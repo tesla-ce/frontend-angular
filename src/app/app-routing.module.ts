@@ -4,17 +4,22 @@ import {
   NbAuthComponent,
   NbLoginComponent,
   NbLogoutComponent,
-  NbRegisterComponent,
-  NbRequestPasswordComponent,
-  NbResetPasswordComponent,
 } from '@nebular/auth';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {DashboardModule} from './dashboard/dashboard.module';
+import {AuthGuardAuthenticated} from './@core/auth/guards/auth-guard-authenticated';
 
 export const routes: Routes = [
   {
-    path: 'ui',
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuardAuthenticated],
+  },
+  /*{
+    path: 'pages',
     loadChildren: () => import('./pages/pages.module')
       .then(m => m.PagesModule),
-  },
+  },*/
   {
     path: 'auth',
     component: NbAuthComponent,
@@ -28,25 +33,13 @@ export const routes: Routes = [
         component: NbLoginComponent,
       },
       {
-        path: 'register',
-        component: NbRegisterComponent,
-      },
-      {
         path: 'logout',
         component: NbLogoutComponent,
       },
-      {
-        path: 'request-password',
-        component: NbRequestPasswordComponent,
-      },
-      {
-        path: 'reset-password',
-        component: NbResetPasswordComponent,
-      },
     ],
   },
-  { path: '', redirectTo: 'ui', pathMatch: 'full' },
-  { path: '**', redirectTo: 'ui' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '**', component: DashboardComponent },
 ];
 
 const config: ExtraOptions = {
@@ -54,7 +47,7 @@ const config: ExtraOptions = {
 };
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, config)],
+  imports: [RouterModule.forRoot(routes, config), DashboardModule],
   exports: [RouterModule],
 })
 export class AppRoutingModule {

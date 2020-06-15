@@ -32,6 +32,7 @@ import {
   NumberWithCommasPipe,
 } from './pipes';
 import {
+  FullViewLayoutComponent,
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
@@ -63,6 +64,7 @@ const COMPONENTS = [
   HeaderComponent,
   FooterComponent,
   SearchInputComponent,
+  FullViewLayoutComponent,
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,

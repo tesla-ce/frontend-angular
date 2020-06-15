@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-admin-demo": {
+    "tesla-ce": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -27,7 +27,8 @@
                 "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images",
                 "output": "/assets/img/markers"
-              }
+              },
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
@@ -74,25 +75,27 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ngx-admin-demo:build"
+            "browserTarget": "tesla-ce:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ngx-admin-demo:build:production"
+              "browserTarget": "tesla-ce:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx-admin-demo:build"
+            "browserTarget": "tesla-ce:build"
           }
         },
         "test": {
@@ -131,7 +134,8 @@
                 "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images",
                 "output": "/assets/img/markers"
-              }
+              },
+              "src/manifest.webmanifest"
             ]
           }
         },
@@ -148,7 +152,7 @@
         }
       }
     },
-    "ngx-admin-demo-e2e": {
+    "tesla-ce-e2e": {
       "root": "",
       "sourceRoot": "",
       "projectType": "application",
@@ -157,7 +161,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "ngx-admin-demo:serve"
+            "devServerTarget": "tesla-ce:serve"
           }
         },
         "lint": {
@@ -172,7 +176,7 @@
       }
     }
   },
-  "defaultProject": "ngx-admin-demo",
+  "defaultProject": "tesla-ce",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "ngx",

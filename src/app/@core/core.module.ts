@@ -1,8 +1,11 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbAuthModule, NbDummyAuthStrategy } from '@nebular/auth';
+import {
+  NbAuthModule,
+  NbPasswordAuthStrategy,
+  NbAuthOAuth2JWTToken,
+} from '@nebular/auth';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
-import { of as observableOf } from 'rxjs';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import {
@@ -12,6 +15,9 @@ import {
 import { UserData } from './data/users';
 import { UserService } from './mock/users.service';
 import { MockDataModule } from './mock/mock-data.module';
+import { AuthService} from './auth/auth.service';
+import {AuthGuardAuthenticated} from './auth/guards/auth-guard-authenticated';
+import {AuthGuardAdmin} from './auth/guards/auth-guard-admin';
 
 const socialLinks = [
   {
@@ -35,22 +41,33 @@ const DATA_SERVICES = [
   { provide: UserData, useClass: UserService },
 ];
 
-export class NbSimpleRoleProvider extends NbRoleProvider {
-  getRole() {
-    // here you could provide any role based on any auth flow
-    return observableOf('guest');
-  }
-}
-
 export const NB_CORE_PROVIDERS = [
   ...MockDataModule.forRoot().providers,
   ...DATA_SERVICES,
   ...NbAuthModule.forRoot({
 
     strategies: [
-      NbDummyAuthStrategy.setup({
+      /*NbDummyAuthStrategy.setup({
         name: 'email',
         delay: 3000,
+      }),*/
+      NbPasswordAuthStrategy.setup({
+        name: 'email',
+        token: {
+          class: NbAuthOAuth2JWTToken,
+          key: 'token',
+        },
+        baseEndpoint: 'http://localhost:8000',
+        login: {
+          endpoint: '/api/v2/auth/login',
+        },
+        refreshToken: {
+          endpoint: '/api/v2/auth/token/refresh',
+        },
+        logout: {
+          endpoint: '/api/v2/auth/logout',
+          redirect: {success: '/', failure: '/'},
+        },
       }),
     ],
     forms: {
@@ -62,14 +79,13 @@ export const NB_CORE_PROVIDERS = [
       },
     },
   }).providers,
-
   NbSecurityModule.forRoot({
     accessControl: {
       guest: {
-        view: '*',
       },
       user: {
         parent: 'guest',
+        view: '*',
         create: '*',
         edit: '*',
         remove: '*',
@@ -78,7 +94,7 @@ export const NB_CORE_PROVIDERS = [
   }).providers,
 
   {
-    provide: NbRoleProvider, useClass: NbSimpleRoleProvider,
+    provide: NbRoleProvider, useClass: AuthService,
   },
   AnalyticsService,
   LayoutService,
@@ -92,6 +108,7 @@ export const NB_CORE_PROVIDERS = [
     NbAuthModule,
   ],
   declarations: [],
+  providers: [AuthService, AuthGuardAuthenticated, AuthGuardAdmin],
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
