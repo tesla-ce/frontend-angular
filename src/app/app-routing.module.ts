@@ -8,12 +8,17 @@ import {
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {AuthGuardAuthenticated} from './@core/auth/guards/auth-guard-authenticated';
+import {LauncherComponent} from './@core/launcher/launcher.component';
 
 export const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuardAuthenticated],
+  },
+  {
+    path: 'auth/launcher',
+    component: LauncherComponent,
   },
   /*{
     path: 'pages',

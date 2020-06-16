@@ -18,6 +18,7 @@ import { MockDataModule } from './mock/mock-data.module';
 import { AuthService} from './auth/auth.service';
 import {AuthGuardAuthenticated} from './auth/guards/auth-guard-authenticated';
 import {AuthGuardAdmin} from './auth/guards/auth-guard-admin';
+import {LauncherModule} from './launcher/launcher.module';
 
 const socialLinks = [
   {
@@ -103,6 +104,7 @@ export const NB_CORE_PROVIDERS = [
 @NgModule({
   imports: [
     CommonModule,
+    LauncherModule,
   ],
   exports: [
     NbAuthModule,
