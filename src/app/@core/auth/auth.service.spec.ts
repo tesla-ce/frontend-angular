@@ -1,0 +1,3 @@
+describe('Authenticated User service', () => {
+
+});

@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "../out-tsc/e2e",
     "module": "commonjs",
+    "baseUrl": "./",
     "target": "es5",
     "types": [
       "jasmine",
