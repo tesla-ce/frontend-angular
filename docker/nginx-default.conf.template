@@ -4,7 +4,11 @@ server {
     root /usr/share/nginx/html;
     index index.html;
 
-    location /ui {
-        try_files $uri $uri/ /index.html;
+    location / {
+        root /usr/share/nginx/html;
+    }
+
+    location /ui/ {
+        root /usr/share/nginx/html;
     }
 }
