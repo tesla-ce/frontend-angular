@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {MENU_ITEMS} from './dashboard-menu';
 
 @Component({
   selector: 'ngx-dashboard',
@@ -6,4 +7,5 @@ import { Component } from '@angular/core';
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent {
+    menu = MENU_ITEMS;
 }

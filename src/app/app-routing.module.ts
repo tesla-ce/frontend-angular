@@ -20,11 +20,21 @@ export const routes: Routes = [
     path: 'auth/launcher',
     component: LauncherComponent,
   },
-  /*{
-    path: 'pages',
-    loadChildren: () => import('./pages/pages.module')
-      .then(m => m.PagesModule),
-  },*/
+  {
+    path: 'learner',
+    loadChildren: () => import('./learner/learner.module')
+      .then(m => m.LearnerModule),
+  },
+  {
+    path: 'instructor',
+    loadChildren: () => import('./instructor/instructor.module')
+      .then(m => m.InstructorModule),
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module')
+      .then(m => m.AdminModule),
+  },
   {
     path: 'auth',
     component: NbAuthComponent,
@@ -43,7 +53,7 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: '**', component: DashboardComponent },
 ];
 

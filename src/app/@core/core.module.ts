@@ -1,5 +1,6 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   NbAuthModule,
   NbPasswordAuthStrategy,
@@ -12,14 +13,18 @@ import {
   AnalyticsService,
   LayoutService,
 } from './utils';
-import { UserData } from './data/users';
-import { UserService } from './mock/users.service';
-import { MockDataModule } from './mock/mock-data.module';
-import { AuthService} from './auth/auth.service';
+
+import { AuthInterceptorService } from './auth/auth-interceptor';
+import { AuthUserData, AuthService} from './auth/auth.service';
+import { ApiService} from './models/api.service';
 import {AuthGuardAuthenticated} from './auth/guards/auth-guard-authenticated';
 import {AuthGuardAdmin} from './auth/guards/auth-guard-admin';
 import {LauncherModule} from './launcher/launcher.module';
+import { EnvServiceFactory, EnvServiceProvider } from './env/env.service.provider';
+import {EnvService} from './env/env.service';
+// import { environment } from '../../environments/environment';
 
+const environment: EnvService = EnvServiceFactory();
 const socialLinks = [
   {
     url: 'https://github.com/akveo/nebular',
@@ -39,26 +44,22 @@ const socialLinks = [
 ];
 
 const DATA_SERVICES = [
-  { provide: UserData, useClass: UserService },
+  { provide: AuthUserData, useClass: AuthService },
+  // { provide: UserData, useClass: UserService },
 ];
 
 export const NB_CORE_PROVIDERS = [
-  ...MockDataModule.forRoot().providers,
   ...DATA_SERVICES,
   ...NbAuthModule.forRoot({
 
     strategies: [
-      /*NbDummyAuthStrategy.setup({
-        name: 'email',
-        delay: 3000,
-      }),*/
       NbPasswordAuthStrategy.setup({
         name: 'email',
         token: {
           class: NbAuthOAuth2JWTToken,
           key: 'token',
         },
-        baseEndpoint: 'http://localhost:8000',
+        baseEndpoint: environment.apiUrl,
         login: {
           endpoint: '/api/v2/auth/login',
         },
@@ -93,12 +94,17 @@ export const NB_CORE_PROVIDERS = [
       },
     },
   }).providers,
-
   {
     provide: NbRoleProvider, useClass: AuthService,
   },
+  EnvServiceProvider,
   AnalyticsService,
   LayoutService,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true,
+  },
 ];
 
 @NgModule({

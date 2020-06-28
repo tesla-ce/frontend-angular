@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {nbAuthCreateToken, NbAuthOAuth2JWTToken, NbAuthService, NbAuthToken, NbTokenService} from '@nebular/auth';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'ngx-tesla-launcher',
@@ -15,9 +16,7 @@ export class LauncherComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      const urlbase = 'http://localhost:8000';
-      const url = urlbase + '/api/v2/auth/token';
-      console.log('Launcher id=' + params['id'] + ', token=' + params['token']);
+      const url = environment.apiUrl + '/api/v2/auth/token';
       const options = {
         observe: 'body' as const,
         responseType: 'json' as const,
@@ -31,7 +30,6 @@ export class LauncherComponent implements OnInit {
       }, options).subscribe(result => {
         const token: NbAuthToken = nbAuthCreateToken(NbAuthOAuth2JWTToken,
           result, 'email');
-        console.log('New token received');
         this.tokenService.set(token).subscribe( _ => {
             this.authService.isAuthenticatedOrRefresh().subscribe( authenticated => {
                 this.router.navigateByUrl('/dashboard');

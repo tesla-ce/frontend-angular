@@ -12,13 +12,13 @@ const SERVICES = [
     CommonModule,
   ],
   providers: [
-    ...SERVICES,
+    UserService,
   ],
 })
-export class MockDataModule {
+export class DataModule {
   static forRoot(): ModuleWithProviders {
     return <ModuleWithProviders>{
-      ngModule: MockDataModule,
+      ngModule: DataModule,
       providers: [
         ...SERVICES,
       ],

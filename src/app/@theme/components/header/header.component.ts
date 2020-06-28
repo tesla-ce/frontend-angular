@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
-import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { RippleService } from '../../../@core/utils/ripple.service';
-import {AuthService, AuthUserData} from '../../../@core/auth/auth.service';
+import {AuthService } from '../../../@core/auth/auth.service';
+import { User } from '../../../@core/models/users';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   public readonly materialTheme$: Observable<boolean>;
   userPictureOnly: boolean = false;
-  user: AuthUserData;
+  user: User;
 
   themes = [
     {
@@ -56,7 +56,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
     private themeService: NbThemeService,
-    private userService: UserData,
     private layoutService: LayoutService,
     private breakpointService: NbMediaBreakpointsService,
     private rippleService: RippleService,
@@ -74,7 +73,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.authService.getUser()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((user: AuthUserData) => this.user = user);
+      .subscribe((user: User) => this.user = user);
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
       .pipe(
