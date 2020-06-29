@@ -1,7 +1,10 @@
+stages:
+  - test
+  - build
 
 test:karma:
   stage: test
-  image: trion/ng-cli-karma
+  image: trion/ng-cli-karma:9.1.7
   allow_failure: true
   script:
     - ng test --code-coverage --progress false --watch false
