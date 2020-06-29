@@ -7,8 +7,7 @@ test:karma:
   image: trion/ng-cli-karma:9.1.7
   allow_failure: true
   before_script:
-    - pwd
-    - ln -s $PWD /app
+    - npm i
   script:
     - ng test --code-coverage --progress false --watch false
   coverage: '/Lines \W+: (\d+\.\d+)%.*/'
