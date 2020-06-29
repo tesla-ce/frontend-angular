@@ -1,6 +1,16 @@
 stages:
+  - quality
   - test
   - build
+
+lint:
+  stage: quality
+  image: trion/ng-cli-karma:9.1.7
+  allow_failure: false
+  before_script:
+    - npm i
+  script:
+    - ng lint
 
 test:karma:
   stage: test

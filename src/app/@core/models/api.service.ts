@@ -6,7 +6,6 @@ import {Router} from '@angular/router';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import { User, Institution } from './users';
-import { AuthUserData } from '../auth/auth.service';
 import {EnvService} from '../env/env.service';
 
 

@@ -1,9 +1,9 @@
 import {of as observableOf, Observable, BehaviorSubject} from 'rxjs';
 import { Injectable } from '@angular/core';
-import {NbAuthService, NbAuthOAuth2JWTToken, NbTokenService} from '@nebular/auth';
+import {NbAuthService, NbAuthOAuth2JWTToken} from '@nebular/auth';
 import {NbRoleProvider} from '@nebular/security';
 import {Router} from '@angular/router';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {User, Institution, InstitutionUser} from '../models/users';
 import {EnvService} from '../env/env.service';
 

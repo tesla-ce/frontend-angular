@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse} from '@angular/common/http';
-import {BehaviorSubject, iif, Observable, of, partition, throwError} from 'rxjs';
+import {BehaviorSubject, iif, Observable, of, throwError} from 'rxjs';
 import {NbAuthService, NbAuthToken} from '@nebular/auth';
 import {Router} from '@angular/router';
-import {catchError, filter, finalize, map, mapTo, mergeMap, switchMap, take} from 'rxjs/operators';
-import {merge} from 'rxjs';
+import {catchError, filter, finalize, mergeMap, switchMap, take} from 'rxjs/operators';
 import {EnvService} from '../env/env.service';
 
 

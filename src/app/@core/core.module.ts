@@ -16,7 +16,6 @@ import {
 
 import { AuthInterceptorService } from './auth/auth-interceptor';
 import { AuthUserData, AuthService} from './auth/auth.service';
-import { ApiService} from './models/api.service';
 import {AuthGuardAuthenticated} from './auth/guards/auth-guard-authenticated';
 import {AuthGuardAdmin} from './auth/guards/auth-guard-admin';
 import {LauncherModule} from './launcher/launcher.module';
