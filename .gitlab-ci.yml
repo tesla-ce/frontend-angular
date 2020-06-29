@@ -5,7 +5,7 @@ stages:
 test:karma:
   stage: test
   image: trion/ng-cli-karma:9.1.7
-  allow_failure: true
+  allow_failure: false
   before_script:
     - npm i
   script:
