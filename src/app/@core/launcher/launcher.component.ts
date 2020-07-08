@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {nbAuthCreateToken, NbAuthOAuth2JWTToken, NbAuthService, NbAuthToken, NbTokenService} from '@nebular/auth';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { environment } from '../../../environments/environment';
+import { EnvService } from '../env/env.service';
 
 @Component({
   selector: 'ngx-tesla-launcher',
@@ -10,13 +10,13 @@ import { environment } from '../../../environments/environment';
 })
 export class LauncherComponent implements OnInit {
   constructor(protected tokenService: NbTokenService, protected router: Router, private route: ActivatedRoute,
-              private http: HttpClient, private authService: NbAuthService) {
+              private http: HttpClient, private authService: NbAuthService, private envService: EnvService) {
 
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      const url = environment.apiUrl + '/api/v2/auth/token';
+      const url = this.envService.apiUrl + '/api/v2/auth/token';
       const options = {
         observe: 'body' as const,
         responseType: 'json' as const,
