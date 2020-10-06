@@ -8,7 +8,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
-    title: 'INSTRUCTOR',
-    group: true,
+    title: 'Admin',
+    icon: 'award-outline',
+    link: '/admin',
+    home: true,
+  },
+  {
+    title: 'Instructor',
+    icon: 'cube-outline',
+    link: '/instructor',
+    home: true,
+    selected: true,
+  },
+  {
+    title: 'Learner',
+    icon: 'book-outline',
+    link: '/learner',
+    home: true,
   },
 ];
