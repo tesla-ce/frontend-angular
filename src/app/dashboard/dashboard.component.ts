@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {MENU_ITEMS} from './dashboard-menu';
+import {MENU_ITEMS} from '../shared/admin-menu';
 
 @Component({
   selector: 'ngx-dashboard',

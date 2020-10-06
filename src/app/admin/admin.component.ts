@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { MENU_ITEMS } from './admin-menu';
+import {MENU_ITEMS} from '../shared/admin-menu';
 
 @Component({
   selector: 'ngx-admin',

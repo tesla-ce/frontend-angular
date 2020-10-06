@@ -36,6 +36,11 @@ export const routes: Routes = [
       .then(m => m.AdminModule),
   },
   {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module')
+      .then(m => m.SettingsModule),
+  },
+  {
     path: 'auth',
     component: NbAuthComponent,
     children: [
