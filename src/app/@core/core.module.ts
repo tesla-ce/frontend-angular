@@ -21,9 +21,9 @@ import {AuthGuardAdmin} from './auth/guards/auth-guard-admin';
 import {LauncherModule} from './launcher/launcher.module';
 import { EnvServiceFactory, EnvServiceProvider } from './env/env.service.provider';
 import {EnvService} from './env/env.service';
-// import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment';
 
-const environment: EnvService = EnvServiceFactory();
+//const environment: EnvService = EnvServiceFactory();
 const socialLinks = [
   {
     url: 'https://github.com/akveo/nebular',
