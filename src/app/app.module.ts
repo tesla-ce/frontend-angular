@@ -11,6 +11,7 @@ import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   NbDatepickerModule,
   NbDialogModule,
@@ -23,12 +24,16 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
 
     ThemeModule.forRoot(),
 
@@ -40,6 +45,7 @@ import { environment } from '../environments/environment';
     NbToastrModule.forRoot(),
     CoreModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    
   ],
   bootstrap: [AppComponent],
 })
