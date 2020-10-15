@@ -9,6 +9,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {AuthGuardAuthenticated} from './@core/auth/guards/auth-guard-authenticated';
 import {LauncherComponent} from './@core/launcher/launcher.component';
+import {AdminComponent} from './admin/admin.component';
 
 export const routes: Routes = [
   {
@@ -23,7 +24,7 @@ export const routes: Routes = [
   {
     path: 'learner',
     loadChildren: () => import('./learner/learner.module')
-      .then(m => m.LearnerModule),
+      .then(m => m.LearnerModule), 
   },
   {
     path: 'instructor',
@@ -32,8 +33,7 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: () => import('./admin/admin.module')
-      .then(m => m.AdminModule),
+    component: AdminComponent,
   },
   {
     path: 'settings',
