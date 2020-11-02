@@ -1,5 +1,9 @@
-<div *ngIf="type=='image'; then thenBlock else elseBlock"></div>
-<ng-template #thenBlock>
-    <img class="logo" src="assets/images/logo.png">
-</ng-template>
-<ng-template #elseBlock>{{title}}</ng-template>
+<div [ngSwitch]="type">
+    <!-- the same view can be shown in more than one case -->
+    <img *ngSwitchCase="'image'" class="logo" src="assets/images/logo.png">
+    <div *ngSwitchCase="'image+text'" class="logo-text-container">
+        <img class="logo-image-text" src="assets/images/logo.png">
+        <span class="title-image-text">{{title}}</span>
+    </div>
+    <span *ngSwitchDefault>{{title}}</span>
+</div>

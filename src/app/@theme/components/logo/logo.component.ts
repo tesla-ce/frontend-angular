@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LogoComponent implements OnInit {
 
-  @Input() type: string = "image"; // ["image", "text"]
+  @Input() type: string = "image+text"; // ["image", "text", "image+text"]
   @Input() title: string = "TeSLA-CE";
   @Input() logo: string = "/assets/logo.png";
 
