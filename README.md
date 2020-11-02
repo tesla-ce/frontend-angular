@@ -28,4 +28,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Custom Styles
 
-[Theme customization guide](./docs/custom-styles.md).
+[Theme customization guide](./documents/custom-styles.md).
