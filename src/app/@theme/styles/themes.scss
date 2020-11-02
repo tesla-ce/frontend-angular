@@ -133,3 +133,34 @@ $nb-themes: nb-register-theme((
   slide-out-shadow-color: 0 4px 14px 0 #292929,
   slide-out-shadow-color-rtl: 0 4px 14px 0 #292929,
 ), material-dark, material-dark);
+
+$nb-themes: nb-register-theme((
+  
+  //Place here your theme variables
+
+  // color-primary-100: red,
+  // color-primary-200: blue,
+  // color-primary-300: magenta,
+  // color-primary-400: aquamarine,
+  // color-primary-500: green,
+  // color-primary-600: gray,
+  // color-primary-700: white,
+  // color-primary-800: black,
+  // color-primary-900: yellow
+
+), 
+/*
+custom theme
+*/
+custom,
+/*
+built-in base theme inheritance
+available built-in themes
+- default
+- cosmic
+- corporate
+- dark
+- material-light
+- material-dark
+*/
+default);
