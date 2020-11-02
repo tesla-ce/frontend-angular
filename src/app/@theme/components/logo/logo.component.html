@@ -1,0 +1,5 @@
+<div *ngIf="type=='image'; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+    <img class="logo" src="assets/images/logo.png">
+</ng-template>
+<ng-template #elseBlock>{{title}}</ng-template>

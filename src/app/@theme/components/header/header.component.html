@@ -10,7 +10,9 @@
     >
       <nb-icon [icon]="(materialTheme$ | async) ? 'menu-outline' : 'menu-2-outline'"></nb-icon>
     </a>
-    <a class="logo" href="#" (click)="navigateHome()">TeSLA-<span>CE</span></a>
+    <a class="logo" href="#" (click)="navigateHome()">
+      <ngx-logo></ngx-logo>
+    </a>
   </div>
   <nb-select
     status="primary"

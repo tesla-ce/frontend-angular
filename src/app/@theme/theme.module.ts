@@ -44,6 +44,7 @@ import { DARK_THEME } from './styles/theme.dark';
 import { CUSTOM_THEME } from './styles/theme.custom';
 import { MATERIAL_LIGHT_THEME } from './styles/material/theme.material-light';
 import { MATERIAL_DARK_THEME } from './styles/material/theme.material-dark';
+import { LogoComponent } from './components/logo/logo.component';
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -81,7 +82,7 @@ const PIPES = [
 @NgModule({
   imports: [CommonModule, MatRippleModule, ...NB_MODULES],
   exports: [CommonModule, MatRippleModule, ...PIPES, ...COMPONENTS],
-  declarations: [...COMPONENTS, ...PIPES],
+  declarations: [...COMPONENTS, ...PIPES, LogoComponent],
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders<ThemeModule> {

@@ -1,3 +1,17 @@
+## Change Application Logo
+Change logo
+```code
+src/app/@theme/components/logo/logo.component.ts
+```
+Component inputs: [type, title, logo]
+**type**
+text => to render text
+image => to render image
+**title**
+Your Application Name
+**logo**
+/path/to/logo
+
 ## Application theme
 Register application theme on
 ```code
@@ -37,6 +51,7 @@ available built-in themes
 default);
 ```
 
+## Global CSS/SCSS
 Edit top level global CSS/SCSS files to place your custom styles
 ```code
 src/app/@theme/styles/styles-custom.scss
