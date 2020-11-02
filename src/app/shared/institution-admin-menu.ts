@@ -23,139 +23,72 @@ export const MENU_ITEMS: NbMenuItem[] = [
       link: '/learner',
     }]
   },{
-  title: 'System configuration',
+  title: 'Institution options',
     icon: 'settings-outline',
     //link: '/settings',
     //expanded: true,
   
     children: [{
-      title: 'Update',
-      icon: 'flip-2-outline',
-      link: '/settings/update',
+      title: 'External IC',
+      icon: 'external-link-outline',
+      link: '/institution-options/external-ic',
     },
     {
-      title: 'Workers frequencies',
+      title: 'Learner auto-create',
       icon: 'activity-outline',
-      link: '/settings/workers-frequencies',
+      link: '/institution-options/learner-auto-create',
     },
     {
-      title: 'Sensors parameters',
+      title: 'Instructor auto-create',
       icon: 'shake-outline',
-      link: '/settings/sensors-parameters',
-    },
-    {
-      title: 'System scaling',
-      icon: 'paper-plane-outline',
-      link: '/settings/system-scaling',
-    },
-    ]
-  },{
-      title: 'Monitoring',
-      icon: 'monitor-outline',
-      //link: '/settings',
-      //expanded: true,
-    
-      children: [{
-        title: 'External Services',
-        icon: 'external-link-outline',
-        //link: '/settings',
-        //expanded: true,
-      
-        children: [{
-          title: 'Database',
-          icon: 'layers-outline',
-          link: '/monitoring/external-services/database',
-        },
-        {
-          title: 'Storage',
-          icon: 'award-outline',
-          link: '/monitoring/external-services/storage',
-        },
-        {
-          title: 'Vault',
-          icon: 'radio-button-off-outline',
-          link: '/monitoring/external-services/vault',
-        },]
-      },{
-        title: 'System status',
-        icon: 'loader-outline',
-        //link: '/settings',
-        //expanded: true,
-      
-        children: [{
-          title: 'Docker status',
-          icon: 'grid-outline',
-          link: '/monitoring/status/docker',
-        },
-        {
-          title: 'Load levels',
-          icon: 'bar-chart-outline',
-          link: '/monitoring/status/storage',
-        }]
-      },{
-      title: 'Learners',
-      icon: 'book-outline',
-      link: '/monitoring/docker',
-      },{
-      title: 'Activities',
-      icon: 'star-outline',
-      link: '/monitoring/activities',
+      link: '/institution-options/instructor-auto-create',
     }]
   },{
-    title: 'Institutions',
-      icon: 'cube-outline',
+      title: 'Informed Consent management',
+      icon: 'monitor-outline',
       //link: '/settings',
       //expanded: true,
     
       children: [{
         title: 'Add/Del/Update',
         icon: 'award-outline',
-        link: '/institutions/update',
+        link: '/informed-consent-managment/update',
       },
       {
-        title: 'Statistics',
-        icon: 'pie-chart-outline',
-        link: '/institutions/statistics',
+        title: 'Manage languages',
+        icon: 'award-outline',
+        link: '/informed-consent-managment/update',
+      },
+      {
+        title: 'Manage documents',
+        icon: 'radio-button-off-outline',
+        link: '/informed-consent-managment/update',
       }]
   },{
-    title: 'Instrument',
+      title: 'SEND management',
+      icon: 'cube-outline',
+      link: '/settings',
+  },{
+    title: 'Data management',
       icon: 'color-picker-outline',
       //link: '/settings',
       //expanded: true,
     
       children: [{
-        title: 'Management',
-        icon: 'settings-outline',
-        link: '/instrument/management',
-      },
-      {
-        title: 'Providers',
+        title: 'GDPR actions',
         icon: 'car-outline',
-        children: [{
-          title: 'Management',
-          icon: 'settings-outline',
-          link: '/instrument/providers/management',
-        },{
-          title: 'Options',
-          icon: 'options-outline',
-          link: '/instrument/providers/options',
-        }]
-    }],
+        link: '/instrument/management',
+    }]
   },{
-    title: 'User management',
+    title: 'Users management',
       icon: 'cube-outline',
       //link: '/settings',
       //expanded: true,
     
       children: [{
-        title: 'Admins',
+        title: 'Roles',
         icon: 'award-outline',
-        link: '/user-management/admins',
-      },
-      {
-        title: 'Institutions',
-        icon: 'cube-outline',
-        link: '/user-management/institutuions',
+        link: '/user-management/roles',
       }]
   },
 ];
