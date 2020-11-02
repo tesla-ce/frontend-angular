@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateUserService } from './create-user.service';
+import { CreateUserService, Institutions, Institution } from './create-user.service';
 import { AuthService } from '../../@core/auth/auth.service'
 
 import { FormGroup, FormControl } from '@angular/forms';
@@ -12,14 +12,33 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 
 export class CreateUserComponent {
+  error: any;
+  institutions: Institution[];
+
   constructor(private createUserService: CreateUserService) {}
 
   profileForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
     username: new FormControl(''),
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),    
     email: new FormControl(''),
+    password: new FormControl(''),
+    institution: new FormControl(null),    
+    roles: new FormControl(''),
+    date_joined: new FormControl(new Date()),
   });
+
+  ngOnInit() {
+    this.getInstitutions();
+  }
+
+  getInstitutions(): void {
+    this.createUserService.getInstitutions()
+      .subscribe(institutions => {
+        this.institutions = institutions.results;
+      });
+  }
+
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.warn(this.profileForm.value);
