@@ -1,5 +1,6 @@
-import { Component, LOCALE_ID, Inject } from '@angular/core';
-import {MENU_ITEMS} from '../shared/admin-menu';
+import { Component, LOCALE_ID, Inject, OnInit } from '@angular/core';
+import {AuthService } from '../@core/auth/auth.service';
+import { User } from '../@core/models/users';
 
 export function getUsersLocale(defaultValue: string): string {
   if (typeof window === 'undefined' || typeof window.navigator === 'undefined') {
@@ -17,10 +18,19 @@ export function getUsersLocale(defaultValue: string): string {
   templateUrl: './admin.component.html',
 })
 
-export class AdminComponent {
+export class AdminComponent implements OnInit {
+  
+  user: User;
+
   constructor(
+    private authService: AuthService,
     @Inject(LOCALE_ID) public userLocale: string
   ) { }
   browserLocale = getUsersLocale('en-US');
-  menu = MENU_ITEMS;
+
+  ngOnInit(){
+    this.authService.getUser()
+      .pipe()
+      .subscribe((user: User) => this.user = user);
+  }
 }

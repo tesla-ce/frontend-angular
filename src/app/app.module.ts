@@ -22,6 +22,7 @@ import {
 } from '@nebular/theme';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { SideMenuModule } from './side-menu/side-menu.module'
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { environment } from '../environments/environment';
     CoreModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     
+    SideMenuModule
   ],
   //providers: [ { provide: LOCALE_ID, useValue: 'ca' } ],
   bootstrap: [AppComponent],

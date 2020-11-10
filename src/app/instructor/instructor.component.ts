@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import {MENU_ITEMS} from '../shared/admin-menu';
-
 @Component({
   selector: 'ngx-instructor',
   styleUrls: ['instructor.component.scss'],
@@ -9,5 +7,4 @@ import {MENU_ITEMS} from '../shared/admin-menu';
 })
 export class InstructorComponent {
 
-  menu = MENU_ITEMS;
 }

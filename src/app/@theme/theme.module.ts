@@ -45,6 +45,7 @@ import { CUSTOM_THEME } from './styles/theme.custom';
 import { MATERIAL_LIGHT_THEME } from './styles/material/theme.material-light';
 import { MATERIAL_DARK_THEME } from './styles/material/theme.material-dark';
 import { LogoComponent } from './components/logo/logo.component';
+import { SideMenuModule } from '../side-menu/side-menu.module';
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -59,6 +60,7 @@ const NB_MODULES = [
   NbSelectModule,
   NbIconModule,
   NbEvaIconsModule,
+  SideMenuModule
 ];
 const COMPONENTS = [
   SwitcherComponent,
