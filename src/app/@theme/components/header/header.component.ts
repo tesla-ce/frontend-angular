@@ -6,7 +6,7 @@ import { map, takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { RippleService } from '../../../@core/utils/ripple.service';
 import {AuthService } from '../../../@core/auth/auth.service';
-import { User } from '../../../@core/models/users';
+import { InstitutionUser, User } from '../../../@core/models/users';
 
 
 @Component({
@@ -56,6 +56,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
 
+  currentInstitution: String;
+  institutions;
   public constructor(
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
@@ -74,10 +76,36 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
-
+    
     this.authService.getUser()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((user: User) => this.user = user);
+      .subscribe((user: User) => {
+        this.user = user;
+        if (!user?.isAdmin){
+          //mock institutions
+          this.institutions = [
+            {
+              "acronym":"uoc",
+              "id":1,
+              "isAdmin":false
+            },
+            {
+              "acronym":"uoc-1",
+              "id":1,
+              "isAdmin":false
+            },
+            {
+              "acronym":"uoc-2",
+              "id":1,
+              "isAdmin":false
+            }];
+          //Load institution from user
+          //TO DO: this will be an array, delete mocked array, add user.institutions to array or load it from template user?.institutions
+          //this.institutions.push(user.institution)
+          //this.currentInstitution = user.institution.acronym;
+          this.currentInstitution = 'uoc';
+        }
+      });
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
       .pipe(
@@ -112,6 +140,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   changeTheme(themeName: string) {
     this.themeService.changeTheme(themeName);
+  }
+
+  changeInstitution(acronym: string) {
+    console.log("change instiution!", acronym);
+    //this.themeService.changeTheme(acronym);
   }
 
   toggleSidebar(): boolean {

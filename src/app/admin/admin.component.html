@@ -1,10 +1,11 @@
 <ngx-one-column-layout>
   <ngx-side-menu></ngx-side-menu>
   <router-outlet>
-    <h1>Admin</h1>
-    <h1 test="ep" i18n="An introduction header for this sample@@introductionHeader">Hello i18n!</h1>
-    <h2>userLocale {{ userLocale }}</h2>
-    <h2>browserLocale {{ browserLocale }}</h2>
-    <h2>FULL NAME: {{ user?.fullName }}</h2>
+    <h2>Admin</h2>
+    <h2 test="ep" i18n="An introduction header for this sample@@introductionHeader">Hello i18n!</h2>
+    <div>userLocale {{ userLocale }}</div>
+    <div>browserLocale {{ browserLocale }}</div>
+    <div>FULL NAME: {{ user?.fullName }}</div>
+    <div>FULL USER: {{ JSON.stringify(user) }}</div>
   </router-outlet>
 </ngx-one-column-layout>

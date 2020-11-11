@@ -21,11 +21,12 @@ export function getUsersLocale(defaultValue: string): string {
 export class AdminComponent implements OnInit {
   
   user: User;
+  JSON;
 
   constructor(
     private authService: AuthService,
     @Inject(LOCALE_ID) public userLocale: string
-  ) { }
+  ) { this.JSON = JSON;}
   browserLocale = getUsersLocale('en-US');
 
   ngOnInit(){
