@@ -11,6 +11,7 @@ import {AuthGuardAuthenticated} from './@core/auth/guards/auth-guard-authenticat
 import {LauncherComponent} from './@core/launcher/launcher.component';
 import {AdminComponent} from './admin/admin.component';
 import {UserManagementComponent} from './user-management/user-management.component'
+import {IcManagementComponent} from './ic-management/ic-management.component'
 
 export const routes: Routes = [
   {
@@ -39,6 +40,10 @@ export const routes: Routes = [
   {
     path: 'user-management/admins',
     component: UserManagementComponent,
+  },
+  {
+    path: 'informed-consent-management/update',
+    component: IcManagementComponent,
   },
   {
     path: 'settings',

@@ -1,0 +1,21 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">    
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="inputVersion" class="label">Version</label>
+                <input nbInput fullWidth type="text" id="inputVersion" formControlName="version" required placeholder="Version (X.Y.Z)">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="inputLastName" class="label">Valid From</label>
+                <input nbInput fullWidth placeholder="Pick Date" [nbDatepicker]="dateTimePicker" formControlName="valid_from" >
+                <nb-datepicker #dateTimePicker></nb-datepicker>
+            </div>
+        </div>
+    </div>
+    <button nbButton type="submit" [disabled]="!profileForm.valid">Submit</button>
+    <!-- <p>
+        {{ profileForm.status }}
+    </p> -->
+</form>

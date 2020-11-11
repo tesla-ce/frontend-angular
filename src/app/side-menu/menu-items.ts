@@ -52,17 +52,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
       children: [{
         title: 'Add/Del/Update',
         icon: 'award-outline',
-        link: '/informed-consent-managment/update',
+        link: '/informed-consent-management/update',
       },
       {
         title: 'Manage languages',
         icon: 'award-outline',
-        link: '/informed-consent-managment/update',
+        link: '/informed-consent-management/update',
       },
       {
         title: 'Manage documents',
         icon: 'radio-button-off-outline',
-        link: '/informed-consent-managment/update',
+        link: '/informed-consent-management/update',
       }]
   },{
       title: 'SEND management',
