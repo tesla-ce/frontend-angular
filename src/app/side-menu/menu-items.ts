@@ -44,7 +44,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       link: '/institution-options/instructor-auto-create',
     }]
   },{
-      title: 'Informed Consent management',
+      title: 'Informed Consent',
       icon: 'monitor-outline',
       //link: '/settings',
       //expanded: true,
@@ -52,24 +52,24 @@ export const MENU_ITEMS: NbMenuItem[] = [
       children: [{
         title: 'Add/Del/Update',
         icon: 'award-outline',
-        link: '/informed-consent-management/update',
+        link: '/informed-consent/update',
       },
       {
         title: 'Manage languages',
         icon: 'award-outline',
-        link: '/informed-consent-management/update',
+        link: '/informed-consent/update',
       },
       {
         title: 'Manage documents',
         icon: 'radio-button-off-outline',
-        link: '/informed-consent-management/update',
+        link: '/informed-consent/update',
       }]
   },{
-      title: 'SEND management',
+      title: 'SEND',
       icon: 'cube-outline',
       link: '/settings',
   },{
-    title: 'Data management',
+    title: 'Data',
       icon: 'color-picker-outline',
       //link: '/settings',
       //expanded: true,
@@ -77,10 +77,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
       children: [{
         title: 'GDPR actions',
         icon: 'car-outline',
-        link: '/instrument/management',
+        link: '/instrument',
     }]
   },{
-    title: 'Users management',
+    title: 'Users',
       icon: 'cube-outline',
       //link: '/settings',
       //expanded: true,
@@ -88,7 +88,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       children: [{
         title: 'Roles',
         icon: 'award-outline',
-        link: '/user-management/roles',
+        link: '/user/roles',
       }]
   },
 ];

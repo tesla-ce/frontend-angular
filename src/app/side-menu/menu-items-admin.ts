@@ -126,7 +126,7 @@ export const MENU_ITEMS_ADMIN: NbMenuItem[] = [
       children: [{
         title: 'Management',
         icon: 'settings-outline',
-        link: '/instrument/management',
+        link: '/instrument',
       },
       {
         title: 'Providers',
@@ -134,7 +134,7 @@ export const MENU_ITEMS_ADMIN: NbMenuItem[] = [
         children: [{
           title: 'Management',
           icon: 'settings-outline',
-          link: '/instrument/providers/management',
+          link: '/instrument/providers',
         },{
           title: 'Options',
           icon: 'options-outline',
@@ -142,7 +142,7 @@ export const MENU_ITEMS_ADMIN: NbMenuItem[] = [
         }]
     }],
   },{
-    title: 'User management',
+    title: 'User',
       icon: 'people-outline',
       //link: '/settings',
       //expanded: true,
@@ -150,12 +150,12 @@ export const MENU_ITEMS_ADMIN: NbMenuItem[] = [
       children: [{
         title: 'Admins',
         icon: 'award-outline',
-        link: '/user-management/admins',
+        link: '/user/admins',
       },
       {
         title: 'Institutions',
         icon: 'cube-outline',
-        link: '/user-management/institutuions',
+        link: '/user/institutuions',
       }]
   },
 ];

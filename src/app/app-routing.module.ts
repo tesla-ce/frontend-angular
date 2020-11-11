@@ -38,11 +38,11 @@ export const routes: Routes = [
     component: AdminComponent,
   },
   {
-    path: 'user-management/admins',
+    path: 'user/admins',
     component: UserManagementComponent,
   },
   {
-    path: 'informed-consent-management/update',
+    path: 'informed-consent/update',
     component: IcManagementComponent,
   },
   {
