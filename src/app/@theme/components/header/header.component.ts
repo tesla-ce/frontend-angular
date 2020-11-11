@@ -56,8 +56,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
 
-  currentInstitution: String;
+  currentInstitution;
   institutions;
+
   public constructor(
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
@@ -91,19 +92,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
             },
             {
               "acronym":"uoc-1",
-              "id":1,
+              "id":2,
               "isAdmin":false
             },
             {
               "acronym":"uoc-2",
-              "id":1,
+              "id":3,
               "isAdmin":false
             }];
           //Load institution from user
           //TO DO: this will be an array, delete mocked array, add user.institutions to array or load it from template user?.institutions
           //this.institutions.push(user.institution)
           //this.currentInstitution = user.institution.acronym;
-          this.currentInstitution = 'uoc';
+          this.currentInstitution = 1;
         }
       });
     const { xl } = this.breakpointService.getBreakpointsMap();
