@@ -15,18 +15,40 @@ export interface User {
   username: string,
   firstName: string,
   lastName: string,
-  email: string
+  email: string,
+  password: string,
+  institution: string,
+  roles: string,
+  date_joined: Date
+}
+
+export interface Institutions {
+  results: []
+}
+
+export interface Institution {
+    id: number,
+    name: string;
 }
 
 @Injectable()
 export class CreateUserService {
-  usersUrl = 'https://demo.tesla-project.eu/api/v2/admin/user';
+  userUrl = 'https://demo.tesla-project.eu/api/v2/admin/user';
+  institutionUrl = 'https://demo.tesla-project.eu/api/v2/admin/institution/?format=json';
 
   constructor(private http: HttpClient) { }
   createUser(user: User): Observable<User> {
-    return this.http.post<User>(this.usersUrl, user, httpOptions)
+    return this.http.post<User>(this.userUrl, user, httpOptions)
       .pipe(
         //catchError(this.handleError('createUser', user))
+      );
+  }
+
+  getInstitutions() {
+    return this.http.get<Institutions>(this.institutionUrl)
+      .pipe(
+        retry(3), // retry a failed request up to 3 times
+        catchError(this.handleError) // then handle the error
       );
   }
 

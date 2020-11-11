@@ -15,6 +15,21 @@
         Email:
         <input type="text" formControlName="email" required>
     </label>
+    <label>
+        Password:
+        <input type="password" formControlName="password" required>
+    </label>
+    <label>
+        Roles:
+        <input type="text" formControlName="roles" required>
+    </label>
+    <label>
+        Institutions:
+        <select formControlName="institution" required>
+            <option [ngValue]="null"></option>
+            <option *ngFor="let institution of institutions" [ngValue]="institution.id">{{institution.name}}</option>
+        </select>
+    </label>
     <p>
         Form Status: {{ profileForm.status }}
       </p>
