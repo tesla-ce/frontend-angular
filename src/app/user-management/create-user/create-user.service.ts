@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angul
 
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { User } from '../../@core/models/users';
 
 const httpOptions = {
 headers: new HttpHeaders({
@@ -11,16 +12,16 @@ headers: new HttpHeaders({
     })
 };
 
-export interface User {
-  username: string,
-  firstName: string,
-  lastName: string,
-  email: string,
-  password: string,
-  institution: string,
-  roles: string,
-  date_joined: Date
-}
+// export interface User {
+//   username: string,
+//   firstName: string,
+//   lastName: string,
+//   email: string,
+//   password: string,
+//   institution: string,
+//   roles: string,
+//   date_joined: Date
+// }
 
 export interface Institutions {
   results: []

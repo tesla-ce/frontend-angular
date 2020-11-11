@@ -16,6 +16,8 @@ export interface User {
   picture?: string;
   fullName: string;
   locale?: string;
+  roles: string;
+  date_joined: Date;
 }
 
 export interface InstitutionUser extends User {

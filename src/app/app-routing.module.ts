@@ -10,6 +10,7 @@ import {DashboardModule} from './dashboard/dashboard.module';
 import {AuthGuardAuthenticated} from './@core/auth/guards/auth-guard-authenticated';
 import {LauncherComponent} from './@core/launcher/launcher.component';
 import {AdminComponent} from './admin/admin.component';
+import {UserManagementComponent} from './user-management/user-management.component'
 
 export const routes: Routes = [
   {
@@ -34,6 +35,10 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+  },
+  {
+    path: 'user-management/admins',
+    component: UserManagementComponent,
   },
   {
     path: 'settings',
