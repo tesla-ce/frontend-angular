@@ -1,37 +1,53 @@
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-    <label>
-        First name:
-        <input nbInput type="text" formControlName="firstName" required>
-    </label>
-    <label>
-        Last name:
-        <input nbInput type="text" formControlName="lastName" required>
-    </label>
-    <label>
-        Username:
-        <input nbInput type="text" formControlName="username" required>
-    </label>
-    <label>
-        Email:
-        <input nbInput type="text" formControlName="email" required>
-    </label>
-    <label>
-        Password:
-        <input nbInput type="password" formControlName="password" required>
-    </label>
-    <label>
-        Roles:
-        <input nbInput type="text" formControlName="roles" required>
-    </label>
-    <label>
-        Institutions:
-        <select formControlName="institution" required>
-            <option [ngValue]="null"></option>
-            <option *ngFor="let institution of institutions" [ngValue]="institution.id">{{institution.name}}</option>
-        </select>
-    </label>
-    <p>
-        Form Status: {{ profileForm.status }}
-      </p>
-    <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">    
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="inputFirstName" class="label">First Name</label>
+                <input nbInput fullWidth type="text" id="inputFirstName" formControlName="firstName" required placeholder="First name">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="inputLastName" class="label">Last Name</label>
+                <input nbInput fullWidth type="text" id="inputLastName" formControlName="lastName" required placeholder="Last name">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="inputUsername" class="label">Username</label>
+                <input nbInput fullWidth type="text" id="inputUsername" formControlName="username" required placeholder="Username">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="inputEmail" class="label">Email</label>
+                <input nbInput fullWidth type="text" id="inputEmail" formControlName="email" required placeholder="Email">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="inputPassword" class="label">Password</label>
+                <input nbInput fullWidth type="password" id="inputPassword" formControlName="password" required placeholder="Password">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="inputRoles" class="label">Roles</label>
+                <input nbInput fullWidth type="text" id="inputRoles" formControlName="roles" required placeholder="Roles">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="inputRoles" class="label">Institutions</label>
+                <nb-select fullWidth multiple formControlName="institution" required placeholder="Institutions">
+                    <!-- <nb-option value="null"></nb-option> -->
+                    <nb-option *ngFor="let institution of institutions" value="institution.id">{{institution.name}}</nb-option>
+                </nb-select>
+            </div>
+        </div>
+    </div>
+    <button nbButton type="submit" [disabled]="!profileForm.valid">Submit</button>
+    <!-- <p>
+        {{ profileForm.status }}
+    </p> -->
 </form>

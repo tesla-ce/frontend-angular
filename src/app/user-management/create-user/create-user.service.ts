@@ -28,7 +28,7 @@ export interface Institutions {
 }
 
 export interface Institution {
-    id: number,
+    id: number;
     name: string;
 }
 
