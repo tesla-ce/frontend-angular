@@ -10,8 +10,8 @@ import {DashboardModule} from './dashboard/dashboard.module';
 import {AuthGuardAuthenticated} from './@core/auth/guards/auth-guard-authenticated';
 import {LauncherComponent} from './@core/launcher/launcher.component';
 import {AdminComponent} from './admin/admin.component';
-import {UserManagementComponent} from './user-management/user-management.component'
-import {IcManagementComponent} from './ic-management/ic-management.component'
+import {UserManagementComponent} from './user-management/user-management.component';
+import {IcManagementComponent} from './ic-management/ic-management.component';
 
 export const routes: Routes = [
   {
@@ -26,7 +26,7 @@ export const routes: Routes = [
   {
     path: 'learner',
     loadChildren: () => import('./learner/learner.module')
-      .then(m => m.LearnerModule), 
+      .then(m => m.LearnerModule),
   },
   {
     path: 'instructor',

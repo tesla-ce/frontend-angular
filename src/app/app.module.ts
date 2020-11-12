@@ -22,11 +22,11 @@ import {
 } from '@nebular/theme';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { SideMenuModule } from './side-menu/side-menu.module'
+import { SideMenuModule } from './side-menu/side-menu.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,10 +46,10 @@ import { SideMenuModule } from './side-menu/side-menu.module'
     NbToastrModule.forRoot(),
     CoreModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    
-    SideMenuModule
+
+    SideMenuModule,
   ],
-  //providers: [ { provide: LOCALE_ID, useValue: 'ca' } ],
+  // providers: [ { provide: LOCALE_ID, useValue: 'ca' } ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

@@ -23,7 +23,7 @@ import { EnvServiceFactory, EnvServiceProvider } from './env/env.service.provide
 import {EnvService} from './env/env.service';
 import { environment } from '../../environments/environment';
 
-//const environment: EnvService = EnvServiceFactory();
+// const environment: EnvService = EnvServiceFactory();
 const socialLinks = [
   {
     url: 'https://github.com/akveo/nebular',

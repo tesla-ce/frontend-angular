@@ -8,10 +8,10 @@ import { SideMenuModule } from '../side-menu/side-menu.module';
   imports: [
     AdminRoutingModule,
     ThemeModule,
-    SideMenuModule
+    SideMenuModule,
   ],
   declarations: [
-    AdminComponent
+    AdminComponent,
   ],
 })
 export class AdminModule {
