@@ -4,8 +4,8 @@ export const MENU_ITEMS_ADMIN: NbMenuItem[] = [
   {
     title: 'Dashboard',
     icon: 'home-outline',
-    //link: '/dashboard',
-    //expanded: true,
+    // link: '/dashboard',
+    // expanded: true,
     home: true,
     children: [{
       title: 'Admin',
@@ -21,13 +21,13 @@ export const MENU_ITEMS_ADMIN: NbMenuItem[] = [
       title: 'Learner',
       icon: 'book-outline',
       link: '/learner',
-    }]
-  },{
+    }],
+  }, {
   title: 'System configuration',
     icon: 'settings-outline',
-    //link: '/settings',
-    //expanded: true,
-  
+    // link: '/settings',
+    // expanded: true,
+
     children: [{
       title: 'Update',
       icon: 'flip-2-outline',
@@ -48,19 +48,19 @@ export const MENU_ITEMS_ADMIN: NbMenuItem[] = [
       icon: 'paper-plane-outline',
       link: '/settings/system-scaling',
     },
-    ]
-  },{
+    ],
+  }, {
       title: 'Monitoring',
       icon: 'monitor-outline',
-      //link: '/settings',
-      //expanded: true,
-    
+      // link: '/settings',
+      // expanded: true,
+
       children: [{
         title: 'External Services',
         icon: 'external-link-outline',
-        //link: '/settings',
-        //expanded: true,
-      
+        // link: '/settings',
+        // expanded: true,
+
         children: [{
           title: 'Database',
           icon: 'layers-outline',
@@ -75,13 +75,13 @@ export const MENU_ITEMS_ADMIN: NbMenuItem[] = [
           title: 'Vault',
           icon: 'radio-button-off-outline',
           link: '/monitoring/external-services/vault',
-        },]
-      },{
+        } ],
+      }, {
         title: 'System status',
         icon: 'loader-outline',
-        //link: '/settings',
-        //expanded: true,
-      
+        // link: '/settings',
+        // expanded: true,
+
         children: [{
           title: 'Docker status',
           icon: 'grid-outline',
@@ -91,22 +91,22 @@ export const MENU_ITEMS_ADMIN: NbMenuItem[] = [
           title: 'Load levels',
           icon: 'bar-chart-outline',
           link: '/monitoring/status/storage',
-        }]
-      },{
+        }],
+      }, {
       title: 'Learners',
       icon: 'book-outline',
       link: '/monitoring/docker',
-      },{
+      }, {
       title: 'Activities',
       icon: 'star-outline',
       link: '/monitoring/activities',
-    }]
-  },{
+    }],
+  }, {
     title: 'Institutions',
       icon: 'cube-outline',
-      //link: '/settings',
-      //expanded: true,
-    
+      // link: '/settings',
+      // expanded: true,
+
       children: [{
         title: 'Add/Del/Update',
         icon: 'award-outline',
@@ -116,13 +116,13 @@ export const MENU_ITEMS_ADMIN: NbMenuItem[] = [
         title: 'Statistics',
         icon: 'pie-chart-outline',
         link: '/institutions/statistics',
-      }]
-  },{
+      }],
+  }, {
     title: 'Instrument',
       icon: 'color-picker-outline',
-      //link: '/settings',
-      //expanded: true,
-    
+      // link: '/settings',
+      // expanded: true,
+
       children: [{
         title: 'Management',
         icon: 'settings-outline',
@@ -135,18 +135,18 @@ export const MENU_ITEMS_ADMIN: NbMenuItem[] = [
           title: 'Management',
           icon: 'settings-outline',
           link: '/instrument/providers',
-        },{
+        }, {
           title: 'Options',
           icon: 'options-outline',
           link: '/instrument/providers/options',
-        }]
+        }],
     }],
-  },{
+  }, {
     title: 'User',
       icon: 'people-outline',
-      //link: '/settings',
-      //expanded: true,
-    
+      // link: '/settings',
+      // expanded: true,
+
       children: [{
         title: 'Admins',
         icon: 'award-outline',
@@ -156,6 +156,6 @@ export const MENU_ITEMS_ADMIN: NbMenuItem[] = [
         title: 'Institutions',
         icon: 'cube-outline',
         link: '/user/institutuions',
-      }]
+      }],
   },
 ];

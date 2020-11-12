@@ -7,9 +7,9 @@ import { User } from '../../@core/models/users';
 
 const httpOptions = {
 headers: new HttpHeaders({
-        'Content-Type':  'application/json'/*,
+        'Content-Type':  'application/json',/*,
         Authorization: 'my-auth-token'*/
-    })
+    }),
 };
 
 // export interface User {
@@ -24,7 +24,7 @@ headers: new HttpHeaders({
 // }
 
 export interface Institutions {
-  results: []
+  results: [];
 }
 
 export interface Institution {
@@ -41,7 +41,7 @@ export class CreateUserService {
   createUser(user: User): Observable<User> {
     return this.http.post<User>(this.userUrl, user, httpOptions)
       .pipe(
-        //catchError(this.handleError('createUser', user))
+        // catchError(this.handleError('createUser', user))
       );
   }
 
@@ -49,7 +49,7 @@ export class CreateUserService {
     return this.http.get<Institutions>(this.institutionUrl)
       .pipe(
         retry(3), // retry a failed request up to 3 times
-        catchError(this.handleError) // then handle the error
+        catchError(this.handleError), // then handle the error
       );
   }
 

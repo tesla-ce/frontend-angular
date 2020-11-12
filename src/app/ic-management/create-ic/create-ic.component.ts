@@ -11,9 +11,9 @@ import { FormGroup, FormControl } from '@angular/forms';
   providers: [CreateIcService, AuthService],
 })
 
-export class CreateIcComponent {
+export class CreateIcComponent implements OnInit {
   error: any;
-  
+
   constructor(private createIcService: CreateIcService) {}
 
   profileForm = new FormGroup({
@@ -22,7 +22,7 @@ export class CreateIcComponent {
   });
 
   ngOnInit() {
-    
+
   }
 
   onSubmit() {
@@ -30,6 +30,8 @@ export class CreateIcComponent {
     console.warn(this.profileForm.value);
     this.createIcService
     .createIc(this.profileForm.value)
-    .subscribe(ic => console.log(ic));
-  }  
+    .subscribe(ic => {
+      // console.log(ic)
+    });
+  }
 }

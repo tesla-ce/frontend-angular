@@ -9,10 +9,10 @@ import { SideMenuModule } from '../side-menu/side-menu.module';
   imports: [
     LearnerRoutingModule,
     ThemeModule,
-    SideMenuModule
+    SideMenuModule,
   ],
   declarations: [
-    LearnerComponent
+    LearnerComponent,
   ],
 })
 export class LearnerModule {

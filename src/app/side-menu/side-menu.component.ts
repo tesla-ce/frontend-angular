@@ -8,15 +8,15 @@ import { NbMenuItem } from '@nebular/theme';
 @Component({
   selector: 'ngx-side-menu',
   templateUrl: './side-menu.component.html',
-  styleUrls: ['./side-menu.component.scss']
+  styleUrls: ['./side-menu.component.scss'],
 })
 export class SideMenuComponent implements OnInit {
-  
+
   user: User;
   menu: NbMenuItem[];
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class SideMenuComponent implements OnInit {
       .pipe()
       .subscribe((user: User) => {
         this.user = user;
-        this.menu = user?user.isAdmin?MENU_ITEMS_ADMIN:MENU_ITEMS:[];
+        this.menu = user ? user.isAdmin ? MENU_ITEMS_ADMIN : MENU_ITEMS : [];
     });
   }
 

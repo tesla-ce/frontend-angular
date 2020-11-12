@@ -6,21 +6,21 @@ import { Ic } from '../../@core/models/ic';
 
 const httpOptions = {
 headers: new HttpHeaders({
-        'Content-Type':  'application/json'/*,
+        'Content-Type':  'application/json',/*,
         Authorization: 'my-auth-token'*/
-    })
+    }),
 };
 
 @Injectable()
 export class CreateIcService {
-  //TO DO: load institution from global selected institution
+  // TO DO: load institution from global selected institution
   icUrl = 'https://demo.tesla-project.eu/api/v2/institution/1/ic';
-  
+
   constructor(private http: HttpClient) { }
   createIc(ic: Ic): Observable<Ic> {
     return this.http.post<Ic>(this.icUrl, ic, httpOptions)
       .pipe(
-        //catchError(this.handleError('createIc', ic))
+        // catchError(this.handleError('createIc', ic))
       );
   }
 
@@ -41,7 +41,6 @@ export class CreateIcService {
   }
 
 }
-
 
 /*
 Copyright Google LLC. All Rights Reserved.

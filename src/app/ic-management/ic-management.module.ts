@@ -6,7 +6,7 @@ import {
   NbCardModule,
   NbDatepickerModule,
   NbInputModule,
-  NbSelectModule
+  NbSelectModule,
 } from '@nebular/theme';
 
 import { IcManagementComponent } from './ic-management.component';
@@ -29,11 +29,11 @@ import { CreateIcComponent } from './create-ic/create-ic.component';
     NbCardModule,
     NbInputModule,
     NbSelectModule,
-    NbDatepickerModule
+    NbDatepickerModule,
   ],
   declarations: [
     IcManagementComponent,
-    CreateIcComponent
+    CreateIcComponent,
   ],
 })
 export class IcManagementModule {

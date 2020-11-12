@@ -4,8 +4,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Dashboard',
     icon: 'home-outline',
-    //link: '/dashboard',
-    //expanded: true,
+    // link: '/dashboard',
+    // expanded: true,
     home: true,
     children: [{
       title: 'Admin',
@@ -21,13 +21,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
       title: 'Learner',
       icon: 'book-outline',
       link: '/learner',
-    }]
-  },{
+    }],
+  }, {
   title: 'Institution options',
     icon: 'settings-outline',
-    //link: '/settings',
-    //expanded: true,
-  
+    // link: '/settings',
+    // expanded: true,
+
     children: [{
       title: 'External IC',
       icon: 'external-link-outline',
@@ -42,13 +42,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
       title: 'Instructor auto-create',
       icon: 'shake-outline',
       link: '/institution-options/instructor-auto-create',
-    }]
-  },{
+    }],
+  }, {
       title: 'Informed Consent',
       icon: 'monitor-outline',
-      //link: '/settings',
-      //expanded: true,
-    
+      // link: '/settings',
+      // expanded: true,
+
       children: [{
         title: 'Add/Del/Update',
         icon: 'award-outline',
@@ -63,32 +63,32 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Manage documents',
         icon: 'radio-button-off-outline',
         link: '/informed-consent/update',
-      }]
-  },{
+      }],
+  }, {
       title: 'SEND',
       icon: 'cube-outline',
       link: '/settings',
-  },{
+  }, {
     title: 'Data',
       icon: 'color-picker-outline',
-      //link: '/settings',
-      //expanded: true,
-    
+      // link: '/settings',
+      // expanded: true,
+
       children: [{
         title: 'GDPR actions',
         icon: 'car-outline',
         link: '/instrument',
-    }]
-  },{
+    }],
+  }, {
     title: 'Users',
       icon: 'cube-outline',
-      //link: '/settings',
-      //expanded: true,
-    
+      // link: '/settings',
+      // expanded: true,
+
       children: [{
         title: 'Roles',
         icon: 'award-outline',
         link: '/user/roles',
-      }]
+      }],
   },
 ];

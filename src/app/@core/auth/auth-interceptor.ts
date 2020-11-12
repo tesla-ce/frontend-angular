@@ -85,8 +85,8 @@ export class AuthInterceptorService implements HttpInterceptor {
       return request;
     }
     return request.clone({
-      headers: request.headers.set(this.AUTH_HEADER, 'JWT ' + this.token.getValue()), 
-      //request.headers
+      headers: request.headers.set(this.AUTH_HEADER, 'JWT ' + this.token.getValue()),
+      // request.headers
     });
   }
 }

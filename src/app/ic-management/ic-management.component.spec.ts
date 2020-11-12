@@ -8,7 +8,7 @@ describe('IcManagementComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IcManagementComponent ]
+      declarations: [ IcManagementComponent ],
     })
     .compileComponents();
   }));

@@ -11,7 +11,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   providers: [CreateUserService, AuthService],
 })
 
-export class CreateUserComponent {
+export class CreateUserComponent implements OnInit {
   error: any;
   institutions: Institution[];
 
@@ -20,10 +20,10 @@ export class CreateUserComponent {
   profileForm = new FormGroup({
     username: new FormControl(''),
     firstName: new FormControl(''),
-    lastName: new FormControl(''),    
+    lastName: new FormControl(''),
     email: new FormControl(''),
     password: new FormControl(''),
-    institution: new FormControl(null),    
+    institution: new FormControl(null),
     roles: new FormControl(''),
     date_joined: new FormControl(new Date()),
   });
@@ -44,6 +44,8 @@ export class CreateUserComponent {
     console.warn(this.profileForm.value);
     this.createUserService
     .createUser(this.profileForm.value)
-    .subscribe(user => console.log(user));
-  }  
+    .subscribe(user => {
+      // console.log(user)
+    });
+  }
 }

@@ -5,7 +5,7 @@ import {
   NbButtonModule,
   NbCardModule,
   NbInputModule,
-  NbSelectModule
+  NbSelectModule,
 } from '@nebular/theme';
 
 import { UserManagementComponent } from './user-management.component';
@@ -27,11 +27,11 @@ import { CreateUserComponent } from './create-user/create-user.component';
     NbButtonModule,
     NbCardModule,
     NbInputModule,
-    NbSelectModule
+    NbSelectModule,
   ],
   declarations: [
     UserManagementComponent,
-    CreateUserComponent
+    CreateUserComponent,
   ],
 })
 export class UserManagementModule {

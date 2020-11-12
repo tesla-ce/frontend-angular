@@ -9,10 +9,10 @@ import { SideMenuModule } from '../side-menu/side-menu.module';
   imports: [
     SettingsRoutingModule,
     ThemeModule,
-    SideMenuModule
+    SideMenuModule,
   ],
   declarations: [
-    SettingsComponent
+    SettingsComponent,
   ],
 })
 export class SettingsModule {

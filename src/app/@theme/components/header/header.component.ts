@@ -77,33 +77,32 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
-    
     this.authService.getUser()
       .pipe(takeUntil(this.destroy$))
       .subscribe((user: User) => {
         this.user = user;
         if (!user?.isAdmin){
-          //mock institutions
+          // mock institutions
           this.institutions = [
             {
-              "acronym":"uoc",
-              "id":1,
-              "isAdmin":false
+              'acronym': 'uoc',
+              'id': 1,
+              'isAdmin': false,
             },
             {
-              "acronym":"uoc-1",
-              "id":2,
-              "isAdmin":false
+              'acronym': 'uoc-1',
+              'id': 2,
+              'isAdmin': false,
             },
             {
-              "acronym":"uoc-2",
-              "id":3,
-              "isAdmin":false
+              'acronym': 'uoc-2',
+              'id': 3,
+              'isAdmin': false,
             }];
-          //Load institution from user
-          //TO DO: this will be an array, delete mocked array, add user.institutions to array or load it from template user?.institutions
-          //this.institutions.push(user.institution)
-          //this.currentInstitution = user.institution.acronym;
+          // Load institution from user
+          // TO DO: this will be an array, delete mocked array, add user.institutions to array or load it from template user?.institutions
+          // this.institutions.push(user.institution)
+          // this.currentInstitution = user.institution.acronym;
           this.currentInstitution = 1;
         }
       });
@@ -144,8 +143,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   changeInstitution(acronym: string) {
-    console.log("change instiution!", acronym);
-    //this.themeService.changeTheme(acronym);
+    // console.log('change instiution!', acronym);
+    // this.themeService.changeTheme(acronym);
   }
 
   toggleSidebar(): boolean {

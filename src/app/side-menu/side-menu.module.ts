@@ -5,14 +5,14 @@ import { NbMenuModule } from '@nebular/theme';
 
 @NgModule({
   declarations: [
-    SideMenuComponent
+    SideMenuComponent,
   ],
   imports: [
     CommonModule,
-    NbMenuModule
+    NbMenuModule,
   ],
   exports: [
-    SideMenuComponent
-  ]
+    SideMenuComponent,
+  ],
 })
 export class SideMenuModule { }
