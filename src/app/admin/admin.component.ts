@@ -26,10 +26,10 @@ export class AdminComponent implements OnInit {
   constructor(
     private authService: AuthService,
     @Inject(LOCALE_ID) public userLocale: string,
-  ) { this.JSON = JSON;}
+  ) { this.JSON = JSON; }
   browserLocale = getUsersLocale('en-US');
 
-  ngOnInit(){
+  ngOnInit() {
     this.authService.getUser()
       .pipe()
       .subscribe((user: User) => this.user = user);

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateUserService, Institutions, Institution } from './create-user.service';
-import { AuthService } from '../../@core/auth/auth.service'
+import { AuthService } from '../../@core/auth/auth.service';
 
 import { FormGroup, FormControl } from '@angular/forms';
 

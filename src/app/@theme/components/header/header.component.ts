@@ -81,7 +81,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((user: User) => {
         this.user = user;
-        if (!user?.isAdmin){
+        if (!user?.isAdmin) {
           // mock institutions
           this.institutions = [
             {
