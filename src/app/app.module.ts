@@ -5,7 +5,7 @@
  */
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
@@ -49,7 +49,6 @@ import { SideMenuModule } from './side-menu/side-menu.module';
 
     SideMenuModule,
   ],
-  // providers: [ { provide: LOCALE_ID, useValue: 'ca' } ],
   bootstrap: [AppComponent],
 })
 export class AppModule {
