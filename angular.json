@@ -7,19 +7,11 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
-      "i18n": {
-        "sourceLocale": "en-US",
-        "locales": {
-          "ca": "src/locale/messages.ca.xlf"
-        }
-      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "aot": true,
-            //"localize": true,
-            //"localize": ["en-US"],
             "preserveSymlinks": true,
             "rebaseRootRelativeCssUrls": true,
             "outputPath": "dist",
@@ -63,9 +55,6 @@
             ]
           },
           "configurations": {
-            "ca":{
-              "localize": ["ca"]
-            },
             "production": {
               "budgets": [
                 {
@@ -101,9 +90,6 @@
           "configurations": {
             "production": {
               "browserTarget": "tesla-ce:build:production"
-            },
-            "ca": {
-              "browserTarget": "tesla-ce:build:ca"
             }
           }
         },
