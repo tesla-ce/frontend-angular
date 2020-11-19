@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
-import { NbMenuModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { LearnerComponent } from './learner.component';
 import { LearnerRoutingModule } from './learner-routing.module';
+import { SideMenuModule } from '../side-menu/side-menu.module';
 
 @NgModule({
   imports: [
     LearnerRoutingModule,
     ThemeModule,
-    NbMenuModule,
+    SideMenuModule,
   ],
   declarations: [
     LearnerComponent,

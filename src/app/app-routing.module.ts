@@ -9,6 +9,9 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {AuthGuardAuthenticated} from './@core/auth/guards/auth-guard-authenticated';
 import {LauncherComponent} from './@core/launcher/launcher.component';
+import {AdminComponent} from './admin/admin.component';
+import {UserManagementComponent} from './user-management/user-management.component';
+import {IcManagementComponent} from './ic-management/ic-management.component';
 
 export const routes: Routes = [
   {
@@ -32,8 +35,20 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: () => import('./admin/admin.module')
-      .then(m => m.AdminModule),
+    component: AdminComponent,
+  },
+  {
+    path: 'user/admins',
+    component: UserManagementComponent,
+  },
+  {
+    path: 'informed-consent/update',
+    component: IcManagementComponent,
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module')
+      .then(m => m.SettingsModule),
   },
   {
     path: 'auth',
