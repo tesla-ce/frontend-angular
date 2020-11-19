@@ -15,7 +15,8 @@ import { SideMenuModule } from '../side-menu/side-menu.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CreateUserComponent } from './create-user/create-user.component';
-
+// import { ListComponent } from './list/list.component';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
   imports: [
@@ -28,10 +29,12 @@ import { CreateUserComponent } from './create-user/create-user.component';
     NbCardModule,
     NbInputModule,
     NbSelectModule,
+    Ng2SmartTableModule,
   ],
   declarations: [
     UserManagementComponent,
     CreateUserComponent,
+    // ListComponent,
   ],
 })
 export class UserManagementModule {
