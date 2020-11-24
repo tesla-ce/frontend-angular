@@ -6,6 +6,7 @@ import {
   NbCardModule,
   NbInputModule,
   NbSelectModule,
+  NbIconModule,
 } from '@nebular/theme';
 
 import { UserManagementComponent } from './user-management.component';
@@ -15,12 +16,14 @@ import { SideMenuModule } from '../side-menu/side-menu.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CreateUserComponent } from './create-user/create-user.component';
-// import { ListComponent } from './list/list.component';
+import { ListComponent } from './list/list.component';
+import { ListCellActionsComponent } from './list/list-cell-actions.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
   imports: [
     UserManagementRoutingModule,
+    Ng2SmartTableModule,
     ThemeModule,
     FormsModule,
     ReactiveFormsModule,
@@ -29,12 +32,13 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NbCardModule,
     NbInputModule,
     NbSelectModule,
-    Ng2SmartTableModule,
+    NbIconModule,
   ],
   declarations: [
     UserManagementComponent,
     CreateUserComponent,
-    // ListComponent,
+    ListComponent,
+    ListCellActionsComponent,
   ],
 })
 export class UserManagementModule {
