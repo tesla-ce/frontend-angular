@@ -33,6 +33,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NbInputModule,
     NbSelectModule,
     NbIconModule,
+    NbSelectModule,
   ],
   declarations: [
     UserManagementComponent,

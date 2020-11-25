@@ -51,6 +51,7 @@ export class ListComponent implements OnInit {
   };
 
   source: CustomDataSource;
+  perPage: '10';
 
   constructor(http: HttpClient) {
     this.source = new CustomDataSource(http, {
@@ -67,6 +68,10 @@ export class ListComponent implements OnInit {
    }
 
   ngOnInit(): void {
+  }
+
+  perPageOnChange(perPage): void {
+    this.source.setPaging(1, +perPage, true);
   }
 
 }
