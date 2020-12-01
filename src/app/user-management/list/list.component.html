@@ -1,3 +1,9 @@
+<div class="list-header">
+    <nb-form-field>
+        <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+        <input type="text" nbInput #searchInput>
+    </nb-form-field>
+</div>
 <ng2-smart-table  class="list" [settings]="settings" [source]="source"></ng2-smart-table>
 <div class="list-footer">
     <nb-select placeholder="Items per page" [(selected)]="perPage" (selectedChange)="perPageOnChange($event)">

@@ -1,9 +1,15 @@
 @import '../../@theme/styles/themes';
 
 @include nb-install-component() {
+    .list-header {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 0.5rem;
+    }
+
     .list-footer {
         display: flex;
         justify-content: center;
-        margin-top: 0.2rem;
+        margin-top: 0.5rem;
     }
 }

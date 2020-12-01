@@ -7,6 +7,7 @@ import {
   NbInputModule,
   NbSelectModule,
   NbIconModule,
+  NbFormFieldModule,
 } from '@nebular/theme';
 
 import { UserManagementComponent } from './user-management.component';
@@ -34,6 +35,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NbSelectModule,
     NbIconModule,
     NbSelectModule,
+    NbFormFieldModule,
   ],
   declarations: [
     UserManagementComponent,
