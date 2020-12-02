@@ -5,5 +5,6 @@
  */
 export const environment = {
   production: true,
-  apiUrl: 'https://demo.tesla-project.eu',
+  apiUrl: 'https://demo.tesla-project.eu/api/',
+  apiVersion: 'v2',
 };

@@ -17,14 +17,11 @@ import { SideMenuModule } from '../side-menu/side-menu.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CreateUserComponent } from './create-user/create-user.component';
-import { ListComponent } from './list/list.component';
-import { ListCellActionsComponent } from './list/list-cell-actions.component';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { ListModule } from './list/list.module';
 
 @NgModule({
   imports: [
     UserManagementRoutingModule,
-    Ng2SmartTableModule,
     ThemeModule,
     FormsModule,
     ReactiveFormsModule,
@@ -36,12 +33,11 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NbIconModule,
     NbSelectModule,
     NbFormFieldModule,
+    ListModule,
   ],
   declarations: [
     UserManagementComponent,
     CreateUserComponent,
-    ListComponent,
-    ListCellActionsComponent,
   ],
 })
 export class UserManagementModule {
