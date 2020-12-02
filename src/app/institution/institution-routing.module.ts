@@ -1,16 +1,16 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
-import { PagesComponent } from './pages.component';
-import { DashboardComponent } from '../dashboard/dashboard.component';
+import { InstitutionComponent } from './institution.component';
+import { InstitutionDashboardComponent } from './institution-dashboard/institution-dashboard.component';
 
 const routes: Routes = [{
   path: '',
-  component: PagesComponent,
+  component: InstitutionComponent,
   children: [
     {
       path: 'dashboard',
-      component: DashboardComponent,
+      component: InstitutionDashboardComponent,
     },
     {
       path: '',
@@ -24,5 +24,5 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PagesRoutingModule {
+export class InstitutionRoutingModule {
 }

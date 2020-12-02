@@ -5,37 +5,22 @@ import {
   NbLoginComponent,
   NbLogoutComponent,
 } from '@nebular/auth';
-import {DashboardComponent} from './dashboard/dashboard.component';
-import {DashboardModule} from './dashboard/dashboard.module';
 import {AuthGuardAuthenticated} from './@core/auth/guards/auth-guard-authenticated';
-import {LauncherComponent} from './@core/launcher/launcher.component';
-import {AdminComponent} from './admin/admin.component';
 import {UserManagementComponent} from './user-management/user-management.component';
 import {IcManagementComponent} from './ic-management/ic-management.component';
 
 export const routes: Routes = [
   {
-    path: 'dashboard',
-    component: DashboardComponent,
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module')
+      .then(m => m.AdminModule),
     canActivate: [AuthGuardAuthenticated],
   },
   {
-    path: 'auth/launcher',
-    component: LauncherComponent,
-  },
-  {
-    path: 'learner',
-    loadChildren: () => import('./learner/learner.module')
-      .then(m => m.LearnerModule),
-  },
-  {
-    path: 'instructor',
-    loadChildren: () => import('./instructor/instructor.module')
-      .then(m => m.InstructorModule),
-  },
-  {
-    path: 'admin',
-    component: AdminComponent,
+    path: 'institution',
+    loadChildren: () => import('./institution/institution.module')
+      .then(m => m.InstitutionModule),
+    canActivate: [AuthGuardAuthenticated],
   },
   {
     path: 'users',
@@ -44,11 +29,6 @@ export const routes: Routes = [
   {
     path: 'informed-consent/update',
     component: IcManagementComponent,
-  },
-  {
-    path: 'settings',
-    loadChildren: () => import('./settings/settings.module')
-      .then(m => m.SettingsModule),
   },
   {
     path: 'auth',
@@ -68,8 +48,8 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: '**', component: DashboardComponent },
+  { path: '', redirectTo: 'admin/dashboard', pathMatch: 'full' },
+  { path: '**', redirectTo: 'admin/dashboard', pathMatch: 'full' },
 ];
 
 const config: ExtraOptions = {
@@ -77,7 +57,7 @@ const config: ExtraOptions = {
 };
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, config), DashboardModule],
+  imports: [RouterModule.forRoot(routes, config)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {
