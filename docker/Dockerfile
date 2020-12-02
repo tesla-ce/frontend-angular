@@ -1,5 +1,6 @@
 ### STAGE 1: Build ###
 FROM node:alpine AS build
+RUN apk add --no-cache python2
 WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm install

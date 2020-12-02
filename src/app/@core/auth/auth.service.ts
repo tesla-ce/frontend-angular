@@ -50,7 +50,7 @@ export class AuthService extends AuthUserData {
     this.authService.onTokenChange()
       .subscribe((token: NbAuthOAuth2JWTToken) => {
         if (token.isValid()) {
-          const url = envService.apiUrl + '/api/v2/auth/profile';
+          const url = envService.apiUrl + '/auth/profile';
           this.http.get(url).subscribe( data => {
             let institution: Institution;
             let user: User | InstitutionUser = null;

@@ -16,7 +16,7 @@ export class LauncherComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      const url = this.envService.apiUrl + '/api/v2/auth/token';
+      const url = this.envService.apiUrl + '/auth/token';
       const options = {
         observe: 'body' as const,
         responseType: 'json' as const,

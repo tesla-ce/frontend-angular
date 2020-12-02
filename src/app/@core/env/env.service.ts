@@ -6,7 +6,7 @@ export class EnvService {
   // be overridden by env.js
 
   // API url
-  public apiUrl = environment.apiUrl;
+  public apiUrl = environment.apiUrl + environment.apiVersion;
 
   // Whether or not to enable debug mode
   public enableDebug = !environment.production;

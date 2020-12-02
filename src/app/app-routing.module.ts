@@ -38,7 +38,7 @@ export const routes: Routes = [
     component: AdminComponent,
   },
   {
-    path: 'user/admins',
+    path: 'users',
     component: UserManagementComponent,
   },
   {

@@ -10,5 +10,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://demo.tesla-project.eu',
+  apiUrl: 'https://demo.tesla-project.eu/api/',
+  apiVersion: 'v2',
 };

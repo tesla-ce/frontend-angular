@@ -142,20 +142,21 @@ export const MENU_ITEMS_ADMIN: NbMenuItem[] = [
         }],
     }],
   }, {
-    title: 'User',
-      icon: 'people-outline',
-      // link: '/settings',
-      // expanded: true,
+    title: 'Users',
+    icon: 'people-outline',
+    link: '/users',
+      // // link: '/settings',
+      // // expanded: true,
 
-      children: [{
-        title: 'Admins',
-        icon: 'award-outline',
-        link: '/user/admins',
-      },
-      {
-        title: 'Institutions',
-        icon: 'cube-outline',
-        link: '/user/institutuions',
-      }],
+      // children: [{
+      //   title: 'List',
+      //   icon: 'list-outline',
+      //   link: '/user/admins',
+      // },
+      // {
+      //   title: 'New',
+      //   icon: 'cube-outline',
+      //   link: '/user/institutuions',
+      // }],
   },
 ];
