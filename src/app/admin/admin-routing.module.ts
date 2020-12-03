@@ -2,22 +2,22 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { AdminComponent } from './admin.component';
-import { DashboardComponent } from '../dashboard/dashboard.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [{
   path: '',
   component: AdminComponent,
-  // children: [
-  //   {
-  //     path: 'dashboard',
-  //     component: DashboardComponent,
-  //   },
-  //   {
-  //     path: '',
-  //     redirectTo: 'dashboard',
-  //     pathMatch: 'full',
-  //   },
-  // ],
+  children: [
+    {
+      path: 'dashboard',
+      component: AdminDashboardComponent,
+    },
+    {
+      path: '',
+      redirectTo: 'dashboard',
+      pathMatch: 'full',
+    },
+  ],
 }];
 
 @NgModule({

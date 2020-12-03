@@ -36,7 +36,7 @@ export class ApiService extends NbRoleProvider {
               'Content-type': 'application/json; charset=utf-8',
             }),
           };
-          const url = envService.apiUrl + '/api/v2/auth/profile';
+          const url = envService.apiUrl + '/auth/profile';
           this.http.get(url, options).subscribe( data => {
             let institution: Institution;
             if (data['institution']) {
