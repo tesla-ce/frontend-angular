@@ -21,9 +21,9 @@ import {AuthGuardAdmin} from './auth/guards/auth-guard-admin';
 import {LauncherModule} from './launcher/launcher.module';
 import { EnvServiceFactory, EnvServiceProvider } from './env/env.service.provider';
 import {EnvService} from './env/env.service';
-import { environment } from '../../environments/environment';
+// import { environment } from '../../environments/environment';
 
-// const environment: EnvService = EnvServiceFactory();
+const environment: EnvService = EnvServiceFactory();
 const socialLinks = [
   {
     url: 'https://github.com/akveo/nebular',
@@ -60,13 +60,13 @@ export const NB_CORE_PROVIDERS = [
         },
         baseEndpoint: environment.apiUrl,
         login: {
-          endpoint: '/api/v2/auth/login',
+          endpoint: '/auth/login',
         },
         refreshToken: {
-          endpoint: '/api/v2/auth/token/refresh',
+          endpoint: '/auth/token/refresh',
         },
         logout: {
-          endpoint: '/api/v2/auth/logout',
+          endpoint: '/auth/logout',
           redirect: {success: '/', failure: '/'},
         },
       }),
