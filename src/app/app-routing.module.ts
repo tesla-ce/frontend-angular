@@ -6,7 +6,7 @@ import {
   NbLogoutComponent,
 } from '@nebular/auth';
 import {AuthGuardAuthenticated} from './@core/auth/guards/auth-guard-authenticated';
-import {UserManagementComponent} from './user-management/user-management.component';
+import {UserManagementComponent} from './admin/user-management/user-management.component';
 import {IcManagementComponent} from './ic-management/ic-management.component';
 
 export const routes: Routes = [

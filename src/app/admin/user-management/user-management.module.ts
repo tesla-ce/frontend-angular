@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { ThemeModule } from '../@theme/theme.module';
+import { ThemeModule } from '../../@theme/theme.module';
 import {
   NbButtonModule,
   NbCardModule,
@@ -12,12 +12,13 @@ import {
 
 import { UserManagementComponent } from './user-management.component';
 import { UserManagementRoutingModule } from './user-management-routing.module';
-import { SideMenuModule } from '../side-menu/side-menu.module';
+import { SideMenuModule } from '../../side-menu/side-menu.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CreateUserComponent } from './create-user/create-user.component';
-import { ListModule } from './list/list.module';
+import { ListModule } from '../../list/list.module';
+import { CreateModule } from '../../create/create.module';
 
 @NgModule({
   imports: [
@@ -26,14 +27,14 @@ import { ListModule } from './list/list.module';
     FormsModule,
     ReactiveFormsModule,
     SideMenuModule,
-    NbButtonModule,
     NbCardModule,
+    NbButtonModule,
     NbInputModule,
     NbSelectModule,
-    NbIconModule,
-    NbSelectModule,
     NbFormFieldModule,
+    NbIconModule,
     ListModule,
+    CreateModule,
   ],
   declarations: [
     UserManagementComponent,

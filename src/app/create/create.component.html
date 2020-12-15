@@ -1,0 +1,22 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">    
+    <div class="row">
+        <div *ngFor="let field of fields" class="col-sm-6">
+            <div class="form-group">
+                <label [for]="field.inputName" class="label">{{field.label || field.key}}</label>
+                <input nbInput fullWidth 
+                    [type]="field.inputType || text"
+                    [id]="field.inputName || field.key"
+                    [name]="field.inputName || field.key"
+                    [formControlName]="field.key"
+                    [placeholder]="field.placeholder || null" 
+                    [attr.disabled]="field.disabled || null"
+                    [attr.email]="field.validator == 'email' || null"
+                    [required] = "field.required || false" >
+            </div>
+        </div>
+    </div>
+    <button *ngIf="!loading" nbButton type="submit" [disabled]="!profileForm.valid">Submit</button>
+<p>
+    <!-- {{ profileForm.status }} -->
+</p>
+</form>
