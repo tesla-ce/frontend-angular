@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -9,8 +9,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class CreateComponent implements OnInit {
 
   @Input() fields: any;
-  @Input() createService: any;
-  @Input() endPoint: string;
+  @Output() save: EventEmitter<any> = new EventEmitter();
 
   profileForm: FormGroup;
 
@@ -29,12 +28,8 @@ export class CreateComponent implements OnInit {
   }
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.profileForm.value);
-    this.createService(this.profileForm.value)
-    .subscribe(result => {
-      // console.log(result)
-    });
+    console.log(this.profileForm.value);
+    this.save.emit(this.profileForm.value);
   }
 
 }

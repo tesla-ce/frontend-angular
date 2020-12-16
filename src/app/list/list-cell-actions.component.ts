@@ -21,8 +21,8 @@ export class ListCellActionsComponent implements ViewCell, OnInit {
   constructor(  private route: ActivatedRoute,
                 private router: Router ) {}
 
-  edit() {
-    this.router.navigate(['edit', this.rowData.id], {relativeTo: this.route });
+  update() {
+    this.router.navigate(['update', this.rowData.id], {relativeTo: this.route });
   }
 
   delete() {

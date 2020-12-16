@@ -6,7 +6,6 @@ import {
   NbLogoutComponent,
 } from '@nebular/auth';
 import {AuthGuardAuthenticated} from './@core/auth/guards/auth-guard-authenticated';
-import {UserManagementComponent} from './admin/user-management/user-management.component';
 import {IcManagementComponent} from './ic-management/ic-management.component';
 
 export const routes: Routes = [
@@ -21,10 +20,6 @@ export const routes: Routes = [
     loadChildren: () => import('./institution/institution.module')
       .then(m => m.InstitutionModule),
     canActivate: [AuthGuardAuthenticated],
-  },
-  {
-    path: 'users',
-    component: UserManagementComponent,
   },
   {
     path: 'informed-consent/update',

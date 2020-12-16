@@ -5,6 +5,7 @@ import { ServerSourceConf } from 'ng2-smart-table/lib/lib/data-source/server/ser
 import {fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, tap } from 'rxjs/operators';
 import { EnvService } from '../@core/env/env.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-list',
@@ -22,10 +23,16 @@ export class ListComponent implements OnInit, AfterViewInit {
   perPage: string;
   http: HttpClient;
   envService: EnvService;
+  id: number;
 
-  constructor(http: HttpClient, envService: EnvService) {
+  constructor(
+    http: HttpClient,
+    envService: EnvService,
+    private route: ActivatedRoute,
+    private router: Router) {
     this.http = http;
     this.envService = envService;
+
    }
 
   ngOnInit(): void {
@@ -52,6 +59,14 @@ export class ListComponent implements OnInit, AfterViewInit {
           }),
       )
       .subscribe();
+  }
+
+  userRowSelect(event) {
+    this.router.navigate(['show', event.data.id], {relativeTo: this.route });
+  }
+
+  create(event) {
+    this.router.navigate(['create'], {relativeTo: this.route });
   }
 
   perPageOnChange(perPage): void {

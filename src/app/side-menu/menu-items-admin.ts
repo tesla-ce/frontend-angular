@@ -144,7 +144,7 @@ export const MENU_ITEMS_ADMIN: NbMenuItem[] = [
   }, {
     title: 'Users',
     icon: 'people-outline',
-    link: '/users',
+    link: '/admin/admin-user',
       // // link: '/settings',
       // // expanded: true,
 
