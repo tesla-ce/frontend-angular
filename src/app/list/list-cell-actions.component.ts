@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NbDialogService } from '@nebular/theme';
 import { ViewCell } from 'ng2-smart-table';
+import { DeleteDialogComponent } from './delete-dialog.component';
 
 @Component({
   selector: 'ngx-list-cell-actions',
@@ -18,20 +20,21 @@ export class ListCellActionsComponent implements ViewCell, OnInit {
 
   ngOnInit() {}
 
-  constructor(  private route: ActivatedRoute,
-                private router: Router ) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private dialog: NbDialogService,
+  ) {}
 
   update() {
     this.router.navigate(['update', this.rowData.id], {relativeTo: this.route });
   }
 
-  delete() {
-    /*
-    TO DO:
-    - confirm delete pop up
-    - call delete endpoint
-    - confirm item deleted
-    */
+  delete(event) {
+    this.dialog.open(DeleteDialogComponent)
+    .onClose.subscribe(data => {
+      console.log(data)
+    });
   }
 
 }

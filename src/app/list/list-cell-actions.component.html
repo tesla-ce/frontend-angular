@@ -2,7 +2,7 @@
     <button nbButton status='warning' size="small" (click)="update()">
         <nb-icon icon="edit-outline"></nb-icon>
     </button>
-    <button nbButton status='danger' size="small" (click)="delete()">
+    <button nbButton status='danger' size="small" (click)="delete($event.stopPropagation())">
         <nb-icon icon="trash-2-outline"></nb-icon>
     </button>
 </div>

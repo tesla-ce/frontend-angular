@@ -6,11 +6,14 @@ import {
   NbFormFieldModule,
   NbInputModule,
   NbButtonModule,
+  NbDialogModule,
+  NbCardModule,
 } from '@nebular/theme';
 
 import { ListComponent } from './list.component';
 import { ListCellActionsComponent } from './list-cell-actions.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { DeleteDialogComponent } from './delete-dialog.component';
 
 @NgModule({
   imports: [
@@ -21,10 +24,13 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NbFormFieldModule,
     NbInputModule,
     NbButtonModule,
+    NbCardModule,
+    NbDialogModule,
   ],
   declarations: [
     ListComponent,
     ListCellActionsComponent,
+    DeleteDialogComponent,
   ],
   exports: [
       ListComponent,
