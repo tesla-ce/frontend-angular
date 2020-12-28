@@ -16,7 +16,7 @@ export interface User {
   picture?: string;
   fullName: string;
   locale?: string;
-  // roles: string;
+  roles: string[];
   // date_joined: Date;
 }
 

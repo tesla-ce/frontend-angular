@@ -40,6 +40,7 @@ export class ApiService {
       .get(this.endpointUrl + userId)
       .pipe(
         map(( user: User ) => {
+          console.log(user);
           if ( user ) return user;
           else throw user;
         }),
@@ -72,4 +73,12 @@ export class ApiService {
     console.error('ApiService::handleError', error);
     return ErrorObservable.create(error);
   }
+
+  camelToSnakeCase (str) {
+    return str.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
+  }
+  snakeToCamelCase (str) {
+    return str.replace(/[-_][a-z]/ig, letter => `${letter.toUpperCase()}`).replace('_', '');
+  }
+
 }

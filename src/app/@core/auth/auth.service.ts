@@ -70,6 +70,7 @@ export class AuthService extends AuthUserData {
                 locale: data['locale'],
                 uid: data['uid'],
                 username: data['username'],
+                roles: data['roles'],
                 institution,
               };
             } else {
@@ -81,6 +82,7 @@ export class AuthService extends AuthUserData {
                 fullName: data['full_name'],
                 locale: data['locale'],
                 username: data['username'],
+                roles: data['roles'],
               };
             }
             this.userData.next(Object.assign({}, user));

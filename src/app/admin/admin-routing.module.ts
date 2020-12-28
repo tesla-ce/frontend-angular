@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AdminComponent } from './admin.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { AdminUserComponent } from './admin-user/admin-user.component';
 
 const routes: Routes = [{
   path: '',

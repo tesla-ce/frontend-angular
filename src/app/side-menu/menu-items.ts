@@ -46,24 +46,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
   }, {
       title: 'Informed Consent',
       icon: 'monitor-outline',
-      // link: '/settings',
+      link: '/institution/institution-ic',
       // expanded: true,
-
-      children: [{
-        title: 'Add/Del/Update',
-        icon: 'award-outline',
-        link: '/informed-consent/update',
-      },
-      {
-        title: 'Manage languages',
-        icon: 'award-outline',
-        link: '/informed-consent/update',
-      },
-      {
-        title: 'Manage documents',
-        icon: 'radio-button-off-outline',
-        link: '/informed-consent/update',
-      }],
   }, {
       title: 'SEND',
       icon: 'cube-outline',
@@ -81,14 +65,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     }],
   }, {
     title: 'Users',
-      icon: 'cube-outline',
-      // link: '/settings',
-      // expanded: true,
-
-      children: [{
-        title: 'Roles',
-        icon: 'award-outline',
-        link: '/user/roles',
-      }],
+    icon: 'people-outline',
+    link: '/institution/institution-user',
   },
 ];
