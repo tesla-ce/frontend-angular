@@ -6,7 +6,7 @@ import { map, takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { RippleService } from '../../../@core/utils/ripple.service';
 import {AuthService } from '../../../@core/auth/auth.service';
-import { InstitutionUser, User } from '../../../@core/models/users';
+import { InstitutionUser, User } from '../../../@core/models/user';
 
 
 @Component({
@@ -81,7 +81,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((user: User) => {
         this.user = user;
-        if (!user?.isAdmin) {
+        if (!user?.is_admin) {
           // mock institutions
           this.institutions = [
             {

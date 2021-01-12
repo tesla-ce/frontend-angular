@@ -4,7 +4,7 @@ export interface Institution {
   acronym: string;
   id: number;
   name: string;
-  isAdmin: boolean;
+  is_admin: boolean;
 }
 
 export interface User {
@@ -21,6 +21,7 @@ export interface User {
   is_superuser: string;
   is_staff: boolean;
   is_active: boolean;
+  is_admin: boolean;
   date_joined: Date;
   groups: string[];
   user_permissions: string[];

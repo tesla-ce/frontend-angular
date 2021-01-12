@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angul
 
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { User } from '../../../@core/models/users';
+import { User } from '../../../@core/models/user';
 
 const httpOptions = {
 headers: new HttpHeaders({

@@ -6,7 +6,7 @@
     </nb-card-body>
     <nb-card-footer>
         <div style="display: flex; flex-direction: row;">
-            <nb-card style="flex-grow: 1;">
+            <nb-card style="flex: 1;">
                 <nb-list *ngIf="user?true:false">
                     <nb-list-item *ngIf="user.id?true:false">id: {{ user.id }}</nb-list-item>
                     <nb-list-item *ngIf="user.username?true:false">username: {{ user.username }}</nb-list-item>
@@ -18,10 +18,6 @@
                     <!-- <nb-list-item *ngIf="user.institution?true:false">institution: {{ user.institution }}</nb-list-item>
                     <nb-list-item *ngIf="user.acronym?true:false">acronym: {{ user.acronym }}</nb-list-item>
                     <nb-list-item *ngIf="user.uid?true:false">uid: {{ user.uid }}</nb-list-item> -->
-                </nb-list>
-            </nb-card>
-            <nb-card style="flex-grow: 1;">
-                <nb-list *ngIf="user?true:false">
                     <nb-list-item *ngIf="user.roles?true:false">roles: {{ user.roles }}</nb-list-item>
                     <nb-list-item *ngIf="user.locale?true:false">locale: {{ user.locale }}</nb-list-item>
                     <nb-list-item *ngIf="user.is_superuser?true:false">is_superuser: {{ user.is_superuser }}</nb-list-item>
@@ -33,6 +29,5 @@
                 </nb-list>
             </nb-card>
         </div>
-        
     </nb-card-footer>
 </nb-card>

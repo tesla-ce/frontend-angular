@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService } from '../@core/auth/auth.service';
 import {MENU_ITEMS} from './menu-items';
 import {MENU_ITEMS_ADMIN} from './menu-items-admin';
-import { User } from '../@core/models/users';
+import { User } from '../@core/models/user';
 import { NbMenuItem } from '@nebular/theme';
 
 @Component({
@@ -24,7 +24,7 @@ export class SideMenuComponent implements OnInit {
       .pipe()
       .subscribe((user: User) => {
         this.user = user;
-        this.menu = user ? user.isAdmin ? MENU_ITEMS_ADMIN : MENU_ITEMS : [];
+        this.menu = user ? user.is_admin ? MENU_ITEMS_ADMIN : MENU_ITEMS : [];
     });
   }
 

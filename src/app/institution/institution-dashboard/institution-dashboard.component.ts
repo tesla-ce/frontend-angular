@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService } from '../../@core/auth/auth.service';
-import { User } from '../../@core/models/users';
+import { User } from '../../@core/models/user';
 
 @Component({
   selector: 'ngx-institution-dashboard',
@@ -11,11 +11,10 @@ import { User } from '../../@core/models/users';
 export class InstitutionDashboardComponent implements OnInit {
 
   user: User;
-  JSON;
 
   constructor(
     private authService: AuthService,
-  ) { this.JSON = JSON; }
+  ) {}
 
   ngOnInit() {
     this.authService.getUser()
