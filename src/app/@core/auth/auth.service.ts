@@ -22,6 +22,7 @@ export abstract class AuthUserData extends NbRoleProvider {
 export class AuthService extends AuthUserData {
   private time: Date = new Date;
   private _user = new BehaviorSubject<User>(null);
+  private _isAdmin: boolean = false;
   private readonly user = this._user.asObservable();
 
   getRole(): Observable<string> {
@@ -40,6 +41,10 @@ export class AuthService extends AuthUserData {
     return this.user;
   }
 
+  isAdmin(): boolean {
+    return this._isAdmin;
+  }
+
   logOut(): void {
     this.authService.logout('email').subscribe( result => {
       this.router.navigateByUrl('/auth/login');
@@ -54,8 +59,10 @@ export class AuthService extends AuthUserData {
         if (token.isValid()) {
           const url = envService.apiUrl + '/auth/profile';
           this.http.get(url).subscribe(( user: User ) => {
-              if ( user ) this._user.next(user);
-              else throw user;
+              if ( user ) {
+                this._isAdmin = user.is_admin;
+                this._user.next(user);
+              } else throw user;
           });
           // this.http.get(url).pipe(
           //   map(( user: User ) => {

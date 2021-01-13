@@ -7,6 +7,8 @@ import {
 } from '@nebular/auth';
 import {AuthGuardAuthenticated} from './@core/auth/guards/auth-guard-authenticated';
 import {IcManagementComponent} from './ic-management/ic-management.component';
+import { AuthGuardAdmin } from './@core/auth/guards/auth-guard-admin';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -19,6 +21,11 @@ export const routes: Routes = [
     path: 'institution',
     loadChildren: () => import('./institution/institution.module')
       .then(m => m.InstitutionModule),
+    canActivate: [AuthGuardAuthenticated],
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
     canActivate: [AuthGuardAuthenticated],
   },
   {
@@ -43,8 +50,8 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: '', redirectTo: 'admin/dashboard', pathMatch: 'full' },
-  { path: '**', redirectTo: 'admin/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '**', redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 
 const config: ExtraOptions = {
