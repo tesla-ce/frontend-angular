@@ -4,24 +4,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Dashboard',
     icon: 'home-outline',
-    // link: '/dashboard',
-    // expanded: true,
-    home: true,
-    children: [{
-      title: 'Admin',
-      icon: 'award-outline',
-      link: '/admin',
-    },
-    {
-      title: 'Instructor',
-      icon: 'cube-outline',
-      link: '/instructor',
-    },
-    {
-      title: 'Learner',
-      icon: 'book-outline',
-      link: '/learner',
-    }],
+    link: '/institutuion/dashboard',
   }, {
   title: 'Institution options',
     icon: 'settings-outline',
