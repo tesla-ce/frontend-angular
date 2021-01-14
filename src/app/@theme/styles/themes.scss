@@ -7,6 +7,7 @@
 @import './material/material-light';
 
 $nb-themes: nb-register-theme((
+  logo: url(assets/images/logo.png),
   layout-padding-top: 2.25rem,
 
   menu-item-icon-margin: 0 0.5rem 0 0,
@@ -28,6 +29,7 @@ $nb-themes: nb-register-theme((
 ), default, default);
 
 $nb-themes: nb-register-theme((
+  logo: url(assets/images/logo.png),
   layout-padding-top: 2.25rem,
 
   menu-item-icon-margin: 0 0.5rem 0 0,
@@ -49,6 +51,7 @@ $nb-themes: nb-register-theme((
 ), cosmic, cosmic);
 
 $nb-themes: nb-register-theme((
+  logo: url(assets/images/logo.png),
   layout-padding-top: 2.25rem,
 
   menu-item-icon-margin: 0 0.5rem 0 0,
@@ -70,6 +73,7 @@ $nb-themes: nb-register-theme((
 ), corporate, corporate);
 
 $nb-themes: nb-register-theme((
+  logo: url(assets/images/logo.png),
   layout-padding-top: 2.25rem,
 
   menu-item-icon-margin: 0 0.5rem 0 0,
@@ -91,6 +95,7 @@ $nb-themes: nb-register-theme((
 ), dark, dark);
 
 $nb-themes: nb-register-theme((
+  logo: url(assets/images/logo.png),
   layout-padding-top: 2.25rem,
 
   menu-item-icon-margin: 0 0.5rem 0 0,
@@ -113,6 +118,7 @@ $nb-themes: nb-register-theme((
 ), material-light, material-light);
 
 $nb-themes: nb-register-theme((
+  logo: url(assets/images/logo.png),
   layout-padding-top: 2.25rem,
 
   menu-item-icon-margin: 0 0.5rem 0 0,
@@ -137,7 +143,7 @@ $nb-themes: nb-register-theme((
 $nb-themes: nb-register-theme((
   
   //Place here your theme variables
-
+  logo: url(assets/images/logo.png),
   // color-primary-100: red,
   // color-primary-200: blue,
   // color-primary-300: magenta,
@@ -153,6 +159,117 @@ $nb-themes: nb-register-theme((
 custom theme
 */
 custom,
+/*
+built-in base theme inheritance
+available built-in themes
+- default
+- cosmic
+- corporate
+- dark
+- material-light
+- material-dark
+*/
+default);
+
+
+$nb-themes: nb-register-theme((
+  
+  //Place here your theme variables
+  logo: url(assets/images/logo.png),
+  color-primary-100: #000078,
+  color-primary-200: #000078,
+  color-primary-300: #000078,
+  color-primary-400: #000078,
+  color-primary-500: #000078,
+  color-primary-600: #000078,
+  color-primary-700: #000078,
+  color-primary-800: #000078,
+  color-primary-900: #000078,
+  // color-basic-100: #D5FAFF,
+  // color-basic-200: #D5FAFF,
+  // color-basic-300: #D5FAFF,
+  // color-basic-400: #D5FAFF,
+  color-basic-500: #73EDFF,
+  color-basic-600: #000078,
+  color-basic-700: #000078,
+  color-basic-800: #000078,
+  color-basic-900: #000078,
+  // color-basic-1000: #73EDFF,
+  // color-basic-1100: #73EDFF,
+  color-success-100: #38ff90,
+  color-success-200: #38ff90,
+  color-success-300: #38ff90,
+  color-success-400: #38ff90,
+  color-success-500: #38ff90,
+  color-success-600: #38ff90,
+  color-success-700: #38ff90,
+  color-success-800: #38ff90,
+  color-success-900: #38ff90,
+  color-info-100: #73EDFF,
+  color-info-200: #73EDFF,
+  color-info-300: #73EDFF,
+  color-info-400: #73EDFF,
+  color-info-500: #73EDFF,
+  color-info-600: #73EDFF,
+  color-info-700: #73EDFF,
+  color-info-800: #73EDFF,
+  color-info-900: #73EDFF,
+  color-warning-100: #FFE000,
+  color-warning-200: #FFE000,
+  color-warning-300: #FFE000,
+  color-warning-400: #FFE000,
+  color-warning-500: #FFE000,
+  color-warning-600: #FFE000,
+  color-warning-700: #FFE000,
+  color-warning-800: #FFE000,
+  color-warning-900: #FFE000,
+  color-danger-100: #FF0000,
+  color-danger-200: #FF0000,
+  color-danger-300: #FF0000,
+  color-danger-400: #FF0000,
+  color-danger-500: #FF0000,
+  color-danger-600: #FF0000,
+  color-danger-700: #FF0000,
+  color-danger-800: #FF0000,
+  color-danger-900: #FF0000,
+
+), 
+/*
+custom theme
+*/
+uoc,
+/*
+built-in base theme inheritance
+available built-in themes
+- default
+- cosmic
+- corporate
+- dark
+- material-light
+- material-dark
+*/
+default);
+
+$nb-themes: nb-register-theme((
+  
+  //Place here your theme variables
+
+  // color-primary-100: red,
+  // color-primary-200: blue,
+  // color-primary-300: magenta,
+  // color-primary-400: aquamarine,
+  // color-primary-500: green,
+  // color-primary-600: gray,
+  // color-primary-700: white,
+  // color-primary-800: black,
+  // color-primary-900: yellow
+  logo: url(assets/images/logo-tesla-ce.png),
+
+), 
+/*
+custom theme
+*/
+tesla-ce,
 /*
 built-in base theme inheritance
 available built-in themes
