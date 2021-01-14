@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminUserComponent } from './admin-user.component';
-import { AdminUserShowComponent } from './admin-user-show/admin-user-show.component';
+import { AdminUserReadComponent } from './admin-user-read/admin-user-read.component';
 import { AdminUserCreateComponent } from './admin-user-create/admin-user-create.component';
 import { AdminUserUpdateComponent } from './admin-user-update/admin-user-update.component';
 import { AdminUserListComponent } from './admin-user-list/admin-user-list.component';
@@ -15,8 +15,8 @@ const routes: Routes = [{
       component: AdminUserListComponent,
     },
     {
-      path: 'show/:id',
-      component: AdminUserShowComponent,
+      path: 'read/:id',
+      component: AdminUserReadComponent,
     },
     {
       path: 'create',

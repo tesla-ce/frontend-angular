@@ -1,1 +1,6 @@
-<p>admin-user-update id: {{id}}</p>
+<nb-card *ngIf="instance">
+    <nb-card-header>Update User {{id}}</nb-card-header>
+    <nb-card-body class="example-items-rows">
+        <ngx-update (save)="onSave($event)" [fields]="fields" [instance]="instance"></ngx-update>
+    </nb-card-body>
+</nb-card>

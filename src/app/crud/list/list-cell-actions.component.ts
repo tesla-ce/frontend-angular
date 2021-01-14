@@ -26,6 +26,10 @@ export class ListCellActionsComponent implements ViewCell, OnInit {
     private dialog: NbDialogService,
   ) {}
 
+  read() {
+    this.router.navigate(['read', this.rowData.id], {relativeTo: this.route });
+  }
+
   update() {
     this.router.navigate(['update', this.rowData.id], {relativeTo: this.route });
   }

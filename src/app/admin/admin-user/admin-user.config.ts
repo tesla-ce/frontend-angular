@@ -22,7 +22,7 @@ export const AdminUserConfig = {
       required: true,
     },
     {
-      key: 'firstName',
+      key: 'first_name',
       dataType: 'string',
       label: 'First name',
       inputType: 'text',
@@ -32,7 +32,7 @@ export const AdminUserConfig = {
       required: true,
     },
     {
-      key: 'lastName',
+      key: 'last_name',
       dataType: 'string',
       label: 'Last name',
       inputType: 'text',
@@ -53,7 +53,19 @@ export const AdminUserConfig = {
     },
     {
       key: 'institution',
-      dataType: 'string',
+      dataType: 'object',
+      keyAccessor: 'acronym',
+      valueAccessor: 'id',
+      options: [
+        {
+          key: 'uoc',
+          value: 1,
+        },
+        {
+          key: 'test',
+          value: 2,
+        },
+      ],
       label: 'Institution',
       inputType: 'select-multiple-remote',
       remoteUrl: '',
@@ -61,7 +73,7 @@ export const AdminUserConfig = {
       formControlName: 'institution-form-control-name',
       placeholder: 'uoc',
       validator: 'institution',
-      required: true,
+      required: false,
     },
     {
       key: 'locale',

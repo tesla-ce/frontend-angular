@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ListCellActionsComponent } from '../../list/list-cell-actions.component';
 
 @Component({
   selector: 'ngx-admin-user',

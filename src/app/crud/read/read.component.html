@@ -1,0 +1,12 @@
+<div>
+    <div class="row">
+        <div *ngFor="let field of fields" class="col-sm-6">
+            <div class="form-group" [ngSwitch]="field.dataType">
+                <label [for]="field.inputName" class="label">{{field.label || field.key}}</label>
+                <p *ngSwitchCase="'array'" class="value">{{instance[field.key]}}</p>
+                <p *ngSwitchCase="'object'" class="value">{{instance[field.key][field.keyAccessor]}}</p>
+                <p *ngSwitchDefault class="value">{{instance[field.key]}}</p>
+            </div>
+        </div>
+    </div>
+</div>

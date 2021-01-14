@@ -1,0 +1,6 @@
+<nb-card *ngIf="instance">
+    <nb-card-header>Read User {{id}}</nb-card-header>
+    <nb-card-body class="example-items-rows">
+        <ngx-read [fields]="fields" [instance]="instance"></ngx-read>
+    </nb-card-body>
+</nb-card>

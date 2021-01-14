@@ -16,8 +16,8 @@ import { SideMenuModule } from '../../side-menu/side-menu.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ListModule } from '../../list/list.module';
-import { CreateModule } from '../../create/create.module';
+import { ListModule } from '../../crud/list/list.module';
+import { CreateModule } from '../../crud/create/create.module';
 import { InstitutionIcCreateComponent } from './institution-ic-create/institution-ic-create.component';
 import { InstitutionIcUpdateComponent } from './institution-ic-update/institution-ic-update.component';
 import { InstitutionIcShowComponent } from './institution-ic-show/institution-ic-show.component';

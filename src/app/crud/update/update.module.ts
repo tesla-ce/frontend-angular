@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { ThemeModule } from '../@theme/theme.module';
+import { ThemeModule } from '../../@theme/theme.module';
 import {
   NbButtonModule,
   NbInputModule,
@@ -10,7 +10,7 @@ import {
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { CreateComponent } from './create.component';
+import { UpdateComponent } from './update.component';
 
 @NgModule({
   imports: [
@@ -23,10 +23,10 @@ import { CreateComponent } from './create.component';
     NbFormFieldModule,
   ],
   declarations: [
-    CreateComponent,
+    UpdateComponent,
   ],
   exports: [
-    CreateComponent,
+    UpdateComponent,
   ],
 })
-export class CreateModule { }
+export class UpdateModule { }

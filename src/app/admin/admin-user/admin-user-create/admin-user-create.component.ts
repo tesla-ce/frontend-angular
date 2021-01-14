@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AdminUserConfig} from './admin-user-create.config';
+import {AdminUserConfig} from '../admin-user.config';
 
 @Component({
   selector: 'ngx-admin-user-create',

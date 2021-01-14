@@ -1,4 +1,3 @@
-import { query } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
@@ -33,8 +32,7 @@ export class CreateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.profileForm.value);
-    // this.save.emit(this.profileForm.value);
+    this.save.emit(this.profileForm.value);
   }
 
 }

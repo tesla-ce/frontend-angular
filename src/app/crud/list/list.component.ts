@@ -4,7 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ServerSourceConf } from 'ng2-smart-table/lib/lib/data-source/server/server-source.conf';
 import {fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, tap } from 'rxjs/operators';
-import { EnvService } from '../@core/env/env.service';
+import { EnvService } from '../../@core/env/env.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -62,7 +62,7 @@ export class ListComponent implements OnInit, AfterViewInit {
   }
 
   userRowSelect(event) {
-    this.router.navigate(['show', event.data.id], {relativeTo: this.route });
+    // this.router.navigate(['read', event.data.id], {relativeTo: this.route });
   }
 
   create(event) {

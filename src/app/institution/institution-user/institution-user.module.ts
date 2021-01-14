@@ -15,8 +15,8 @@ import { InstitutionUserRoutingModule } from './institution-user-routing.module'
 import { SideMenuModule } from '../../side-menu/side-menu.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ListModule } from '../../list/list.module';
-import { CreateModule } from '../../create/create.module';
+import { ListModule } from '../../crud/list/list.module';
+import { CreateModule } from '../../crud/create/create.module';
 import { InstitutionUserCreateComponent } from './institution-user-create/institution-user-create.component';
 import { InstitutionUserUpdateComponent } from './institution-user-update/institution-user-update.component';
 import { InstitutionUserShowComponent } from './institution-user-show/institution-user-show.component';

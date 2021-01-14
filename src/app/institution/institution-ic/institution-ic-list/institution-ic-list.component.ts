@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ListCellActionsComponent } from '../../../list/list-cell-actions.component';
+import { ListCellActionsComponent } from '../../../crud/list/list-cell-actions.component';
 
 @Component({
   selector: 'ngx-institution-ic-list',
