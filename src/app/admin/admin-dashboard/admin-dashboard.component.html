@@ -1,7 +1,7 @@
 <nb-card status="success">
     <nb-card-header>Dashboard</nb-card-header>
     <nb-card-body>
-        <h2 *ngIf="user?true:false">Welcome {{ user.first_name + " " + user.last_name }}</h2>
+        <h2 *ngIf="user?true:false&&translate?true:false">{{ "ADMIN.DASHBOARD.WELCOME" | translate }} {{ user.first_name + " " + user.last_name }}</h2>
         <button nbButton outline status="primary" size="tiny" *ngFor="let role of user?.roles">{{ role }}</button>
     </nb-card-body>
     <nb-card-footer>
@@ -15,9 +15,6 @@
                     <nb-list-item *ngIf="user.last_name?true:false">last_name: {{ user.last_name }}</nb-list-item>
                     <nb-list-item *ngIf="user.full_name?true:false">full_name: {{ user.full_name }}</nb-list-item>
                     <nb-list-item *ngIf="user.email?true:false">email: {{ user.email }}</nb-list-item>
-                    <!-- <nb-list-item *ngIf="user.institution?true:false">institution: {{ user.institution }}</nb-list-item>
-                    <nb-list-item *ngIf="user.acronym?true:false">acronym: {{ user.acronym }}</nb-list-item>
-                    <nb-list-item *ngIf="user.uid?true:false">uid: {{ user.uid }}</nb-list-item> -->
                     <nb-list-item *ngIf="user.roles?true:false">roles: {{ user.roles }}</nb-list-item>
                     <nb-list-item *ngIf="user.locale?true:false">locale: {{ user.locale }}</nb-list-item>
                     <nb-list-item *ngIf="user.is_superuser?true:false">is_superuser: {{ user.is_superuser }}</nb-list-item>
