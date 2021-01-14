@@ -11,6 +11,17 @@ export const AdminUserConfig = {
       disabled: true,
     },
     {
+      key: 'email',
+      dataType: 'string',
+      label: 'Email',
+      inputType: 'email',
+      inputName: 'email-input-name',
+      formControlName: 'email-form-control-name',
+      placeholder: 'joedoe@example.com',
+      validator: 'email',
+      required: true,
+    },
+    {
       key: 'firstName',
       dataType: 'string',
       label: 'First name',
@@ -38,6 +49,100 @@ export const AdminUserConfig = {
       formControlName: 'email-form-control-name',
       placeholder: 'joedoe@example.com',
       validator: 'email',
+      required: true,
+    },
+    {
+      key: 'institution',
+      dataType: 'string',
+      label: 'Institution',
+      inputType: 'select-multiple-remote',
+      remoteUrl: '',
+      inputName: 'institution-input-name',
+      formControlName: 'institution-form-control-name',
+      placeholder: 'uoc',
+      validator: 'institution',
+      required: true,
+    },
+    {
+      key: 'locale',
+      dataType: 'string',
+      label: 'Language',
+      inputType: 'select',
+      options: [
+        {
+          value: 'en',
+          key: 'en',
+        },
+        {
+          value: 'es',
+          key: 'es',
+        },
+        {
+          value: 'ca',
+          key: 'ca',
+        },
+        {
+          value: 'bg',
+          key: 'bg',
+        },
+        {
+          value: 'fi',
+          key: 'fi',
+        },
+        {
+          value: 'tr',
+          key: 'tr',
+        },
+      ],
+      inputName: 'locale-input-name',
+      formControlName: 'locale-form-control-name',
+      placeholder: 'en',
+      validator: 'locale',
+      required: true,
+    },
+    {
+      key: 'roles',
+      dataType: 'string',
+      label: 'Roles',
+      inputType: 'select-multiple',
+      options: [
+        {
+          value: 'GLOBAL_ADMIN',
+          key: 'GLOBAL_ADMIN',
+        },
+        {
+          value: 'ADMIN',
+          key: 'ADMIN',
+        },
+        {
+          value: 'SEND',
+          key: 'SEND',
+        },
+        {
+          value: 'DATA_MANAGEMENT',
+          key: 'DATA_MANAGEMENT',
+        },
+        {
+          value: 'IC_MANAGEMENT',
+          key: 'IC_MANAGEMENT',
+        },
+        {
+          value: 'INSTRUCTOR',
+          key: 'INSTRUCTOR',
+        },
+        {
+          value: 'LEARNER',
+          key: 'LEARNER',
+        },
+        {
+          value: 'ACADEMIC_MANAGEMENT',
+          key: 'ACADEMIC_MANAGEMENT',
+        },
+      ],
+      inputName: 'roles-input-name',
+      formControlName: 'roles-form-control-name',
+      placeholder: 'en',
+      validator: 'roles',
       required: true,
     },
   ],

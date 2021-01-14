@@ -1,3 +1,4 @@
+import { query } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
@@ -11,6 +12,7 @@ export class CreateComponent implements OnInit {
   @Input() fields: any;
   @Output() save: EventEmitter<any> = new EventEmitter();
 
+  formControls: any;
   profileForm: FormGroup;
 
   loading: Boolean = true;
@@ -18,18 +20,21 @@ export class CreateComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.formControls = {};
     this.loading = false;
-    const formControls = {};
-    this.fields.map(function(field) {
-      formControls[field.key] = new FormControl(field.defaultValue || null);
+    this.fields.map((field) => {
+      this.formControls[field.key] = new FormControl(field.defaultValue || null);
+      // if (field.type.includes('remote') {
+      //   field.options = result from query...
+      // }
     });
 
-    this.profileForm = new FormGroup(formControls);
+    this.profileForm = new FormGroup(this.formControls);
   }
 
   onSubmit() {
     console.log(this.profileForm.value);
-    this.save.emit(this.profileForm.value);
+    // this.save.emit(this.profileForm.value);
   }
 
 }

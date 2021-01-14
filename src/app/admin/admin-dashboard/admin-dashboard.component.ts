@@ -21,7 +21,10 @@ export class AdminDashboardComponent implements OnInit {
   ngOnInit() {
     this.authService.getUser()
       .pipe()
-      .subscribe((user: User) => this.user = user);
+      .subscribe((user: User) => {
+        this.user = user;
+        console.log(user);
+      });
   }
 }
 
