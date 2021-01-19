@@ -23,7 +23,9 @@
                     [placeholder]="field.placeholder || null" 
                     [attr.disabled]="field.disabled || null"
                     [attr.email]="field.validator == 'email' || null"
-                    [required] = "field.required || false" >
+                    [required] = "field.required || false" 
+                    [status] = "formErrors[field.key]?'danger':'default'" >
+                    <errors class="text-danger">{{formErrors[field.key]?formErrors[field.key]:''}}</errors>
             </div>
         </div>
     </div>

@@ -1,6 +1,7 @@
 import { query } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ngx-update',
@@ -11,9 +12,11 @@ export class UpdateComponent implements OnInit {
 
   @Input() fields: any;
   @Input() instance: any;
+  @Input() errors: Observable<any>;
   @Output() save: EventEmitter<any> = new EventEmitter();
 
   formControls: any;
+  formErrors: any = {};
   profileForm: FormGroup;
 
   loading: Boolean = true;
@@ -28,6 +31,9 @@ export class UpdateComponent implements OnInit {
       // if (field.type.includes('remote') {
       //   field.options = result from query...
       // }
+    });
+    this.errors.subscribe(errors => {
+      this.formErrors = errors;
     });
 
     this.profileForm = new FormGroup(this.formControls);

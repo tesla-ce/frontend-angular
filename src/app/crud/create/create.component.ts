@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ngx-create',
@@ -9,11 +10,12 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class CreateComponent implements OnInit {
 
   @Input() fields: any;
+  @Input() errors: Observable<any>;
   @Output() save: EventEmitter<any> = new EventEmitter();
 
   formControls: any;
   profileForm: FormGroup;
-
+  formErrors: any = {};
   loading: Boolean = true;
 
   constructor() { }
@@ -26,6 +28,9 @@ export class CreateComponent implements OnInit {
       // if (field.type.includes('remote') {
       //   field.options = result from query...
       // }
+    });
+    this.errors.subscribe(errors => {
+      this.formErrors = errors;
     });
 
     this.profileForm = new FormGroup(this.formControls);

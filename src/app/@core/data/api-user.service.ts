@@ -30,8 +30,17 @@ export class ApiUserService {
   // }
 
   // API: POST /users
-  public createUser(user: User) {
+  public createUser(fields: any) {
     // will use this.http.post()
+    return this.http.post(this.endpointUrl, fields)
+    .pipe(
+      map(( user: User ) => {
+        console.log(user);
+        if ( user ) return user;
+        else throw user;
+      }),
+      catchError(this.handleError),
+    );
   }
 
   // API: GET /users/:id
