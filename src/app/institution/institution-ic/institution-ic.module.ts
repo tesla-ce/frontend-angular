@@ -8,6 +8,7 @@ import {
   NbSelectModule,
   NbIconModule,
   NbFormFieldModule,
+  NbTabsetModule,
 } from '@nebular/theme';
 
 import { InstitutionIcComponent } from './institution-ic.component';
@@ -22,6 +23,8 @@ import { InstitutionIcCreateComponent } from './institution-ic-create/institutio
 import { InstitutionIcUpdateComponent } from './institution-ic-update/institution-ic-update.component';
 import { InstitutionIcShowComponent } from './institution-ic-show/institution-ic-show.component';
 import { InstitutionIcListComponent } from './institution-ic-list/institution-ic-list.component';
+import { CKEditorModule } from 'ng2-ckeditor';
+
 
 @NgModule({
   imports: [
@@ -38,6 +41,8 @@ import { InstitutionIcListComponent } from './institution-ic-list/institution-ic
     NbIconModule,
     ListModule,
     CreateModule,
+    CKEditorModule,
+    NbTabsetModule,
   ],
   declarations: [
     InstitutionIcComponent,

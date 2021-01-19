@@ -17,6 +17,8 @@ export class AppComponent implements OnInit {
     private analytics: AnalyticsService,
     public translate: TranslateService,
   ) {
+    window['CKEDITOR_BASEPATH'] = '//cdn.ckeditor.com/4.6.2/full-all/';
+
     translate.addLangs(['en', 'fr']);
      // this language will be used as a fallback when a translation isn't found in the current language
     translate.setDefaultLang('en');
