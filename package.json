@@ -50,7 +50,7 @@
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^6.0.0",
     "@swimlane/ngx-charts": "^14.0.0",
-    "@tesla-ce/icons": "0.0.6",
+    "@tesla-ce/icons": "0.0.26",
     "angular2-chartjs": "0.5.1",
     "bootstrap": "^4.5.0",
     "chart.js": "^2.9.3",

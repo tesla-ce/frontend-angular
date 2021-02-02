@@ -26,7 +26,7 @@ import { SideMenuModule } from './side-menu/side-menu.module';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { SharedModule } from './shared/shared.module';
-import {NbTeSLAIconsModule} from '@tesla-ce/icons/src/lib/nebular.icons.module';
+import {NbTeslaIconsModule} from '@tesla-ce/icons';
 
 
 @NgModule({
@@ -65,7 +65,7 @@ import {NbTeSLAIconsModule} from '@tesla-ce/icons/src/lib/nebular.icons.module';
 
     SideMenuModule,
     NbIconModule,
-    NbTeSLAIconsModule,
+    NbTeslaIconsModule,
   ],
   bootstrap: [AppComponent],
 })
