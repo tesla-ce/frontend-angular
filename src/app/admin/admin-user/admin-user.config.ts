@@ -1,6 +1,6 @@
 export const AdminUserConfig = {
-  fields: [
-    {
+  fields: {
+    username: {
       key: 'username',
       dataType: 'string',
       label: 'Username',
@@ -10,7 +10,7 @@ export const AdminUserConfig = {
       placeholder: 'joedoe',
       required: true,
     },
-    {
+    email: {
       key: 'email',
       dataType: 'string',
       label: 'Email',
@@ -21,7 +21,7 @@ export const AdminUserConfig = {
       validator: 'email',
       required: true,
     },
-    {
+    password: {
       key: 'password',
       dataType: 'string',
       label: 'Password',
@@ -31,7 +31,7 @@ export const AdminUserConfig = {
       placeholder: 'password',
       required: true,
     },
-    {
+    first_name: {
       key: 'first_name',
       dataType: 'string',
       label: 'First name',
@@ -41,7 +41,7 @@ export const AdminUserConfig = {
       placeholder: 'Joe',
       required: true,
     },
-    {
+    last_name: {
       key: 'last_name',
       dataType: 'string',
       label: 'Last name',
@@ -50,7 +50,7 @@ export const AdminUserConfig = {
       formControlName: 'last-name-form-control-name',
       placeholder: 'Doe',
     },
-    // {
+    // institution: {
     //   key: 'institution',
     //   dataType: 'object',
     //   keyAccessor: 'acronym',
@@ -74,7 +74,7 @@ export const AdminUserConfig = {
     //   validator: 'institution',
     //   required: false,
     // },
-    {
+    locale: {
       key: 'locale',
       dataType: 'string',
       label: 'Language',
@@ -111,7 +111,7 @@ export const AdminUserConfig = {
       validator: 'locale',
       required: true,
     },
-    // {
+    // roles: {
     //   key: 'roles',
     //   dataType: 'string',
     //   label: 'Roles',
@@ -156,5 +156,5 @@ export const AdminUserConfig = {
     //   validator: 'roles',
     //   required: true,
     // },
-  ],
+  },
 };

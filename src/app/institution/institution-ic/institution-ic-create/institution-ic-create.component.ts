@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { of as observableOf,  Observable, Subject } from 'rxjs';
+import { ApiIcService } from '../../../@core/data/api-ic.service';
+import { Ic } from '../../../@core/models/ic';
 import {InstitutionIcConfig} from '../institution-ic.config';
-import 'ckeditor';
 
 @Component({
   selector: 'ngx-institution-ic-create',
@@ -10,13 +13,35 @@ import 'ckeditor';
 export class InstitutionIcCreateComponent implements OnInit {
 
   fields = InstitutionIcConfig.fields;
-  ckEditorConfig = { extraPlugins: 'divarea', height: '320' };
-  constructor() {}
+  public errors = new Subject();
+
+  constructor(private apiIcService: ApiIcService, private toastrService: NbToastrService) {}
 
   ngOnInit(): void {
   }
 
   onSave(event): void {
-    console.log('event recieved', event);
+    this.apiIcService.createIc(event).subscribe((ic: Ic) => {
+        this.toastrService.show(
+          'Ic Created',
+          ic.version,
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'success',
+            icon: 'save-outline',
+            duration: 2000,
+        });
+    }, error => {
+      this.errors.next(error.error);
+      this.toastrService.show(
+        'Error saving',
+        'ic',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'danger',
+          icon: 'save-outline',
+          duration: 2000,
+      });
+    });
   }
 }

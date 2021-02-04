@@ -1,5 +1,5 @@
 import { query } from '@angular/animations';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, Pipe, PipeTransform } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
@@ -17,7 +17,7 @@ export class UpdateComponent implements OnInit {
 
   formControls: any;
   formErrors: any = {};
-  profileForm: FormGroup;
+  formGroup: FormGroup;
 
   loading: Boolean = true;
 
@@ -26,8 +26,8 @@ export class UpdateComponent implements OnInit {
   ngOnInit(): void {
     this.formControls = {};
     this.loading = false;
-    this.fields.map((field) => {
-      this.formControls[field.key] = new FormControl(this.instance[field.key] || field.defaultValue || null);
+    Object.keys(this.fields).map((key) => {
+      this.formControls[key] = new FormControl(this.instance[key] || this.fields[key].defaultValue || null);
       // if (field.type.includes('remote') {
       //   field.options = result from query...
       // }
@@ -36,11 +36,21 @@ export class UpdateComponent implements OnInit {
       this.formErrors = errors;
     });
 
-    this.profileForm = new FormGroup(this.formControls);
+    this.formGroup = new FormGroup(this.formControls);
   }
 
   onSubmit() {
-    this.save.emit(this.profileForm.value);
+    this.save.emit(this.formGroup.value);
   }
 
 }
+
+
+@Pipe({ name: 'keys' })
+export class KeysPipe implements PipeTransform {
+  transform(value): any {
+    if (!value) return null;
+    return Object.keys(value);
+  }
+}
+
