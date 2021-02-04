@@ -14,7 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   NbDatepickerModule,
-  NbDialogModule,
+  NbDialogModule, NbIconModule,
   NbMenuModule,
   NbSidebarModule,
   NbToastrModule,
@@ -26,6 +26,8 @@ import { SideMenuModule } from './side-menu/side-menu.module';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { SharedModule } from './shared/shared.module';
+import {NbTeslaIconsModule} from '@tesla-ce/icons';
+
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { SharedModule } from './shared/shared.module';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
 
     SideMenuModule,
+    NbIconModule,
+    NbTeslaIconsModule,
   ],
   bootstrap: [AppComponent],
 })
