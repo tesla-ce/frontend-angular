@@ -3,94 +3,94 @@ import { NbMenuItem } from '@nebular/theme';
 export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Dashboard',
-    icon: 'home-outline',
+    icon: { icon: 'common-dashboard', pack: 'tesla'},
     link: '/dashboard',
   },
   {
       title: 'My Courses',
-      icon: 'home-outline',
+      icon: { icon: 'common-connection', pack: 'tesla'},
       link: '/my-courses',
   },
   {
       title: 'Test page',
-      icon: 'home-outline',
+      icon: { icon: 'common-menu_logo', pack: 'tesla'},
       link: '/test-page',
   },
   {
       title: 'Administration',
-      icon: 'home-outline',
+      icon: { icon: 'common-notifications', pack: 'tesla'},
       link: '/administration',
       children: [
           {
               title: 'Users',
-              icon: 'home-outline',
+              icon: { icon: 'instrument-fa', pack: 'tesla'},
               link: '/administration/users',
           },
           {
               title: 'Informed Consent',
-              icon: 'home-outline',
+              icon: { icon: 'instrument-fr', pack: 'tesla'},
               link: '/institution/institution-ic',
           },
           {
               title: 'SEND',
-              icon: 'home-outline',
+              icon: { icon: 'instrument-ks', pack: 'tesla'},
               link: '/administration/send',
           },
           {
               title: 'Courses',
-              icon: 'home-outline',
+              icon: { icon: 'instrument-plagiarism', pack: 'tesla'},
               link: '/administration/courses',
           },
           {
               title: 'Data Management',
-              icon: 'home-outline',
+              icon: { icon: 'instrument-vr', pack: 'tesla'},
               link: '/administration/data-management',
           },
           {
               title: 'Settings',
-              icon: 'home-outline',
+              icon: { icon: 'sensor-assessment', pack: 'tesla'},
               link: '/administration/settings',
           },
       ],
   },
   {
       title: 'Statistics',
-      icon: 'home-outline',
+      icon: { icon: 'sensor-camera', pack: 'tesla'},
       link: '/statistics',
   },
   {
       title: 'Monitoring',
-      icon: 'home-outline',
+      icon: { icon: 'sensor-keyboard', pack: 'tesla'},
       link: '/monitoring',
   },
   {
     title: 'System',
-    icon: 'home-outline',
+    icon: { icon: 'sensor-microphone', pack: 'tesla'},
     link: '/system',
     children: [
         {
             title: 'Users',
-            icon: 'home-outline',
+            icon: { icon: 'common-dashboard', pack: 'tesla'},
             link: '/admin/admin-user',
         },
         {
             title: 'Institutions',
-            icon: 'home-outline',
+            icon: { icon: 'common-dashboard', pack: 'tesla'},
             link: '/system/institutions',
         },
         {
             title: 'Instruments',
-            icon: 'home-outline',
+            icon: { icon: 'common-dashboard', pack: 'tesla'},
             link: '/system/instruments',
         },
         {
             title: 'Services',
-            icon: 'home-outline',
+            icon: { icon: 'common-dashboard', pack: 'tesla'},
             link: '/system/services',
         },
         {
             title: 'Status',
-            icon: 'home-outline',
+            icon: { icon: 'common-dashboard', pack: 'tesla'},
             link: '/system/status',
         },
     ],
