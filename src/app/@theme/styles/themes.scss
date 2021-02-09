@@ -141,7 +141,7 @@ $nb-themes: nb-register-theme((
 ), material-dark, material-dark);
 
 $nb-themes: nb-register-theme((
-  
+
   //Place here your theme variables
   logo: url(assets/images/logo.png),
   // color-primary-100: red,
@@ -154,7 +154,7 @@ $nb-themes: nb-register-theme((
   // color-primary-800: black,
   // color-primary-900: yellow
 
-), 
+),
 /*
 custom theme
 */
@@ -173,10 +173,10 @@ default);
 
 
 $nb-themes: nb-register-theme((
-  
+
   //Place here your theme variables
   logo: url(assets/images/logo.png),
-  color-primary-100: #000078,
+  color-primary-100: red,
   color-primary-200: #000078,
   color-primary-300: #000078,
   color-primary-400: #000078,
@@ -233,7 +233,7 @@ $nb-themes: nb-register-theme((
   color-danger-800: #FF0000,
   color-danger-900: #FF0000,
 
-), 
+),
 /*
 custom theme
 */
@@ -251,7 +251,7 @@ available built-in themes
 default);
 
 $nb-themes: nb-register-theme((
-  
+
   //Place here your theme variables
 
   // color-primary-100: red,
@@ -265,7 +265,7 @@ $nb-themes: nb-register-theme((
   // color-primary-900: yellow
   logo: url(assets/images/logo-tesla-ce.png),
 
-), 
+),
 /*
 custom theme
 */
