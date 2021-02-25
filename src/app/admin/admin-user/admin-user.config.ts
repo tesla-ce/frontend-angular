@@ -1,4 +1,32 @@
+import { Validators,ValidatorFn,AbstractControl, ValidationErrors } from '@angular/forms';
+
+function customValidator() : ValidatorFn{
+  return (group: AbstractControl): ValidationErrors => {
+     const pass = group.get('password');
+     const confirmPass = group.get('confirm_password');
+     const username = group.get("username")
+     const email = group.get("email")
+
+
+     if (username?.value.length < 5) {
+       username?.setErrors({wrongLength: "Username too short"})
+     }
+
+     if (email?.value) {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (!re.test(String(email?.value).toLowerCase())) email?.setErrors({wrongFormat: "Wrong email format"})
+    }
+
+     if (pass?.value !== confirmPass?.value) {
+      confirmPass?.setErrors({notEquivalent: 'password does not match'});
+     } else {
+      confirmPass?.setErrors(null);
+     }
+     return {};
+}}
+
 export const AdminUserConfig = {
+  validation: customValidator,
   fields: {
     username: {
       key: 'username',
@@ -29,6 +57,16 @@ export const AdminUserConfig = {
       inputName: 'pasword-input-name',
       formControlName: 'pasword-form-control-name',
       placeholder: 'password',
+      required: true,
+    },
+    confirm_password: {
+      key: 'confirm_password',
+      dataType: 'string',
+      label: 'Confirm Password',
+      inputType: 'password',
+      inputName: 'confirm-pasword-input-name',
+      formControlName: 'confirm-pasword-form-control-name',
+      placeholder: 'confirm password',
       required: true,
     },
     first_name: {
@@ -74,43 +112,43 @@ export const AdminUserConfig = {
     //   validator: 'institution',
     //   required: false,
     // },
-    locale: {
-      key: 'locale',
-      dataType: 'string',
-      label: 'Language',
-      inputType: 'select',
-      options: [
-        {
-          value: 'en',
-          key: 'en',
-        },
-        {
-          value: 'es',
-          key: 'es',
-        },
-        {
-          value: 'ca',
-          key: 'ca',
-        },
-        {
-          value: 'bg',
-          key: 'bg',
-        },
-        {
-          value: 'fi',
-          key: 'fi',
-        },
-        {
-          value: 'tr',
-          key: 'tr',
-        },
-      ],
-      inputName: 'locale-input-name',
-      formControlName: 'locale-form-control-name',
-      placeholder: 'en',
-      validator: 'locale',
-      required: true,
-    },
+    // locale: {
+    //   key: 'locale',
+    //   dataType: 'string',
+    //   label: 'Language',
+    //   inputType: 'select',
+    //   options: [
+    //     {
+    //       value: 'en',
+    //       key: 'en',
+    //     },
+    //     {
+    //       value: 'es',
+    //       key: 'es',
+    //     },
+    //     {
+    //       value: 'ca',
+    //       key: 'ca',
+    //     },
+    //     {
+    //       value: 'bg',
+    //       key: 'bg',
+    //     },
+    //     {
+    //       value: 'fi',
+    //       key: 'fi',
+    //     },
+    //     {
+    //       value: 'tr',
+    //       key: 'tr',
+    //     },
+    //   ],
+    //   inputName: 'locale-input-name',
+    //   formControlName: 'locale-form-control-name',
+    //   placeholder: 'en',
+    //   validator: 'locale',
+    //   // required: true,
+    // },
     // roles: {
     //   key: 'roles',
     //   dataType: 'string',
