@@ -25,18 +25,18 @@ export class CreateComponent implements OnInit {
     this.formControls = {};
     this.loading = false;
     Object.keys(this.fields).map((key) => {
-      this.formControls[key] = new FormControl(this.fields[key].defaultValue || null);
-      console.log("key", key, "field", this.fields[key]);
+      this.formControls[key] = new FormControl(this.fields[key].defaultValue || null, this.fields[key].validator || null)
     });
     this.errors.subscribe(errors => {
       this.formErrors = errors;
     });
-
-    this.formGroup = new FormGroup(this.formControls, this.validation || null);
+    this.formGroup = new FormGroup(this.formControls);
+    if (this.validation) this.formGroup.setValidators(this.validation())
   }
 
   onSubmit() {
-    this.save.emit(this.formGroup.value);
+    // this.save.emit(this.formGroup.value);
+    console.log(this.formGroup)
   }
 
 }
