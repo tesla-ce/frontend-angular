@@ -34,9 +34,9 @@
                 (formGroup.controls[field.key].dirty || formGroup.controls[field.key].touched)">
                     <small class="text-danger" *ngIf="formGroup.controls[field.key].hasError('required')">
                         Required </small>
-                    <small class="text-danger" *ngIf="formGroup.controls[field.key].hasError('wrongFormat')">
+                    <small class="text-danger" *ngIf="formGroup.controls[field.key].hasError('wrongFormat') && !formGroup.controls[field.key].hasError('required')">
                         Wrong Email Format </small>
-                    <small class="text-danger" *ngIf="formGroup.controls[field.key].hasError('notEquivalent')">
+                    <small class="text-danger" *ngIf="formGroup.controls[field.key].hasError('notEquivalent') && !formGroup.controls[field.key].hasError('required')">
                         Passwords doesn't match </small>
                 </div>
             </div>

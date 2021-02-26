@@ -1,34 +1,7 @@
-import { Validators,ValidatorFn,AbstractControl, ValidationErrors } from '@angular/forms';
-
-function customValidator() : ValidatorFn{
-  return (group: AbstractControl): ValidationErrors => {
-     const pass = group.get('password');
-     const confirmPass = group.get('confirm_password');
-    //  const username = group.get("username")
-    //  const email = group.get("email")
-
-    console.log(group)
-
-
-    //  if (username?.value?.length < 5) {
-    //    username?.setErrors({wrongLength: "Username too short"})
-    //  }
-
-    //  if (email?.value) {
-    //   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    //   if (!re.test(String(email?.value).toLowerCase())) email?.setErrors({wrongFormat: "Wrong email format"})
-    // }
-
-     if (pass?.value !== confirmPass?.value) {
-      confirmPass?.setErrors({notEquivalent: 'password does not match'});
-     } else {
-      confirmPass?.setErrors(null);
-     }
-     return null;
-}}
+import { doublePasswordCheck, checkEmail } from "../../@core/utils/validators";
 
 export const AdminUserConfig = {
-  validation: customValidator,
+  validation: doublePasswordCheck,
   fields: {
     username: {
       key: 'username',
@@ -48,7 +21,7 @@ export const AdminUserConfig = {
       inputName: 'email-input-name',
       formControlName: 'email-form-control-name',
       placeholder: 'joedoe@example.com',
-      // validator: 'email',
+      validator: checkEmail,
       required: true,
     },
     password: {

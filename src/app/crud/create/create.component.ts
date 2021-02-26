@@ -25,7 +25,7 @@ export class CreateComponent implements OnInit {
     this.formControls = {};
     this.loading = false;
     Object.keys(this.fields).map((key) => {
-      this.formControls[key] = new FormControl(this.fields[key].defaultValue || null, this.fields[key].validator || null)
+      this.formControls[key] = new FormControl(this.fields[key].defaultValue || null, this.fields[key]?.validator ?  this.fields[key].validator() : null)
     });
     this.errors.subscribe(errors => {
       this.formErrors = errors;
@@ -35,8 +35,7 @@ export class CreateComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.save.emit(this.formGroup.value);
-    console.log(this.formGroup)
+    this.save.emit(this.formGroup.value);
   }
 
 }
