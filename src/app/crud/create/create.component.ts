@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class CreateComponent implements OnInit {
 
   @Input() fields: any;
-  @Input() validation: any;
+  @Input() validator: any;
   @Input() errors: Observable<any>;
   @Output() save: EventEmitter<any> = new EventEmitter();
 
@@ -31,7 +31,7 @@ export class CreateComponent implements OnInit {
       this.formErrors = errors;
     });
     this.formGroup = new FormGroup(this.formControls);
-    if (this.validation) this.formGroup.setValidators(this.validation())
+    if (this.validator) this.formGroup.setValidators(this.validator())
   }
 
   onSubmit() {

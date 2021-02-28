@@ -1,7 +1,7 @@
 import { doublePasswordCheck, checkEmail } from "../../@core/utils/validators";
 
 export const AdminUserConfig = {
-  validation: doublePasswordCheck,
+  validator: doublePasswordCheck,
   fields: {
     username: {
       key: 'username',

@@ -13,7 +13,7 @@ import {AdminUserConfig} from '../admin-user.config';
 export class AdminUserCreateComponent implements OnInit {
 
   fields = AdminUserConfig.fields;
-  validation = AdminUserConfig.validation;
+  validator = AdminUserConfig.validator;
   public errors = new Subject();
 
   constructor(private apiUserService: ApiUserService, private toastrService: NbToastrService) {}
