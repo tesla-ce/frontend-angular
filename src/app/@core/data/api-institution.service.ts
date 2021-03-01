@@ -12,7 +12,7 @@ import { ApiService } from './api.service';
 @Injectable({
   providedIn: 'root',
 })
-export class ApiInstitutionService implements ApiService {
+export class ApiInstitutionService {
 
   apiUrl: string;
   endpoint: string = '/institution/';
