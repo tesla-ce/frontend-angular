@@ -13,6 +13,7 @@ import {AdminUserConfig} from '../admin-user.config';
 export class AdminUserCreateComponent implements OnInit {
 
   fields = AdminUserConfig.fields;
+  validator = AdminUserConfig.validator;
   public errors = new Subject();
 
   constructor(private apiUserService: ApiUserService, private toastrService: NbToastrService) {}
@@ -21,27 +22,29 @@ export class AdminUserCreateComponent implements OnInit {
   }
 
   onSave(event): void {
-    this.apiUserService.createUser(event).subscribe((user: User) => {
-        this.toastrService.show(
-          'User Created',
-          user.username,
-          {
-            position: NbGlobalPhysicalPosition.TOP_RIGHT,
-            status: 'success',
-            icon: 'save-outline',
-            duration: 2000,
-        });
-    }, error => {
-      this.errors.next(error.error);
-      this.toastrService.show(
-        'Error saving',
-        'user',
-        {
-          position: NbGlobalPhysicalPosition.TOP_RIGHT,
-          status: 'danger',
-          icon: 'save-outline',
-          duration: 2000,
-      });
-    });
+    console.log(event)
+
+    // this.apiUserService.createUser(event).subscribe((user: User) => {
+    //     this.toastrService.show(
+    //       'User Created',
+    //       user.username,
+    //       {
+    //         position: NbGlobalPhysicalPosition.TOP_RIGHT,
+    //         status: 'success',
+    //         icon: 'save-outline',
+    //         duration: 2000,
+    //     });
+    // }, error => {
+    //   this.errors.next(error.error);
+    //   this.toastrService.show(
+    //     'Error saving',
+    //     'user',
+    //     {
+    //       position: NbGlobalPhysicalPosition.TOP_RIGHT,
+    //       status: 'danger',
+    //       icon: 'save-outline',
+    //       duration: 2000,
+    //   });
+    // });
   }
 }

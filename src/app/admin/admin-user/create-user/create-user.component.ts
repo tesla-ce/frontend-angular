@@ -23,10 +23,12 @@ export class CreateUserComponent implements OnInit {
     lastName: new FormControl(''),
     email: new FormControl(''),
     password: new FormControl(''),
+    confirm_password: new FormControl(''),
     institution: new FormControl(null),
     roles: new FormControl(''),
     date_joined: new FormControl(new Date()),
   });
+
 
   ngOnInit() {
     this.getInstitutions();

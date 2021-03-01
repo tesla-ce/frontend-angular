@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, Pipe, PipeTransform } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 export class CreateComponent implements OnInit {
 
   @Input() fields: any;
+  @Input() validator: any;
   @Input() errors: Observable<any>;
   @Output() save: EventEmitter<any> = new EventEmitter();
 
@@ -24,17 +25,13 @@ export class CreateComponent implements OnInit {
     this.formControls = {};
     this.loading = false;
     Object.keys(this.fields).map((key) => {
-      this.formControls[key] = new FormControl(this.fields[key].defaultValue || null);
-      // if (field.type.includes('remote') {
-      //   field.options = result from query...
-      // }
-      console.log("key", key, "field", this.fields[key]);
+      this.formControls[key] = new FormControl(this.fields[key].defaultValue || null, this.fields[key]?.validator ?  this.fields[key].validator() : null)
     });
     this.errors.subscribe(errors => {
       this.formErrors = errors;
     });
-
     this.formGroup = new FormGroup(this.formControls);
+    if (this.validator) this.formGroup.setValidators(this.validator())
   }
 
   onSubmit() {
