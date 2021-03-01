@@ -7,36 +7,33 @@ import { Observable } from 'rxjs/Observable';
 import {catchError, map} from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { EnvService } from '../env/env.service';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ApiInstitutionService {
+export class ApiInstitutionService implements ApiService {
+
   apiUrl: string;
   endpoint: string = '/institution/';
   endpointUrl: string;
 
   constructor(
     private http: HttpClient,
-    private envService: EnvService){
+    private envService: EnvService) {
       this.apiUrl = envService.apiUrl;
       this.endpointUrl = this.apiUrl + this.endpoint;
     }
 
-  // public getAll(fields: any) {
-  //   const data = this.http.get("http://jsonplaceholder.typicode.com/posts")
-  //   console.log(data)
-  // }
-
   // API: GET /institutions
   public getAll( fields: any ): Observable<Institution[]> {
     return this.http
-      .get<Institution[]>(`${this.endpointUrl}${parseParams(fields)}` )
+      .get<any>(`${this.endpointUrl}${parseParams(fields)}` )
       .pipe(
-        map(( Institution ) => {
-          console.log(Institution);
-          if ( Institution ) return Institution;
-          else throw Institution;
+        map(response => response.results),
+        map(( institutions: Institution[] ) => {
+          if ( institutions ) return institutions;
+          else throw institutions;
         }),
         catchError(this.handleError),
     );

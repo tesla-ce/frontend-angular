@@ -1,4 +1,3 @@
-import { SelectRemoteComponent } from './../inputs/select-remote/select-remote.component';
 import { NgModule } from '@angular/core';
 
 import { ThemeModule } from '../../@theme/theme.module';
@@ -13,6 +12,7 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CreateComponent } from './create.component';
+import { SelectRemoteModule } from '../inputs/select-remote/select-remote.module';
 
 @NgModule({
   imports: [
@@ -24,10 +24,10 @@ import { CreateComponent } from './create.component';
     NbAutocompleteModule,
     NbSelectModule,
     NbFormFieldModule,
+    SelectRemoteModule,
   ],
   declarations: [
     CreateComponent,
-    SelectRemoteComponent
   ],
   exports: [
     CreateComponent,

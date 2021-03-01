@@ -1,16 +1,18 @@
-import { SelectRemoteComponent } from './select-remote.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NbAutocompleteModule } from '@nebular/theme';
-
-
+import { SelectRemoteComponent } from './select-remote.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SelectRemoteComponent,
+  ],
   imports: [
     CommonModule,
-    NbAutocompleteModule
+    NbAutocompleteModule,
   ],
-  exports: [SelectRemoteComponent]
+  exports: [
+    SelectRemoteComponent,
+  ],
 })
 export class SelectRemoteModule { }

@@ -1,37 +1,30 @@
-import { ApiInstitutionService } from './../../../@core/data/api-institution.service';
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
-
-import { FormControl, FormGroup } from '@angular/forms';
-import { map, startWith } from 'rxjs/operators';
+import { FormGroup } from '@angular/forms';
+import { ApiInstitutionService } from '../../../@core/data/api-institution.service';
+import { ApiService } from '../../../@core/data/api.service';
 
 @Component({
-  selector: 'nb-select-remote',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'ngx-select-remote',
+  // changeDetection: ChangeDetectionStrategy.OnPush,
+  // styleUrls: ['./select-remote.component.scss'],
   templateUrl: './select-remote.component.html',
 })
+
 export class SelectRemoteComponent implements OnInit {
   @Input() field: any;
-  @Input() parentFrom: FormGroup;
-
-  options: string[];
-  response: Observable<any>
-  filteredControlOptions$: Observable<string[]>;
-  filteredNgModelOptions$: Observable<string[]>;
-  inputFormControl: FormControl;
+  apiService: ApiInstitutionService;
+  options: any[];
   value: string;
 
-  ngOnInit() {
-    this.options = this.field.options || [];
-    this.filteredControlOptions$ = of(this.options);
-    this.filteredNgModelOptions$ = of(this.options);
+  constructor(apiService: ApiInstitutionService) {
+    this.apiService = apiService;
+  }
 
-    this.inputFormControl = new FormControl();
-    this.filteredControlOptions$ = this.inputFormControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(filterString => this.filter(filterString)),
-      );
+  ngOnInit() {
+    this.apiService.getAll({[this.field.value.search || 'search'] : this.value }).subscribe( options => {
+      this.options = options;
+      console.log(options);
+    });
   }
 
   private filter(value: string): string[] {
@@ -40,10 +33,9 @@ export class SelectRemoteComponent implements OnInit {
   }
 
   async onModelChange(value: string) {
-    this.options = this.field?.apiService.getAll({[this.field.search || "search"]: value })
-    
-    console.log(this.options)
-
-    this.filteredNgModelOptions$ = of(this.filter(value));
+    this.apiService.getAll({[this.field.value.search || 'search'] : this.value }).subscribe( options => {
+      this.options = options;
+      console.log(options);
+    });
   }
 }

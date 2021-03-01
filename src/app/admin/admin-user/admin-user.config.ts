@@ -67,22 +67,12 @@ export const AdminUserConfig = {
     institution: {
       key: 'institution',
       dataType: 'object',
-      keyAccessor: 'acronym',
-      valueAccessor: 'id',
-      options: [
-        {
-          key: 'uoc',
-          value: 1,
-        },
-        {
-          key: 'test',
-          value: 2,
-        },
-      ],
       label: 'Institution',
       inputType: 'select-remote',
       search: 'search',
-      apiService: ApiInstitutionService,
+      optionLabelAccessor: 'name',
+      optionValueAccessor: 'id',
+      // apiService: ApiInstitutionService,
       inputName: 'institution-input-name',
       formControlName: 'institution-form-control-name',
       placeholder: 'uoc',
