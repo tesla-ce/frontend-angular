@@ -38,7 +38,9 @@
                 <ngx-select-remote
                     *ngSwitchCase="'select-remote'" 
                     [field]="field"
-                    [apiService]="field.value.apiService">
+                    [formControlName]="field.key"
+                    [parentForm]="formGroup"
+                    >
                 </ngx-select-remote>
                 
                 <!-- default input -->

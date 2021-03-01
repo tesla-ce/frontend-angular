@@ -1,17 +1,18 @@
-<div>
+<div [formGroup]="parentForm"> 
   <input
+    [ngModel]="value"
+    [formControlName]="field.key" 
     fullWidth
     (ngModelChange)="onModelChange($event)"
     nbInput
-    fullWidth
-    ngDefaultControl
     [required]="field.required || false"
     type="text"
     placeholder="Search"
-    [nbAutocomplete]="autoNgModel"/>
-  <nb-autocomplete #autoNgModel>
-    <nb-option *ngFor="let option of options" [value]="option[field.value.optionValueAccessor]">
-      {{ option[field.value.optionLabelAccessor] }}
-    </nb-option>
-  </nb-autocomplete>  
+    [nbAutocomplete]="autoNgModel" />
+
+    <nb-autocomplete #autoNgModel>
+      <nb-option *ngFor="let option of options" [value]="option[field.value.optionValueAccessor]">
+        {{ option[field.value.optionLabelAccessor] }}
+      </nb-option>
+    </nb-autocomplete>  
 </div>
