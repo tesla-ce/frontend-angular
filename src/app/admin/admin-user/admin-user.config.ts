@@ -1,3 +1,4 @@
+import { ApiInstitutionService } from './../../@core/data/api-institution.service';
 import { doublePasswordCheck, checkEmail } from "../../@core/utils/validators";
 
 export const AdminUserConfig = {
@@ -63,111 +64,109 @@ export const AdminUserConfig = {
       formControlName: 'last-name-form-control-name',
       placeholder: 'Doe',
     },
-    // institution: {
-    //   key: 'institution',
-    //   dataType: 'object',
-    //   keyAccessor: 'acronym',
-    //   valueAccessor: 'id',
-    //   options: [
-    //     {
-    //       key: 'uoc',
-    //       value: 1,
-    //     },
-    //     {
-    //       key: 'test',
-    //       value: 2,
-    //     },
-    //   ],
-    //   label: 'Institution',
-    //   inputType: 'select-multiple-remote',
-    //   remoteUrl: '',
-    //   inputName: 'institution-input-name',
-    //   formControlName: 'institution-form-control-name',
-    //   placeholder: 'uoc',
-    //   validator: 'institution',
-    //   required: false,
-    // },
-    // locale: {
-    //   key: 'locale',
-    //   dataType: 'string',
-    //   label: 'Language',
-    //   inputType: 'select',
-    //   options: [
-    //     {
-    //       value: 'en',
-    //       key: 'en',
-    //     },
-    //     {
-    //       value: 'es',
-    //       key: 'es',
-    //     },
-    //     {
-    //       value: 'ca',
-    //       key: 'ca',
-    //     },
-    //     {
-    //       value: 'bg',
-    //       key: 'bg',
-    //     },
-    //     {
-    //       value: 'fi',
-    //       key: 'fi',
-    //     },
-    //     {
-    //       value: 'tr',
-    //       key: 'tr',
-    //     },
-    //   ],
-    //   inputName: 'locale-input-name',
-    //   formControlName: 'locale-form-control-name',
-    //   placeholder: 'en',
-    //   validator: 'locale',
-    //   // required: true,
-    // },
-    // roles: {
-    //   key: 'roles',
-    //   dataType: 'string',
-    //   label: 'Roles',
-    //   inputType: 'select-multiple',
-    //   options: [
-    //     {
-    //       value: 'GLOBAL_ADMIN',
-    //       key: 'GLOBAL_ADMIN',
-    //     },
-    //     {
-    //       value: 'ADMIN',
-    //       key: 'ADMIN',
-    //     },
-    //     {
-    //       value: 'SEND',
-    //       key: 'SEND',
-    //     },
-    //     {
-    //       value: 'DATA_MANAGEMENT',
-    //       key: 'DATA_MANAGEMENT',
-    //     },
-    //     {
-    //       value: 'IC_MANAGEMENT',
-    //       key: 'IC_MANAGEMENT',
-    //     },
-    //     {
-    //       value: 'INSTRUCTOR',
-    //       key: 'INSTRUCTOR',
-    //     },
-    //     {
-    //       value: 'LEARNER',
-    //       key: 'LEARNER',
-    //     },
-    //     {
-    //       value: 'ACADEMIC_MANAGEMENT',
-    //       key: 'ACADEMIC_MANAGEMENT',
-    //     },
-    //   ],
-    //   inputName: 'roles-input-name',
-    //   formControlName: 'roles-form-control-name',
-    //   placeholder: 'en',
-    //   validator: 'roles',
-    //   required: true,
-    // },
+    institution: {
+      key: 'institution',
+      dataType: 'object',
+      keyAccessor: 'acronym',
+      valueAccessor: 'id',
+      options: [
+        {
+          key: 'uoc',
+          value: 1,
+        },
+        {
+          key: 'test',
+          value: 2,
+        },
+      ],
+      label: 'Institution',
+      inputType: 'select-remote',
+      search: 'search',
+      apiService: ApiInstitutionService,
+      inputName: 'institution-input-name',
+      formControlName: 'institution-form-control-name',
+      placeholder: 'uoc',
+      required: true,
+    },
+    locale: {
+      key: 'locale',
+      dataType: 'string',
+      label: 'Language',
+      inputType: 'select',
+      options: [
+        {
+          value: 'en',
+          key: 'en',
+        },
+        {
+          value: 'es',
+          key: 'es',
+        },
+        {
+          value: 'ca',
+          key: 'ca',
+        },
+        {
+          value: 'bg',
+          key: 'bg',
+        },
+        {
+          value: 'fi',
+          key: 'fi',
+        },
+        {
+          value: 'tr',
+          key: 'tr',
+        },
+      ],
+      inputName: 'locale-input-name',
+      formControlName: 'locale-form-control-name',
+      placeholder: 'en',
+      // required: true,
+    },
+    roles: {
+      key: 'roles',
+      dataType: 'string',
+      label: 'Roles',
+      inputType: 'select-multiple',
+      options: [
+        {
+          value: 'GLOBAL_ADMIN',
+          key: 'GLOBAL_ADMIN',
+        },
+        {
+          value: 'ADMIN',
+          key: 'ADMIN',
+        },
+        {
+          value: 'SEND',
+          key: 'SEND',
+        },
+        {
+          value: 'DATA_MANAGEMENT',
+          key: 'DATA_MANAGEMENT',
+        },
+        {
+          value: 'IC_MANAGEMENT',
+          key: 'IC_MANAGEMENT',
+        },
+        {
+          value: 'INSTRUCTOR',
+          key: 'INSTRUCTOR',
+        },
+        {
+          value: 'LEARNER',
+          key: 'LEARNER',
+        },
+        {
+          value: 'ACADEMIC_MANAGEMENT',
+          key: 'ACADEMIC_MANAGEMENT',
+        },
+      ],
+      inputName: 'roles-input-name',
+      formControlName: 'roles-form-control-name',
+      placeholder: 'en',
+      required: true,
+    },
   },
 };

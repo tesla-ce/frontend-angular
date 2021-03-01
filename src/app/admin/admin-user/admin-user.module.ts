@@ -8,6 +8,7 @@ import {
   NbSelectModule,
   NbIconModule,
   NbFormFieldModule,
+  NbAutocompleteModule
 } from '@nebular/theme';
 
 import { AdminUserComponent } from './admin-user.component';

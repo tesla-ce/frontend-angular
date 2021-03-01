@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, AfterViewInit, ViewChild, Input  } from 
 import { ServerDataSource } from 'ng2-smart-table';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ServerSourceConf } from 'ng2-smart-table/lib/lib/data-source/server/server-source.conf';
-import {fromEvent } from 'rxjs';
+import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, tap } from 'rxjs/operators';
 import { EnvService } from '../../@core/env/env.service';
 import { ActivatedRoute, Router } from '@angular/router';
