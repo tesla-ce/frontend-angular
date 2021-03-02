@@ -1,3 +1,4 @@
+import { Validators } from '@angular/forms';
 import { ApiInstitutionService } from './../../@core/data/api-institution.service';
 import { doublePasswordCheck, checkEmail } from "../../@core/utils/validators";
 
@@ -76,6 +77,7 @@ export const AdminUserConfig = {
       inputName: 'institution-input-name',
       formControlName: 'institution-form-control-name',
       placeholder: 'uoc',
+      validator: () => Validators.required,
       required: true,
     },
     locale: {

@@ -26,7 +26,6 @@ export class CreateComponent implements OnInit {
     this.formControls = {};
     this.loading = false;
     Object.keys(this.fields).map((key) => {
-      console.log(this.fields[key]);
       this.formControls[key] = new FormControl(
         this.fields[key].defaultValue ||
         null, this.fields[key]?.validator ?

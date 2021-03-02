@@ -37,8 +37,7 @@
                 <!-- case select remote-->
                 <ngx-select-remote
                     *ngSwitchCase="'select-remote'" 
-                    [field]="field"
-                    [formControlName]="field.key"
+                    [field]="field.value"
                     [parentForm]="formGroup"
                     >
                 </ngx-select-remote>
