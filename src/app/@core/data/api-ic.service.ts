@@ -36,7 +36,7 @@ export class ApiIcService {
     return this.http.post(this.endpointUrl, fields)
     .pipe(
       map(( ic: Ic ) => {
-        console.log(ic);
+        // console.log(ic);
         if ( ic ) return ic;
         else throw ic;
       }),
@@ -50,7 +50,7 @@ export class ApiIcService {
       .get(this.endpointUrl + icId)
       .pipe(
         map(( ic: Ic ) => {
-          console.log(ic);
+          // console.log(ic);
           if ( ic ) return ic;
           else throw ic;
         }),

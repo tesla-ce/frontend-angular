@@ -37,7 +37,7 @@ export class ListCellActionsComponent implements ViewCell, OnInit {
   delete(event) {
     this.dialog.open(DeleteDialogComponent)
     .onClose.subscribe(data => {
-      console.log(data)
+      // console.log(data)
     });
   }
 

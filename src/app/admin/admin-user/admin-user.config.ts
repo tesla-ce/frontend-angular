@@ -1,6 +1,6 @@
 import { Validators } from '@angular/forms';
 import { ApiInstitutionService } from './../../@core/data/api-institution.service';
-import { doublePasswordCheck, checkEmail } from "../../@core/utils/validators";
+import { doublePasswordCheck, checkEmail } from '../../@core/utils/validators';
 
 export const AdminUserConfig = {
   validator: doublePasswordCheck,

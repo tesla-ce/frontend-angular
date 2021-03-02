@@ -1,16 +1,16 @@
 
 export const parseParams = (params: Object): String => {
-    let i = 0,
-      url = "";
-  
+    let i = 0, url = '';
     if (params) {
-      for (let key in params) {
+    for (const key in params) {
+      if (params.hasOwnProperty(key)) {
         if (i === 0) {
           url += `?${key}=${params[key]}`;
-        } else {
+          } else {
           url += `&${key}=${params[key]}`;
-        }
-        i++;
+          }
+          i++;
+          }
       }
     }
     return url;

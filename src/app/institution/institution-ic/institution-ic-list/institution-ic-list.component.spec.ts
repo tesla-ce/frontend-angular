@@ -8,7 +8,7 @@ describe('InstitutionIcListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InstitutionIcListComponent ]
+      declarations: [ InstitutionIcListComponent ],
     })
     .compileComponents();
   }));

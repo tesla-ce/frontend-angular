@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'ngx-institution-user-update',
   templateUrl: './institution-user-update.component.html',
-  styleUrls: ['./institution-user-update.component.scss']
+  styleUrls: ['./institution-user-update.component.scss'],
 })
 export class InstitutionUserUpdateComponent implements OnInit {
 

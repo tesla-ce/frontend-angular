@@ -12,7 +12,7 @@ import { SelectRemoteComponent } from './select-remote.component';
     CommonModule,
     NbAutocompleteModule,
     NbInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [
     SelectRemoteComponent,
