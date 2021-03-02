@@ -13,6 +13,16 @@ const routes: Routes = [{
       component: InstitutionDashboardComponent,
     },
     {
+      path: 'institution-user',
+      loadChildren: () => import('./institution-user/institution-user.module')
+      .then(m => m.InstitutionUserModule),
+    },
+    {
+      path: 'institution-ic',
+      loadChildren: () => import('./institution-ic/institution-ic.module')
+      .then(m => m.InstitutionIcModule),
+    },
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',

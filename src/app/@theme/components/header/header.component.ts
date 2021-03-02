@@ -6,7 +6,7 @@ import { map, takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { RippleService } from '../../../@core/utils/ripple.service';
 import {AuthService } from '../../../@core/auth/auth.service';
-import { InstitutionUser, User } from '../../../@core/models/users';
+import { InstitutionUser, User } from '../../../@core/models/user';
 
 
 @Component({
@@ -23,33 +23,41 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   themes = [
     {
-      value: 'custom',
-      name: 'Custom',
+      value: 'uoc',
+      name: 'UOC',
     },
     {
-      value: 'default',
-      name: 'Light',
+      value: 'tesla-ce',
+      name: 'TeSLA-CE',
     },
-    {
-      value: 'dark',
-      name: 'Dark',
-    },
-    {
-      value: 'cosmic',
-      name: 'Cosmic',
-    },
-    {
-      value: 'corporate',
-      name: 'Corporate',
-    },
-    {
-      value: 'material-light',
-      name: 'Material Light',
-    },
-    {
-      value: 'material-dark',
-      name: 'Material Dark',
-    },
+    // {
+    //   value: 'custom',
+    //   name: 'Custom',
+    // },
+    // {
+    //   value: 'default',
+    //   name: 'Light',
+    // },
+    // {
+    //   value: 'dark',
+    //   name: 'Dark',
+    // },
+    // {
+    //   value: 'cosmic',
+    //   name: 'Cosmic',
+    // },
+    // {
+    //   value: 'corporate',
+    //   name: 'Corporate',
+    // },
+    // {
+    //   value: 'material-light',
+    //   name: 'Material Light',
+    // },
+    // {
+    //   value: 'material-dark',
+    //   name: 'Material Dark',
+    // },
   ];
 
   currentTheme = 'default';
@@ -81,7 +89,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((user: User) => {
         this.user = user;
-        if (!user?.isAdmin) {
+        if (!user?.is_admin) {
           // mock institutions
           this.institutions = [
             {
@@ -90,13 +98,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
               'isAdmin': false,
             },
             {
-              'acronym': 'uoc-1',
+              'acronym': 'test',
               'id': 2,
-              'isAdmin': false,
-            },
-            {
-              'acronym': 'uoc-2',
-              'id': 3,
               'isAdmin': false,
             }];
           // Load institution from user

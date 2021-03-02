@@ -42,6 +42,8 @@ import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 import { DARK_THEME } from './styles/theme.dark';
 import { CUSTOM_THEME } from './styles/theme.custom';
+import { UOC_THEME } from './styles/theme.uoc';
+import { TESLA_CE_THEME } from './styles/theme.tesla-ce';
 import { MATERIAL_LIGHT_THEME } from './styles/material/theme.material-light';
 import { MATERIAL_DARK_THEME } from './styles/material/theme.material-dark';
 import { LogoComponent } from './components/logo/logo.component';
@@ -93,9 +95,10 @@ export class ThemeModule {
       providers: [
         ...NbThemeModule.forRoot(
           {
-            name: 'custom',
+            name: 'uoc',
           },
-          [ CUSTOM_THEME, DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME, DARK_THEME, MATERIAL_LIGHT_THEME, MATERIAL_DARK_THEME ],
+          [ UOC_THEME, TESLA_CE_THEME, CUSTOM_THEME, DEFAULT_THEME, COSMIC_THEME,
+            CORPORATE_THEME, DARK_THEME, MATERIAL_LIGHT_THEME, MATERIAL_DARK_THEME ],
         ).providers,
       ],
     };

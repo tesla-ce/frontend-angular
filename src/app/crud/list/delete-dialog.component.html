@@ -1,0 +1,21 @@
+<div>
+    <div class="row">
+        
+    </div>
+</div>
+<nb-card>
+    <nb-card-header>DELETE</nb-card-header>
+    <nb-card-body>
+      Are you sure you want to remove this item?
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="card-buttons">
+            <button nbButton status='warning' size="small" (click)="dismiss()">
+                <nb-icon icon="close-circle-outline"></nb-icon> CANCEL
+            </button>
+            <button class="delete-button" nbButton status='danger' size="small" (click)="delete()">
+                <nb-icon icon="trash-2-outline"></nb-icon> DELETE
+            </button>
+        </div>
+    </nb-card-footer>
+  </nb-card>

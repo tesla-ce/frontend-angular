@@ -1,0 +1,105 @@
+<nb-card>
+    <nb-card-header>Update Informed Consent</nb-card-header>
+    <nb-card-body class="example-items-rows" *ngIf="!loading">
+            <form [formGroup]="formGroup" fullWidth (ngSubmit)="onSave()">
+                
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label [for]="fields['version'].inputName" class="label">{{fields['version'].label || 'version'}}</label>
+                        <input nbInput fullWidth
+                                [type]="fields['version'].inputType || text"
+                                [id]="fields['version'].inputName || 'version'"
+                                [name]="fields['version'].inputName || 'version'"
+                                [formControlName]="'version'"
+                                [placeholder]="fields['version'].placeholder || null" 
+                                [attr.disabled]="fields['version'].disabled || null"
+                                [attr.email]="fields['version'].validator == 'email' || null"
+                                [required] = "fields['version'].required || false" 
+                                [status] = "formErrors['version']?'danger':'default'" >
+                        <errors class="text-danger">{{formErrors['version']?formErrors['version']:''}}</errors>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <label class="label">Informed Consent</label>
+                    <nb-tabset fullWidth>
+                        <nb-tab tabTitle="EN">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label [for]="fields['file'].inputName" class="label">{{fields['file'].label || 'file'}}</label>
+                                    <input nbInput fullWidth
+                                            [type]="fields['file'].inputType || text"
+                                            [id]="fields['file'].inputName || 'file'"
+                                            [name]="fields['file'].inputName || 'file'"
+                                            [formControlName]="'file'"
+                                            [placeholder]="fields['file'].placeholder || null" 
+                                            [attr.disabled]="fields['file'].disabled || null"
+                                            [attr.email]="fields['file'].validator == 'email' || null"
+                                            [required] = "fields['file'].required || false" 
+                                            [status] = "formErrors['file']?'danger':'default'" >
+                                    <errors class="text-danger">{{formErrors['file']?formErrors['file']:''}}</errors>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="ckEditorConfig" class="label">{{fields['html'].label || 'html'}}</label>
+                                    <ckeditor fullWidth [formControlName]="'html'" [config]="ckEditorConfig"></ckeditor>
+                                </div>
+                            </div>
+                            <errors class="text-danger">{{formErrors['html']?formErrors['html']:''}}</errors>
+                        </nb-tab>
+                        <nb-tab tabTitle="ES">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label [for]="fields['file'].inputName" class="label">{{fields['file'].label || 'file'}}</label>
+                                    <input nbInput fullWidth
+                                            [type]="fields['file'].inputType || text"
+                                            [id]="fields['file'].inputName || 'file'"
+                                            [name]="fields['file'].inputName || 'file'"
+                                            [formControlName]="'file'"
+                                            [placeholder]="fields['file'].placeholder || null" 
+                                            [attr.disabled]="fields['file'].disabled || null"
+                                            [attr.email]="fields['file'].validator == 'email' || null"
+                                            [required] = "fields['file'].required || false" 
+                                            [status] = "formErrors['file']?'danger':'default'" >
+                                    <errors class="text-danger">{{formErrors['file']?formErrors['file']:''}}</errors>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="ckEditorConfig" class="label">{{fields['html'].label || 'html'}}</label>
+                                    <ckeditor fullWidth [formControlName]="'html'" [config]="ckEditorConfig"></ckeditor>
+                                </div>
+                            </div>
+                            <errors class="text-danger">{{formErrors['html']?formErrors['html']:''}}</errors>
+                        </nb-tab>
+                        <nb-tab tabTitle="CA">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label [for]="fields['file'].inputName" class="label">{{fields['file'].label || 'file'}}</label>
+                                    <input nbInput fullWidth
+                                            [type]="fields['file'].inputType || text"
+                                            [id]="fields['file'].inputName || 'file'"
+                                            [name]="fields['file'].inputName || 'file'"
+                                            [formControlName]="'file'"
+                                            [placeholder]="fields['file'].placeholder || null" 
+                                            [attr.disabled]="fields['file'].disabled || null"
+                                            [attr.email]="fields['file'].validator == 'email' || null"
+                                            [required] = "fields['file'].required || false" 
+                                            [status] = "formErrors['file']?'danger':'default'" >
+                                    <errors class="text-danger">{{formErrors['file']?formErrors['file']:''}}</errors>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="ckEditorConfig" class="label">{{fields['html'].label || 'html'}}</label>
+                                <ckeditor fullWidth [formControlName]="'html'" [config]="ckEditorConfig"></ckeditor>
+                                </div>
+                            </div>
+                            <errors class="text-danger">{{formErrors['html']?formErrors['html']:''}}</errors>
+                        </nb-tab>
+                    </nb-tabset>
+                </div>
+            </form>
+        <button *ngIf="!loading" nbButton type="submit" [disabled]="!formGroup.valid">Submit</button>
+    </nb-card-body>
+</nb-card>

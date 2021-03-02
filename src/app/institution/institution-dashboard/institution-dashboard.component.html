@@ -1,3 +1,33 @@
-<h2>Institution Dashboard</h2>
-<div>FULL NAME: {{ user?.fullName }}</div>
-<div>FULL USER: {{ JSON.stringify(user) }}</div>
+<nb-card status="info">
+    <nb-card-header>Dashboard</nb-card-header>
+    <nb-card-body>
+        <h2 *ngIf="user?true:false">Welcome {{ user.first_name + " " + user.last_name }}</h2>
+        <button nbButton outline status="primary" size="tiny" *ngFor="let role of user?.roles">{{ role }}</button>
+    </nb-card-body>
+    <nb-card-footer>
+        <div style="display: flex; flex-direction: row;">
+            <nb-card style="flex: 1;">
+                <nb-list *ngIf="user?true:false">
+                    <nb-list-item *ngIf="user.id?true:false">id: {{ user.id }}</nb-list-item>
+                    <nb-list-item *ngIf="user.username?true:false">username: {{ user.username }}</nb-list-item>
+                    <nb-list-item *ngIf="user.last_login?true:false">last_login: {{ user.last_login }}</nb-list-item>
+                    <nb-list-item *ngIf="user.first_name?true:false">first_name: {{ user.first_name }}</nb-list-item>
+                    <nb-list-item *ngIf="user.last_name?true:false">last_name: {{ user.last_name }}</nb-list-item>
+                    <nb-list-item *ngIf="user.full_name?true:false">full_name: {{ user.full_name }}</nb-list-item>
+                    <nb-list-item *ngIf="user.email?true:false">email: {{ user.email }}</nb-list-item>
+                    <!-- <nb-list-item *ngIf="user.institution?true:false">institution: {{ user.institution }}</nb-list-item>
+                    <nb-list-item *ngIf="user.acronym?true:false">acronym: {{ user.acronym }}</nb-list-item>
+                    <nb-list-item *ngIf="user.uid?true:false">uid: {{ user.uid }}</nb-list-item> -->
+                    <nb-list-item *ngIf="user.roles?true:false">roles: {{ user.roles }}</nb-list-item>
+                    <nb-list-item *ngIf="user.locale?true:false">locale: {{ user.locale }}</nb-list-item>
+                    <nb-list-item *ngIf="user.is_superuser?true:false">is_superuser: {{ user.is_superuser }}</nb-list-item>
+                    <nb-list-item *ngIf="user.is_staff?true:false">is_staff: {{ user.is_staff }}</nb-list-item>
+                    <nb-list-item *ngIf="user.is_active?true:false">is_active: {{ user.is_active }}</nb-list-item>
+                    <nb-list-item *ngIf="user.date_joined?true:false">date_joined: {{ user.date_joined }}</nb-list-item>
+                    <nb-list-item *ngIf="user.groups?true:false">groups: {{ user.groups }}</nb-list-item>
+                    <nb-list-item *ngIf="user.user_permissions?true:false">user_permissions: {{ user.user_permissions }}</nb-list-item>
+                </nb-list>
+            </nb-card>
+        </div>
+    </nb-card-footer>
+</nb-card>

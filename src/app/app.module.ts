@@ -6,7 +6,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
@@ -14,7 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   NbDatepickerModule,
-  NbDialogModule,
+  NbDialogModule, NbIconModule,
   NbMenuModule,
   NbSidebarModule,
   NbToastrModule,
@@ -23,6 +23,11 @@ import {
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { SideMenuModule } from './side-menu/side-menu.module';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { SharedModule } from './shared/shared.module';
+import {NbTeslaIconsModule} from '@tesla-ce/icons';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +41,18 @@ import { SideMenuModule } from './side-menu/side-menu.module';
     FormsModule,
     ReactiveFormsModule,
 
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json'),
+        deps: [HttpClient],
+      },
+    }),
+
     ThemeModule.forRoot(),
+
+    SharedModule,
 
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
@@ -48,6 +64,8 @@ import { SideMenuModule } from './side-menu/side-menu.module';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
 
     SideMenuModule,
+    NbIconModule,
+    NbTeslaIconsModule,
   ],
   bootstrap: [AppComponent],
 })
