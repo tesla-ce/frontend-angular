@@ -23,7 +23,7 @@ export class AdminDashboardComponent implements OnInit {
       .pipe()
       .subscribe((user: User) => {
         this.user = user;
-        console.log(user);
+        // console.log(user);
       });
   }
 }

@@ -4,7 +4,7 @@ import {InstitutionUserConfig} from './institution-user-create.config';
 @Component({
   selector: 'ngx-institution-user-create',
   templateUrl: './institution-user-create.component.html',
-  styleUrls: ['./institution-user-create.component.scss']
+  styleUrls: ['./institution-user-create.component.scss'],
 })
 export class InstitutionUserCreateComponent implements OnInit {
 
@@ -16,6 +16,6 @@ export class InstitutionUserCreateComponent implements OnInit {
   }
 
   onSave(event): void {
-    console.log('event recieved', event);
+    // console.log('event recieved', event);
   }
 }

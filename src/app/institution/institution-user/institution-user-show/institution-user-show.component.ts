@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'ngx-institution-user-show',
   templateUrl: './institution-user-show.component.html',
-  styleUrls: ['./institution-user-show.component.scss']
+  styleUrls: ['./institution-user-show.component.scss'],
 })
 export class InstitutionUserShowComponent implements OnInit {
   id: number;
