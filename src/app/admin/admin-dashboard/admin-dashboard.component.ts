@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService } from '../../@core/auth/auth.service';
-import { User } from '../../@core/models/users';
+import { User } from '../../@core/models/user';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-admin-dashboard',
@@ -11,16 +12,19 @@ import { User } from '../../@core/models/users';
 export class AdminDashboardComponent implements OnInit {
 
   user: User;
-  JSON;
 
   constructor(
     private authService: AuthService,
-  ) { this.JSON = JSON; }
+    public translate: TranslateService,
+  ) {}
 
   ngOnInit() {
     this.authService.getUser()
       .pipe()
-      .subscribe((user: User) => this.user = user);
+      .subscribe((user: User) => {
+        this.user = user;
+        // console.log(user);
+      });
   }
 }
 

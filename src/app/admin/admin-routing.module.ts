@@ -13,6 +13,11 @@ const routes: Routes = [{
       component: AdminDashboardComponent,
     },
     {
+      path: 'admin-user',
+      loadChildren: () => import('./admin-user/admin-user.module')
+      .then(m => m.AdminUserModule),
+    },
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',

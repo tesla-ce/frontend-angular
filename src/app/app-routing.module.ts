@@ -6,8 +6,9 @@ import {
   NbLogoutComponent,
 } from '@nebular/auth';
 import {AuthGuardAuthenticated} from './@core/auth/guards/auth-guard-authenticated';
-import {UserManagementComponent} from './user-management/user-management.component';
 import {IcManagementComponent} from './ic-management/ic-management.component';
+import { AuthGuardAdmin } from './@core/auth/guards/auth-guard-admin';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -23,8 +24,9 @@ export const routes: Routes = [
     canActivate: [AuthGuardAuthenticated],
   },
   {
-    path: 'users',
-    component: UserManagementComponent,
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuardAuthenticated],
   },
   {
     path: 'informed-consent/update',
@@ -48,8 +50,8 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: '', redirectTo: 'admin/dashboard', pathMatch: 'full' },
-  { path: '**', redirectTo: 'admin/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '**', redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 
 const config: ExtraOptions = {

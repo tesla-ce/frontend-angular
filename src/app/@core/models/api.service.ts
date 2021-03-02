@@ -5,8 +5,10 @@ import {NbRoleProvider} from '@nebular/security';
 import {Router} from '@angular/router';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-import { User, Institution } from './users';
+import { User, Institution } from './user';
 import {EnvService} from '../env/env.service';
+import { catchError, map } from 'rxjs/operators';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
 
 @Injectable()
@@ -37,31 +39,45 @@ export class ApiService extends NbRoleProvider {
             }),
           };
           const url = envService.apiUrl + '/auth/profile';
-          this.http.get(url, options).subscribe( data => {
-            let institution: Institution;
-            if (data['institution']) {
-              institution = Object.assign({}, {
-                acronym: data['institution']['acronym'],
-                id: data['institution']['id'],
-                name: data['institution']['name'],
-                isAdmin: false,
-              });
-            }
-            this.userData.next(Object.assign({}, {
-              firstName: data['first_name'],
-              lastName: data['last_name'],
-              email: data['email'],
-              username: data['username'],
-              isAdmin: data['is_admin'],
-              fullName: data['full_name'],
-              locale: data['locale'],
-              uid: data['locale'],
-              institution,
-            }));
-          });
+          this.http.get(url, options)
+          .pipe(
+            map(( user: User ) => {
+              // console.log(user);
+              if ( user ) return user;
+              else throw user;
+            }),
+            catchError(this.handleError),
+          );
+          // this.http.get(url, options).subscribe( data => {
+          //   let institution: Institution;
+          //   if (data['institution']) {
+          //     institution = Object.assign({}, {
+          //       acronym: data['institution']['acronym'],
+          //       id: data['institution']['id'],
+          //       name: data['institution']['name'],
+          //       isAdmin: false,
+          //     });
+          //   }
+          //   this.userData.next(Object.assign({}, {
+          //     firstName: data['first_name'],
+          //     lastName: data['last_name'],
+          //     email: data['email'],
+          //     username: data['username'],
+          //     isAdmin: data['is_admin'],
+          //     fullName: data['full_name'],
+          //     locale: data['locale'],
+          //     uid: data['institution']['id'],
+          //     roles: data['roles'],
+          //     institution,
+          //   }));
+          // });
         } else {
           this.userData.next(null);
         }
       });
+  }
+  private handleError (error: Response | any) {
+    console.error('ApiService::handleError', error);
+    return ErrorObservable.create(error);
   }
 }

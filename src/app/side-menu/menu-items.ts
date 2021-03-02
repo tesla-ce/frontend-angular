@@ -4,24 +4,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Dashboard',
     icon: 'home-outline',
-    // link: '/dashboard',
-    // expanded: true,
-    home: true,
-    children: [{
-      title: 'Admin',
-      icon: 'award-outline',
-      link: '/admin',
-    },
-    {
-      title: 'Instructor',
-      icon: 'cube-outline',
-      link: '/instructor',
-    },
-    {
-      title: 'Learner',
-      icon: 'book-outline',
-      link: '/learner',
-    }],
+    link: '/institutuion/dashboard',
   }, {
   title: 'Institution options',
     icon: 'settings-outline',
@@ -46,24 +29,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
   }, {
       title: 'Informed Consent',
       icon: 'monitor-outline',
-      // link: '/settings',
+      link: '/institution/institution-ic',
       // expanded: true,
-
-      children: [{
-        title: 'Add/Del/Update',
-        icon: 'award-outline',
-        link: '/informed-consent/update',
-      },
-      {
-        title: 'Manage languages',
-        icon: 'award-outline',
-        link: '/informed-consent/update',
-      },
-      {
-        title: 'Manage documents',
-        icon: 'radio-button-off-outline',
-        link: '/informed-consent/update',
-      }],
   }, {
       title: 'SEND',
       icon: 'cube-outline',
@@ -81,14 +48,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     }],
   }, {
     title: 'Users',
-      icon: 'cube-outline',
-      // link: '/settings',
-      // expanded: true,
-
-      children: [{
-        title: 'Roles',
-        icon: 'award-outline',
-        link: '/user/roles',
-      }],
+    icon: 'people-outline',
+    link: '/institution/institution-user',
   },
 ];
