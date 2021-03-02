@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InstitutionIcUpdateComponent } from './institution-ic-update.component';
+// import { InstitutionIcUpdateComponent } from './institution-ic-update.component';
 
-describe('InstitutionIcUpdateComponent', () => {
-  let component: InstitutionIcUpdateComponent;
-  let fixture: ComponentFixture<InstitutionIcUpdateComponent>;
+// describe('InstitutionIcUpdateComponent', () => {
+//   let component: InstitutionIcUpdateComponent;
+//   let fixture: ComponentFixture<InstitutionIcUpdateComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ InstitutionIcUpdateComponent ]
-    })
-    .compileComponents();
-  }));
+//   beforeEach(async(() => {
+//     TestBed.configureTestingModule({
+//       declarations: [ InstitutionIcUpdateComponent ]
+//     })
+//     .compileComponents();
+//   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(InstitutionIcUpdateComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//   beforeEach(() => {
+//     fixture = TestBed.createComponent(InstitutionIcUpdateComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

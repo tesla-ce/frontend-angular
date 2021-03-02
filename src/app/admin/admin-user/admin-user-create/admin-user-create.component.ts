@@ -22,29 +22,27 @@ export class AdminUserCreateComponent implements OnInit {
   }
 
   onSave(event): void {
-    console.log(event)
-
-    // this.apiUserService.createUser(event).subscribe((user: User) => {
-    //     this.toastrService.show(
-    //       'User Created',
-    //       user.username,
-    //       {
-    //         position: NbGlobalPhysicalPosition.TOP_RIGHT,
-    //         status: 'success',
-    //         icon: 'save-outline',
-    //         duration: 2000,
-    //     });
-    // }, error => {
-    //   this.errors.next(error.error);
-    //   this.toastrService.show(
-    //     'Error saving',
-    //     'user',
-    //     {
-    //       position: NbGlobalPhysicalPosition.TOP_RIGHT,
-    //       status: 'danger',
-    //       icon: 'save-outline',
-    //       duration: 2000,
-    //   });
-    // });
+    this.apiUserService.createUser(event).subscribe((user: User) => {
+        this.toastrService.show(
+          'User Created',
+          user.username,
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'success',
+            icon: 'save-outline',
+            duration: 2000,
+        });
+    }, error => {
+      this.errors.next(error.error);
+      this.toastrService.show(
+        'Error saving',
+        'user',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'danger',
+          icon: 'save-outline',
+          duration: 2000,
+      });
+    });
   }
 }
