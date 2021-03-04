@@ -32,7 +32,6 @@ export class CreateComponent implements OnInit {
     this.usableFields = {};
 
     this.loading = false;
-    console.log(Object.keys(this.fields))
     Object.keys(this.fields).map((key) => {
       if (this.fields[key].creable) {
         this.usableFields[key] = this.fields[key]
@@ -40,7 +39,12 @@ export class CreateComponent implements OnInit {
         this.fields[key].defaultValue ||
         null, this.fields[key]?.validator ?
         this.fields[key].validator() :
-        null);}
+        null);
+
+        this.fields[key].disabled = false
+      } else {
+        this.fields[key].disabled = true
+      }
     });
     this.errors.subscribe(errors => {
       this.formErrors = errors;
@@ -48,6 +52,7 @@ export class CreateComponent implements OnInit {
 
     this.formGroup = new FormGroup(this.formControls);
     if (this.validator) this.formGroup.setValidators(this.validator());
+
   }
 
   onSubmit() {

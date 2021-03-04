@@ -39,28 +39,29 @@ export class AdminUserUpdateComponent implements OnInit {
   }
 
   onSave(event): void {
-    this.apiUserService.updateUser(this.id, event).subscribe((user: User) => {
-        this.toastrService.show(
-          'User Updated',
-          user.username,
-          {
-            position: NbGlobalPhysicalPosition.TOP_RIGHT,
-            status: 'success',
-            icon: 'save-outline',
-            duration: 2000,
-        });
-    }, error => {
-      this.errors.next(error.error);
-      this.toastrService.show(
-        'Error saving',
-        'user',
-        {
-          position: NbGlobalPhysicalPosition.TOP_RIGHT,
-          status: 'danger',
-          icon: 'save-outline',
-          duration: 2000,
-      });
-    });
+    console.log(event)
+    // this.apiUserService.updateUser(this.id, event).subscribe((user: User) => {
+    //     this.toastrService.show(
+    //       'User Updated',
+    //       user.username,
+    //       {
+    //         position: NbGlobalPhysicalPosition.TOP_RIGHT,
+    //         status: 'success',
+    //         icon: 'save-outline',
+    //         duration: 2000,
+    //     });
+    // }, error => {
+    //   this.errors.next(error.error);
+    //   this.toastrService.show(
+    //     'Error saving',
+    //     'user',
+    //     {
+    //       position: NbGlobalPhysicalPosition.TOP_RIGHT,
+    //       status: 'danger',
+    //       icon: 'save-outline',
+    //       duration: 2000,
+    //   });
+    // });
   }
 
 }

@@ -1,5 +1,4 @@
 import { Validators } from '@angular/forms';
-import { ApiInstitutionService } from './../../@core/data/api-institution.service';
 import { doublePasswordCheck, checkEmail } from '../../@core/utils/validators';
 
 export const AdminUserConfig = {
@@ -7,6 +6,7 @@ export const AdminUserConfig = {
   fields: {
     username: {
       creable: true,
+      editable: true,
       key: 'username',
       dataType: 'string',
       label: 'Username',
@@ -18,6 +18,7 @@ export const AdminUserConfig = {
     },
     email: {
       creable: true,
+      editable: true,
       key: 'email',
       dataType: 'string',
       label: 'Email',
@@ -30,6 +31,7 @@ export const AdminUserConfig = {
     },
     password: {
       creable: true,
+      editable: false,
       key: 'password',
       dataType: 'string',
       label: 'Password',
@@ -41,6 +43,7 @@ export const AdminUserConfig = {
     },
     confirm_password: {
       creable: true,
+      editable: false,
       key: 'confirm_password',
       dataType: 'string',
       label: 'Confirm Password',
@@ -52,6 +55,7 @@ export const AdminUserConfig = {
     },
     first_name: {
       creable: true,
+      editable: true,
       key: 'first_name',
       dataType: 'string',
       label: 'First name',
@@ -63,6 +67,7 @@ export const AdminUserConfig = {
     },
     last_name: {
       creable: true,
+      editable: true,
       key: 'last_name',
       dataType: 'string',
       label: 'Last name',
@@ -73,6 +78,7 @@ export const AdminUserConfig = {
     },
     institution: {
       creable: true,
+      editable: true,
       key: 'institution',
       dataType: 'object',
       label: 'Institution',
@@ -85,10 +91,10 @@ export const AdminUserConfig = {
       formControlName: 'institution-form-control-name',
       placeholder: 'uoc',
       validator: () => Validators.required,
-      required: true,
     },
     locale: {
       creable: true,
+      editable: true,
       key: 'locale',
       dataType: 'string',
       label: 'Language',
@@ -126,6 +132,7 @@ export const AdminUserConfig = {
     },
     roles: {
       creable: true,
+      editable: true,
       key: 'roles',
       dataType: 'string',
       label: 'Roles',

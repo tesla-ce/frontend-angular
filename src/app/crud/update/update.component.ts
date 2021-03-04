@@ -1,4 +1,4 @@
-import { query } from '@angular/animations';
+import { KeyValue } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, Pipe, PipeTransform } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -12,31 +12,52 @@ export class UpdateComponent implements OnInit {
 
   @Input() fields: any;
   @Input() instance: any;
+  @Input() validator: any;
   @Input() errors: Observable<any>;
   @Output() save: EventEmitter<any> = new EventEmitter();
 
   formControls: any;
-  formErrors: any = {};
   formGroup: FormGroup;
-
+  formErrors: any = {};
   loading: Boolean = true;
 
   constructor() { }
 
+  originalOrder = (a: KeyValue<number,string>, b: KeyValue<number,string>): number => {
+    return 0;
+  }
+
+    private markFormGroupTouched(formGroup: FormGroup) {
+    (<any>Object).values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+
+      if (control.controls) {
+        this.markFormGroupTouched(control);
+      }
+    });
+  }
+
   ngOnInit(): void {
     this.formControls = {};
+
     this.loading = false;
     Object.keys(this.fields).map((key) => {
-      this.formControls[key] = new FormControl(this.instance[key] || this.fields[key].defaultValue || null);
-      // if (field.type.includes('remote') {
-      //   field.options = result from query...
-      // }
+        this.formControls[key] = new FormControl(
+        this.fields[key].defaultValue ||
+        (this.instance[key] && (Array.isArray(this.instance[key]) || typeof this.instance[key] !== 'object')) ? this.instance[key] : null , this.fields[key]?.validator ?
+        this.fields[key].validator() :
+        null);
+        if (!this.fields[key].editable) this.fields[key].disabled = true
+        else this.fields[key].disabled = false
     });
+
     this.errors.subscribe(errors => {
       this.formErrors = errors;
     });
 
     this.formGroup = new FormGroup(this.formControls);
+    if (this.validator) this.formGroup.setValidators(this.validator());
+    if (this.instance) this.markFormGroupTouched(this.formGroup)
   }
 
   onSubmit() {
@@ -53,4 +74,3 @@ export class KeysPipe implements PipeTransform {
     return Object.keys(value);
   }
 }
-
