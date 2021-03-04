@@ -1,7 +1,7 @@
+import { KeyValue } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, Pipe, PipeTransform } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { ApiInstitutionService } from '../../@core/data/api-institution.service';
 
 @Component({
   selector: 'ngx-create',
@@ -15,6 +15,7 @@ export class CreateComponent implements OnInit {
   @Input() errors: Observable<any>;
   @Output() save: EventEmitter<any> = new EventEmitter();
 
+  usableFields: {};
   formControls: any;
   formGroup: FormGroup;
   formErrors: any = {};
@@ -22,17 +23,25 @@ export class CreateComponent implements OnInit {
 
   constructor() { }
 
+  originalOrder = (a: KeyValue<number,string>, b: KeyValue<number,string>): number => {
+    return 0;
+  }
+
   ngOnInit(): void {
     this.formControls = {};
+    this.usableFields = {};
+
     this.loading = false;
+    console.log(Object.keys(this.fields))
     Object.keys(this.fields).map((key) => {
-      this.formControls[key] = new FormControl(
+      if (this.fields[key].creable) {
+        this.usableFields[key] = this.fields[key]
+        this.formControls[key] = new FormControl(
         this.fields[key].defaultValue ||
         null, this.fields[key]?.validator ?
         this.fields[key].validator() :
-        null);
+        null);}
     });
-
     this.errors.subscribe(errors => {
       this.formErrors = errors;
     });

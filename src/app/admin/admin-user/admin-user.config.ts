@@ -6,6 +6,7 @@ export const AdminUserConfig = {
   validator: doublePasswordCheck,
   fields: {
     username: {
+      creable: true,
       key: 'username',
       dataType: 'string',
       label: 'Username',
@@ -16,6 +17,7 @@ export const AdminUserConfig = {
       required: true,
     },
     email: {
+      creable: true,
       key: 'email',
       dataType: 'string',
       label: 'Email',
@@ -27,6 +29,7 @@ export const AdminUserConfig = {
       required: true,
     },
     password: {
+      creable: true,
       key: 'password',
       dataType: 'string',
       label: 'Password',
@@ -37,6 +40,7 @@ export const AdminUserConfig = {
       required: true,
     },
     confirm_password: {
+      creable: true,
       key: 'confirm_password',
       dataType: 'string',
       label: 'Confirm Password',
@@ -47,6 +51,7 @@ export const AdminUserConfig = {
       required: true,
     },
     first_name: {
+      creable: true,
       key: 'first_name',
       dataType: 'string',
       label: 'First name',
@@ -57,6 +62,7 @@ export const AdminUserConfig = {
       required: true,
     },
     last_name: {
+      creable: true,
       key: 'last_name',
       dataType: 'string',
       label: 'Last name',
@@ -66,6 +72,7 @@ export const AdminUserConfig = {
       placeholder: 'Doe',
     },
     institution: {
+      creable: true,
       key: 'institution',
       dataType: 'object',
       label: 'Institution',
@@ -81,6 +88,7 @@ export const AdminUserConfig = {
       required: true,
     },
     locale: {
+      creable: true,
       key: 'locale',
       dataType: 'string',
       label: 'Language',
@@ -117,6 +125,7 @@ export const AdminUserConfig = {
       // required: true,
     },
     roles: {
+      creable: true,
       key: 'roles',
       dataType: 'string',
       label: 'Roles',

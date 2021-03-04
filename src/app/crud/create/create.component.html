@@ -1,6 +1,6 @@
 <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
     <div class="row">
-        <div *ngFor="let field of fields | keyvalue" class="col-sm-6">
+        <div *ngFor="let field of usableFields | keyvalue: originalOrder" class="col-sm-6">
             <div class="form-group" [ngSwitch]="field.value.inputType" style="margin-bottom: 0.75rem;">
 
                 <label [for]="field.value.inputName" class="label">{{field.value.label || field.key}}</label>
