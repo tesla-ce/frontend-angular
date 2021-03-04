@@ -143,14 +143,6 @@ export const AdminUserConfig = {
           key: 'IC_MANAGEMENT',
         },
         {
-          value: 'INSTRUCTOR',
-          key: 'INSTRUCTOR',
-        },
-        {
-          value: 'LEARNER',
-          key: 'LEARNER',
-        },
-        {
           value: 'ACADEMIC_MANAGEMENT',
           key: 'ACADEMIC_MANAGEMENT',
         },
