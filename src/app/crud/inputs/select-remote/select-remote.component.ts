@@ -12,6 +12,7 @@ export class SelectRemoteComponent implements OnInit {
   @Input() field: any;
   @Input() parentForm: FormGroup;
   @Input() initialValue: any;
+  @Input() isDisabled: boolean
 
   formControl: FormControl;
   formGroup: FormGroup;
@@ -24,7 +25,6 @@ export class SelectRemoteComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.field, this.initialValue)
     this.formGroup = new FormGroup({
       intern: new FormControl(this.initialValue[this.field.optionValueAccessor] ? this.initialValue?.[this.field.optionLabelAccessor] ? this.initialValue?.[this.field.optionLabelAccessor] : "Lost Label" : null),
     });

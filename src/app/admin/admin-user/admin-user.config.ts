@@ -6,6 +6,7 @@ export const AdminUserConfig = {
   fields: {
     username: {
       creable: true,
+      showable: true,
       editable: true,
       key: 'username',
       dataType: 'string',
@@ -18,6 +19,7 @@ export const AdminUserConfig = {
     },
     email: {
       creable: true,
+      showable: true,
       editable: true,
       key: 'email',
       dataType: 'string',
@@ -31,6 +33,7 @@ export const AdminUserConfig = {
     },
     password: {
       creable: true,
+      showable: false,
       editable: false,
       key: 'password',
       dataType: 'string',
@@ -43,6 +46,7 @@ export const AdminUserConfig = {
     },
     confirm_password: {
       creable: true,
+      showable: false,
       editable: false,
       key: 'confirm_password',
       dataType: 'string',
@@ -55,6 +59,7 @@ export const AdminUserConfig = {
     },
     first_name: {
       creable: true,
+      showable: true,
       editable: true,
       key: 'first_name',
       dataType: 'string',
@@ -67,6 +72,7 @@ export const AdminUserConfig = {
     },
     last_name: {
       creable: true,
+      showable: true,
       editable: true,
       key: 'last_name',
       dataType: 'string',
@@ -78,6 +84,7 @@ export const AdminUserConfig = {
     },
     institution: {
       creable: true,
+      showable: true,
       editable: true,
       key: 'institution',
       dataType: 'object',
@@ -94,6 +101,7 @@ export const AdminUserConfig = {
     },
     locale: {
       creable: true,
+      showable: false,
       editable: true,
       key: 'locale',
       dataType: 'string',
@@ -132,6 +140,7 @@ export const AdminUserConfig = {
     },
     roles: {
       creable: true,
+      showable: false,
       editable: true,
       key: 'roles',
       dataType: 'string',
