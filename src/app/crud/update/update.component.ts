@@ -17,7 +17,7 @@ export class UpdateComponent implements OnInit {
   @Output() save: EventEmitter<any> = new EventEmitter();
 
   formControls: any;
-  formGroup: FormGroup;
+  updateForm: FormGroup;
   formErrors: any = {};
   loading: Boolean = true;
 
@@ -39,7 +39,6 @@ export class UpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.formControls = {};
-
     this.loading = false;
     Object.keys(this.fields).map((key) => {
         this.formControls[key] = new FormControl(
@@ -55,13 +54,13 @@ export class UpdateComponent implements OnInit {
       this.formErrors = errors;
     });
 
-    this.formGroup = new FormGroup(this.formControls);
-    if (this.validator) this.formGroup.setValidators(this.validator());
-    if (this.instance) this.markFormGroupTouched(this.formGroup)
+    this.updateForm = new FormGroup(this.formControls);
+    if (this.validator) this.updateForm.setValidators(this.validator());
+    if (this.instance) this.markFormGroupTouched(this.updateForm)
   }
 
   onSubmit() {
-    this.save.emit(this.formGroup.value);
+    this.save.emit(this.updateForm.value);
   }
 
 }

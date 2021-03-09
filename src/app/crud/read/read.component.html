@@ -1,69 +1,68 @@
-<form [formGroup]="formGroup" >
+<form [formGroup]="readForm" >
     <div class="row">
         <div *ngFor="let field of data | keyvalue: originalOrder" class="col-sm-6">
-            <div class="form-group" [ngSwitch]="field.value.inputType" style="margin-bottom: 0.75rem;">
+            <div class="form-group" style="margin-bottom: 0.75rem;">
 
-                <label [for]="field.value.inputName" class="label">{{field.value.label || field.key}}</label>
+                <label [for]="field.value.id" class="label">{{field.value.label || field.key}}</label>
                 <!-- case select -->
-                <nb-select fullWidth *ngSwitchCase="'select'" [(selected)]="instance[key]" placeholder="Select..."
+                <!-- <nb-select fullWidth *ngSwitchCase="'select'" [(selected)]="instance[key]" placeholder="Select..."
                     [formControl]="formControls[field.key]">
                     <nb-option *ngFor="let option of field.value.options; let i = index" value="{{option.value}}">
                         {{option.key}}
                     </nb-option>
-                </nb-select>
+                </nb-select> -->
 
-                <!-- case select multiple-->
-                <nb-select fullWidth multiple required *ngSwitchCase="'select-multiple'"
+                <!-- case select multiple -->
+                <!-- <nb-select fullWidth multiple required *ngSwitchCase="'select-multiple'"
                     placeholder="Select..." [formControl]="formControls[field.key]">
                     <nb-option value="" *ngIf="!field.value.required">Option empty</nb-option>
                     <nb-option *ngFor="let option of field.value.options; let i = index" value="{{option.value}}">
                         {{option.key}}
                     </nb-option>
-                </nb-select>
+                </nb-select> -->
 
                 <!-- case select multiple remote -->
-                <nb-select fullWidth multiple *ngSwitchCase="'select-multiple-remote'"
-                    placeholder="Select..." [formControl]="formControls[field.key]">
+                <!-- <nb-select fullWidth multiple *ngSwitchCase="'select-multiple-remote'"
+                    placeholder="Select..." [formControl]="formControls[field.key]"> -->
                     <!-- <nb-option value="" *ngIf="!field.value.required">Option empty</nb-option> -->
-                    <nb-option *ngFor="let option of field.value.options; let i = index" value="{{option.value}}">
+                    <!-- <nb-option *ngFor="let option of field.value.options; let i = index" value="{{option.value}}">
                         {{option.key}}</nb-option>
-                </nb-select>
+                </nb-select> -->
 
                 <!-- case select remote-->
-                <ngx-select-remote *ngSwitchCase="'select-remote'" [isDisabled]=true [field]="field.value" [initialValue]="instance[field.key]"
-                    [parentForm]="formGroup">
-                </ngx-select-remote>
+                <!-- <ngx-select-remote *ngSwitchCase="'select-remote'" [isDisabled]=true [field]="field.value" [initialValue]="instance[field.key]"
+                    [parentForm]="readForm">
+                </ngx-select-remote> -->
 
                 <!-- default input -->
-                <input *ngSwitchDefault nbInput fullWidth [type]="field.value.inputType || text"
-                    [id]="field.value.inputName || field.key" [name]="field.value.inputName || field.key"
-                    style="color:black"
+                <input nbInput fullWidth [type]="text"
+                    [id]="field.value.id || field.key" [name]="field.value.id || field.key"
                     [formControlName]="field.key" [placeholder]="field.value.disabled ? '*****' : field.value.placeholder || null"
                     [required]="field.value.required ? !field.value.disabled :  false" [status]="formErrors[field.key]?'danger':'basic'">
 
                 <!-- errors -->
                 <errors class="text-danger">{{formErrors[field.key]?formErrors[field.key]:''}}</errors>
-                <div *ngIf="formGroup.controls[field.key].invalid && 
-                formGroup.controls[field.key].errors && 
-                (formGroup.controls[field.key].dirty || formGroup.controls[field.key].touched)">
-                    <small class="text-danger" *ngIf="formGroup.controls[field.key].hasError('required')">
+                <div *ngIf="readForm.controls[field.key].invalid && 
+                readForm.controls[field.key].errors && 
+                (readForm.controls[field.key].dirty || readForm.controls[field.key].touched)">
+                    <small class="text-danger" *ngIf="readForm.controls[field.key].hasError('required')">
                         Required </small>
                     <small class="text-danger"
-                        *ngIf="formGroup.controls[field.key].hasError('wrongFormat') && !formGroup.controls[field.key].hasError('required')">
+                        *ngIf="readForm.controls[field.key].hasError('wrongFormat') && !readForm.controls[field.key].hasError('required')">
                         Wrong Email Format </small>
                     <small class="text-danger"
-                        *ngIf="formGroup.controls[field.key].hasError('notEquivalent') && !formGroup.controls[field.key].hasError('required')">
+                        *ngIf="readForm.controls[field.key].hasError('notEquivalent') && !readForm.controls[field.key].hasError('required')">
                         Passwords doesn't match </small>
                 </div>
-                <div style="height: 22px" *ngIf="!(formGroup.controls[field.key].invalid && 
-                formGroup.controls[field.key].errors && 
-                (formGroup.controls[field.key].dirty || formGroup.controls[field.key].touched))">&nbsp;&nbsp;&nbsp;
+                <div style="height: 22px" *ngIf="!(readForm.controls[field.key].invalid && 
+                readForm.controls[field.key].errors && 
+                (readForm.controls[field.key].dirty || readForm.controls[field.key].touched))">&nbsp;&nbsp;&nbsp;
                 </div>
             </div>
         </div>
     </div>
-    <!-- <button *ngIf="!loading" nbButton type="submit" [disabled]="!formGroup.valid">Submit</button> -->
+    <button *ngIf="!loading" nbButton type="button" (click)="goToEdit()">EDIT</button>
     <p>
-        <!-- {{ formGroup.status }} -->
+        <!-- {{ readForm.status }} -->
     </p>
 </form>

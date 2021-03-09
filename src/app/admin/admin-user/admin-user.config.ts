@@ -101,7 +101,7 @@ export const AdminUserConfig = {
     },
     locale: {
       creable: true,
-      showable: false,
+      showable: true,
       editable: true,
       key: 'locale',
       dataType: 'string',
@@ -140,7 +140,7 @@ export const AdminUserConfig = {
     },
     roles: {
       creable: true,
-      showable: false,
+      showable: true,
       editable: true,
       key: 'roles',
       dataType: 'string',

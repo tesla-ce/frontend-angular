@@ -1,5 +1,5 @@
-<div [formGroup]="formGroup" >
-  <input [(ngModel)]="value" formControlName="intern" disabled="isDisabled" fullWidth (ngModelChange)="onModelChange($event)" nbInput
+<div [formGroup]="internForm" >
+  <input [(ngModel)]="value" formControlName="intern" fullWidth (ngModelChange)="onModelChange($event)" nbInput
     [required]="field.required || false" type="text" placeholder="Search" [nbAutocomplete]="autoNgModel" />
 
   <nb-autocomplete #autoNgModel>
