@@ -85,7 +85,7 @@ export const AdminUserConfig = {
     institution: {
       creable: true,
       showable: true,
-      editable: true,
+      editable: false,
       key: 'institution',
       dataType: 'object',
       label: 'Institution',
@@ -102,7 +102,7 @@ export const AdminUserConfig = {
     locale: {
       creable: true,
       showable: true,
-      editable: true,
+      editable: false,
       key: 'locale',
       dataType: 'string',
       label: 'Language',
@@ -141,7 +141,7 @@ export const AdminUserConfig = {
     roles: {
       creable: true,
       showable: true,
-      editable: true,
+      editable: false,
       key: 'roles',
       dataType: 'string',
       label: 'Roles',
