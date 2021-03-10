@@ -37,7 +37,7 @@
                 <!-- default input -->
                 <input nbInput fullWidth [type]="text"
                     [id]="field.value.id || field.key" [name]="field.value.id || field.key"
-                    [formControlName]="field.key" [placeholder]="field.value.disabled ? '*****' : field.value.placeholder || null"
+                    [formControlName]="field.key"
                     [required]="field.value.required ? !field.value.disabled :  false" [status]="formErrors[field.key]?'danger':'basic'">
 
                 <!-- errors -->

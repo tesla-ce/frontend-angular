@@ -97,7 +97,7 @@ export const AdminUserConfig = {
       inputName: 'institution-input-name',
       formControlName: 'institution-form-control-name',
       placeholder: 'uoc',
-      validator: () => Validators.required,
+      // validator: () => Validators.required,
     },
     locale: {
       creable: true,
@@ -175,7 +175,7 @@ export const AdminUserConfig = {
       inputName: 'roles-input-name',
       formControlName: 'roles-form-control-name',
       placeholder: 'en',
-      required: true,
+      // required: false,
     },
   },
 };

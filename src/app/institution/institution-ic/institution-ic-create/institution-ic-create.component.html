@@ -1,7 +1,8 @@
 <nb-card>
     <nb-card-header>Create new Informed Consent</nb-card-header>
-    <nb-card-body>
-        <div fullWidth></div>
-        <ngx-create (save)="onSave($event)" [fields]="fields"></ngx-create>
+    <nb-card-body class="example-items-rows">
+        <!-- <ngx-create (save)="onSave($event)" [fields]="fields" [errors]="errors"></ngx-create>         -->
+        <ngx-create (save)="onSave($event)" [fields]="fields" [validator]="validator" [errors]="errors"></ngx-create>
+
     </nb-card-body>
 </nb-card>

@@ -1,7 +1,7 @@
 <nb-card>
     <nb-card-header>Update Informed Consent</nb-card-header>
     <nb-card-body class="example-items-rows" *ngIf="!loading">
-            <form [formGroup]="formGroup" fullWidth (ngSubmit)="onSave()">
+            <form [formGroup]="formGrupIC" fullWidth (ngSubmit)="onSave()">
                 
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -15,91 +15,65 @@
                                 [attr.disabled]="fields['version'].disabled || null"
                                 [attr.email]="fields['version'].validator == 'email' || null"
                                 [required] = "fields['version'].required || false" 
-                                [status] = "formErrors['version']?'danger':'default'" >
+                                [status] = "formErrors['version']?'danger':'basic'" >
                         <errors class="text-danger">{{formErrors['version']?formErrors['version']:''}}</errors>
+                        <label [for]="fields['valid_from'].inputName" class="label">{{fields['valid_from'].label || 'valid from'}}</label>
+                        <input nbInput fullWidth
+                                type="text"
+                                [id]="fields['valid_from'].inputName || 'valid_from'"
+                                [name]="fields['valid_from'].inputName || 'valid_from'"
+                                [formControlName]="'valid_from'"
+                                [placeholder]="fields['valid_from'].placeholder || null" 
+                                [attr.disabled]="fields['valid_from'].disabled || null"
+                                [attr.email]="fields['valid_from'].validator == 'email' || null"
+                                [required] = "fields['valid_from'].required || false" 
+                                [status] = "formErrors['valid_from']?'danger':'basic'" >
+                        <errors class="text-danger">{{formErrors['valid_from']?formErrors['valid_from']:''}}</errors>
                     </div>
                 </div>
+            </form>
                 <div class="col-sm-12">
-                    <label class="label">Informed Consent</label>
-                    <nb-tabset fullWidth>
-                        <nb-tab tabTitle="EN">
+                    <div>
+                        <label class="label">Informed Consent</label>
+                    </div>
+                    <div class="flexRow mb-8">
+                        <nb-select  
+                        id="lenguageSelect"
+                        placeholder="Add Language"
+                        (selectedChange)="pickedNewLenguage($event)"
+                         >
+                        <nb-option *ngFor="let option of options; let i = index" value="{{option}}">
+                            {{option}}
+                        </nb-option>
+                    </nb-select>
+                    <button nbButton [disabled]="!picked" (click)="newLenguage()">Add</button>
+                    </div>
+                    <nb-tabset *ngIf="languages?.length > 0" fullWidth>
+                        <nb-tab  *ngFor="let language of languages" tabTitle={{language.language}}>
+                            <form [formGroup]="formGrupDocument" fullWidth>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label [for]="fields['file'].inputName" class="label">{{fields['file'].label || 'file'}}</label>
+                                    <label [for]="documentFieldsModel.file.inputName" class="label">Upload PDF file</label>
                                     <input nbInput fullWidth
-                                            [type]="fields['file'].inputType || text"
-                                            [id]="fields['file'].inputName || 'file'"
-                                            [name]="fields['file'].inputName || 'file'"
-                                            [formControlName]="'file'"
-                                            [placeholder]="fields['file'].placeholder || null" 
-                                            [attr.disabled]="fields['file'].disabled || null"
-                                            [attr.email]="fields['file'].validator == 'email' || null"
-                                            [required] = "fields['file'].required || false" 
-                                            [status] = "formErrors['file']?'danger':'default'" >
-                                    <errors class="text-danger">{{formErrors['file']?formErrors['file']:''}}</errors>
+                                            type="file"
+                                            accept="application/pdf"
+                                            [name]="documentFieldsModel.file.inputName + language.language || 'file'"
+                                            [formControlName]="documentFieldsModel.file.formControlName + language.language"
+                                            status = "basic" >
+                                    <!-- <errors class="text-danger">{{formErrors['file']?formErrors['file']:''}}</errors> -->
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="ckEditorConfig" class="label">{{fields['html'].label || 'html'}}</label>
-                                    <ckeditor fullWidth [formControlName]="'html'" [config]="ckEditorConfig"></ckeditor>
+                                    <label for="ckEditorConfig" class="label">Html</label>
+                                    <ckeditor fullWidth [formControlName]="documentFieldsModel.html.formControlName + language.language" [config]="ckEditorConfig"></ckeditor>
                                 </div>
                             </div>
                             <errors class="text-danger">{{formErrors['html']?formErrors['html']:''}}</errors>
-                        </nb-tab>
-                        <nb-tab tabTitle="ES">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label [for]="fields['file'].inputName" class="label">{{fields['file'].label || 'file'}}</label>
-                                    <input nbInput fullWidth
-                                            [type]="fields['file'].inputType || text"
-                                            [id]="fields['file'].inputName || 'file'"
-                                            [name]="fields['file'].inputName || 'file'"
-                                            [formControlName]="'file'"
-                                            [placeholder]="fields['file'].placeholder || null" 
-                                            [attr.disabled]="fields['file'].disabled || null"
-                                            [attr.email]="fields['file'].validator == 'email' || null"
-                                            [required] = "fields['file'].required || false" 
-                                            [status] = "formErrors['file']?'danger':'default'" >
-                                    <errors class="text-danger">{{formErrors['file']?formErrors['file']:''}}</errors>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="ckEditorConfig" class="label">{{fields['html'].label || 'html'}}</label>
-                                    <ckeditor fullWidth [formControlName]="'html'" [config]="ckEditorConfig"></ckeditor>
-                                </div>
-                            </div>
-                            <errors class="text-danger">{{formErrors['html']?formErrors['html']:''}}</errors>
-                        </nb-tab>
-                        <nb-tab tabTitle="CA">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label [for]="fields['file'].inputName" class="label">{{fields['file'].label || 'file'}}</label>
-                                    <input nbInput fullWidth
-                                            [type]="fields['file'].inputType || text"
-                                            [id]="fields['file'].inputName || 'file'"
-                                            [name]="fields['file'].inputName || 'file'"
-                                            [formControlName]="'file'"
-                                            [placeholder]="fields['file'].placeholder || null" 
-                                            [attr.disabled]="fields['file'].disabled || null"
-                                            [attr.email]="fields['file'].validator == 'email' || null"
-                                            [required] = "fields['file'].required || false" 
-                                            [status] = "formErrors['file']?'danger':'default'" >
-                                    <errors class="text-danger">{{formErrors['file']?formErrors['file']:''}}</errors>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="ckEditorConfig" class="label">{{fields['html'].label || 'html'}}</label>
-                                <ckeditor fullWidth [formControlName]="'html'" [config]="ckEditorConfig"></ckeditor>
-                                </div>
-                            </div>
-                            <errors class="text-danger">{{formErrors['html']?formErrors['html']:''}}</errors>
+                        </form>
                         </nb-tab>
                     </nb-tabset>
                 </div>
-            </form>
-        <button *ngIf="!loading" nbButton type="submit" [disabled]="!formGroup.valid">Submit</button>
+        <button *ngIf="!loading" nbButton type="button" (click)="update()">Submit</button>
     </nb-card-body>
 </nb-card>

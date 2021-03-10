@@ -20,14 +20,15 @@ export class UpdateComponent implements OnInit {
   updateForm: FormGroup;
   formErrors: any = {};
   loading: Boolean = true;
+  data: any;
 
   constructor() { }
 
-  originalOrder = (a: KeyValue<number,string>, b: KeyValue<number,string>): number => {
+  originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
     return 0;
   }
 
-    private markFormGroupTouched(formGroup: FormGroup) {
+  private markFormGroupTouched(formGroup: FormGroup) {
     (<any>Object).values(formGroup.controls).forEach(control => {
       control.markAsTouched();
 
@@ -39,15 +40,18 @@ export class UpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.formControls = {};
+    this.data = {}
     this.loading = false;
     Object.keys(this.fields).map((key) => {
+      if (!this.fields[key].editable) return
+      else {
+        this.data[key] = this.fields[key]
         this.formControls[key] = new FormControl(
-        this.fields[key].defaultValue ||
-        (this.instance[key] && (Array.isArray(this.instance[key]) || typeof this.instance[key] !== 'object')) ? this.instance[key] : null , this.fields[key]?.validator ?
-        this.fields[key].validator() :
-        null);
-        if (!this.fields[key].editable) this.fields[key].disabled = true
-        else this.fields[key].disabled = false
+          this.fields[key].defaultValue ||
+            (this.instance[key] && (Array.isArray(this.instance[key]) || typeof this.instance[key] !== 'object')) ? this.instance[key] : null, this.fields[key]?.validator ?
+          this.fields[key].validator() :
+          null);
+      }
     });
 
     this.errors.subscribe(errors => {

@@ -23,45 +23,44 @@ export class AdminUserUpdateComponent implements OnInit {
     private router: Router,
     private apiUserService: ApiUserService,
     private toastrService: NbToastrService) {
-      this.route.params.subscribe(params => {
-        if (params['id'] != null ) {
-          this.id = params['id'];
-          apiUserService.getUserById(this.id).subscribe(instance => {
-            this.instance = instance;
-          });
-        } else {
-          router.navigate(['../'], {relativeTo: this.route});
-        }
-      });
+    this.route.params.subscribe(params => {
+      if (params['id'] != null) {
+        this.id = params['id'];
+        apiUserService.getUserById(this.id).subscribe(instance => {
+          this.instance = instance;
+        });
+      } else {
+        router.navigate(['../'], { relativeTo: this.route });
+      }
+    });
   }
 
   ngOnInit(): void {
   }
 
   onSave(event): void {
-    console.log(event)
-    // this.apiUserService.updateUser(this.id, event).subscribe((user: User) => {
-    //     this.toastrService.show(
-    //       'User Updated',
-    //       user.username,
-    //       {
-    //         position: NbGlobalPhysicalPosition.TOP_RIGHT,
-    //         status: 'success',
-    //         icon: 'save-outline',
-    //         duration: 2000,
-    //     });
-    // }, error => {
-    //   this.errors.next(error.error);
-    //   this.toastrService.show(
-    //     'Error saving',
-    //     'user',
-    //     {
-    //       position: NbGlobalPhysicalPosition.TOP_RIGHT,
-    //       status: 'danger',
-    //       icon: 'save-outline',
-    //       duration: 2000,
-    //   });
-    // });
+    this.apiUserService.updateUser(this.id, event).subscribe((user: User) => {
+      this.toastrService.show(
+        'User Updated',
+        user.username,
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'success',
+          icon: 'save-outline',
+          duration: 2000,
+        });
+    }, error => {
+      this.errors.next(error.error);
+      this.toastrService.show(
+        'Error saving',
+        'user',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'danger',
+          icon: 'save-outline',
+          duration: 2000,
+        });
+    });
   }
 
 }

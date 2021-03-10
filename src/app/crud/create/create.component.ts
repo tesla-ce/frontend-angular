@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class CreateComponent implements OnInit {
 
   @Input() fields: any;
-  @Input() validator: any;
+  @Input() validator: any = null;
   @Input() errors: Observable<any>;
   @Output() save: EventEmitter<any> = new EventEmitter();
 
@@ -23,7 +23,7 @@ export class CreateComponent implements OnInit {
 
   constructor() { }
 
-  originalOrder = (a: KeyValue<number,string>, b: KeyValue<number,string>): number => {
+  originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
     return 0;
   }
 
@@ -36,10 +36,10 @@ export class CreateComponent implements OnInit {
       if (this.fields[key].creable) {
         this.usableFields[key] = this.fields[key]
         this.formControls[key] = new FormControl(
-        this.fields[key].defaultValue ||
-        null, this.fields[key]?.validator ?
-        this.fields[key].validator() :
-        null);
+          this.fields[key].defaultValue ||
+          null, this.fields[key]?.validator ?
+          this.fields[key].validator() :
+          null);
 
         this.fields[key].disabled = false
       } else {
