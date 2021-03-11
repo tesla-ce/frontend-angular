@@ -26,10 +26,13 @@ export class SelectRemoteComponent implements OnInit {
 
   ngOnInit() {
     this.internForm = new FormGroup({
-      intern: new FormControl(this.initialValue?.[this.field.optionValueAccessor] ? this.initialValue?.[this.field.optionLabelAccessor] ? this.initialValue?.[this.field.optionLabelAccessor] : "Lost Label" : null),
+      intern: new FormControl(
+        this.initialValue?.[this.field.optionValueAccessor] ?
+        this.initialValue?.[this.field.optionLabelAccessor] ?
+        this.initialValue?.[this.field.optionLabelAccessor] : '-' : null),
     });
 
-    if(this.initialValue?.[this.field.optionValueAccessor] ) {
+    if (this.initialValue?.[this.field.optionValueAccessor] ) {
       this.parentForm.controls[this.field.key].setValue(this.initialValue[this.field.optionValueAccessor]);
     }
 
@@ -44,7 +47,7 @@ export class SelectRemoteComponent implements OnInit {
   }
 
   async onModelChange(value: string) {
-    if( this.firstRender) return this.firstRender = false
+    if (this.firstRender) return this.firstRender = false;
     const picked = this.options?.filter((option) => option[this.field.optionLabelAccessor] === value);
     if (picked?.length > 0) this.parentForm.controls[this.field.key].setValue(picked[0][this.field.optionValueAccessor]);
     else {

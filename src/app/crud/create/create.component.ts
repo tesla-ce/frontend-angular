@@ -34,16 +34,16 @@ export class CreateComponent implements OnInit {
     this.loading = false;
     Object.keys(this.fields).map((key) => {
       if (this.fields[key].creable) {
-        this.usableFields[key] = this.fields[key]
+        this.usableFields[key] = this.fields[key];
         this.formControls[key] = new FormControl(
           this.fields[key].defaultValue ||
           null, this.fields[key]?.validator ?
           this.fields[key].validator() :
           null);
 
-        this.fields[key].disabled = false
+        this.fields[key].disabled = false;
       } else {
-        this.fields[key].disabled = true
+        this.fields[key].disabled = true;
       }
     });
     this.errors.subscribe(errors => {

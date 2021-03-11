@@ -61,21 +61,21 @@ export class ApiIcService {
   // API: GET /ics/:id/:icId/document
   public getIcDocument(icId: number): Observable<any> {
     return this.http
-      .get(this.endpointUrl + icId + "/document/")
+      .get(this.endpointUrl + icId + '/document/')
       .pipe(
         map((response: any) => {
-          if (response?.results) return response.results
+          if (response?.results) return response.results;
         }),
         catchError(this.handleError),
       );
   }
 
-  //API: POST /ics/document/
+  // API: POST /ics/document/
   public createDocument(idIc, fields): Observable<any> {
     return this.http
-      .post(this.endpointUrl + idIc + "/document/", fields).pipe(
+      .post(this.endpointUrl + idIc + '/document/', fields).pipe(
         map((data: any) => {
-          console.log("Create Document Response", data)
+          // console.log('Create Document Response', data);
           if (data.status) {
             return true;
           } else {
@@ -85,13 +85,13 @@ export class ApiIcService {
         catchError(this.handleError));
   }
 
-  //API: PUT /ics/document/
+  // API: PUT /ics/document/
   public updateDocument(idIc, fields): Observable<any> {
-    console.log(fields)
+    // console.log(fields);
     return this.http
-      .put(this.endpointUrl + idIc + "/document/" + fields.language, fields).pipe(
+      .put(this.endpointUrl + idIc + '/document/' + fields.language, fields).pipe(
         map((data: any) => {
-          console.log("Update Document Response", data)
+          // console.log('Update Document Response', data);
           if (data.status) {
             return true;
           } else {
@@ -122,7 +122,7 @@ export class ApiIcService {
   }
 
   private handleError(error: Response | any) {
-    console.error('ApiIcService::handleError', error);
+    // console.error('ApiIcService::handleError', error);
     return ErrorObservable.create(error);
   }
 

@@ -40,16 +40,18 @@ export class UpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.formControls = {};
-    this.data = {}
+    this.data = {};
     this.loading = false;
     Object.keys(this.fields).map((key) => {
-      if (!this.fields[key].editable) return
+      if (!this.fields[key].editable) return;
       else {
-        this.data[key] = this.fields[key]
+        this.data[key] = this.fields[key];
         this.formControls[key] = new FormControl(
           this.fields[key].defaultValue ||
-            (this.instance[key] && (Array.isArray(this.instance[key]) || typeof this.instance[key] !== 'object')) ? this.instance[key] : null, this.fields[key]?.validator ?
-          this.fields[key].validator() :
+          (this.instance[key] && (Array.isArray(this.instance[key]) ||
+           typeof this.instance[key] !== 'object')) ? this.instance[key] :
+            null, this.fields[key]?.validator ?
+            this.fields[key].validator() :
           null);
       }
     });
@@ -60,7 +62,7 @@ export class UpdateComponent implements OnInit {
 
     this.updateForm = new FormGroup(this.formControls);
     if (this.validator) this.updateForm.setValidators(this.validator());
-    if (this.instance) this.markFormGroupTouched(this.updateForm)
+    if (this.instance) this.markFormGroupTouched(this.updateForm);
   }
 
   onSubmit() {

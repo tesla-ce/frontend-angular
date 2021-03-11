@@ -14,53 +14,51 @@ export class ReadComponent implements OnInit {
   @Input() fields: any;
   @Input() instance: any;
 
-  data: any;  
+  data: any;
   formControls: any;
   readForm: FormGroup;
   formErrors: any = {};
   loading: Boolean = true;
 
-  constructor(private router: Router){ }
+  constructor(private router: Router) { }
 
-  originalOrder = (a: KeyValue<number,string>, b: KeyValue<number,string>): number => {
+  originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
     return 0;
   }
 
   goToEdit(): void {
-    console.log("Hello")
-    this.router.navigate(['/admin/admin-user/update/'+this.instance.id]);
+    this.router.navigate(['/admin/admin-user/update/' + this.instance.id]);
   }
 
   ngOnInit(): void {
     this.formControls = {};
-    this.data = {}
+    this.data = {};
 
     Object.keys(this.fields).map((key) => {
-      if(!this.fields[key].showable) return
+      if (!this.fields[key].showable) return;
       else {
         let editedValue: string;
 
-        if (typeof this.instance[key] == 'string'){
-          editedValue = this.instance[key]
-
+        if (typeof this.instance[key] === 'string') {
+          editedValue = this.instance[key];
         } else if (Array.isArray(this.instance[key])) {
-          editedValue = this.instance[key].join(", ")
+          editedValue = this.instance[key].join(', ');
 
-        } else if ( typeof this.instance[key] == 'object') {
+        } else if ( typeof this.instance[key] === 'object') {
           if (this.fields[key].optionLabelAccessor && this.instance[key]) {
-            editedValue = this.instance?.[key]?.[this.fields[key].optionLabelAccessor] ||  "Lost Label" 
+            editedValue = this.instance?.[key]?.[this.fields[key].optionLabelAccessor] ||  'Lost Label';
           }
         } else if ( this.fields[key].defaultValue ) {
-          editedValue = this.fields[key].defaultValue
+          editedValue = this.fields[key].defaultValue;
 
         } else {
-          editedValue = ""
+          editedValue = '';
         }
 
-        this.data[key] = this.fields[key]
-        this.data[key].id = this.fields[key].inputName + "-read"
+        this.data[key] = this.fields[key];
+        this.data[key].id = this.fields[key].inputName + '-read';
 
-        this.formControls[key] = new FormControl({value: editedValue, disabled: true})
+        this.formControls[key] = new FormControl({value: editedValue, disabled: true});
       }
     });
 
