@@ -11,21 +11,30 @@ import { ApiInstitutionService } from '../../../@core/data/api-institution.servi
 export class SelectRemoteComponent implements OnInit {
   @Input() field: any;
   @Input() parentForm: FormGroup;
+  @Input() initialValue: any;
 
   formControl: FormControl;
-  formGroup: FormGroup;
+  internForm: FormGroup;
   apiService: ApiInstitutionService;
   options: any[];
   value: string;
+  firstRender: boolean = true;
 
   constructor(apiService: ApiInstitutionService) {
     this.apiService = apiService;
   }
 
   ngOnInit() {
-    this.formGroup = new FormGroup({
-      intern: new FormControl(),
+    this.internForm = new FormGroup({
+      intern: new FormControl(
+        this.initialValue?.[this.field.optionValueAccessor] ?
+        this.initialValue?.[this.field.optionLabelAccessor] ?
+        this.initialValue?.[this.field.optionLabelAccessor] : '-' : null),
     });
+
+    if (this.initialValue?.[this.field.optionValueAccessor] ) {
+      this.parentForm.controls[this.field.key].setValue(this.initialValue[this.field.optionValueAccessor]);
+    }
 
     this.apiService.getAll({[this.field.search || 'search'] : this.value }).subscribe( options => {
       this.options = options;
@@ -38,11 +47,12 @@ export class SelectRemoteComponent implements OnInit {
   }
 
   async onModelChange(value: string) {
+    if (this.firstRender) return this.firstRender = false;
     const picked = this.options?.filter((option) => option[this.field.optionLabelAccessor] === value);
     if (picked?.length > 0) this.parentForm.controls[this.field.key].setValue(picked[0][this.field.optionValueAccessor]);
-    else if (this.field.required) {
+    else {
       this.parentForm.controls[this.field.key].setValue(null);
-      if (!this.formGroup.controls.intern.pristine)this.parentForm.controls[this.field.key].markAsTouched();
+      if (!this.internForm.controls.intern.pristine)this.parentForm.controls[this.field.key].markAsTouched();
     }
 
     this.apiService.getAll({[this.field.search || 'search'] : value }).subscribe( options => {
