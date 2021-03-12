@@ -30,34 +30,34 @@ export class HeaderComponent implements OnInit, OnDestroy {
       value: 'tesla-ce',
       name: 'TeSLA-CE',
     },
-    // {
-    //   value: 'custom',
-    //   name: 'Custom',
-    // },
-    // {
-    //   value: 'default',
-    //   name: 'Light',
-    // },
-    // {
-    //   value: 'dark',
-    //   name: 'Dark',
-    // },
-    // {
-    //   value: 'cosmic',
-    //   name: 'Cosmic',
-    // },
-    // {
-    //   value: 'corporate',
-    //   name: 'Corporate',
-    // },
-    // {
-    //   value: 'material-light',
-    //   name: 'Material Light',
-    // },
-    // {
-    //   value: 'material-dark',
-    //   name: 'Material Dark',
-    // },
+    {
+      value: 'custom',
+      name: 'Custom',
+    },
+    {
+      value: 'default',
+      name: 'Light',
+    },
+    {
+      value: 'dark',
+      name: 'Dark',
+    },
+    {
+      value: 'cosmic',
+      name: 'Cosmic',
+    },
+    {
+      value: 'corporate',
+      name: 'Corporate',
+    },
+    {
+      value: 'material-light',
+      name: 'Material Light',
+    },
+    {
+      value: 'material-dark',
+      name: 'Material Dark',
+    },
   ];
 
   currentTheme = 'default';
