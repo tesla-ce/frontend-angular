@@ -16,6 +16,7 @@ import { InstitutionIcRoutingModule } from './institution-ic-routing.module';
 import { SideMenuModule } from '../../../side-menu/side-menu.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators'; // <-- #2 import module
 
 import { ListModule } from '../../../crud/list/list.module';
 import { CreateModule } from '../../../crud/create/create.module';
@@ -38,6 +39,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
     NbInputModule,
     NbSelectModule,
     NbFormFieldModule,
+    RxReactiveFormsModule,
     NbIconModule,
     ListModule,
     CreateModule,

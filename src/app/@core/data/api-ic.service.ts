@@ -72,6 +72,7 @@ export class ApiIcService {
 
   // API: POST /ics/document/
   public createDocument(idIc, fields): Observable<any> {
+    console.log(fields)
     return this.http
       .post(this.endpointUrl + idIc + '/document/', fields).pipe(
         map((data: any) => {
@@ -87,7 +88,7 @@ export class ApiIcService {
 
   // API: PUT /ics/document/
   public updateDocument(idIc, fields): Observable<any> {
-    // console.log(fields);
+    console.log(fields);
     return this.http
       .put(this.endpointUrl + idIc + '/document/' + fields.language, fields).pipe(
         map((data: any) => {

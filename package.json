@@ -49,6 +49,7 @@
     "@nebular/theme": "5.1.0",
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^6.0.0",
+    "@rxweb/reactive-form-validators": "^2.1.2",
     "@swimlane/ngx-charts": "^14.0.0",
     "@tesla-ce/icons": "0.0.26",
     "angular2-chartjs": "0.5.1",
