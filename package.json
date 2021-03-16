@@ -66,6 +66,7 @@
     "nebular-icons": "1.1.0",
     "ng2-ckeditor": "^1.2.7",
     "ng2-completer": "^9.0.1",
+    "ng2-pdf-viewer": "^6.4.1",
     "ng2-smart-table": "1.6.0",
     "ngx-echarts": "^5.0.0",
     "normalize.css": "8.0.1",

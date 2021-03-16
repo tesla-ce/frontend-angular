@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Ic } from '../models/ic';
 import { Observable } from 'rxjs/Observable';
 import { catchError, map } from 'rxjs/operators';
@@ -87,19 +87,24 @@ export class ApiIcService {
   }
 
   // API: PUT /ics/document/
-  public updateDocument(idIc, fields): Observable<any> {
-    console.log(fields);
+  public updateDocument(idIc, fields, language): Observable<any> {
+
+    let formData = new FormData()
+    formData.append('language', fields.language)
+    if (fields.pdf) formData.append('pdf', fields.pdf, fields.pdf?.name)
+    if (fields.html) formData.append('html', fields.html)
+
     return this.http
-      .put(this.endpointUrl + idIc + '/document/' + fields.language, fields).pipe(
-        map((data: any) => {
-          // console.log('Update Document Response', data);
-          if (data.status) {
-            return true;
-          } else {
-            return false;
-          }
-        }),
-        catchError(this.handleError));
+      .put(this.endpointUrl + idIc + '/document/' + language + '/', formData,
+    ).pipe(
+      map((data: any) => {
+        if (data.status) {
+          return true;
+        } else {
+          return false;
+        }
+      }),
+      catchError(this.handleError));
   }
 
   // API: PUT /ics/:id

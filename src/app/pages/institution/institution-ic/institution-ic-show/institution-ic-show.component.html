@@ -1,1 +1,40 @@
-<p>institution-ic-show id: {{id}}</p>
+<nb-card>
+    <nb-card-header>Update Informed Consent</nb-card-header>
+    <nb-card-body class="example-items-rows" *ngIf="!loading">
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label [for]="fields['version'].inputName" class="label">{{fields['version'].label ||
+                    'version'}}</label>
+                <p>{{instance.version || "Unknown"}}</p>
+                <label [for]="fields['valid_from'].inputName" class="label">{{fields['valid_from'].label || 'valid
+                    from'}}</label>
+                <p>{{instance.valid_from || "Unknown"}}</p>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div>
+                <label class="label">Informed Consent</label>
+            </div>
+            <nb-tabset *ngIf="languages?.length > 0" fullWidth>
+                <nb-tab *ngFor="let language of languages" tabTitle={{language.language}}>
+                    <label *ngIf="language.pdf" class="label">PDF</label>
+                    <div class="pdf-Download" *ngIf="language.pdf && language.html">
+                        <p>{{language.title}}</p>
+                        <a [href]="language.pdf"  nbButton  download="language.title">Download</a>
+                    </div>
+
+                    <div class="pdf-Download" *ngIf="language.pdf && !language.html">
+                        <pdf-viewer [src]="language.pdf" [render-text]="true" style="display: block;"></pdf-viewer>
+                    </div>
+
+                    <div *ngIf="language.html">
+                        <label class="label">HTML</label>
+                        <div class="innerHTML" [innerHTML]="language.html"></div>
+                    </div>
+                </nb-tab>
+            </nb-tabset>
+        </div>
+        <button *ngIf="!loading" nbButton type="button" (click)="console.log('accepted')">Accept</button>
+    </nb-card-body>
+</nb-card>

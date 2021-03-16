@@ -188,7 +188,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
     }
 
     for (let u = 0; u < toUpdateConfirm.length; u++) {
-      this.apiIcService.updateDocument(this.id, this.toUpdate[toUpdateConfirm[u]].form).subscribe((ic: Ic) => {
+      this.apiIcService.updateDocument(this.id, this.toUpdate[toUpdateConfirm[u]].form, this.toUpdate[toUpdateConfirm[u]].language).subscribe((ic: Ic) => {
         this.toastrService.show(
           'Document Updated',
           toUpdateConfirm[u],

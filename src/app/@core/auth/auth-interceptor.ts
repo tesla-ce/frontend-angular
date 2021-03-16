@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse} from '@angular/common/http';
-import {BehaviorSubject, iif, Observable, of, throwError} from 'rxjs';
-import {NbAuthService, NbAuthToken} from '@nebular/auth';
-import {Router} from '@angular/router';
-import {catchError, filter, finalize, mergeMap, switchMap, take} from 'rxjs/operators';
-import {EnvService} from '../env/env.service';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, iif, Observable, of, throwError } from 'rxjs';
+import { NbAuthService, NbAuthToken } from '@nebular/auth';
+import { Router } from '@angular/router';
+import { catchError, filter, finalize, mergeMap, switchMap, take } from 'rxjs/operators';
+import { EnvService } from '../env/env.service';
 
 
 @Injectable({
@@ -25,18 +25,18 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    if (!req.headers.has('Content-Type')) {
-      req = req.clone({
-        headers: req.headers.set('Content-Type', 'application/json'),
-      });
-    }
+    // if (!req.headers.has('Content-Type')) {
+    //   req = req.clone({
+    //     headers: req.headers.set('Content-Type', 'application/json'),
+    //   });
+    // }
 
     req = this.addAuthenticationToken(req);
 
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error && error.status === 401) {
-         // 401 errors are most likely going to be because we have an expired token that we need to refresh.
+          // 401 errors are most likely going to be because we have an expired token that we need to refresh.
           if (this.refreshTokenInProgress) {
             // If refreshTokenInProgress is true, we will wait until refreshTokenSubject has a non-null value
             // which means the new token is ready and we can retry the request again
