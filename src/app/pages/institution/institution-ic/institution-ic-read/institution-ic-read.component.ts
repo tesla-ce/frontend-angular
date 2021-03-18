@@ -5,11 +5,11 @@ import { Ic } from '../../../../@core/models/ic';
 import { InstitutionIcConfig } from '../institution-ic.config';
 
 @Component({
-  selector: 'ngx-institution-ic-show',
-  templateUrl: './institution-ic-show.component.html',
-  styleUrls: ['./institution-ic-show.component.scss'],
+  selector: 'ngx-institution-ic-read',
+  templateUrl: './institution-ic-read.component.html',
+  styleUrls: ['./institution-ic-read.component.scss'],
 })
-export class InstitutionIcShowComponent implements OnInit {
+export class InstitutionIcReadComponent implements OnInit {
   id: number;
   languages: any[] = []
   loading: boolean = true;
@@ -28,6 +28,10 @@ export class InstitutionIcShowComponent implements OnInit {
         router.navigate(['../'], { relativeTo: this.route });
       }
     });
+  }
+
+  goToEdit(): void {
+    this.router.navigate(['/institution/institution-ic/update' + this.instance.id]);
   }
 
   ngOnInit(): void {

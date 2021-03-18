@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, AfterViewInit, ViewChild, Input  } from '@angular/core';
+import { Component, OnInit, ElementRef, AfterViewInit, ViewChild, Input } from '@angular/core';
 import { ServerDataSource } from 'ng2-smart-table';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ServerSourceConf } from 'ng2-smart-table/lib/lib/data-source/server/server-source.conf';
@@ -33,7 +33,7 @@ export class ListComponent implements OnInit, AfterViewInit {
     this.http = http;
     this.envService = envService;
 
-   }
+  }
 
   ngOnInit(): void {
     this.source = new CustomDataSource(this.http, {
@@ -51,12 +51,12 @@ export class ListComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     fromEvent(this.searchInput.nativeElement, 'keyup')
       .pipe(
-          filter(Boolean),
-          debounceTime(150),
-          distinctUntilChanged(),
-          tap((text) => {
-            this.source.setFilter([{ field: 'search', search: this.searchInput.nativeElement.value }]);
-          }),
+        filter(Boolean),
+        debounceTime(150),
+        distinctUntilChanged(),
+        tap((text) => {
+          this.source.setFilter([{ field: 'search', search: this.searchInput.nativeElement.value }]);
+        }),
       )
       .subscribe();
   }
@@ -66,7 +66,7 @@ export class ListComponent implements OnInit, AfterViewInit {
   }
 
   create(event) {
-    this.router.navigate(['create'], {relativeTo: this.route });
+    this.router.navigate(['create'], { relativeTo: this.route });
   }
 
   perPageOnChange(perPage): void {
@@ -76,22 +76,22 @@ export class ListComponent implements OnInit, AfterViewInit {
 
 export class CustomDataSource extends ServerDataSource {
   constructor(http: HttpClient, serverSourceConf: ServerSourceConf) {
-      super(http, serverSourceConf);
+    super(http, serverSourceConf);
   }
 
   protected addPagerRequestParams(httpParams: HttpParams): HttpParams {
-      const paging = this.getPaging();
-      return httpParams
-          .set(this.conf.pagerPageKey, ((paging.page - 1) * paging.perPage).toString())
-          .set(this.conf.pagerLimitKey, paging.perPage.toString());
+    const paging = this.getPaging();
+    return httpParams
+      .set(this.conf.pagerPageKey, ((paging.page - 1) * paging.perPage).toString())
+      .set(this.conf.pagerLimitKey, paging.perPage.toString());
   }
 
   protected addSortRequestParams(httpParams: HttpParams): HttpParams {
-      const sort: {field: string, direction: string}[] = this.getSort();
-      sort.forEach((column) => {
-          httpParams = httpParams.append(this.conf.sortFieldKey, `${column.direction === 'asc' ? '' : '-'}${column.field}`);
-      });
-      return httpParams;
+    const sort: { field: string, direction: string }[] = this.getSort();
+    sort.forEach((column) => {
+      httpParams = httpParams.append(this.conf.sortFieldKey, `${column.direction === 'asc' ? '' : '-'}${column.field}`);
+    });
+    return httpParams;
   }
 }
 

@@ -136,7 +136,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
 
     toCreateKeys.map(key => {
       this.toCreate[key].form = { pdf: values[`${this.documentFieldsModel.pdf.formControlName}${key}`]?.[0] }
-      this.toCreate[key].form.html = values[`${this.documentFieldsModel.html.formControlName}${key}`] || null
+      this.toCreate[key].form.html = values[`${this.documentFieldsModel.html.formControlName}${key}`] || ""
       this.toCreate[key].form.language = key
 
     });
@@ -149,7 +149,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
         values[`${this.documentFieldsModel.pdf.formControlName}${key}`]) {
 
         this.toUpdate[key].form = { pdf: values[`${this.documentFieldsModel.pdf.formControlName}${key}`]?.[0] }
-        this.toUpdate[key].form.html = values[`${this.documentFieldsModel.html.formControlName}${key}`] || null
+        this.toUpdate[key].form.html = values[`${this.documentFieldsModel.html.formControlName}${key}`] || ""
         this.toUpdate[key].form.language = key
 
         toUpdateConfirm.push(key);

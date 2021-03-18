@@ -27,7 +27,7 @@ export class ReadComponent implements OnInit {
   }
 
   goToEdit(): void {
-    this.router.navigate(['/admin/admin-user/update/' + this.instance.id]);
+    this.router.navigate(['/admin-user/update/1' + this.instance.id]);
   }
 
   ngOnInit(): void {
@@ -44,11 +44,11 @@ export class ReadComponent implements OnInit {
         } else if (Array.isArray(this.instance[key])) {
           editedValue = this.instance[key].join(', ');
 
-        } else if ( typeof this.instance[key] === 'object') {
+        } else if (typeof this.instance[key] === 'object') {
           if (this.fields[key].optionLabelAccessor && this.instance[key]) {
-            editedValue = this.instance?.[key]?.[this.fields[key].optionLabelAccessor] ||  'Lost Label';
+            editedValue = this.instance?.[key]?.[this.fields[key].optionLabelAccessor] || 'Lost Label';
           }
-        } else if ( this.fields[key].defaultValue ) {
+        } else if (this.fields[key].defaultValue) {
           editedValue = this.fields[key].defaultValue;
 
         } else {
@@ -58,7 +58,7 @@ export class ReadComponent implements OnInit {
         this.data[key] = this.fields[key];
         this.data[key].id = this.fields[key].inputName + '-read';
 
-        this.formControls[key] = new FormControl({value: editedValue, disabled: true});
+        this.formControls[key] = new FormControl({ value: editedValue, disabled: true });
       }
     });
 

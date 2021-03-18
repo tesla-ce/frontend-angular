@@ -1,5 +1,5 @@
 <nb-card>
-    <nb-card-header>Update Informed Consent</nb-card-header>
+    <nb-card-header>Read Informed Consent</nb-card-header>
     <nb-card-body class="example-items-rows" *ngIf="!loading">
 
         <div class="col-sm-6">
@@ -26,6 +26,7 @@
 
                     <div class="pdf-Download" *ngIf="language.pdf && !language.html">
                         <pdf-viewer [src]="language.pdf" [render-text]="true" style="display: block;"></pdf-viewer>
+                        <a [href]="language.pdf"  nbButton  download="language.title">Download</a>
                     </div>
 
                     <div *ngIf="language.html">
@@ -35,6 +36,7 @@
                 </nb-tab>
             </nb-tabset>
         </div>
-        <button *ngIf="!loading" nbButton type="button" (click)="console.log('accepted')">Accept</button>
+        <button *ngIf="!loading" disabled nbButton type="button" (click)="console.log('accepted')">Accept</button>
+        <!-- <button *ngIf="!loading" disabled="checkDisabled(instance.valid_from)" nbButton type="button" (click)="goToEdit()">EDIT</button> -->
     </nb-card-body>
 </nb-card>
