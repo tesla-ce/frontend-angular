@@ -125,7 +125,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
 
   }
 
-  pickedNewLenguage(event): void {
+  pickedNewLanguage(event): void {
     this.picked = event;
   }
 

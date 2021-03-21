@@ -26,6 +26,7 @@ import { InstitutionIcReadComponent } from './institution-ic-read/institution-ic
 import { InstitutionIcListComponent } from './institution-ic-list/institution-ic-list.component';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { InstitutionIcIframeComponent } from './institution-ic-iframe/institution-ic-iframe.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     InstitutionIcUpdateComponent,
     InstitutionIcReadComponent,
     InstitutionIcListComponent,
+    InstitutionIcIframeComponent
   ],
 })
 export class InstitutionIcModule {

@@ -5,6 +5,7 @@ import { InstitutionIcReadComponent } from './institution-ic-read/institution-ic
 import { InstitutionIcCreateComponent } from './institution-ic-create/institution-ic-create.component';
 import { InstitutionIcUpdateComponent } from './institution-ic-update/institution-ic-update.component';
 import { InstitutionIcListComponent } from './institution-ic-list/institution-ic-list.component';
+import { InstitutionIcIframeComponent } from './institution-ic-iframe/institution-ic-iframe.component';
 
 const routes: Routes = [{
   path: '',
@@ -25,6 +26,10 @@ const routes: Routes = [{
     {
       path: 'update/:id',
       component: InstitutionIcUpdateComponent,
+    },
+    {
+      path: 'iframe/:id',
+      component: InstitutionIcIframeComponent,
     },
   ],
 }];
