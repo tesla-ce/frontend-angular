@@ -1,0 +1,36 @@
+.pdf-Download {
+    display: flex;
+    align-items: baseline;
+
+    p {
+        margin-right: 24px;
+    }
+}
+
+p, .innerHTML {
+    margin-left: 8px;
+}
+
+.pdf-Download, .innerHTML {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.download {
+    align-self: flex-end;
+}
+
+.ic {
+    margin-top: 32px;
+}
+
+.first-line-form {
+    display: flex;
+    justify-content: space-between;
+}
+
+nb-card {
+    max-width: 860px;
+    margin: auto
+}

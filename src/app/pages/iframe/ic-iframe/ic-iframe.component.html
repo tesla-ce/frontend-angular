@@ -1,0 +1,45 @@
+<nb-card>
+    <nb-card-header>Read Informed Consent</nb-card-header>
+    <nb-card-body class="example-items-rows" *ngIf="!loading">
+        <div class="first-line-form">
+            <div>
+                <label [for]="fields['version'].inputName" class="label">{{fields['version'].label ||
+                    'version'}}</label>
+                <p>{{instance.version || "Unknown"}}</p>
+            </div>
+            <nb-select id="languageSelect" placeholder="Pick language" (selectedChange)="pickedLanguage($event)"
+                [(selected)]="selectedLanguage">
+                <nb-option *ngFor="let option of languagesSelections; let i = index" value="{{option}}">
+                    {{option}}
+                </nb-option>
+            </nb-select>
+        </div>
+        <label [for]="fields['valid_from'].inputName" class="label">{{fields['valid_from'].label || 'valid
+            from'}}</label>
+        <p>{{instance.valid_from || "Unknown"}}</p>
+        <div class="col-sm-12 ic">
+            <div>
+                <label class="label">Informed Consent</label>
+            </div>
+            <label *ngIf="languages[selectedLanguage].pdf" class="label">PDF</label>
+            <div class="pdf-Download" *ngIf="languages[selectedLanguage].pdf && languages[selectedLanguage].html">
+                <p>{{languages[selectedLanguage].title}}</p>
+                <a [href]="languages[selectedLanguage].pdf" nbButton
+                    download="language[selectedLanguage].title">Download</a>
+            </div>
+
+            <div class="pdf-Download" *ngIf="languages[selectedLanguage].pdf && !languages[selectedLanguage].html">
+                <pdf-viewer [src]="languages[selectedLanguage].pdf" [render-text]="true" style="display: block;">
+                </pdf-viewer>
+                <a class="download" [href]="languages[selectedLanguage].pdf" nbButton download="language.title">Download</a>
+            </div>
+
+            <div *ngIf="languages[selectedLanguage].html">
+                <label class="label">HTML</label>
+                <div class="innerHTML" [innerHTML]="languages[selectedLanguage].html"></div>
+            </div>
+        </div>
+        <button *ngIf="!loading" disabled nbButton type="button" (click)="console.log('accepted')">Accept</button>
+        <!-- <button *ngIf="!loading" disabled="checkDisabled(instance.valid_from)" nbButton type="button" (click)="goToEdit()">EDIT</button> -->
+    </nb-card-body>
+</nb-card>
