@@ -1,10 +1,11 @@
-import { startWith } from 'rxjs/operators';
+import { DataDisplayComponent } from './control';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCourseService } from '../../../@core/data/api-course.service';
 import { Course } from '../../../@core/models/course';
 import { CourseConfig } from '../course.config';
 import { angularMaterialRenderers } from '@jsonforms/angular-material';
+import { and, createAjv, isControl, rankWith, scopeEndsWith } from '@jsonforms/core';
 
 @Component({
   selector: 'ngx-course-read',
@@ -34,8 +35,24 @@ export class CourseReadComponent implements OnInit {
   public instance: Course;
   public fields = CourseConfig.fields;
   renderers = [
-    ...angularMaterialRenderers
+    ...angularMaterialRenderers,
+    {
+      renderer: DataDisplayComponent,
+      tester: rankWith(
+        6,
+        and(
+          isControl,
+          scopeEndsWith('___data')
+        )
+      )
+    },
   ];
+  ajv = createAjv({
+    schemaId: 'auto',
+    allErrors: true,
+    jsonPointers: true,
+    errorDataPath: 'property'
+  });
 
   constructor(
     private route: ActivatedRoute,
@@ -78,6 +95,10 @@ export class CourseReadComponent implements OnInit {
     else this.apiCourseService.addActivityInstrument(this.id, actId, { id: instrument }).subscribe(response => {
       if (response) location.reload();
     })
+  }
+
+  consolIt(anything) {
+    console.log(anything)
   }
 
   checkInstruments(index) {

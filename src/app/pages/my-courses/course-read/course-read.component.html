@@ -70,9 +70,12 @@
                                             <p class="instrument-description">{{instrument.instrument.description}}</p>
                                             <div *ngIf="instrument.schema" class="instrument-jsonform">
                                                 <jsonforms  
+                                                dataChange="consolIt($event)"
+                                                errors="consolIt($event)"
                                                 [data]="instrument.options"
                                                 [renderers]="renderers"
-                                                [schema]="instrument.schema" >
+                                                [schema]="instrument.schema" 
+                                                [ajv]="ajv">
                                             </jsonforms>
                                             </div>
                                             <button nbButton style="align-self: flex-end;"

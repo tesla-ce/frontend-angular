@@ -27,6 +27,7 @@ import { CourseReadComponent } from './course-read/course-read.component';
 import { CourseListComponent } from './course-list/course-list.component';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { DataDisplayComponent } from './course-read/control';
 
 
 @NgModule({
@@ -53,10 +54,13 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     PdfViewerModule,
   ],
   declarations: [
+    DataDisplayComponent,
     CourseComponent,
     CourseReadComponent,
     CourseListComponent,
   ],
+  entryComponents: [DataDisplayComponent],
+
 })
 export class CourseModule {
 }
