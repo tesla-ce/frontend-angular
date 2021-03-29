@@ -27,10 +27,10 @@ const routes: Routes = [{
       path: 'update/:id',
       component: InstitutionIcUpdateComponent,
     },
-    {
-      path: 'iframe/:id',
-      component: InstitutionIcIframeComponent,
-    },
+    // {
+    //   path: 'iframe/:id',
+    //   component: InstitutionIcIframeComponent,
+    // },
   ],
 }];
 

@@ -10,12 +10,17 @@ const routes: Routes = [{
     {
       path: 'institution-user',
       loadChildren: () => import('./institution-user/institution-user.module')
-      .then(m => m.InstitutionUserModule),
+        .then(m => m.InstitutionUserModule),
     },
     {
       path: 'institution-ic',
       loadChildren: () => import('./institution-ic/institution-ic.module')
-      .then(m => m.InstitutionIcModule),
+        .then(m => m.InstitutionIcModule),
+    },
+    {
+      path: 'course',
+      loadChildren: () => import('./insitution-course/institution-course.module')
+        .then(m => m.InstitutionCourseModule),
     },
   ],
 }];
