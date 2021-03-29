@@ -9,7 +9,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     {
         title: 'My Courses',
         icon: { icon: 'common-connection', pack: 'tesla' },
-        link: '/my-courses',
+        link: '/course',
     },
     {
         title: 'Test page',

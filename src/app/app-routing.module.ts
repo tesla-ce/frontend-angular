@@ -33,6 +33,12 @@ export const routes: Routes = [
     canActivate: [AuthGuardAuthenticated],
   },
   {
+    path: 'course',
+    loadChildren: () => import('./pages/my-courses/course.module')
+      .then(m => m.CourseModule),
+    canActivate: [AuthGuardAuthenticated],
+  },
+  {
     path: 'iframe',
     loadChildren: () => import('./pages/iframe/iframe.module')
       .then(m => m.IframeModule),

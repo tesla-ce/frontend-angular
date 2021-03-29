@@ -54,3 +54,7 @@ import 'core-js/es/object';
 if (typeof SVGElement.prototype.contains === 'undefined') {
   SVGElement.prototype.contains = HTMLDivElement.prototype.contains;
 }
+
+
+(window as any).process = require('process/browser');
+(window as any).global = window;
