@@ -52,7 +52,7 @@
                             <div class="instruments">
                                 <label class="label">Instruments</label>
                                 <button class="instruments-addInstrument" nbButton style="align-self: flex-end;"
-                                    (click)="addInstrument(activity.id)" *ngIf="checkInstruments(i)">Add
+                                    (click)="addInstrument(i)" *ngIf="checkInstruments(i)">Add
                                     Instrument</button>
                             </div>
                             <div *ngIf="activity.instruments?.length > 0" fullWidth>
@@ -84,16 +84,44 @@
                                                 Alternative</button>
                                             <button nbButton style="align-self: flex-end;"
                                                 *ngIf="!instrument.alternative_to && !instrument.hasAlternative"
-                                                (click)="console.log('Future')">Add Alternative</button>
+                                                (click)="addInstrument(i, instrument.id)">Add Alternative</button>
                                         </nb-card-body>
                                     </nb-card>
                                 </div>
                             </div>
                         </nb-card-body>
+                        <ng-template #escClose>
+                            <div class="instrument" *ngFor="let choice of addComponent.choices"
+                            id={{activity.id}}>
+                            <nb-card>
+                                    <nb-card-header style="display: flex; justify-content: space-between;">
+                                        {{choice.name}}
+                                        <button nbButton style="align-self: flex-end;"
+                                            (click)="handleAddInstrument(activity.id, choice.id, addComponent.isAlternativeOf)">Add</button>
+                                    </nb-card-header>
+                                    <nb-card-body style="display: flex; flex-direction: column;">
+                                    <p class="instrument-description">{{choice.description}}</p>
+                                    <!-- <div *ngIf="instrument.schema" class="instrument-jsonform">
+                                        <jsonforms  
+                                        dataChange="consolIt($event)"
+                                        errors="consolIt($event)"
+                                        [data]="instrument.options"
+                                        [renderers]="renderers"
+                                        [schema]="instrument.schema" 
+                                        [ajv]="ajv">
+                                    </jsonforms> -->
+                                    <!-- </div> -->
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                                              <!-- {{addComponent.activityId}}  
+                                              {{addComponent.isAlternativeOf}}                   -->
+                        </ng-template>
                     </nb-card>
                 </div>
             </div>
         </div>
+  
         <!-- <button *ngIf="!loading" disabled nbButton type="button" (click)="console.log('accepted')">Accept</button> -->
         <!-- <button *ngIf="!loading" disabled="checkDisabled(instance.valid_from)" nbButton type="button" (click)="goToEdit()">EDIT</button> -->
     </nb-card-body>

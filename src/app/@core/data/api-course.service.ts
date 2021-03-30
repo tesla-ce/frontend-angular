@@ -66,12 +66,11 @@ export class ApiCourseService {
 
   // API: POST /ics/document/
   public addActivityInstrument(courseId, activityId, fields): Observable<any> {
-    console.log(fields)
     return this.http
-      .post(this.endpointUrl + courseId + "/activity/" + activityId + '/instrument', fields).pipe(
+      .post(this.endpointUrl + "1/course/" + courseId + "/activity/" + activityId + '/instrument/', fields).pipe(
         map((data: any) => {
           // console.log('Create Document Response', data);
-          if (data.status) {
+          if (data) {
             return true;
           } else {
             return false;
@@ -106,6 +105,17 @@ export class ApiCourseService {
       );
   }
 
+  public getAllInstruments(): Observable<any> {
+    return this.http
+      .get(this.apiUrl + '/admin/instrument')
+      .pipe(
+        map((response: any) => {
+          if (response?.results) return response.results;
+          else return []
+        }),
+        catchError(this.handleError),
+      );
+  }
 
 
   // API: PUT /activity/:id/

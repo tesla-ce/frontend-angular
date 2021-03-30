@@ -1,11 +1,12 @@
 import { DataDisplayComponent } from './control';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCourseService } from '../../../@core/data/api-course.service';
 import { Course } from '../../../@core/models/course';
 import { CourseConfig } from '../course.config';
 import { angularMaterialRenderers } from '@jsonforms/angular-material';
 import { and, createAjv, isControl, rankWith, scopeEndsWith } from '@jsonforms/core';
+import { NbWindowService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-course-read',
@@ -15,23 +16,25 @@ import { and, createAjv, isControl, rankWith, scopeEndsWith } from '@jsonforms/c
 export class CourseReadComponent implements OnInit {
   id: number;
   activities: any[] = []
-  instruments: any[] = [{
-    "name": "Face Recognition", "acronym": "fr", "description": "Verify learner identity by means of face attributes.",
-    "id": 1,
-  }, {
-    "id": 2,
-    "name": "Keystroke Dynamics Recognition",
-    "acronym": "ks", "description": "Verify learner identity by means of keystroke patterns."
-  }, {
-    "id": 3,
-    "name": "Voice Recognition",
-    "acronym": "vr", "description": "Verify learner identity by means of voice attributes.",
-  }, {
-    "id": 4,
-    "name": "Forensic Analysis",
-    "acronym": "fa", "description": "Verify learner identity by means of writing style patterns."
-  }]
+  instruments: any[]
+  // [{
+  //   "name": "Face Recognition", "acronym": "fr", "description": "Verify learner identity by means of face attributes.",
+  //   "id": 1,
+  // }, {
+  //   "id": 2,
+  //   "name": "Keystroke Dynamics Recognition",
+  //   "acronym": "ks", "description": "Verify learner identity by means of keystroke patterns."
+  // }, {
+  //   "id": 3,
+  //   "name": "Voice Recognition",
+  //   "acronym": "vr", "description": "Verify learner identity by means of voice attributes.",
+  // }, {
+  //   "id": 4,
+  //   "name": "Forensic Analysis",
+  //   "acronym": "fa", "description": "Verify learner identity by means of writing style patterns."
+  // }]
   loading: boolean = true;
+  addComponent: any = {}
   public instance: Course;
   public fields = CourseConfig.fields;
   renderers = [
@@ -54,7 +57,11 @@ export class CourseReadComponent implements OnInit {
     errorDataPath: 'property'
   });
 
+  @ViewChild('escClose', { read: TemplateRef }) escCloseTemplate: TemplateRef<HTMLElement>;
+
+
   constructor(
+    private windowService: NbWindowService,
     private route: ActivatedRoute,
     private apiCourseService: ApiCourseService,
     private router: Router) {
@@ -67,12 +74,19 @@ export class CourseReadComponent implements OnInit {
     });
   }
 
-  enableDisableActivity(actId, value): void {
-    this.apiCourseService.putActivityActive(this.id, actId, { enabled: value }).subscribe(response => { return })
+  addInstrument(actIndex, isAlternativeOf) {
+    this.addComponent = { activityId: actIndex, isAlternativeOf }
+
+    this.addComponent.choices = this.instruments.filter(instrument => this.activities[actIndex].inUseInstruments.indexOf(instrument.acronym) == -1)
+
+    this.windowService.open(
+      this.escCloseTemplate,
+      { title: 'Window with backdrop', hasBackdrop: true },
+    );
   }
 
-  addInstrument(actId, isAlternative): void {
-    return
+  enableDisableActivity(actId, value): void {
+    this.apiCourseService.putActivityActive(this.id, actId, { enabled: value }).subscribe(response => { return })
   }
 
   handleFormChange(event) {
@@ -89,10 +103,20 @@ export class CourseReadComponent implements OnInit {
   }
 
   handleAddInstrument(actId, instrument, isAlternative) {
-    if (isAlternative) {
-      this.apiCourseService.addActivityInstrument(this.id, actId, { id: isAlternative, alternative_to: instrument })
+    const data = {
+      "options": null,
+      "instrument_id": instrument,
+      "required": false,
+      "active": false,
+      "alternative_to": isAlternative || null
     }
-    else this.apiCourseService.addActivityInstrument(this.id, actId, { id: instrument }).subscribe(response => {
+    console.log(data)
+    if (isAlternative) {
+      this.apiCourseService.addActivityInstrument(this.id, actId, data).subscribe(response => {
+        if (response) location.reload();
+      })
+    }
+    else this.apiCourseService.addActivityInstrument(this.id, actId, data).subscribe(response => {
       if (response) location.reload();
     })
   }
@@ -111,17 +135,25 @@ export class CourseReadComponent implements OnInit {
       if (activityArray.length > 0) {
         activityArray.map((activity, i) => {
           this.apiCourseService.getActivityInstrument(this.id, activity.id).subscribe(instrumentsArray => {
-            console.log(instrumentsArray)
             if (instrumentsArray.length > 0) {
 
-              activityArray[i].instruments = instrumentsArray
+              const instrumentsOrder = []
+              instrumentsArray.map(instrument => {
+                if (instrument.alternative_to) {
+                  const index = instrumentsOrder.findIndex(x => x.id == instrument.alternative_to)
+                  instrumentsOrder.splice(index + 1, 0, instrument);
+                  instrumentsOrder[index].hasAlternative = instrument.id
+                }
+                else instrumentsOrder.push(instrument)
+              })
+              activityArray[i].instruments = instrumentsOrder
 
               activityArray[i].inUseInstruments = instrumentsArray.map((list, z) => {
-                if (typeof list.alternative_to == "number") activityArray[i].instruments[z - 1].hasAlternative = list.id
                 activityArray[i].instruments[z].schema = JSON.parse(list.instrument.options_schema)
 
                 return list.instrument.acronym
               })
+              console.log(activityArray)
 
             }
           })
@@ -134,6 +166,11 @@ export class CourseReadComponent implements OnInit {
     // this.apiCourseService.getCourseInstruments(this.id).subscribe(instrumentsArray => {
     //   this.instruments = instrumentsArray;
     // });
+
+    this.apiCourseService.getAllInstruments().subscribe(instrumentsArray => {
+      console.log(instrumentsArray)
+      this.instruments = instrumentsArray;
+    });
 
     this.apiCourseService.getCourseById(this.id).subscribe(instance => {
       this.instance = instance;
