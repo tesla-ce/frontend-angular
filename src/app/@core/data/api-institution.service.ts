@@ -1,10 +1,10 @@
 import { parseParams } from './../utils/utils';
 import { Institution } from './../models/user';
 import { Injectable } from '@angular/core';
-import {  } from '../../../environments/environment';
-import {HttpClient} from '@angular/common/http';
+import { } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import {catchError, map} from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { EnvService } from '../env/env.service';
 import { ApiService } from './api.service';
@@ -21,22 +21,22 @@ export class ApiInstitutionService {
   constructor(
     private http: HttpClient,
     private envService: EnvService) {
-      this.apiUrl = envService.apiUrl;
-      this.endpointUrl = this.apiUrl + this.endpoint;
-    }
+    this.apiUrl = envService.apiUrl;
+    this.endpointUrl = this.apiUrl + this.endpoint;
+  }
 
   // API: GET /institutions
-  public getAll( fields: any ): Observable<Institution[]> {
+  public getAll(fields: any): Observable<Institution[]> {
     return this.http
-      .get<any>(`${this.endpointUrl}${parseParams(fields)}` )
+      .get<any>(`${this.endpointUrl}${parseParams(fields)}`)
       .pipe(
         map(response => response.results),
-        map(( institutions: Institution[] ) => {
-          if ( institutions ) return institutions;
+        map((institutions: Institution[]) => {
+          if (institutions) return institutions;
           else throw institutions;
         }),
         catchError(this.handleError),
-    );
+      );
   }
 
 
@@ -89,7 +89,7 @@ export class ApiInstitutionService {
   //   // will use this.http.delete()
   // }
 
-  private handleError (error: Response | any) {
+  private handleError(error: Response | any) {
     console.error('ApiInstitutionService::handleError', error);
     return ErrorObservable.create(error);
   }

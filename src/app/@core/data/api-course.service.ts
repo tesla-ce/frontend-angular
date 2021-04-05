@@ -1,3 +1,4 @@
+import { apiConstants } from './api-constants';
 import { Injectable } from '@angular/core';
 import { } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -13,7 +14,7 @@ import { EnvService } from '../env/env.service';
 export class ApiCourseService {
 
   apiUrl: string;
-  endpoint: string = '/institution/';
+  endpoint: string = `/institution/${apiConstants.institution}`;
   endpointUrl: string;
 
   constructor(
@@ -27,7 +28,7 @@ export class ApiCourseService {
   // API: GET /course/:id
   public getCourseById(courseId: number): Observable<Course> {
     return this.http
-      .get(this.endpointUrl + "1/course/" + courseId)
+      .get(this.endpointUrl + "/course/" + courseId)
       .pipe(
         map((course: Course) => {
           // console.log(course);
@@ -41,7 +42,7 @@ export class ApiCourseService {
   // API: GET /course/:id/activity
   public getCourseActivity(courseId: number): Observable<any> {
     return this.http
-      .get(this.endpointUrl + "1/course/" + courseId + '/activity')
+      .get(this.endpointUrl + "/course/" + courseId + '/activity')
       .pipe(
         map((response: any) => {
           if (response?.results) return response.results;
@@ -54,7 +55,7 @@ export class ApiCourseService {
   // API: GET /course/:id/activity/:id
   public getActivityInstrument(courseId: number, activityId: number): Observable<any> {
     return this.http
-      .get(this.endpointUrl + "1/course/" + courseId + '/activity/' + activityId + "/instrument")
+      .get(this.endpointUrl + "/course/" + courseId + '/activity/' + activityId + "/instrument")
       .pipe(
         map((response: any) => {
           if (response?.results) return response.results;
@@ -67,7 +68,7 @@ export class ApiCourseService {
   // API: POST /ics/document/
   public addActivityInstrument(courseId, activityId, fields): Observable<any> {
     return this.http
-      .post(this.endpointUrl + "1/course/" + courseId + "/activity/" + activityId + '/instrument/', fields).pipe(
+      .post(this.endpointUrl + "/course/" + courseId + "/activity/" + activityId + '/instrument/', fields).pipe(
         map((data: any) => {
           // console.log('Create Document Response', data);
           if (data) {
@@ -82,7 +83,7 @@ export class ApiCourseService {
   // API: DELETE /course/:id/activity/:id/instrument/:id
   public deleteActivityInstrument(courseId: number, activityId: number, instrumentId: number): Observable<any> {
     return this.http
-      .delete(this.endpointUrl + "1/course/" + courseId + '/activity/' + activityId + "/instrument/" + instrumentId)
+      .delete(this.endpointUrl + "/course/" + courseId + '/activity/' + activityId + "/instrument/" + instrumentId)
       .pipe(
         map((data: any) => {
           return true
@@ -95,7 +96,7 @@ export class ApiCourseService {
   // API: GET /course/:id/activity
   public getCourseInstruments(institutionId: number): Observable<any> {
     return this.http
-      .get(this.endpointUrl + institutionId + '/instrument')
+      .get(this.endpointUrl + '/instrument')
       .pipe(
         map((response: any) => {
           if (response?.results) return response.results;
@@ -121,7 +122,7 @@ export class ApiCourseService {
   // API: PUT /activity/:id/
   public putActivityActive(courseId: number, activityId: number, fields: any): Observable<any> {
     return this.http
-      .put(this.endpointUrl + "/1/course/" + courseId + '/activity/' + activityId, fields).pipe(
+      .put(this.endpointUrl + "/course/" + courseId + '/activity/' + activityId, fields).pipe(
         map((data: any) => {
           if (data.status) {
             return true;

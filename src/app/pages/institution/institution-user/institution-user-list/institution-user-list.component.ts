@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { apiConstants } from '../../../../@core/data/api-constants';
 import { ListCellActionsComponent } from '../../../../crud/list/list-cell-actions.component';
 
 @Component({
@@ -41,7 +42,7 @@ export class InstitutionUserListComponent implements OnInit {
     },
   };
 
-  endPoint = '/institution/1/user';
+  endPoint = `/institution/${apiConstants.institution}/user`;
 
   constructor() { }
 

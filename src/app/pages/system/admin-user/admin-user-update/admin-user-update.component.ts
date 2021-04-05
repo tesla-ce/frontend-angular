@@ -17,6 +17,7 @@ export class AdminUserUpdateComponent implements OnInit {
   public instance: User;
   public fields = AdminUserConfig.fields;
   public errors = new Subject();
+  public paths = AdminUserConfig.paths
 
   constructor(
     private route: ActivatedRoute,

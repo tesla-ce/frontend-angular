@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { catchError, map } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { EnvService } from '../env/env.service';
+import { apiConstants } from './api-constants';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ import { EnvService } from '../env/env.service';
 export class ApiIcService {
 
   apiUrl: string;
-  endpoint: string = '/institution/1/ic/';
+  endpoint: string = `/institution/${apiConstants.institution}/ic/`;
   // document endpoint '/api/v2/institution/1/ic/2/document/ca/'
   endpointUrl: string;
 

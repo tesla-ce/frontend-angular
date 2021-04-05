@@ -13,6 +13,7 @@ export class ReadComponent implements OnInit {
 
   @Input() fields: any;
   @Input() instance: any;
+  @Input() paths: any;
 
   data: any;
   formControls: any;
@@ -27,7 +28,7 @@ export class ReadComponent implements OnInit {
   }
 
   goToEdit(): void {
-    this.router.navigate(['/admin-user/update/1' + this.instance.id]);
+    this.router.navigate([this.paths.editRedirect + this.instance.id]);
   }
 
   ngOnInit(): void {

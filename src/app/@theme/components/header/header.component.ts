@@ -5,8 +5,9 @@ import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { RippleService } from '../../../@core/utils/ripple.service';
-import {AuthService } from '../../../@core/auth/auth.service';
+import { AuthService } from '../../../@core/auth/auth.service';
 import { InstitutionUser, User } from '../../../@core/models/user';
+import { apiConstants } from '../../../@core/data/api-constants';
 
 
 @Component({
@@ -62,7 +63,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
 
   currentInstitution;
   institutions;
@@ -87,27 +88,40 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.currentTheme = this.themeService.currentTheme;
     this.authService.getUser()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((user: User) => {
+      .subscribe((user: InstitutionUser) => {
         this.user = user;
-        if (!user?.is_admin) {
-          // mock institutions
-          this.institutions = [
-            {
-              'acronym': 'uoc',
-              'id': 1,
-              'isAdmin': false,
-            },
-            {
-              'acronym': 'test',
-              'id': 2,
-              'isAdmin': false,
-            }];
-          // Load institution from user
-          // TO DO: this will be an array, delete mocked array, add user.institutions to array or load it from template user?.institutions
-          // this.institutions.push(user.institution)
-          // this.currentInstitution = user.institution.acronym;
-          this.currentInstitution = 1;
-        }
+        this.institutions = user?.institution ?? [{
+          'acronym': 'uoc',
+          'id': 1,
+          'isAdmin': false,
+        },
+        {
+          'acronym': 'test',
+          'id': 2,
+          'isAdmin': false,
+        }];
+
+        apiConstants.institution = this.institutions[0].id;
+        this.currentInstitution = this.institutions[0].id;
+        // if (!user?.is_admin) {
+        //   // mock institutions
+        //   this.institutions = [
+        //     {
+        //       'acronym': 'uoc',
+        //       'id': 1,
+        //       'isAdmin': false,
+        //     },
+        //     {
+        //       'acronym': 'test',
+        //       'id': 2,
+        //       'isAdmin': false,
+        //     }];
+        // Load institution from user
+        // TO DO: this will be an array, delete mocked array, add user.institutions to array or load it from template user?.institutions
+        // this.institutions.push(user.institution)
+        // this.currentInstitution = user.institution.acronym;
+
+        // }
       });
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
@@ -145,8 +159,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.themeService.changeTheme(themeName);
   }
 
-  changeInstitution(acronym: string) {
-    // console.log('change instiution!', acronym);
+  changeInstitution(id: string) {
+    this.currentInstitution = id
+    // apiConstants.institution = id; CHECK
     // this.themeService.changeTheme(acronym);
   }
 
