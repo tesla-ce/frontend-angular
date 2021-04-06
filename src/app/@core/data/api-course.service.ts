@@ -1,4 +1,5 @@
-import { apiConstants } from './api-constants';
+import { AuthService } from './../auth/auth.service';
+// import { apiConstants } from './api-constants';
 import { Injectable } from '@angular/core';
 import { } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -14,13 +15,15 @@ import { EnvService } from '../env/env.service';
 export class ApiCourseService {
 
   apiUrl: string;
-  endpoint: string = `/institution/${apiConstants.institution}`;
+  endpoint: string;
   endpointUrl: string;
 
   constructor(
+    private authService: AuthService,
     private http: HttpClient,
     private envService: EnvService,
   ) {
+    this.authService.getInstitution().subscribe(id => this.endpoint = `/institution/${id}`)
     this.apiUrl = envService.apiUrl;
     this.endpointUrl = this.apiUrl + this.endpoint;
   }
@@ -40,12 +43,26 @@ export class ApiCourseService {
   }
 
   // API: GET /course/:id/activity
-  public getCourseActivity(courseId: number): Observable<any> {
+  public getCourseActivities(courseId: number): Observable<any> {
     return this.http
       .get(this.endpointUrl + "/course/" + courseId + '/activity')
       .pipe(
         map((response: any) => {
           if (response?.results) return response.results;
+          else return []
+        }),
+        catchError(this.handleError),
+      );
+  }
+
+
+  // API: GET /course/:id/activity
+  public getCourseActivity(courseId: number, activityId: number): Observable<any> {
+    return this.http
+      .get(this.endpointUrl + "/course/" + courseId + '/activity/' + activityId)
+      .pipe(
+        map((response: any) => {
+          if (response?.id) return response;
           else return []
         }),
         catchError(this.handleError),

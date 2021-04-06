@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { Injectable } from '@angular/core';
 import { } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -6,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { catchError, map } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { EnvService } from '../env/env.service';
-import { apiConstants } from './api-constants';
+// import { apiConstants } from './api-constants';
 
 @Injectable({
   providedIn: 'root',
@@ -14,15 +15,17 @@ import { apiConstants } from './api-constants';
 export class ApiIcService {
 
   apiUrl: string;
-  endpoint: string = `/institution/${apiConstants.institution}/ic/`;
+  endpoint: string
   // document endpoint '/api/v2/institution/1/ic/2/document/ca/'
   endpointUrl: string;
 
   constructor(
+    private authService: AuthService,
     private http: HttpClient,
     private envService: EnvService,
   ) {
     this.apiUrl = envService.apiUrl;
+    this.authService.getInstitution().subscribe(id => this.endpoint = `/institution/${id}/ic/`)
     this.endpointUrl = this.apiUrl + this.endpoint;
   }
 

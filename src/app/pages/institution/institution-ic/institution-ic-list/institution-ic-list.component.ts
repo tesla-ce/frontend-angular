@@ -1,5 +1,6 @@
+import { AuthService } from './../../../../@core/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { apiConstants } from '../../../../@core/data/api-constants';
+// import { apiConstants } from '../../../../@core/data/api-constants';
 import { ListCellActionsComponent } from '../../../../crud/list/list-cell-actions.component';
 
 @Component({
@@ -8,6 +9,7 @@ import { ListCellActionsComponent } from '../../../../crud/list/list-cell-action
   styleUrls: ['./institution-ic-list.component.scss'],
 })
 export class InstitutionIcListComponent implements OnInit {
+  endPoint: string
   settings = {
     columns: {
       actions: {
@@ -42,11 +44,11 @@ export class InstitutionIcListComponent implements OnInit {
     },
   };
 
-  endPoint = `/institution/${apiConstants.institution}/ic`
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.getInstitution().subscribe(id => this.endPoint = `/institution/${id}/ic`)
   }
 
 }

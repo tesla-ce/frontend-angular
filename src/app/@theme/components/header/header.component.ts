@@ -7,7 +7,7 @@ import { Subject, Observable } from 'rxjs';
 import { RippleService } from '../../../@core/utils/ripple.service';
 import { AuthService } from '../../../@core/auth/auth.service';
 import { InstitutionUser, User } from '../../../@core/models/user';
-import { apiConstants } from '../../../@core/data/api-constants';
+// import { apiConstants } from '../../../@core/data/api-constants';
 
 
 @Component({
@@ -65,8 +65,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
 
-  currentInstitution;
-  institutions;
+  currentInstitution = this.authService.getInstitution().subscribe(id => id)
+  institutions = this.authService.getUserInstitutions().subscribe(list => list)
+
 
   public constructor(
     private sidebarService: NbSidebarService,
@@ -82,6 +83,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
         const themeName: string = theme?.name || '';
         return themeName.startsWith('material');
       }));
+
+    // this.authService.getUserInstitutions().subscribe(list => {
+    //   this.institutions = list
+    // })
+
+    // this.authService.getInstitution().subscribe(id => {
+    //   console.log(id)
+    //   this.currentInstitution = id
+    // })
   }
 
   ngOnInit() {
@@ -90,19 +100,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((user: InstitutionUser) => {
         this.user = user;
-        this.institutions = user?.institution ?? [{
-          'acronym': 'uoc',
-          'id': 1,
-          'isAdmin': false,
-        },
-        {
-          'acronym': 'test',
-          'id': 2,
-          'isAdmin': false,
-        }];
+        // this.institutions = user?.institution ?? [{
+        //   'acronym': 'uoc',
+        //   'id': 1,
+        //   'isAdmin': false,
+        // },
+        // {
+        //   'acronym': 'test',
+        //   'id': 2,
+        //   'isAdmin': false,
+        // }];
 
-        apiConstants.institution = this.institutions[0].id;
-        this.currentInstitution = this.institutions[0].id;
+        // apiConstants.institution = this.institutions[0].id;
+        // this.currentInstitution = this.institutions[0].id;
         // if (!user?.is_admin) {
         //   // mock institutions
         //   this.institutions = [
@@ -160,8 +170,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   changeInstitution(id: string) {
-    this.currentInstitution = id
-    // apiConstants.institution = id; CHECK
+    this.authService.setInstitution(id)
     // this.themeService.changeTheme(acronym);
   }
 

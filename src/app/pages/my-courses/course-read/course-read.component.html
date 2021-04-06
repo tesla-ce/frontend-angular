@@ -29,10 +29,18 @@
             </div>
         </div>
         <div class="col-sm-12">
-            <div>
+            <!-- <div>
                 <label class="label">Activities</label>
-            </div>
-            <div *ngIf="activities?.length > 0" fullWidth>
+            </div> -->
+            <router-outlet></router-outlet>
+            <!-- <nb-card>
+                <nb-card-header>ACTIVITIES</nb-card-header>
+                <nb-card-body class="example-items-rows">
+                    <ngx-list [settings]="settings" [endPoint]="endPoint"></ngx-list>    
+                </nb-card-body>
+            </nb-card> -->
+            
+            <!-- <div *ngIf="activities?.length > 0" fullWidth>
                 <div class="activity" *ngFor="let activity of activities; let i = index" id={{activity.id}}>
                     <nb-card>
                         <nb-card-header>{{activity.name}}</nb-card-header>
@@ -69,14 +77,10 @@
                                         <nb-card-body style="display: flex; flex-direction: column;">
                                             <p class="instrument-description">{{instrument.instrument.description}}</p>
                                             <div *ngIf="instrument.schema" class="instrument-jsonform">
-                                                <jsonforms  
-                                                dataChange="consolIt($event)"
-                                                errors="consolIt($event)"
-                                                [data]="instrument.options"
-                                                [renderers]="renderers"
-                                                [schema]="instrument.schema" 
-                                                [ajv]="ajv">
-                                            </jsonforms>
+                                                <jsonforms dataChange="consolIt($event)" errors="consolIt($event)"
+                                                    [data]="instrument.options" [renderers]="renderers"
+                                                    [schema]="instrument.schema" [ajv]="ajv">
+                                                </jsonforms>
                                             </div>
                                             <button nbButton style="align-self: flex-end;"
                                                 *ngIf="!instrument.alternative_to && instrument.hasAlternative"
@@ -91,38 +95,36 @@
                             </div>
                         </nb-card-body>
                         <ng-template #escClose>
-                            <div class="instrument" *ngFor="let choice of addComponent.choices"
-                            id={{activity.id}}>
-                            <nb-card>
+                            <div class="instrument" *ngFor="let choice of addComponent.choices" id={{activity.id}}>
+                                <nb-card>
                                     <nb-card-header style="display: flex; justify-content: space-between;">
                                         {{choice.name}}
                                         <button nbButton style="align-self: flex-end;"
                                             (click)="handleAddInstrument(activity.id, choice.id, addComponent.isAlternativeOf)">Add</button>
                                     </nb-card-header>
                                     <nb-card-body style="display: flex; flex-direction: column;">
-                                    <p class="instrument-description">{{choice.description}}</p>
-                                    <!-- <div *ngIf="instrument.schema" class="instrument-jsonform">
-                                        <jsonforms  
-                                        dataChange="consolIt($event)"
-                                        errors="consolIt($event)"
-                                        [data]="instrument.options"
-                                        [renderers]="renderers"
-                                        [schema]="instrument.schema" 
-                                        [ajv]="ajv">
-                                    </jsonforms> -->
-                                    <!-- </div> -->
-                                </nb-card-body>
-                            </nb-card>
-                        </div>
-                                              <!-- {{addComponent.activityId}}  
-                                              {{addComponent.isAlternativeOf}}                   -->
+                                        <p class="instrument-description">{{choice.description}}</p>
+                                    </nb-card-body>
+                                </nb-card>
+                            </div>
                         </ng-template>
                     </nb-card>
                 </div>
-            </div>
+            </div> -->
         </div>
-  
+        
         <!-- <button *ngIf="!loading" disabled nbButton type="button" (click)="console.log('accepted')">Accept</button> -->
         <!-- <button *ngIf="!loading" disabled="checkDisabled(instance.valid_from)" nbButton type="button" (click)="goToEdit()">EDIT</button> -->
     </nb-card-body>
 </nb-card>
+
+<!-- <div *ngIf="instrument.schema" class="instrument-jsonform">
+<jsonforms  
+dataChange="consolIt($event)"
+errors="consolIt($event)"
+[data]="instrument.options"
+[renderers]="renderers"
+[schema]="instrument.schema" 
+[ajv]="ajv">
+</jsonforms> -->
+<!-- </div> -->

@@ -1,4 +1,5 @@
-import { apiConstants } from './../../../@core/data/api-constants';
+import { AuthService } from './../../../@core/auth/auth.service';
+// import { apiConstants } from './../../../@core/data/api-constants';
 import { Component, OnInit } from '@angular/core';
 import { ListCellActionsComponent } from '../../../crud/list/list-cell-actions.component';
 
@@ -8,6 +9,7 @@ import { ListCellActionsComponent } from '../../../crud/list/list-cell-actions.c
   styleUrls: ['./course-list.component.scss'],
 })
 export class CourseListComponent implements OnInit {
+  endPoint: string;
   settings = {
     columns: {
       actions: {
@@ -45,11 +47,13 @@ export class CourseListComponent implements OnInit {
     },
   };
 
-  endPoint = `/institution/${apiConstants.institution}/course`;
-
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.getInstitution().subscribe(id => {
+      this.endPoint = `/institution/${id}/course`
+    })
+
   }
 
 }

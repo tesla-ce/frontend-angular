@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CourseComponent } from './course.component';
-import { CourseReadComponent } from './course-read/course-read.component';
 import { CourseListComponent } from './course-list/course-list.component';
 
 const routes: Routes = [{
@@ -14,7 +13,8 @@ const routes: Routes = [{
     },
     {
       path: 'read/:id',
-      component: CourseReadComponent,
+      loadChildren: () => import('./course-read/course-read.module')
+        .then(m => m.CourseModule),
     },
   ],
 }];

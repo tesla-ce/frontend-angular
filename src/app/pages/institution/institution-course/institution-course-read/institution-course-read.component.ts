@@ -78,7 +78,7 @@ export class InstitutionCourseReadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.apiCourseService.getCourseActivity(this.id).subscribe(activityArray => {
+    this.apiCourseService.getCourseActivities(this.id).subscribe(activityArray => {
       if (activityArray.length > 0) {
         activityArray.map((activity, i) => {
           this.apiCourseService.getActivityInstrument(this.id, activity.id).subscribe(instrumentsArray => {
