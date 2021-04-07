@@ -15,11 +15,11 @@ const routes: Routes = [{
       component: CourseReadActivityListComponent,
     },
     {
-      path: 'read/:activityId',
+      path: 'activity/read/:activityId',
       component: CourseReadActivityReadComponent,
     },
     {
-      path: 'update/:activityId',
+      path: 'activity/update/:activityId',
       component: CourseReadActivityUpdateComponent,
     },
   ],

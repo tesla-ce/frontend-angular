@@ -1,5 +1,10 @@
 <nb-card *ngIf="!loading">
-    <nb-card-header>{{instance.name}}</nb-card-header>
+    <nb-card-header style="display: flex; justify-content: space-between;">{{instance.name}}
+        <nb-toggle class="toggle"
+        (click)="enableDisableActivity(!instance.enabled)"
+        [(ngModel)]="instance.enabled" labelPosition="left" status="basic">Is Active
+    </nb-toggle>
+    </nb-card-header>
     <nb-card-body>
         <div class="activity-board">
             <div class="activity-info">

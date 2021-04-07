@@ -21,6 +21,10 @@ export class CourseReadActivityListComponent implements OnInit {
         type: 'custom',
         sort: false,
         filter: false,
+        defaultValue: {
+          readRoute: "activity/read",
+          updateRoute: "activity/update"
+        },
         renderComponent: ListCellActionsComponent,
       },
       name: {

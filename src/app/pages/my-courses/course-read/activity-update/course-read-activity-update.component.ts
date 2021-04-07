@@ -55,8 +55,8 @@ export class CourseReadActivityUpdateComponent implements OnInit {
     );
   }
 
-  enableDisableActivity(actId, value): void {
-    this.apiCourseService.putActivityActive(this.id, actId, { enabled: value }).subscribe(response => { return })
+  enableDisableActivity(value): void {
+    this.apiCourseService.putActivityActive(this.course, this.id, { enabled: value }).subscribe(response => { return })
   }
 
 
