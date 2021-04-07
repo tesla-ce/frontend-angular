@@ -1,4 +1,3 @@
-import { CourseReadActivityReadComponent } from './activity-read/course-read-activity-read.component';
 import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
 import { JsonFormsModule } from '@jsonforms/angular';
 import { NgModule } from '@angular/core';
@@ -26,6 +25,8 @@ import { CreateModule } from '../../../crud/create/create.module';
 import { CourseReadComponent } from './course-read.component';
 import { DataDisplayComponent } from '../course-read/control';
 import { CourseReadActivityListComponent } from './activity-list/course-read-activity-list.component';
+import { CourseReadActivityUpdateComponent } from './activity-update/course-read-activity-update.component';
+import { CourseReadActivityReadComponent } from './activity-read/course-read-activity-read.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { CourseReadActivityListComponent } from './activity-list/course-read-act
     DataDisplayComponent,
     CourseReadComponent,
     CourseReadActivityListComponent,
-    CourseReadActivityReadComponent
+    CourseReadActivityReadComponent,
+    CourseReadActivityUpdateComponent
   ],
   entryComponents: [DataDisplayComponent],
 

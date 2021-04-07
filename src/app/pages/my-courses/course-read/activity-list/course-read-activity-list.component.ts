@@ -63,7 +63,6 @@ export class CourseReadActivityListComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getInstitution().subscribe(id => {
-      console.log(`/institution/${id}/course/${this.course}`)
       this.endPoint = `/institution/${id}/course/${this.course}/activity`
       this.loading = false
     })

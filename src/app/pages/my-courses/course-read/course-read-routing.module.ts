@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CourseReadComponent } from './course-read.component';
 import { CourseReadActivityListComponent } from './activity-list/course-read-activity-list.component';
 import { CourseReadActivityReadComponent } from './activity-read/course-read-activity-read.component';
+import { CourseReadActivityUpdateComponent } from './activity-update/course-read-activity-update.component';
 
 
 const routes: Routes = [{
@@ -16,6 +17,10 @@ const routes: Routes = [{
     {
       path: 'read/:activityId',
       component: CourseReadActivityReadComponent,
+    },
+    {
+      path: 'update/:activityId',
+      component: CourseReadActivityUpdateComponent,
     },
   ],
 }];

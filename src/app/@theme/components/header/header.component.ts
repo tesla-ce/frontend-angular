@@ -65,9 +65,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
 
-  currentInstitution = this.authService.getInstitution().subscribe(id => id)
-  institutions = this.authService.getUserInstitutions().subscribe(list => list)
+  // currentInstitution = this.authService.getInstitution().subscribe(id => id)
+  // institutions = this.authService.getUserInstitutions().subscribe(list => list)
 
+  currentInstitution = 1
+  institutions = [{ id: 1, acronym: "UOC" }]
 
   public constructor(
     private sidebarService: NbSidebarService,
