@@ -59,6 +59,10 @@ export class CourseReadActivityUpdateComponent implements OnInit {
     this.apiCourseService.putActivityActive(this.course, this.id, { enabled: value }).subscribe(response => { return })
   }
 
+  enableDisableInstrument(instrument): void {
+    this.apiCourseService.putInstrumentActive(this.course, this.id, instrument.id, { active: !instrument.active, instrument_id: instrument.instrument.id, options: instrument.options, required: instrument.required }).subscribe(response => { return })
+  }
+
 
   handleDeleteInstrument(instrument, hasAlternative) {
     if (hasAlternative) {

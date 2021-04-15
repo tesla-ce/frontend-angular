@@ -151,6 +151,23 @@ export class ApiCourseService {
   }
 
 
+  // API: PUT /activity/:id/
+  public putInstrumentActive(courseId: number, activityId: number, instrumentId: number, fields: any): Observable<any> {
+    return this.http
+      .put(this.endpointUrl + "/course/" + courseId + '/activity/' + activityId + '/instrument/' + instrumentId, fields).pipe(
+        map((data: any) => {
+          if (data.status) {
+            return true;
+          } else {
+            return false;
+          }
+        }),
+        catchError(this.handleError));
+  }
+
+
+
+
   // API: PUT /course/:id
   // public updateCourse(courseId, fields, language): Observable<any> {
   public updateCourse(courseId, fields): void {

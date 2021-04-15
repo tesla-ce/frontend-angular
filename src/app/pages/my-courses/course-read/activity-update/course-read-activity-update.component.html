@@ -26,13 +26,19 @@
             </nb-card-header>
             <nb-card-body>
                 <div *ngIf="instance.instruments?.length > 0" fullWidth>
-                    <div class="instrument" *ngFor="let instrument of instance.instruments" id={{instance.id}}>
+                    <div class="instrument" *ngFor="let instrument of instance.instruments; let instrumentIndex = index" id={{instance.id}}>
                         <nb-card [class.alternative]="instrument.alternative_to">
                             <nb-card-header style="display: flex; justify-content: space-between;">
+                                <nb-toggle class="toggle"
+                                (click)="enableDisableInstrument(instrument)"
+                                [(ngModel)]="instrument.active" labelPosition="left" status="basic">
+                                <!-- Is Active -->
+                            </nb-toggle>
                                 {{instrument.instrument.name}}
-                                <p style="align-self: flex-end;" *ngIf="instrument.alternative_to">
-                                    <strong>ALTERNATIVE</strong>
-                                </p>
+                                <button nbButton style="align-self: flex-end;"
+                                *ngIf="instrument.alternative_to"
+                                (click)="handleDeleteInstrument(instrument.id)">Delete
+                                Alternative</button>
                                 <button nbButton style="align-self: flex-end;" *ngIf="!instrument.alternative_to"
                                     (click)="handleDeleteInstrument(instrument.id, instrument.hasAlternative)">DELETE</button>
 
@@ -45,10 +51,6 @@
                                         [ajv]="ajv">
                                     </jsonforms>
                                 </div> -->
-                                <button nbButton style="align-self: flex-end;"
-                                    *ngIf="!instrument.alternative_to && instrument.hasAlternative"
-                                    (click)="handleDeleteInstrument(instrument.hasAlternative)">Delete
-                                    Alternative</button>
                                 <button nbButton style="align-self: flex-end;"
                                     *ngIf="!instrument.alternative_to && !instrument.hasAlternative && checkInstruments()"
                                     (click)="addInstrument(instrument.id)">Add Alternative</button>
