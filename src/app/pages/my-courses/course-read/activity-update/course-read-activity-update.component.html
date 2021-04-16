@@ -2,7 +2,7 @@
     <nb-card-header style="display: flex; justify-content: space-between;">{{instance.name}}
         <nb-toggle class="toggle"
         (click)="enableDisableActivity(!instance.enabled)"
-        [(ngModel)]="instance.enabled" labelPosition="left" status="basic">Is Active
+        [(ngModel)]="instance.enabled" labelPosition="left" status="basic">
     </nb-toggle>
     </nb-card-header>
     <nb-card-body>
@@ -29,18 +29,26 @@
                     <div class="instrument" *ngFor="let instrument of instance.instruments; let instrumentIndex = index" id={{instance.id}}>
                         <nb-card [class.alternative]="instrument.alternative_to">
                             <nb-card-header style="display: flex; justify-content: space-between;">
-                                <nb-toggle class="toggle"
-                                (click)="enableDisableInstrument(instrument)"
-                                [(ngModel)]="instrument.active" labelPosition="left" status="basic">
-                                <!-- Is Active -->
-                            </nb-toggle>
+                                <div style="display: flex; align-items: center;">
+
                                 {{instrument.instrument.name}}
-                                <button nbButton style="align-self: flex-end;"
+                                <button nbButton style="margin-left: 8px;"
                                 *ngIf="instrument.alternative_to"
-                                (click)="handleDeleteInstrument(instrument.id)">Delete
-                                Alternative</button>
-                                <button nbButton style="align-self: flex-end;" *ngIf="!instrument.alternative_to"
-                                    (click)="handleDeleteInstrument(instrument.id, instrument.hasAlternative)">DELETE</button>
+                                (click)="handleDeleteInstrument(instrument.id)">
+                                <nb-icon icon="trash-2-outline"></nb-icon>
+
+                            </button>
+                            <button nbButton style=" margin-left: 8px;" *ngIf="!instrument.alternative_to"
+                                (click)="handleDeleteInstrument(instrument.id, instrument.hasAlternative)">
+                                <nb-icon icon="trash-2-outline"></nb-icon>
+                            </button>
+                        </div>
+
+                                    <nb-toggle class="toggle"
+                                    (click)="enableDisableInstrument(instrument)"
+                                    [(ngModel)]="instrument.active" labelPosition="left" status="basic">
+                                    <!-- Is Active -->
+                                </nb-toggle>
 
                             </nb-card-header>
                             <nb-card-body style="display: flex; flex-direction: column;">
