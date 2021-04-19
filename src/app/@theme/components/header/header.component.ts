@@ -5,8 +5,10 @@ import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { RippleService } from '../../../@core/utils/ripple.service';
-import {AuthService } from '../../../@core/auth/auth.service';
+import { AuthService } from '../../../@core/auth/auth.service';
 import { InstitutionUser, User } from '../../../@core/models/user';
+import { Router } from '@angular/router';
+// import { apiConstants } from '../../../@core/data/api-constants';
 
 
 @Component({
@@ -62,10 +64,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [{ title: 'Profile' }, { title: 'User Informed Consent' }, { title: 'Log out' }];
 
-  currentInstitution;
-  institutions;
+  // currentInstitution = this.authService.getInstitution().subscribe(id => id)
+  // institutions = this.authService.getUserInstitutions().subscribe(list => list)
+
+  currentInstitution = 1;
+  institutions = [{ id: 1, acronym: 'UOC' }];
 
   public constructor(
     private sidebarService: NbSidebarService,
@@ -75,39 +80,62 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private breakpointService: NbMediaBreakpointsService,
     private rippleService: RippleService,
     private authService: AuthService,
+    private router: Router,
   ) {
     this.materialTheme$ = this.themeService.onThemeChange()
       .pipe(map(theme => {
         const themeName: string = theme?.name || '';
         return themeName.startsWith('material');
       }));
+
+    // this.authService.getUserInstitutions().subscribe(list => {
+    //   this.institutions = list
+    // })
+
+    // this.authService.getInstitution().subscribe(id => {
+    //   console.log(id)
+    //   this.currentInstitution = id
+    // })
   }
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
     this.authService.getUser()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((user: User) => {
+      .subscribe((user: InstitutionUser) => {
         this.user = user;
-        if (!user?.is_admin) {
-          // mock institutions
-          this.institutions = [
-            {
-              'acronym': 'uoc',
-              'id': 1,
-              'isAdmin': false,
-            },
-            {
-              'acronym': 'test',
-              'id': 2,
-              'isAdmin': false,
-            }];
-          // Load institution from user
-          // TO DO: this will be an array, delete mocked array, add user.institutions to array or load it from template user?.institutions
-          // this.institutions.push(user.institution)
-          // this.currentInstitution = user.institution.acronym;
-          this.currentInstitution = 1;
-        }
+        // this.institutions = user?.institution ?? [{
+        //   'acronym': 'uoc',
+        //   'id': 1,
+        //   'isAdmin': false,
+        // },
+        // {
+        //   'acronym': 'test',
+        //   'id': 2,
+        //   'isAdmin': false,
+        // }];
+
+        // apiConstants.institution = this.institutions[0].id;
+        // this.currentInstitution = this.institutions[0].id;
+        // if (!user?.is_admin) {
+        //   // mock institutions
+        //   this.institutions = [
+        //     {
+        //       'acronym': 'uoc',
+        //       'id': 1,
+        //       'isAdmin': false,
+        //     },
+        //     {
+        //       'acronym': 'test',
+        //       'id': 2,
+        //       'isAdmin': false,
+        //     }];
+        // Load institution from user
+        // TO DO: this will be an array, delete mocked array, add user.institutions to array or load it from template user?.institutions
+        // this.institutions.push(user.institution)
+        // this.currentInstitution = user.institution.acronym;
+
+        // }
       });
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
@@ -132,6 +160,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.authService.logOut();
         this.menuService.navigateHome();
         return false;
+      } else if (event.item.title === 'User Informed Consent') {
+        this.router.navigate(['/iframe/ic-iframe/2']);
+        return false;
       }
     });
   }
@@ -145,8 +176,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.themeService.changeTheme(themeName);
   }
 
-  changeInstitution(acronym: string) {
-    // console.log('change instiution!', acronym);
+  changeInstitution(id: string) {
+    this.authService.setInstitution(id);
     // this.themeService.changeTheme(acronym);
   }
 

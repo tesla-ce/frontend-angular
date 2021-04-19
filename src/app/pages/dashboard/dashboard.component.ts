@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService } from '../../@core/auth/auth.service';
+import { AuthService } from '../../@core/auth/auth.service';
 import { User } from '../../@core/models/user';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private authService: AuthService,
     public translate: TranslateService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.authService.getUser()

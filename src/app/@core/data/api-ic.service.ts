@@ -1,11 +1,13 @@
+import { AuthService } from './../auth/auth.service';
 import { Injectable } from '@angular/core';
 import { } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Ic } from '../models/ic';
 import { Observable } from 'rxjs/Observable';
 import { catchError, map } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { EnvService } from '../env/env.service';
+// import { apiConstants } from './api-constants';
 
 @Injectable({
   providedIn: 'root',
@@ -13,15 +15,17 @@ import { EnvService } from '../env/env.service';
 export class ApiIcService {
 
   apiUrl: string;
-  endpoint: string = '/institution/1/ic/';
+  endpoint: string;
   // document endpoint '/api/v2/institution/1/ic/2/document/ca/'
   endpointUrl: string;
 
   constructor(
+    private authService: AuthService,
     private http: HttpClient,
     private envService: EnvService,
   ) {
     this.apiUrl = envService.apiUrl;
+    this.authService.getInstitution().subscribe(id => this.endpoint = `/institution/${id}/ic/`);
     this.endpointUrl = this.apiUrl + this.endpoint;
   }
 
@@ -72,6 +76,7 @@ export class ApiIcService {
 
   // API: POST /ics/document/
   public createDocument(idIc, fields): Observable<any> {
+
     return this.http
       .post(this.endpointUrl + idIc + '/document/', fields).pipe(
         map((data: any) => {
@@ -86,19 +91,24 @@ export class ApiIcService {
   }
 
   // API: PUT /ics/document/
-  public updateDocument(idIc, fields): Observable<any> {
-    // console.log(fields);
+  public updateDocument(idIc, fields, language): Observable<any> {
+
+    const formData = new FormData();
+    formData.append('language', fields.language);
+    if (fields.pdf) formData.append('pdf', fields.pdf, fields.pdf?.name);
+    if (fields.html) formData.append('html', fields.html);
+
     return this.http
-      .put(this.endpointUrl + idIc + '/document/' + fields.language, fields).pipe(
-        map((data: any) => {
-          // console.log('Update Document Response', data);
-          if (data.status) {
-            return true;
-          } else {
-            return false;
-          }
-        }),
-        catchError(this.handleError));
+      .put(this.endpointUrl + idIc + '/document/' + language + '/', formData,
+    ).pipe(
+      map((data: any) => {
+        if (data.status) {
+          return true;
+        } else {
+          return false;
+        }
+      }),
+      catchError(this.handleError));
   }
 
   // API: PUT /ics/:id

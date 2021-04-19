@@ -26,14 +26,15 @@ export class InstitutionIcUpdateComponent implements OnInit {
   formGrupDocument: FormGroup;
   toUpdate: any = {};
   toCreate: any = {};
-  toUse: any = {};
   options: any[];
   languages: any[] = [];
   loading: boolean = true;
   picked: string;
+  hasDocument: any = {};
+  regexPDF: RegExp = /[0-9A-Za-z]+[.][Pp][Dd][Ff]/;
 
   documentFieldsModel = {
-    file: {
+    pdf: {
       key: 'file',
       inputName: 'upload-pdf-input-name-',
       formControlName: 'upload-pdf-form-control-name-',
@@ -62,7 +63,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.apiIcService.getIcDocument(this.id).subscribe(list => {
       this.languages = list;
-      const initialOptions = ['en', 'es', 'ru', 'fr', 'ca'];
+      const initialOptions = ['en', 'es', 'ru', 'fr', 'ca', 'jp', 'pt'];
       for (let i = 0; i < list.length; i++) {
         this.toUpdate[list[i].language] = { html: list[i].html || '', file: list[i].file || null, language: list[i].language };
 
@@ -74,8 +75,13 @@ export class InstitutionIcUpdateComponent implements OnInit {
       const group = {};
 
       list.map((item) => {
-        group[`${this.documentFieldsModel.file.formControlName}${item.language}`] = new FormControl(item.file);
+        if (!item.pdf) this.hasDocument[item.language] = { has: false };
+        else {
+          this.hasDocument[item.language] = { has: true, title: this.regexPDF.exec(item.pdf)[0] };
+        }
         group[`${this.documentFieldsModel.html.formControlName}${item.language}`] = new FormControl(item.html);
+        group[`${this.documentFieldsModel.pdf.formControlName}${item.language}`] = new FormControl();
+
       });
       this.formGrupDocument = new FormGroup(group);
     });
@@ -86,13 +92,17 @@ export class InstitutionIcUpdateComponent implements OnInit {
       this.loading = false;
       Object.keys(this.fields).map((key) => {
         this.formControls[key] = new FormControl({
-           value: this.instance[key] || this.fields[key].defaultValue || null,
-           disabled: !this.fields[key].editable,
-          });
+          value: this.instance[key] || this.fields[key].defaultValue || null,
+          disabled: !this.fields[key].editable,
+        });
       });
       this.formGrupIC = new FormGroup(this.formControls);
       this.loading = false;
     });
+  }
+
+  changePDF(language: string): void {
+    this.hasDocument[language].has = false;
   }
 
   newLenguage(): void {
@@ -101,21 +111,21 @@ export class InstitutionIcUpdateComponent implements OnInit {
     this.options.splice(index, 1);
 
     const group = {};
-    group[`${this.documentFieldsModel.file.formControlName}${this.picked}`] = new FormControl(null);
+    group[`${this.documentFieldsModel.pdf.formControlName}${this.picked}`] = new FormControl(null);
     group[`${this.documentFieldsModel.html.formControlName}${this.picked}`] = new FormControl(null);
     if (this.formGrupDocument) {
-      this.formGrupDocument.addControl(`${this.documentFieldsModel.file.formControlName}${this.picked}`, new FormControl(null));
+      this.formGrupDocument.addControl(`${this.documentFieldsModel.pdf.formControlName}${this.picked}`, new FormControl(null));
       this.formGrupDocument.addControl(`${this.documentFieldsModel.html.formControlName}${this.picked}`, new FormControl(null));
     } else this.formGrupDocument = new FormGroup(group);
 
     this.toCreate[this.picked] = {};
-    this.toUse[this.picked] = {};
+    this.hasDocument[this.picked] = { has: false };
 
     this.picked = '';
 
   }
 
-  pickedNewLenguage(event): void {
+  pickedNewLanguage(event): void {
     this.picked = event;
   }
 
@@ -123,10 +133,12 @@ export class InstitutionIcUpdateComponent implements OnInit {
     const values = this.formGrupDocument.value;
 
     const toCreateKeys = Object.keys(this.toCreate);
+
     toCreateKeys.map(key => {
-      this.toCreate[key].language = key;
-      this.toCreate[key].html = values[`${this.documentFieldsModel.html.formControlName}${key}`];
-      this.toCreate[key].file = values[`${this.documentFieldsModel.file.formControlName}${key}`];
+      this.toCreate[key].form = { pdf: values[`${this.documentFieldsModel.pdf.formControlName}${key}`]?.[0] };
+      this.toCreate[key].form.html = values[`${this.documentFieldsModel.html.formControlName}${key}`] || '';
+      this.toCreate[key].form.language = key;
+
     });
 
     const toUpdateKeys = Object.keys(this.toUpdate);
@@ -134,19 +146,21 @@ export class InstitutionIcUpdateComponent implements OnInit {
 
     toUpdateKeys.map(key => {
       if (this.toUpdate[key].html !== values[`${this.documentFieldsModel.html.formControlName}${key}`] ||
-        this.toUpdate[key].file !== values[`${this.documentFieldsModel.file.formControlName}${key}`]) {
-          this.toUpdate[key].html = values[`${this.documentFieldsModel.html.formControlName}${key}`];
-          this.toUpdate[key].file = values[`${this.documentFieldsModel.file.formControlName}${key}`];
-          this.toUpdate[key].languages = key;
-          toUpdateConfirm.push(key);
+        values[`${this.documentFieldsModel.pdf.formControlName}${key}`]) {
+
+        this.toUpdate[key].form = { pdf: values[`${this.documentFieldsModel.pdf.formControlName}${key}`]?.[0] };
+        this.toUpdate[key].form.html = values[`${this.documentFieldsModel.html.formControlName}${key}`] || '';
+        this.toUpdate[key].form.language = key;
+
+        toUpdateConfirm.push(key);
       }
     });
 
     for (let c = 0; c < toCreateKeys.length; c++) {
-      this.apiIcService.createDocument(this.id, this.toCreate[toCreateKeys[c]]).subscribe((ic: Ic) => {
+      this.apiIcService.createDocument(this.id, this.toCreate[toCreateKeys[c]].form).subscribe((ic: Ic) => {
         this.toUpdate[toCreateKeys[c]] = {};
         this.toUpdate[toCreateKeys[c]].html = this.toCreate[toCreateKeys[c]].html;
-        this.toUpdate[toCreateKeys[c]].file = this.toCreate[toCreateKeys[c]].file;
+        this.toUpdate[toCreateKeys[c]].pdf = this.toCreate[toCreateKeys[c]].pdf;
         this.toUpdate[toCreateKeys[c]].language = this.toCreate[toCreateKeys[c]].language;
         delete this.toCreate[toCreateKeys[c]];
 
@@ -174,28 +188,30 @@ export class InstitutionIcUpdateComponent implements OnInit {
     }
 
     for (let u = 0; u < toUpdateConfirm.length; u++) {
-      this.apiIcService.updateDocument(this.id, this.toUpdate[toUpdateConfirm[u]]).subscribe((ic: Ic) => {
-        this.toastrService.show(
-          'Document Updated',
-          toUpdateConfirm[u],
-          {
-            position: NbGlobalPhysicalPosition.TOP_RIGHT,
-            status: 'success',
-            icon: 'save-outline',
-            duration: 2000,
-          });
-      }, error => {
-        this.errors.next(error.error);
-        this.toastrService.show(
-          'Error saving',
-          'Document',
-          {
-            position: NbGlobalPhysicalPosition.TOP_RIGHT,
-            status: 'danger',
-            icon: 'save-outline',
-            duration: 2000,
-          });
-      });
+      this.apiIcService.updateDocument(this.id,
+        this.toUpdate[toUpdateConfirm[u]].form,
+        this.toUpdate[toUpdateConfirm[u]].language).subscribe((ic: Ic) => {
+          this.toastrService.show(
+            'Document Updated',
+            toUpdateConfirm[u],
+            {
+              position: NbGlobalPhysicalPosition.TOP_RIGHT,
+              status: 'success',
+              icon: 'save-outline',
+              duration: 2000,
+            });
+        }, error => {
+          this.errors.next(error.error);
+          this.toastrService.show(
+            'Error saving',
+            'Document',
+            {
+              position: NbGlobalPhysicalPosition.TOP_RIGHT,
+              status: 'danger',
+              icon: 'save-outline',
+              duration: 2000,
+            });
+        });
     }
 
   }

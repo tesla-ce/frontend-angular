@@ -36,6 +36,7 @@ import {
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
+  IframeLayoutComponent,
 } from './layouts';
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
@@ -74,6 +75,7 @@ const COMPONENTS = [
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
+  IframeLayoutComponent,
 ];
 const PIPES = [
   CapitalizePipe,
@@ -97,8 +99,8 @@ export class ThemeModule {
           {
             name: 'uoc',
           },
-          [ UOC_THEME, TESLA_CE_THEME, CUSTOM_THEME, DEFAULT_THEME, COSMIC_THEME,
-            CORPORATE_THEME, DARK_THEME, MATERIAL_LIGHT_THEME, MATERIAL_DARK_THEME ],
+          [UOC_THEME, TESLA_CE_THEME, CUSTOM_THEME, DEFAULT_THEME, COSMIC_THEME,
+            CORPORATE_THEME, DARK_THEME, MATERIAL_LIGHT_THEME, MATERIAL_DARK_THEME],
         ).providers,
       ],
     };
