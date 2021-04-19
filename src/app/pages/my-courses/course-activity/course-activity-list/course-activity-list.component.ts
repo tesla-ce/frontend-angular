@@ -13,8 +13,8 @@ export class CourseActivityListComponent implements OnInit {
   endPoint: string;
   loading: boolean = true;
   settings = {
-    noAddNew: true,
-    noSearch: true,
+    addNew: false,
+    search: false,
     columns: {
       actions: {
         title: 'Actions',

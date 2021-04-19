@@ -53,6 +53,7 @@ export class CourseListComponent implements OnInit {
       display: true,
       perPage: 10,
     },
+    addNew: false,
   };
 
   constructor(private authService: AuthService) { }
