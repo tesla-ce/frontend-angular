@@ -16,7 +16,7 @@ const routes: Routes = [{
       component: InstitutionIcListComponent,
     },
     {
-      path: 'read/:id',
+      path: ':id',
       component: InstitutionIcReadComponent,
     },
     {
@@ -24,7 +24,7 @@ const routes: Routes = [{
       component: InstitutionIcCreateComponent,
     },
     {
-      path: 'update/:id',
+      path: ':id/update',
       component: InstitutionIcUpdateComponent,
     },
     // {

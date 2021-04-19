@@ -17,11 +17,11 @@ const routes: Routes = [{
       loadChildren: () => import('./institution-ic/institution-ic.module')
         .then(m => m.InstitutionIcModule),
     },
-    {
-      path: 'course',
-      loadChildren: () => import('./institution-course/institution-course.module')
-        .then(m => m.InstitutionCourseModule),
-    },
+    // {
+    //   path: 'course',
+    //   loadChildren: () => import('./institution-course/institution-course.module')
+    //     .then(m => m.InstitutionCourseModule),
+    // },
   ],
 }];
 
