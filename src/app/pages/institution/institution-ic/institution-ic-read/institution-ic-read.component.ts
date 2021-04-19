@@ -31,7 +31,7 @@ export class InstitutionIcReadComponent implements OnInit {
   }
 
   goToEdit(): void {
-    this.router.navigate(['/institution/institution-ic/update' + this.instance.id]);
+    this.router.navigate(['/institution/institution-ic/' + this.instance.id + '/update']);
   }
 
   ngOnInit(): void {

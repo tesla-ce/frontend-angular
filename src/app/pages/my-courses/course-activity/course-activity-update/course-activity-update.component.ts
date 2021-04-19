@@ -1,4 +1,4 @@
-import { DataDisplayComponent } from '../control';
+// import { DataDisplayComponent } from '../control';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCourseService } from '../../../../@core/data/api-course.service';
