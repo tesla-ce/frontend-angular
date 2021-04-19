@@ -159,9 +159,9 @@ export class InstitutionIcUpdateComponent implements OnInit {
     for (let c = 0; c < toCreateKeys.length; c++) {
       this.apiIcService.createDocument(this.id, this.toCreate[toCreateKeys[c]].form).subscribe((ic: Ic) => {
         this.toUpdate[toCreateKeys[c]] = {};
-        this.toUpdate[toCreateKeys[c]].html = this.toCreate[toCreateKeys[c]].html;
-        this.toUpdate[toCreateKeys[c]].pdf = this.toCreate[toCreateKeys[c]].pdf;
-        this.toUpdate[toCreateKeys[c]].language = this.toCreate[toCreateKeys[c]].language;
+        this.toUpdate[toCreateKeys[c]].html = this.toCreate[toCreateKeys[c]].form.html;
+        this.toUpdate[toCreateKeys[c]].pdf = this.toCreate[toCreateKeys[c]].form.pdf;
+        this.toUpdate[toCreateKeys[c]].language = this.toCreate[toCreateKeys[c]].form.language;
         delete this.toCreate[toCreateKeys[c]];
 
         this.toastrService.show(
