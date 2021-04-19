@@ -14,7 +14,7 @@ import {
   NbToggleModule,
 } from '@nebular/theme';
 
-// import { CourseReadRoutingModule } from './course-read-routing.module';
+import { CourseRoutingModule } from './course-activity-routing.module';
 import { SideMenuModule } from '../../../side-menu/side-menu.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,15 +22,16 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators'; // <-- 
 
 import { ListModule } from '../../../crud/list/list.module';
 import { CreateModule } from '../../../crud/create/create.module';
-import { CourseReadComponent } from './course-read.component';
-import { DataDisplayComponent } from '../course-read/control';
-import { CourseActivityModule } from '../course-activity/course-activity.module';
-import { CourseActivityListComponent } from '../course-activity/course-activity-list/course-activity-list.component';
+import { CourseActivityComponent } from './course-activity.component';
+import { DataDisplayComponent } from '../course-activity/control';
+import { CourseActivityListComponent } from './course-activity-list/course-activity-list.component';
+import { CourseActivityUpdateComponent } from './course-activity-update/course-activity-update.component';
+import { CourseActivityReadComponent } from './course-activity-read/course-activity-read.component';
 
 
 @NgModule({
   imports: [
-    // CourseReadRoutingModule,
+    CourseRoutingModule,
     ThemeModule,
     FormsModule,
     ReactiveFormsModule,
@@ -48,21 +49,20 @@ import { CourseActivityListComponent } from '../course-activity/course-activity-
     ListModule,
     CreateModule,
     NbTabsetModule,
-    CourseActivityModule,
   ],
   declarations: [
     DataDisplayComponent,
-    CourseReadComponent,
-    // CourseReadActivityListComponent,
-    // CourseReadActivityReadComponent,
-    // CourseReadActivityUpdateComponent,
+    CourseActivityComponent,
+    CourseActivityListComponent,
+    CourseActivityReadComponent,
+    CourseActivityUpdateComponent,
   ],
-  entryComponents: [
-    DataDisplayComponent,
+  exports: [
     CourseActivityListComponent,
   ],
+  entryComponents: [DataDisplayComponent],
 
 })
-export class CourseModule {
+export class CourseActivityModule {
 }
 

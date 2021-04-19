@@ -18,6 +18,14 @@ export class CourseListComponent implements OnInit {
         sort: false,
         filter: false,
         renderComponent: ListCellActionsComponent,
+        defaultValue: {
+          update: {
+            enabled: false,
+          },
+          delete: {
+            enabled: false,
+          },
+        },
       },
       id: {
         title: 'ID',
@@ -51,8 +59,8 @@ export class CourseListComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getInstitution().subscribe(id => {
-      this.endPoint = `/institution/${id}/course`
-    })
+      this.endPoint = `/institution/${id}/course`;
+    });
 
   }
 

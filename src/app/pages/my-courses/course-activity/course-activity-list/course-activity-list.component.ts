@@ -4,11 +4,11 @@ import { ListCellActionsComponent } from '../../../../crud/list/list-cell-action
 import { AuthService } from '../../../../@core/auth/auth.service';
 
 @Component({
-  selector: 'ngx-course-read-activity-list',
-  templateUrl: './course-read-activity-list.component.html',
-  styleUrls: ['./course-read-activity-list.component.scss'],
+  selector: 'ngx-course-activity-list',
+  templateUrl: './course-activity-list.component.html',
+  styleUrls: ['./course-activity-list.component.scss'],
 })
-export class CourseReadActivityListComponent implements OnInit {
+export class CourseActivityListComponent implements OnInit {
   course: number;
   endPoint: string;
   loading: boolean = true;
@@ -21,11 +21,20 @@ export class CourseReadActivityListComponent implements OnInit {
         type: 'custom',
         sort: false,
         filter: false,
-        defaultValue: {
-          readRoute: "activity/read",
-          updateRoute: "activity/update"
-        },
         renderComponent: ListCellActionsComponent,
+        defaultValue: {
+          update: {
+            enabled: true,
+            path: 'activity',
+          },
+          read: {
+            enabled: true,
+            path: 'activity',
+          },
+          delete: {
+            enabled: false,
+          },
+        },
       },
       name: {
         title: 'Name',
@@ -67,10 +76,9 @@ export class CourseReadActivityListComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getInstitution().subscribe(id => {
-      this.endPoint = `/institution/${id}/course/${this.course}/activity`
-      this.loading = false
-    })
-
+      this.endPoint = `/institution/${id}/course/${this.course}/activity`;
+      this.loading = false;
+    });
   }
 
 }

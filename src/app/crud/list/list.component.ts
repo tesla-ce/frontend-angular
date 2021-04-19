@@ -49,7 +49,8 @@ export class ListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    fromEvent(this.searchInput.nativeElement, 'keyup')
+    if (this.searchInput) {
+      fromEvent(this.searchInput.nativeElement, 'keyup')
       .pipe(
         filter(Boolean),
         debounceTime(150),
@@ -59,6 +60,7 @@ export class ListComponent implements OnInit, AfterViewInit {
         }),
       )
       .subscribe();
+    }
   }
 
   userRowSelect(event) {

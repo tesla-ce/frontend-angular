@@ -68,6 +68,7 @@ export const routes: Routes = [
 
 const config: ExtraOptions = {
   useHash: false,
+  paramsInheritanceStrategy: 'always',
 };
 
 @NgModule({

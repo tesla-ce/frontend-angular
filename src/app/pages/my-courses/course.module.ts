@@ -11,7 +11,7 @@ import {
   NbIconModule,
   NbFormFieldModule,
   NbTabsetModule,
-  NbToggleModule
+  NbToggleModule,
 } from '@nebular/theme';
 
 import { CourseComponent } from './course.component';

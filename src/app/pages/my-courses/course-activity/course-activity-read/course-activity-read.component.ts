@@ -8,20 +8,20 @@ import { angularMaterialRenderers } from '@jsonforms/angular-material';
 import { and, createAjv, isControl, rankWith, scopeEndsWith } from '@jsonforms/core';
 import { NbWindowService } from '@nebular/theme';
 import { AuthService } from '../../../../@core/auth/auth.service';
-import { ActivityConfig } from '../activity.config';
+import { CourseActivityConfig } from '../course-activity.config';
 
 @Component({
-  selector: 'ngx-course-read-activity-read',
-  templateUrl: './course-read-activity-read.component.html',
-  styleUrls: ['./course-read-activity-read.component.scss'],
+  selector: 'ngx-course-activity-read',
+  templateUrl: './course-activity-read.component.html',
+  styleUrls: ['./course-activity-read.component.scss'],
 })
-export class CourseReadActivityReadComponent implements OnInit {
+export class CourseActivityReadComponent implements OnInit {
   course: any;
   id: number;
   loading: boolean = true;
 
   public instance: any;
-  public fields = ActivityConfig.fields;
+  public fields = CourseActivityConfig.fields;
 
   constructor(
     private windowService: NbWindowService,
@@ -30,15 +30,8 @@ export class CourseReadActivityReadComponent implements OnInit {
     private apiCourseService: ApiCourseService,
     private router: Router) {
     this.route.params.subscribe(params => {
-      if (params['activityId'] != null) {
-        const brokenURL = this.router.url.split("/")
-        this.course = parseInt(brokenURL[3]);
-        this.id = params['activityId']
-      }
-      else {
-        console.log(params)
-        // router.navigate(['../'], { relativeTo: this.route });
-      }
+        this.course = params['id'];
+        this.id = params['activityId'];
     });
   }
 

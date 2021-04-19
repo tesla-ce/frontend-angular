@@ -28,11 +28,18 @@ export class ListCellActionsComponent implements ViewCell, OnInit {
   ) { }
 
   read() {
-    this.router.navigate([this.value?.readRoute || 'read', this.rowData.id], { relativeTo: this.route });
+    const path = [];
+    if (this.value && this.value.read && this.value.read.path ) path.push(this.value.read.path);
+    path.push(this.rowData.id);
+    this.router.navigate(path, { relativeTo: this.route });
   }
 
   update() {
-    this.router.navigate([this.value?.updateRoute || 'update', this.rowData.id], { relativeTo: this.route });
+    const path = [];
+    if (this.value && this.value.update && this.value.update.path) path.push(this.value.update.path);
+    path.push(this.rowData.id);
+    path.push('update');
+    this.router.navigate(path, { relativeTo: this.route });
   }
 
   delete(event) {

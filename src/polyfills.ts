@@ -55,6 +55,6 @@ if (typeof SVGElement.prototype.contains === 'undefined') {
   SVGElement.prototype.contains = HTMLDivElement.prototype.contains;
 }
 
-
-(window as any).process = require('process/browser');
+declare var require: any;
 (window as any).global = window;
+(window as any).process = require('process/browser');
