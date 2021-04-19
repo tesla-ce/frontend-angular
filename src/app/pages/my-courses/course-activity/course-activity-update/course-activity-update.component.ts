@@ -18,14 +18,10 @@ export class CourseActivityUpdateComponent implements OnInit {
   instruments: any[];
   addComponent: any = {};
 
-
   public instance: any;
   public fields = CourseActivityConfig.fields;
 
-  @ViewChild('escClose', { read: TemplateRef }) escCloseTemplate: TemplateRef<HTMLElement>;
-
   constructor(
-    private windowService: NbWindowService,
     private route: ActivatedRoute,
     private authService: AuthService,
     private apiCourseService: ApiCourseService,
@@ -36,65 +32,8 @@ export class CourseActivityUpdateComponent implements OnInit {
     });
   }
 
-
-  addInstrument(isAlternativeOf) {
-    this.addComponent = { activityId: this.id, isAlternativeOf };
-
-    this.addComponent.choices = this.instruments.filter(instrument => this.instance.inUseInstruments.indexOf(instrument.acronym) == -1)
-
-    this.windowService.open(
-      this.escCloseTemplate,
-      { title: 'Instruments', hasBackdrop: true },
-    );
-  }
-
   enableDisableActivity(value): void {
-    this.apiCourseService.putActivityActive(this.course, this.id, { enabled: value }).subscribe(response => { return })
-  }
-
-  enableDisableInstrument(instrument): void {
-    this.apiCourseService.putInstrumentActive(
-      this.course,
-       this.id,
-       instrument.id,
-       { active: !instrument.active,
-        instrument_id: instrument.instrument.id,
-        options: instrument.options,
-        required: instrument.required })
-    .subscribe(response => response);
-  }
-
-
-  handleDeleteInstrument(instrument, hasAlternative) {
-    if (hasAlternative) {
-      this.apiCourseService.deleteActivityInstrument(this.course, this.id, hasAlternative);
-    }
-    this.apiCourseService.deleteActivityInstrument(this.course, this.id, instrument).subscribe(response => {
-      if (response) location.reload();
-    });
-  }
-
-  handleAddInstrument(instrument, isAlternative) {
-    const data = {
-      'options': null,
-      'instrument_id': instrument,
-      'required': false,
-      'active': false,
-      'alternative_to': isAlternative || null,
-    };
-
-    if (isAlternative) {
-      this.apiCourseService.addActivityInstrument(this.course, this.id, data).subscribe(response => {
-        if (response) location.reload();
-      });
-    } else this.apiCourseService.addActivityInstrument(this.course, this.id, data).subscribe(response => {
-      if (response) location.reload();
-    });
-  }
-
-  checkInstruments() {
-    if (this.instruments?.length > this.instance.instruments?.length) return true;
-    return false;
+    this.apiCourseService.putActivityActive(this.course, this.id, { enabled: value }).subscribe();
   }
 
   ngOnInit(): void {
