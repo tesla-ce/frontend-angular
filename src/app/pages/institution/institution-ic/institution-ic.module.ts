@@ -47,7 +47,7 @@ import { InstitutionIcIframeComponent } from './institution-ic-iframe/institutio
     CreateModule,
     CKEditorModule,
     NbTabsetModule,
-    PdfViewerModule
+    PdfViewerModule,
   ],
   declarations: [
     InstitutionIcComponent,
@@ -55,7 +55,7 @@ import { InstitutionIcIframeComponent } from './institution-ic-iframe/institutio
     InstitutionIcUpdateComponent,
     InstitutionIcReadComponent,
     InstitutionIcListComponent,
-    InstitutionIcIframeComponent
+    InstitutionIcIframeComponent,
   ],
 })
 export class InstitutionIcModule {

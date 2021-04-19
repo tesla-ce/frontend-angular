@@ -12,7 +12,7 @@ import { AdminUserConfig } from '../admin-user.config';
 export class AdminUserReadComponent implements OnInit {
   id: number;
   fields = AdminUserConfig.fields;
-  paths = AdminUserConfig.paths
+  paths = AdminUserConfig.paths;
   instance: User;
 
   constructor(

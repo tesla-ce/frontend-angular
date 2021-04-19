@@ -30,7 +30,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
   languages: any[] = [];
   loading: boolean = true;
   picked: string;
-  hasDocument: any = {}
+  hasDocument: any = {};
   regexPDF: RegExp = /[0-9A-Za-z]+[.][Pp][Dd][Ff]/;
 
   documentFieldsModel = {
@@ -75,9 +75,9 @@ export class InstitutionIcUpdateComponent implements OnInit {
       const group = {};
 
       list.map((item) => {
-        if (!item.pdf) this.hasDocument[item.language] = { has: false }
+        if (!item.pdf) this.hasDocument[item.language] = { has: false };
         else {
-          this.hasDocument[item.language] = { has: true, title: this.regexPDF.exec(item.pdf)[0] }
+          this.hasDocument[item.language] = { has: true, title: this.regexPDF.exec(item.pdf)[0] };
         }
         group[`${this.documentFieldsModel.html.formControlName}${item.language}`] = new FormControl(item.html);
         group[`${this.documentFieldsModel.pdf.formControlName}${item.language}`] = new FormControl();
@@ -102,7 +102,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
   }
 
   changePDF(language: string): void {
-    this.hasDocument[language].has = false
+    this.hasDocument[language].has = false;
   }
 
   newLenguage(): void {
@@ -119,7 +119,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
     } else this.formGrupDocument = new FormGroup(group);
 
     this.toCreate[this.picked] = {};
-    this.hasDocument[this.picked] = { has: false }
+    this.hasDocument[this.picked] = { has: false };
 
     this.picked = '';
 
@@ -135,9 +135,9 @@ export class InstitutionIcUpdateComponent implements OnInit {
     const toCreateKeys = Object.keys(this.toCreate);
 
     toCreateKeys.map(key => {
-      this.toCreate[key].form = { pdf: values[`${this.documentFieldsModel.pdf.formControlName}${key}`]?.[0] }
-      this.toCreate[key].form.html = values[`${this.documentFieldsModel.html.formControlName}${key}`] || ""
-      this.toCreate[key].form.language = key
+      this.toCreate[key].form = { pdf: values[`${this.documentFieldsModel.pdf.formControlName}${key}`]?.[0] };
+      this.toCreate[key].form.html = values[`${this.documentFieldsModel.html.formControlName}${key}`] || '';
+      this.toCreate[key].form.language = key;
 
     });
 
@@ -148,9 +148,9 @@ export class InstitutionIcUpdateComponent implements OnInit {
       if (this.toUpdate[key].html !== values[`${this.documentFieldsModel.html.formControlName}${key}`] ||
         values[`${this.documentFieldsModel.pdf.formControlName}${key}`]) {
 
-        this.toUpdate[key].form = { pdf: values[`${this.documentFieldsModel.pdf.formControlName}${key}`]?.[0] }
-        this.toUpdate[key].form.html = values[`${this.documentFieldsModel.html.formControlName}${key}`] || ""
-        this.toUpdate[key].form.language = key
+        this.toUpdate[key].form = { pdf: values[`${this.documentFieldsModel.pdf.formControlName}${key}`]?.[0] };
+        this.toUpdate[key].form.html = values[`${this.documentFieldsModel.html.formControlName}${key}`] || '';
+        this.toUpdate[key].form.language = key;
 
         toUpdateConfirm.push(key);
       }
@@ -188,28 +188,30 @@ export class InstitutionIcUpdateComponent implements OnInit {
     }
 
     for (let u = 0; u < toUpdateConfirm.length; u++) {
-      this.apiIcService.updateDocument(this.id, this.toUpdate[toUpdateConfirm[u]].form, this.toUpdate[toUpdateConfirm[u]].language).subscribe((ic: Ic) => {
-        this.toastrService.show(
-          'Document Updated',
-          toUpdateConfirm[u],
-          {
-            position: NbGlobalPhysicalPosition.TOP_RIGHT,
-            status: 'success',
-            icon: 'save-outline',
-            duration: 2000,
-          });
-      }, error => {
-        this.errors.next(error.error);
-        this.toastrService.show(
-          'Error saving',
-          'Document',
-          {
-            position: NbGlobalPhysicalPosition.TOP_RIGHT,
-            status: 'danger',
-            icon: 'save-outline',
-            duration: 2000,
-          });
-      });
+      this.apiIcService.updateDocument(this.id,
+        this.toUpdate[toUpdateConfirm[u]].form,
+        this.toUpdate[toUpdateConfirm[u]].language).subscribe((ic: Ic) => {
+          this.toastrService.show(
+            'Document Updated',
+            toUpdateConfirm[u],
+            {
+              position: NbGlobalPhysicalPosition.TOP_RIGHT,
+              status: 'success',
+              icon: 'save-outline',
+              duration: 2000,
+            });
+        }, error => {
+          this.errors.next(error.error);
+          this.toastrService.show(
+            'Error saving',
+            'Document',
+            {
+              position: NbGlobalPhysicalPosition.TOP_RIGHT,
+              status: 'danger',
+              icon: 'save-outline',
+              duration: 2000,
+            });
+        });
     }
 
   }

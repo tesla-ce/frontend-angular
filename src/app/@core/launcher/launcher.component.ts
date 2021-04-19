@@ -35,8 +35,8 @@ export class LauncherComponent implements OnInit {
         this.tokenService.set(token).subscribe(_ => {
           this.authService.isAuthenticatedOrRefresh().subscribe(authenticated => {
             this.router.navigateByUrl('/dashboard');
-            const url = this.envService.apiUrl + '/auth/profile';
-            this.http.get(url).subscribe((user: InstitutionUser) => {
+            const uri = this.envService.apiUrl + '/auth/profile';
+            this.http.get(uri).subscribe((user: InstitutionUser) => {
               if (user) {
                 this.userAuthService.setIsAdmin(user.is_admin);
                 if (user.institution) {
@@ -53,7 +53,7 @@ export class LauncherComponent implements OnInit {
                   // }])
 
                 } else {
-                  this.userAuthService.setInstitution("1")
+                  this.userAuthService.setInstitution('1');
                   this.userAuthService.setUserInstitutions([{
                     'acronym': 'uoc',
                     'id': 1,
@@ -63,7 +63,7 @@ export class LauncherComponent implements OnInit {
                     'acronym': 'test',
                     'id': 2,
                     'isAdmin': false,
-                  }])
+                  }]);
                 }
 
               } else throw user;

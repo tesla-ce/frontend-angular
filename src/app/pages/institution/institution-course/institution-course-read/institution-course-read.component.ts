@@ -12,23 +12,23 @@ import { InstitutionCourseConfig } from '../institution-course.config';
 })
 export class InstitutionCourseReadComponent implements OnInit {
   id: number;
-  activities: any[] = []
+  activities: any[] = [];
   instruments: any[] = [{
-    "name": "Face Recognition", "acronym": "fr", "description": "Verify learner identity by means of face attributes.",
-    "id": 1,
+    'name': 'Face Recognition', 'acronym': 'fr', 'description': 'Verify learner identity by means of face attributes.',
+    'id': 1,
   }, {
-    "id": 2,
-    "name": "Keystroke Dynamics Recognition",
-    "acronym": "ks", "description": "Verify learner identity by means of keystroke patterns."
+    'id': 2,
+    'name': 'Keystroke Dynamics Recognition',
+    'acronym': 'ks', 'description': 'Verify learner identity by means of keystroke patterns.',
   }, {
-    "id": 3,
-    "name": "Voice Recognition",
-    "acronym": "vr", "description": "Verify learner identity by means of voice attributes.",
+    'id': 3,
+    'name': 'Voice Recognition',
+    'acronym': 'vr', 'description': 'Verify learner identity by means of voice attributes.',
   }, {
-    "id": 4,
-    "name": "Forensic Analysis",
-    "acronym": "fa", "description": "Verify learner identity by means of writing style patterns."
-  }]
+    'id': 4,
+    'name': 'Forensic Analysis',
+    'acronym': 'fa', 'description': 'Verify learner identity by means of writing style patterns.',
+  }];
   loading: boolean = true;
   public instance: Course;
   public fields = InstitutionCourseConfig.fields;
@@ -47,34 +47,33 @@ export class InstitutionCourseReadComponent implements OnInit {
   }
 
   enableDisableActivity(actId, value): void {
-    this.apiCourseService.putActivityActive(this.id, actId, { enabled: value }).subscribe(response => { return })
+    this.apiCourseService.putActivityActive(this.id, actId, { enabled: value }).subscribe(response => { return; });
   }
 
   addInstrument(actId, isAlternative): void {
-    return
+    return;
   }
 
   handleDeleteInstrument(actId, instrument, hasAlternative) {
     if (hasAlternative) {
-      this.apiCourseService.deleteActivityInstrument(this.id, actId, hasAlternative)
+      this.apiCourseService.deleteActivityInstrument(this.id, actId, hasAlternative);
     }
     this.apiCourseService.deleteActivityInstrument(this.id, actId, instrument).subscribe(response => {
       if (response) location.reload();
-    })
+    });
   }
 
   handleAddInstrument(actId, instrument, isAlternative) {
     if (isAlternative) {
-      this.apiCourseService.addActivityInstrument(this.id, actId, { id: isAlternative, alternative_to: instrument })
-    }
-    else this.apiCourseService.addActivityInstrument(this.id, actId, { id: instrument }).subscribe(response => {
+      this.apiCourseService.addActivityInstrument(this.id, actId, { id: isAlternative, alternative_to: instrument });
+    } else this.apiCourseService.addActivityInstrument(this.id, actId, { id: instrument }).subscribe(response => {
       if (response) location.reload();
-    })
+    });
   }
 
   checkInstruments(index) {
-    if (this.instruments?.length > this.activities[index].instruments?.length) return true
-    return false
+    if (this.instruments?.length > this.activities[index].instruments?.length) return true;
+    return false;
   }
 
   ngOnInit(): void {
@@ -84,16 +83,16 @@ export class InstitutionCourseReadComponent implements OnInit {
           this.apiCourseService.getActivityInstrument(this.id, activity.id).subscribe(instrumentsArray => {
             if (instrumentsArray.length > 0) {
 
-              activityArray[i].instruments = instrumentsArray
+              activityArray[i].instruments = instrumentsArray;
 
               activityArray[i].inUseInstruments = instrumentsArray.map((list, z) => {
-                if (typeof list.alternative_to == "number") activityArray[i].instruments[z - 1].hasAlternative = list.id
-                return list.instrument.acronym
-              })
+                if (typeof list.alternative_to === 'number') activityArray[i].instruments[z - 1].hasAlternative = list.id;
+                return list.instrument.acronym;
+              });
 
             }
-          })
-        })
+          });
+        });
       }
 
       this.activities = activityArray;

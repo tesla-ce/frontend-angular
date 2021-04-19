@@ -9,7 +9,7 @@ import { ListCellActionsComponent } from '../../../../crud/list/list-cell-action
   styleUrls: ['./institution-ic-list.component.scss'],
 })
 export class InstitutionIcListComponent implements OnInit {
-  endPoint: string
+  endPoint: string;
   settings = {
     columns: {
       actions: {
@@ -48,7 +48,7 @@ export class InstitutionIcListComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.authService.getInstitution().subscribe(id => this.endPoint = `/institution/${id}/ic`)
+    this.authService.getInstitution().subscribe(id => this.endPoint = `/institution/${id}/ic`);
   }
 
 }

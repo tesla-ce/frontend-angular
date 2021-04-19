@@ -51,8 +51,8 @@ export class InstitutionCourseListComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getInstitution().subscribe(id => {
-      this.endPoint = `/institution/${id}/course`
-    })
+      this.endPoint = `/institution/${id}/course`;
+    });
 
   }
 

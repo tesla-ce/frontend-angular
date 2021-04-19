@@ -24,8 +24,8 @@ export class AuthService extends AuthUserData {
   private time: Date = new Date;
   private _user = new BehaviorSubject<User>(null);
   private _isAdmin: boolean = false;
-  private _institution: number
-  private _userInstitutions: any[]
+  private _institution: number;
+  private _userInstitutions: any[];
   private readonly user = this._user.asObservable();
 
   getRole(): Observable<string> {
@@ -45,7 +45,7 @@ export class AuthService extends AuthUserData {
   }
 
   getInstitution(): Observable<string> {
-    return observableOf(localStorage.getItem("institution"))
+    return observableOf(localStorage.getItem('institution'));
   }
 
   setInstitution(institutionId: string): void {
@@ -53,7 +53,7 @@ export class AuthService extends AuthUserData {
   }
 
   getUserInstitutions(): Observable<any[]> {
-    return observableOf(JSON.parse(localStorage.getItem("userInstitutions")))
+    return observableOf(JSON.parse(localStorage.getItem('userInstitutions')));
   }
 
   setUserInstitutions(list: any[]): void {
@@ -61,7 +61,7 @@ export class AuthService extends AuthUserData {
   }
 
   setIsAdmin(isAdmin: boolean): void {
-    this._isAdmin = isAdmin
+    this._isAdmin = isAdmin;
   }
 
   isAdmin(): boolean {
@@ -98,7 +98,7 @@ export class AuthService extends AuthUserData {
                 // }])
 
               } else {
-                this.setInstitution("1")
+                this.setInstitution('1');
                 this.setUserInstitutions([{
                   'acronym': 'uoc',
                   'id': 1,
@@ -108,7 +108,7 @@ export class AuthService extends AuthUserData {
                   'acronym': 'test',
                   'id': 2,
                   'isAdmin': false,
-                }])
+                }]);
 
               }
 

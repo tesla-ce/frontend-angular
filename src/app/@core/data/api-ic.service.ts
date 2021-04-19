@@ -15,7 +15,7 @@ import { EnvService } from '../env/env.service';
 export class ApiIcService {
 
   apiUrl: string;
-  endpoint: string
+  endpoint: string;
   // document endpoint '/api/v2/institution/1/ic/2/document/ca/'
   endpointUrl: string;
 
@@ -25,7 +25,7 @@ export class ApiIcService {
     private envService: EnvService,
   ) {
     this.apiUrl = envService.apiUrl;
-    this.authService.getInstitution().subscribe(id => this.endpoint = `/institution/${id}/ic/`)
+    this.authService.getInstitution().subscribe(id => this.endpoint = `/institution/${id}/ic/`);
     this.endpointUrl = this.apiUrl + this.endpoint;
   }
 
@@ -76,7 +76,7 @@ export class ApiIcService {
 
   // API: POST /ics/document/
   public createDocument(idIc, fields): Observable<any> {
-    console.log(fields)
+
     return this.http
       .post(this.endpointUrl + idIc + '/document/', fields).pipe(
         map((data: any) => {
@@ -93,10 +93,10 @@ export class ApiIcService {
   // API: PUT /ics/document/
   public updateDocument(idIc, fields, language): Observable<any> {
 
-    let formData = new FormData()
-    formData.append('language', fields.language)
-    if (fields.pdf) formData.append('pdf', fields.pdf, fields.pdf?.name)
-    if (fields.html) formData.append('html', fields.html)
+    const formData = new FormData();
+    formData.append('language', fields.language);
+    if (fields.pdf) formData.append('pdf', fields.pdf, fields.pdf?.name);
+    if (fields.html) formData.append('html', fields.html);
 
     return this.http
       .put(this.endpointUrl + idIc + '/document/' + language + '/', formData,

@@ -11,7 +11,7 @@ import { InstitutionIcConfig } from '../institution-ic.config';
 })
 export class InstitutionIcReadComponent implements OnInit {
   id: number;
-  languages: any[] = []
+  languages: any[] = [];
   loading: boolean = true;
   public instance: Ic;
   public fields = InstitutionIcConfig.fields;
@@ -37,10 +37,10 @@ export class InstitutionIcReadComponent implements OnInit {
   ngOnInit(): void {
     this.apiIcService.getIcDocument(this.id).subscribe(list => {
       list.map((item) => {
-        if (item.pdf) item.title = this.regexPDF.exec(item.pdf)[0]
+        if (item.pdf) item.title = this.regexPDF.exec(item.pdf)[0];
       });
       this.languages = list;
-    })
+    });
 
     this.apiIcService.getIcById(this.id).subscribe(instance => {
       this.instance = instance;

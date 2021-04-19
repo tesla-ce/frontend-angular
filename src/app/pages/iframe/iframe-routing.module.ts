@@ -10,7 +10,7 @@ const routes: Routes = [{
   children: [
     {
       path: 'ic-iframe/:id',
-      component: IcIframeComponent
+      component: IcIframeComponent,
       // loadChildren: () => import('./ic-iframe/ic-iframe.module')
       //   .then(m => m.IcIframeModule),
     },

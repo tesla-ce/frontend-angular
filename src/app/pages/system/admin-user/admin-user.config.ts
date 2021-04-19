@@ -1,11 +1,10 @@
-import { Validators } from '@angular/forms';
 import { doublePasswordCheck, checkEmail } from '../../../@core/utils/validators';
 
 export const AdminUserConfig = {
   validator: doublePasswordCheck,
   paths: {
-    editRedirect: "/system/admin-user/update/",
-    readRedirect: "/system/admin-user/read/"
+    editRedirect: '/system/admin-user/update/',
+    readRedirect: '/system/admin-user/read/',
   },
   fields: {
     username: {

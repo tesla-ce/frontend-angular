@@ -9,7 +9,7 @@ import {
   NbIconModule,
   NbFormFieldModule,
   NbTabsetModule,
-  NbToggleModule
+  NbToggleModule,
 } from '@nebular/theme';
 
 import { InstitutionCourseComponent } from './institution-course.component';
@@ -46,7 +46,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     CreateModule,
     CKEditorModule,
     NbTabsetModule,
-    PdfViewerModule
+    PdfViewerModule,
   ],
   declarations: [
     InstitutionCourseComponent,

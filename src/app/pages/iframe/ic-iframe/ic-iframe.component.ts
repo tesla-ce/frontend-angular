@@ -13,9 +13,9 @@ export class IcIframeComponent implements OnInit {
   @Input() user: any;
 
   id: number;
-  languages: any = {}
-  languagesSelections: string[] = []
-  selectedLanguage: "es"
+  languages: any = {};
+  languagesSelections: string[] = [];
+  selectedLanguage: 'es';
   loading: boolean = true;
   public instance: Ic;
   public fields = InstitutionIcConfig.fields;
@@ -35,23 +35,22 @@ export class IcIframeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("I'm here")
+
     this.apiIcService.getIcDocument(this.id).subscribe(list => {
-      const objectification = {}
+      const objectification = {};
       list.map((item, index) => {
-        objectification[item.language] = {}
-        objectification[item.language].html = item.html
+        objectification[item.language] = {};
+        objectification[item.language].html = item.html;
         if (item.pdf) {
-          objectification[item.language].pdf = item.pdf
-          objectification[item.language].title = this.regexPDF.exec(item.pdf)[0]
+          objectification[item.language].pdf = item.pdf;
+          objectification[item.language].title = this.regexPDF.exec(item.pdf)[0];
         }
-        this.languagesSelections.push(item.language)
-        if (!index) this.selectedLanguage = item.language
+        this.languagesSelections.push(item.language);
+        if (!index) this.selectedLanguage = item.language;
       });
-      console.log(objectification)
 
       this.languages = objectification;
-    })
+    });
 
     this.apiIcService.getIcById(this.id).subscribe(instance => {
       this.instance = instance;

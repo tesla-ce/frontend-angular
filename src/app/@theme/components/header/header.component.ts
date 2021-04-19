@@ -69,7 +69,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   // currentInstitution = this.authService.getInstitution().subscribe(id => id)
   // institutions = this.authService.getUserInstitutions().subscribe(list => list)
 
-  currentInstitution = 1
+  currentInstitution = 1;
   institutions = [{ id: 1, acronym: 'UOC' }];
 
   public constructor(
@@ -177,7 +177,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   changeInstitution(id: string) {
-    this.authService.setInstitution(id)
+    this.authService.setInstitution(id);
     // this.themeService.changeTheme(acronym);
   }
 
