@@ -39,6 +39,7 @@ export const InstitutionIcConfig = {
       editable: false,
       key: 'valid_from',
       dataType: 'dateTime',
+      withTime: false,
       label: 'Valid From',
       inputType: 'dateTime',
       inputName: 'valid-from-input-name',

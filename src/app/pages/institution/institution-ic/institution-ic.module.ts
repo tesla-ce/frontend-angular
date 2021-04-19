@@ -16,14 +16,17 @@ import { InstitutionIcRoutingModule } from './institution-ic-routing.module';
 import { SideMenuModule } from '../../../side-menu/side-menu.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators'; // <-- #2 import module
 
 import { ListModule } from '../../../crud/list/list.module';
 import { CreateModule } from '../../../crud/create/create.module';
 import { InstitutionIcCreateComponent } from './institution-ic-create/institution-ic-create.component';
 import { InstitutionIcUpdateComponent } from './institution-ic-update/institution-ic-update.component';
-import { InstitutionIcShowComponent } from './institution-ic-show/institution-ic-show.component';
+import { InstitutionIcReadComponent } from './institution-ic-read/institution-ic-read.component';
 import { InstitutionIcListComponent } from './institution-ic-list/institution-ic-list.component';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { InstitutionIcIframeComponent } from './institution-ic-iframe/institution-ic-iframe.component';
 
 
 @NgModule({
@@ -38,18 +41,21 @@ import { CKEditorModule } from 'ng2-ckeditor';
     NbInputModule,
     NbSelectModule,
     NbFormFieldModule,
+    RxReactiveFormsModule,
     NbIconModule,
     ListModule,
     CreateModule,
     CKEditorModule,
     NbTabsetModule,
+    PdfViewerModule,
   ],
   declarations: [
     InstitutionIcComponent,
     InstitutionIcCreateComponent,
     InstitutionIcUpdateComponent,
-    InstitutionIcShowComponent,
+    InstitutionIcReadComponent,
     InstitutionIcListComponent,
+    InstitutionIcIframeComponent,
   ],
 })
 export class InstitutionIcModule {

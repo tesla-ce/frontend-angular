@@ -23,10 +23,10 @@ import {
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { SideMenuModule } from './side-menu/side-menu.module';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SharedModule } from './shared/shared.module';
-import {NbTeslaIconsModule} from '@tesla-ce/icons';
+import { NbTeslaIconsModule } from '@tesla-ce/icons';
 
 
 @NgModule({

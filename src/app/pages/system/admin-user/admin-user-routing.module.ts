@@ -15,7 +15,7 @@ const routes: Routes = [{
       component: AdminUserListComponent,
     },
     {
-      path: 'read/:id',
+      path: ':id',
       component: AdminUserReadComponent,
     },
     {
@@ -23,7 +23,7 @@ const routes: Routes = [{
       component: AdminUserCreateComponent,
     },
     {
-      path: 'update/:id',
+      path: ':id/update',
       component: AdminUserUpdateComponent,
     },
   ],

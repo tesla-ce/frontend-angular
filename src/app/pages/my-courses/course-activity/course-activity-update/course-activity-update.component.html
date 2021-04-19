@@ -1,0 +1,30 @@
+<nb-card *ngIf="!loading">
+    <nb-card-header class="flexbox flexbox--justify-between">{{instance.name}}
+        <nb-toggle class="toggle" (click)="enableDisableActivity(!instance.enabled)" [(ngModel)]="instance.enabled"
+            labelPosition="left" status="basic">
+        </nb-toggle>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="flexbox--direction-column">
+            <div class="flexbox--direction-column">
+                <p>{{instance.description || "Exemple descripció de l'activitat."}}</p>
+                <p>Start: {{instance.start || "Sense data d'inici"}}</p>
+                <p>End: {{instance.end || "Sense data de finalització"}}</p>
+            </div>
+        </div>
+        <!-- <p>AQUI ACTIVITY CONFIGURACIÓ</p> -->
+        <!-- <div class="instruments">
+                <label class="label">Instruments</label>
+            </div> -->
+        <div *ngIf="instance.instruments">
+            <ngx-course-activity-instrument class="width--max" 
+            [type]="update" 
+            [instance]="instance" 
+            [course]="course" 
+            [id]="id"
+            [reload]="ngOnInit"
+            >
+            </ngx-course-activity-instrument>
+        </div>
+    </nb-card-body>
+</nb-card>

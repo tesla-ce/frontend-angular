@@ -2,6 +2,7 @@ import { KeyValue } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, Pipe, PipeTransform } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-update',
@@ -13,6 +14,7 @@ export class UpdateComponent implements OnInit {
   @Input() fields: any;
   @Input() instance: any;
   @Input() validator: any;
+  @Input() paths: any;
   @Input() errors: Observable<any>;
   @Output() save: EventEmitter<any> = new EventEmitter();
 
@@ -22,10 +24,14 @@ export class UpdateComponent implements OnInit {
   loading: Boolean = true;
   data: any;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
     return 0;
+  }
+
+  goToRead(): void {
+    this.router.navigate([this.paths.readRedirect + this.instance.id]);
   }
 
   private markFormGroupTouched(formGroup: FormGroup) {
@@ -48,10 +54,10 @@ export class UpdateComponent implements OnInit {
         this.data[key] = this.fields[key];
         this.formControls[key] = new FormControl(
           this.fields[key].defaultValue ||
-          (this.instance[key] && (Array.isArray(this.instance[key]) ||
-           typeof this.instance[key] !== 'object')) ? this.instance[key] :
+            (this.instance[key] && (Array.isArray(this.instance[key]) ||
+              typeof this.instance[key] !== 'object')) ? this.instance[key] :
             null, this.fields[key]?.validator ?
-            this.fields[key].validator() :
+          this.fields[key].validator() :
           null);
       }
     });

@@ -12,6 +12,7 @@ import { AdminUserConfig } from '../admin-user.config';
 export class AdminUserReadComponent implements OnInit {
   id: number;
   fields = AdminUserConfig.fields;
+  paths = AdminUserConfig.paths;
   instance: User;
 
   constructor(
@@ -19,13 +20,13 @@ export class AdminUserReadComponent implements OnInit {
     private router: Router,
     private apiUserService: ApiUserService) {
     this.route.params.subscribe(params => {
-      if (params['id'] != null ) {
+      if (params['id'] != null) {
         this.id = params['id'];
         apiUserService.getUserById(this.id).subscribe(instance => {
           this.instance = instance;
         });
       } else {
-        router.navigate(['../'], {relativeTo: this.route});
+        router.navigate(['../'], { relativeTo: this.route });
       }
     });
   }

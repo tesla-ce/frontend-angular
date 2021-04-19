@@ -5,7 +5,7 @@ import {
   NbLoginComponent,
   NbLogoutComponent,
 } from '@nebular/auth';
-import {AuthGuardAuthenticated} from './@core/auth/guards/auth-guard-authenticated';
+import { AuthGuardAuthenticated } from './@core/auth/guards/auth-guard-authenticated';
 // import { AuthGuardAdmin } from './@core/auth/guards/auth-guard-admin';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LauncherComponent } from './@core/launcher/launcher.component';
@@ -33,6 +33,18 @@ export const routes: Routes = [
     canActivate: [AuthGuardAuthenticated],
   },
   {
+    path: 'course',
+    loadChildren: () => import('./pages/my-courses/course.module')
+      .then(m => m.CourseModule),
+    canActivate: [AuthGuardAuthenticated],
+  },
+  {
+    path: 'iframe',
+    loadChildren: () => import('./pages/iframe/iframe.module')
+      .then(m => m.IframeModule),
+    canActivate: [AuthGuardAuthenticated],
+  },
+  {
     path: 'auth',
     component: NbAuthComponent,
     children: [
@@ -56,6 +68,7 @@ export const routes: Routes = [
 
 const config: ExtraOptions = {
   useHash: false,
+  paramsInheritanceStrategy: 'always',
 };
 
 @NgModule({
