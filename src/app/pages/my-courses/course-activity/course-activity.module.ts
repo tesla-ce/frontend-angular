@@ -1,5 +1,5 @@
-import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
-import { JsonFormsModule } from '@jsonforms/angular';
+// import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
+// import { JsonFormsModule } from '@jsonforms/angular';
 import { NgModule } from '@angular/core';
 
 import { ThemeModule } from '../../../@theme/theme.module';
@@ -23,7 +23,7 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators'; // <-- 
 import { ListModule } from '../../../crud/list/list.module';
 import { CreateModule } from '../../../crud/create/create.module';
 import { CourseActivityComponent } from './course-activity.component';
-import { DataDisplayComponent } from '../course-activity/control';
+// import { DataDisplayComponent } from '../course-activity/control';
 import { CourseActivityListComponent } from './course-activity-list/course-activity-list.component';
 import { CourseActivityUpdateComponent } from './course-activity-update/course-activity-update.component';
 import { CourseActivityReadComponent } from './course-activity-read/course-activity-read.component';
@@ -41,8 +41,8 @@ import { CourseActivityInstrumentComponent } from './instrument/course-activity-
     NbButtonModule,
     NbInputModule,
     NbSelectModule,
-    JsonFormsModule,
-    JsonFormsAngularMaterialModule,
+    // JsonFormsModule,
+    // JsonFormsAngularMaterialModule,
     NbToggleModule,
     NbFormFieldModule,
     RxReactiveFormsModule,
@@ -52,7 +52,7 @@ import { CourseActivityInstrumentComponent } from './instrument/course-activity-
     NbTabsetModule,
   ],
   declarations: [
-    DataDisplayComponent,
+    // DataDisplayComponent,
     CourseActivityComponent,
     CourseActivityListComponent,
     CourseActivityReadComponent,
@@ -62,7 +62,9 @@ import { CourseActivityInstrumentComponent } from './instrument/course-activity-
   exports: [
     CourseActivityListComponent,
   ],
-  entryComponents: [DataDisplayComponent],
+  entryComponents: [
+    // DataDisplayComponent,
+  ],
 
 })
 export class CourseActivityModule {

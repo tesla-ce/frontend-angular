@@ -1,5 +1,5 @@
-import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
-import { JsonFormsModule } from '@jsonforms/angular';
+// import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
+// import { JsonFormsModule } from '@jsonforms/angular';
 import { NgModule } from '@angular/core';
 
 import { ThemeModule } from '../../../@theme/theme.module';
@@ -23,13 +23,16 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators'; // <-- 
 import { ListModule } from '../../../crud/list/list.module';
 import { CreateModule } from '../../../crud/create/create.module';
 import { CourseReadComponent } from './course-read.component';
-import { DataDisplayComponent } from '../course-read/control';
+// import { DataDisplayComponent } from '../course-read/control';
 import { CourseActivityModule } from '../course-activity/course-activity.module';
 import { CourseActivityListComponent } from '../course-activity/course-activity-list/course-activity-list.component';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
   imports: [
+    CommonModule,
     // CourseReadRoutingModule,
     ThemeModule,
     FormsModule,
@@ -39,8 +42,8 @@ import { CourseActivityListComponent } from '../course-activity/course-activity-
     NbButtonModule,
     NbInputModule,
     NbSelectModule,
-    JsonFormsModule,
-    JsonFormsAngularMaterialModule,
+    // JsonFormsModule,
+    // JsonFormsAngularMaterialModule,
     NbToggleModule,
     NbFormFieldModule,
     RxReactiveFormsModule,
@@ -51,14 +54,14 @@ import { CourseActivityListComponent } from '../course-activity/course-activity-
     CourseActivityModule,
   ],
   declarations: [
-    DataDisplayComponent,
+    // DataDisplayComponent,
     CourseReadComponent,
     // CourseReadActivityListComponent,
     // CourseReadActivityReadComponent,
     // CourseReadActivityUpdateComponent,
   ],
   entryComponents: [
-    DataDisplayComponent,
+    // DataDisplayComponent,
     CourseActivityListComponent,
   ],
 

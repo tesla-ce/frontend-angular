@@ -1,5 +1,5 @@
-import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
-import { JsonFormsModule } from '@jsonforms/angular';
+// import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
+// import { JsonFormsModule } from '@jsonforms/angular';
 import { NgModule } from '@angular/core';
 
 import { ThemeModule } from '../../@theme/theme.module';
@@ -39,8 +39,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     NbButtonModule,
     NbInputModule,
     NbSelectModule,
-    JsonFormsModule,
-    JsonFormsAngularMaterialModule,
+    // JsonFormsModule,
+    // JsonFormsAngularMaterialModule,
     NbToggleModule,
     NbFormFieldModule,
     RxReactiveFormsModule,
