@@ -7,6 +7,7 @@ import { Subject, Observable } from 'rxjs';
 import { RippleService } from '../../../@core/utils/ripple.service';
 import { AuthService } from '../../../@core/auth/auth.service';
 import { InstitutionUser, User } from '../../../@core/models/user';
+import { Router } from '@angular/router';
 // import { apiConstants } from '../../../@core/data/api-constants';
 
 
@@ -63,13 +64,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
+  userMenu = [{ title: 'Profile' }, { title: 'Informed Consent' }, { title: 'Log out' }];
 
   // currentInstitution = this.authService.getInstitution().subscribe(id => id)
   // institutions = this.authService.getUserInstitutions().subscribe(list => list)
 
   currentInstitution = 1
-  institutions = [{ id: 1, acronym: "UOC" }]
+  institutions = [{ id: 1, acronym: 'UOC' }];
 
   public constructor(
     private sidebarService: NbSidebarService,
@@ -79,6 +80,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private breakpointService: NbMediaBreakpointsService,
     private rippleService: RippleService,
     private authService: AuthService,
+    private router: Router,
   ) {
     this.materialTheme$ = this.themeService.onThemeChange()
       .pipe(map(theme => {
@@ -157,6 +159,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if (event.item.title === 'Log out') {
         this.authService.logOut();
         this.menuService.navigateHome();
+        return false;
+      } else if (event.item.title === 'Informed Consent') {
+        this.router.navigate(['/iframe/ic-iframe/2']);
         return false;
       }
     });
