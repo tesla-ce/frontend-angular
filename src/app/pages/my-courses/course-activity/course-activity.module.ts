@@ -27,6 +27,7 @@ import { DataDisplayComponent } from '../course-activity/control';
 import { CourseActivityListComponent } from './course-activity-list/course-activity-list.component';
 import { CourseActivityUpdateComponent } from './course-activity-update/course-activity-update.component';
 import { CourseActivityReadComponent } from './course-activity-read/course-activity-read.component';
+import { CourseActivityInstrumentComponent } from './instrument/course-activity-instrument.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { CourseActivityReadComponent } from './course-activity-read/course-activ
     CourseActivityListComponent,
     CourseActivityReadComponent,
     CourseActivityUpdateComponent,
+    CourseActivityInstrumentComponent,
   ],
   exports: [
     CourseActivityListComponent,
