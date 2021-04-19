@@ -1,60 +1,57 @@
+
+.flexbox {
+    display: flex;
+
+    &--direction-column {
+        flex-direction: column;
+    }
+
+    &--justify-between {
+        justify-content: space-between;
+    }
+
+    &--align-item-center {
+        align-items: center;
+    }
+
+}
+
+.width {
+    &--max {
+        width: 100%
+    }
+}
+
+.button {
+    &--align-self-end { align-self: flex-end;}
+}
+
+.margin {
+    &--left {
+
+        &-40 {
+            margin-left: 40px;
+        }
+
+        &-8 {
+            margin-left: 8px;
+        }
+    }
+
+    &--bottom{
+         &-24 {
+             margin : 0 0 24px 0;}
+        }
+
+}
+
+.toggle {
+    align-items: start;
+ }
+
+
+
 p {
     margin-left: 8px;
 }
 
-.form-group{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    &-row {
-        display: flex;
-        justify-content: space-between;
-
-    }
-    &-starEnd {
-        display: flex;
-
-        div {
-            min-width: 120px;
-        }
-    }
-}
-
-.activity {
-    display: flex;
-    flex-direction: column;
-    
-    &-board {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    &-info {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .toggle {
-        align-items: start;
-
-    }
-}
-
-.alternative {
-    margin-left: 40px;
-}
-
-.instruments {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-
-    &-description {
-        margin-bottom: 24px;
-    }
-
-    &-jsonform {
-        margin-left: 24px;
-    }
-}

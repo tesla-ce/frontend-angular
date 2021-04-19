@@ -1,8 +1,12 @@
 <nb-card *ngIf="!loading">
-    <nb-card-header>{{instance.name}}</nb-card-header>
+    <nb-card-header class="flexbox flexbox--justify-between">{{instance.name}}
+        <nb-toggle class="toggle" (click)="enableDisableActivity(!instance.enabled)" [(ngModel)]="instance.enabled"
+            labelPosition="left" status="basic">
+        </nb-toggle>
+    </nb-card-header>
     <nb-card-body>
-        <div class="activity-board">
-            <div class="activity-info">
+        <div class="flexbox--direction-column">
+            <div class="flexbox--direction-column">
                 <p>{{instance.description || "Exemple descripció de l'activitat."}}</p>
                 <p>Start: {{instance.start || "Sense data d'inici"}}</p>
                 <p>End: {{instance.end || "Sense data de finalització"}}</p>
@@ -12,30 +16,12 @@
         <!-- <div class="instruments">
                 <label class="label">Instruments</label>
             </div> -->
-        <nb-card>
-            <nb-card-header>Instruments</nb-card-header>
-            <nb-card-body>
-                <div *ngIf="instance.instruments?.length > 0" fullWidth>
-                    <div class="instrument" *ngFor="let instrument of instance.instruments" id={{instance.id}}>
-                        <nb-card [class.alternative]="instrument.alternative_to">
-                            <nb-card-header style="display: flex; justify-content: space-between;">
-                                {{instrument.instrument.name}}
-                                <p style="align-self: flex-end;" *ngIf="instrument.alternative_to">
-                                    <strong>ALTERNATIVE</strong></p>
-                            </nb-card-header>
-                            <nb-card-body style="display: flex; flex-direction: column;">
-                                <p class="instrument-description">{{instrument.instrument.description}}</p>
-                                <div *ngIf="instrument.schema" class="instrument-jsonform">
-                                    <jsonforms dataChange="consolIt($event)" errors="consolIt($event)"
-                                        [data]="instrument.options" [renderers]="renderers" [schema]="instrument.schema"
-                                        [ajv]="ajv">
-                                    </jsonforms>
-                                </div>
-                            </nb-card-body>
-                        </nb-card>
-                    </div>
-                </div>
-            </nb-card-body>
-        </nb-card>
+
+            <div *ngIf="instance.instruments">
+                <ngx-course-activity-instrument 
+                class="width--max"
+                [instance]="instance"
+                ></ngx-course-activity-instrument>
+            </div>
     </nb-card-body>
 </nb-card>
