@@ -34,7 +34,6 @@ export class LauncherComponent implements OnInit {
           result, 'email');
         this.tokenService.set(token).subscribe(_ => {
           this.authService.isAuthenticatedOrRefresh().subscribe(authenticated => {
-            this.router.navigateByUrl('/dashboard');
             const uri = this.envService.apiUrl + '/auth/profile';
             this.http.get(uri).subscribe((user: InstitutionUser) => {
               if (user) {
@@ -65,7 +64,8 @@ export class LauncherComponent implements OnInit {
                     'isAdmin': false,
                   }]);
                 }
-
+                if (params['redirect_url']) this.router.navigateByUrl(params['redirect_url']);
+                else this.router.navigateByUrl('/dashboard');
               } else throw user;
             });
           });

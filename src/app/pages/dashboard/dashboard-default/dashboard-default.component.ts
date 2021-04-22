@@ -22,7 +22,6 @@ export class DashboardDefaultComponent implements OnInit {
     this.authService.getUser()
       .pipe()
       .subscribe((user: User) => {
-        console.log('ngOnInit', user);
         if (user) this.user = user;
       });
   }
