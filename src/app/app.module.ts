@@ -14,7 +14,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   NbDatepickerModule,
-  NbDialogModule, NbIconModule,
+  NbDialogModule,
+  NbIconModule,
   NbMenuModule,
   NbSidebarModule,
   NbToastrModule,
