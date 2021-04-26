@@ -2,6 +2,7 @@ stages:
   - quality
   - test
   - build
+  - deploy
 
 lint:
   stage: quality
@@ -52,3 +53,13 @@ docker-build:
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
   except:
     - master
+
+deploy-demo:
+  stage: deploy
+  tags: 
+    - tesla-ce-demo-deploy
+  script:
+    -  sudo /opt/tesla-ce/upgrade_core_images.sh
+  only:
+    - master
+
