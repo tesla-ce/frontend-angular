@@ -1,36 +1,90 @@
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">    
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
     <div class="row">
-        <div *ngFor="let field of fields" class="col-sm-6">
-            <div class="form-group" [ngSwitch]="field.inputType">
-                <label [for]="field.inputName" class="label">{{field.label || field.key}}</label>
-                <nb-select status = "errors[field.key]?'danger':'default'" fullWidth *ngSwitchCase="'select'" placeholder="Select..." [formControl]="formControls[field.key]">
-                    <!-- <nb-option value="" *ngIf="!field.required">Option empty</nb-option> -->
-                    <nb-option *ngFor="let option of field.options; let i = index" value="{{option.value}}">{{option.key}}</nb-option>
+        <div *ngFor="let field of usableFields | keyvalue: originalOrder" class="col-sm-6">
+            <div class="form-group" [ngSwitch]="field.value.inputType" style="margin-bottom: 0.75rem;">
+
+                <label [for]="field.value.inputName" class="label">{{field.value.label || field.key}}</label>
+                <!-- case select -->
+                <nb-select fullWidth *ngSwitchCase="'select'"
+                [required]="field.value.required || false"
+                    placeholder="Select..." [formControl]="formControls[field.key]" >
+                    <nb-option *ngFor="let option of field.value.options; let i = index" value="{{option.value}}">
+                        {{option.key}}
+                    </nb-option>
                 </nb-select>
-                <nb-select status = "errors[field.key]?'danger':'default'" fullWidth multiple *ngSwitchCase="'select-multiple'" placeholder="Select..." [formControl]="formControls[field.key]">
-                    <nb-option value="" *ngIf="!field.required">Option empty</nb-option>
-                    <nb-option *ngFor="let option of field.options; let i = index" value="{{option.value}}">{{option.key}}</nb-option>
+
+                <!-- case select multiple-->
+                <nb-select  
+                    fullWidth multiple
+                    *ngSwitchCase="'select-multiple'" 
+                    placeholder="Select..." 
+                    [required]="field.value.required || false"
+                    [formControl]="formControls[field.key]">
+                    <nb-option value="" *ngIf="!field.value.required">Option empty</nb-option>
+                    <nb-option *ngFor="let option of field.value.options; let i = index" value="{{option.value}}">
+                        {{option.key}}
+                    </nb-option>
                 </nb-select>
-                <nb-select status = "errors[field.key]?'danger':'default'" fullWidth multiple *ngSwitchCase="'select-multiple-remote'" placeholder="Select..." [formControl]="formControls[field.key]">
-                    <!-- <nb-option value="" *ngIf="!field.required">Option empty</nb-option> -->
-                    <nb-option *ngFor="let option of field.options; let i = index" value="{{option.value}}">{{option.key}}</nb-option>
+
+                <!-- case select multiple remote -->
+                <nb-select fullWidth multiple
+                    *ngSwitchCase="'select-multiple-remote'" placeholder="Select..."
+                    [formControl]="formControls[field.key]">
+                    <!-- <nb-option value="" *ngIf="!field.value.required">Option empty</nb-option> -->
+                    <nb-option *ngFor="let option of field.value.options; let i = index" value="{{option.value}}">
+                        {{option.key}}</nb-option>
                 </nb-select>
-                <input *ngSwitchDefault nbInput fullWidth
-                    [type]="field.inputType || text"
-                    [id]="field.inputName || field.key"
-                    [name]="field.inputName || field.key"
-                    [formControlName]="field.key"
-                    [placeholder]="field.placeholder || null" 
-                    [attr.disabled]="field.disabled || null"
-                    [attr.email]="field.validator == 'email' || null"
-                    [required] = "field.required || false"
-                    [status] = "formErrors[field.key]?'danger':'default'" >
+
+                <!-- case select remote-->
+                <ngx-select-remote
+                    *ngSwitchCase="'select-remote'" 
+                    [field]="field.value"
+                    [parentForm]="formGroup"
+                    >
+                </ngx-select-remote>
+
+                <!-- case date -->
+                <div  *ngSwitchCase="'dateTime'">
+                    <input nbInput  
+                    fullWidth
+                    [formControlName]="field.key" 
+                    [placeholder]="field.value.placeholder || 'Pick a date'"
+                    [nbDatepicker]="dateTimePicker"
+                    [id]="field.value.inputName || field.key"
+                    [name]="field.value.inputName || field.key"
+                    [required]="field.value.required || false"
+                    [status]="formErrors[field.key]?'danger':'basic'">
+                    <nb-datepicker #dateTimePicker></nb-datepicker>
+                </div>
+                
+                <!-- default input -->
+                <input *ngSwitchDefault nbInput fullWidth [type]="field.value.inputType || text"
+                    [id]="field.value.inputName || field.key" [name]="field.value.inputName || field.key"
+                    [formControlName]="field.key" [placeholder]="field.value.placeholder || null"
+                    [attr.disabled]="field.value.disabled || null"
+                    [required]="field.value.required || false"
+                    [status]="formErrors[field.key]?'danger':'basic'">
+
+                <!-- errors -->    
                 <errors class="text-danger">{{formErrors[field.key]?formErrors[field.key]:''}}</errors>
+                <div *ngIf="formGroup.controls[field.key].invalid && 
+                formGroup.controls[field.key].errors && 
+                (formGroup.controls[field.key].dirty || formGroup.controls[field.key].touched)">
+                    <small class="text-danger" *ngIf="formGroup.controls[field.key].hasError('required')">
+                        Required </small>
+                    <small class="text-danger" *ngIf="formGroup.controls[field.key].hasError('wrongFormat') && !formGroup.controls[field.key].hasError('required')">
+                        Wrong Email Format </small>
+                    <small class="text-danger" *ngIf="formGroup.controls[field.key].hasError('notEquivalent') && !formGroup.controls[field.key].hasError('required')">
+                        Passwords doesn't match </small>
+                </div>
+                <div style="height: 22px" *ngIf="!(formGroup.controls[field.key].invalid && 
+                formGroup.controls[field.key].errors && 
+                (formGroup.controls[field.key].dirty || formGroup.controls[field.key].touched))">&nbsp;&nbsp;&nbsp;</div>
             </div>
         </div>
     </div>
-    <button *ngIf="!loading" nbButton type="submit" [disabled]="!profileForm.valid">Submit</button>
-<p>
-    <!-- {{ profileForm.status }} -->
-</p>
+    <button *ngIf="!loading" nbButton type="submit" [disabled]="!formGroup.valid">Submit</button>
+    <p>
+        <!-- {{ formGroup.status }} -->
+    </p>
 </form>

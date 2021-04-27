@@ -40,7 +40,7 @@ export class ApiService {
       .get(this.endpointUrl + userId)
       .pipe(
         map(( user: User ) => {
-          console.log(user);
+          // console.log(user);
           if ( user ) return user;
           else throw user;
         }),
@@ -70,7 +70,7 @@ export class ApiService {
   }
 
   private handleError (error: Response | any) {
-    console.error('ApiService::handleError', error);
+    // console.error('ApiService::handleError', error);
     return ErrorObservable.create(error);
   }
 

@@ -1,8 +1,8 @@
 <div class="list-header">
-    <button class="create-button" nbButton status='info' size="small" (click)="create($event)">
+    <button *ngIf="settings.addNew" class="create-button" nbButton status='info' size="small" (click)="create($event)">
         <nb-icon icon="plus-circle-outline"></nb-icon>ADD NEW
     </button>
-    <nb-form-field>
+    <nb-form-field *ngIf="settings.search">
         <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
         <input type="text" nbInput #searchInput>
     </nb-form-field>
@@ -13,6 +13,6 @@
         <nb-option value="5">5</nb-option>
         <nb-option value="10">10</nb-option>
         <nb-option value="50">50</nb-option>
-        <nb-option value="20">100</nb-option>
+        <nb-option value="100">100</nb-option>
     </nb-select>
 </div>

@@ -1,0 +1,64 @@
+<nb-card>
+    <nb-card-header class="flexbox flexbox--justify-between">
+        Instruments
+        <button class="button button--align-self-end" nbButton (click)="addInstrument()"
+        *ngIf="instruments && type != 'show' && checkInstruments()">Add
+        Instrument</button>
+    </nb-card-header>
+    <nb-card-body>
+        <div *ngIf="instance.instruments?.length > 0" fullWidth>
+            <div class="flexbox flexbox--align-item-center"
+            *ngFor="let instrument of instance.instruments; let instrumentIndex = index" id={{instance.id}}>
+            <nb-card [class.margin--left-40]="instrument.alternative_to" class="width--max">
+                <nb-card-header class="flexbox flexbox--justify-between">
+                    <div class="flexbox flexbox--align-item-center  width--max">
+
+                        {{instrument.instrument.name}}
+                        <button nbButton class="margin--left-8" *ngIf="type != 'show'  &&  instrument.alternative_to"
+                            (click)="handleDeleteInstrument(instrument.id)">
+                            <nb-icon icon="trash-2-outline"></nb-icon>
+
+                        </button>
+                        <button nbButton class="margin--left-8" *ngIf="type != 'show'  &&  !instrument.alternative_to"
+                            (click)="handleDeleteInstrument(instrument.id, instrument.hasAlternative)">
+                            <nb-icon icon="trash-2-outline"></nb-icon>
+                        </button>
+                    </div>
+
+                    <nb-toggle class="toggle" *ngIf="type != 'show'" (click)="enableDisableInstrument(instrument)"
+                        [(ngModel)]="instrument.active" labelPosition="left" status="basic">
+                    </nb-toggle>
+
+                </nb-card-header>
+                <nb-card-body class="flexbox flexbox--direction-column">
+                    <p class="margin--bottom-24">{{instrument.instrument.description}}</p>
+                    <!-- <div *ngIf="instrument.schema" class="instrument-jsonform">
+            <jsonforms dataChange="consolIt($event)" errors="consolIt($event)"
+                [data]="instrument.options" [renderers]="renderers" [schema]="instrument.schema"
+                [ajv]="ajv">
+            </jsonforms>
+        </div> -->
+                    <button nbButton class="button button--align-self-end"
+                        *ngIf="instruments && type != 'show' && !instrument.alternative_to && !instrument.hasAlternative && checkInstruments()"
+                        (click)="addInstrument(instrument.id)">Add Alternative</button>
+                </nb-card-body>
+            </nb-card>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+
+        <ng-template #escClose>
+            <div *ngFor="let choice of addComponent.choices" id={{instance.id}}>
+                <nb-card>
+                    <nb-card-header class="flexbox flexbox--justify-between">
+                        {{choice.name}}
+                        <button nbButton class="button button--align-self-end"
+                            (click)="handleAddInstrument(choice.id, addComponent.isAlternativeOf)">Add</button>
+                    </nb-card-header>
+                    <nb-card-body class="flexbox flexbox--direction-column">
+                        <p  class="margin--bottom-24">{{choice.description}}</p>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        </ng-template>

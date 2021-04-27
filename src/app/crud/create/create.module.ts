@@ -6,11 +6,14 @@ import {
   NbInputModule,
   NbSelectModule,
   NbFormFieldModule,
+  NbAutocompleteModule,
+  NbDatepickerModule,
 } from '@nebular/theme';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CreateComponent } from './create.component';
+import { SelectRemoteModule } from '../inputs/select-remote/select-remote.module';
 
 @NgModule({
   imports: [
@@ -19,8 +22,11 @@ import { CreateComponent } from './create.component';
     ReactiveFormsModule,
     NbButtonModule,
     NbInputModule,
+    NbAutocompleteModule,
     NbSelectModule,
+    NbDatepickerModule,
     NbFormFieldModule,
+    SelectRemoteModule,
   ],
   declarations: [
     CreateComponent,

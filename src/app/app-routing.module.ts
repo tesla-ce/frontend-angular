@@ -5,32 +5,45 @@ import {
   NbLoginComponent,
   NbLogoutComponent,
 } from '@nebular/auth';
-import {AuthGuardAuthenticated} from './@core/auth/guards/auth-guard-authenticated';
-import {IcManagementComponent} from './ic-management/ic-management.component';
-import { AuthGuardAdmin } from './@core/auth/guards/auth-guard-admin';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthGuardAuthenticated } from './@core/auth/guards/auth-guard-authenticated';
+// import { AuthGuardAdmin } from './@core/auth/guards/auth-guard-admin';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { LauncherComponent } from './@core/launcher/launcher.component';
 
 export const routes: Routes = [
   {
-    path: 'admin',
-    loadChildren: () => import('./admin/admin.module')
-      .then(m => m.AdminModule),
+    path: 'auth/launcher',
+    component: LauncherComponent,
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./pages/dashboard/dashboard.module')
+      .then(m => m.DashboardModule),
     canActivate: [AuthGuardAuthenticated],
   },
   {
     path: 'institution',
-    loadChildren: () => import('./institution/institution.module')
+    loadChildren: () => import('./pages/institution/institution.module')
       .then(m => m.InstitutionModule),
     canActivate: [AuthGuardAuthenticated],
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent,
+    path: 'system',
+    loadChildren: () => import('./pages/system/admin.module')
+      .then(m => m.AdminModule),
     canActivate: [AuthGuardAuthenticated],
   },
   {
-    path: 'informed-consent/update',
-    component: IcManagementComponent,
+    path: 'course',
+    loadChildren: () => import('./pages/my-courses/course.module')
+      .then(m => m.CourseModule),
+    canActivate: [AuthGuardAuthenticated],
+  },
+  {
+    path: 'iframe',
+    loadChildren: () => import('./pages/iframe/iframe.module')
+      .then(m => m.IframeModule),
+    canActivate: [AuthGuardAuthenticated],
   },
   {
     path: 'auth',
@@ -56,6 +69,7 @@ export const routes: Routes = [
 
 const config: ExtraOptions = {
   useHash: false,
+  paramsInheritanceStrategy: 'always',
 };
 
 @NgModule({

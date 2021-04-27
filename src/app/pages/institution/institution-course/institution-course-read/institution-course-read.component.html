@@ -1,0 +1,80 @@
+<nb-card>
+    <nb-card-header>Read Course</nb-card-header>
+    <nb-card-body class="example-items-rows" *ngIf="!loading">
+
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="form-group-row">
+                    <div>
+                        <label [for]="fields['code'].inputName" class="label">{{fields['code'].label ||
+                            'code'}}</label>
+                        <p>{{instance.code || "Unknown"}}</p>
+                    </div>
+                    <div class="form-group-starEnd">
+                        <div>
+                            <label [for]="fields['start'].inputName" class="label">{{fields['start'].label || 'valid
+                                from'}}</label>
+                            <p>{{instance.start || "Unknown"}}</p>
+                        </div>
+                        <div>
+                            <label [for]="fields['end'].inputName" class="label">{{fields['end'].label || 'valid
+                                from'}}</label>
+                            <p>{{instance.end || "Unknown"}}</p>
+                        </div>
+                    </div>
+                </div>
+                <label [for]="fields['description'].inputName" class="label">{{fields['description'].label || 'valid
+                    from'}}</label>
+                <p>{{instance.description || "Unknown"}}</p>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div>
+                <label class="label">Activities</label>
+            </div>
+            <div *ngIf="activities?.length > 0" fullWidth>
+                <div class="activity" *ngFor="let activity of activities; let i = index" id={{activity.id}}>
+                    <nb-card>
+                        <nb-card-header>{{activity.name}}</nb-card-header>
+                        <nb-card-body>
+                            <div class="activity-board">
+                                <div class="activity-info">
+                                    <p>{{activity.description || "Exemple descripció de l'activitat."}}</p>
+                                    <p>Start: {{activity.start || "Sense data d'inici"}}</p>
+                                    <p>End: {{activity.end || "Sense data de finalització"}}</p>
+                                </div>
+                                <nb-toggle class="toggle"
+                                    (click)="enableDisableActivity(activity.id, !activity.enabled)"
+                                    [(ngModel)]="activity.enabled" labelPosition="left" status="basic">Active
+                                </nb-toggle>
+                            </div>
+                            <p>AQUI CONFIGURACIÓ</p>
+                            <div class="instruments">
+                                <label  class="label">Instruments</label>
+                                <button class="instruments-addInstrument" nbButton style="align-self: flex-end;" (click)="addInstrument(activity.id)" *ngIf="checkInstruments(i)">Add Instrument</button>
+                            </div>
+                            <div *ngIf="activity.instruments?.length > 0" fullWidth>
+                                <div class="instrument" *ngFor="let instrument of activity.instruments"
+                                    id={{activity.id}}>
+                                    <nb-card [class.alternative] = "instrument.alternative_to" >
+                                        <nb-card-header style="display: flex; justify-content: space-between;">{{instrument.instrument.name}}
+                                            <button nbButton style="align-self: flex-end;" *ngIf="!instrument.alternative_to" (click)="handleAlternative(activity.id, instrument.id, instrument.hasAlternative)">{{instrument.hasAlternative ? "Delete Instruments" : "Delete Instrument"}}</button>
+                                        </nb-card-header>
+                                        <nb-card-body style="display: flex; flex-direction: column;">
+                                            {{instrument.instrument.description}}
+                                            <p>AQUI CONFIGURACIÓ</p>
+                                            <button nbButton style="align-self: flex-end;" *ngIf="!instrument.alternative_to && instrument.hasAlternative" (click)="handleDeleteInstrument(activity.id, instrument.hasAlternative)">Delete Alternative</button>
+                                            <button nbButton style="align-self: flex-end;" *ngIf="!instrument.alternative_to && !instrument.hasAlternative" (click)="console.log('Future')">Add Alternative</button>
+                                        </nb-card-body>
+                                    </nb-card>
+                                </div>
+                            </div>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+            </div>
+        </div>
+        <!-- <button *ngIf="!loading" disabled nbButton type="button" (click)="console.log('accepted')">Accept</button> -->
+        <!-- <button *ngIf="!loading" disabled="checkDisabled(instance.valid_from)" nbButton type="button" (click)="goToEdit()">EDIT</button> -->
+    </nb-card-body>
+</nb-card>
