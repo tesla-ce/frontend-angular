@@ -2,6 +2,7 @@ stages:
   - quality
   - test
   - build
+  - deploy
 
 lint:
   stage: quality
@@ -34,7 +35,7 @@ docker-build-master:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE" -f docker/Dockerfile .
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:latest" -f docker/Dockerfile .
     - docker push "$CI_REGISTRY_IMAGE":latest
   only:
     - master
@@ -52,3 +53,13 @@ docker-build:
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
   except:
     - master
+
+deploy-demo:
+  stage: deploy
+  tags: 
+    - tesla-ce-demo-deploy
+  script:
+    -  sudo /opt/tesla-ce/upgrade_core_images.sh
+  only:
+    - master
+
