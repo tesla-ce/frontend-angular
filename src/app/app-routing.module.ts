@@ -40,9 +40,9 @@ export const routes: Routes = [
     canActivate: [AuthGuardAuthenticated],
   },
   {
-    path: 'iframe',
-    loadChildren: () => import('./pages/iframe/iframe.module')
-      .then(m => m.IframeModule),
+    path: 'learner',
+    loadChildren: () => import('./pages/learner/learner.module')
+      .then(m => m.LearnerModule),
     canActivate: [AuthGuardAuthenticated],
   },
   {

@@ -4,6 +4,10 @@ input#version-input-name,input#valid-from-input-name {
 
 .flexRow {
     display: flex;
+
+    &-justify--between{
+        justify-content: space-between;
+    }
 }
 
 .mb-8 {

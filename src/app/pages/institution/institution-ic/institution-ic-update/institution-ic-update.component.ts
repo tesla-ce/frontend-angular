@@ -129,8 +129,14 @@ export class InstitutionIcUpdateComponent implements OnInit {
     this.picked = event;
   }
 
+  deleteLenguage(language: string) {
+    console.log;
+
+  }
+
   update(): void {
     const values = this.formGrupDocument.value;
+    let hadError = false;
 
     const toCreateKeys = Object.keys(this.toCreate);
 
@@ -174,6 +180,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
             duration: 2000,
           });
       }, error => {
+        hadError = true;
         this.errors.next(error.error);
         this.toastrService.show(
           'Error saving',
@@ -201,6 +208,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
               duration: 2000,
             });
         }, error => {
+          hadError = true;
           this.errors.next(error.error);
           this.toastrService.show(
             'Error saving',
@@ -213,6 +221,8 @@ export class InstitutionIcUpdateComponent implements OnInit {
             });
         });
     }
+
+    if (!hadError) this.ngOnInit();
 
   }
 }

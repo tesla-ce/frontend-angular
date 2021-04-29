@@ -18,6 +18,7 @@ export class ApiIcService {
   endpoint: string;
   // document endpoint '/api/v2/institution/1/ic/2/document/ca/'
   endpointUrl: string;
+  institutionId: string;
 
   constructor(
     private authService: AuthService,
@@ -25,7 +26,10 @@ export class ApiIcService {
     private envService: EnvService,
   ) {
     this.apiUrl = envService.apiUrl;
-    this.authService.getInstitution().subscribe(id => this.endpoint = `/institution/${id}/ic/`);
+    this.authService.getInstitution().subscribe(id => {
+      this.institutionId = id,
+        this.endpoint = `/institution/${id}/ic/`;
+    });
     this.endpointUrl = this.apiUrl + this.endpoint;
   }
 
@@ -52,6 +56,20 @@ export class ApiIcService {
   public getIcById(icId: number): Observable<Ic> {
     return this.http
       .get(this.endpointUrl + icId)
+      .pipe(
+        map((ic: Ic) => {
+          // console.log(ic);
+          if (ic) return ic;
+          else throw ic;
+        }),
+        catchError(this.handleError),
+      );
+  }
+
+  public getCurrentIc(): Observable<Ic> {
+    return this.http
+      .get(this.endpointUrl
+        + 'current')
       .pipe(
         map((ic: Ic) => {
           // console.log(ic);
@@ -129,6 +147,31 @@ export class ApiIcService {
   // DELETE /ics/:id
   public deleteIcById(icId: number) {
     // will use this.http.delete()
+  }
+
+  // API: POST /institution/id/learner/id/ic
+  public approveIc(userId, icVersion): Observable<any> {
+    return this.http.post(`${this.apiUrl}/institution/${this.institutionId}/learner/${userId}/ic/`, { version: icVersion }).pipe(
+      map((data: any) => {
+        if (data) {
+          return data;
+        } else {
+          return false;
+        }
+      }),
+      catchError(this.handleError));
+  }
+
+  public rejectIc(userId, icVersion): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/institution/${this.institutionId}/learner/${userId}/ic/`).pipe(
+      map((data: any) => {
+        if (data) {
+          return data;
+        } else {
+          return false;
+        }
+      }),
+      catchError(this.handleError));
   }
 
   private handleError(error: Response | any) {

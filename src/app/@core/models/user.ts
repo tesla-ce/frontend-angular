@@ -18,6 +18,10 @@ export interface User {
   acronym: string;
   roles: string[];
   locale: string;
+  consent: string;
+  consent_accepted: string;
+  consent_rejected: string;
+  ic_status: string;
   is_superuser: string;
   is_staff: boolean;
   is_active: boolean;
