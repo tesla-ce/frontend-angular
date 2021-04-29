@@ -6,10 +6,10 @@
             <div class="form-group">
                 <label [for]="fields['version'].inputName" class="label">{{fields['version'].label ||
                     'version'}}</label>
-                <p>{{instance.version || "Unknown"}}</p>
+                <p>{{instance.version || ""}}</p>
                 <label [for]="fields['valid_from'].inputName" class="label">{{fields['valid_from'].label || 'valid
                     from'}}</label>
-                <p>{{instance.valid_from || "Unknown"}}</p>
+                <p>{{instance.valid_from || ""}}</p>
             </div>
         </div>
         <div class="col-sm-12">
@@ -26,7 +26,7 @@
 
                     <div class="pdf-Download" *ngIf="language.pdf && !language.html">
                         <pdf-viewer [src]="language.pdf" [render-text]="true" style="display: block;"></pdf-viewer>
-                        <a [href]="language.pdf"  nbButton  download="language.title">Download</a>
+                        <a  target="_blank"  [href]="language.pdf"  nbButton  download="language.title">Download</a>
                     </div>
 
                     <div *ngIf="language.html">

@@ -144,8 +144,21 @@ export class ApiIcService {
   }
 
 
-  // DELETE /ics/:id
+  // DELETE /ic/:id
   public deleteIcById(icId: number) {
+    // will use this.http.delete()
+  }
+
+  // DELETE Langueg /ics/:id
+  public deleteDocument(icID: number, documentLan: string) {
+    return this.http
+      .delete(this.endpointUrl + icID + '/document/' + documentLan + '/')
+      .pipe(
+        map((data: any) => {
+          return true;
+        }),
+        catchError(this.handleError),
+      );
     // will use this.http.delete()
   }
 

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { NbGlobalPhysicalPosition, NbToastrService, NbWindowService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { ApiIcService } from '../../../../@core/data/api-ic.service';
 import { Ic } from '../../../../@core/models/ic';
@@ -14,7 +14,9 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./institution-ic-update.component.scss'],
 })
 export class InstitutionIcUpdateComponent implements OnInit {
+  @ViewChild('escClose', { read: TemplateRef }) escCloseTemplate: TemplateRef<HTMLElement>;
 
+  windowRef: any;
   public id: number;
   public instance: Ic;
   public fields = InstitutionIcConfig.fields;
@@ -26,6 +28,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
   formGrupDocument: FormGroup;
   toUpdate: any = {};
   toCreate: any = {};
+  toDelete: string;
   options: any[];
   languages: any[] = [];
   loading: boolean = true;
@@ -50,6 +53,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private apiIcService: ApiIcService,
+    private windowService: NbWindowService,
     private toastrService: NbToastrService) {
     this.route.params.subscribe(params => {
       if (params['id'] != null) {
@@ -130,7 +134,19 @@ export class InstitutionIcUpdateComponent implements OnInit {
   }
 
   deleteLenguage(language: string) {
-    console.log;
+    this.toDelete = language;
+
+    this.windowRef = this.windowService.open(
+      this.escCloseTemplate,
+      { title: 'Delete Language', hasBackdrop: true },
+    );
+  }
+
+  delete() {
+    this.windowRef.close();
+    this.apiIcService.deleteDocument(this.id, this.toDelete).subscribe(response => {
+      this.ngOnInit();
+    });
 
   }
 
@@ -221,8 +237,5 @@ export class InstitutionIcUpdateComponent implements OnInit {
             });
         });
     }
-
-    if (!hadError) this.ngOnInit();
-
   }
 }

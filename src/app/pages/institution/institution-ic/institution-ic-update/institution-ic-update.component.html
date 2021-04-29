@@ -42,7 +42,8 @@
                 <button nbButton [disabled]="!picked" (click)="newLenguage()">Add</button>
             </div>
             <nb-tabset *ngIf="languages?.length > 0" fullWidth>
-                <nb-tab *ngFor="let language of languages; let f = index" tabTitle={{language.language}} [active]="f === 0">
+                <nb-tab *ngFor="let language of languages; let f = index" tabTitle={{language.language}}
+                    [active]="f === 0">
                     <form [formGroup]="formGrupDocument" fullWidth>
                         <div>
                             <div class="form-group flexRow flexRow-justify--between">
@@ -57,14 +58,20 @@
                                 <div *ngIf="hasDocument[language.language].has === true">
                                     <label [for]="documentFieldsModel.pdf.inputName" class="label">PDF file</label>
                                     <p>{{hasDocument[language.language].title}}</p>
-                                    <button nbButton (click)="changePDF(language.language)">Change Document</button>
+                                    <a target="_blank" [href]="language.pdf" nbButton download>
+                                        <nb-icon icon="download-outline"></nb-icon>
+                                    </a>
+                                    <button nbButton (click)="changePDF(language.language)">
+                                        <nb-icon icon="trash-2-outline"></nb-icon>
+                                    </button>
                                 </div>
                                 <div>
-                                <button *ngIf="!loading" nbButton type="button" (click)="deleteLenguage(language.language)"> 
-                                    <nb-icon icon="trash-2-outline"></nb-icon>
-                                    Language
-                                </button>
-                            </div>
+                                    <button *ngIf="!loading" nbButton type="button"
+                                        (click)="deleteLenguage(language.language)">
+                                        <nb-icon icon="trash-2-outline"></nb-icon>
+                                        Language
+                                    </button>
+                                </div>
 
                                 <!-- <errors class="text-danger">{{formErrors['file']?formErrors['file']:''}}</errors> -->
                             </div>
@@ -85,3 +92,10 @@
         <button *ngIf="!loading" nbButton type="button" (click)="update()">Submit</button>
     </nb-card-body>
 </nb-card>
+
+<ng-template  #escClose>
+        <p>This action CAN NOT be reverted. Before deleting a language please save all the other changes. Are you sure you want to delete te whole <strong>{{toDelete}}</strong> document?</p>
+        <button *ngIf="!loading" nbButton type="button" (click)="delete()">
+            Delete
+        </button>
+</ng-template>
