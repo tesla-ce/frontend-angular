@@ -52,7 +52,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "@rxweb/reactive-form-validators": "^2.1.2",
     "@swimlane/ngx-charts": "^14.0.0",
-    "@tesla-ce/icons": "0.0.28",
+    "@tesla-ce/icons": "0.0.29",
     "@types/ckeditor": "^4.9.10",
     "angular2-chartjs": "0.5.1",
     "bootstrap": "^4.5.0",
