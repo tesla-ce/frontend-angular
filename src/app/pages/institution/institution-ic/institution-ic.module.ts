@@ -9,6 +9,7 @@ import {
   NbIconModule,
   NbFormFieldModule,
   NbTabsetModule,
+  NbActionsModule,
 } from '@nebular/theme';
 
 import { InstitutionIcComponent } from './institution-ic.component';
@@ -27,6 +28,7 @@ import { InstitutionIcListComponent } from './institution-ic-list/institution-ic
 import { CKEditorModule } from 'ng2-ckeditor';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { InstitutionIcIframeComponent } from './institution-ic-iframe/institution-ic-iframe.component';
+import { SharedModule } from '../../../shared/shared.module';
 
 
 @NgModule({
@@ -40,6 +42,7 @@ import { InstitutionIcIframeComponent } from './institution-ic-iframe/institutio
     NbButtonModule,
     NbInputModule,
     NbSelectModule,
+    NbActionsModule,
     NbFormFieldModule,
     RxReactiveFormsModule,
     NbIconModule,
@@ -48,6 +51,7 @@ import { InstitutionIcIframeComponent } from './institution-ic-iframe/institutio
     CKEditorModule,
     NbTabsetModule,
     PdfViewerModule,
+    SharedModule,
   ],
   declarations: [
     InstitutionIcComponent,

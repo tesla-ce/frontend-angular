@@ -8,6 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { InstitutionUser, User } from '../../../@core/models/user';
 import { Subject } from 'rxjs';
 import { ApiInstitutionService } from '../../../@core/data/api-institution.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-learner-ic',
@@ -32,6 +33,7 @@ export class LearnerIcComponent implements OnInit {
     private route: ActivatedRoute,
     private apiIcService: ApiIcService,
     private authService: AuthService,
+    public translate: TranslateService,
     private institutionService: ApiInstitutionService,
     private router: Router) {
     // this.route.params.subscribe(params => {

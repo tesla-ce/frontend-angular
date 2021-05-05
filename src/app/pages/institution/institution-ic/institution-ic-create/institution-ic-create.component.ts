@@ -5,6 +5,8 @@ import { of as observableOf, Observable, Subject } from 'rxjs';
 import { ApiIcService } from '../../../../@core/data/api-ic.service';
 import { Ic } from '../../../../@core/models/ic';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-institution-ic-create',
@@ -17,10 +19,15 @@ export class InstitutionIcCreateComponent implements OnInit {
   public errors = new Subject();
   validator = InstitutionIcConfig.validator;
 
-  constructor(private apiIcService: ApiIcService, private toastrService: NbToastrService, private router: Router) { }
+  constructor(private apiIcService: ApiIcService, public translate: TranslateService,
+    private location: Location,
+    private toastrService: NbToastrService, private router: Router) { }
 
   ngOnInit(): void {
   }
+
+  back() { this.location.back(); }
+
 
   onSave(event): void {
     this.apiIcService.createIc(event).subscribe((ic: Ic) => {

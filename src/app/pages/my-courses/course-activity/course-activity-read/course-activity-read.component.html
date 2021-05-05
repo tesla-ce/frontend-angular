@@ -8,8 +8,8 @@
         <div class="flexbox--direction-column">
             <div class="flexbox--direction-column">
                 <p>{{instance.description || "Exemple descripció de l'activitat."}}</p>
-                <p>Start: {{instance.start || "Sense data d'inici"}}</p>
-                <p>End: {{instance.end || "Sense data de finalització"}}</p>
+                <p> {{'COURSE.STARTS' | translate }}: {{instance.start || "Sense data d'inici"}}</p>
+                <p> {{'COURSE.ENDS' | translate }}: {{instance.end || "Sense data de finalització"}}</p>
             </div>
         </div>
         <!-- <p>AQUI ACTIVITY CONFIGURACIÓ</p> -->

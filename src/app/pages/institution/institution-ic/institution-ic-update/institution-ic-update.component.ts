@@ -7,6 +7,8 @@ import { Ic } from '../../../../@core/models/ic';
 import { InstitutionIcConfig } from '../institution-ic.config';
 import 'ckeditor';
 import { FormControl, FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'ngx-institution-ic-update',
@@ -53,6 +55,8 @@ export class InstitutionIcUpdateComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private apiIcService: ApiIcService,
+    public translate: TranslateService,
+    private location: Location,
     private windowService: NbWindowService,
     private toastrService: NbToastrService) {
     this.route.params.subscribe(params => {
@@ -63,6 +67,9 @@ export class InstitutionIcUpdateComponent implements OnInit {
       }
     });
   }
+
+  back() { this.location.back(); }
+
 
   ngOnInit(): void {
     this.apiIcService.getIcDocument(this.id).subscribe(list => {

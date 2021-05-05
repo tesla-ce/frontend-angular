@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListCellActionsComponent } from '../../../../crud/list/list-cell-actions.component';
 import { AuthService } from '../../../../@core/auth/auth.service';
+import { TranslateService } from '@ngx-translate/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'ngx-course-activity-list',
@@ -64,7 +66,8 @@ export class CourseActivityListComponent implements OnInit {
     },
   };
 
-  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) {
+  constructor(private authService: AuthService, public translate: TranslateService,
+    private location: Location, private router: Router, private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
       if (params['id'] != null) {
         this.course = params['id'];
@@ -73,6 +76,7 @@ export class CourseActivityListComponent implements OnInit {
       }
     });
   }
+  back() { this.location.back(); }
 
   ngOnInit(): void {
     this.authService.getInstitution().subscribe(id => {

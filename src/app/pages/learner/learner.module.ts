@@ -8,6 +8,7 @@ import { SideMenuModule } from '../../side-menu/side-menu.module';
 import { ThemeModule } from '../../@theme/theme.module';
 import { LearnerComponent } from './learner.component';
 import { NbTabsetModule, NbIconModule, NbFormFieldModule, NbSelectModule, NbInputModule, NbButtonModule, NbCardModule } from '@nebular/theme';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
     imports: [
@@ -23,6 +24,7 @@ import { NbTabsetModule, NbIconModule, NbFormFieldModule, NbSelectModule, NbInpu
         SideMenuModule,
         NbTabsetModule,
         PdfViewerModule,
+        SharedModule,
     ],
     declarations: [
         LearnerIcComponent,

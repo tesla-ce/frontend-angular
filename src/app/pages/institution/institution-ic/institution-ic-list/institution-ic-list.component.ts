@@ -2,6 +2,7 @@ import { AuthService } from './../../../../@core/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 // import { apiConstants } from '../../../../@core/data/api-constants';
 import { ListCellActionsComponent } from '../../../../crud/list/list-cell-actions.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-institution-ic-list',
@@ -45,7 +46,8 @@ export class InstitutionIcListComponent implements OnInit {
   };
 
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, public translate: TranslateService,
+  ) { }
 
   ngOnInit(): void {
     this.authService.getInstitution().subscribe(id => this.endPoint = `/institution/${id}/ic`);

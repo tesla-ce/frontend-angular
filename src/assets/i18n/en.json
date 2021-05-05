@@ -3,7 +3,16 @@
         "ACCEPT_CONSENT": "Accept",
         "CLEAR": "Clear",
         "CLOSE": "Close",
-        "DECLINE_CONSENT": "Reject"
+        "CANCEL": "Cancel",
+        "DECLINE_CONSENT": "Reject",
+        "GO_BACK": "Go to previous page",
+        "DELETE": "Delete",
+        "DELETE_CONFIRMATION": "Are you sure you want to remove this item?",
+        "EDIT": "Edit",
+        "SUBMIT": "Submit",
+        "SAVE": "Save",
+        "DOWNLOAD": "Download",
+        "ADD": "Add"
     },
     "ETHICAL_WARNING": {
         "ACTIVE_INSTRUMENTS": "The following instruments are enabled",
@@ -28,5 +37,37 @@
         "DASHBOARD": {
             "WELCOME" : "Welcome"
         }
+    },
+    "IC": {
+        "IC" : "Informed Consent",
+        "LANGUAGE" : "Language",
+        "VERSION" : "Version",
+        "VALID_FROM": "Valid From",
+        "PDF_UPLOAD": "Upload PDF file",
+        "PDF_DOWNLOAD": "Download PDF",
+        "DELETE_ALERT_1": "This action CAN NOT be reverted. Before deleting a language please save all the other changes. Are you sure you want to delete te whole ",
+        "DELETE_ALERT_2": " document?",
+        "PDF_FILE": "PDF file",
+        "UPDATE_TITLE": "Update Informed Consent",
+        "NEW_TITLE": "Create new Informed Consent",
+        "READ_TITLE": "Read Informed Consent",
+        "VALID_FROM": "Valid From"
+    },
+    "COURSE":{
+        "SINGULAR": "Course",
+        "PLURAL": "Courses",
+        "UPDATE_TITLE": "Update Informed Consent",
+        "NEW_TITLE": "Create new Informed Consent",
+        "CODE": "Code",
+        "DESCRIPTION": "Description",
+        "STARTS": "Starts",
+        "ENDS": "Ends",
+        "ACTIVITIES": "Activities"
+    },
+    "INSTRUMENT": {
+        "SINGULAR": "Instrument",
+        "PLURAL": "Instruments",
+        "ADD": "Add Instrument",
+        "ADD_ALTERNATIVE": "Add Alternative"
     }
 }

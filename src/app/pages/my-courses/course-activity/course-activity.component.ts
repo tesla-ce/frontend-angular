@@ -8,6 +8,8 @@ import { CourseConfig } from '../course.config';
 // import { and, createAjv, isControl, rankWith, scopeEndsWith } from '@jsonforms/core';
 import { NbWindowService } from '@nebular/theme';
 import { AuthService } from '../../../@core/auth/auth.service';
+import { TranslateService } from '@ngx-translate/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'ngx-course-activity',
@@ -45,6 +47,8 @@ export class CourseActivityComponent implements OnInit {
     private windowService: NbWindowService,
     private route: ActivatedRoute,
     private authService: AuthService,
+    public translate: TranslateService,
+    private location: Location,
     private apiCourseService: ApiCourseService,
     private router: Router) {
     this.route.params.subscribe(params => {
@@ -55,6 +59,8 @@ export class CourseActivityComponent implements OnInit {
       }
     });
   }
+  back() { this.location.back(); }
+
 
   ngOnInit(): void {
     this.apiCourseService.getCourseById(this.id).subscribe(instance => {

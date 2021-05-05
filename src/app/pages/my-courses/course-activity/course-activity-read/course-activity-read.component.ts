@@ -4,6 +4,8 @@ import { ApiCourseService } from '../../../../@core/data/api-course.service';
 import { NbWindowService } from '@nebular/theme';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { CourseActivityConfig } from '../course-activity.config';
+import { TranslateService } from '@ngx-translate/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'ngx-course-activity-read',
@@ -21,6 +23,8 @@ export class CourseActivityReadComponent implements OnInit {
   constructor(
     private windowService: NbWindowService,
     private route: ActivatedRoute,
+    public translate: TranslateService,
+    private location: Location,
     private authService: AuthService,
     private apiCourseService: ApiCourseService,
     private router: Router) {
@@ -29,6 +33,7 @@ export class CourseActivityReadComponent implements OnInit {
       this.id = params['activityId'];
     });
   }
+  back() { this.location.back(); }
 
   ngOnInit(): void {
     this.apiCourseService.getCourseActivity(this.course, this.id).subscribe(instance => {

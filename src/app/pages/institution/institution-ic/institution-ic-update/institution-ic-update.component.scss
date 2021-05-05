@@ -10,6 +10,15 @@ input#version-input-name,input#valid-from-input-name {
     }
 }
 
+.padding {
+    &-left {
+        &--4 {
+            padding-left:4px;
+        }
+    }
+}
+
+
 a {
     margin-right: 4px;
 }

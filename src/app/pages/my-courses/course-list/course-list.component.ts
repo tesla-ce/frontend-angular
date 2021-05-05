@@ -2,6 +2,7 @@ import { AuthService } from './../../../@core/auth/auth.service';
 // import { apiConstants } from './../../../@core/data/api-constants';
 import { Component, OnInit } from '@angular/core';
 import { ListCellActionsComponent } from '../../../crud/list/list-cell-actions.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-course-list',
@@ -56,7 +57,8 @@ export class CourseListComponent implements OnInit {
     addNew: false,
   };
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, public translate: TranslateService,
+  ) { }
 
   ngOnInit(): void {
     this.authService.getInstitution().subscribe(id => {

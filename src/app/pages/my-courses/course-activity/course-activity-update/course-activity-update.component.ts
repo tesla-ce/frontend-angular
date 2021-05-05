@@ -5,6 +5,8 @@ import { ApiCourseService } from '../../../../@core/data/api-course.service';
 import { NbWindowService } from '@nebular/theme';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { CourseActivityConfig } from '../course-activity.config';
+import { TranslateService } from '@ngx-translate/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'ngx-course-activity-update',
@@ -25,12 +27,15 @@ export class CourseActivityUpdateComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private apiCourseService: ApiCourseService,
+    public translate: TranslateService,
+    private location: Location,
     private router: Router) {
     this.route.params.subscribe(params => {
       this.course = params['id'];
       this.id = params['activityId'];
     });
   }
+  back() { this.location.back(); }
 
   enableDisableActivity(value): void {
     this.apiCourseService.putActivityActive(this.course, this.id, { enabled: value }).subscribe();

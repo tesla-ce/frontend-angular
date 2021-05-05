@@ -1,32 +1,44 @@
+
+<nb-card class="inline-form-card">
+    <nb-card-header class="flexRow padding-left--4">
+        <nb-actions size="small">
+            <nb-action>
+              <button nbTooltip="'ACTIONS.GO_BACK' | translate" class="btn btn-outline-primary btn-xs btn-icon" (click)="back()">                                       
+                   <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+              </button>
+            </nb-action>
+          </nb-actions>
+          {{'IC.READ_TITLE' | translate }}
+    </nb-card-header>
+  </nb-card>
+
+
 <nb-card>
-    <nb-card-header>Read Informed Consent</nb-card-header>
     <nb-card-body class="example-items-rows" *ngIf="!loading">
 
         <div class="col-sm-6">
             <div class="form-group">
-                <label [for]="fields['version'].inputName" class="label">{{fields['version'].label ||
-                    'version'}}</label>
+                <label [for]="fields['version'].inputName" class="label">{{'IC.VERSION' | translate }}</label>
                 <p>{{instance.version || ""}}</p>
-                <label [for]="fields['valid_from'].inputName" class="label">{{fields['valid_from'].label || 'valid
-                    from'}}</label>
+                <label [for]="fields['valid_from'].inputName" class="label">{{'IC.VALID_FROM' | translate }}</label>
                 <p>{{instance.valid_from || ""}}</p>
             </div>
         </div>
         <div class="col-sm-12">
             <div>
-                <label class="label">Informed Consent</label>
+                <label class="label">{{'IC.IC' | translate}}</label>
             </div>
             <nb-tabset *ngIf="languages?.length > 0" fullWidth>
                 <nb-tab *ngFor="let language of languages" tabTitle={{language.language}}>
                     <label *ngIf="language.pdf" class="label">PDF</label>
                     <div class="pdf-Download" *ngIf="language.pdf && language.html">
                         <p>{{language.title}}</p>
-                        <a [href]="language.pdf"  nbButton  download="language.title">Download</a>
+                        <a [href]="language.pdf"  nbButton  download="language.title">{{'ACTIONS.DOWNLOAD' | translate}}</a>
                     </div>
 
                     <div class="pdf-Download" *ngIf="language.pdf && !language.html">
                         <pdf-viewer [src]="language.pdf" [render-text]="true" style="display: block;"></pdf-viewer>
-                        <a  target="_blank"  [href]="language.pdf"  nbButton  download="language.title">Download</a>
+                        <a  target="_blank"  [href]="language.pdf"  nbButton  download="language.title">{{'ACTIONS.DOWNLOAD' | translate}}</a>
                     </div>
 
                     <div *ngIf="language.html">
@@ -37,6 +49,6 @@
             </nb-tabset>
         </div>
         <!-- <button *ngIf="!loading" disabled nbButton type="button" (click)="console.log('accepted')">Accept</button> -->
-        <button *ngIf="!loading" disabled="checkDisabled(instance.valid_from)" nbButton type="button" (click)="goToEdit()">EDIT</button>
+        <button *ngIf="!loading" disabled="checkDisabled(instance.valid_from)" nbButton type="button" (click)="goToEdit()">{{'ACTIONS.EDIT' | translate}}</button>
     </nb-card-body>
 </nb-card>

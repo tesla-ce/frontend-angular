@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
 import { NbWindowService } from '@nebular/theme';
+import { TranslateService } from '@ngx-translate/core';
 import { ApiCourseService } from '../../../../@core/data/api-course.service';
 
 @Component({
@@ -23,6 +24,7 @@ export class CourseActivityInstrumentComponent implements OnInit {
 
   constructor(
     private windowService: NbWindowService,
+    public translate: TranslateService,
     private apiCourseService: ApiCourseService,
   ) {
     // this.route.params.subscribe(params => {

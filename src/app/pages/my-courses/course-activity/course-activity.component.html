@@ -1,30 +1,39 @@
+
+<nb-card class="inline-form-card">
+    <nb-card-header class="flexRow padding-left--4">
+        <nb-actions size="small">
+            <nb-action>
+              <button nbTooltip="'ACTIONS.GO_BACK' | translate" class="btn btn-outline-primary btn-xs btn-icon" (click)="back()">                                        
+                <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+            </button>
+            </nb-action>
+          </nb-actions>
+          {{'COURSE.SINGULAR' | translate }}
+    </nb-card-header>
+  </nb-card>
+
 <nb-card>
-    <nb-card-header>Course</nb-card-header>
     <nb-card-body class="example-items-rows" *ngIf="!loading">
 
         <div class="col-sm-12">
             <div class="form-group">
                 <div class="form-group-row">
                     <div>
-                        <label [for]="fields['code'].inputName" class="label">{{fields['code'].label ||
-                            'code'}}</label>
+                        <label [for]="fields['code'].inputName" class="label">{{'COURSE.CODE' | translate}}</label>
                         <p>{{instance.code || ""}}</p>
                     </div>
                     <div class="form-group-starEnd">
                         <div>
-                            <label [for]="fields['start'].inputName" class="label">{{fields['start'].label || 'valid
-                                from'}}</label>
+                            <label [for]="fields['start'].inputName" class="label">{{'COURSE.STARTS' | translate}}</label>
                             <p>{{instance.start || ""}}</p>
                         </div>
                         <div>
-                            <label [for]="fields['end'].inputName" class="label">{{fields['end'].label || 'valid
-                                from'}}</label>
+                            <label [for]="fields['end'].inputName" class="label">{{'COURSE.ENDS' | translate}}</label>
                             <p>{{instance.end || ""}}</p>
                         </div>
                     </div>
                 </div>
-                <label [for]="fields['description'].inputName" class="label">{{fields['description'].label || 'valid
-                    from'}}</label>
+                <label [for]="fields['description'].inputName" class="label">{{'COURSE.DESCRIPTION' | translate}}</label>
                 <p>{{instance.description || ""}}</p>
             </div>
         </div>

@@ -12,6 +12,7 @@ import {
   NbFormFieldModule,
   NbTabsetModule,
   NbToggleModule,
+  NbActionsModule,
 } from '@nebular/theme';
 
 // import { CourseReadRoutingModule } from './course-read-routing.module';
@@ -28,6 +29,7 @@ import { CourseActivityModule } from '../course-activity/course-activity.module'
 import { CourseActivityListComponent } from '../course-activity/course-activity-list/course-activity-list.component';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { SharedModule } from '../../../shared/shared.module';
 
 
 @NgModule({
@@ -48,10 +50,12 @@ import { BrowserModule } from '@angular/platform-browser';
     NbFormFieldModule,
     RxReactiveFormsModule,
     NbIconModule,
+    NbActionsModule,
     ListModule,
     CreateModule,
     NbTabsetModule,
     CourseActivityModule,
+    SharedModule,
   ],
   declarations: [
     // DataDisplayComponent,

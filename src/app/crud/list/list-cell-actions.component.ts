@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
+import { TranslateService } from '@ngx-translate/core';
 import { ViewCell } from 'ng2-smart-table';
 import { DeleteDialogComponent } from './delete-dialog.component';
 
@@ -22,6 +23,7 @@ export class ListCellActionsComponent implements ViewCell, OnInit {
   }
 
   constructor(
+    public translate: TranslateService,
     private route: ActivatedRoute,
     private router: Router,
     private dialog: NbDialogService,
@@ -29,7 +31,7 @@ export class ListCellActionsComponent implements ViewCell, OnInit {
 
   read() {
     const path = [];
-    if (this.value && this.value.read && this.value.read.path ) path.push(this.value.read.path);
+    if (this.value && this.value.read && this.value.read.path) path.push(this.value.read.path);
     path.push(this.rowData.id);
     this.router.navigate(path, { relativeTo: this.route });
   }
