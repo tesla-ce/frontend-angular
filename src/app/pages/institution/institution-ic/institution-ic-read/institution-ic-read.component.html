@@ -21,7 +21,7 @@
                 <label [for]="fields['version'].inputName" class="label">{{'IC.VERSION' | translate }}</label>
                 <p>{{instance.version || ""}}</p>
                 <label [for]="fields['valid_from'].inputName" class="label">{{'IC.VALID_FROM' | translate }}</label>
-                <p>{{instance.valid_from || ""}}</p>
+                <p>{{instance.valid_from  | date }}</p>
             </div>
         </div>
         <div class="col-sm-12">

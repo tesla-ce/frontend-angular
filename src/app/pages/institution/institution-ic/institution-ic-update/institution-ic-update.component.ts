@@ -99,9 +99,10 @@ export class InstitutionIcUpdateComponent implements OnInit {
 
     this.apiIcService.getIcById(this.id).subscribe(instance => {
       this.instance = instance;
+      console.log(instance)
       this.formControls = {};
       this.loading = false;
-      Object.keys(this.fields).map((key) => {
+      ["version", "valid_from"].map((key) => {
         this.formControls[key] = new FormControl({
           value: this.instance[key] || this.fields[key].defaultValue || null,
           disabled: !this.fields[key].editable,
@@ -243,6 +244,33 @@ export class InstitutionIcUpdateComponent implements OnInit {
               duration: 2000,
             });
         });
+    }
+
+    const valuesIC = this.formGrupIC.value;
+
+    if (valuesIC.version !== this.instance.version || JSON.stringify(valuesIC.valid_from) !== JSON.stringify(this.instance.valid_from)) {
+      this.apiIcService.updateIc(this.instance.id, valuesIC).subscribe((ic: Ic) => {
+        this.toastrService.show(
+          'Ic Updated',
+          valuesIC.version,
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'success',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+      }, error => {
+        this.errors.next(error.error);
+        this.toastrService.show(
+          'Error saving',
+          'ic',
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'danger',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+      })
     }
   }
 }

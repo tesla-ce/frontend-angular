@@ -2,14 +2,15 @@
     <nb-card-header class="flexRow padding-left--4">
         <nb-actions size="small">
             <nb-action>
-              <button nbTooltip="'ACTIONS.GO_BACK' | translate" class="btn btn-outline-primary btn-xs btn-icon" (click)="back()">                                        
-                <nb-icon icon="arrow-ios-back-outline"></nb-icon>
-            </button>
+                <button nbTooltip="'ACTIONS.GO_BACK' | translate" class="btn btn-outline-primary btn-xs btn-icon"
+                    (click)="back()">
+                    <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+                </button>
             </nb-action>
-          </nb-actions>
-          {{'IC.UPDATE_TITLE' | translate }}
+        </nb-actions>
+        {{'IC.UPDATE_TITLE' | translate }}
     </nb-card-header>
-  </nb-card>
+</nb-card>
 
 <nb-card>
     <nb-card-body class="example-items-rows" *ngIf="!loading">
@@ -27,15 +28,18 @@
                         [required]="fields['version'].required || false"
                         [status]="formErrors['version']?'danger':'basic'">
                     <errors class="text-danger">{{formErrors['version']?formErrors['version']:''}}</errors>
-                    <label [for]="fields['valid_from'].inputName" class="label">{{'IC.VALID_FROM' | translate }}</label>
-                    <input nbInput fullWidth type="text" [id]="fields['valid_from'].inputName || 'valid_from'"
-                        [name]="fields['valid_from'].inputName || 'valid_from'" [formControlName]="'valid_from'"
-                        [placeholder]="fields['valid_from'].placeholder || null"
-                        [attr.disabled]="fields['valid_from'].disabled || null"
-                        [attr.email]="fields['valid_from'].validator == 'email' || null"
-                        [required]="fields['valid_from'].required || false"
-                        [status]="formErrors['valid_from']?'danger':'basic'">
-                    <errors class="text-danger">{{formErrors['valid_from']?formErrors['valid_from']:''}}</errors>
+                    <div style="display: flex; flex-direction: column; margin-top: 8px;">
+                        <label [for]="fields['valid_from'].inputName" class="label">{{'IC.VALID_FROM' | translate
+                            }}</label>
+                        <input nbInput [formControlName]="'valid_from'"
+                            [placeholder]="fields['valid_from'].placeholder || null" [nbDatepicker]="dateTimePicker"
+                            [id]="fields['valid_from'].inputName || 'valid_from'"
+                            [name]="fields['valid_from'].inputName || 'valid_from'"
+                            [required]="fields['valid_from'].required || false"
+                            [status]="formErrors['valid_from']?'danger':'basic'">
+                        <nb-datepicker #dateTimePicker></nb-datepicker>
+                        <errors class="text-danger">{{formErrors['valid_from']?formErrors['valid_from']:''}}</errors>
+                    </div>
                 </div>
             </div>
         </form>
@@ -44,7 +48,8 @@
                 <label class="label">{{'IC.IC' | translate}}</label>
             </div>
             <div class="flexRow mb-8">
-                <nb-select id="languageSelect" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" (selectedChange)="pickedNewLanguage($event)">
+                <nb-select id="languageSelect" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                    (selectedChange)="pickedNewLanguage($event)">
                     <nb-option *ngFor="let option of options; let i = index" value="{{option}}">
                         {{option}}
                     </nb-option>
@@ -58,14 +63,16 @@
                         <div>
                             <div class="form-group flexRow flexRow-justify--between">
                                 <div *ngIf="hasDocument[language.language].has === false">
-                                    <label [for]="documentFieldsModel.pdf.inputName" class="label">{{'IC.PDF_UPLOAD' | translate }}</label>
+                                    <label [for]="documentFieldsModel.pdf.inputName" class="label">{{'IC.PDF_UPLOAD' |
+                                        translate }}</label>
                                     <input nbInput fullWidth [writeFile]="true" type="file" accept="application/pdf"
                                         [name]="documentFieldsModel.pdf.inputName + language.language || 'pdf'"
                                         [formControlName]="documentFieldsModel.pdf.formControlName + language.language"
                                         status="basic">
                                 </div>
                                 <div *ngIf="hasDocument[language.language].has === true">
-                                    <label [for]="documentFieldsModel.pdf.inputName" class="label">{{'IC.PDF_FILE' | translate }}</label>
+                                    <label [for]="documentFieldsModel.pdf.inputName" class="label">{{'IC.PDF_FILE' |
+                                        translate }}</label>
                                     <p>{{hasDocument[language.language].title}}</p>
                                     <a target="_blank" [href]="language.pdf" nbButton download>
                                         <nb-icon icon="download-outline"></nb-icon>
@@ -102,9 +109,9 @@
     </nb-card-body>
 </nb-card>
 
-<ng-template  #escClose>
-        <p>{{'IC.DELETE_ALERT_1' | translate }} <strong>{{toDelete}}</strong>{{'IC.DELETE_ALERT_2' | translate }}</p>
-        <button *ngIf="!loading" nbButton type="button" (click)="delete()">
-            {{'ACTIONS.DELETE' | translate}}
-        </button>
+<ng-template #escClose>
+    <p>{{'IC.DELETE_ALERT_1' | translate }} <strong>{{toDelete}}</strong>{{'IC.DELETE_ALERT_2' | translate }}</p>
+    <button *ngIf="!loading" nbButton type="button" (click)="delete()">
+        {{'ACTIONS.DELETE' | translate}}
+    </button>
 </ng-template>

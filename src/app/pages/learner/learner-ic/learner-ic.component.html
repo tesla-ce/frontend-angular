@@ -46,7 +46,7 @@
                     </div>
                     <div class="footer" >
                         <label [for]="fields['valid_from'].inputName" class="label">{{"IC.VALID_FROM" | translate}}:</label>
-                        <p>{{instance.valid_from || ""}}</p>
+                        <p>{{instance.valid_from | date}}</p>
                     </div>
                 </div>
                 <a *ngIf="languages[selectedLanguage].pdf" class="download" [href]="languages[selectedLanguage].pdf"

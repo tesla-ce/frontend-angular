@@ -24,7 +24,7 @@ export const InstitutionIcConfig = {
       key: 'version',
       creable: true,
       showable: true,
-      editable: false,
+      editable: true,
       dataType: 'string',
       label: 'VERSION',
       inputType: 'text',
@@ -36,7 +36,7 @@ export const InstitutionIcConfig = {
     valid_from: {
       creable: true,
       showable: true,
-      editable: false,
+      editable: true,
       key: 'valid_from',
       dataType: 'dateTime',
       withTime: false,

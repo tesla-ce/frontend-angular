@@ -10,6 +10,7 @@ import {
   NbFormFieldModule,
   NbTabsetModule,
   NbActionsModule,
+  NbDatepickerModule,
 } from '@nebular/theme';
 
 import { InstitutionIcComponent } from './institution-ic.component';
@@ -51,6 +52,7 @@ import { SharedModule } from '../../../shared/shared.module';
     CKEditorModule,
     NbTabsetModule,
     PdfViewerModule,
+    NbDatepickerModule,
     SharedModule,
   ],
   declarations: [

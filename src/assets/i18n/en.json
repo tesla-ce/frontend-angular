@@ -12,7 +12,8 @@
         "SUBMIT": "Submit",
         "SAVE": "Save",
         "DOWNLOAD": "Download",
-        "ADD": "Add"
+        "ADD": "Add",
+        "NEW": "New"
     },
     "ETHICAL_WARNING": {
         "ACTIVE_INSTRUMENTS": "The following instruments are enabled",

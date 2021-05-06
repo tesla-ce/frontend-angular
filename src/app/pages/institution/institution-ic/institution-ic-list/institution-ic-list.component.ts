@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 // import { apiConstants } from '../../../../@core/data/api-constants';
 import { ListCellActionsComponent } from '../../../../crud/list/list-cell-actions.component';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'ngx-institution-ic-list',
@@ -31,6 +33,9 @@ export class InstitutionIcListComponent implements OnInit {
       },
       valid_from: {
         title: 'Valid from',
+        valuePrepareFunction: value => {
+          return this.datePipe.transform(value)
+        }
       },
     },
     actions: {
@@ -46,11 +51,15 @@ export class InstitutionIcListComponent implements OnInit {
   };
 
 
-  constructor(private authService: AuthService, public translate: TranslateService,
+  constructor(private authService: AuthService, private datePipe: DatePipe, private router: Router, public translate: TranslateService,
   ) { }
 
   ngOnInit(): void {
     this.authService.getInstitution().subscribe(id => this.endPoint = `/institution/${id}/ic`);
+  }
+
+  goNew = () => {
+    this.router.navigate(['/institution/institution-ic/create']);
   }
 
 }
