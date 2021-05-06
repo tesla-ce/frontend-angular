@@ -94,9 +94,14 @@ export class ApiIcService {
 
   // API: POST /ics/document/
   public createDocument(idIc, fields): Observable<any> {
+    const formData = new FormData();
+    formData.append('language', fields.language);
+    if (fields.pdf) formData.append('pdf', fields.pdf, fields.pdf?.name);
+    if (fields.html) formData.append('html', fields.html);
+    if (fields.language) formData.append('language', fields.language);
 
     return this.http
-      .post(this.endpointUrl + idIc + '/document/', fields).pipe(
+      .post(this.endpointUrl + idIc + '/document/', formData).pipe(
         map((data: any) => {
           // console.log('Create Document Response', data);
           if (data.status) {
@@ -114,6 +119,7 @@ export class ApiIcService {
     const formData = new FormData();
     formData.append('language', fields.language);
     if (fields.pdf) formData.append('pdf', fields.pdf, fields.pdf?.name);
+    // else formData.append('pdf', new Blob([], { type: 'text/plain' }));
     if (fields.html) formData.append('html', fields.html);
 
     return this.http

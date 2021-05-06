@@ -101,7 +101,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
       this.instance = instance;
       this.formControls = {};
       this.loading = false;
-      ["version", "valid_from"].map((key) => {
+      ['version', 'valid_from'].map((key) => {
         this.formControls[key] = new FormControl({
           value: this.instance[key] || this.fields[key].defaultValue || null,
           disabled: !this.fields[key].editable,
@@ -142,11 +142,11 @@ export class InstitutionIcUpdateComponent implements OnInit {
 
   deleteLenguage(language: string, index: number) {
     if (Object.keys(this.toCreate).indexOf(language) > -1) {
-      delete this.toCreate[language]
-      this.options.push(language)
+      delete this.toCreate[language];
+      this.options.push(language);
       this.languages.splice(index, 1);
       this.picked = null;
-      return
+      return;
     }
     this.toDelete = language;
 
@@ -182,9 +182,10 @@ export class InstitutionIcUpdateComponent implements OnInit {
 
     toUpdateKeys.map(key => {
       if (this.toUpdate[key].html !== values[`${this.documentFieldsModel.html.formControlName}${key}`] ||
-        values[`${this.documentFieldsModel.pdf.formControlName}${key}`]) {
+        !this.hasDocument[key].has) {
+        console.log("hello")
 
-        this.toUpdate[key].form = { pdf: values[`${this.documentFieldsModel.pdf.formControlName}${key}`]?.[0] };
+        this.toUpdate[key].form = { pdf: values[`${this.documentFieldsModel.pdf.formControlName}${key}`]?.[0] || undefined };
         this.toUpdate[key].form.html = values[`${this.documentFieldsModel.html.formControlName}${key}`] || '';
         this.toUpdate[key].form.language = key;
 
@@ -276,7 +277,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
             icon: 'save-outline',
             duration: 2000,
           });
-      })
+      });
     }
   }
 }

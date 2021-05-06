@@ -34,8 +34,8 @@ export class InstitutionIcListComponent implements OnInit {
       valid_from: {
         title: 'Valid from',
         valuePrepareFunction: value => {
-          return this.datePipe.transform(value)
-        }
+          return this.datePipe.transform(value);
+        },
       },
     },
     actions: {
