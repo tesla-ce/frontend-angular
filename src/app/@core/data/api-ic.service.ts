@@ -97,7 +97,7 @@ export class ApiIcService {
     const formData = new FormData();
     formData.append('language', fields.language);
     if (fields.pdf) formData.append('pdf', fields.pdf, fields.pdf?.name);
-    if (fields.html) formData.append('html', fields.html);
+    formData.append('html', fields.html || '');
     if (fields.language) formData.append('language', fields.language);
 
     return this.http
@@ -120,7 +120,7 @@ export class ApiIcService {
     formData.append('language', fields.language);
     if (fields.pdf) formData.append('pdf', fields.pdf, fields.pdf?.name);
     // else formData.append('pdf', new Blob([], { type: 'text/plain' }));
-    if (fields.html) formData.append('html', fields.html);
+    formData.append('html', fields.html || '');
 
     return this.http
       .put(this.endpointUrl + idIc + '/document/' + language + '/', formData,

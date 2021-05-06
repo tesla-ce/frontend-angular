@@ -182,8 +182,8 @@ export class InstitutionIcUpdateComponent implements OnInit {
 
     toUpdateKeys.map(key => {
       if (this.toUpdate[key].html !== values[`${this.documentFieldsModel.html.formControlName}${key}`] ||
-        !this.hasDocument[key].has) {
-        console.log("hello")
+        (!this.hasDocument[key].has && this.hasDocument[key].title) ||
+        values[`${this.documentFieldsModel.pdf.formControlName}${key}`]?.[0]) {
 
         this.toUpdate[key].form = { pdf: values[`${this.documentFieldsModel.pdf.formControlName}${key}`]?.[0] || undefined };
         this.toUpdate[key].form.html = values[`${this.documentFieldsModel.html.formControlName}${key}`] || '';
