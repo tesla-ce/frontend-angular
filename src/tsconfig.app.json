@@ -2,7 +2,7 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
-    "baseUrl": "./",
+    // "baseUrl": "./",
     "resolveJsonModule": true,
     "esModuleInterop": true
   },
@@ -16,5 +16,5 @@
     "../src/**/*.ts",
     "../node_modules/@nebular/**/*.ts",
     "../node_modules/@tesla-ce/icons/src/lib/nebular.icons.module.ts"
-  ]
+  ],
 }

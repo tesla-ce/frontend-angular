@@ -56,5 +56,5 @@ if (typeof SVGElement.prototype.contains === 'undefined') {
 }
 
 declare var require: any;
-(window as any).global = window;
 (window as any).process = require('process/browser');
+(window as any).global = window;
