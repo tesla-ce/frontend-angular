@@ -20,5 +20,19 @@
     "plugins": [
       { "name": "tslint-language-service"}
     ],
+    // "resolveJsonModule": true,
+    // "allowSyntheticDefaultImports": true,
   },
+  // "paths": {
+  //   "json-schema-ref-parser": ["node_modules/json-schema-ref-parser/dist/ref-parser.js"],
+  //   "stream": [
+  //     "node_modules/stream-browserify"
+  //   ],
+  //   "http": [
+  //     "node_modules/http-browserify"
+  //   ],
+  //   "https": [
+  //     "node_modules/https-browserify"
+  //   ],
+  // },
 }

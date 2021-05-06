@@ -7,6 +7,7 @@ import { SideMenuModule } from '../../side-menu/side-menu.module';
 import { DashboardDefaultComponent } from './dashboard-default/dashboard-default.component';
 import { NbButtonModule, NbCardModule, NbListModule, NbIconModule } from '@nebular/theme';
 import { SharedModule } from '../../shared/shared.module';
+import { JsonFormsModule } from '@jsonforms/angular';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { SharedModule } from '../../shared/shared.module';
     NbListModule,
     SharedModule,
     NbIconModule,
+    JsonFormsModule,
   ],
   declarations: [
     DashboardComponent,
