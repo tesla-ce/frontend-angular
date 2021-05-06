@@ -99,7 +99,6 @@ export class InstitutionIcUpdateComponent implements OnInit {
 
     this.apiIcService.getIcById(this.id).subscribe(instance => {
       this.instance = instance;
-      console.log(instance)
       this.formControls = {};
       this.loading = false;
       ["version", "valid_from"].map((key) => {
@@ -141,7 +140,14 @@ export class InstitutionIcUpdateComponent implements OnInit {
     this.picked = event;
   }
 
-  deleteLenguage(language: string) {
+  deleteLenguage(language: string, index: number) {
+    if (Object.keys(this.toCreate).indexOf(language) > -1) {
+      delete this.toCreate[language]
+      this.options.push(language)
+      this.languages.splice(index, 1);
+      this.picked = null;
+      return
+    }
     this.toDelete = language;
 
     this.windowRef = this.windowService.open(

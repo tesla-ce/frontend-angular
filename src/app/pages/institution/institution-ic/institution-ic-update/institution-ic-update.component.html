@@ -83,7 +83,7 @@
                                 </div>
                                 <div>
                                     <button *ngIf="!loading" nbButton type="button"
-                                        (click)="deleteLenguage(language.language)">
+                                        (click)="deleteLenguage(language.language, f)">
                                         <nb-icon icon="trash-2-outline"></nb-icon>
                                         {{'IC.LANGUAGE' | translate}}
                                     </button>
