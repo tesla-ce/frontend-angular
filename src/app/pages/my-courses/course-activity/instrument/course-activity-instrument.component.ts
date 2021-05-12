@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, TemplateRef, PipeTransform, Pipe } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { angularMaterialRenderers } from '@jsonforms/angular-material';
 import { NbWindowService } from '@nebular/theme';
 import { TranslateService } from '@ngx-translate/core';
 import { ApiCourseService } from '../../../../@core/data/api-course.service';
@@ -10,6 +12,7 @@ import { ApiCourseService } from '../../../../@core/data/api-course.service';
 })
 export class CourseActivityInstrumentComponent implements OnInit {
 
+  loading: boolean = true;
   idAi: string;
   instruments: any;
   addComponent: any;
@@ -20,25 +23,56 @@ export class CourseActivityInstrumentComponent implements OnInit {
   @Input() type: string = 'show';
   @Input() reload: Function;
 
+  courseId: any;
+  activityId: any;
+
   @ViewChild('escClose', { read: TemplateRef }) escCloseTemplate: TemplateRef<HTMLElement>;
+
+  renderers = angularMaterialRenderers;
+  dataschema: any =  {
+    'type': 'object',
+    'properties': {
+      'online': {
+        'type': 'boolean',
+        'title': 'Analyze learner identity during the assessment',
+        'default': true,
+      },
+      'offline': {
+        'type': 'boolean',
+        'title': 'Analyze learner identity on the delivered assessment',
+        'default': false,
+      },
+    },
+  };
+
+  data: any = {
+    'online': true,
+    'offline': false,
+  };
 
   constructor(
     private windowService: NbWindowService,
     public translate: TranslateService,
     private apiCourseService: ApiCourseService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
   }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.courseId = params['courseId'];
+      this.activityId = params['activityId'];
+    });
     this.apiCourseService.getAllInstruments().subscribe(instrumentList => {
       this.instruments = instrumentList;
-      console.log(instrumentList);
+      this.loading = false;
     });
   }
 
 
   addInstrument(isAlternativeOf) {
-    this.addComponent = { activityId: this.id, isAlternativeOf };
+    this.addComponent = { activityId: this.activityId, isAlternativeOf };
 
     this.addComponent.choices = this.instruments.filter(instrument => this.instance.inUseInstruments.indexOf(instrument.acronym) === -1);
 
@@ -51,7 +85,7 @@ export class CourseActivityInstrumentComponent implements OnInit {
 
   enableDisableInstrument(instrument): void {
     this.apiCourseService.putInstrumentActive(this.course,
-      this.id,
+      this.activityId,
       instrument.id,
       {
         active: !instrument.active,
@@ -65,12 +99,12 @@ export class CourseActivityInstrumentComponent implements OnInit {
 
   handleDeleteInstrument(instrument, hasAlternative) {
     if (hasAlternative) {
-      this.apiCourseService.deleteActivityInstrument(this.course, this.id, hasAlternative)
+      this.apiCourseService.deleteActivityInstrument(this.course, this.activityId, hasAlternative)
         .subscribe(response => {
           if (response) this.reload();
         });
     }
-    this.apiCourseService.deleteActivityInstrument(this.course, this.id, instrument)
+    this.apiCourseService.deleteActivityInstrument(this.course, this.activityId, instrument)
       .subscribe(response => {
         if (response) this.reload();
       });
@@ -86,10 +120,10 @@ export class CourseActivityInstrumentComponent implements OnInit {
     };
 
     if (isAlternative) {
-      this.apiCourseService.addActivityInstrument(this.course, this.id, data).subscribe(response => {
+      this.apiCourseService.addActivityInstrument(this.course, this.activityId, data).subscribe(response => {
         if (response) this.reload();
       });
-    } else this.apiCourseService.addActivityInstrument(this.course, this.id, data).subscribe(response => {
+    } else this.apiCourseService.addActivityInstrument(this.course, this.activityId, data).subscribe(response => {
       if (response) this.reload();
     });
 

@@ -35,6 +35,8 @@ export class CourseActivityReadComponent implements OnInit {
   }
   back() { this.location.back(); }
 
+  reports() { this.router.navigate(['report'], { relativeTo: this.route }); }
+
   ngOnInit(): void {
     this.apiCourseService.getCourseActivity(this.courseId, this.activityId).subscribe(instance => {
       this.apiCourseService.getActivityInstrument(this.courseId, this.activityId).subscribe(instrumentsArray => {

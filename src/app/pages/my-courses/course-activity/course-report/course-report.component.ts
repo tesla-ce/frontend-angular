@@ -18,7 +18,7 @@ import { AuthService } from '../../../../@core/auth/auth.service';
   styleUrls: ['./course-report.component.scss'],
 })
 export class CourseReportComponent implements OnInit {
-  id: number;
+  courseId: number;
   loading: boolean = true;
 
   public instance: Course;
@@ -53,8 +53,8 @@ export class CourseReportComponent implements OnInit {
     private apiCourseService: ApiCourseService,
     private router: Router) {
     this.route.params.subscribe(params => {
-      if (params['id'] != null) {
-        this.id = params['id'];
+      if (params['courseId'] != null) {
+        this.courseId = params['courseId'];
       } else {
         router.navigate(['../'], { relativeTo: this.route });
       }
@@ -64,7 +64,7 @@ export class CourseReportComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.apiCourseService.getCourseById(this.id).subscribe(instance => {
+    this.apiCourseService.getCourseById(this.courseId).subscribe(instance => {
       this.instance = instance;
       this.loading = false;
     });

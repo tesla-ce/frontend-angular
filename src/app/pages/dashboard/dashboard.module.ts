@@ -8,11 +8,7 @@ import { DashboardDefaultComponent } from './dashboard-default/dashboard-default
 import { NbButtonModule, NbCardModule, NbListModule, NbIconModule } from '@nebular/theme';
 import { SharedModule } from '../../shared/shared.module';
 import { JsonFormsModule } from '@jsonforms/angular';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
 
 @NgModule({
   imports: [
@@ -28,11 +24,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     NbIconModule,
     // json forms
     JsonFormsModule,
-    MatDialogModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatAutocompleteModule,
-    MatProgressSpinnerModule,
+    JsonFormsAngularMaterialModule,
   ],
   declarations: [
     DashboardComponent,

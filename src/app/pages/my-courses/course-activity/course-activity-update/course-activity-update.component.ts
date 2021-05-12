@@ -19,6 +19,7 @@ export class CourseActivityUpdateComponent implements OnInit {
   loading: boolean = true;
   instruments: any[];
   addComponent: any = {};
+  data: any = {};
 
   public instance: any;
   public fields = CourseActivityConfig.fields;

@@ -30,6 +30,13 @@ import { CourseActivityUpdateComponent } from './course-activity-update/course-a
 import { CourseActivityReadComponent } from './course-activity-read/course-activity-read.component';
 import { CourseActivityInstrumentComponent } from './instrument/course-activity-instrument.component';
 import { SharedModule } from '../../../shared/shared.module';
+import { JsonFormsModule } from '@jsonforms/angular';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -43,8 +50,6 @@ import { SharedModule } from '../../../shared/shared.module';
     NbButtonModule,
     NbInputModule,
     NbSelectModule,
-    // JsonFormsModule,
-    // JsonFormsAngularMaterialModule,
     NbToggleModule,
     NbFormFieldModule,
     RxReactiveFormsModule,
@@ -54,6 +59,14 @@ import { SharedModule } from '../../../shared/shared.module';
     NbActionsModule,
     NbTabsetModule,
     SharedModule,
+    // json forms
+    JsonFormsModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatAutocompleteModule,
+    MatCheckboxModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     // DataDisplayComponent,
