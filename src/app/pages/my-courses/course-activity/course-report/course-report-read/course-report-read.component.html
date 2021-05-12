@@ -12,16 +12,5 @@
                 <p> {{'COURSE.ENDS' | translate }}: {{instance.end || "Sense data de finalització"}}</p>
             </div>
         </div>
-        <!-- <p>AQUI ACTIVITY CONFIGURACIÓ</p> -->
-        <!-- <div class="instruments">
-                <label class="label">Instruments</label>
-            </div> -->
-
-            <div *ngIf="instance.instruments">
-                <ngx-course-activity-instrument 
-                class="width--max"
-                [instance]="instance"
-                ></ngx-course-activity-instrument>
-            </div>
     </nb-card-body>
 </nb-card>

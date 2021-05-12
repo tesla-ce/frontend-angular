@@ -1,15 +1,16 @@
 // import { DataDisplayComponent } from './control';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiCourseService } from '../../../@core/data/api-course.service';
-import { Course } from '../../../@core/models/course';
-import { CourseConfig } from '../course.config';
+import { ApiCourseService } from '../../../../@core/data/api-course.service';
+import { Course } from '../../../../@core/models/course';
+import { CourseConfig } from '../../course.config';
 // import { angularMaterialRenderers } from '@jsonforms/angular-material';
 // import { and, createAjv, isControl, rankWith, scopeEndsWith } from '@jsonforms/core';
 import { NbWindowService } from '@nebular/theme';
-import { AuthService } from '../../../@core/auth/auth.service';
+
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
+import { AuthService } from '../../../../@core/auth/auth.service';
 
 @Component({
   selector: 'ngx-course-report',

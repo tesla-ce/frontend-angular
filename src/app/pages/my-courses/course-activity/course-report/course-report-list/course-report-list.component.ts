@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ListCellActionsComponent } from '../../../../crud/list/list-cell-actions.component';
-import { AuthService } from '../../../../@core/auth/auth.service';
+import { ListCellActionsComponent } from '../../../../../crud/list/list-cell-actions.component';
+import { AuthService } from '../../../../../@core/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 

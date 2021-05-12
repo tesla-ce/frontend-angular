@@ -15,7 +15,7 @@ import { Location } from '@angular/common';
 })
 export class CourseActivityUpdateComponent implements OnInit {
   course: any;
-  id: number;
+  courseId: number;
   loading: boolean = true;
   instruments: any[];
   addComponent: any = {};
@@ -31,19 +31,19 @@ export class CourseActivityUpdateComponent implements OnInit {
     private location: Location,
     private router: Router) {
     this.route.params.subscribe(params => {
-      this.course = params['id'];
-      this.id = params['activityId'];
+      this.course = params['courseId'];
+      this.courseId = params['activityId'];
     });
   }
   back() { this.location.back(); }
 
   enableDisableActivity(value): void {
-    this.apiCourseService.putActivityActive(this.course, this.id, { enabled: value }).subscribe();
+    this.apiCourseService.putActivityActive(this.course, this.courseId, { enabled: value }).subscribe();
   }
 
   ngOnInit(): void {
-    this.apiCourseService.getCourseActivity(this.course, this.id).subscribe(instance => {
-      this.apiCourseService.getActivityInstrument(this.course, this.id).subscribe(instrumentsArray => {
+    this.apiCourseService.getCourseActivity(this.course, this.courseId).subscribe(instance => {
+      this.apiCourseService.getActivityInstrument(this.course, this.courseId).subscribe(instrumentsArray => {
         if (instrumentsArray.length > 0) {
 
           const instrumentsOrder = [];

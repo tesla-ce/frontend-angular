@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./course-activity-list.component.scss'],
 })
 export class CourseActivityListComponent implements OnInit {
-  course: number;
+  courseId: number;
   endPoint: string;
   loading: boolean = true;
   settings = {
@@ -69,8 +69,8 @@ export class CourseActivityListComponent implements OnInit {
   constructor(private authService: AuthService, public translate: TranslateService,
     private location: Location, private router: Router, private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
-      if (params['id'] != null) {
-        this.course = params['id'];
+      if (params['courseId'] != null) {
+        this.courseId = params['courseId'];
       } else {
         router.navigate(['../'], { relativeTo: this.route });
       }
@@ -79,8 +79,8 @@ export class CourseActivityListComponent implements OnInit {
   back() { this.location.back(); }
 
   ngOnInit(): void {
-    this.authService.getInstitution().subscribe(id => {
-      this.endPoint = `/institution/${id}/course/${this.course}/activity`;
+    this.authService.getInstitution().subscribe(institutionId => {
+      this.endPoint = `/institution/${institutionId}/course/${this.courseId}/activity`;
       this.loading = false;
     });
   }

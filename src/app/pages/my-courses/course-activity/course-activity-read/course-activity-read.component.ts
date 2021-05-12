@@ -13,8 +13,8 @@ import { Location } from '@angular/common';
   styleUrls: ['./course-activity-read.component.scss'],
 })
 export class CourseActivityReadComponent implements OnInit {
-  course: any;
-  id: number;
+  courseId: any;
+  activityId: number;
   loading: boolean = true;
 
   public instance: any;
@@ -29,15 +29,15 @@ export class CourseActivityReadComponent implements OnInit {
     private apiCourseService: ApiCourseService,
     private router: Router) {
     this.route.params.subscribe(params => {
-      this.course = params['id'];
-      this.id = params['activityId'];
+      this.courseId = params['courseId'];
+      this.activityId = params['activityId'];
     });
   }
   back() { this.location.back(); }
 
   ngOnInit(): void {
-    this.apiCourseService.getCourseActivity(this.course, this.id).subscribe(instance => {
-      this.apiCourseService.getActivityInstrument(this.course, this.id).subscribe(instrumentsArray => {
+    this.apiCourseService.getCourseActivity(this.courseId, this.activityId).subscribe(instance => {
+      this.apiCourseService.getActivityInstrument(this.courseId, this.activityId).subscribe(instrumentsArray => {
         if (instrumentsArray.length > 0) {
 
           const instrumentsOrder = [];

@@ -52,8 +52,8 @@ export class CourseReadComponent implements OnInit {
     private apiCourseService: ApiCourseService,
     private router: Router) {
     this.route.params.subscribe(params => {
-      if (params['id'] != null) {
-        this.id = params['id'];
+      if (params['courseId'] != null) {
+        this.id = params['courseId'];
       } else {
         router.navigate(['../'], { relativeTo: this.route });
       }

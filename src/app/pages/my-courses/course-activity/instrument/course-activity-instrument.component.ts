@@ -27,22 +27,12 @@ export class CourseActivityInstrumentComponent implements OnInit {
     public translate: TranslateService,
     private apiCourseService: ApiCourseService,
   ) {
-    // this.route.params.subscribe(params => {
-    //   if (params['activityId'] != null) {
-    //     const brokenURL = this.router.url.split("/")
-    //     this.course = parseInt(brokenURL[3]);
-    //     this.id = params['activityId']
-    //   }
-    //   else {
-    //     console.log(params)
-    //     // router.navigate(['../'], { relativeTo: this.route });
-    //   }
-    // });
   }
 
   ngOnInit() {
     this.apiCourseService.getAllInstruments().subscribe(instrumentList => {
       this.instruments = instrumentList;
+      console.log(instrumentList);
     });
   }
 
