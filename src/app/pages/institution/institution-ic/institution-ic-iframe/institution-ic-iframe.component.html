@@ -5,7 +5,7 @@
             <div>
                 <label [for]="fields['version'].inputName" class="label">{{fields['version'].label ||
                     'version'}}</label>
-                <p>{{instance.version || "Unknown"}}</p>
+                <p>{{instance.version || ""}}</p>
             </div>
             <nb-select id="languageSelect" placeholder="Pick language" (selectedChange)="pickedLanguage($event)"
                 [(selected)]="selectedLanguage">
@@ -16,7 +16,7 @@
         </div>
         <label [for]="fields['valid_from'].inputName" class="label">{{fields['valid_from'].label || 'valid
             from'}}</label>
-        <p>{{instance.valid_from || "Unknown"}}</p>
+        <p>{{instance.valid_from || ""}}</p>
         <div class="col-sm-12 ic">
             <div>
                 <label class="label">Informed Consent</label>

@@ -12,6 +12,7 @@ import {
   NbFormFieldModule,
   NbTabsetModule,
   NbToggleModule,
+  NbActionsModule,
 } from '@nebular/theme';
 
 import { CourseComponent } from './course.component';
@@ -26,6 +27,7 @@ import { CreateModule } from '../../crud/create/create.module';
 import { CourseListComponent } from './course-list/course-list.component';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -45,11 +47,13 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     NbFormFieldModule,
     RxReactiveFormsModule,
     NbIconModule,
+    NbActionsModule,
     ListModule,
     CreateModule,
     CKEditorModule,
     NbTabsetModule,
     PdfViewerModule,
+    SharedModule,
   ],
   declarations: [
     CourseComponent,

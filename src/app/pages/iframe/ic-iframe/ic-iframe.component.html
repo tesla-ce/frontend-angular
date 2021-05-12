@@ -41,13 +41,13 @@
                     <div class="footer" >
                         <label [for]="fields['version'].inputName" class="label">{{fields['version'].label ||
                             'version'}}:</label>
-                        <p>{{instance.version || "Unknown"}}</p>
+                        <p>{{instance.version || ""}}</p>
                     </div>
                     <div class="footer" >
                         <label [for]="fields['valid_from'].inputName" class="label">{{fields['valid_from'].label ||
                             'valid
                             from'}}:</label>
-                        <p>{{instance.valid_from || "Unknown"}}</p>
+                        <p>{{instance.valid_from || ""}}</p>
                     </div>
                 </div>
                 <a *ngIf="languages[selectedLanguage].pdf" class="download" [href]="languages[selectedLanguage].pdf"

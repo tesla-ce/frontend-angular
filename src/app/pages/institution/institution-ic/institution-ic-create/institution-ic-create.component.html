@@ -1,5 +1,18 @@
+
+<nb-card class="inline-form-card">
+  <nb-card-header class="flexRow padding-left--4">
+      <nb-actions size="small">
+          <nb-action>
+            <button nbTooltip="'ACTIONS.GO_BACK' | translate" class="btn btn-outline-primary btn-xs btn-icon" (click)="back()">                                       
+                 <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+            </button>
+          </nb-action>
+        </nb-actions>
+        {{'IC.NEW_TITLE' | translate }}
+  </nb-card-header>
+</nb-card>
+
 <nb-card>
-    <nb-card-header>Create new Informed Consent</nb-card-header>
     <nb-card-body class="example-items-rows">
         <!-- <ngx-create (save)="onSave($event)" [fields]="fields" [errors]="errors"></ngx-create>         -->
         <ngx-create (save)="onSave($event)" [fields]="fields" [validator]="validator" [errors]="errors"></ngx-create>

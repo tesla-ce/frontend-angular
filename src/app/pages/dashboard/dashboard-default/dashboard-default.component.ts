@@ -3,6 +3,8 @@ import { AuthService } from '../../../@core/auth/auth.service';
 import { User } from '../../../@core/models/user';
 import { TranslateService } from '@ngx-translate/core';
 
+import { angularMaterialRenderers } from '@jsonforms/angular-material';
+
 @Component({
   selector: 'ngx-dashboard-default',
   styleUrls: ['./dashboard-default.component.scss'],
@@ -12,6 +14,29 @@ import { TranslateService } from '@ngx-translate/core';
 export class DashboardDefaultComponent implements OnInit {
 
   user: User;
+
+  dataschema: any =  {
+    'type': 'object',
+    'properties': {
+      'online': {
+        'type': 'boolean',
+        'title': 'Analyze learner identity during the assessment',
+        'default': true,
+      },
+      'offline': {
+        'type': 'boolean',
+        'title': 'Analyze learner identity on the delivered assessment',
+        'default': false,
+      },
+    },
+  };
+
+  data: any = {
+    'online': true,
+    'offline': false,
+  };
+
+  renderers = angularMaterialRenderers;
 
   constructor(
     private authService: AuthService,

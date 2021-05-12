@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { NbGlobalPhysicalPosition, NbToastrService, NbWindowService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { ApiIcService } from '../../../../@core/data/api-ic.service';
 import { Ic } from '../../../../@core/models/ic';
 import { InstitutionIcConfig } from '../institution-ic.config';
 import 'ckeditor';
 import { FormControl, FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'ngx-institution-ic-update',
@@ -14,7 +16,9 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./institution-ic-update.component.scss'],
 })
 export class InstitutionIcUpdateComponent implements OnInit {
+  @ViewChild('escClose', { read: TemplateRef }) escCloseTemplate: TemplateRef<HTMLElement>;
 
+  windowRef: any;
   public id: number;
   public instance: Ic;
   public fields = InstitutionIcConfig.fields;
@@ -26,6 +30,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
   formGrupDocument: FormGroup;
   toUpdate: any = {};
   toCreate: any = {};
+  toDelete: string;
   options: any[];
   languages: any[] = [];
   loading: boolean = true;
@@ -50,6 +55,9 @@ export class InstitutionIcUpdateComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private apiIcService: ApiIcService,
+    public translate: TranslateService,
+    private location: Location,
+    private windowService: NbWindowService,
     private toastrService: NbToastrService) {
     this.route.params.subscribe(params => {
       if (params['id'] != null) {
@@ -59,6 +67,9 @@ export class InstitutionIcUpdateComponent implements OnInit {
       }
     });
   }
+
+  back() { this.location.back(); }
+
 
   ngOnInit(): void {
     this.apiIcService.getIcDocument(this.id).subscribe(list => {
@@ -90,7 +101,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
       this.instance = instance;
       this.formControls = {};
       this.loading = false;
-      Object.keys(this.fields).map((key) => {
+      ['version', 'valid_from'].map((key) => {
         this.formControls[key] = new FormControl({
           value: this.instance[key] || this.fields[key].defaultValue || null,
           disabled: !this.fields[key].editable,
@@ -129,8 +140,33 @@ export class InstitutionIcUpdateComponent implements OnInit {
     this.picked = event;
   }
 
+  deleteLenguage(language: string, index: number) {
+    if (Object.keys(this.toCreate).indexOf(language) > -1) {
+      delete this.toCreate[language];
+      this.options.push(language);
+      this.languages.splice(index, 1);
+      this.picked = null;
+      return;
+    }
+    this.toDelete = language;
+
+    this.windowRef = this.windowService.open(
+      this.escCloseTemplate,
+      { title: 'Delete Language', hasBackdrop: true },
+    );
+  }
+
+  delete() {
+    this.windowRef.close();
+    this.apiIcService.deleteDocument(this.id, this.toDelete).subscribe(response => {
+      this.ngOnInit();
+    });
+
+  }
+
   update(): void {
     const values = this.formGrupDocument.value;
+    let hadError = false;
 
     const toCreateKeys = Object.keys(this.toCreate);
 
@@ -146,9 +182,10 @@ export class InstitutionIcUpdateComponent implements OnInit {
 
     toUpdateKeys.map(key => {
       if (this.toUpdate[key].html !== values[`${this.documentFieldsModel.html.formControlName}${key}`] ||
-        values[`${this.documentFieldsModel.pdf.formControlName}${key}`]) {
+        (!this.hasDocument[key].has && this.hasDocument[key].title) ||
+        values[`${this.documentFieldsModel.pdf.formControlName}${key}`]?.[0]) {
 
-        this.toUpdate[key].form = { pdf: values[`${this.documentFieldsModel.pdf.formControlName}${key}`]?.[0] };
+        this.toUpdate[key].form = { pdf: values[`${this.documentFieldsModel.pdf.formControlName}${key}`]?.[0] || undefined };
         this.toUpdate[key].form.html = values[`${this.documentFieldsModel.html.formControlName}${key}`] || '';
         this.toUpdate[key].form.language = key;
 
@@ -174,6 +211,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
             duration: 2000,
           });
       }, error => {
+        hadError = true;
         this.errors.next(error.error);
         this.toastrService.show(
           'Error saving',
@@ -201,6 +239,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
               duration: 2000,
             });
         }, error => {
+          hadError = true;
           this.errors.next(error.error);
           this.toastrService.show(
             'Error saving',
@@ -214,5 +253,31 @@ export class InstitutionIcUpdateComponent implements OnInit {
         });
     }
 
+    const valuesIC = this.formGrupIC.value;
+
+    if (valuesIC.version !== this.instance.version || JSON.stringify(valuesIC.valid_from) !== JSON.stringify(this.instance.valid_from)) {
+      this.apiIcService.updateIc(this.instance.id, valuesIC).subscribe((ic: Ic) => {
+        this.toastrService.show(
+          'Ic Updated',
+          valuesIC.version,
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'success',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+      }, error => {
+        this.errors.next(error.error);
+        this.toastrService.show(
+          'Error saving',
+          'ic',
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'danger',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+      });
+    }
   }
 }

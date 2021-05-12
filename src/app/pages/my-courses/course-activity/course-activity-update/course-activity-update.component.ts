@@ -5,6 +5,8 @@ import { ApiCourseService } from '../../../../@core/data/api-course.service';
 import { NbWindowService } from '@nebular/theme';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { CourseActivityConfig } from '../course-activity.config';
+import { TranslateService } from '@ngx-translate/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'ngx-course-activity-update',
@@ -13,10 +15,11 @@ import { CourseActivityConfig } from '../course-activity.config';
 })
 export class CourseActivityUpdateComponent implements OnInit {
   course: any;
-  id: number;
+  courseId: number;
   loading: boolean = true;
   instruments: any[];
   addComponent: any = {};
+  data: any = {};
 
   public instance: any;
   public fields = CourseActivityConfig.fields;
@@ -25,20 +28,23 @@ export class CourseActivityUpdateComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private apiCourseService: ApiCourseService,
+    public translate: TranslateService,
+    private location: Location,
     private router: Router) {
     this.route.params.subscribe(params => {
-      this.course = params['id'];
-      this.id = params['activityId'];
+      this.course = params['courseId'];
+      this.courseId = params['activityId'];
     });
   }
+  back() { this.location.back(); }
 
   enableDisableActivity(value): void {
-    this.apiCourseService.putActivityActive(this.course, this.id, { enabled: value }).subscribe();
+    this.apiCourseService.putActivityActive(this.course, this.courseId, { enabled: value }).subscribe();
   }
 
   ngOnInit(): void {
-    this.apiCourseService.getCourseActivity(this.course, this.id).subscribe(instance => {
-      this.apiCourseService.getActivityInstrument(this.course, this.id).subscribe(instrumentsArray => {
+    this.apiCourseService.getCourseActivity(this.course, this.courseId).subscribe(instance => {
+      this.apiCourseService.getActivityInstrument(this.course, this.courseId).subscribe(instrumentsArray => {
         if (instrumentsArray.length > 0) {
 
           const instrumentsOrder = [];

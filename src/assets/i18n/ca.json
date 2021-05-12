@@ -3,7 +3,8 @@
         "ACCEPT_CONSENT": "Acceptar",
         "CLEAR": "Neteja",
         "CLOSE": "Tanca",
-        "DECLINE_CONSENT": "Declinar"
+        "DECLINE_CONSENT": "Declinar",
+        "GO_BACK": "Ves a la pàgina anterior"
     },
     "ETHICAL_WARNING": {
         "ACTIVE_INSTRUMENTS": "Els següents instruments estan seleccionats",
