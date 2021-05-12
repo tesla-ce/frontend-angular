@@ -13,11 +13,11 @@ const routes: Routes = [{
       component: CourseListComponent,
     },
     {
-      path: ':id',
+      path: ':courseId',
       component: CourseReadComponent,
     },
     {
-      path: ':id/activity',
+      path: ':courseId/activity',
       loadChildren: () => import('./course-activity/course-activity.module')
         .then(m => m.CourseActivityModule),
     },

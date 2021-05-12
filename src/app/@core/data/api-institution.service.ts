@@ -1,5 +1,5 @@
 import { parseParams } from './../utils/utils';
-import { Institution } from './../models/user';
+import { Institution, InstitutionUser } from './../models/user';
 import { Injectable } from '@angular/core';
 import { } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -8,6 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { EnvService } from '../env/env.service';
 import { ApiService } from './api.service';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,11 +18,14 @@ export class ApiInstitutionService {
   apiUrl: string;
   endpoint: string = '/institution/';
   endpointUrl: string;
+  currentInstitution: string;
 
   constructor(
     private http: HttpClient,
+    private authService: AuthService,
     private envService: EnvService) {
     this.apiUrl = envService.apiUrl;
+    this.authService.getInstitution().subscribe(id => this.currentInstitution = id);
     this.endpointUrl = this.apiUrl + this.endpoint;
   }
 
@@ -34,6 +38,19 @@ export class ApiInstitutionService {
         map((institutions: Institution[]) => {
           if (institutions) return institutions;
           else throw institutions;
+        }),
+        catchError(this.handleError),
+      );
+  }
+
+  public getInstitutionUser(userId: string): Observable<InstitutionUser> {
+    return this.http
+      .get(`${this.endpointUrl}${this.currentInstitution}/learner/${userId}`)
+      .pipe(
+        map((user: InstitutionUser) => {
+          // console.log(ic);
+          if (user) return user;
+          else throw user;
         }),
         catchError(this.handleError),
       );

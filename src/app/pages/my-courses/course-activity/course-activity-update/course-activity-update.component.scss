@@ -14,6 +14,10 @@
         align-items: center;
     }
 
+    &--flex-end {
+        align-self: flex-end;
+    }
+
 }
 
 .width {
@@ -44,14 +48,3 @@
         }
 
 }
-
-.toggle {
-    align-items: start;
- }
-
-
-
-p {
-    margin-left: 8px;
-}
-

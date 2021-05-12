@@ -1,5 +1,5 @@
-p {
-    margin-left: 8px;
+label {
+    margin-right: 8px;
 }
 
 .form-group{
@@ -8,15 +8,16 @@ p {
     width: 100%;
     &-row {
         display: flex;
-        justify-content: space-between;
-
+        flex-direction: row;
     }
-    &-starEnd {
+    &-control-column {
         display: flex;
+        flex-direction: column;
+    }
 
-        div {
-            min-width: 120px;
-        }
+    &-control-row {
+        display: flex;
+        flex-direction: row;
     }
 }
 
@@ -56,5 +57,13 @@ p {
 
     &-jsonform {
         margin-left: 24px;
+    }
+}
+
+.padding {
+    &-left {
+        &--4 {
+            padding-left:4px;
+        }
     }
 }

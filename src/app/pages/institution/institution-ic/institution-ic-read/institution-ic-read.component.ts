@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiIcService } from '../../../../@core/data/api-ic.service';
@@ -20,6 +21,7 @@ export class InstitutionIcReadComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apiIcService: ApiIcService,
+    private location: Location,
     private router: Router) {
     this.route.params.subscribe(params => {
       if (params['id'] != null) {
@@ -33,6 +35,8 @@ export class InstitutionIcReadComponent implements OnInit {
   goToEdit(): void {
     this.router.navigate(['/institution/institution-ic/' + this.instance.id + '/update']);
   }
+
+  back() { this.location.back(); }
 
   ngOnInit(): void {
     this.apiIcService.getIcDocument(this.id).subscribe(list => {

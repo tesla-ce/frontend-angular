@@ -1,87 +1,117 @@
+<nb-card class="inline-form-card">
+    <nb-card-header class="flexRow padding-left--4">
+        <nb-actions size="small">
+            <nb-action>
+                <button nbTooltip="'ACTIONS.GO_BACK' | translate" class="btn btn-outline-primary btn-xs btn-icon"
+                    (click)="back()">
+                    <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+                </button>
+            </nb-action>
+        </nb-actions>
+        {{'IC.UPDATE_TITLE' | translate }}
+    </nb-card-header>
+</nb-card>
+
 <nb-card>
-    <nb-card-header>Update Informed Consent</nb-card-header>
     <nb-card-body class="example-items-rows" *ngIf="!loading">
-            <form [formGroup]="formGrupIC" fullWidth (ngSubmit)="onSave()">
-                
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label [for]="fields['version'].inputName" class="label">{{fields['version'].label || 'version'}}</label>
-                        <input nbInput fullWidth
-                                [type]="fields['version'].inputType || text"
-                                [id]="fields['version'].inputName || 'version'"
-                                [name]="fields['version'].inputName || 'version'"
-                                [formControlName]="'version'"
-                                [placeholder]="fields['version'].placeholder || null" 
-                                [attr.disabled]="fields['version'].disabled || null"
-                                [attr.email]="fields['version'].validator == 'email' || null"
-                                [required] = "fields['version'].required || false" 
-                                [status] = "formErrors['version']?'danger':'basic'" >
-                        <errors class="text-danger">{{formErrors['version']?formErrors['version']:''}}</errors>
-                        <label [for]="fields['valid_from'].inputName" class="label">{{fields['valid_from'].label || 'valid from'}}</label>
-                        <input nbInput fullWidth
-                                type="text"
-                                [id]="fields['valid_from'].inputName || 'valid_from'"
-                                [name]="fields['valid_from'].inputName || 'valid_from'"
-                                [formControlName]="'valid_from'"
-                                [placeholder]="fields['valid_from'].placeholder || null" 
-                                [attr.disabled]="fields['valid_from'].disabled || null"
-                                [attr.email]="fields['valid_from'].validator == 'email' || null"
-                                [required] = "fields['valid_from'].required || false" 
-                                [status] = "formErrors['valid_from']?'danger':'basic'" >
+        <form [formGroup]="formGrupIC" fullWidth (ngSubmit)="onSave()">
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label [for]="fields['version'].inputName" class="label">{{'IC.VERSION' | translate }}</label>
+                    <input nbInput fullWidth [type]="fields['version'].inputType || text"
+                        [id]="fields['version'].inputName || 'version'"
+                        [name]="fields['version'].inputName || 'version'" [formControlName]="'version'"
+                        [placeholder]="fields['version'].placeholder || null"
+                        [attr.disabled]="fields['version'].disabled || null"
+                        [attr.email]="fields['version'].validator == 'email' || null"
+                        [required]="fields['version'].required || false"
+                        [status]="formErrors['version']?'danger':'basic'">
+                    <errors class="text-danger">{{formErrors['version']?formErrors['version']:''}}</errors>
+                    <div style="display: flex; flex-direction: column; margin-top: 8px;">
+                        <label [for]="fields['valid_from'].inputName" class="label">{{'IC.VALID_FROM' | translate
+                            }}</label>
+                        <input nbInput [formControlName]="'valid_from'"
+                            [placeholder]="fields['valid_from'].placeholder || null" [nbDatepicker]="dateTimePicker"
+                            [id]="fields['valid_from'].inputName || 'valid_from'"
+                            [name]="fields['valid_from'].inputName || 'valid_from'"
+                            [required]="fields['valid_from'].required || false"
+                            [status]="formErrors['valid_from']?'danger':'basic'">
+                        <nb-datepicker #dateTimePicker></nb-datepicker>
                         <errors class="text-danger">{{formErrors['valid_from']?formErrors['valid_from']:''}}</errors>
                     </div>
                 </div>
-            </form>
-                <div class="col-sm-12">
-                    <div>
-                        <label class="label">Informed Consent</label>
-                    </div>
-                    <div class="flexRow mb-8">
-                        <nb-select  
-                        id="languageSelect"
-                        placeholder="Add Language"
-                        (selectedChange)="pickedNewLanguage($event)"
-                         >
-                        <nb-option *ngFor="let option of options; let i = index" value="{{option}}">
-                            {{option}}
-                        </nb-option>
-                    </nb-select>
-                    <button nbButton [disabled]="!picked" (click)="newLenguage()">Add</button>
-                    </div>
-                    <nb-tabset *ngIf="languages?.length > 0" fullWidth>
-                        <nb-tab  *ngFor="let language of languages" tabTitle={{language.language}}>
-                            <form [formGroup]="formGrupDocument" fullWidth>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <div  *ngIf="hasDocument[language.language].has === false" >
-                                    <label [for]="documentFieldsModel.pdf.inputName" class="label">Upload PDF file</label>
-                                    <input nbInput fullWidth
-                                    [writeFile]="true"
-                                            type="file"
-                                            accept="application/pdf"
-                                            [name]="documentFieldsModel.pdf.inputName + language.language || 'pdf'"
-                                            [formControlName]="documentFieldsModel.pdf.formControlName + language.language"
-                                            status = "basic" >
-                                        </div>
-                                    <div *ngIf="hasDocument[language.language].has === true"  >
-                                        <label [for]="documentFieldsModel.pdf.inputName" class="label">PDF file</label>
-                                        <p>{{hasDocument[language.language].title}}</p>
-                                        <button nbButton (click)="changePDF(language.language)">Change Document</button>
-                                    </div>
-                                    <!-- <errors class="text-danger">{{formErrors['file']?formErrors['file']:''}}</errors> -->
+            </div>
+        </form>
+        <div class="col-sm-12">
+            <div>
+                <label class="label">{{'IC.IC' | translate}}</label>
+            </div>
+            <div class="flexRow mb-8">
+                <nb-select id="languageSelect" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                    (selectedChange)="pickedNewLanguage($event)">
+                    <nb-option *ngFor="let option of options; let i = index" value="{{option}}">
+                        {{option}}
+                    </nb-option>
+                </nb-select>
+                <button nbButton [disabled]="!picked" (click)="newLenguage()"> {{'ACTIONS.ADD' | translate}}</button>
+            </div>
+            <nb-tabset *ngIf="languages?.length > 0" fullWidth>
+                <nb-tab *ngFor="let language of languages; let f = index" tabTitle={{language.language}}
+                    [active]="f === 0">
+                    <form [formGroup]="formGrupDocument" fullWidth>
+                        <div>
+                            <div class="form-group flexRow flexRow-justify--between">
+                                <div *ngIf="hasDocument[language.language].has === false">
+                                    <label [for]="documentFieldsModel.pdf.inputName" class="label">{{'IC.PDF_UPLOAD' |
+                                        translate }}</label>
+                                    <input nbInput fullWidth [writeFile]="true" type="file" accept="application/pdf"
+                                        [name]="documentFieldsModel.pdf.inputName + language.language || 'pdf'"
+                                        [formControlName]="documentFieldsModel.pdf.formControlName + language.language"
+                                        status="basic">
                                 </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="ckEditorConfig" class="label">Html</label>
-                                    <ckeditor fullWidth [formControlName]="documentFieldsModel.html.formControlName + language.language" [config]="ckEditorConfig"></ckeditor>
+                                <div *ngIf="hasDocument[language.language].has === true">
+                                    <label [for]="documentFieldsModel.pdf.inputName" class="label">{{'IC.PDF_FILE' |
+                                        translate }}</label>
+                                    <p>{{hasDocument[language.language].title}}</p>
+                                    <a target="_blank" [href]="language.pdf" nbButton download>
+                                        <nb-icon icon="download-outline"></nb-icon>
+                                    </a>
+                                    <button nbButton (click)="changePDF(language.language)">
+                                        <nb-icon icon="trash-2-outline"></nb-icon>
+                                    </button>
                                 </div>
+                                <div>
+                                    <button *ngIf="!loading" nbButton type="button"
+                                        (click)="deleteLenguage(language.language, f)">
+                                        <nb-icon icon="trash-2-outline"></nb-icon>
+                                        {{'IC.LANGUAGE' | translate}}
+                                    </button>
+                                </div>
+
+                                <!-- <errors class="text-danger">{{formErrors['file']?formErrors['file']:''}}</errors> -->
                             </div>
-                            <errors class="text-danger">{{formErrors['html']?formErrors['html']:''}}</errors>
-                        </form>
-                        </nb-tab>
-                    </nb-tabset>
-                </div>
-        <button *ngIf="!loading" nbButton type="button" (click)="update()">Submit</button>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="ckEditorConfig" class="label">Html</label>
+                                <ckeditor fullWidth
+                                    [formControlName]="documentFieldsModel.html.formControlName + language.language"
+                                    [config]="ckEditorConfig"></ckeditor>
+                            </div>
+                        </div>
+                        <errors class="text-danger">{{formErrors['html']?formErrors['html']:''}}</errors>
+                    </form>
+                </nb-tab>
+            </nb-tabset>
+        </div>
+        <button *ngIf="!loading" nbButton type="button" (click)="update()">{{'ACTIONS.SAVE' | translate}}</button>
     </nb-card-body>
 </nb-card>
+
+<ng-template #escClose>
+    <p>{{'IC.DELETE_ALERT_1' | translate }} <strong>{{toDelete}}</strong>{{'IC.DELETE_ALERT_2' | translate }}</p>
+    <button *ngIf="!loading" nbButton type="button" (click)="delete()">
+        {{'ACTIONS.DELETE' | translate}}
+    </button>
+</ng-template>

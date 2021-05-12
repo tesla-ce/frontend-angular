@@ -161,7 +161,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.menuService.navigateHome();
         return false;
       } else if (event.item.title === 'User Informed Consent') {
-        this.router.navigate(['/iframe/ic-iframe/2']);
+        this.router.navigate(['/learner/ic']);
         return false;
       }
     });

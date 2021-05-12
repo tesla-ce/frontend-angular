@@ -1,0 +1,11 @@
+/* place here your global styles */
+@import '../../../../node_modules/@tesla-ce/icons/src/lib/tesla.icons.component';
+
+.header {
+    display: flex;
+}
+
+.actions{
+    flex: 1;
+    text-align: right;
+}

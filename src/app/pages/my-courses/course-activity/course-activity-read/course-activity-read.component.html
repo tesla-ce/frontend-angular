@@ -1,18 +1,23 @@
 <nb-card *ngIf="!loading">
-    <nb-card-header class="flexbox flexbox--justify-between">{{instance.name}}
-        <nb-toggle class="toggle" (click)="enableDisableActivity(!instance.enabled)" [(ngModel)]="instance.enabled"
-            labelPosition="left" status="basic">
-        </nb-toggle>
+    <nb-card-header class="header">
+        {{ instance.name }}
+        <div class="actions">
+          <button nbButton outline status="primary" size="tiny" (click)="back()" class="back-button">
+              <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+          </button>
+        </div>
     </nb-card-header>
     <nb-card-body>
         <div class="flexbox--direction-column">
             <div class="flexbox--direction-column">
                 <p>{{instance.description || "Exemple descripció de l'activitat."}}</p>
-                <p>Start: {{instance.start || "Sense data d'inici"}}</p>
-                <p>End: {{instance.end || "Sense data de finalització"}}</p>
+                <p> {{'COURSE.STARTS' | translate }}: {{instance.start || "Sense data d'inici"}}</p>
+                <p> {{'COURSE.ENDS' | translate }}: {{instance.end || "Sense data de finalització"}}</p>
+                <button nbButton outline status="primary" (click)="reports()" class="back-button">{{'ACTIVITY_REPORTS' | translate }}</button>
+                <p></p>
             </div>
         </div>
-        <!-- <p>AQUI ACTIVITY CONFIGURACIÓ</p> -->
+        <!-- <p>TO DO ACTIVITY SETTINGS</p> -->
         <!-- <div class="instruments">
                 <label class="label">Instruments</label>
             </div> -->

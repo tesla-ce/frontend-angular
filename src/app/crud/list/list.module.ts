@@ -14,6 +14,7 @@ import { ListComponent } from './list.component';
 import { ListCellActionsComponent } from './list-cell-actions.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { DeleteDialogComponent } from './delete-dialog.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { DeleteDialogComponent } from './delete-dialog.component';
     NbInputModule,
     NbButtonModule,
     NbCardModule,
+    SharedModule,
     NbDialogModule,
   ],
   declarations: [
@@ -33,7 +35,7 @@ import { DeleteDialogComponent } from './delete-dialog.component';
     DeleteDialogComponent,
   ],
   exports: [
-      ListComponent,
+    ListComponent,
   ],
 })
 export class ListModule {

@@ -1,31 +1,37 @@
-<nb-card>
-    <nb-card-header>Course</nb-card-header>
+<nb-card class="inline-form-card"  *ngIf="!loading">
+    <nb-card-header class="header">
+          {{ instance.code }}
+          <div class="actions">
+            <button nbButton outline status="primary" size="tiny" (click)="back()" class="back-button">
+                <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+            </button>
+          </div>
+    </nb-card-header>
     <nb-card-body class="example-items-rows" *ngIf="!loading">
-
         <div class="col-sm-12">
             <div class="form-group">
                 <div class="form-group-row">
-                    <div>
-                        <label [for]="fields['code'].inputName" class="label">{{fields['code'].label ||
-                            'code'}}</label>
-                        <p>{{instance.code || "Unknown"}}</p>
-                    </div>
-                    <div class="form-group-starEnd">
-                        <div>
-                            <label [for]="fields['start'].inputName" class="label">{{fields['start'].label || 'valid
-                                from'}}</label>
-                            <p>{{instance.start || "Unknown"}}</p>
-                        </div>
-                        <div>
-                            <label [for]="fields['end'].inputName" class="label">{{fields['end'].label || 'valid
-                                from'}}</label>
-                            <p>{{instance.end || "Unknown"}}</p>
-                        </div>
+                    <div class="form-group-control-column">
+                        <label [for]="fields['description'].inputName" class="label">
+                            {{fields['description'].label}}</label>
+                        <p>{{instance.description || ""}}</p>
                     </div>
                 </div>
-                <label [for]="fields['description'].inputName" class="label">{{fields['description'].label || 'valid
-                    from'}}</label>
-                <p>{{instance.description || "Unknown"}}</p>
+                <div class="form-group-row">
+                    <div class="form-group-control-row"></div>
+                        <label [for]="fields['start'].inputName" class="label">
+                            {{fields['start'].label}}
+                        </label>
+                        <p>{{instance.start || ""}}</p>
+                    </div>
+                <div class="form-group-row">
+                    <div class="form-group-control-row">
+                        <label [for]="fields['end'].inputName" class="label">
+                            {{fields['end'].label}}
+                        </label>
+                        <p>{{instance.end || ""}}</p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-sm-12">

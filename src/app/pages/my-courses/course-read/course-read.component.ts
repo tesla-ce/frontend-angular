@@ -8,6 +8,8 @@ import { CourseConfig } from '../course.config';
 // import { and, createAjv, isControl, rankWith, scopeEndsWith } from '@jsonforms/core';
 import { NbWindowService } from '@nebular/theme';
 import { AuthService } from '../../../@core/auth/auth.service';
+import { Location } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-course-read',
@@ -45,16 +47,20 @@ export class CourseReadComponent implements OnInit {
     private windowService: NbWindowService,
     private route: ActivatedRoute,
     private authService: AuthService,
+    public translate: TranslateService,
+    private location: Location,
     private apiCourseService: ApiCourseService,
     private router: Router) {
     this.route.params.subscribe(params => {
-      if (params['id'] != null) {
-        this.id = params['id'];
+      if (params['courseId'] != null) {
+        this.id = params['courseId'];
       } else {
         router.navigate(['../'], { relativeTo: this.route });
       }
     });
   }
+
+  back() { this.location.back(); }
 
   ngOnInit(): void {
     this.apiCourseService.getCourseById(this.id).subscribe(instance => {
