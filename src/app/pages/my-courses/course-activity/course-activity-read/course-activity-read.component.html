@@ -1,11 +1,15 @@
 <nb-card *ngIf="!loading">
-    <nb-card-header class="header">
+    <nb-card-header>
+        <nb-actions>
+            <nb-action>
+                <button nbButton size="tiny" (click)="back()">
+                    <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+                </button>
+            </nb-action>
+            <nb-action>
+            </nb-action>
+        </nb-actions>
         {{ instance.name }}
-        <div class="actions">
-          <button nbButton outline status="primary" size="tiny" (click)="back()" class="back-button">
-              <nb-icon icon="arrow-ios-back-outline"></nb-icon>
-          </button>
-        </div>
     </nb-card-header>
     <nb-card-body>
         <div class="flexbox--direction-column">

@@ -49,6 +49,8 @@ import { MATERIAL_LIGHT_THEME } from './styles/material/theme.material-light';
 import { MATERIAL_DARK_THEME } from './styles/material/theme.material-dark';
 import { LogoComponent } from './components/logo/logo.component';
 import { SideMenuModule } from '../side-menu/side-menu.module';
+import { MATERIAL_UOC_THEME } from './styles/material/theme.material-uoc';
+import { MATERIAL_TESLA_THEME } from './styles/material/theme.material-tesla';
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -97,10 +99,21 @@ export class ThemeModule {
       providers: [
         ...NbThemeModule.forRoot(
           {
-            name: 'uoc',
+            name: 'material-uoc',
           },
-          [UOC_THEME, TESLA_CE_THEME, CUSTOM_THEME, DEFAULT_THEME, COSMIC_THEME,
-            CORPORATE_THEME, DARK_THEME, MATERIAL_LIGHT_THEME, MATERIAL_DARK_THEME],
+          [
+            UOC_THEME,
+            TESLA_CE_THEME,
+            CUSTOM_THEME,
+            DEFAULT_THEME,
+            COSMIC_THEME,
+            CORPORATE_THEME,
+            DARK_THEME,
+            MATERIAL_LIGHT_THEME,
+            MATERIAL_DARK_THEME,
+            MATERIAL_UOC_THEME,
+            MATERIAL_TESLA_THEME,
+          ],
         ).providers,
       ],
     };

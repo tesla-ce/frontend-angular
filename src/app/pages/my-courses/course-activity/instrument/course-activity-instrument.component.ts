@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, TemplateRef, PipeTransform, Pipe } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { angularMaterialRenderers } from '@jsonforms/angular-material';
 import { NbWindowService } from '@nebular/theme';
@@ -69,7 +69,6 @@ export class CourseActivityInstrumentComponent implements OnInit {
       this.loading = false;
     });
   }
-
 
   addInstrument(isAlternativeOf) {
     this.addComponent = { activityId: this.activityId, isAlternativeOf };

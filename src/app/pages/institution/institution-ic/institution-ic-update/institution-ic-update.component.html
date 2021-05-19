@@ -1,11 +1,12 @@
 <nb-card class="inline-form-card">
     <nb-card-header class="flexRow padding-left--4">
-        <nb-actions size="small">
+        <nb-actions>
             <nb-action>
-                <button nbTooltip="'ACTIONS.GO_BACK' | translate" class="btn btn-outline-primary btn-xs btn-icon"
-                    (click)="back()">
+                <button nbButton size="tiny" (click)="back()">
                     <nb-icon icon="arrow-ios-back-outline"></nb-icon>
                 </button>
+            </nb-action>
+            <nb-action>
             </nb-action>
         </nb-actions>
         {{'IC.UPDATE_TITLE' | translate }}

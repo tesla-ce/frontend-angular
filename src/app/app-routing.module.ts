@@ -19,31 +19,31 @@ export const routes: Routes = [
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module')
       .then(m => m.DashboardModule),
-    canActivate: [AuthGuardAuthenticated],
+    // canActivate: [AuthGuardAuthenticated],
   },
   {
     path: 'institution',
     loadChildren: () => import('./pages/institution/institution.module')
       .then(m => m.InstitutionModule),
-    canActivate: [AuthGuardAuthenticated],
+    // canActivate: [AuthGuardAuthenticated],
   },
   {
     path: 'system',
     loadChildren: () => import('./pages/system/admin.module')
       .then(m => m.AdminModule),
-    canActivate: [AuthGuardAuthenticated],
+    // canActivate: [AuthGuardAuthenticated],
   },
   {
     path: 'course',
     loadChildren: () => import('./pages/my-courses/course.module')
       .then(m => m.CourseModule),
-    canActivate: [AuthGuardAuthenticated],
+    // canActivate: [AuthGuardAuthenticated],
   },
   {
     path: 'learner',
     loadChildren: () => import('./pages/learner/learner.module')
       .then(m => m.LearnerModule),
-    canActivate: [AuthGuardAuthenticated],
+    // canActivate: [AuthGuardAuthenticated],
   },
   {
     path: 'auth',
