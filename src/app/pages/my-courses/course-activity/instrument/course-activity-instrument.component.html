@@ -38,19 +38,11 @@
                 </jsonforms>
             </div> -->
                     <div *ngIf="instrument.instrument.options_schema">
-                        <div>JSON FORMS START</div>
-                        <!-- <jsonforms 
-                            [schema]="instrument.instrument.options_schema"
-                            [(data)]="data"
-                            [renderers]="renderers"
-                        ></jsonforms> -->
                         <jsonforms 
-                            [schema]="dataschema" 
+                            [schema]="instrument.instrument.options_schema | jsonParse"
                             [(data)]="data"
                             [renderers]="renderers"
-                        ></jsonforms>
-                        <div>EXISTS {{instrument.instrument.options_schema}}</div>
-                        <div>JSON FORMS END</div>                        
+                        ></jsonforms>              
                     </div>
                     <button nbButton class="button button--align-self-end"
                         *ngIf="instruments && type != 'show' && !instrument.alternative_to && !instrument.hasAlternative && checkInstruments()"

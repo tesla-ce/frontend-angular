@@ -28,12 +28,23 @@ export class DashboardDefaultComponent implements OnInit {
         'title': 'Analyze learner identity on the delivered assessment',
         'default': false,
       },
+      'test_date_picker': {
+        'type': 'date',
+        'title' : 'This is a date picker test',
+      },
+      // 'test_string_picker': {
+      //   'type': 'string',
+      //   'title' : 'This is a string input',
+      // },
+      // 'test_number_picker': {
+      //   'type': 'number',
+      //   'title' : 'This is a number input',
+      // },
     },
   };
 
   data: any = {
-    'online': true,
-    'offline': false,
+
   };
 
   renderers = angularMaterialRenderers;

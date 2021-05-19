@@ -37,6 +37,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { JsonParsePipe } from '../../../@core/pipes/json-parse.pipe';
 
 
 @NgModule({
@@ -75,6 +76,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     CourseActivityReadComponent,
     CourseActivityUpdateComponent,
     CourseActivityInstrumentComponent,
+    JsonParsePipe,
   ],
   exports: [
     CourseActivityListComponent,
