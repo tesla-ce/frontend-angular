@@ -64,7 +64,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [{ title: 'Profile' }, { title: 'User Informed Consent' }, { title: 'Log out' }];
+  userMenu = [{ title: 'Profile' }, { title: 'Informed Consent' }, { title: 'Log out' }];
 
   // currentInstitution = this.authService.getInstitution().subscribe(id => id)
   // institutions = this.authService.getUserInstitutions().subscribe(list => list)
@@ -160,7 +160,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.authService.logOut();
         this.menuService.navigateHome();
         return false;
-      } else if (event.item.title === 'User Informed Consent') {
+      } else if (event.item.title === 'Informed Consent') {
         this.router.navigate(['/learner/ic']);
         return false;
       }
