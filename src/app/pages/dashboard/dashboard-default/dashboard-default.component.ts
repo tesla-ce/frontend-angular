@@ -29,7 +29,8 @@ export class DashboardDefaultComponent implements OnInit {
         'default': false,
       },
       'test_date_picker': {
-        'type': 'date',
+        'type': 'string',
+        'format': 'date',
         'title' : 'This is a date picker test',
       },
       // 'test_string_picker': {
