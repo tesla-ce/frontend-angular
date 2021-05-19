@@ -1,11 +1,11 @@
 <nb-card *ngIf="!loading">
     <nb-card-header class="header">
-        {{ instance.name }}
         <div class="actions">
-          <button nbButton outline status="primary" size="tiny" (click)="back()" class="back-button">
-              <nb-icon icon="arrow-ios-back-outline"></nb-icon>
-          </button>
-        </div>
+            <button nbButton outline status="primary" size="tiny" (click)="back()" class="back-button">
+                <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+            </button>
+          </div>
+        {{ instance.name }}
     </nb-card-header>
     <nb-card-body class="flexbox flexbox--direction-column">
         <nb-toggle class="toggle" (click)="enableDisableActivity(!instance.enabled)" [(ngModel)]="instance.enabled"

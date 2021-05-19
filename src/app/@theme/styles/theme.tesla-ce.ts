@@ -4,7 +4,7 @@ const baseThemeVariables = baseTheme.variables;
 
 export const TESLA_CE_THEME = {
   name: 'custom',
-  base: 'default',
+  base: 'material-light',
   variables: {
     temperature: {
       arcFill: [

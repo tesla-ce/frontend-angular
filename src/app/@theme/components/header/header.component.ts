@@ -24,33 +24,41 @@ export class HeaderComponent implements OnInit, OnDestroy {
   user: User;
 
   themes = [
+    // {
+    //   value: 'uoc',
+    //   name: 'UOC',
+    // },
+    // {
+    //   value: 'tesla-ce',
+    //   name: 'TeSLA-CE',
+    // },
+    // {
+    //   value: 'custom',
+    //   name: 'Custom',
+    // },
+    // {
+    //   value: 'default',
+    //   name: 'Light',
+    // },
+    // {
+    //   value: 'dark',
+    //   name: 'Dark',
+    // },
+    // {
+    //   value: 'cosmic',
+    //   name: 'Cosmic',
+    // },
+    // {
+    //   value: 'corporate',
+    //   name: 'Corporate',
+    // },
     {
-      value: 'uoc',
+      value: 'material-uoc',
       name: 'UOC',
     },
     {
-      value: 'tesla-ce',
-      name: 'TeSLA-CE',
-    },
-    {
-      value: 'custom',
-      name: 'Custom',
-    },
-    {
-      value: 'default',
-      name: 'Light',
-    },
-    {
-      value: 'dark',
-      name: 'Dark',
-    },
-    {
-      value: 'cosmic',
-      name: 'Cosmic',
-    },
-    {
-      value: 'corporate',
-      name: 'Corporate',
+      value: 'material-tesla',
+      name: 'TeSLA',
     },
     {
       value: 'material-light',
@@ -64,7 +72,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [{ title: 'Profile' }, { title: 'Informed Consent' }, { title: 'Log out' }];
+  userMenu = [
+    { title: 'Profile' },
+    { title: 'Informed Consent' , target: 'ic'},
+    { title: 'Log out' }];
 
   // currentInstitution = this.authService.getInstitution().subscribe(id => id)
   // institutions = this.authService.getUserInstitutions().subscribe(list => list)
@@ -160,7 +171,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.authService.logOut();
         this.menuService.navigateHome();
         return false;
-      } else if (event.item.title === 'Informed Consent') {
+      } else if (event.item.target === 'ic') {
         this.router.navigate(['/learner/ic']);
         return false;
       }

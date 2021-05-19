@@ -1,14 +1,16 @@
 
 <nb-card class="inline-form-card">
     <nb-card-header class="flexRow padding-left--4">
-        <nb-actions size="small">
+        <nb-actions>
             <nb-action>
-              <button nbTooltip="'ACTIONS.GO_BACK' | translate" class="btn btn-outline-primary btn-xs btn-icon" (click)="back()">                                        
-                <nb-icon icon="arrow-ios-back-outline"></nb-icon>
-            </button>
+                <button nbButton size="tiny" (click)="back()">
+                    <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+                </button>
             </nb-action>
-          </nb-actions>
-          {{'REPORT.PLURAL' | translate }}
+            <nb-action>
+            </nb-action>
+        </nb-actions>
+        {{'REPORT.PLURAL' | translate }}
     </nb-card-header>
     <nb-card-body class="example-items-rows" *ngIf="!loading">
         NOT IMPLEMENTED YET

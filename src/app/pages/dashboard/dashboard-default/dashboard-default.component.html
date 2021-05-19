@@ -1,15 +1,13 @@
-<nb-card status="info">
+<nb-card>
     <nb-card-header>Dashboard</nb-card-header>
-    <div>JSON FORMS START</div>
-    <jsonforms 
-        [schema]="dataschema" 
-        [(data)]="data"
-        [renderers]="renderers"
-    ></jsonforms>
-    <div>JSON FORMS END</div>
     <nb-card-body>
         <h2 *ngIf="user?true:false&&translate?true:false">{{ "ADMIN.DASHBOARD.WELCOME" | translate }} {{ user.first_name + " " + user.last_name }}</h2>
         <button nbButton outline status="primary" size="tiny" *ngFor="let role of user?.roles">{{ role }}</button>
+        <jsonforms 
+            [schema]="dataschema" 
+            [(data)]="data"
+            [renderers]="renderers"
+        ></jsonforms>
     </nb-card-body>
     <nb-card-footer>
         <div style="display: flex; flex-direction: row;">

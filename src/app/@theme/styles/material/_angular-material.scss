@@ -12,4 +12,14 @@
     $custom-light-theme: mat-light-theme(mat-palette($mat-indigo), mat-palette($mat-pink));
     @include angular-material-theme($custom-light-theme);
   }
+
+  @include nb-for-theme(material-uoc) {
+    $custom-light-theme: mat-light-theme(mat-palette($mat-indigo), mat-palette($mat-pink));
+    @include angular-material-theme($custom-light-theme);
+  }
+
+  @include nb-for-theme(material-tesla) {
+    $custom-light-theme: mat-light-theme(mat-palette($mat-indigo), mat-palette($mat-pink));
+    @include angular-material-theme($custom-light-theme);
+  }
 }
