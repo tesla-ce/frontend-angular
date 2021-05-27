@@ -1,0 +1,31 @@
+<nb-card>
+    <nb-card-header class="flexbox">
+        <div style="flex:1">
+            ADD INSTRUMENT
+        </div>
+        <button nbButton size="tiny" (click)="dismiss()">
+            <nb-icon icon="close-outline"></nb-icon>
+        </button>
+    </nb-card-header>
+    <nb-card-body>
+        <nb-card *ngFor="let instrument of availableInstruments">
+            <nb-card-header class="flexbox">
+                <div style="flex:1">
+                    <nb-icon [icon]="'instrument-'+instrument.acronym" pack="tesla"></nb-icon>
+                    {{ instrument.name }}
+                </div>
+                <nb-actions>
+                    <nb-action></nb-action>
+                    <nb-action>
+                        <button nbButton>
+                            <nb-icon icon="plus-outline" (click)="add(instrument)"></nb-icon>
+                        </button>
+                    </nb-action>
+                </nb-actions>
+            </nb-card-header>
+            <nb-card-body>
+                <p>{{instrument.description}}</p>
+            </nb-card-body>
+        </nb-card>
+    </nb-card-body>
+</nb-card>

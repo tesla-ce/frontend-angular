@@ -126,7 +126,7 @@ export class ApiCourseService {
   // API: GET /instrument/
   public getAllInstruments(): Observable<any> {
     return this.http
-      .get(this.endpointUrl + '/instrument/')
+      .get(this.apiUrl + '/admin/instrument/')
       .pipe(
         map((response: any) => {
           if (response?.results) return response.results;

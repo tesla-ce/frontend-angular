@@ -1,0 +1,27 @@
+<nb-card *ngIf="instrument" [class.margin--left-40]="instrument.alternative_to" [class.margin--right-40]="!instrument.alternative_to">
+    <nb-card-header class="flexbox">
+        <div style="flex:1">
+            <nb-icon [icon]="'instrument-'+instrument.instrument.acronym" pack="tesla"></nb-icon>
+            {{ instrument.instrument.name }}
+        </div>
+        <button nbButton size="tiny" (click)="dismiss()">
+            <nb-icon icon="close-outline"></nb-icon>
+        </button>
+    </nb-card-header>
+    <nb-card-body>
+        <p>{{instrument.instrument.description}}</p>
+        <div *ngIf="instrument.instrument.options_schema">
+            <jsonforms 
+                [schema]="instrument.instrument.options_schema | jsonParse"
+                [(data)]="data"
+                [renderers]="renderers"
+            ></jsonforms>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <button *ngIf="instrument.instrument.options_schema" nbButton 
+            (click)="save()">
+            <nb-icon icon="save-outline"></nb-icon>SAVE
+        </button>
+    </nb-card-footer>
+</nb-card>
