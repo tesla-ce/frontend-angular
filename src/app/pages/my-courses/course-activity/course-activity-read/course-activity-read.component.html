@@ -9,28 +9,66 @@
             <nb-action>
             </nb-action>
         </nb-actions>
-        {{ instance.name }}
+        <div style="flex:1" [class.text-disabled]="instance.enabled!==true">
+            {{ instance.name }}
+        </div>
+        <nb-actions>
+            <nb-action>
+                
+            </nb-action>
+        </nb-actions>
     </nb-card-header>
-    <nb-card-body>
+    <nb-card-body class="flexbox flexbox--direction-column">
         <div class="flexbox--direction-column">
             <div class="flexbox--direction-column">
-                <p>{{instance.description || "Exemple descripció de l'activitat."}}</p>
-                <p> {{'COURSE.STARTS' | translate }}: {{instance.start || "Sense data d'inici"}}</p>
-                <p> {{'COURSE.ENDS' | translate }}: {{instance.end || "Sense data de finalització"}}</p>
-                <button nbButton outline status="primary" (click)="reports()" class="back-button">{{'ACTIVITY_REPORTS' | translate }}</button>
-                <p></p>
+                <label [for]="fields['description'].inputName" class="label"  [class.text-disabled]="instance.enabled!==true">
+                    {{ fields['description'].label }}
+                </label>
+                <p  [class.text-disabled]="instance.enabled!==true">{{ instance.description }}</p>
+                <label [for]="fields['start'].inputName" class="label" [class.text-disabled]="instance.enabled!==true">
+                    {{ fields['start'].label }}
+                </label>
+                <p [class.text-disabled]="instance.enabled!==true">{{ instance.start }}</p>
+                <label [for]="fields['end'].inputName" class="label" [class.text-disabled]="instance.enabled!==true">
+                    {{ fields['end'].label }}
+                </label>
+                <p [class.text-disabled]="instance.enabled!==true">{{ instance.end }}</p>
+                <!-- <p> {{'COURSE.STARTS' | translate }}: {{instance.start || "start date"}}</p>
+                <p> {{'COURSE.ENDS' | translate }}: {{instance.end || "end date"}}</p> -->
             </div>
         </div>
-        <!-- <p>TO DO ACTIVITY SETTINGS</p> -->
+        <!-- <p>AQUI ACTIVITY CONFIGURACIÓ</p> -->
         <!-- <div class="instruments">
                 <label class="label">Instruments</label>
             </div> -->
-
-            <div *ngIf="instance.instruments">
-                <ngx-course-activity-instrument 
-                class="width--max"
-                [instance]="instance"
-                ></ngx-course-activity-instrument>
-            </div>
+        <!-- <div *ngIf="instance.instruments">
+            <ngx-course-activity-instrument class="width--max" 
+            [type]="update"
+            [instance]="instance"
+            [course]="course"
+            [activityInstruments]="activityInstruments"
+            [allInstruments]="allInstruments"
+            [id]="id"
+            [reload]="ngOnInit"
+            >
+            </ngx-course-activity-instrument>
+        </div> -->
+        <nb-card *ngIf="!loading">
+            <nb-card-header class='tesla-card-header'>
+                <div style="flex:1" [class.text-disabled]="instance.enabled!==true">
+                {{'INSTRUMENT.PLURAL' | translate }}
+                </div>
+            </nb-card-header>
+            <nb-card-footer *ngFor="let activityMainInstrument of activityMainInstruments">
+                <div style="flex:1" [class.text-disabled]="!activityMainInstrument.active || !instance.enabled">
+                    <nb-icon style="vertical-align: middle;" [icon]="'instrument-'+activityMainInstrument.instrument.acronym" pack="tesla"></nb-icon>
+                    {{ activityMainInstrument.instrument.name }}
+                </div>
+                <div *ngIf="getAlternative(activityMainInstrument.id)" style="flex:1" [class.text-disabled]="!getAlternative(activityMainInstrument.id).active || !instance.enabled">
+                    └ <nb-icon style="vertical-align: middle;" [icon]="'instrument-'+getAlternative(activityMainInstrument.id).instrument.acronym" pack="tesla"></nb-icon>
+                    {{ getAlternative(activityMainInstrument.id).instrument.name }}
+                </div>
+            </nb-card-footer>
+        </nb-card>
     </nb-card-body>
 </nb-card>

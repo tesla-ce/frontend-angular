@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+// import { DataDisplayComponent } from '../control';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCourseService } from '../../../../@core/data/api-course.service';
-import { NbWindowService } from '@nebular/theme';
+import { NbDialogService, NbThemeService, NbWindowService } from '@nebular/theme';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { CourseActivityConfig } from '../course-activity.config';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
+import { CourseActivityInstrumentAddComponent } from '../course-activity-instrument/course-activity-instrument-add.component';
 
 @Component({
   selector: 'ngx-course-activity-read',
@@ -13,20 +15,23 @@ import { Location } from '@angular/common';
   styleUrls: ['./course-activity-read.component.scss'],
 })
 export class CourseActivityReadComponent implements OnInit {
-  courseId: any;
+  courseId: number;
   activityId: number;
   loading: boolean = true;
+  activityInstruments: any[];
+  activityMainInstruments: any[];
+  activityAltInstruments: any[];
 
   public instance: any;
   public fields = CourseActivityConfig.fields;
 
   constructor(
-    private windowService: NbWindowService,
     private route: ActivatedRoute,
-    public translate: TranslateService,
-    private location: Location,
     private authService: AuthService,
     private apiCourseService: ApiCourseService,
+    public translate: TranslateService,
+    private location: Location,
+    private dialog: NbDialogService,
     private router: Router) {
     this.route.params.subscribe(params => {
       this.courseId = params['courseId'];
@@ -35,35 +40,24 @@ export class CourseActivityReadComponent implements OnInit {
   }
   back() { this.location.back(); }
 
-  reports() { this.router.navigate(['report'], { relativeTo: this.route }); }
+  getAlternative(mainInstrumentId): any {
+    return this.activityAltInstruments
+    .filter(activityAltInstrument => activityAltInstrument.alternative_to === mainInstrumentId)[0];
+  }
 
   ngOnInit(): void {
     this.apiCourseService.getCourseActivity(this.courseId, this.activityId).subscribe(instance => {
-      this.apiCourseService.getActivityInstrument(this.courseId, this.activityId).subscribe(instrumentsArray => {
-        if (instrumentsArray.length > 0) {
-
-          const instrumentsOrder = [];
-          instrumentsArray.map(instrument => {
-            if (instrument.alternative_to) {
-              const index = instrumentsOrder.findIndex(x => x.id === instrument.alternative_to);
-              instrumentsOrder.splice(index + 1, 0, instrument);
-              instrumentsOrder[index].hasAlternative = instrument.id;
-            } else instrumentsOrder.push(instrument);
-          });
-          instance.instruments = instrumentsOrder;
-
-          instance.inUseInstruments = instrumentsArray.map((list, z) => {
-            instance.instruments[z].schema = JSON.parse(list.instrument.options_schema);
-
-            return list.instrument.acronym;
-          });
-        }
+      this.apiCourseService.getActivityInstrument(this.courseId, this.activityId).subscribe(activityInstruments => {
+        this.activityInstruments = activityInstruments;
+        this.activityMainInstruments = activityInstruments.filter(ins => ins.alternative_to === null);
+        this.activityAltInstruments = activityInstruments.filter(ins => ins.alternative_to !== null);
+        this.activityAltInstruments.map(altInstrument => {
+          this.activityMainInstruments.filter(ins => ins.id === altInstrument.alternative_to)[0].alternative = altInstrument;
+        });
       });
 
       this.instance = instance;
-
       this.loading = false;
     });
   }
-
 }
