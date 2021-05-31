@@ -2,11 +2,12 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCourseService } from '../../../../@core/data/api-course.service';
-import { NbWindowService } from '@nebular/theme';
+import { NbDialogService, NbThemeService, NbWindowService } from '@nebular/theme';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { CourseActivityConfig } from '../course-activity.config';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
+import { CourseActivityInstrumentAddComponent } from '../course-activity-instrument/course-activity-instrument-add.component';
 
 @Component({
   selector: 'ngx-course-activity-update',
@@ -14,10 +15,14 @@ import { Location } from '@angular/common';
   styleUrls: ['./course-activity-update.component.scss'],
 })
 export class CourseActivityUpdateComponent implements OnInit {
-  course: any;
   courseId: number;
+  activityId: number;
   loading: boolean = true;
-  instruments: any[];
+  allInstruments: any[];
+  availableInstruments: any[];
+  activityInstruments: any[];
+  activityMainInstruments: any[];
+  activityAltInstruments: any[];
   addComponent: any = {};
   data: any = {};
 
@@ -30,49 +35,88 @@ export class CourseActivityUpdateComponent implements OnInit {
     private apiCourseService: ApiCourseService,
     public translate: TranslateService,
     private location: Location,
+    private dialog: NbDialogService,
     private router: Router) {
     this.route.params.subscribe(params => {
-      this.course = params['courseId'];
-      this.courseId = params['activityId'];
+      this.courseId = params['courseId'];
+      this.activityId = params['activityId'];
     });
   }
   back() { this.location.back(); }
 
   enableDisableActivity(value): void {
-    this.apiCourseService.putActivityActive(this.course, this.courseId, { enabled: value }).subscribe();
+    this.apiCourseService.putActivityActive(this.courseId, this.activityId, { enabled: value }).subscribe();
+  }
+
+  getAlternative(mainInstrumentId): any {
+    return this.activityAltInstruments
+    .filter(activityAltInstrument => activityAltInstrument.alternative_to === mainInstrumentId)[0];
   }
 
   ngOnInit(): void {
-    this.apiCourseService.getCourseActivity(this.course, this.courseId).subscribe(instance => {
-      this.apiCourseService.getActivityInstrument(this.course, this.courseId).subscribe(instrumentsArray => {
-        if (instrumentsArray.length > 0) {
-
-          const instrumentsOrder = [];
-          instrumentsArray.map(instrument => {
-            if (instrument.alternative_to) {
-              const index = instrumentsOrder.findIndex(x => x.id === instrument.alternative_to);
-              instrumentsOrder.splice(index + 1, 0, instrument);
-              instrumentsOrder[index].hasAlternative = instrument.id;
-            } else instrumentsOrder.push(instrument);
+    this.apiCourseService.getCourseActivity(this.courseId, this.activityId).subscribe(instance => {
+      this.apiCourseService.getActivityInstrument(this.courseId, this.activityId).subscribe(activityInstruments => {
+        this.activityInstruments = activityInstruments;
+        this.activityMainInstruments = activityInstruments.filter(ins => ins.alternative_to === null);
+        this.activityAltInstruments = activityInstruments.filter(ins => ins.alternative_to !== null);
+        this.activityAltInstruments.map(altInstrument => {
+          this.activityMainInstruments.filter(ins => ins.id === altInstrument.alternative_to)[0].alternative = altInstrument;
+        });
+        this.apiCourseService.getAllInstruments().subscribe(allInstruments => {
+          this.allInstruments = allInstruments;
+          this.availableInstruments = this.allInstruments.filter(ins => {
+            return this.activityInstruments.map(item => item.instrument.acronym).indexOf(ins.acronym) === -1;
           });
-          instance.instruments = instrumentsOrder;
-
-          instance.inUseInstruments = instrumentsArray.map((list, z) => {
-            instance.instruments[z].schema = JSON.parse(list.instrument.options_schema);
-
-            return list.instrument.acronym;
-          });
-        }
-      });
-
-      this.apiCourseService.getAllInstruments().subscribe(instrumentList => {
-        this.instruments = instrumentList;
+        });
       });
 
       this.instance = instance;
-
       this.loading = false;
     });
   }
 
+  addInstrument(): void {
+    this.dialog.open(
+      CourseActivityInstrumentAddComponent, {
+        context: {
+          availableInstruments: this.availableInstruments,
+          courseId: this.courseId,
+          activityId: this.activityId,
+        },
+      })
+    .onClose.subscribe(instrument => {
+      if (instrument) {
+        this.activityMainInstruments = [instrument, ...this.activityMainInstruments];
+        this.availableInstruments = this.availableInstruments.filter(item => item.id !== instrument.instrument.id);
+      }
+    });
+  }
+
+  deleteInstrument(instrument): void {
+    this.activityMainInstruments = this.activityMainInstruments.filter(item => item.id !== instrument.id);
+    this.availableInstruments = [instrument.instrument, ...this.availableInstruments];
+  }
+
+  addAlternative(alternativeTo): void {
+    this.dialog.open(
+      CourseActivityInstrumentAddComponent, {
+        context: {
+          availableInstruments: this.availableInstruments,
+          courseId: this.courseId,
+          activityId: this.activityId,
+          alternativeTo: alternativeTo,
+        },
+      })
+    .onClose.subscribe(instrument => {
+      if (instrument) {
+        this.activityAltInstruments = [instrument, ...this.activityAltInstruments];
+        this.availableInstruments = this.availableInstruments.filter(item => item.id !== instrument.instrument.id);
+      }
+    });
+  }
+
+  deleteAlternative(instrument): void {
+    this.activityAltInstruments = this.activityAltInstruments.filter(item => item.id !== instrument.id);
+    this.availableInstruments = [instrument.instrument, ...this.availableInstruments];
+  }
 }

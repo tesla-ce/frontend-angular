@@ -1,0 +1,39 @@
+<nb-card *ngIf="instrument" [class.margin--left-40]="instrument.alternative_to" [class.margin--right-40]="!instrument.alternative_to">
+    <nb-card-header class="flexbox">
+        <div style="flex:1" [class.text-disabled]="!instrument.active || !activity.enabled">
+            <nb-icon style="vertical-align: middle;" [icon]="'instrument-'+instrument.instrument.acronym" pack="tesla"></nb-icon>
+            {{ instrument.instrument.name }}
+        </div>
+        <nb-actions>
+            <nb-action>
+                <button nbButton [disabled]="!activity.enabled">
+                    <nb-icon icon="settings-outline" (click)="settings()"></nb-icon>
+                </button>
+                <button 
+                    *ngIf='!isAlternative && !hasAlternative'
+                    nbButton 
+                    class="margin--left-8"
+                    (click)="addAlternative()"
+                    [disabled]="!activity.enabled || !hasAvailableInstruments">
+                    <nb-icon icon="plus-square-outline"></nb-icon>
+                </button>
+                <button nbButton class="margin--left-8" (click)="delete()" [disabled]="!activity.enabled">
+                    <nb-icon icon="trash-2-outline"></nb-icon>
+                </button>
+            </nb-action>
+            <nb-action>
+                <nb-toggle 
+                    [disabled]="!activity.enabled"
+                    class="toggle"
+                    (click)="enableDisableInstrument()"
+                    [(ngModel)]="instrument.active"
+                    labelPosition="left"
+                    status="basic">
+                </nb-toggle>
+            </nb-action>
+        </nb-actions>
+    </nb-card-header>
+    <nb-card-body>
+        <p [class.text-disabled]="!instrument.active || !activity.enabled">{{instrument.instrument.description}}</p>
+    </nb-card-body>
+</nb-card>

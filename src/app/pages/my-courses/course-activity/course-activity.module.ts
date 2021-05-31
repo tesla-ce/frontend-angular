@@ -28,7 +28,7 @@ import { CourseActivityComponent } from './course-activity.component';
 import { CourseActivityListComponent } from './course-activity-list/course-activity-list.component';
 import { CourseActivityUpdateComponent } from './course-activity-update/course-activity-update.component';
 import { CourseActivityReadComponent } from './course-activity-read/course-activity-read.component';
-import { CourseActivityInstrumentComponent } from './instrument/course-activity-instrument.component';
+import { CourseActivityInstrumentComponent } from './course-activity-instrument/course-activity-instrument.component';
 import { SharedModule } from '../../../shared/shared.module';
 import { JsonFormsModule } from '@jsonforms/angular';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -38,6 +38,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { JsonParsePipe } from '../../../@core/pipes/json-parse.pipe';
+import { CourseActivityInstrumentSettingsComponent } from './course-activity-instrument/course-activity-instrument-settings.component';
+import { CourseActivityInstrumentAddComponent } from './course-activity-instrument/course-activity-instrument-add.component';
 
 
 @NgModule({
@@ -76,6 +78,8 @@ import { JsonParsePipe } from '../../../@core/pipes/json-parse.pipe';
     CourseActivityReadComponent,
     CourseActivityUpdateComponent,
     CourseActivityInstrumentComponent,
+    CourseActivityInstrumentSettingsComponent,
+    CourseActivityInstrumentAddComponent,
     JsonParsePipe,
   ],
   exports: [
