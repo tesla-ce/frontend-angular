@@ -140,7 +140,7 @@ export class ApiCourseService {
         map((data: any) => {
           return data;
         }),
-        catchError(this.handleError))
+        catchError(this.handleError));
   }
 
 
