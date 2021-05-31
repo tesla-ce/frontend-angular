@@ -1,5 +1,5 @@
-<nb-card class="inline-form-card">
-    <nb-card-header class="flexRow padding-left--4">
+<nb-card>
+    <nb-card-header class="tesla-card-header">
         <nb-actions>
             <nb-action>
                 <button nbButton size="tiny" (click)="back()">
@@ -11,9 +11,6 @@
         </nb-actions>
         {{'IC.UPDATE_TITLE' | translate }}
     </nb-card-header>
-</nb-card>
-
-<nb-card>
     <nb-card-body class="example-items-rows" *ngIf="!loading">
         <form [formGroup]="formGrupIC" fullWidth (ngSubmit)="onSave()">
 

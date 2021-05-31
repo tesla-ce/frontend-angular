@@ -20,6 +20,8 @@ export class CourseActivityInstrumentComponent implements OnInit {
   @Input() course: any;
   @Input() id: any;
   @Input() instance: any;
+  @Input() activityInstruments: any[];
+  @Input() allInstruments: any[];
   @Input() type: string = 'show';
   @Input() reload: Function;
 

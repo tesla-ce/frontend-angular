@@ -14,7 +14,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     {
         title: 'Test page',
         icon: { icon: 'common-menu_logo', pack: 'tesla' },
-        link: '/test-page',
+        link: '/test',
     },
     {
         title: 'Administration',
