@@ -36,6 +36,10 @@ export class CourseActivityListComponent implements OnInit {
           delete: {
             enabled: false,
           },
+          report: {
+            enabled: true,
+            path: 'activity',
+          },
         },
       },
       name: {
