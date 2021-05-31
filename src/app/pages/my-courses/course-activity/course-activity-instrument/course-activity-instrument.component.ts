@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, TemplateRef, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { angularMaterialRenderers } from '@jsonforms/angular-material';
 import { NbDialogService, NbWindowService } from '@nebular/theme';
@@ -17,7 +17,10 @@ export class CourseActivityInstrumentComponent implements OnInit {
   @Input() instrument: any;
   @Input() isAlternative: boolean;
   @Input() hasAlternative: boolean;
+  @Input() hasAvailableInstruments: boolean;
   @Input() activity: any;
+  @Output() addAlternativeEvent = new EventEmitter<any>();
+  @Output() deleteInstrumentEvent = new EventEmitter<any>();
 
   courseId: any;
   activityId: any;
@@ -41,41 +44,38 @@ export class CourseActivityInstrumentComponent implements OnInit {
     });
   }
 
-  enableDisableInstrument(instrument): void {
+  enableDisableInstrument(): void {
     this.apiCourseService.putInstrumentActive(this.courseId,
       this.activityId,
-      instrument.id,
+      this.instrument.id,
       {
-        active: !instrument.active,
-        instrument_id: instrument.instrument.id,
-        options: instrument.options,
-        required: instrument.required,
+        active: !this.instrument.active,
+        instrument_id: this.instrument.instrument.id,
+        options: this.instrument.options,
+        required: this.instrument.required,
       })
       .subscribe();
   }
 
-  delete(instrument, hasAlternative) {
-    if (hasAlternative) {
-      this.apiCourseService.deleteActivityInstrument(this.courseId, this.activityId, instrument.id)
+  delete() {
+    this.apiCourseService.deleteActivityInstrument(this.courseId, this.activityId, this.instrument.id)
         .subscribe(response => {
-          if (response) console.log("DELETE INSTRUMENT - NOT IMPLEMENTED YET");
+          if (response) this.deleteInstrumentEvent.emit(this.instrument);
         });
-    }
-    this.apiCourseService.deleteActivityInstrument(this.courseId, this.activityId, instrument.id)
-      .subscribe(response => {
-        if (response) console.log("DELETE INSTRUMENT - NOT IMPLEMENTED YET");
-      });
   }
 
   addAlternative() {
-    console.log("ADD ALTERNATIVE INSTRUMENT - NOT IMPLEMENTED YET");
+    this.addAlternativeEvent.emit(this.instrument);
   }
 
   settings(): void {
-    console.log("HANDLE OPEN SETTINGS");
-    this.dialog.open(CourseActivityInstrumentSettingsComponent, { context: { instrument: this.instrument } })
+    this.dialog.open(CourseActivityInstrumentSettingsComponent,
+      { context: {
+        instrument: this.instrument,
+        courseId: this.courseId,
+        activityId: this.activityId,
+      } })
     .onClose.subscribe(data => {
-      // console.log(data)
     });
   }
 }

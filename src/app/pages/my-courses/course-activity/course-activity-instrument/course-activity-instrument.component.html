@@ -9,7 +9,12 @@
                 <button nbButton [disabled]="!activity.enabled">
                     <nb-icon icon="settings-outline" (click)="settings()"></nb-icon>
                 </button>
-                <button *ngIf='!isAlternative && !hasAlternative' nbButton class="margin--left-8"  (click)="addAlternative()" [disabled]="!activity.enabled">
+                <button 
+                    *ngIf='!isAlternative && !hasAlternative'
+                    nbButton 
+                    class="margin--left-8"
+                    (click)="addAlternative()"
+                    [disabled]="!activity.enabled || !hasAvailableInstruments">
                     <nb-icon icon="plus-square-outline"></nb-icon>
                 </button>
                 <button nbButton class="margin--left-8" (click)="delete()" [disabled]="!activity.enabled">
@@ -20,7 +25,7 @@
                 <nb-toggle 
                     [disabled]="!activity.enabled"
                     class="toggle"
-                    (click)="enableDisableInstrument(instrument)"
+                    (click)="enableDisableInstrument()"
                     [(ngModel)]="instrument.active"
                     labelPosition="left"
                     status="basic">

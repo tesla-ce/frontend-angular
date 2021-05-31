@@ -1,5 +1,14 @@
 <nb-card>
     <nb-card-header class="flexbox">
+        <nb-actions *ngIf="selectedInstrument">
+            <nb-action>
+                <button nbButton size="tiny" (click)="back()">
+                    <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+                </button>
+            </nb-action>
+            <nb-action>
+            </nb-action>
+        </nb-actions>
         <div style="flex:1">
             ADD INSTRUMENT
         </div>
@@ -7,7 +16,7 @@
             <nb-icon icon="close-outline"></nb-icon>
         </button>
     </nb-card-header>
-    <nb-card-body>
+    <nb-card-body *ngIf="!selectedInstrument">
         <nb-card *ngFor="let instrument of availableInstruments">
             <nb-card-header class="flexbox">
                 <div style="flex:1">
@@ -18,7 +27,7 @@
                     <nb-action></nb-action>
                     <nb-action>
                         <button nbButton>
-                            <nb-icon icon="plus-outline" (click)="add(instrument)"></nb-icon>
+                            <nb-icon icon="plus-outline" (click)="select(instrument)"></nb-icon>
                         </button>
                     </nb-action>
                 </nb-actions>
@@ -28,4 +37,38 @@
             </nb-card-body>
         </nb-card>
     </nb-card-body>
+    <nb-card-body *ngIf="selectedInstrument">
+        <nb-card>
+            <nb-card-header class="flexbox">
+                <div style="flex:1">
+                    <nb-icon [icon]="'instrument-'+selectedInstrument.acronym" pack="tesla"></nb-icon>
+                    {{ selectedInstrument.name }}
+                </div>
+            </nb-card-header>
+            <nb-card-body>
+                <p>{{selectedInstrument.description}}</p>
+                <nb-toggle 
+                    class="toggle"
+                    [(checked)]="data.active"
+                    labelPosition="left"
+                    status="basic">
+                </nb-toggle>
+                <div *ngIf="selectedInstrument.options_schema">
+                    <jsonforms 
+                        [schema]="selectedInstrument.options_schema"
+                        [(data)]="jsonFormsData"
+                        [renderers]="renderers"
+                        [ajv]="ajv"
+                    ></jsonforms>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </nb-card-body>
+    <nb-card-footer>
+        <button nbButton
+            [disabled]="!selectedInstrument" 
+            (click)="save()">
+            <nb-icon icon="save-outline"></nb-icon>SAVE
+        </button>
+    </nb-card-footer>
 </nb-card>

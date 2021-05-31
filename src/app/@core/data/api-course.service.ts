@@ -88,11 +88,7 @@ export class ApiCourseService {
       .post(this.endpointUrl + '/course/' + courseId + '/activity/' + activityId + '/instrument/', fields).pipe(
         map((data: any) => {
           // console.log('Create Document Response', data);
-          if (data) {
-            return true;
-          } else {
-            return false;
-          }
+          return data;
         }),
         catchError(this.handleError));
   }
@@ -142,13 +138,9 @@ export class ApiCourseService {
     return this.http
       .put(this.endpointUrl + '/course/' + courseId + '/activity/' + activityId, fields).pipe(
         map((data: any) => {
-          if (data.status) {
-            return true;
-          } else {
-            return false;
-          }
+          return data;
         }),
-        catchError(this.handleError));
+        catchError(this.handleError))
   }
 
 
@@ -157,11 +149,7 @@ export class ApiCourseService {
     return this.http
       .put(this.endpointUrl + '/course/' + courseId + '/activity/' + activityId + '/instrument/' + instrumentId, fields).pipe(
         map((data: any) => {
-          if (data.status) {
-            return true;
-          } else {
-            return false;
-          }
+          return data;
         }),
         catchError(this.handleError));
   }

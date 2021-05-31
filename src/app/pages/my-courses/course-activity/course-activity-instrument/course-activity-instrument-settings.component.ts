@@ -14,8 +14,9 @@ export class CourseActivityInstrumentSettingsComponent implements OnInit {
 
   loading: boolean = true;
   @Input() instrument: any;
-  courseId: any;
-  activityId: any;
+  @Input() courseId: any;
+  @Input() activityId: any;
+  data: any;
 
   renderers = angularMaterialRenderers;
 
@@ -28,10 +29,7 @@ export class CourseActivityInstrumentSettingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.courseId = params['courseId'];
-      this.activityId = params['activityId'];
-    });
+    this.data = this.instrument.options;
   }
 
   dismiss() {
@@ -39,7 +37,19 @@ export class CourseActivityInstrumentSettingsComponent implements OnInit {
   }
 
   save() {
-    console.log("SAVE INSTRUMENT - NOT IMPLEMENTED YET");
-    this.ref.close();
+    this.apiCourseService.putInstrumentActive(
+      this.courseId,
+      this.activityId,
+      this.instrument.id,
+      {
+        active: this.instrument.active,
+        options: this.data,
+        instrument_id: this.instrument.instrument.id,
+        required: this.instrument.required,
+      })
+      .subscribe(() => {
+        this.instrument.options = this.data;
+        this.ref.close();
+      });
   }
 }

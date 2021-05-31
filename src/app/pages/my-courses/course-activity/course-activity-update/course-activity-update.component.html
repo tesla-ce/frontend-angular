@@ -65,15 +65,18 @@
                 </div>
                 <nb-actions>
                     <nb-action>
-                        <button nbButton (click)="addInstrument()">
+                        <button 
+                            nbButton 
+                            (click)="addInstrument()"
+                            [disabled]="!availableInstruments || !availableInstruments.length">
                             <nb-icon icon="plus-outline"></nb-icon>
                         </button>
                     </nb-action>
                 </nb-actions>
             </nb-card-header>
             <nb-card-footer *ngFor="let activityMainInstrument of activityMainInstruments">
-                <ngx-course-activity-instrument [activity]="instance" [instrument]="activityMainInstrument" [isAlternative]="false" [hasAlternative]="getAlternative(activityMainInstrument.id)?true:false"></ngx-course-activity-instrument>
-                <ngx-course-activity-instrument [activity]="instance" [instrument]="getAlternative(activityMainInstrument.id)" [isAlternative]="true" [hasAlternative]="false"></ngx-course-activity-instrument>
+                <ngx-course-activity-instrument (deleteInstrumentEvent)="deleteInstrument($event)" (addAlternativeEvent)="addAlternative($event)" [activity]="instance" [instrument]="activityMainInstrument" [isAlternative]="false" [hasAlternative]="getAlternative(activityMainInstrument.id)?true:false"  [hasAvailableInstruments]="availableInstruments && availableInstruments.length"></ngx-course-activity-instrument>
+                <ngx-course-activity-instrument (deleteInstrumentEvent)="deleteAlternative($event)" [activity]="instance" [instrument]="getAlternative(activityMainInstrument.id)" [isAlternative]="true" [hasAlternative]="false"></ngx-course-activity-instrument>
             </nb-card-footer>
         </nb-card>
     </nb-card-body>
