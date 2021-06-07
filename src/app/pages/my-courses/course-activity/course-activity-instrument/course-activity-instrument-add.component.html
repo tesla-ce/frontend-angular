@@ -47,12 +47,6 @@
             </nb-card-header>
             <nb-card-body>
                 <p>{{selectedInstrument.description}}</p>
-                <nb-toggle 
-                    class="toggle"
-                    [(checked)]="data.active"
-                    labelPosition="left"
-                    status="basic">
-                </nb-toggle>
                 <div *ngIf="selectedInstrument.options_schema">
                     <jsonforms 
                         [schema]="selectedInstrument.options_schema"
