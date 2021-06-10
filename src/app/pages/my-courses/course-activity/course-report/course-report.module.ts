@@ -29,6 +29,7 @@ import { CourseReportListComponent } from './course-report-list/course-report-li
 import { CourseReportUpdateComponent } from './course-report-update/course-report-update.component';
 import { CourseReportReadComponent } from './course-report-read/course-report-read.component';
 import { SharedModule } from '../../../../shared/shared.module';
+import { ListCellInstrumentCompontent } from './course-report-list/list-cell-instrument.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { SharedModule } from '../../../../shared/shared.module';
     NbActionsModule,
     NbTabsetModule,
     SharedModule,
+    NbIconModule,
   ],
   declarations: [
     // DataDisplayComponent,
@@ -60,6 +62,7 @@ import { SharedModule } from '../../../../shared/shared.module';
     CourseReportListComponent,
     CourseReportReadComponent,
     CourseReportUpdateComponent,
+    ListCellInstrumentCompontent,
   ],
   exports: [
     CourseReportListComponent,

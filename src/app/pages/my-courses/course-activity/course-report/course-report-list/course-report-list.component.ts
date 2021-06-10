@@ -4,6 +4,9 @@ import { ListCellActionsComponent } from '../../../../../crud/list/list-cell-act
 import { AuthService } from '../../../../../@core/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
+import { ListCellInstrumentCompontent } from './list-cell-instrument.component';
+import { ListSubHeaderComponent } from './list-sub-header-instrument.component';
+import { ApiCourseService } from '../../../../../@core/data/api-course.service';
 
 @Component({
   selector: 'ngx-course-report-list',
@@ -11,7 +14,8 @@ import { Location } from '@angular/common';
   styleUrls: ['./course-report-list.component.scss'],
 })
 export class CourseReportListComponent implements OnInit {
-  course: number;
+  courseId: number;
+  activityId: number;
   endPoint: string;
   loading: boolean = true;
   settings = {
@@ -26,33 +30,58 @@ export class CourseReportListComponent implements OnInit {
         renderComponent: ListCellActionsComponent,
         defaultValue: {
           update: {
-            enabled: true,
-            path: 'report',
+            enabled: false,
           },
           read: {
             enabled: true,
-            path: 'report',
           },
           delete: {
             enabled: false,
           },
         },
       },
-      name: {
-        title: 'Name',
+      id: {
+        title: 'id',
+        filter: false,
       },
-      vle_report_type: {
-        title: 'Type',
+      learner: {
+        title: 'Learner',
+        valuePrepareFunction: (value) => {
+          return value.uid;
+        },
+        filter: false,
       },
-      description: {
-        title: 'Description',
-      },
+      // detail: {
+      //   class: 'instrument',
+      //   title: 'Detail',
+      //   type: 'custom',
+      //   filter: {
+      //     type: 'custom',
+      //     component: ListSubHeaderComponent,
+      //   },
+      //   renderComponent: ListCellInstrumentCompontent,
+      // },
       start: {
         title: 'Start',
+        filter: false,
       },
       end: {
         title: 'End',
+        filter: false,
       },
+      identity_level: {
+        title: 'Identity',
+        filter: false,
+      },
+      content_level: {
+        title: 'Content',
+        filter: false,
+      },
+      integrity_level: {
+        title: 'Integrity',
+        filter: false,
+      },
+
     },
     actions: {
       edit: false,
@@ -66,22 +95,45 @@ export class CourseReportListComponent implements OnInit {
     },
   };
 
-  constructor(private authService: AuthService, public translate: TranslateService,
-    private location: Location, private router: Router, private route: ActivatedRoute) {
+  constructor(
+    private authService: AuthService,
+    private apiCourseService: ApiCourseService,
+    public translate: TranslateService,
+    private location: Location,
+    private router: Router,
+    private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
-      if (params['id'] != null) {
-        this.course = params['id'];
-      } else {
-        router.navigate(['../'], { relativeTo: this.route });
-      }
+      this.courseId = params['courseId'];
+      this.activityId = params['activityId'];
     });
   }
+
   back() { this.location.back(); }
 
   ngOnInit(): void {
     this.authService.getInstitution().subscribe(id => {
-      this.endPoint = `/institution/${id}/course/${this.course}/report`;
-      this.loading = false;
+      this.endPoint = `/institution/${id}/course/${this.courseId}/activity/${this.activityId}/report`;
+      this.apiCourseService.getAllInstruments().subscribe((instruments: any[]) => {
+        instruments.map((instrument: any) => {
+          this.settings.columns['instrument-' + instrument.acronym] = {
+            // title: '<nb-icon icon="instrument-' + instrument.acronym + '" pack="tesla"></nb-icon> ' + instrument.acronym,
+            class: 'instrument',
+            title: instrument.acronym,
+            width: '1400px',
+            type: 'custom',
+            valuePrepareFunction: (value) => {
+              return instrument;
+            },
+            filter: {
+              type: 'custom',
+              component: ListSubHeaderComponent,
+              data: {instrument : instrument},
+            },
+            renderComponent: ListCellInstrumentCompontent,
+          };
+          this.loading = false;
+        });
+      });
     });
   }
 
