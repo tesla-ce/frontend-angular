@@ -22,28 +22,28 @@ export class CourseReportListComponent implements OnInit {
     addNew: false,
     search: false,
     columns: {
-      actions: {
-        title: 'Actions',
-        type: 'custom',
-        sort: false,
-        filter: false,
-        renderComponent: ListCellActionsComponent,
-        defaultValue: {
-          update: {
-            enabled: false,
-          },
-          read: {
-            enabled: true,
-          },
-          delete: {
-            enabled: false,
-          },
-        },
-      },
-      id: {
-        title: 'id',
-        filter: false,
-      },
+      // actions: {
+      //   title: 'Actions',
+      //   type: 'custom',
+      //   sort: false,
+      //   filter: false,
+      //   renderComponent: ListCellActionsComponent,
+      //   defaultValue: {
+      //     update: {
+      //       enabled: false,
+      //     },
+      //     read: {
+      //       enabled: true,
+      //     },
+      //     delete: {
+      //       enabled: false,
+      //     },
+      //   },
+      // },
+      // id: {
+      //   title: 'id',
+      //   filter: false,
+      // },
       learner: {
         title: 'Learner',
         valuePrepareFunction: (value) => {
@@ -61,24 +61,28 @@ export class CourseReportListComponent implements OnInit {
       //   },
       //   renderComponent: ListCellInstrumentComponent,
       // },
-      start: {
-        title: 'Start',
-        filter: false,
-      },
-      end: {
-        title: 'End',
-        filter: false,
-      },
-      identity_level: {
-        title: 'Identity',
-        filter: false,
-      },
-      content_level: {
-        title: 'Content',
-        filter: false,
-      },
-      integrity_level: {
-        title: 'Integrity',
+      // start: {
+      //   title: 'Start',
+      //   filter: false,
+      // },
+      // end: {
+      //   title: 'End',
+      //   filter: false,
+      // },
+      // identity_level: {
+      //   title: 'Identity',
+      //   filter: false,
+      // },
+      // content_level: {
+      //   title: 'Content',
+      //   filter: false,
+      // },
+      // integrity_level: {
+      //   title: 'Integrity',
+      //   filter: false,
+      // },
+      summary: {
+        title: 'Summary',
         filter: false,
       },
 
