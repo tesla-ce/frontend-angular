@@ -6,7 +6,7 @@ import { ViewCell } from 'ng2-smart-table';
   templateUrl: './list-cell-instrument.component.html',
   styleUrls: ['./list-cell-instrument.component.scss'],
 })
-export class ListCellInstrumentCompontent implements ViewCell, OnInit {
+export class ListCellInstrumentComponent implements ViewCell, OnInit {
 
   @Input() value;
   @Input() rowData: any;

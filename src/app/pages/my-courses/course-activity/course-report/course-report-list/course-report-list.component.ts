@@ -4,7 +4,7 @@ import { ListCellActionsComponent } from '../../../../../crud/list/list-cell-act
 import { AuthService } from '../../../../../@core/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
-import { ListCellInstrumentCompontent } from './list-cell-instrument.component';
+import { ListCellInstrumentComponent } from './list-cell-instrument.component';
 import { ListSubHeaderComponent } from './list-sub-header-instrument.component';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
 
@@ -59,7 +59,7 @@ export class CourseReportListComponent implements OnInit {
       //     type: 'custom',
       //     component: ListSubHeaderComponent,
       //   },
-      //   renderComponent: ListCellInstrumentCompontent,
+      //   renderComponent: ListCellInstrumentComponent,
       // },
       start: {
         title: 'Start',
@@ -129,7 +129,7 @@ export class CourseReportListComponent implements OnInit {
               component: ListSubHeaderComponent,
               data: {instrument : instrument},
             },
-            renderComponent: ListCellInstrumentCompontent,
+            renderComponent: ListCellInstrumentComponent,
           };
           this.loading = false;
         });

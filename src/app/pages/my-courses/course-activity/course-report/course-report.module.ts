@@ -29,7 +29,7 @@ import { CourseReportListComponent } from './course-report-list/course-report-li
 import { CourseReportUpdateComponent } from './course-report-update/course-report-update.component';
 import { CourseReportReadComponent } from './course-report-read/course-report-read.component';
 import { SharedModule } from '../../../../shared/shared.module';
-import { ListCellInstrumentCompontent } from './course-report-list/list-cell-instrument.component';
+import { ListCellInstrumentComponent } from './course-report-list/list-cell-instrument.component';
 
 
 @NgModule({
@@ -62,7 +62,7 @@ import { ListCellInstrumentCompontent } from './course-report-list/list-cell-ins
     CourseReportListComponent,
     CourseReportReadComponent,
     CourseReportUpdateComponent,
-    ListCellInstrumentCompontent,
+    ListCellInstrumentComponent,
   ],
   exports: [
     CourseReportListComponent,
