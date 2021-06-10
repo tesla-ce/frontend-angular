@@ -93,6 +93,11 @@ export class CourseActivityUpdateComponent implements OnInit {
   }
 
   deleteInstrument(instrument): void {
+    const alternative = this.getAlternative(instrument.id);
+    if (alternative) {
+      this.activityAltInstruments = this.activityAltInstruments.filter(item => item.id !== alternative.id);
+      this.availableInstruments = [alternative.instrument, ...this.availableInstruments];
+    }
     this.activityMainInstruments = this.activityMainInstruments.filter(item => item.id !== instrument.id);
     this.availableInstruments = [instrument.instrument, ...this.availableInstruments];
   }

@@ -7,7 +7,7 @@ import {
 } from '@nebular/auth';
 import { AuthGuardAuthenticated } from './@core/auth/guards/auth-guard-authenticated';
 // import { AuthGuardAdmin } from './@core/auth/guards/auth-guard-admin';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+
 import { LauncherComponent } from './@core/launcher/launcher.component';
 
 export const routes: Routes = [
@@ -19,37 +19,49 @@ export const routes: Routes = [
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module')
       .then(m => m.DashboardModule),
-    // canActivate: [AuthGuardAuthenticated],
+    canActivate: [AuthGuardAuthenticated],
   },
   {
     path: 'test',
     loadChildren: () => import('./pages/test/test.module')
       .then(m => m.TestModule),
-    // canActivate: [AuthGuardAuthenticated],
+    canActivate: [AuthGuardAuthenticated],
+  },
+  {
+    path: 'statistics',
+    loadChildren: () => import('./pages/statistics/statistics.module')
+      .then(m => m.StatisticsModule),
+    canActivate: [AuthGuardAuthenticated],
+  },
+  {
+    path: 'monitoring',
+    loadChildren: () => import('./pages/statistics/statistics.module')
+      .then(m => m.StatisticsModule),
+    canActivate: [AuthGuardAuthenticated],
   },
   {
     path: 'institution',
     loadChildren: () => import('./pages/institution/institution.module')
       .then(m => m.InstitutionModule),
-    // canActivate: [AuthGuardAuthenticated],
+    canActivate: [AuthGuardAuthenticated],
   },
   {
     path: 'system',
     loadChildren: () => import('./pages/system/admin.module')
       .then(m => m.AdminModule),
-    // canActivate: [AuthGuardAuthenticated],
+    canActivate: [AuthGuardAuthenticated],
   },
   {
     path: 'course',
     loadChildren: () => import('./pages/my-courses/course.module')
       .then(m => m.CourseModule),
-    // canActivate: [AuthGuardAuthenticated],
+    canActivate: [AuthGuardAuthenticated],
   },
   {
     path: 'learner',
     loadChildren: () => import('./pages/learner/learner.module')
       .then(m => m.LearnerModule),
-    // canActivate: [AuthGuardAuthenticated],
+    canActivate: [AuthGuardAuthenticated],
   },
   {
     path: 'auth',

@@ -19,9 +19,6 @@ export class CourseActivityInstrumentAddComponent implements OnInit {
   @Input() courseId: any;
   @Input() activityId: any;
   @Input() alternativeTo: any;
-  data: any = {
-    active: true,
-  };
   jsonFormsData: any = {};
 
   renderers = angularMaterialRenderers;
@@ -49,9 +46,6 @@ export class CourseActivityInstrumentAddComponent implements OnInit {
 
   back() {
     this.selectedInstrument = null;
-    this.data = {
-      enabled: true,
-    };
     this.jsonFormsData = {};
   }
 
@@ -60,7 +54,7 @@ export class CourseActivityInstrumentAddComponent implements OnInit {
       'options': JSON.stringify(this.jsonFormsData),
       'instrument_id': this.selectedInstrument.id,
       'required': false,
-      'active': this.data.active,
+      'active': true,
       'alternative_to': this.alternativeTo ? this.alternativeTo.id : null,
     };
 
