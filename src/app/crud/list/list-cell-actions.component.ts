@@ -51,4 +51,12 @@ export class ListCellActionsComponent implements ViewCell, OnInit {
       });
   }
 
+  report() {
+    const path = [];
+    if (this.value && this.value.report && this.value.report.path) path.push(this.value.report.path);
+    path.push(this.rowData.id);
+    path.push('report');
+    this.router.navigate(path, { relativeTo: this.route });
+  }
+
 }

@@ -1,0 +1,7 @@
+@import '../../../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  .tesla-cell-instrument-text {
+    font-size: x-small !important;
+  }
+}

@@ -11,6 +11,10 @@ const routes: Routes = [{
   component: CourseReportComponent,
   children: [
     {
+      path: '',
+      component: CourseReportListComponent,
+    },
+    {
       path: ':reportId',
       component: CourseReportReadComponent,
     },

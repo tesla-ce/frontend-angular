@@ -8,4 +8,7 @@
     <button  *ngIf='value?value.delete?value.delete.enabled:true:true'  nbButton status='danger' size="small" (click)="delete($event.stopPropagation())">
         <nb-icon icon="trash-2-outline"></nb-icon>
     </button>
+    <button  *ngIf='value?value.report?value.report.enabled:false:false'  nbButton status='default' size="small" (click)="report($event)">
+        <nb-icon icon="file-text-outline"></nb-icon>
+    </button>
 </div>

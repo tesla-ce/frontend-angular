@@ -1,0 +1,7 @@
+@import '../../../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  .tesla-sub-header-text {
+    font-size: xx-small !important;
+  }
+}
