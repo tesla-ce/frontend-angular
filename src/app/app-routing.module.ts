@@ -9,12 +9,37 @@ import { AuthGuardAuthenticated } from './@core/auth/guards/auth-guard-authentic
 // import { AuthGuardAdmin } from './@core/auth/guards/auth-guard-admin';
 
 import { LauncherComponent } from './@core/launcher/launcher.component';
+import { PluginComponent } from './@core/plugin/plugin.component';
 
 export const routes: Routes = [
   {
     path: 'auth/launcher',
     component: LauncherComponent,
   },
+  {
+    path: 'plugin/youp',
+    component: PluginComponent,
+  },
+{
+    path: 'plugin/ic',
+    component: PluginComponent,
+},
+{
+    path: 'plugin/enrolment',
+    component: PluginComponent,
+},
+{
+    path: 'plugin/activity/report',
+    component: PluginComponent,
+},
+{
+    path: 'plugin/course/report',
+    component: PluginComponent,
+},
+{
+    path: 'plugin/activity/configuration',
+    component: PluginComponent,
+},
   {
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module')
