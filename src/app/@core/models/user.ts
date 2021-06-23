@@ -17,6 +17,7 @@ export interface User {
   email: string;
   acronym: string;
   roles: string[];
+  routes: string[];
   locale: string;
   consent: string;
   consent_accepted: string;

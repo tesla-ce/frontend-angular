@@ -46,9 +46,10 @@ export class CourseReportListComponent implements OnInit {
       //   filter: false,
       // },
       learner: {
+        width: '400px',
         title: 'Learner',
         valuePrepareFunction: (value) => {
-          return value.first_name + '_' + value.last_name;
+          return value.last_name + ', ' + value.first_name;
         },
         filter: false,
       },
