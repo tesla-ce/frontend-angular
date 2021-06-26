@@ -12,7 +12,7 @@ import { NbMenuItem } from '@nebular/theme';
 export class SideMenuComponent implements OnInit {
 
   user: User;
-  menu: NbMenuItem[];
+  menu: NbMenuItem[] = [];
 
   constructor(
     private authService: AuthService,
@@ -23,9 +23,149 @@ export class SideMenuComponent implements OnInit {
       .pipe()
       .subscribe((user: User) => {
         this.user = user;
-        // TO DO Load menu by roles
-        this.menu = MENU_ITEMS;
+        this.menu = [
+          {
+              title: 'Dashboard',
+              icon: { icon: 'common-dashboard', pack: 'tesla' },
+              link: '/dashboard',
+              hidden: this.getMockedRoutes().indexOf('dashboard') === -1,
+          },
+          {
+              title: 'My Courses',
+              icon: { icon: 'common-course', pack: 'tesla' },
+              link: '/course',
+              hidden: this.getMockedRoutes().indexOf('my-courses') === -1,
+          },
+          {
+              title: 'Test page',
+              icon: { icon: 'common-menu_logo', pack: 'tesla' },
+              link: '/test',
+              hidden: this.getMockedRoutes().indexOf('test-page') === -1,
+          },
+          {
+              title: 'Administration',
+              icon: { icon: 'common-monitoring', pack: 'tesla' },
+              link: '/institution',
+              hidden: this.getMockedRoutes().indexOf('administration') === -1,
+              children: [
+                  {
+                      title: 'Users',
+                      icon: { icon: 'instrument-fa', pack: 'tesla' },
+                      link: '/institution/user',
+                      hidden: this.getMockedRoutes().indexOf('administration-users') === -1,
+                  },
+                  {
+                      title: 'Informed Consent',
+                      icon: { icon: 'sensor-assessment', pack: 'tesla' },
+                      link: '/institution/ic',
+                      hidden: this.getMockedRoutes().indexOf('administration-ic') === -1,
+                  },
+                  {
+                      title: 'SEND',
+                      icon: { icon: 'instrument-ks', pack: 'tesla' },
+                      link: '/institution/send',
+                      hidden: this.getMockedRoutes().indexOf('administration-send') === -1,
+                  },
+                  {
+                      title: 'Courses',
+                      icon: { icon: 'instrument-plagiarism', pack: 'tesla' },
+                      link: '/institution/course',
+                      hidden: this.getMockedRoutes().indexOf('administration-courses') === -1,
+                  },
+                  {
+                      title: 'Data Management',
+                      icon: { icon: 'instrument-vr', pack: 'tesla' },
+                      link: '/institution/data-management',
+                      hidden: this.getMockedRoutes().indexOf('administration-data-management') === -1,
+                  },
+                  {
+                      title: 'Settings',
+                      icon: { icon: 'sensor-assessment', pack: 'tesla' },
+                      link: '/institution/settings',
+                      hidden: this.getMockedRoutes().indexOf('administration-settings') === -1,
+                  },
+              ],
+          },
+          {
+              title: 'Statistics',
+              icon: { icon: 'sensor-camera', pack: 'tesla' },
+              link: '/statistics',
+              hidden: this.getMockedRoutes().indexOf('statistics') === -1,
+          },
+          {
+              title: 'Monitoring',
+              icon: { icon: 'sensor-keyboard', pack: 'tesla' },
+              link: '/monitoring',
+              hidden: this.getMockedRoutes().indexOf('monitoring') === -1,
+          },
+          {
+              title: 'System',
+              icon: { icon: 'common-system', pack: 'tesla' },
+              link: '/system',
+              hidden: this.getMockedRoutes().indexOf('system') === -1,
+              children: [
+                  {
+                      title: 'Users',
+                      icon: { icon: 'common-user', pack: 'tesla' },
+                      link: '/system/admin-user',
+                      hidden: this.getMockedRoutes().indexOf('system-users') === -1,
+                  },
+                  {
+                      title: 'Institutions',
+                      icon: { icon: 'common-dashboard', pack: 'tesla' },
+                      link: '/system/institution',
+                      hidden: this.getMockedRoutes().indexOf('system-institutions') === -1,
+                  },
+                  {
+                      title: 'Instruments',
+                      icon: { icon: 'common-dashboard', pack: 'tesla' },
+                      link: '/system/instrument',
+                      hidden: this.getMockedRoutes().indexOf('system-instruments') === -1,
+                  },
+                  {
+                      title: 'Services',
+                      icon: { icon: 'common-dashboard', pack: 'tesla' },
+                      link: '/system/service',
+                      hidden: this.getMockedRoutes().indexOf('system-services') === -1,
+                  },
+                  {
+                      title: 'Status',
+                      icon: { icon: 'common-dashboard', pack: 'tesla' },
+                      link: '/system/status',
+                      hidden: this.getMockedRoutes().indexOf('system-status') === -1,
+                  },
+              ],
+          },
+      ];
     });
   }
+
+  getMockedRoutes(): string[] {
+    return [
+        'dashboard',
+        'my-courses',
+        // 'test-page',
+        'administration',
+        // 'administration-users',
+        'administration-ic',
+        // 'administration-send',
+        // 'administration-courses',
+        // 'administration-data-management',
+        // 'administration-settings',
+        // 'settings',
+        // 'statistics',
+        // 'monitoring',
+        'system',
+        'system-users',
+        // 'system-institutions',
+        // 'system-instruments',
+        // 'system-services',
+        // 'system-status',
+      ];
+}
+
+showAvailableItems(key: string, routes: string[]) {
+    return routes[key] || false;
+}
 
 }

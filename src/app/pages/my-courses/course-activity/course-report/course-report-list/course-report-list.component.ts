@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import { ListCellInstrumentComponent } from './list-cell-instrument.component';
 import { ListSubHeaderComponent } from './list-sub-header-instrument.component';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
+import { ListCellSumaryComponent } from './list-cell-sumary.component';
 
 @Component({
   selector: 'ngx-course-report-list',
@@ -45,9 +46,10 @@ export class CourseReportListComponent implements OnInit {
       //   filter: false,
       // },
       learner: {
+        width: '400px',
         title: 'Learner',
         valuePrepareFunction: (value) => {
-          return value.uid;
+          return value.last_name + ', ' + value.first_name;
         },
         filter: false,
       },
@@ -84,6 +86,8 @@ export class CourseReportListComponent implements OnInit {
       summary: {
         title: 'Summary',
         filter: false,
+        type: 'custom',
+        renderComponent: ListCellSumaryComponent,
       },
 
     },

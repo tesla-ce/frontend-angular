@@ -11,10 +11,11 @@
     <a class="ng2-smart-action tesla-cell-instrument-text">{{ cellData?.confidence }}%</a>
     <a class="ng2-smart-action tesla-cell-instrument-text">{{ cellData?.result }}%</a>
     <a class="ng2-smart-action tesla-cell-instrument-text">
-        <nb-icon icon="common-notifications" status="error" pack="tesla"></nb-icon>
+        <nb-icon icon="common-identity" [attr.status]='sumary?.identity_level' pack="tesla" ></nb-icon>
+        <nb-icon icon="common-authorship" [attr.status]='sumary?.content_level'  pack="tesla"></nb-icon>
+        <nb-icon icon="common-integrity" [attr.status]='sumary?.integrity_level' pack="tesla"></nb-icon>
     </a>
-    
-    <!-- <a class="ng2-smart-action">{{ value[0].identity_level }}</a>
+    <!-- <a class="ng2-smart-action">{{ value[0]._level }}</a>
     <a class="ng2-smart-action">{{ value[0].content_level }}</a>
     <a class="ng2-smart-action">{{ value[0].integrity_level }}</a>
     <a class="ng2-smart-action">{{ value[0].instrument_id }}</a> -->
