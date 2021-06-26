@@ -99,11 +99,11 @@ export class ThemeModule {
       providers: [
         ...NbThemeModule.forRoot(
           {
-            name: 'material-uoc',
+            name: 'material-tesla',
           },
           [
-            UOC_THEME,
             TESLA_CE_THEME,
+            UOC_THEME,
             CUSTOM_THEME,
             DEFAULT_THEME,
             COSMIC_THEME,
