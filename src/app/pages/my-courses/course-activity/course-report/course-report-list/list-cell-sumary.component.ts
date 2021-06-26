@@ -27,9 +27,9 @@ export class ListCellSumaryComponent implements ViewCell, OnInit {
   getIconStatus(level) {
     switch (level) {
       case 0:
-        return 'warning';
+        return '';
       case 1:
-          return 'info';
+          return '';
       case 2:
           return 'success';
       case 3:

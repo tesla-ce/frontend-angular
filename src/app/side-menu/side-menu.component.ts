@@ -32,7 +32,7 @@ export class SideMenuComponent implements OnInit {
           },
           {
               title: 'My Courses',
-              icon: { icon: 'common-connection', pack: 'tesla' },
+              icon: { icon: 'common-course', pack: 'tesla' },
               link: '/course',
               hidden: this.getMockedRoutes().indexOf('my-courses') === -1,
           },
@@ -44,7 +44,7 @@ export class SideMenuComponent implements OnInit {
           },
           {
               title: 'Administration',
-              icon: { icon: 'common-notifications', pack: 'tesla' },
+              icon: { icon: 'common-monitoring', pack: 'tesla' },
               link: '/institution',
               hidden: this.getMockedRoutes().indexOf('administration') === -1,
               children: [
@@ -56,7 +56,7 @@ export class SideMenuComponent implements OnInit {
                   },
                   {
                       title: 'Informed Consent',
-                      icon: { icon: 'instrument-fr', pack: 'tesla' },
+                      icon: { icon: 'sensor-assessment', pack: 'tesla' },
                       link: '/institution/ic',
                       hidden: this.getMockedRoutes().indexOf('administration-ic') === -1,
                   },
@@ -100,13 +100,13 @@ export class SideMenuComponent implements OnInit {
           },
           {
               title: 'System',
-              icon: { icon: 'sensor-microphone', pack: 'tesla' },
+              icon: { icon: 'common-system', pack: 'tesla' },
               link: '/system',
               hidden: this.getMockedRoutes().indexOf('system') === -1,
               children: [
                   {
                       title: 'Users',
-                      icon: { icon: 'common-dashboard', pack: 'tesla' },
+                      icon: { icon: 'common-user', pack: 'tesla' },
                       link: '/system/admin-user',
                       hidden: this.getMockedRoutes().indexOf('system-users') === -1,
                   },
