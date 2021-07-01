@@ -20,26 +20,26 @@ export const routes: Routes = [
     path: 'plugin/youp',
     component: PluginComponent,
   },
-{
-    path: 'plugin/ic',
-    component: PluginComponent,
-},
-{
-    path: 'plugin/enrolment',
-    component: PluginComponent,
-},
-{
-    path: 'plugin/activity/report',
-    component: PluginComponent,
-},
-{
-    path: 'plugin/course/report',
-    component: PluginComponent,
-},
-{
-    path: 'plugin/activity/configuration',
-    component: PluginComponent,
-},
+  {
+      path: 'plugin/ic',
+      component: PluginComponent,
+  },
+  {
+      path: 'plugin/enrolment',
+      component: PluginComponent,
+  },
+  {
+      path: 'plugin/activity/report',
+      component: PluginComponent,
+  },
+  {
+      path: 'plugin/course/report',
+      component: PluginComponent,
+  },
+  {
+      path: 'plugin/activity/configuration',
+      component: PluginComponent,
+  },
   {
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module')
@@ -60,8 +60,8 @@ export const routes: Routes = [
   },
   {
     path: 'monitoring',
-    loadChildren: () => import('./pages/statistics/statistics.module')
-      .then(m => m.StatisticsModule),
+    loadChildren: () => import('./pages/monitoring/monitoring.module')
+      .then(m => m.MonitoringModule),
     canActivate: [AuthGuardAuthenticated],
   },
   {
@@ -86,6 +86,12 @@ export const routes: Routes = [
     path: 'learner',
     loadChildren: () => import('./pages/learner/learner.module')
       .then(m => m.LearnerModule),
+    canActivate: [AuthGuardAuthenticated],
+  },
+  {
+    path: 'enrolment',
+    loadChildren: () => import('./pages/enrolment/enrolment.module')
+      .then(m => m.EnrolmentModule),
     canActivate: [AuthGuardAuthenticated],
   },
   {

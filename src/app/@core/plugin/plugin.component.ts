@@ -19,22 +19,21 @@ export class PluginComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       const url = this.router.url.split('?')[0];
-      // if (params['redirect_url']) this.router.navigateByUrl(params['redirect_url']);
       switch (url) {
-        case '/plugin/ic': // ?institution_id => profile-ic
+        case '/plugin/ic':
               this.router.navigateByUrl('/learner/ic');
           break;
-        case '/plugin/enrolment': // ?institution_id&instruments&include_completed=0|1&redirect_uri => biometric-profile-enrolment
-        this.router.navigateByUrl(`/course/${params.instrument_id}/report`);
-          break;
-        case '/plugin/activity/report': // ?activity:
+        case '/plugin/activity/report':
             this.router.navigateByUrl(`/course/${params.course_id}/activity/${params.activity_id}/report`);
             break;
-        case '/plugin/course/report': // course
+        case '/plugin/course/report':
           this.router.navigateByUrl(`/course/${params.course_id}/report`);
           break;
-        case '/plugin/activity/configuration': //
+        case '/plugin/activity/configuration':
           this.router.navigateByUrl(`/course/${params.course_id}/activity/${params.activity_id}/update`);
+          break;
+        case '/plugin/enrolment':
+          this.router.navigateByUrl('/enrolment');
           break;
         default:
             this.router.navigateByUrl('/dashboard');
