@@ -1,16 +1,24 @@
-<nb-card *ngIf="!loading">
-    <nb-card-header class="flexbox flexbox--justify-between">{{instance.name}}
-        <!-- <nb-toggle class="toggle" (click)="enableDisableActivity(!instance.enabled)" [(ngModel)]="instance.enabled"
-            labelPosition="left" status="basic">
-        </nb-toggle> -->
+<nb-card *ngIf='!loading'>
+    <nb-card-header class="tesla-card-header">
+        <nb-actions>
+            <nb-action>
+                <button nbButton size="tiny" (click)="back()">
+                    <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+                </button>
+            </nb-action>
+            <nb-action>
+            </nb-action>
+        </nb-actions>
+        <div style="flex:1">
+            {{'REPORT.SINGULAR' | translate }}
+        </div>
+        <nb-actions>
+            <nb-action>
+                
+            </nb-action>
+        </nb-actions>
     </nb-card-header>
     <nb-card-body>
-        <div class="flexbox--direction-column">
-            <div class="flexbox--direction-column">
-                <p>{{instance.description || "Exemple descripció de l'activitat."}}</p>
-                <p> {{'COURSE.STARTS' | translate }}: {{instance.start || "Sense data d'inici"}}</p>
-                <p> {{'COURSE.ENDS' | translate }}: {{instance.end || "Sense data de finalització"}}</p>
-            </div>
-        </div>
+        <ngx-list [settings]="settings" [endPoint]="endPoint"></ngx-list>
     </nb-card-body>
 </nb-card>

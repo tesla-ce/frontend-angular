@@ -23,24 +23,24 @@ export class CourseReportListComponent implements OnInit {
     addNew: false,
     search: false,
     columns: {
-      // actions: {
-      //   title: 'Actions',
-      //   type: 'custom',
-      //   sort: false,
-      //   filter: false,
-      //   renderComponent: ListCellActionsComponent,
-      //   defaultValue: {
-      //     update: {
-      //       enabled: false,
-      //     },
-      //     read: {
-      //       enabled: true,
-      //     },
-      //     delete: {
-      //       enabled: false,
-      //     },
-      //   },
-      // },
+      actions: {
+        title: 'Actions',
+        type: 'custom',
+        sort: false,
+        filter: false,
+        renderComponent: ListCellActionsComponent,
+        defaultValue: {
+          update: {
+            enabled: false,
+          },
+          read: {
+            enabled: true,
+          },
+          delete: {
+            enabled: false,
+          },
+        },
+      },
       // id: {
       //   title: 'id',
       //   filter: false,

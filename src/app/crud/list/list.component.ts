@@ -16,6 +16,7 @@ export class ListComponent implements OnInit, AfterViewInit {
 
   @Input() settings: any;
   @Input() endPoint: any;
+  @Input() showFooter: boolean = true;
 
   @ViewChild('searchInput') searchInput: ElementRef;
 

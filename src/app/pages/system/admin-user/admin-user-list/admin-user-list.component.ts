@@ -39,6 +39,7 @@ export class AdminUserListComponent implements OnInit {
       display: true,
       perPage: 10,
     },
+    addNew: true,
   };
 
   endPoint = '/admin/user';

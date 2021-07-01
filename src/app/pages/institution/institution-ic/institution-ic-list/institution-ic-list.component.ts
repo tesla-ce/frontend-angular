@@ -48,6 +48,7 @@ export class InstitutionIcListComponent implements OnInit {
       display: true,
       perPage: 10,
     },
+    addNew: true,
   };
 
 

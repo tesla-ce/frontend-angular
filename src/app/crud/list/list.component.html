@@ -8,7 +8,7 @@
     </nb-form-field>
 </div>
 <ng2-smart-table (userRowSelect)="userRowSelect($event)" class="list" [settings]="settings" [source]="source"></ng2-smart-table>
-<div class="list-footer">
+<div *ngIf='settings.showFooter===false?false:true' class="list-footer">
     <nb-select placeholder="Items per page" [(selected)]="perPage" (selectedChange)="perPageOnChange($event)">
         <nb-option value="5">5</nb-option>
         <nb-option value="10">10</nb-option>
