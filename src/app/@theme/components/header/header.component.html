@@ -29,13 +29,14 @@
 </div>
 <div class="header-container">
   <nb-select
+    *ngIf="user && user.institution"
     status="primary"
     matRipple
-    [selected]="currentInstitution"
+    [selected]="user.institution.id"
     (selectedChange)="changeInstitution($event)"
   >
     <nb-option
-      *ngFor="let institution of institutions"
+      *ngFor="let institution of user.institutions"
       [value]="institution.id"
       matRipple
     >{{ institution.acronym }}</nb-option>

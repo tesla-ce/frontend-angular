@@ -143,7 +143,10 @@ $nb-themes: nb-register-theme((
 ), material-uoc, material-light);
 
 $nb-themes: nb-register-theme((
-  logo: url(/assets/images/logo-tesla-ce/logo-tesla-ce-white.png),
+  logo: url(/assets/images/logo-tesla-ce/logo-tesla-ce-black.png),
+
+  color-basic-100: white,
+
   layout-padding-top: 2.25rem,
 
   menu-item-icon-margin: 0 0.5rem 0 0,

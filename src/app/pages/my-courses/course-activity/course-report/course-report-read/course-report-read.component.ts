@@ -8,6 +8,8 @@ import { ListCellInstrumentComponent } from '../course-report-list/list-cell-ins
 import { ListSubHeaderComponent } from '../course-report-list/list-sub-header-instrument.component';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
 import { ListCellSumaryComponent } from '../course-report-list/list-cell-sumary.component';
+import { InstitutionUser } from '../../../../../@core/models/user';
+import { ApiReportService } from '../../../../../@core/data/api-report.service';
 
 @Component({
   selector: 'ngx-course-report-read',
@@ -18,6 +20,8 @@ export class CourseReportReadComponent implements OnInit {
   courseId: number;
   activityId: number;
   reportId: number;
+  report: any;
+  reportChart: any;
   endPoint: string;
   loading: boolean = true;
   settings = {
@@ -56,6 +60,7 @@ export class CourseReportReadComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private apiCourseService: ApiCourseService,
+    private apiReportService: ApiReportService,
     public translate: TranslateService,
     private location: Location,
     private router: Router,
@@ -70,8 +75,8 @@ export class CourseReportReadComponent implements OnInit {
   back() { this.location.back(); }
 
   ngOnInit(): void {
-    this.authService.getInstitution().subscribe(id => {
-      this.endPoint = `/institution/${id}/course/${this.courseId}/activity/${this.activityId}/report?id=${this.reportId}`;
+    this.authService.getUser().subscribe((user: InstitutionUser) => {
+      this.endPoint = `/institution/1/course/${this.courseId}/activity/${this.activityId}/report?id=${this.reportId}`;
       this.apiCourseService.getAllInstruments().subscribe((instruments: any[]) => {
         instruments.map((instrument: any) => {
           this.settings.columns['instrument-' + instrument.acronym] = {
@@ -90,7 +95,14 @@ export class CourseReportReadComponent implements OnInit {
             },
             renderComponent: ListCellInstrumentComponent,
           };
-          this.loading = false;
+          this.apiReportService.getActivityReport(this.courseId, this.activityId, this.reportId).subscribe(report => {
+            this.report = report;
+            this.apiReportService.getActivityReportChart(this.courseId, this.activityId, this.reportId).subscribe(reportChart => {
+              this.reportChart = reportChart;
+              console.log(reportChart);
+              this.loading = false;
+            });
+          });
         });
       });
     });

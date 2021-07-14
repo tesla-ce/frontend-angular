@@ -4,6 +4,7 @@ import { ListCellActionsComponent } from '../../../../crud/list/list-cell-action
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
+import { InstitutionUser } from '../../../../@core/models/user';
 
 @Component({
   selector: 'ngx-course-activity-list',
@@ -83,9 +84,11 @@ export class CourseActivityListComponent implements OnInit {
   back() { this.location.back(); }
 
   ngOnInit(): void {
-    this.authService.getInstitution().subscribe(institutionId => {
-      this.endPoint = `/institution/${institutionId}/course/${this.courseId}/activity`;
-      this.loading = false;
+    this.authService.getUser().subscribe((user: InstitutionUser) => {
+      if (user){
+        this.endPoint = `/institution/${user.institution.id}/course/${this.courseId}/activity`;
+        this.loading = false;
+      }
     });
   }
 

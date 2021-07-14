@@ -18,14 +18,14 @@ export class ApiInstitutionService {
   apiUrl: string;
   endpoint: string = '/institution/';
   endpointUrl: string;
-  currentInstitution: string;
+  user: InstitutionUser;
 
   constructor(
     private http: HttpClient,
     private authService: AuthService,
     private envService: EnvService) {
     this.apiUrl = envService.apiUrl;
-    this.authService.getInstitution().subscribe(id => this.currentInstitution = id);
+    this.authService.getUser().subscribe((user: InstitutionUser) => this.user = user);
     this.endpointUrl = this.apiUrl + this.endpoint;
   }
 
@@ -45,7 +45,7 @@ export class ApiInstitutionService {
 
   public getInstitutionUser(userId: string): Observable<InstitutionUser> {
     return this.http
-      .get(`${this.endpointUrl}${this.currentInstitution}/learner/${userId}`)
+      .get(`${this.endpointUrl}${this.user.institution.id}/learner/${userId}`)
       .pipe(
         map((user: InstitutionUser) => {
           // console.log(ic);

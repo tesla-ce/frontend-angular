@@ -7,9 +7,9 @@
     right: 0;
     height: 100%;
 ">
-    <a class="ng2-smart-action tesla-cell-instrument-text">{{ cellData?.enrolment }}%</a>
-    <a class="ng2-smart-action tesla-cell-instrument-text">{{ cellData?.confidence }}%</a>
-    <a class="ng2-smart-action tesla-cell-instrument-text">{{ cellData?.result }}%</a>
+    <a class="ng2-smart-action tesla-cell-instrument-text">{{ cellData?.enrolment?cellData.enrolment  + '%':'-'}}</a>
+    <a class="ng2-smart-action tesla-cell-instrument-text">{{ cellData?.confidence?cellData.confidence  + '%':'-'}}</a>
+    <a class="ng2-smart-action tesla-cell-instrument-text">{{ cellData?.result?cellData.result + '%':'-'}}</a>
     <a class="ng2-smart-action tesla-cell-instrument-text">
         <nb-icon icon="common-identity" [attr.status]='sumary?.identity_level' pack="tesla" ></nb-icon>
         <nb-icon icon="common-authorship" [attr.status]='sumary?.content_level'  pack="tesla"></nb-icon>

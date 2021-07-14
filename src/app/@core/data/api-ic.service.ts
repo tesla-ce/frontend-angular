@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { catchError, map } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { EnvService } from '../env/env.service';
+import { InstitutionUser } from '../models/user';
 // import { apiConstants } from './api-constants';
 
 @Injectable({
@@ -18,7 +19,7 @@ export class ApiIcService {
   endpoint: string;
   // document endpoint '/api/v2/institution/1/ic/2/document/ca/'
   endpointUrl: string;
-  institutionId: string;
+  user: InstitutionUser;
 
   constructor(
     private authService: AuthService,
@@ -26,9 +27,9 @@ export class ApiIcService {
     private envService: EnvService,
   ) {
     this.apiUrl = envService.apiUrl;
-    this.authService.getInstitution().subscribe(id => {
-      this.institutionId = id,
-        this.endpoint = `/institution/${id}/ic/`;
+    this.authService.getUser().subscribe((user: InstitutionUser) => {
+      this.user = user;
+      this.endpoint = `/institution/${user.institution.id}/ic/`;
     });
     this.endpointUrl = this.apiUrl + this.endpoint;
   }
@@ -170,7 +171,8 @@ export class ApiIcService {
 
   // API: POST /institution/id/learner/id/ic
   public approveIc(userId, icVersion): Observable<any> {
-    return this.http.post(`${this.apiUrl}/institution/${this.institutionId}/learner/${userId}/ic/`, { version: icVersion }).pipe(
+    return this.http.post(`${this.apiUrl}/institution/${this.user.institution.id}/learner/${this.user.id}/ic/`,
+     { version: icVersion }).pipe(
       map((data: any) => {
         if (data) {
           return data;
@@ -182,7 +184,7 @@ export class ApiIcService {
   }
 
   public rejectIc(userId, icVersion): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/institution/${this.institutionId}/learner/${userId}/ic/`).pipe(
+    return this.http.delete(`${this.apiUrl}/institution/${this.user.institution.id}/learner/${this.user.id}/ic/`).pipe(
       map((data: any) => {
         if (data) {
           return data;

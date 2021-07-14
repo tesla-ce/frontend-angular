@@ -8,6 +8,7 @@ import { ListCellInstrumentComponent } from './list-cell-instrument.component';
 import { ListSubHeaderComponent } from './list-sub-header-instrument.component';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
 import { ListCellSumaryComponent } from './list-cell-sumary.component';
+import { InstitutionUser } from '../../../../../@core/models/user';
 
 @Component({
   selector: 'ngx-course-report-list',
@@ -119,14 +120,14 @@ export class CourseReportListComponent implements OnInit {
   back() { this.location.back(); }
 
   ngOnInit(): void {
-    this.authService.getInstitution().subscribe(id => {
-      this.endPoint = `/institution/${id}/course/${this.courseId}/activity/${this.activityId}/report`;
+    this.authService.getUser().subscribe((user: InstitutionUser) => {
+      this.endPoint = `/institution/${user.institution.id}/course/${this.courseId}/activity/${this.activityId}/report`;
       this.apiCourseService.getAllInstruments().subscribe((instruments: any[]) => {
         instruments.map((instrument: any) => {
           this.settings.columns['instrument-' + instrument.acronym] = {
             // title: '<nb-icon icon="instrument-' + instrument.acronym + '" pack="tesla"></nb-icon> ' + instrument.acronym,
             class: 'instrument',
-            title: instrument.acronym,
+            title: instrument.name,
             width: '1400px',
             type: 'custom',
             valuePrepareFunction: (value) => {

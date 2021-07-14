@@ -6,7 +6,7 @@ import { map, takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { RippleService } from '../../../@core/utils/ripple.service';
 import { AuthService } from '../../../@core/auth/auth.service';
-import { InstitutionUser, User } from '../../../@core/models/user';
+import { InstitutionUser} from '../../../@core/models/user';
 import { Router } from '@angular/router';
 // import { apiConstants } from '../../../@core/data/api-constants';
 
@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   public readonly materialTheme$: Observable<boolean>;
   userPictureOnly: boolean = false;
-  user: User;
+  user: InstitutionUser;
 
   themes = [
     // {
@@ -70,7 +70,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // },
   ];
 
-  currentTheme = 'default';
+  currentTheme = 'material-tesla';
 
   userMenu = [
     { title: 'Profile' },
@@ -79,9 +79,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   // currentInstitution = this.authService.getInstitution().subscribe(id => id)
   // institutions = this.authService.getUserInstitutions().subscribe(list => list)
-
-  currentInstitution = 1;
-  institutions = [{ id: 1, acronym: 'UOC' }];
 
   public constructor(
     private sidebarService: NbSidebarService,
@@ -112,20 +109,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
     this.authService.getUser()
-      .pipe(takeUntil(this.destroy$))
+      // .pipe(takeUntil(this.destroy$))
       .subscribe((user: InstitutionUser) => {
+        if (!user) return;
         this.user = user;
-        // this.institutions = user?.institution ?? [{
-        //   'acronym': 'uoc',
-        //   'id': 1,
-        //   'isAdmin': false,
-        // },
-        // {
-        //   'acronym': 'test',
-        //   'id': 2,
-        //   'isAdmin': false,
-        // }];
 
+        const [institutionTheme] = this.themes.filter(theme => {
+          return theme.value === 'material-' + user?.institution?.acronym.toString();
+        });
+
+        // if (institutionTheme) this.themeService.changeTheme(institutionTheme.name);
         // apiConstants.institution = this.institutions[0].id;
         // this.currentInstitution = this.institutions[0].id;
         // if (!user?.is_admin) {

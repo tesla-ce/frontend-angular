@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { catchError, map } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { EnvService } from '../env/env.service';
+import { InstitutionUser } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,11 @@ export class ApiReportService {
     private http: HttpClient,
     private envService: EnvService,
   ) {
-    this.authService.getInstitution().subscribe(id => this.endpoint = `/institution/${id}`);
+    this.authService.getUser().subscribe((user: InstitutionUser)  => {
+      //if (user) this.endpoint = `/institution/${user.institution.id}`;
+      //else 
+      this.endpoint = `/institution/1`;
+    });
     this.apiUrl = envService.apiUrl;
     this.endpointUrl = this.apiUrl + this.endpoint;
   }
@@ -42,13 +47,25 @@ export class ApiReportService {
   }
 
   // API: GET /report/:id/activity
-  public getActivityReport(activityId: number, reportId: number): Observable<any> {
+  public getActivityReport(courseId: number, activityId: number, reportId: number): Observable<any> {
     return this.http
-      .get(this.endpointUrl + '/activity/' + activityId + '/report/' + reportId)
+      .get(this.endpointUrl + '/course/' + courseId  + '/activity/' + activityId + '/report/' + reportId)
       .pipe(
         map((response: any) => {
           if (response?.id) return response;
           else return [];
+        }),
+        catchError(this.handleError),
+      );
+  }
+
+  public getActivityReportChart(courseId: number, activityId: number, reportId: number): Observable<any> {
+    return this.http
+      .get(this.endpointUrl + '/course/' + courseId  + '/activity/' + activityId + '/report/' + reportId + '/request/')
+      .pipe(
+        map((response: any) => {
+          if (response) return response;
+          else return null;
         }),
         catchError(this.handleError),
       );

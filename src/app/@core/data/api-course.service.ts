@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { catchError, map } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { EnvService } from '../env/env.service';
+import { InstitutionUser } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,10 @@ export class ApiCourseService {
     private http: HttpClient,
     private envService: EnvService,
   ) {
-    this.authService.getInstitution().subscribe(id => this.endpoint = `/institution/${id}`);
+    this.authService.getUser().subscribe((user: InstitutionUser)  => {
+      if (user) this.endpoint = `/institution/${user.institution.id}`;
+      else this.endpoint = `/institution/1`;
+    });
     this.apiUrl = envService.apiUrl;
     this.endpointUrl = this.apiUrl + this.endpoint;
   }

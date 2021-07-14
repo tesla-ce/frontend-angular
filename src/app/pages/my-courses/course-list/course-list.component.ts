@@ -3,6 +3,7 @@ import { AuthService } from './../../../@core/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { ListCellActionsComponent } from '../../../crud/list/list-cell-actions.component';
 import { TranslateService } from '@ngx-translate/core';
+import { InstitutionUser } from '../../../@core/models/user';
 
 @Component({
   selector: 'ngx-course-list',
@@ -61,8 +62,8 @@ export class CourseListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.authService.getInstitution().subscribe(id => {
-      this.endPoint = `/institution/${id}/course`;
+    this.authService.getUser().subscribe((user: InstitutionUser) => {
+      if (user) this.endPoint = `/institution/${user.institution.id}/course`;
     });
 
   }

@@ -35,6 +35,7 @@ export interface User {
 export interface InstitutionUser extends User {
   uid: string;
   institution: Institution;
+  institutions: Institution[];
 }
 
 export abstract class UserProvider {
