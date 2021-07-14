@@ -24,6 +24,7 @@ export class CourseReportReadComponent implements OnInit {
   reportChart: any;
   endPoint: string;
   loading: boolean = true;
+  instrumentCharts: any[] = [];
   settings = {
     addNew: false,
     search: false,
@@ -97,6 +98,11 @@ export class CourseReportReadComponent implements OnInit {
           };
           this.apiReportService.getActivityReport(this.courseId, this.activityId, this.reportId).subscribe(report => {
             this.report = report;
+            this.report.detail.map(det => {
+              this.instrumentCharts[det.instrument_acronym + '_activity_histogram'] = this.getInstrumentChart(det, 'activity_histogram');
+              this.instrumentCharts[det.instrument_acronym + '_learner_histogram'] = this.getInstrumentChart(det, 'learner_histogram');
+            });
+
             this.apiReportService.getActivityReportChart(this.courseId, this.activityId, this.reportId).subscribe(reportChart => {
               this.reportChart = reportChart;
               console.log(reportChart);
@@ -106,6 +112,67 @@ export class CourseReportReadComponent implements OnInit {
         });
       });
     });
+  }
+
+  getInstrumentChart(detail, type) {
+
+    return {
+      tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+              type: 'shadow',
+          },
+      },
+      // legend: {
+      //     data: ['gaussian', type],
+      // },
+      grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true,
+      },
+      xAxis: [
+          {
+              type: 'category',
+              data: [], // xAxis items
+          },
+      ],
+      yAxis: [
+          {
+              type: 'value',
+          },
+      ],
+      series: [
+            {
+              name: 'gaussian',
+              type: 'bar',
+              stack: 'stack',
+              emphasis: {
+                  focus: 'series',
+              },
+              data: this.getGaussianData(detail[type], detail.result_bean),
+          },
+          {
+              name: 'activity histogram',
+              type: 'bar',
+              stack: 'stack',
+              emphasis: {
+                  focus: 'series',
+              },
+              data: detail.activity_histogram,
+          },
+      ],
+    };
+  }
+
+  getGaussianData(hist, bean) {
+    // Compute the probability to have current value for the learner
+    const gaussian = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    gaussian[bean] = hist[bean];
+    if (bean > 0) gaussian[bean - 1] = hist[bean - 1] / 2.0;
+    if (bean < 9) gaussian[bean + 1] = hist[bean + 1] / 2.0;
+    return gaussian;
   }
 
 }

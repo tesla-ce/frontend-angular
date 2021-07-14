@@ -20,7 +20,9 @@
     </nb-card-header>
     <nb-card-body>
         <ngx-list [settings]="settings" [endPoint]="endPoint"></ngx-list>
+        <br>
         <strong>REPORT CHART</strong>
+        <br>
         <div>
             count: {{ reportChart.count }} <br>
             next: {{ reportChart.next }}  <br>
@@ -28,27 +30,26 @@
             results: {{ reportChart.results }}  <br>
         </div>
         <br>
-        <br>
-        <strong>INSTRUMENTS REPORT CHART</strong>
-        <div *ngFor="let det of report.detail">
-            instrument:{{det.instrument}}<br>
-            activity_histogram:{{det.activity_histogram}} <br>
-            confidence:{{det.confidence}} <br>
-            content_level:{{det.content_level}} <br>
-            enrolment:{{det.enrolment}} <br>
-            h_prob_context:{{det.h_prob_context}} <br>
-            h_prob_learner:{{det.h_prob_learner}} <br>
-            identity_level:{{det.identity_level}} <br>
-            instrument_acronym:{{det.instrument_acronym}} <br>
-            instrument_id:{{det.instrument_id}} <br>
-            instrument_polarity:{{det.instrument_polarity}} <br>
-            integrity_level:{{det.integrity_level}} <br>
-            learner_histogram:{{det.learner_histogram}} <br>
-            prob_context:{{det.prob_context}} <br>
-            prob_learner:{{det.prob_learner}} <br>
-            result:{{det.result}} <br>
-            result_bean:{{det.result_bean}} <br>
-            thresholds:{{det.thresholds}} <br>
+        <div style="display:flex">
+            <nb-card *ngFor="let det of report.detail" style="margin:5px; width:320px">
+                <nb-card-header>
+                    {{ det.instrument }}
+                </nb-card-header>
+                <nb-card-body>
+                    Activity Histogram
+                    <div style="height:200px" echarts [options]="instrumentCharts[det.instrument_acronym + '_activity_histogram']"></div>
+                    <br>
+                    <br>
+                    Learner Histogram
+                    <div style="height:200px" echarts [options]="instrumentCharts[det.instrument_acronym + '_learner_histogram']"></div>
+                </nb-card-body>
+                <nb-card-footer>
+                    Positive Facts
+                </nb-card-footer>
+                <nb-card-footer>
+                    Negative Facts
+                </nb-card-footer>
+            </nb-card>
         </div>
     </nb-card-body>
 </nb-card>

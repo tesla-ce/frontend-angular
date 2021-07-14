@@ -31,6 +31,7 @@ import { CourseReportReadComponent } from './course-report-read/course-report-re
 import { SharedModule } from '../../../../shared/shared.module';
 import { ListCellInstrumentComponent } from './course-report-list/list-cell-instrument.component';
 import { ListCellSumaryComponent } from './course-report-list/list-cell-sumary.component';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 
 @NgModule({
@@ -44,8 +45,6 @@ import { ListCellSumaryComponent } from './course-report-list/list-cell-sumary.c
     NbButtonModule,
     NbInputModule,
     NbSelectModule,
-    // JsonFormsModule,
-    // JsonFormsAngularMaterialModule,
     NbToggleModule,
     NbFormFieldModule,
     RxReactiveFormsModule,
@@ -56,6 +55,10 @@ import { ListCellSumaryComponent } from './course-report-list/list-cell-sumary.c
     NbTabsetModule,
     SharedModule,
     NbIconModule,
+    // CHARTS
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
   ],
   declarations: [
     // DataDisplayComponent,
