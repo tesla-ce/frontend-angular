@@ -120,29 +120,6 @@ $nb-themes: nb-register-theme((
 ), material-light, material-light);
 
 $nb-themes: nb-register-theme((
-  logo: url(/assets/images/logo.png),
-  layout-padding-top: 2.25rem,
-
-  menu-item-icon-margin: 0 0.5rem 0 0,
-
-  card-height-tiny: 13.5rem,
-  card-height-small: 21.1875rem,
-  card-height-medium: 28.875rem,
-  card-height-large: 36.5625rem,
-  card-height-giant: 44.25rem,
-  card-margin-bottom: 1.875rem,
-  card-header-with-select-padding-top: 0.5rem,
-  card-header-with-select-padding-bottom: 0.5rem,
-
-  select-min-width: 6rem,
-  option-list-border-radius: 0,
-
-  slide-out-background: linear-gradient(270deg, #e0e0e0 0%, #ebebeb 100%),
-  slide-out-shadow-color: 0 4px 14px 0 #ebebeb,
-  slide-out-shadow-color-rtl: 0 4px 14px 0 #ebebeb,
-), material-uoc, material-light);
-
-$nb-themes: nb-register-theme((
 
   logo: url(/assets/images/logo-tesla-ce/logo-tesla-ce-white.png),
   layout-padding-top: 2.25rem,
@@ -165,6 +142,87 @@ $nb-themes: nb-register-theme((
   slide-out-shadow-color: 0 4px 14px 0 #ebebeb,
   slide-out-shadow-color-rtl: 0 4px 14px 0 #ebebeb,
 ), material-tesla, material-light);
+
+$nb-themes: nb-register-theme((
+  logo: url(/assets/images/logo.png),
+  layout-padding-top: 2.25rem,
+
+  menu-item-icon-margin: 0 0.5rem 0 0,
+
+  card-height-tiny: 13.5rem,
+  card-height-small: 21.1875rem,
+  card-height-medium: 28.875rem,
+  card-height-large: 36.5625rem,
+  card-height-giant: 44.25rem,
+  card-margin-bottom: 1.875rem,
+  card-header-with-select-padding-top: 0.5rem,
+  card-header-with-select-padding-bottom: 0.5rem,
+
+  select-min-width: 6rem,
+  option-list-border-radius: 0,
+
+  slide-out-background: linear-gradient(270deg, #e0e0e0 0%, #ebebeb 100%),
+  slide-out-shadow-color: 0 4px 14px 0 #ebebeb,
+  slide-out-shadow-color-rtl: 0 4px 14px 0 #ebebeb,
+
+  color-primary-100: red,
+  color-primary-200: #000078,
+  color-primary-300: #000078,
+  color-primary-400: #000078,
+  color-primary-500: #000078,
+  color-primary-600: #000078,
+  color-primary-700: #000078,
+  color-primary-800: #000078,
+  color-primary-900: #000078,
+  // color-basic-100: #D5FAFF,
+  // color-basic-200: #D5FAFF,
+  // color-basic-300: #D5FAFF,
+  // color-basic-400: #D5FAFF,
+  color-basic-500: #73EDFF,
+  color-basic-600: #000078,
+  color-basic-700: #000078,
+  color-basic-800: #000078,
+  color-basic-900: #000078,
+  // color-basic-1000: #73EDFF,
+  // color-basic-1100: #73EDFF,
+  color-success-100: #38ff90,
+  color-success-200: #38ff90,
+  color-success-300: #38ff90,
+  color-success-400: #38ff90,
+  color-success-500: #38ff90,
+  color-success-600: #38ff90,
+  color-success-700: #38ff90,
+  color-success-800: #38ff90,
+  color-success-900: #38ff90,
+  color-info-100: #73EDFF,
+  color-info-200: #73EDFF,
+  color-info-300: #73EDFF,
+  color-info-400: #73EDFF,
+  color-info-500: #73EDFF,
+  color-info-600: #73EDFF,
+  color-info-700: #73EDFF,
+  color-info-800: #73EDFF,
+  color-info-900: #73EDFF,
+  color-warning-100: #FFE000,
+  color-warning-200: #FFE000,
+  color-warning-300: #FFE000,
+  color-warning-400: #FFE000,
+  color-warning-500: #FFE000,
+  color-warning-600: #FFE000,
+  color-warning-700: #FFE000,
+  color-warning-800: #FFE000,
+  color-warning-900: #FFE000,
+  color-danger-100: #FF0000,
+  color-danger-200: #FF0000,
+  color-danger-300: #FF0000,
+  color-danger-400: #FF0000,
+  color-danger-500: #FF0000,
+  color-danger-600: #FF0000,
+  color-danger-700: #FF0000,
+  color-danger-800: #FF0000,
+  color-danger-900: #FF0000,
+
+), material-uoc, material-tesla);
 
 $nb-themes: nb-register-theme((
   logo: url(/assets/images/logo.png),
