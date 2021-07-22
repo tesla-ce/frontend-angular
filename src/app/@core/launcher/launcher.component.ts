@@ -37,35 +37,21 @@ export class LauncherComponent implements OnInit {
             const uri = this.envService.apiUrl + '/auth/profile';
             this.http.get(uri).subscribe((user: InstitutionUser) => {
               if (user) {
-                this.userAuthService.setIsAdmin(user.is_admin);
                 if (user.institution) {
-                  // apiConstants.setInstitution(user.institution.id)
-                  // apiConstants.setInstitutionList(                [{
-                  //   'acronym': 'uoc',
-                  //   'id': 1,
-                  //   'isAdmin': false,
-                  // },
-                  // {
-                  //   'acronym': 'test',
-                  //   'id': 2,
-                  //   'isAdmin': false,
-                  // }])
-
+                  this.userAuthService.setIsAdmin(user.is_admin);
+                  this.http.get(this.envService.apiUrl + '/institution/' + user.institution.id.toString() + '/learner/' + user.id)
+                  .subscribe((learner: any) => {
+                    if (learner.ic_status.startsWith('NOT_VALID')) this.router.navigateByUrl('/learner/ic');
+                  });
                 } else {
-                  this.userAuthService.setInstitution('1');
-                  this.userAuthService.setUserInstitutions([{
-                    'acronym': 'uoc',
-                    'id': 1,
-                    'isAdmin': false,
-                  },
-                  {
-                    'acronym': 'test',
-                    'id': 2,
-                    'isAdmin': false,
-                  }]);
+                  user.institution = {
+                      'name': 'UOC',
+                      'acronym': 'uoc',
+                      'id': 1,
+                      is_admin: true,
+                  };
                 }
-                if (params['redirect_url']) this.router.navigateByUrl(params['redirect_url']);
-                else this.router.navigateByUrl('/dashboard');
+                this.router.navigateByUrl('/dashboard');
               } else throw user;
             });
           });

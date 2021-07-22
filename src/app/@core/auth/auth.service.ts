@@ -85,25 +85,11 @@ export class AuthService extends AuthUserData {
             if (user) {
               this._isAdmin = user.is_admin;
               if (user.institution) {
-                // this.setInstitution(user.institution.toString());
-                // this.setUserInstitutions(user.institutions);
                 // CHECK IC
                 http.get(envService.apiUrl + '/institution/' + user.institution.id.toString() + '/learner/' + user.id)
                 .subscribe((learner: any) => {
                   if (learner.ic_status.startsWith('NOT_VALID')) this.router.navigateByUrl('/learner/ic');
                 });
-                // apiConstants.setInstitution(user.institution.id)
-                // apiConstants.setInstitutionList(                [{
-                //   'acronym': 'uoc',
-                //   'id': 1,
-                //   'isAdmin': false,
-                // },
-                // {
-                //   'acronym': 'test',
-                //   'id': 2,
-                //   'isAdmin': false,
-                // }])
-
               } else {
                 user.institution = {
                     'name': 'UOC',
@@ -111,16 +97,6 @@ export class AuthService extends AuthUserData {
                     'id': 1,
                     is_admin: true,
                 };
-                // this.setUserInstitutions([{
-                //   'acronym': 'uoc',
-                //   'id': 1,
-                //   'isAdmin': false,
-                // },
-                // {
-                //   'acronym': 'test',
-                //   'id': 2,
-                //   'isAdmin': false,
-                // }]);
               }
 
               this._user.next(user);

@@ -28,6 +28,7 @@ export class LearnerIcComponent implements OnInit {
   public instance: Ic;
   public fields = InstitutionIcConfig.fields;
   regexPDF: RegExp = /[0-9A-Za-z]+[.][Pp][Dd][Ff]/;
+  redirectUri: string = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -77,12 +78,19 @@ export class LearnerIcComponent implements OnInit {
         });
 
         this.languages = objectification;
-        this.loading = false;
-
+        this.route.queryParams.subscribe(params => {
+          if (params['redirect_uri']) {
+            const allowedDomains = ['https://example.com/'];
+            console.log(params);
+            console.log(params['redirect_uri']);
+            const domain =  (new URL(params['redirect_uri'])).hostname.replace('www.', '');
+            console.log(allowedDomains, domain);
+            if (allowedDomains.indexOf(domain) !== -1 ) this.redirectUri = params['redirect_uri'];
+          }
+          this.loading = false;
+        });
       });
-
     });
-
   }
 
   accept() {
@@ -104,6 +112,10 @@ export class LearnerIcComponent implements OnInit {
 
   pickedLanguage(event): void {
     this.selectedLanguage = event;
+  }
+
+  backToLMS() {
+    window.location.href = this.redirectUri;
   }
 
 }

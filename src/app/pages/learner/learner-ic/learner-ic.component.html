@@ -35,7 +35,7 @@
             <div style="display: flex; align-self: center;">
                 <button *ngIf="!loading && !approved" nbButton type="button"
                     (click)="accept()">{{"ACTIONS.ACCEPT_CONSENT" | translate }}</button>
-                    <button *ngIf="!loading && approved" nbButton type="button"
+                <button *ngIf="!loading && approved" nbButton type="button"
                     (click)="reject()">{{"ACTIONS.DECLINE_CONSENT" | translate }}</button>
             </div>
             <div style="display: flex; justify-content: space-between;">

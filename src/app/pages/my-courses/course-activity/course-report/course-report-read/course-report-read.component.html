@@ -24,10 +24,7 @@
         <strong>REPORT CHART</strong>
         <br>
         <div>
-            count: {{ reportChart.count }} <br>
-            next: {{ reportChart.next }}  <br>
-            previous: {{ reportChart.previous }}  <br>
-            results: {{ reportChart.results }}  <br>
+            <div style="height:200px" echarts [options]="reportChart"></div>
         </div>
         <br>
         <div style="display:flex">

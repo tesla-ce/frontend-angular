@@ -4,6 +4,7 @@ import { User } from '../../../@core/models/user';
 import { TranslateService } from '@ngx-translate/core';
 
 import { angularMaterialRenderers } from '@jsonforms/angular-material';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ngx-test-default',
@@ -14,6 +15,7 @@ import { angularMaterialRenderers } from '@jsonforms/angular-material';
 export class TestDefaultComponent implements OnInit {
 
   user: User;
+  redirectUri: string;
 
   dataschema: any =  {
     'type': 'object',
@@ -51,6 +53,7 @@ export class TestDefaultComponent implements OnInit {
   renderers = angularMaterialRenderers;
 
   constructor(
+    private route: ActivatedRoute,
     private authService: AuthService,
     public translate: TranslateService,
   ) { }
@@ -61,6 +64,13 @@ export class TestDefaultComponent implements OnInit {
       .subscribe((user: User) => {
         if (user) this.user = user;
       });
+    this.route.queryParams.subscribe(params => {
+      this.redirectUri = params['redirect_uri'];
+    });
+  }
+
+  backToLMS() {
+    window.location.href = this.redirectUri;
   }
 }
 

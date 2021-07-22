@@ -17,11 +17,62 @@ export class PluginComponent implements OnInit {
   }
 
   ngOnInit() {
+    const redirectUrl = this.router.url.split('?')[0];
     this.route.queryParams.subscribe(params => {
-      const url = this.router.url.split('?')[0];
+      if (params['id'] && params['token']) {
+        const url = this.envService.apiUrl + '/auth/token';
+        const options = {
+          observe: 'body' as const,
+          responseType: 'json' as const,
+          headers: new HttpHeaders({
+            'Content-type': 'application/json; charset=utf-8',
+          }),
+        };
+        this.http.post(url, {
+          id: params['id'],
+          token: params['token'],
+        }, options).subscribe(result => {
+          const token: NbAuthToken = nbAuthCreateToken(NbAuthOAuth2JWTToken,
+            result, 'email');
+          this.tokenService.set(token).subscribe(_ => {
+            this.authService.isAuthenticatedOrRefresh().subscribe(authenticated => {
+              const uri = this.envService.apiUrl + '/auth/profile';
+              this.http.get(uri).subscribe((user: InstitutionUser) => {
+                if (user) {
+                  if (user.institution) {
+                    this.userAuthService.setIsAdmin(user.is_admin);
+                    this.http.get(this.envService.apiUrl + '/institution/' + user.institution.id.toString() + '/learner/' + user.id)
+                    .subscribe((learner: any) => {
+                      if (learner.ic_status.startsWith('NOT_VALID')) this.router.navigateByUrl('/learner/ic');
+                    });
+                  } else {
+                    user.institution = {
+                        'name': 'UOC',
+                        'acronym': 'uoc',
+                        'id': 1,
+                        is_admin: true,
+                    };
+                  }
+                  this.redirect(redirectUrl, params);
+                } else throw user;
+              });
+            });
+          },
+          );
+        });
+      } else {
+        this.redirect(redirectUrl, params);
+      }
+    });
+  }
+
+  redirect(url, params) {
       switch (url) {
         case '/plugin/ic':
-              this.router.navigateByUrl('/learner/ic');
+              // this.router.navigateByUrl('/learner/ic?' + params['redirect_uri']);
+              this.router.navigate(['/learner/ic'], { queryParams: {
+                redirect_uri: params['redirect_uri'],
+              }});
           break;
         case '/plugin/activity/report':
             this.router.navigateByUrl(`/course/${params.course_id}/activity/${params.activity_id}/report`);
@@ -39,6 +90,5 @@ export class PluginComponent implements OnInit {
             this.router.navigateByUrl('/dashboard');
             break;
       }
-    });
   }
 }

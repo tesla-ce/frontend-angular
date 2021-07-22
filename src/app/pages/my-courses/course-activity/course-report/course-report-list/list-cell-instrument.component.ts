@@ -29,9 +29,9 @@ export class ListCellInstrumentComponent implements ViewCell, OnInit {
   getIconStatus(level) {
     switch (level) {
       case 0:
-        return '';
+        return 'disabled';
       case 1:
-          return '';
+          return 'disabled';
       case 2:
           return 'success';
       case 3:
