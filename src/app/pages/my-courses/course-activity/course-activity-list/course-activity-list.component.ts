@@ -85,7 +85,7 @@ export class CourseActivityListComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
-      if (user){
+      if (user) {
         this.endPoint = `/institution/${user.institution.id}/course/${this.courseId}/activity`;
         this.loading = false;
       }

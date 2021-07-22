@@ -81,10 +81,7 @@ export class LearnerIcComponent implements OnInit {
         this.route.queryParams.subscribe(params => {
           if (params['redirect_uri']) {
             const allowedDomains = ['https://example.com/'];
-            console.log(params);
-            console.log(params['redirect_uri']);
             const domain =  (new URL(params['redirect_uri'])).hostname.replace('www.', '');
-            console.log(allowedDomains, domain);
             if (allowedDomains.indexOf(domain) !== -1 ) this.redirectUri = params['redirect_uri'];
           }
           this.loading = false;
