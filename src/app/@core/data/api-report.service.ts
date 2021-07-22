@@ -25,9 +25,8 @@ export class ApiReportService {
     private envService: EnvService,
   ) {
     this.authService.getUser().subscribe((user: InstitutionUser)  => {
-      //if (user) this.endpoint = `/institution/${user.institution.id}`;
-      //else 
-      this.endpoint = `/institution/1`;
+      if (user && user.institution) this.endpoint = `/institution/${user.institution.id}`;
+      else this.endpoint = `/institution/1`;
     });
     this.apiUrl = envService.apiUrl;
     this.endpointUrl = this.apiUrl + this.endpoint;
