@@ -48,7 +48,7 @@ jobs:
       - run: npm run test:coverageheadless
       # - run: npm run ng test --no-watch --code-coverage
       - name: "Upload coverage to Codecov"
-        uses: codecov/codecov-action@v1.5.0
+        uses: codecov/codecov-action@v2.0.2
         if: matrix.operating-system == 'ubuntu-latest'
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
