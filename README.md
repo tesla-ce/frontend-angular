@@ -1,3 +1,9 @@
+[![codecov](https://codecov.io/gh/tesla-ce/frontend-angular/branch/master/graph/badge.svg?token=1doumXL2Kg)](https://codecov.io/gh/tesla-ce/frontend-angular)
+[![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
+[![FOSSA Status](https://app.fossa.com/api/projects/custom%2B26246%2Fgithub.com%2Ftesla-ce%2Ffrontend-angular.svg?type=shield)](https://app.fossa.com/projects/custom%2B26246%2Fgithub.com%2Ftesla-ce%2Ffrontend-angular?ref=badge_shield)
+
+[![Quality gate](https://sonar.sunai.uoc.edu/api/project_badges/quality_gate?project=frontend-angular)](https://sonar.sunai.uoc.edu/dashboard?id=frontend-angular)
+
 # TeSLA CE Angular Front-end
 
 | :warning: This repository is **under construction**. Final release of TeSLA Community Edition source code is expected by the **end of 2021** |
@@ -20,3 +26,5 @@ Credits: Include a section for credits in order to highlight and link to the aut
 
 ## License
 This project is licensed under [AGPL v3 licence](http://www.gnu.org/licenses/agpl-3.0).
+
+[![FOSSA Status](https://app.fossa.com/api/projects/custom%2B26246%2Fgithub.com%2Ftesla-ce%2Ffrontend-angular.svg?type=large)](https://app.fossa.com/projects/custom%2B26246%2Fgithub.com%2Ftesla-ce%2Ffrontend-angular?ref=badge_large)
