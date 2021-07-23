@@ -5,9 +5,9 @@ name: Angular package
 
 on:
   push:
-    branches: [ main, dev, pre ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, pre ]
+    branches: [ main ]
   release:
     types:
       - created
@@ -104,7 +104,7 @@ jobs:
   docker_edge:
     needs: sonar
     runs-on: ubuntu-latest
-    if: github.event_name != 'release' && github.event_name != 'pull_request'
+    if: github.event_name != 'release' && github.ref == 'refs/heads/master'
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
