@@ -129,6 +129,6 @@ jobs:
     needs: docker_edge
     runs-on: [self-hosted, tesla-ce-demo]
     steps:
-      - name: Update core images
+      - name: Update front-end images
         run: |
-          sudo /opt/tesla-ce/upgrade_core_images.sh
+          sudo /opt/tesla-ce/upgrade_frontend_images.sh
