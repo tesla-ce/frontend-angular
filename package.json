@@ -17,6 +17,7 @@
     "build:prod": "npm run build -- --prod --aot",
     "test": "ng test",
     "test:coverage": "rimraf coverage && npm run test -- --code-coverage",
+    "test:coverageheadless": "rimraf coverage && npm run test -- --code-coverage --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
     "lint:fix": "ng lint tesla-ce --fix",
     "lint:styles": "stylelint ./src/**/*.scss",

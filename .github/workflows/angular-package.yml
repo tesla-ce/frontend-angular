@@ -1,0 +1,134 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Angular package
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types:
+      - created
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Get version values
+        id: vars
+        run: |
+          echo ::set-output name=version::$(sed -nE 's/^\s*"version": "(.*?)",$/\1/p' package.json)
+          echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - name: Show captured versions
+        run: |
+          echo 'Version in source code: ${{ steps.vars.outputs.version }}'
+          echo 'Release version: ${{ steps.vars.outputs.tag }}'
+      - name: Check version tag
+        uses: nick-invision/assert-action@v1.1.0
+        if: github.event_name == 'release'
+        with:
+          expected: ${{ steps.vars.outputs.tag }}
+          actual: ${{ steps.vars.outputs.version }}
+          comparison: exact
+  test:
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: npm install
+      - run: npm run test:coverageheadless
+      # - run: npm run ng test --no-watch --code-coverage
+      - name: "Upload coverage to Codecov"
+        uses: codecov/codecov-action@v1.5.0
+        if: matrix.operating-system == 'ubuntu-latest'
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          OS: ${{ matrix.operating-system }}
+        with:
+          fail_ci_if_error: true
+          env_vars: OS
+          files: ./coverage/tesla-ce/icons/index.html
+      - name: Fossa update license analysis
+        uses: fossa-contrib/fossa-action@v1
+        with:
+          fossa-api-key: ${{ secrets.FOSSA_API_KEY }}
+  sonar:
+    needs: test
+    name: Sonar
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: docker://sonarsource/sonar-scanner-cli:latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+  docker_tag:
+    needs: sonar
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: actions/checkout@v2
+      - name: Get version values
+        id: vars
+        run: |
+          echo ::set-output name=version::$(sed -nE 's/^\s*"version": "(.*?)",$/\1/p' package.json)
+          echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2.5.0
+        with:
+          push: true
+          tags: teslace/frontend-angular:${{ steps.vars.outputs.tag }}, teslace/frontend-angular:latest
+          file: docker/Dockerfile
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+
+  docker_edge:
+    needs: sonar
+    runs-on: ubuntu-latest
+    if: github.event_name != 'release' && github.event_name != 'pull_request'
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2.5.0
+        with:
+          push: true
+          tags: teslace/frontend-angular:edge
+          file: docker/Dockerfile
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+
+  deploy_demo:
+    needs: docker_edge
+    runs-on: [self-hosted, tesla-ce-demo]
+    steps:
+      - name: Update core images
+        run: |
+          sudo /opt/tesla-ce/upgrade_core_images.sh
