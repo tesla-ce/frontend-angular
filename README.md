@@ -2,7 +2,7 @@
 [![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
 [![FOSSA Status](https://app.fossa.com/api/projects/custom%2B26246%2Fgithub.com%2Ftesla-ce%2Ffrontend-angular.svg?type=shield)](https://app.fossa.com/projects/custom%2B26246%2Fgithub.com%2Ftesla-ce%2Ffrontend-angular?ref=badge_shield)
 
-[![Quality gate](https://sonar.sunai.uoc.edu/api/project_badges/quality_gate?project=frontend-angular)](https://sonar.sunai.uoc.edu/dashboard?id=frontend-angular)
+[![Quality gate](https://sonar.sunai.uoc.edu/api/project_badges/quality_gate?project=tesla-ce_frontend-angular)](https://sonar.sunai.uoc.edu/dashboard?id=tesla-ce_frontend-angular)
 
 # TeSLA CE Angular Front-end
 
