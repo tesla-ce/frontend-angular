@@ -41,6 +41,8 @@ jobs:
     runs-on: ${{ matrix.operating-system }}
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
@@ -61,23 +63,14 @@ jobs:
         uses: fossa-contrib/fossa-action@v1
         with:
           fossa-api-key: ${{ secrets.FOSSA_API_KEY }}
-  sonar:
-    needs: test
-    name: Sonar
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - uses: docker://sonarsource/sonar-scanner-cli:latest
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-
   docker_tag:
-    # needs: sonar
+    needs: test
     runs-on: ubuntu-latest
     if: github.event_name == 'release'
     steps:
@@ -107,7 +100,7 @@ jobs:
         run: echo ${{ steps.docker_build.outputs.digest }}
 
   docker_edge:
-    # needs: sonar
+    needs: test
     runs-on: ubuntu-latest
     if: github.event_name != 'release' && github.ref == 'refs/heads/master'
     steps:
