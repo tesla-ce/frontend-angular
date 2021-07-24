@@ -26,6 +26,7 @@ export class AuthService extends AuthUserData {
   private _isAdmin: boolean = false;
   private _institution: number;
   private _userInstitutions: any[];
+  private _current_user: InstitutionUser = null;
   private readonly user = this._user.asObservable();
 
   getRole(): Observable<string> {
@@ -48,8 +49,19 @@ export class AuthService extends AuthUserData {
     return observableOf(localStorage.getItem('institution'));
   }
 
+  /**
+   * Change current user institution
+   * @param institutionId New institution ID
+   */
   setInstitution(institutionId: string): void {
     localStorage.setItem('institution', institutionId);
+    for (const institution of this._current_user.institutions) {
+      if (institution.id === Number(institutionId)) {
+        this._current_user.institution = institution;
+        this._user.next(this._current_user);
+        break;
+      }
+    }
   }
 
   getUserInstitutions(): Observable<any[]> {
@@ -85,20 +97,21 @@ export class AuthService extends AuthUserData {
             if (user) {
               this._isAdmin = user.is_admin;
               if (user.institution) {
-                // CHECK IC
-                http.get(envService.apiUrl + '/institution/' + user.institution.id.toString() + '/learner/' + user.id)
-                .subscribe((learner: any) => {
-                  if (learner.ic_status.startsWith('NOT_VALID')) this.router.navigateByUrl('/learner/ic');
-                });
+                // CHECK IC ONLY FOR LEARNERS
+                if (user.roles.includes('LEARNER')) {
+                  http.get(envService.apiUrl + '/institution/' + user.institution.id.toString() + '/learner/' + user.id)
+                    .subscribe((learner: any) => {
+                      if (learner.ic_status.startsWith('NOT_VALID')) this.router.navigateByUrl('/learner/ic');
+                    });
+                }
               } else {
-                user.institution = {
-                    'name': 'UOC',
-                    'acronym': 'uoc',
-                    'id': 1,
-                    is_admin: true,
-                };
+                // When user has no assigned institution, take first available institution
+                if (user.institutions.length > 0) {
+                  user.institution = user.institutions[0];
+                  user.institution.is_admin = true;
+                }
               }
-
+              this._current_user = user;
               this._user.next(user);
             } else throw user;
           });

@@ -45,7 +45,7 @@ export class ApiInstitutionService {
 
   public getInstitutionUser(userId: string): Observable<InstitutionUser> {
     return this.http
-      .get(`${this.endpointUrl}${this.user.institution.id}/learner/${userId}`)
+      .get(`${this.endpointUrl}${this.user.institution.id}/learner/${userId}/`)
       .pipe(
         map((user: InstitutionUser) => {
           // console.log(ic);
