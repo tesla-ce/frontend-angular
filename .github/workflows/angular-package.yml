@@ -102,7 +102,7 @@ jobs:
   docker_edge:
     needs: test
     runs-on: ubuntu-latest
-    if: github.event_name != 'release' && github.ref == 'refs/heads/master'
+    if: github.event_name != 'release' && github.ref == 'refs/heads/main'
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
