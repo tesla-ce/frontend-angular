@@ -7,11 +7,7 @@ describe('AppModule', () => {
 
    beforeEach(() => {
      TestBed.configureTestingModule({});
-     app = TestBed.inject(AppModule);
+     TestBed.inject(AppModule);
    });
-
-   // it('should be created', () => {
-   //   expect(app).toBeTruthy();
-   // });
 });
-// TODO: Add tests
+
