@@ -26,7 +26,7 @@ export class ApiCourseService {
   ) {
     this.authService.getUser().subscribe((user: InstitutionUser)  => {
       if (user) this.endpoint = `/institution/${user.institution.id}`;
-      else this.endpoint = `/institution/1`;
+      // else this.endpoint = `/institution/1`;
     });
     this.apiUrl = envService.apiUrl;
     this.endpointUrl = this.apiUrl + this.endpoint;
@@ -35,7 +35,7 @@ export class ApiCourseService {
   // API: GET /course/:id
   public getCourseById(courseId: number): Observable<Course> {
     return this.http
-      .get(this.endpointUrl + '/course/' + courseId)
+      .get(this.endpointUrl + '/course/' + courseId + '/')
       .pipe(
         map((course: Course) => {
           // console.log(course);
@@ -49,7 +49,7 @@ export class ApiCourseService {
   // API: GET /course/:id/activity
   public getCourseActivities(courseId: number): Observable<any> {
     return this.http
-      .get(this.endpointUrl + '/course/' + courseId + '/activity')
+      .get(this.endpointUrl + '/course/' + courseId + '/activity/')
       .pipe(
         map((response: any) => {
           if (response?.results) return response.results;
@@ -63,7 +63,7 @@ export class ApiCourseService {
   // API: GET /course/:id/activity
   public getCourseActivity(courseId: number, activityId: number): Observable<any> {
     return this.http
-      .get(this.endpointUrl + '/course/' + courseId + '/activity/' + activityId)
+      .get(this.endpointUrl + '/course/' + courseId + '/activity/' + activityId + '/')
       .pipe(
         map((response: any) => {
           if (response?.id) return response;
@@ -76,7 +76,7 @@ export class ApiCourseService {
   // API: GET /course/:id/activity/:id
   public getActivityInstrument(courseId: number, activityId: number): Observable<any> {
     return this.http
-      .get(this.endpointUrl + '/course/' + courseId + '/activity/' + activityId + '/instrument')
+      .get(this.endpointUrl + '/course/' + courseId + '/activity/' + activityId + '/instrument/')
       .pipe(
         map((response: any) => {
           if (response?.results) return response.results;
@@ -100,7 +100,7 @@ export class ApiCourseService {
   // API: DELETE /course/:id/activity/:id/instrument/:id
   public deleteActivityInstrument(courseId: number, activityId: number, instrumentId: number): Observable<any> {
     return this.http
-      .delete(this.endpointUrl + '/course/' + courseId + '/activity/' + activityId + '/instrument/' + instrumentId)
+      .delete(this.endpointUrl + '/course/' + courseId + '/activity/' + activityId + '/instrument/' + instrumentId + '/')
       .pipe(
         map((data: any) => {
           return true;
@@ -113,7 +113,7 @@ export class ApiCourseService {
   // API: GET /course/:id/activity
   public getCourseInstruments(institutionId: number): Observable<any> {
     return this.http
-      .get(this.endpointUrl + '/instrument')
+      .get(this.endpointUrl + '/instrument/')
       .pipe(
         map((response: any) => {
           if (response?.results) return response.results;
