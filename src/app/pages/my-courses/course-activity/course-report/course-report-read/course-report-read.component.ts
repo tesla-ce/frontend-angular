@@ -101,6 +101,10 @@ export class CourseReportReadComponent implements OnInit {
             this.report.detail.map(det => {
               this.instrumentCharts[det.instrument_acronym + '_activity_histogram'] = this.getInstrumentChart(det, 'activity_histogram');
               this.instrumentCharts[det.instrument_acronym + '_learner_histogram'] = this.getInstrumentChart(det, 'learner_histogram');
+              this.instrumentCharts[det.instrument_acronym + '_positive_facts'] = det.facts.positive;
+              this.instrumentCharts[det.instrument_acronym + '_neutral_facts'] = det.facts.neutral;
+              this.instrumentCharts[det.instrument_acronym + '_negative_facts'] = det.facts.negative;
+
             });
 
             this.apiReportService.getActivityReportChart(this.courseId, this.activityId, this.reportId).subscribe(reportChart => {
