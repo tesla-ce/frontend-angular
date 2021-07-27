@@ -45,8 +45,9 @@ export class AuthService extends AuthUserData {
     return this.user;
   }
 
-  getInstitution(): Observable<string> {
-    return observableOf(localStorage.getItem('institution'));
+  getInstitution(): Observable<Institution> {
+    // return observableOf(localStorage.getItem('institution'));
+    return observableOf(this._current_user.institution);
   }
 
   /**
@@ -54,7 +55,7 @@ export class AuthService extends AuthUserData {
    * @param institutionId New institution ID
    */
   setInstitution(institutionId: string): void {
-    localStorage.setItem('institution', institutionId);
+    // localStorage.setItem('institution', institutionId);
     for (const institution of this._current_user.institutions) {
       if (institution.id === Number(institutionId)) {
         this._current_user.institution = institution;
@@ -159,7 +160,7 @@ export class AuthService extends AuthUserData {
           // this._user.next(Object.assign({}, user));
           // });
         } else {
-          this._user.next(null);
+          // this._user.next(null);
         }
       });
   }

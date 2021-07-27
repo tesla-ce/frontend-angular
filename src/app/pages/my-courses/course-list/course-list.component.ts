@@ -65,7 +65,6 @@ export class CourseListComponent implements OnInit {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
       if (user) this.endPoint = `/institution/${user.institution.id}/course`;
     });
-
   }
 
 }
