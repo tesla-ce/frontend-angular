@@ -1,8 +1,10 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../../../@core/auth/auth.service';
 import { ApiIcService } from '../../../../@core/data/api-ic.service';
 import { Ic } from '../../../../@core/models/ic';
+import { InstitutionUser } from '../../../../@core/models/user';
 import { InstitutionIcConfig } from '../institution-ic.config';
 
 @Component({
@@ -21,6 +23,7 @@ export class InstitutionIcReadComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apiIcService: ApiIcService,
+    private authService: AuthService,
     private location: Location,
     private router: Router) {
     this.route.params.subscribe(params => {
@@ -39,16 +42,19 @@ export class InstitutionIcReadComponent implements OnInit {
   back() { this.location.back(); }
 
   ngOnInit(): void {
-    this.apiIcService.getIcDocument(this.id).subscribe(list => {
-      list.map((item) => {
-        if (item.pdf) item.title = this.regexPDF.exec(item.pdf)[0];
-      });
-      this.languages = list;
-    });
-
-    this.apiIcService.getIcById(this.id).subscribe(instance => {
-      this.instance = instance;
-      this.loading = false;
+    this.authService.getUser().subscribe((user: InstitutionUser) => {
+      if (user) {
+        this.apiIcService.getIcDocument(user.institution.id, this.id).subscribe(list => {
+          list.map((item) => {
+            if (item.pdf) item.title = this.regexPDF.exec(item.pdf)[0];
+          });
+          this.languages = list;
+          this.apiIcService.getIcById(user.institution.id, this.id).subscribe(instance => {
+            this.instance = instance;
+            this.loading = false;
+          });
+        });
+      }
     });
   }
 

@@ -8,6 +8,7 @@ import { CourseActivityConfig } from '../course-activity.config';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import { CourseActivityInstrumentAddComponent } from '../course-activity-instrument/course-activity-instrument-add.component';
+import { InstitutionUser } from '../../../../@core/models/user';
 
 @Component({
   selector: 'ngx-course-activity-update',
@@ -15,6 +16,7 @@ import { CourseActivityInstrumentAddComponent } from '../course-activity-instrum
   styleUrls: ['./course-activity-update.component.scss'],
 })
 export class CourseActivityUpdateComponent implements OnInit {
+  institutionId: number;
   courseId: number;
   activityId: number;
   loading: boolean = true;
@@ -45,7 +47,7 @@ export class CourseActivityUpdateComponent implements OnInit {
   back() { this.location.back(); }
 
   enableDisableActivity(value): void {
-    this.apiCourseService.putActivityActive(this.courseId, this.activityId, { enabled: value }).subscribe();
+    this.apiCourseService.putActivityActive(this.institutionId, this.courseId, this.activityId, { enabled: value }).subscribe();
   }
 
   getAlternative(mainInstrumentId): any {
@@ -54,24 +56,28 @@ export class CourseActivityUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.apiCourseService.getCourseActivity(this.courseId, this.activityId).subscribe(instance => {
-      this.apiCourseService.getActivityInstrument(this.courseId, this.activityId).subscribe(activityInstruments => {
-        this.activityInstruments = activityInstruments;
-        this.activityMainInstruments = activityInstruments.filter(ins => ins.alternative_to === null);
-        this.activityAltInstruments = activityInstruments.filter(ins => ins.alternative_to !== null);
-        this.activityAltInstruments.map(altInstrument => {
-          this.activityMainInstruments.filter(ins => ins.id === altInstrument.alternative_to)[0].alternative = altInstrument;
-        });
-        this.apiCourseService.getAllInstruments().subscribe(allInstruments => {
-          this.allInstruments = allInstruments;
-          this.availableInstruments = this.allInstruments.filter(ins => {
-            return this.activityInstruments.map(item => item.instrument.acronym).indexOf(ins.acronym) === -1;
+    this.authService.getUser().subscribe((user: InstitutionUser) => {
+      if (user) {
+        this.institutionId = user.institution.id;
+        this.apiCourseService.getCourseActivity(this.institutionId, this.courseId, this.activityId).subscribe(instance => {
+          this.apiCourseService.getActivityInstrument(this.institutionId, this.courseId, this.activityId).subscribe(activityInstruments => {
+            this.activityInstruments = activityInstruments;
+            this.activityMainInstruments = activityInstruments.filter(ins => ins.alternative_to === null);
+            this.activityAltInstruments = activityInstruments.filter(ins => ins.alternative_to !== null);
+            this.activityAltInstruments.map(altInstrument => {
+              this.activityMainInstruments.filter(ins => ins.id === altInstrument.alternative_to)[0].alternative = altInstrument;
+            });
+            this.apiCourseService.getAllInstruments(this.institutionId).subscribe(allInstruments => {
+              this.allInstruments = allInstruments;
+              this.availableInstruments = this.allInstruments.filter(ins => {
+                return this.activityInstruments.map(item => item.instrument.acronym).indexOf(ins.acronym) === -1;
+              });
+            });
           });
+          this.instance = instance;
+          this.loading = false;
         });
-      });
-
-      this.instance = instance;
-      this.loading = false;
+      }
     });
   }
 

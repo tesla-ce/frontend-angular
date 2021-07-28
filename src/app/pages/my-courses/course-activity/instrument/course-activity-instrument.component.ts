@@ -3,7 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { angularMaterialRenderers } from '@jsonforms/angular-material';
 import { NbWindowService } from '@nebular/theme';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from '../../../../@core/auth/auth.service';
 import { ApiCourseService } from '../../../../@core/data/api-course.service';
+import { InstitutionUser } from '../../../../@core/models/user';
 
 @Component({
   selector: 'ngx-course-activity-instrument',
@@ -25,8 +27,9 @@ export class CourseActivityInstrumentComponent implements OnInit {
   @Input() type: string = 'show';
   @Input() reload: Function;
 
-  courseId: any;
-  activityId: any;
+  institutionId: number;
+  courseId: number;
+  activityId: number;
 
   @ViewChild('escClose', { read: TemplateRef }) escCloseTemplate: TemplateRef<HTMLElement>;
 
@@ -55,6 +58,7 @@ export class CourseActivityInstrumentComponent implements OnInit {
   constructor(
     private windowService: NbWindowService,
     public translate: TranslateService,
+    private authService: AuthService,
     private apiCourseService: ApiCourseService,
     private router: Router,
     private route: ActivatedRoute,
@@ -65,10 +69,15 @@ export class CourseActivityInstrumentComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.courseId = params['courseId'];
       this.activityId = params['activityId'];
-    });
-    this.apiCourseService.getAllInstruments().subscribe(instrumentList => {
-      this.instruments = instrumentList;
-      this.loading = false;
+      this.authService.getUser().subscribe((user: InstitutionUser) => {
+        if (user) {
+          this.institutionId = user.institution.id;
+          this.apiCourseService.getAllInstruments(this.institutionId).subscribe(instrumentList => {
+            this.instruments = instrumentList;
+            this.loading = false;
+          });
+        }
+      });
     });
   }
 
@@ -85,7 +94,7 @@ export class CourseActivityInstrumentComponent implements OnInit {
 
 
   enableDisableInstrument(instrument): void {
-    this.apiCourseService.putInstrumentActive(this.course,
+    this.apiCourseService.putInstrumentActive(this.institutionId, this.course,
       this.activityId,
       instrument.id,
       {
@@ -100,12 +109,12 @@ export class CourseActivityInstrumentComponent implements OnInit {
 
   handleDeleteInstrument(instrument, hasAlternative) {
     if (hasAlternative) {
-      this.apiCourseService.deleteActivityInstrument(this.course, this.activityId, hasAlternative)
+      this.apiCourseService.deleteActivityInstrument(this.institutionId, this.course, this.activityId, hasAlternative)
         .subscribe(response => {
           if (response) this.reload();
         });
     }
-    this.apiCourseService.deleteActivityInstrument(this.course, this.activityId, instrument)
+    this.apiCourseService.deleteActivityInstrument(this.institutionId, this.course, this.activityId, instrument)
       .subscribe(response => {
         if (response) this.reload();
       });
@@ -121,10 +130,10 @@ export class CourseActivityInstrumentComponent implements OnInit {
     };
 
     if (isAlternative) {
-      this.apiCourseService.addActivityInstrument(this.course, this.activityId, data).subscribe(response => {
+      this.apiCourseService.addActivityInstrument(this.institutionId, this.course, this.activityId, data).subscribe(response => {
         if (response) this.reload();
       });
-    } else this.apiCourseService.addActivityInstrument(this.course, this.activityId, data).subscribe(response => {
+    } else this.apiCourseService.addActivityInstrument(this.institutionId, this.course, this.activityId, data).subscribe(response => {
       if (response) this.reload();
     });
 

@@ -160,7 +160,7 @@ export class AuthService extends AuthUserData {
           // this._user.next(Object.assign({}, user));
           // });
         } else {
-          // this._user.next(null);
+          this._user.next(null);
         }
       });
   }

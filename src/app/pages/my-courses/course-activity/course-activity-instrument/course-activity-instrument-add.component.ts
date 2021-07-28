@@ -4,7 +4,9 @@ import { angularMaterialRenderers } from '@jsonforms/angular-material';
 import { createAjv } from '@jsonforms/core';
 import { NbDialogRef, NbWindowService } from '@nebular/theme';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from '../../../../@core/auth/auth.service';
 import { ApiCourseService } from '../../../../@core/data/api-course.service';
+import { InstitutionUser } from '../../../../@core/models/user';
 
 @Component({
   selector: 'ngx-course-activity-instrument-add',
@@ -13,6 +15,7 @@ import { ApiCourseService } from '../../../../@core/data/api-course.service';
 })
 export class CourseActivityInstrumentAddComponent implements OnInit {
 
+  institutionId: number;
   loading: boolean = true;
   @Input() availableInstruments: any[];
   selectedInstrument: any = null;
@@ -27,13 +30,18 @@ export class CourseActivityInstrumentAddComponent implements OnInit {
   constructor(
     public translate: TranslateService,
     private apiCourseService: ApiCourseService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     protected ref: NbDialogRef<CourseActivityInstrumentAddComponent>,
   ) {
   }
 
   ngOnInit() {
-
+    this.authService.getUser().subscribe((user: InstitutionUser) => {
+      if (user) {
+        this.institutionId = user.institution.id;
+      }
+    });
   }
 
   dismiss() {
@@ -58,7 +66,7 @@ export class CourseActivityInstrumentAddComponent implements OnInit {
       'alternative_to': this.alternativeTo ? this.alternativeTo.id : null,
     };
 
-    this.apiCourseService.addActivityInstrument(this.courseId, this.activityId, data).subscribe(response => {
+    this.apiCourseService.addActivityInstrument(this.institutionId, this.courseId, this.activityId, data).subscribe(response => {
       this.ref.close(response);
     });
   }

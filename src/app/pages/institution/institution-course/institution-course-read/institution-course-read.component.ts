@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCourseService } from '../../../../@core/data/api-course.service';
 import { Course } from '../../../../@core/models/course';
 import { InstitutionCourseConfig } from '../institution-course.config';
+import { AuthService } from '../../../../@core/auth/auth.service';
+import { InstitutionUser } from '../../../../@core/models/user';
 
 @Component({
   selector: 'ngx-institution-course-read',
@@ -11,6 +13,7 @@ import { InstitutionCourseConfig } from '../institution-course.config';
   styleUrls: ['./institution-course-read.component.scss'],
 })
 export class InstitutionCourseReadComponent implements OnInit {
+  institutionId: number;
   id: number;
   activities: any[] = [];
   instruments: any[] = [{
@@ -36,6 +39,7 @@ export class InstitutionCourseReadComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apiCourseService: ApiCourseService,
+    private authService: AuthService,
     private router: Router) {
     this.route.params.subscribe(params => {
       if (params['id'] != null) {
@@ -46,27 +50,28 @@ export class InstitutionCourseReadComponent implements OnInit {
     });
   }
 
-  enableDisableActivity(actId, value): void {
-    this.apiCourseService.putActivityActive(this.id, actId, { enabled: value }).subscribe(response => { return; });
+  enableDisableActivity(activitiId, value): void {
+    this.apiCourseService.putActivityActive(this.institutionId, this.id, activitiId, { enabled: value }).subscribe(response => { return; });
   }
 
-  addInstrument(actId, isAlternative): void {
+  addInstrument(activitiId, isAlternative): void {
     return;
   }
 
-  handleDeleteInstrument(actId, instrument, hasAlternative) {
+  handleDeleteInstrument(activitiId, instrument, hasAlternative) {
     if (hasAlternative) {
-      this.apiCourseService.deleteActivityInstrument(this.id, actId, hasAlternative);
+      this.apiCourseService.deleteActivityInstrument(this.institutionId, this.id, activitiId, hasAlternative);
     }
-    this.apiCourseService.deleteActivityInstrument(this.id, actId, instrument).subscribe(response => {
+    this.apiCourseService.deleteActivityInstrument(this.institutionId, this.id, activitiId, instrument).subscribe(response => {
       if (response) location.reload();
     });
   }
 
-  handleAddInstrument(actId, instrument, isAlternative) {
+  handleAddInstrument(activitiId, instrument, isAlternative) {
     if (isAlternative) {
-      this.apiCourseService.addActivityInstrument(this.id, actId, { id: isAlternative, alternative_to: instrument });
-    } else this.apiCourseService.addActivityInstrument(this.id, actId, { id: instrument }).subscribe(response => {
+      this.apiCourseService.addActivityInstrument(
+        this.institutionId, this.id, activitiId, { id: isAlternative, alternative_to: instrument });
+    } else this.apiCourseService.addActivityInstrument(this.institutionId, this.id, activitiId, { id: instrument }).subscribe(response => {
       if (response) location.reload();
     });
   }
@@ -77,34 +82,30 @@ export class InstitutionCourseReadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.apiCourseService.getCourseActivities(this.id).subscribe(activityArray => {
-      if (activityArray.length > 0) {
-        activityArray.map((activity, i) => {
-          this.apiCourseService.getActivityInstrument(this.id, activity.id).subscribe(instrumentsArray => {
-            if (instrumentsArray.length > 0) {
-
-              activityArray[i].instruments = instrumentsArray;
-
-              activityArray[i].inUseInstruments = instrumentsArray.map((list, z) => {
-                if (typeof list.alternative_to === 'number') activityArray[i].instruments[z - 1].hasAlternative = list.id;
-                return list.instrument.acronym;
+    this.authService.getUser().subscribe((user: InstitutionUser) => {
+      if (user) {
+        this.institutionId = user.institution.id;
+        this.apiCourseService.getCourseById(this.institutionId, this.id).subscribe(instance => {
+          this.instance = instance;
+          this.apiCourseService.getCourseActivities(this.institutionId, this.id).subscribe(activityArray => {
+            if (activityArray.length > 0) {
+              activityArray.map((activity, i) => {
+                this.apiCourseService.getActivityInstrument(this.institutionId, this.id, activity.id).subscribe(instrumentsArray => {
+                  if (instrumentsArray.length > 0) {
+                    activityArray[i].instruments = instrumentsArray;
+                    activityArray[i].inUseInstruments = instrumentsArray.map((list, z) => {
+                      if (typeof list.alternative_to === 'number') activityArray[i].instruments[z - 1].hasAlternative = list.id;
+                      return list.instrument.acronym;
+                    });
+                  }
+                });
               });
-
             }
+            this.activities = activityArray;
           });
+          this.loading = false;
         });
       }
-
-      this.activities = activityArray;
-    });
-
-    // this.apiCourseService.getCourseInstruments(this.id).subscribe(instrumentsArray => {
-    //   this.instruments = instrumentsArray;
-    // });
-
-    this.apiCourseService.getCourseById(this.id).subscribe(instance => {
-      this.instance = instance;
-      this.loading = false;
     });
   }
 

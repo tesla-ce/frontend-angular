@@ -7,6 +7,7 @@ import { AuthService } from '../../../../../@core/auth/auth.service';
 import { CourseReportConfig } from '../course-report.config';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
+import { InstitutionUser } from '../../../../../@core/models/user';
 
 @Component({
   selector: 'ngx-course-report-update',
@@ -44,9 +45,13 @@ export class CourseReportUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.apiCourseService.getActivityReport(this.course, this.activity, this.id).subscribe(instance => {
-      this.instance = instance;
-      this.loading = false;
+    this.authService.getUser().subscribe((user: InstitutionUser)  => {
+      if (user) {
+        this.apiCourseService.getActivityReport(user.institution.id, this.course, this.activity, this.id).subscribe(instance => {
+          this.instance = instance;
+          this.loading = false;
+        });
+      }
     });
   }
 

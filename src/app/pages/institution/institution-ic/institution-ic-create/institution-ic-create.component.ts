@@ -7,6 +7,8 @@ import { Ic } from '../../../../@core/models/ic';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from '../../../../@core/auth/auth.service';
+import { InstitutionUser } from '../../../../@core/models/user';
 
 @Component({
   selector: 'ngx-institution-ic-create',
@@ -19,9 +21,13 @@ export class InstitutionIcCreateComponent implements OnInit {
   public errors = new Subject();
   validator = InstitutionIcConfig.validator;
 
-  constructor(private apiIcService: ApiIcService, public translate: TranslateService,
+  constructor(
+    private apiIcService: ApiIcService,
+    private authService: AuthService,
+    public translate: TranslateService,
     private location: Location,
-    private toastrService: NbToastrService, private router: Router) { }
+    private toastrService: NbToastrService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -30,28 +36,32 @@ export class InstitutionIcCreateComponent implements OnInit {
 
 
   onSave(event): void {
-    this.apiIcService.createIc(event).subscribe((ic: Ic) => {
-      this.toastrService.show(
-        'Ic Created',
-        ic.version,
-        {
-          position: NbGlobalPhysicalPosition.TOP_RIGHT,
-          status: 'success',
-          icon: 'save-outline',
-          duration: 2000,
+    this.authService.getUser().subscribe((user: InstitutionUser) => {
+      if (user) {
+        this.apiIcService.createIc(user.institution.id, event).subscribe((ic: Ic) => {
+          this.toastrService.show(
+            'Ic Created',
+            ic.version,
+            {
+              position: NbGlobalPhysicalPosition.TOP_RIGHT,
+              status: 'success',
+              icon: 'save-outline',
+              duration: 2000,
+            });
+          this.router.navigate(['/institution/institution-ic']);
+        }, error => {
+          this.errors.next(error.error);
+          this.toastrService.show(
+            'Error saving',
+            'ic',
+            {
+              position: NbGlobalPhysicalPosition.TOP_RIGHT,
+              status: 'danger',
+              icon: 'save-outline',
+              duration: 2000,
+            });
         });
-      this.router.navigate(['/institution/institution-ic']);
-    }, error => {
-      this.errors.next(error.error);
-      this.toastrService.show(
-        'Error saving',
-        'ic',
-        {
-          position: NbGlobalPhysicalPosition.TOP_RIGHT,
-          status: 'danger',
-          icon: 'save-outline',
-          duration: 2000,
-        });
+      }
     });
   }
 }

@@ -24,31 +24,14 @@ export class ApiReportService {
     private http: HttpClient,
     private envService: EnvService,
   ) {
-    this.authService.getUser().subscribe((user: InstitutionUser)  => {
-      if (user && user.institution) this.endpoint = `/institution/${user.institution.id}`;
-      else this.endpoint = `/institution/1`;
-    });
     this.apiUrl = envService.apiUrl;
-    this.endpointUrl = this.apiUrl + this.endpoint;
+    this.endpointUrl = this.apiUrl;
   }
 
   // API: GET /report/:id/activity
-  public getActivityReports(activityId: number): Observable<any> {
+  public getActivityReport(institutionId: number, courseId: number, activityId: number, reportId: number): Observable<any> {
     return this.http
-      .get(this.endpointUrl + '/activity/' + activityId + '/report/')
-      .pipe(
-        map((response: any) => {
-          if (response?.results) return response.results;
-          else return [];
-        }),
-        catchError(this.handleError),
-      );
-  }
-
-  // API: GET /report/:id/activity
-  public getActivityReport(courseId: number, activityId: number, reportId: number): Observable<any> {
-    return this.http
-      .get(this.endpointUrl + '/course/' + courseId  + '/activity/' + activityId + '/report/' + reportId)
+      .get(`${this.endpointUrl}/institution/${institutionId}/course/${courseId}/activity/${activityId}/report/${reportId}`)
       .pipe(
         map((response: any) => {
           if (response?.id) return response;
@@ -58,9 +41,9 @@ export class ApiReportService {
       );
   }
 
-  public getActivityReportChart(courseId: number, activityId: number, reportId: number): Observable<any> {
+  public getActivityReportChart(institutionId: number, courseId: number, activityId: number, reportId: number): Observable<any> {
     return this.http
-      .get(this.endpointUrl + '/course/' + courseId  + '/activity/' + activityId + '/report/' + reportId + '/request/')
+      .get(`${this.endpointUrl}/institution/${institutionId}/course/${courseId}/activity/${activityId}/report/${reportId}/request/`)
       .pipe(
         map((response: any) => {
           if (response) return response;

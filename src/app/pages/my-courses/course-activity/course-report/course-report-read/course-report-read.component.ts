@@ -22,7 +22,7 @@ export class CourseReportReadComponent implements OnInit {
   reportId: number;
   report: any;
   reportChart: any;
-  endPoint: string;
+  endpoint: string;
   loading: boolean = true;
   instrumentCharts: any[] = [];
   settings = {
@@ -77,43 +77,48 @@ export class CourseReportReadComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
-      this.endPoint = `/institution/1/course/${this.courseId}/activity/${this.activityId}/report?id=${this.reportId}`;
-      this.apiCourseService.getAllInstruments().subscribe((instruments: any[]) => {
-        instruments.map((instrument: any) => {
-          this.settings.columns['instrument-' + instrument.acronym] = {
-            // title: '<nb-icon icon="instrument-' + instrument.acronym + '" pack="tesla"></nb-icon> ' + instrument.acronym,
-            class: 'instrument',
-            title: instrument.acronym,
-            width: '1400px',
-            type: 'custom',
-            valuePrepareFunction: (value) => {
-              return instrument;
-            },
-            filter: {
+      if (user) {
+        this.endpoint =
+         `/institution/${user.institution.id}/course/${this.courseId}/activity/${this.activityId}/report?id=${this.reportId}`;
+        this.apiCourseService.getAllInstruments(user.institution.id).subscribe((instruments: any[]) => {
+          instruments.map((instrument: any) => {
+            this.settings.columns['instrument-' + instrument.acronym] = {
+              // title: '<nb-icon icon="instrument-' + instrument.acronym + '" pack="tesla"></nb-icon> ' + instrument.acronym,
+              class: 'instrument',
+              title: instrument.acronym,
+              width: '1400px',
               type: 'custom',
-              component: ListSubHeaderComponent,
-              data: {instrument : instrument},
-            },
-            renderComponent: ListCellInstrumentComponent,
-          };
-          this.apiReportService.getActivityReport(this.courseId, this.activityId, this.reportId).subscribe(report => {
-            this.report = report;
-            this.report.detail.map(det => {
-              this.instrumentCharts[det.instrument_acronym + '_activity_histogram'] = this.getInstrumentChart(det, 'activity_histogram');
-              this.instrumentCharts[det.instrument_acronym + '_learner_histogram'] = this.getInstrumentChart(det, 'learner_histogram');
-              this.instrumentCharts[det.instrument_acronym + '_positive_facts'] = det.facts.positive;
-              this.instrumentCharts[det.instrument_acronym + '_neutral_facts'] = det.facts.neutral;
-              this.instrumentCharts[det.instrument_acronym + '_negative_facts'] = det.facts.negative;
+              valuePrepareFunction: (value) => {
+                return instrument;
+              },
+              filter: {
+                type: 'custom',
+                component: ListSubHeaderComponent,
+                data: {instrument : instrument},
+              },
+              renderComponent: ListCellInstrumentComponent,
+            };
+            this.apiReportService.getActivityReport(
+              user.institution.id, this.courseId, this.activityId, this.reportId).subscribe(report => {
+              this.report = report;
+              this.report.detail.map(det => {
+                this.instrumentCharts[det.instrument_acronym + '_activity_histogram'] = this.getInstrumentChart(det, 'activity_histogram');
+                this.instrumentCharts[det.instrument_acronym + '_learner_histogram'] = this.getInstrumentChart(det, 'learner_histogram');
+                this.instrumentCharts[det.instrument_acronym + '_positive_facts'] = det.facts.positive;
+                this.instrumentCharts[det.instrument_acronym + '_neutral_facts'] = det.facts.neutral;
+                this.instrumentCharts[det.instrument_acronym + '_negative_facts'] = det.facts.negative;
 
-            });
+              });
 
-            this.apiReportService.getActivityReportChart(this.courseId, this.activityId, this.reportId).subscribe(reportChart => {
-              this.reportChart = this.getReportChart();
-              this.loading = false;
+              this.apiReportService.getActivityReportChart(user.institution.id,
+                this.courseId, this.activityId, this.reportId).subscribe(reportChart => {
+                this.reportChart = this.getReportChart();
+                this.loading = false;
+              });
             });
           });
         });
-      });
+      }
     });
   }
 

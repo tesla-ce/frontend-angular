@@ -42,7 +42,7 @@ export class AdminUserListComponent implements OnInit {
     addNew: true,
   };
 
-  endPoint = '/admin/user';
+  endpoint = '/admin/user';
 
   constructor() { }
 

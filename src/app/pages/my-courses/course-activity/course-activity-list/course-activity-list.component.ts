@@ -13,7 +13,7 @@ import { InstitutionUser } from '../../../../@core/models/user';
 })
 export class CourseActivityListComponent implements OnInit {
   courseId: number;
-  endPoint: string;
+  endpoint: string;
   loading: boolean = true;
   settings = {
     addNew: false,
@@ -86,7 +86,7 @@ export class CourseActivityListComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
       if (user) {
-        this.endPoint = `/institution/${user.institution.id}/course/${this.courseId}/activity`;
+        this.endpoint = `/institution/${user.institution.id}/course/${this.courseId}/activity`;
         this.loading = false;
       }
     });

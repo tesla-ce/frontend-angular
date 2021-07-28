@@ -5,6 +5,7 @@ import { ListCellActionsComponent } from '../../../../crud/list/list-cell-action
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { InstitutionUser } from '../../../../@core/models/user';
 
 @Component({
   selector: 'ngx-institution-ic-list',
@@ -12,7 +13,8 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./institution-ic-list.component.scss'],
 })
 export class InstitutionIcListComponent implements OnInit {
-  endPoint: string;
+  loading: boolean = true;
+  endpoint: string;
   settings = {
     columns: {
       actions: {
@@ -56,7 +58,12 @@ export class InstitutionIcListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.authService.getInstitution().subscribe(id => this.endPoint = `/institution/${id}/ic`);
+    this.authService.getUser().subscribe((user: InstitutionUser) => {
+      if (user) {
+        this.endpoint = `/institution/${user.institution.id}/ic`;
+        this.loading = false;
+      }
+    });
   }
 
   goNew = () => {
