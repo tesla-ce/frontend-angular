@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, AfterViewInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ElementRef, AfterViewInit, ViewChild, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { ServerDataSource } from 'ng2-smart-table';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ServerSourceConf } from 'ng2-smart-table/lib/lib/data-source/server/server-source.conf';
@@ -12,10 +12,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent implements OnInit, AfterViewInit {
+export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() settings: any;
-  @Input() endPoint: any;
+  @Input() endpoint: any;
   @Input() showFooter: boolean = true;
 
   @ViewChild('searchInput') searchInput: ElementRef;
@@ -36,9 +36,9 @@ export class ListComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngOnInit(): void {
+  initTable(): void {
     this.source = new CustomDataSource(this.http, {
-      endPoint: this.envService.apiUrl + this.endPoint,
+      endPoint: this.envService.apiUrl + this.endpoint,
       dataKey: 'results',
       pagerPageKey: 'offset',
       pagerLimitKey: 'limit',
@@ -47,6 +47,14 @@ export class ListComponent implements OnInit, AfterViewInit {
       sortFieldKey: 'ordering',
       sortDirKey: 'direction',
     });
+  }
+
+  ngOnInit(): void {
+    this.initTable();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.initTable();
   }
 
   ngAfterViewInit(): void {

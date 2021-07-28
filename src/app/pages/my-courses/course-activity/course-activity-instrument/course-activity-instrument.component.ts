@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, ViewChild, TemplateRef, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { angularMaterialRenderers } from '@jsonforms/angular-material';
-import { NbDialogService, NbWindowService } from '@nebular/theme';
+import { NbDialogService, NbThemeService, NbWindowService } from '@nebular/theme';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from '../../../../@core/auth/auth.service';
 import { ApiCourseService } from '../../../../@core/data/api-course.service';
+import { InstitutionUser } from '../../../../@core/models/user';
 import { CourseActivityInstrumentSettingsComponent } from './course-activity-instrument-settings.component';
 
 @Component({
@@ -22,8 +24,9 @@ export class CourseActivityInstrumentComponent implements OnInit {
   @Output() addAlternativeEvent = new EventEmitter<any>();
   @Output() deleteInstrumentEvent = new EventEmitter<any>();
 
-  courseId: any;
-  activityId: any;
+  institutionId: number;
+  courseId: number;
+  activityId: number;
 
   renderers = angularMaterialRenderers;
 
@@ -32,6 +35,7 @@ export class CourseActivityInstrumentComponent implements OnInit {
     public translate: TranslateService,
     private apiCourseService: ApiCourseService,
     private router: Router,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private dialog: NbDialogService,
   ) {
@@ -41,11 +45,16 @@ export class CourseActivityInstrumentComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.courseId = params['courseId'];
       this.activityId = params['activityId'];
+      this.authService.getUser().subscribe((user: InstitutionUser) => {
+        if (user) {
+          this.institutionId = user.institution.id;
+        }
+      });
     });
   }
 
   enableDisableInstrument(): void {
-    this.apiCourseService.putInstrumentActive(this.courseId,
+    this.apiCourseService.putInstrumentActive(this.institutionId, this.courseId,
       this.activityId,
       this.instrument.id,
       {
@@ -58,7 +67,7 @@ export class CourseActivityInstrumentComponent implements OnInit {
   }
 
   delete() {
-    this.apiCourseService.deleteActivityInstrument(this.courseId, this.activityId, this.instrument.id)
+    this.apiCourseService.deleteActivityInstrument(this.institutionId, this.courseId, this.activityId, this.instrument.id)
         .subscribe(response => {
           if (response) this.deleteInstrumentEvent.emit(this.instrument);
         });
@@ -72,6 +81,7 @@ export class CourseActivityInstrumentComponent implements OnInit {
     this.dialog.open(CourseActivityInstrumentSettingsComponent,
       { context: {
         instrument: this.instrument,
+        institutionId: this.institutionId,
         courseId: this.courseId,
         activityId: this.activityId,
       } })

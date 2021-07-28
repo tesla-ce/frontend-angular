@@ -10,6 +10,7 @@ import { NbWindowService } from '@nebular/theme';
 import { AuthService } from '../../../@core/auth/auth.service';
 import { Location } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
+import { InstitutionUser } from '../../../@core/models/user';
 
 @Component({
   selector: 'ngx-course-read',
@@ -22,26 +23,6 @@ export class CourseReadComponent implements OnInit {
 
   public instance: Course;
   public fields = CourseConfig.fields;
-
-  // renderers = [
-  //   ...angularMaterialRenderers,
-  //   {
-  //     renderer: DataDisplayComponent,
-  //     tester: rankWith(
-  //       6,
-  //       and(
-  //         isControl,
-  //         scopeEndsWith('___data')
-  //       )
-  //     )
-  //   },
-  // ];
-  // ajv = createAjv({
-  //   schemaId: 'auto',
-  //   allErrors: true,
-  //   jsonPointers: true,
-  //   errorDataPath: 'property'
-  // });
 
   constructor(
     private windowService: NbWindowService,
@@ -63,9 +44,13 @@ export class CourseReadComponent implements OnInit {
   back() { this.location.back(); }
 
   ngOnInit(): void {
-    this.apiCourseService.getCourseById(this.id).subscribe(instance => {
-      this.instance = instance;
-      this.loading = false;
+    this.authService.getUser().subscribe((user: InstitutionUser) => {
+      if (user) {
+        this.apiCourseService.getCourseById(user.institution.id, this.id).subscribe(instance => {
+          this.instance = instance;
+          this.loading = false;
+        });
+      }
     });
   }
 

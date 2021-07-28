@@ -19,7 +19,7 @@
         </nb-actions>
     </nb-card-header>
     <nb-card-body>
-        <ngx-list [settings]="settings" [endPoint]="endPoint"></ngx-list>
+        <ngx-list [settings]="settings" [endpoint]="endpoint"></ngx-list>
         <br>
         <strong>REPORT CHART</strong>
         <br>
@@ -28,7 +28,7 @@
         </div>
         <br>
         <div style="display:flex">
-            <nb-card *ngFor="let det of report.detail" style="margin:5px; width:320px">
+            <nb-card *ngFor="let det of report.detail" style="margin:5px; width:400px">
                 <nb-card-header>
                     {{ det.instrument }}
                 </nb-card-header>
@@ -42,9 +42,21 @@
                 </nb-card-body>
                 <nb-card-footer>
                     Positive Facts
+                    <div *ngFor="let positiveFact of instrumentCharts[det.instrument_acronym + '_positive_facts']">
+                        {{ positiveFact }}
+                    </div>
+                </nb-card-footer>
+                <nb-card-footer>
+                    Neutral Facts
+                    <div *ngFor="let neutralFact of instrumentCharts[det.instrument_acronym + '_neutral_facts']">
+                        {{ neutralFact }}
+                    </div>
                 </nb-card-footer>
                 <nb-card-footer>
                     Negative Facts
+                    <div *ngFor="let negativeFact of instrumentCharts[det.instrument_acronym + '_negative_facts']">
+                        {{ negativeFact }}
+                    </div>
                 </nb-card-footer>
             </nb-card>
         </div>

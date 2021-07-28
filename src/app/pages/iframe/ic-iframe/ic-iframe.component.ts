@@ -3,6 +3,8 @@ import { InstitutionIcConfig } from '../../institution/institution-ic/institutio
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ic } from '../../../@core/models/ic';
+import { AuthService } from '../../../@core/auth/auth.service';
+import { InstitutionUser } from '../../../@core/models/user';
 
 @Component({
   selector: 'ngx-ic-iframe',
@@ -24,6 +26,7 @@ export class IcIframeComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apiIcService: ApiIcService,
+    private authService: AuthService,
     private router: Router) {
     this.route.params.subscribe(params => {
       if (params['id'] != null) {
@@ -35,26 +38,27 @@ export class IcIframeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.apiIcService.getIcDocument(this.id).subscribe(list => {
-      const objectification = {};
-      list.map((item, index) => {
-        objectification[item.language] = {};
-        objectification[item.language].html = item.html;
-        if (item.pdf) {
-          objectification[item.language].pdf = item.pdf;
-          objectification[item.language].title = this.regexPDF.exec(item.pdf)[0];
-        }
-        this.languagesSelections.push(item.language);
-        if (!index) this.selectedLanguage = item.language;
-      });
-
-      this.languages = objectification;
-    });
-
-    this.apiIcService.getIcById(this.id).subscribe(instance => {
-      this.instance = instance;
-      this.loading = false;
+    this.authService.getUser().subscribe((user: InstitutionUser) => {
+      if (user) {
+        this.apiIcService.getIcDocument(user.institution.id, this.id).subscribe(list => {
+          const objectification = {};
+          list.map((item, index) => {
+            objectification[item.language] = {};
+            objectification[item.language].html = item.html;
+            if (item.pdf) {
+              objectification[item.language].pdf = item.pdf;
+              objectification[item.language].title = this.regexPDF.exec(item.pdf)[0];
+            }
+            this.languagesSelections.push(item.language);
+            if (!index) this.selectedLanguage = item.language;
+          });
+          this.languages = objectification;
+          this.apiIcService.getIcById(user.institution.id, this.id).subscribe(instance => {
+            this.instance = instance;
+            this.loading = false;
+          });
+        });
+      }
     });
   }
 

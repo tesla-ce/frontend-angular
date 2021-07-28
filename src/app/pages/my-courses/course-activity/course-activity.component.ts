@@ -5,6 +5,8 @@ import { Course } from '../../../@core/models/course';
 import { CourseConfig } from '../course.config';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
+import { InstitutionUser } from '../../../@core/models/user';
+import { AuthService } from '../../../@core/auth/auth.service';
 
 @Component({
   selector: 'ngx-course-activity',
@@ -13,6 +15,7 @@ import { Location } from '@angular/common';
 })
 export class CourseActivityComponent implements OnInit {
 
+  institutionId: number;
   courseId: number;
   loading: boolean = true;
 
@@ -24,6 +27,7 @@ export class CourseActivityComponent implements OnInit {
     public translate: TranslateService,
     private location: Location,
     private apiCourseService: ApiCourseService,
+    private authService: AuthService,
     private router: Router) {
     this.route.params.subscribe(params => {
       if (params['courseId'] != null) {
@@ -37,9 +41,14 @@ export class CourseActivityComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.apiCourseService.getCourseById(this.courseId).subscribe(instance => {
-      this.instance = instance;
-      this.loading = false;
+    this.authService.getUser().subscribe((user: InstitutionUser) => {
+      if (user) {
+        this.institutionId = user.institution.id;
+        this.apiCourseService.getCourseById(this.institutionId, this.courseId).subscribe(instance => {
+          this.instance = instance;
+          this.loading = false;
+        });
+      }
     });
   }
 
