@@ -1,4 +1,4 @@
-<nb-card>
+<nb-card *ngIf="!loading">
     <nb-card-header class="flexRow flexRow-justify--between">{{'IC.IC' | translate}}</nb-card-header>
     <nb-card-body class="example-items-rows">
         <ngx-list [settings]="settings" [endpoint]="endpoint"></ngx-list>    

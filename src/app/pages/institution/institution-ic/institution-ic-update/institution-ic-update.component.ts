@@ -9,6 +9,8 @@ import 'ckeditor';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
+import { AuthService } from '../../../../@core/auth/auth.service';
+import { InstitutionUser } from '../../../../@core/models/user';
 
 @Component({
   selector: 'ngx-institution-ic-update',
@@ -20,6 +22,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
 
   windowRef: any;
   public id: number;
+  private user: InstitutionUser;
   public instance: Ic;
   public fields = InstitutionIcConfig.fields;
   ckEditorConfig = { extraPlugins: 'divarea', height: '320' };
@@ -55,6 +58,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private apiIcService: ApiIcService,
+    private authService: AuthService,
     public translate: TranslateService,
     private location: Location,
     private windowService: NbWindowService,
@@ -63,7 +67,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
       if (params['id'] != null) {
         this.id = params['id'];
       } else {
-        router.navigate(['../'], { relativeTo: this.route });
+        this.router.navigate(['../'], { relativeTo: this.route });
       }
     });
   }
@@ -72,43 +76,45 @@ export class InstitutionIcUpdateComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.apiIcService.getIcDocument(this.id).subscribe(list => {
-      this.languages = list;
-      const initialOptions = ['en', 'es', 'ru', 'fr', 'ca', 'jp', 'pt'];
-      for (let i = 0; i < list.length; i++) {
-        this.toUpdate[list[i].language] = { html: list[i].html || '', file: list[i].file || null, language: list[i].language };
+    this.authService.getUser().subscribe((user: InstitutionUser) => {
+      if (user) {
+        this.apiIcService.getIcDocument(user.institution.id, this.id).subscribe(list => {
+          this.languages = list;
+          const initialOptions = ['en', 'es', 'ru', 'fr', 'ca', 'jp', 'pt'];
+          for (let i = 0; i < list.length; i++) {
+            this.toUpdate[list[i].language] = { html: list[i].html || '', file: list[i].file || null, language: list[i].language };
+            const index = initialOptions.indexOf(list[i].language);
+            initialOptions.splice(index, 1);
+          }
 
-        const index = initialOptions.indexOf(list[i].language);
-        initialOptions.splice(index, 1);
-      }
+          this.options = initialOptions;
+          const group = {};
 
-      this.options = initialOptions;
-      const group = {};
+          list.map((item) => {
+            if (!item.pdf) this.hasDocument[item.language] = { has: false };
+            else {
+              this.hasDocument[item.language] = { has: true, title: this.regexPDF.exec(item.pdf)[0] };
+            }
+            group[`${this.documentFieldsModel.html.formControlName}${item.language}`] = new FormControl(item.html);
+            group[`${this.documentFieldsModel.pdf.formControlName}${item.language}`] = new FormControl();
 
-      list.map((item) => {
-        if (!item.pdf) this.hasDocument[item.language] = { has: false };
-        else {
-          this.hasDocument[item.language] = { has: true, title: this.regexPDF.exec(item.pdf)[0] };
-        }
-        group[`${this.documentFieldsModel.html.formControlName}${item.language}`] = new FormControl(item.html);
-        group[`${this.documentFieldsModel.pdf.formControlName}${item.language}`] = new FormControl();
-
-      });
-      this.formGrupDocument = new FormGroup(group);
-    });
-
-    this.apiIcService.getIcById(this.id).subscribe(instance => {
-      this.instance = instance;
-      this.formControls = {};
-      this.loading = false;
-      ['version', 'valid_from'].map((key) => {
-        this.formControls[key] = new FormControl({
-          value: this.instance[key] || this.fields[key].defaultValue || null,
-          disabled: !this.fields[key].editable,
+          });
+          this.formGrupDocument = new FormGroup(group);
+          this.apiIcService.getIcById(user.institution.id, this.id).subscribe(instance => {
+            this.instance = instance;
+            this.formControls = {};
+            this.loading = false;
+            ['version', 'valid_from'].map((key) => {
+              this.formControls[key] = new FormControl({
+                value: this.instance[key] || this.fields[key].defaultValue || null,
+                disabled: !this.fields[key].editable,
+              });
+            });
+            this.formGrupIC = new FormGroup(this.formControls);
+            this.loading = false;
+          });
         });
-      });
-      this.formGrupIC = new FormGroup(this.formControls);
-      this.loading = false;
+      }
     });
   }
 
@@ -158,7 +164,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
 
   delete() {
     this.windowRef.close();
-    this.apiIcService.deleteDocument(this.id, this.toDelete).subscribe(response => {
+    this.apiIcService.deleteDocument(this.user.institution.id, this.id, this.toDelete).subscribe(response => {
       this.ngOnInit();
     });
 
@@ -194,7 +200,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
     });
 
     for (let c = 0; c < toCreateKeys.length; c++) {
-      this.apiIcService.createDocument(this.id, this.toCreate[toCreateKeys[c]].form).subscribe((ic: Ic) => {
+      this.apiIcService.createDocument(this.user.institution.id, this.id, this.toCreate[toCreateKeys[c]].form).subscribe((ic: Ic) => {
         this.toUpdate[toCreateKeys[c]] = {};
         this.toUpdate[toCreateKeys[c]].html = this.toCreate[toCreateKeys[c]].form.html;
         this.toUpdate[toCreateKeys[c]].pdf = this.toCreate[toCreateKeys[c]].form.pdf;
@@ -226,7 +232,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
     }
 
     for (let u = 0; u < toUpdateConfirm.length; u++) {
-      this.apiIcService.updateDocument(this.id,
+      this.apiIcService.updateDocument(this.user.institution.id, this.id,
         this.toUpdate[toUpdateConfirm[u]].form,
         this.toUpdate[toUpdateConfirm[u]].language).subscribe((ic: Ic) => {
           this.toastrService.show(
@@ -256,7 +262,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
     const valuesIC = this.formGrupIC.value;
 
     if (valuesIC.version !== this.instance.version || JSON.stringify(valuesIC.valid_from) !== JSON.stringify(this.instance.valid_from)) {
-      this.apiIcService.updateIc(this.instance.id, valuesIC).subscribe((ic: Ic) => {
+      this.apiIcService.updateIc(this.user.institution.id, this.instance.id, valuesIC).subscribe((ic: Ic) => {
         this.toastrService.show(
           'Ic Updated',
           valuesIC.version,

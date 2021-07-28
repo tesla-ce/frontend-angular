@@ -50,7 +50,7 @@ export class LearnerIcComponent implements OnInit {
 
     this.authService.getUser()
       .pipe()
-      .subscribe((user: User) => {
+      .subscribe((user: InstitutionUser) => {
         if (user) {
           this.institutionService.getInstitutionUser(user.id)
             .pipe()
@@ -58,40 +58,37 @@ export class LearnerIcComponent implements OnInit {
               this.user = institutionUser;
               this.approved = institutionUser.ic_status.startsWith('NOT_VALID') ? false : true;
             });
+          this.apiIcService.getCurrentIc(user.institution.id).subscribe(instance => {
+            this.instance = instance;
+            this.apiIcService.getIcDocument(user.institution.id, this.instance.id).subscribe(list => {
+              const objectification = {};
+              list.map((item, index) => {
+                objectification[item.language] = {};
+                objectification[item.language].html = item.html;
+                if (item.pdf) {
+                  objectification[item.language].pdf = item.pdf;
+                  objectification[item.language].title = this.regexPDF.exec(item.pdf)[0];
+                }
+                this.languagesSelections.push(item.language);
+                if (!index) this.selectedLanguage = item.language;
+              });
+              this.languages = objectification;
+              this.route.queryParams.subscribe(params => {
+                if (params['redirect_uri']) {
+                  const allowedDomains = ['https://example.com/'];
+                  const domain =  (new URL(params['redirect_uri'])).hostname.replace('www.', '');
+                  if (allowedDomains.indexOf(domain) !== -1 ) this.redirectUri = params['redirect_uri'];
+                }
+                this.loading = false;
+              });
+            });
+          });
         }
-      });
-
-    this.apiIcService.getCurrentIc().subscribe(instance => {
-      this.instance = instance;
-
-      this.apiIcService.getIcDocument(this.instance.id).subscribe(list => {
-        const objectification = {};
-        list.map((item, index) => {
-          objectification[item.language] = {};
-          objectification[item.language].html = item.html;
-          if (item.pdf) {
-            objectification[item.language].pdf = item.pdf;
-            objectification[item.language].title = this.regexPDF.exec(item.pdf)[0];
-          }
-          this.languagesSelections.push(item.language);
-          if (!index) this.selectedLanguage = item.language;
-        });
-
-        this.languages = objectification;
-        this.route.queryParams.subscribe(params => {
-          if (params['redirect_uri']) {
-            const allowedDomains = ['https://example.com/'];
-            const domain =  (new URL(params['redirect_uri'])).hostname.replace('www.', '');
-            if (allowedDomains.indexOf(domain) !== -1 ) this.redirectUri = params['redirect_uri'];
-          }
-          this.loading = false;
-        });
-      });
     });
   }
 
   accept() {
-    this.apiIcService.approveIc(this.user.id, this.instance.version).subscribe(response => {
+    this.apiIcService.approveIc(this.user, this.instance.version).subscribe(response => {
       if (response) {
         this.user = response;
         this.approved = true;
@@ -99,7 +96,7 @@ export class LearnerIcComponent implements OnInit {
     });
   }
   reject() {
-    this.apiIcService.rejectIc(this.user.id, this.instance.version).subscribe(response => {
+    this.apiIcService.rejectIc(this.user).subscribe(response => {
       if (response) {
         this.user = response;
         this.approved = false;

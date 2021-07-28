@@ -17,9 +17,7 @@ export class ApiIcService {
 
   apiUrl: string;
   endpoint: string;
-  // document endpoint '/api/v2/institution/1/ic/2/document/ca/'
   endpointUrl: string;
-  user: InstitutionUser;
 
   constructor(
     private authService: AuthService,
@@ -27,22 +25,14 @@ export class ApiIcService {
     private envService: EnvService,
   ) {
     this.apiUrl = envService.apiUrl;
-    this.authService.getUser().subscribe((user: InstitutionUser) => {
-      this.user = user;
-      this.endpoint = `/institution/${user.institution.id}/ic/`;
-    });
     this.endpointUrl = this.apiUrl + this.endpoint;
   }
 
-  // API: GET /ics
-  // public getAllIcs():Observable<Ic[]> {
-  //   // will use this.http.post()
-  // }
-
   // API: POST /ics
-  public createIc(fields: any) {
+  public createIc(institutionId: number, fields: any) {
     // will use this.http.post()
-    return this.http.post(this.endpointUrl, fields)
+    return this.http
+      .post(`${this.endpointUrl}/institution/${institutionId}/ic/`, fields)
       .pipe(
         map((ic: Ic) => {
           // console.log(ic);
@@ -54,9 +44,9 @@ export class ApiIcService {
   }
 
   // API: GET /ics/:id
-  public getIcById(icId: number): Observable<Ic> {
+  public getIcById(institutionId: number, icId: number): Observable<Ic> {
     return this.http
-      .get(this.endpointUrl + icId)
+      .get(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}`)
       .pipe(
         map((ic: Ic) => {
           // console.log(ic);
@@ -67,13 +57,11 @@ export class ApiIcService {
       );
   }
 
-  public getCurrentIc(): Observable<Ic> {
+  public getCurrentIc(institutionId: number): Observable<Ic> {
     return this.http
-      .get(this.endpointUrl
-        + 'current')
+      .get(`${this.endpointUrl}/institution/${institutionId}/ic/current`)
       .pipe(
         map((ic: Ic) => {
-          // console.log(ic);
           if (ic) return ic;
           else throw ic;
         }),
@@ -82,9 +70,9 @@ export class ApiIcService {
   }
 
   // API: GET /ics/:id/:icId/document
-  public getIcDocument(icId: number): Observable<any> {
+  public getIcDocument(institutionId: number, icId: number): Observable<any> {
     return this.http
-      .get(this.endpointUrl + icId + '/document/')
+      .get(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}/document/`)
       .pipe(
         map((response: any) => {
           if (response?.results) return response.results;
@@ -94,7 +82,7 @@ export class ApiIcService {
   }
 
   // API: POST /ics/document/
-  public createDocument(idIc, fields): Observable<any> {
+  public createDocument(institutionId: number, icId: number, fields): Observable<any> {
     const formData = new FormData();
     formData.append('language', fields.language);
     if (fields.pdf) formData.append('pdf', fields.pdf, fields.pdf?.name);
@@ -102,7 +90,8 @@ export class ApiIcService {
     if (fields.language) formData.append('language', fields.language);
 
     return this.http
-      .post(this.endpointUrl + idIc + '/document/', formData).pipe(
+      .post(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}/document/`, formData)
+      .pipe(
         map((data: any) => {
           // console.log('Create Document Response', data);
           if (data.status) {
@@ -115,7 +104,7 @@ export class ApiIcService {
   }
 
   // API: PUT /ics/document/
-  public updateDocument(idIc, fields, language): Observable<any> {
+  public updateDocument(institutionId: number, icId: number, fields: any, language: string): Observable<any> {
 
     const formData = new FormData();
     formData.append('language', fields.language);
@@ -124,8 +113,8 @@ export class ApiIcService {
     formData.append('html', fields.html || '');
 
     return this.http
-      .put(this.endpointUrl + idIc + '/document/' + language + '/', formData,
-    ).pipe(
+      .put(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}/document/${language}/`, formData)
+      .pipe(
       map((data: any) => {
         if (data.status) {
           return true;
@@ -137,9 +126,10 @@ export class ApiIcService {
   }
 
   // API: PUT /ics/:id
-  public updateIc(idIc, fields): Observable<any> {
+  public updateIc(institutionId: number, icId: number, fields: any): Observable<any> {
     return this.http
-      .put(this.endpointUrl + '/' + idIc, fields).pipe(
+      .put(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}`, fields)
+      .pipe(
         map((data: any) => {
           if (data.status) {
             return true;
@@ -150,16 +140,15 @@ export class ApiIcService {
         catchError(this.handleError));
   }
 
-
   // DELETE /ic/:id
-  public deleteIcById(icId: number) {
-    // will use this.http.delete()
+  public deleteIcById(institutionId: number) {
+    // Not implemented yet, delete ic this.http.delete()
   }
 
   // DELETE Langueg /ics/:id
-  public deleteDocument(icID: number, documentLan: string) {
+  public deleteDocument(institutionId: number, icId: number, language: string) {
     return this.http
-      .delete(this.endpointUrl + icID + '/document/' + documentLan + '/')
+      .delete(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}/document/${language}/`)
       .pipe(
         map((data: any) => {
           return true;
@@ -170,8 +159,8 @@ export class ApiIcService {
   }
 
   // API: POST /institution/id/learner/id/ic
-  public approveIc(userId, icVersion): Observable<any> {
-    return this.http.post(`${this.apiUrl}/institution/${this.user.institution.id}/learner/${this.user.id}/ic/`,
+  public approveIc(user: InstitutionUser, icVersion: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/institution/${user.institution.id}/learner/${user.id}/ic/`,
      { version: icVersion }).pipe(
       map((data: any) => {
         if (data) {
@@ -183,8 +172,8 @@ export class ApiIcService {
       catchError(this.handleError));
   }
 
-  public rejectIc(userId, icVersion): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/institution/${this.user.institution.id}/learner/${this.user.id}/ic/`).pipe(
+  public rejectIc(user: InstitutionUser): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/institution/${user.institution.id}/learner/${user.id}/ic/`).pipe(
       map((data: any) => {
         if (data) {
           return data;
@@ -199,12 +188,4 @@ export class ApiIcService {
     // console.error('ApiIcService::handleError', error);
     return ErrorObservable.create(error);
   }
-
-  camelToSnakeCase(str) {
-    return str.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
-  }
-  snakeToCamelCase(str) {
-    return str.replace(/[-_][a-z]/ig, letter => `${letter.toUpperCase()}`).replace('_', '');
-  }
-
 }
