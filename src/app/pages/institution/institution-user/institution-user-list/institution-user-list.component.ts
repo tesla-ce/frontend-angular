@@ -10,7 +10,7 @@ import { InstitutionUser } from '../../../../@core/models/user';
   styleUrls: ['./institution-user-list.component.scss'],
 })
 export class InstitutionUserListComponent implements OnInit {
-  endPoint: string;
+  endpoint: string;
   institution: number;
   settings = {
     columns: {
@@ -50,7 +50,7 @@ export class InstitutionUserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
-      if (user) this.endPoint = `/institution/${user.institution.id}/user`;
+      if (user) this.endpoint = `/institution/${user.institution.id}/user`;
     });
   }
 

@@ -14,6 +14,7 @@ export class CourseActivityInstrumentSettingsComponent implements OnInit {
 
   loading: boolean = true;
   @Input() instrument: any;
+  @Input() institutionId: any;
   @Input() courseId: any;
   @Input() activityId: any;
   data: any;
@@ -38,6 +39,7 @@ export class CourseActivityInstrumentSettingsComponent implements OnInit {
 
   save() {
     this.apiCourseService.putInstrumentActive(
+      this.institutionId,
       this.courseId,
       this.activityId,
       this.instrument.id,

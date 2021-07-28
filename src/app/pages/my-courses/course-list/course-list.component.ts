@@ -11,7 +11,7 @@ import { InstitutionUser } from '../../../@core/models/user';
   styleUrls: ['./course-list.component.scss'],
 })
 export class CourseListComponent implements OnInit {
-  endPoint: string;
+  endpoint: string;
   settings = {
     columns: {
       actions: {
@@ -63,7 +63,7 @@ export class CourseListComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
-      if (user) this.endPoint = `/institution/${user.institution.id}/course`;
+      if (user) this.endpoint = `/institution/${user.institution.id}/course`;
     });
   }
 

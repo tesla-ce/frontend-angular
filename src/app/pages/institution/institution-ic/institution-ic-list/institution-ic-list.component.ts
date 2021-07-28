@@ -12,7 +12,7 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./institution-ic-list.component.scss'],
 })
 export class InstitutionIcListComponent implements OnInit {
-  endPoint: string;
+  endpoint: string;
   settings = {
     columns: {
       actions: {
@@ -56,7 +56,7 @@ export class InstitutionIcListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.authService.getInstitution().subscribe(id => this.endPoint = `/institution/${id}/ic`);
+    this.authService.getInstitution().subscribe(id => this.endpoint = `/institution/${id}/ic`);
   }
 
   goNew = () => {

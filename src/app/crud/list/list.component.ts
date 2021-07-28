@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() settings: any;
-  @Input() endPoint: any;
+  @Input() endpoint: any;
   @Input() showFooter: boolean = true;
 
   @ViewChild('searchInput') searchInput: ElementRef;
@@ -38,7 +38,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   initTable(): void {
     this.source = new CustomDataSource(this.http, {
-      endPoint: this.envService.apiUrl + this.endPoint,
+      endPoint: this.envService.apiUrl + this.endpoint,
       dataKey: 'results',
       pagerPageKey: 'offset',
       pagerLimitKey: 'limit',
