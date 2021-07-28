@@ -98,7 +98,8 @@ export class CourseReportReadComponent implements OnInit {
               },
               renderComponent: ListCellInstrumentComponent,
             };
-            this.apiReportService.getActivityReport(this.courseId, this.activityId, this.reportId).subscribe(report => {
+            this.apiReportService.getActivityReport(
+              user.institution.id, this.courseId, this.activityId, this.reportId).subscribe(report => {
               this.report = report;
               this.report.detail.map(det => {
                 this.instrumentCharts[det.instrument_acronym + '_activity_histogram'] = this.getInstrumentChart(det, 'activity_histogram');
@@ -109,7 +110,8 @@ export class CourseReportReadComponent implements OnInit {
 
               });
 
-              this.apiReportService.getActivityReportChart(this.courseId, this.activityId, this.reportId).subscribe(reportChart => {
+              this.apiReportService.getActivityReportChart(user.institution.id,
+                this.courseId, this.activityId, this.reportId).subscribe(reportChart => {
                 this.reportChart = this.getReportChart();
                 this.loading = false;
               });
