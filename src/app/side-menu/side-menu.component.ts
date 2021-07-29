@@ -50,7 +50,7 @@ export class SideMenuComponent implements OnInit {
                 children: [
                     {
                         title: 'Users',
-                        icon: { icon: 'instrument-fa', pack: 'tesla' },
+                        icon: { icon: 'common-user', pack: 'tesla' },
                         link: '/institution/user',
                         hidden: user.routes.indexOf('administration-users') === -1,
                     },
