@@ -1,4 +1,4 @@
-<nb-card *ngIf='!loading'>
+<nb-card>
     <nb-card-header class="tesla-card-header">
         <nb-actions>
             <nb-action>
@@ -9,16 +9,9 @@
             <nb-action>
             </nb-action>
         </nb-actions>
-        <div style="flex:1">
-            {{'REPORT.PLURAL' | translate }}
-        </div>
-        <nb-actions>
-            <nb-action>
-                
-            </nb-action>
-        </nb-actions>
+        {{'AUDIT' | translate }}
     </nb-card-header>
     <nb-card-body>
-        <ngx-list [settings]="settings" [endpoint]="endpoint"></ngx-list>
-    </nb-card-body>
+        NOT IMPLEMENTED YET
+ </nb-card-body>
 </nb-card>

@@ -32,6 +32,7 @@ import { SharedModule } from '../../../../shared/shared.module';
 import { ListCellInstrumentComponent } from './course-report-list/list-cell-instrument.component';
 import { ListCellSumaryComponent } from './course-report-list/list-cell-sumary.component';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { CourseReportAuditComponent } from './course-report-audit/course-report-audit.component';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
     CourseReportListComponent,
     CourseReportReadComponent,
     CourseReportUpdateComponent,
+    CourseReportAuditComponent,
     ListCellInstrumentComponent,
     ListCellSumaryComponent,
   ],
