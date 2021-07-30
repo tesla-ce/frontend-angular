@@ -51,8 +51,7 @@
         "PDF_FILE": "PDF file",
         "UPDATE_TITLE": "Update Informed Consent",
         "NEW_TITLE": "Create new Informed Consent",
-        "READ_TITLE": "Read Informed Consent",
-        "VALID_FROM": "Valid From"
+        "READ_TITLE": "Read Informed Consent"
     },
     "COURSE":{
         "SINGULAR": "Course",
@@ -70,5 +69,22 @@
         "PLURAL": "Instruments",
         "ADD": "Add Instrument",
         "ADD_ALTERNATIVE": "Add Alternative"
+    },
+    "REPORT": {
+        "SINGULAR": "Report",
+        "PLURAL": "Reports",
+        "FACTS": {
+            "POSITIVE_LEARNER_RESULT_ABOVE_THRESHOLD": "The result obtained by this learner is above the defined threshold.",
+            "POSITIVE_LEARNER_RESULT_GOOD_INSTRUMENT": "Looking at results obtained for this learner in this instrument, this is a good result.",
+            "POSITIVE_LEARNER_RESULT_GOOD_ACTIVITY": "This is a good result if we compare with other learners in the activity.",
+            "POSITIVE_LEARNER_RESULT_FREQUENT": "This is a normal result for this learner with this instrument.",
+            "POSITIVE_CONFIDENCE_HIGH": "Confidence value is high, results are representative.",
+            "NEUTRAL_MISSING_INFORMATION": "Available information is not enough to decide.",
+            "NEGATIVE_LEARNER_RESULT_BELOW_THRESHOLD": "The result obtained by this learner is below the defined threshold.",
+            "NEGATIVE_LEARNER_RESULT_BAD_INSTRUMENT": "Looking at results obtained for this learner in this instrument, this is a bad result.",
+            "NEGATIVE_LEARNER_RESULT_BAD_ACTIVITY": "This is a bad result if we compare with other learners in the activity.",
+            "NEGATIVE_LEARNER_RESULT_NOT_FREQUENT": "This is not a normal result for this learner with this instrument.",
+            "NEGATIVE_CONFIDENCE_LOW": "Confidence value is too low to take a decision."
+        }   
     }
 }

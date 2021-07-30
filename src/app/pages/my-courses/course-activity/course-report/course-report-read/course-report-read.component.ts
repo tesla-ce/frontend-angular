@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ListCellActionsComponent } from '../../../../../crud/list/list-cell-actions.component';
 import { AuthService } from '../../../../../@core/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
-import { Location } from '@angular/common';
+import { formatDate, Location } from '@angular/common';
 import { ListCellInstrumentComponent } from '../course-report-list/list-cell-instrument.component';
 import { ListSubHeaderComponent } from '../course-report-list/list-sub-header-instrument.component';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
@@ -77,6 +77,10 @@ export class CourseReportReadComponent implements OnInit {
 
   back() { this.location.back(); }
 
+  audit() {
+    this.router.navigate(['audit'], { relativeTo: this.route });
+  }
+
   ngOnInit(): void {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
       if (user) {
@@ -87,7 +91,7 @@ export class CourseReportReadComponent implements OnInit {
             this.settings.columns['instrument-' + instrument.acronym] = {
               // title: '<nb-icon icon="instrument-' + instrument.acronym + '" pack="tesla"></nb-icon> ' + instrument.acronym,
               class: 'instrument',
-              title: instrument.acronym,
+              title: instrument.name,
               width: '1400px',
               type: 'custom',
               valuePrepareFunction: (value) => {
@@ -109,18 +113,19 @@ export class CourseReportReadComponent implements OnInit {
                 this.instrumentCharts[det.instrument_acronym + '_positive_facts'] = det.facts.positive;
                 this.instrumentCharts[det.instrument_acronym + '_neutral_facts'] = det.facts.neutral;
                 this.instrumentCharts[det.instrument_acronym + '_negative_facts'] = det.facts.negative;
-
               });
-              // console.log(report.data);
-              // this.http.get<any>(this.report.data).subscribe(res => {
-              //     console.log(res);
+
+              this.http.get<any>(this.report.data).subscribe(res => {
+                  // console.log(res);
+                  this.reportChart = this.getReportChart();
+                  this.loading = false;
+              });
+
+              // this.apiReportService.getActivityReportChart(user.institution.id,
+              //   this.courseId, this.activityId, this.reportId).subscribe(reportChart => {
+              //   this.reportChart = this.getReportChart();
+              //   this.loading = false;
               // });
-
-              this.apiReportService.getActivityReportChart(user.institution.id,
-                this.courseId, this.activityId, this.reportId).subscribe(reportChart => {
-                this.reportChart = this.getReportChart();
-                this.loading = false;
-              });
             });
           });
         });
@@ -129,136 +134,126 @@ export class CourseReportReadComponent implements OnInit {
   }
 
   getReportChart() {
+    const options: any = {};
 
-    return {
-      xAxis: {
-          type: 'category',
-          boundaryGap: false,
-      },
-      yAxis: {
-          type: 'value',
-          boundaryGap: [0, '30%'],
-      },
-      toolbox: {
-        show: true,
-        feature: {
-            dataZoom: {
-                yAxisIndex: 'none',
-                title: 'test',
+    options.xAxis = {
+        type: 'time',
+        boundaryGap: false,
+        axisLabel: {
+            formatter: function(value) {
+              return formatDate(value, 'dd/MM/yyyy', 'en-US');
             },
         },
-      },
-      visualMap: {
-          type: 'piecewise',
-          show: false,
-          dimension: 0,
-          seriesIndex: 0,
-          pieces: [
-            {
-              gt: 0,
-              lt: 10,
-              color: 'rgba(0, 0, 0, 0)',
+    };
+
+    options.yAxis = {
+        type: 'value',
+        boundaryGap: [0, '30%'],
+    };
+
+    options.toolbox = {
+      show: true,
+      feature: {
+          dataZoom: {
+              yAxisIndex: 'none',
+              title: '',
           },
-          // {
-          //     gt: 5,
-          //     lt: 7,
-          //     //color: 'rgba(0, 0, 180, 0.4)',
-          // }
-        ],
       },
-      series: [
-          {
-              type: 'line',
-              smooth: 0.6,
-              symbol: 'none',
-              lineStyle: {
-                  color: '#5470C6',
-                  width: 1,
-              },
-              // xAxis: {
-              //   type: 'time',
-              //   axisLabel: {
-              //       formatter: function(value) {
-              //         return value;
-              //       },
-              //   },
-              // },
-              markLine: {
-                  symbol: ['none', 'none'],
-                  label: {show: false},
-                  data: [
-                      {xAxis: 11},
-                      {xAxis: 21},
-                      {xAxis: 33},
-                      {xAxis: 43},
-                  ],
-              },
-              areaStyle: {},
-              data: [
-                      ['2021-07-15T09:21:11.546Z', null],
-                      ['2021-07-15T09:21:11.590Z', null],
-                      ['2021-07-15T09:21:11.622Z', null],
-                      ['2021-07-15T09:21:11.659Z', null],
-                      ['2021-07-15T09:21:11.692Z', null],
-                      ['2021-07-15T09:21:11.721Z', null],
-                      ['2021-07-15T09:21:11.751Z', null],
-                      ['2021-07-15T09:21:11.777Z', null],
-                      ['2021-07-15T09:21:11.806Z', null],
-                      ['2021-07-15T09:21:11.836Z', null],
-                      ['2021-07-15T09:21:15.697Z', null],
+    };
 
-                      ['2021-07-16T09:21:11.546Z', 0.975293666271785],
-                      ['2021-07-16T09:21:11.590Z', 0.9135100193937418],
-                      ['2021-07-16T09:21:11.622Z', 0.967279129661583],
-                      ['2021-07-16T09:21:11.659Z', 0.9097466227868173],
-                      ['2021-07-16T09:21:11.692Z', 0.9838387250892472],
-                      ['2021-07-16T09:21:11.721Z', 0.9447166858037267],
-                      ['2021-07-16T09:21:11.751Z', 0.9118105711305643],
-                      ['2021-07-16T09:21:11.777Z', 0.9344169324066872],
-                      ['2021-07-16T09:21:11.806Z', 0.9974212952306971],
-                      ['2021-07-16T09:21:11.836Z', 0.9846688400960376],
-                      ['2021-07-16T09:21:15.697Z', 0.09534410170326006],
+    options.tooltip = {
+      trigger: 'axis',
+    };
 
-                      ['2021-07-17T09:21:11.546Z', null],
-                      ['2021-07-17T09:21:11.590Z', null],
-                      ['2021-07-17T09:21:11.622Z', null],
-                      ['2021-07-17T09:21:11.659Z', null],
-                      ['2021-07-17T09:21:11.692Z', null],
-                      ['2021-07-17T09:21:11.721Z', null],
-                      ['2021-07-17T09:21:11.751Z', null],
-                      ['2021-07-17T09:21:11.777Z', null],
-                      ['2021-07-17T09:21:11.806Z', null],
-                      ['2021-07-17T09:21:11.836Z', null],
-                      ['2021-07-17T09:21:15.697Z', null],
+    options.visualMap = {
+      type: 'piecewise',
+      show: false,
+      dimension: 0,
+    };
 
-                      ['2021-07-18T09:21:11.546Z', 0.975293666271785],
-                      ['2021-07-18T09:21:11.590Z', 0.9135100193937418],
-                      ['2021-07-18T09:21:11.622Z', 0.967279129661583],
-                      ['2021-07-18T09:21:11.659Z', 0.9097466227868173],
-                      ['2021-07-18T09:21:11.692Z', 0.9838387250892472],
-                      ['2021-07-18T09:21:11.721Z', 0.9447166858037267],
-                      ['2021-07-18T09:21:11.751Z', 0.9118105711305643],
-                      ['2021-07-18T09:21:11.777Z', 0.9344169324066872],
-                      ['2021-07-18T09:21:11.806Z', 0.9974212952306971],
-                      ['2021-07-18T09:21:11.836Z', 0.9846688400960376],
-                      ['2021-07-18T09:21:15.697Z', 0.09534410170326006],
+    options.series = [];
 
-                      ['2021-07-19T09:21:11.546Z', null],
-                      ['2021-07-19T09:21:11.590Z', null],
-                      ['2021-07-19T09:21:11.622Z', null],
-                      ['2021-07-19T09:21:11.659Z', null],
-                      ['2021-07-19T09:21:11.692Z', null],
-                      ['2021-07-19T09:21:11.721Z', null],
-                      ['2021-07-19T09:21:11.751Z', null],
-                      ['2021-07-19T09:21:11.777Z', null],
-                      ['2021-07-19T09:21:11.806Z', null],
-                      ['2021-07-19T09:21:11.836Z', null],
-                      ['2021-07-19T09:21:15.697Z', null],
-                  ],
+    const serieData = [
+      ['2021-07-16T09:21:11.546Z', null],
+      ['2021-07-16T09:21:11.546Z', 0.9752936662717850],
+      ['2021-07-16T09:21:11.590Z', 0.9135100193937418],
+      ['2021-07-16T09:21:11.622Z', 0.9672791296615830],
+      ['2021-07-16T09:21:11.659Z', 0.9097466227868173],
+      ['2021-07-16T09:21:11.692Z', 0.9838387250892472],
+      ['2021-07-16T09:21:11.721Z', 0.9447166858037267],
+      ['2021-07-16T09:21:11.751Z', 0.9118105711305643],
+      ['2021-07-16T09:21:11.777Z', 0.9344169324066872],
+      ['2021-07-16T09:21:11.806Z', 0.9974212952306971],
+      ['2021-07-16T09:21:11.836Z', 0.9846688400960376],
+      ['2021-07-16T09:21:11.836Z', null],
+    ];
 
-          },
-        ],
-  };
+    const serie = {
+        type: 'line',
+        smooth: 0.6,
+        symbol: 'emptyCircle',
+        showSymbol: true,
+        symbolSize: 10,
+        showAllSymbol: true,
+        lineStyle: {
+            color: '#5470C6',
+            width: 2,
+        },
+        markLine: {
+            symbol: ['none', 'none'],
+            label: {show: false},
+            data: [
+                {xAxis: serieData[0][0]},
+                {xAxis: serieData[serieData.length - 1][0]},
+            ],
+        },
+        areaStyle: {},
+        data: serieData,
+    };
+
+    options.series.push(serie);
+
+    const serieData1 = [
+      ['2021-07-16T09:21:12.546Z', null],
+      ['2021-07-16T09:21:12.546Z', 0.4752936662717850],
+      ['2021-07-16T09:21:12.590Z', 0.4135100193937418],
+      ['2021-07-16T09:21:12.622Z', 0.5672791296615830],
+      ['2021-07-16T09:21:12.659Z', 0.6097466227868173],
+      ['2021-07-16T09:21:12.692Z', 0.7838387250892472],
+      ['2021-07-16T09:21:12.721Z', 0.8447166858037267],
+      ['2021-07-16T09:21:12.751Z', 0.3118105711305643],
+      ['2021-07-16T09:21:12.777Z', 0.4344169324066872],
+      ['2021-07-16T09:21:12.806Z', 0.3974212952306971],
+      ['2021-07-16T09:21:12.836Z', 0.4846688400960376],
+      ['2021-07-16T09:21:12.836Z', null],
+    ];
+
+    const serie1 = {
+        type: 'line',
+        smooth: 0.6,
+        symbol: 'emptyCircle',
+        showSymbol: true,
+        symbolSize: 10,
+        showAllSymbol: true,
+        lineStyle: {
+            color: '#5470C6',
+            width: 2,
+        },
+        markLine: {
+            symbol: ['none', 'none'],
+            label: {show: false},
+            data: [
+                {xAxis: serieData1[0][0]},
+                {xAxis: serieData1[serieData1.length - 1][0]},
+            ],
+        },
+        areaStyle: {},
+        data: serieData1,
+    };
+
+    options.series.push(serie1);
+
+    return options;
   }
 
   getReportMockData() {

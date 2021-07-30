@@ -4,6 +4,8 @@ import { CourseReportComponent } from './course-report.component';
 import { CourseReportListComponent } from './course-report-list/course-report-list.component';
 import { CourseReportReadComponent } from './course-report-read/course-report-read.component';
 import { CourseReportUpdateComponent } from './course-report-update/course-report-update.component';
+import { CourseReportAuditComponent } from './course-report-audit/course-report-audit.component';
+
 
 
 const routes: Routes = [{
@@ -21,6 +23,10 @@ const routes: Routes = [{
     {
       path: ':reportId/update',
       component: CourseReportUpdateComponent,
+    },
+    {
+      path: ':reportId/audit',
+      component: CourseReportAuditComponent,
     },
   ],
 }];
