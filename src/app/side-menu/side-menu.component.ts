@@ -26,7 +26,7 @@ export class SideMenuComponent implements OnInit {
             this.menu = [
             {
                 title: 'Dashboard',
-                icon: { icon: 'common-dashboard', pack: 'tesla' },
+                icon: { icon: 'common-dashboard', pack: 'tesla'},
                 link: '/dashboard',
                 hidden: user.routes.indexOf('dashboard') === -1,
             },
@@ -56,7 +56,7 @@ export class SideMenuComponent implements OnInit {
                     },
                     {
                         title: 'Informed Consent',
-                        icon: { icon: 'sensor-assessment', pack: 'tesla' },
+                        icon: { icon: 'common-informed-consent', pack: 'tesla' },
                         link: '/institution/ic',
                         hidden: user.routes.indexOf('administration-ic') === -1,
                     },
@@ -77,6 +77,12 @@ export class SideMenuComponent implements OnInit {
                         icon: { icon: 'instrument-vr', pack: 'tesla' },
                         link: '/institution/data-management',
                         hidden: user.routes.indexOf('administration-data-management') === -1,
+                    },
+                    {
+                        title: 'Institution',
+                        icon: { icon: 'instrument-vr', pack: 'tesla' },
+                        link: '/institution/data-management',
+                        hidden: user.routes.indexOf('administration-institution') === -1,
                     },
                     {
                         title: 'Settings',
