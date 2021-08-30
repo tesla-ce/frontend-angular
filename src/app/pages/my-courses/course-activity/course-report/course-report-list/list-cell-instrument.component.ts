@@ -15,11 +15,13 @@ export class ListCellInstrumentComponent implements ViewCell, OnInit {
 
   ngOnInit() {
     [this.cellData] = this.rowData.detail.filter( item => item.instrument_id === this.value.id);
-    this.sumary = {
-      content_level: this.getIconStatus(this.cellData.content_level),
-      integrity_level: this.getIconStatus(this.cellData.integrity_level),
-      identity_level: this.getIconStatus(this.cellData.identity_level),
-    };
+    if (this.cellData) {
+      this.sumary = {
+        content_level: this.getIconStatus(this.cellData.content_level),
+        integrity_level: this.getIconStatus(this.cellData.integrity_level),
+        identity_level: this.getIconStatus(this.cellData.identity_level),
+      };
+    }
   }
 
   constructor(
