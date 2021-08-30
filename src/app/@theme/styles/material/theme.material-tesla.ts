@@ -53,6 +53,9 @@ export const MATERIAL_TESLA_THEME = {
   name: 'material-tesla',
   base: 'default',
   variables: {
+    histogram: '#982581',
+    gaussian: '#41D5B8',
+    polarity: '#DA416F',
     temperature: {
       arcFill: [
         baseThemeVariables.primary,

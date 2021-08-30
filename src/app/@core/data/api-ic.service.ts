@@ -25,7 +25,7 @@ export class ApiIcService {
     private envService: EnvService,
   ) {
     this.apiUrl = envService.apiUrl;
-    this.endpointUrl = this.apiUrl + this.endpoint;
+    this.endpointUrl = this.apiUrl;
   }
 
   // API: POST /ics

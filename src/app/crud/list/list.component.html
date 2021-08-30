@@ -7,7 +7,8 @@
         <input type="text" nbInput #searchInput>
     </nb-form-field>
 </div>
-<ng2-smart-table (userRowSelect)="userRowSelect($event)" class="list" [settings]="settings" [source]="source"></ng2-smart-table>
+<ng2-smart-table *ngIf="source" (userRowSelect)="userRowSelect($event)" class="list" [settings]="settings" [source]="source"></ng2-smart-table>
+<ng2-smart-table *ngIf="localDataSource" (userRowSelect)="userRowSelect($event)" class="list" [settings]="settings" [source]="localDataSource"></ng2-smart-table>
 <div *ngIf='settings.showFooter===false?false:true' class="list-footer">
     <nb-select placeholder="Items per page" [(selected)]="perPage" (selectedChange)="perPageOnChange($event)">
         <nb-option value="5">5</nb-option>

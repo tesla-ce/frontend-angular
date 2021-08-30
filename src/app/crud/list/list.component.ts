@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, AfterViewInit, ViewChild, Input, SimpleChanges, OnChanges } from '@angular/core';
-import { ServerDataSource } from 'ng2-smart-table';
+import { LocalDataSource, ServerDataSource } from 'ng2-smart-table';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ServerSourceConf } from 'ng2-smart-table/lib/lib/data-source/server/server-source.conf';
 import { fromEvent } from 'rxjs';
@@ -16,11 +16,13 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() settings: any;
   @Input() endpoint: any;
+  @Input() localSource: [];
   @Input() showFooter: boolean = true;
 
   @ViewChild('searchInput') searchInput: ElementRef;
 
   source: CustomDataSource;
+  localDataSource: LocalDataSource;
   perPage: string;
   http: HttpClient;
   envService: EnvService;
@@ -37,16 +39,20 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   initTable(): void {
-    this.source = new CustomDataSource(this.http, {
-      endPoint: this.envService.apiUrl + this.endpoint,
-      dataKey: 'results',
-      pagerPageKey: 'offset',
-      pagerLimitKey: 'limit',
-      totalKey: 'count',
-      filterFieldKey: '#field#',
-      sortFieldKey: 'ordering',
-      sortDirKey: 'direction',
-    });
+    if (this.endpoint) {
+      this.source = new CustomDataSource(this.http, {
+        endPoint: this.envService.apiUrl + this.endpoint,
+        dataKey: 'results',
+        pagerPageKey: 'offset',
+        pagerLimitKey: 'limit',
+        totalKey: 'count',
+        filterFieldKey: '#field#',
+        sortFieldKey: 'ordering',
+        sortDirKey: 'direction',
+      });
+    } else {
+      this.localDataSource = new LocalDataSource(this.localSource);
+    }
   }
 
   ngOnInit(): void {
