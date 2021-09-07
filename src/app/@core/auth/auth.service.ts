@@ -55,7 +55,7 @@ export class AuthService extends AuthUserData {
    * @param institutionId New institution ID
    */
   setInstitution(institutionId: string): void {
-    // localStorage.setItem('institution', institutionId);
+    localStorage.setItem('institution', institutionId);
     for (const institution of this._current_user.institutions) {
       if (institution.id === Number(institutionId)) {
         this._current_user.institution = institution;
@@ -109,6 +109,10 @@ export class AuthService extends AuthUserData {
                 // When user has no assigned institution, take first available institution
                 if (user.institutions.length > 0) {
                   user.institution = user.institutions[0];
+                  const userSelectedInstitution = localStorage.getItem('institution');
+                  if (userSelectedInstitution) {
+                    user.institution = user.institutions.filter(institution => institution.id.toString() === userSelectedInstitution)[0];
+                  }
                   user.institution.is_admin = true;
                 }
               }

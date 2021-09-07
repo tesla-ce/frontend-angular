@@ -115,7 +115,6 @@ export class CourseReportReadComponent implements OnInit {
               this.report = report;
               this.reports.push(report);
               this.report.detail.map(det => {
-                console.log(det);
                 this.instrumentCharts[det.instrument_acronym + '_activity_histogram'] = this.getInstrumentChart(det, 'activity_histogram');
                 this.instrumentCharts[det.instrument_acronym + '_learner_histogram'] = this.getInstrumentChart(det, 'learner_histogram');
                 this.instrumentCharts[det.instrument_acronym + '_positive_facts'] = det.facts.positive;
