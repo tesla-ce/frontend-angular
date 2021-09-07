@@ -12,6 +12,12 @@
         {{'AUDIT' | translate }}
     </nb-card-header>
     <nb-card-body>
-        NOT IMPLEMENTED YET
- </nb-card-body>
+      <owl-carousel-o [options]="customOptions">
+        <ng-container *ngFor="let slide of slidesStore">
+          <ng-template carouselSlide [id]="slide.id">
+            <img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+    </nb-card-body>
 </nb-card>

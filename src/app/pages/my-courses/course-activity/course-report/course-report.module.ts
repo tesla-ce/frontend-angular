@@ -33,6 +33,7 @@ import { ListCellInstrumentComponent } from './course-report-list/list-cell-inst
 import { ListCellSumaryComponent } from './course-report-list/list-cell-sumary.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { CourseReportAuditComponent } from './course-report-audit/course-report-audit.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { CourseReportAuditComponent } from './course-report-audit/course-report-
     NbTabsetModule,
     SharedModule,
     NbIconModule,
+    CarouselModule,
     // CHARTS
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),

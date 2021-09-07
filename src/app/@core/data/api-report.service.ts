@@ -5,10 +5,13 @@ import { } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Report } from '../models/report';
 import { Observable } from 'rxjs/Observable';
-import { catchError, map } from 'rxjs/operators';
+import {catchError, map, tap, switchMap} from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { EnvService } from '../env/env.service';
 import { InstitutionUser } from '../models/user';
+import { ReportAudit } from '../models/report';
+import {iif, of} from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root',
@@ -49,6 +52,18 @@ export class ApiReportService {
           if (response) return response;
           else return null;
         }),
+        catchError(this.handleError),
+      );
+  }
+
+  public getActivityReportAudit(institutionId: number, courseId: number, activityId: number,
+                                reportId: number, instrumentId: number): Observable<any> {
+    return this.http
+      .get<ReportAudit>(`${this.endpointUrl}/institution/${institutionId}/course/${courseId}/activity/${activityId}/report/${reportId}/audit/${instrumentId}/`)
+      .pipe(
+        switchMap(report_audit => iif(() => report_audit.audit_data !== null, this.http.get<any>(report_audit.audit_data), of(null)).pipe(
+            map(audit => ({ ...report_audit, audit })),
+        )),
         catchError(this.handleError),
       );
   }
