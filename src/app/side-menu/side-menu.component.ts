@@ -62,7 +62,7 @@ export class SideMenuComponent implements OnInit {
                     },
                     {
                         title: 'SEND',
-                        icon: { icon: 'instrument-ks', pack: 'tesla' },
+                        icon: { icon: 'role-send', pack: 'tesla' },
                         link: '/institution/send',
                         hidden: user.routes.indexOf('administration-send') === -1,
                     },
@@ -86,7 +86,7 @@ export class SideMenuComponent implements OnInit {
                     },
                     {
                         title: 'Settings',
-                        icon: { icon: 'sensor-assessment', pack: 'tesla' },
+                        icon: { icon: 'common-system', pack: 'tesla' },
                         link: '/institution/settings',
                         hidden: user.routes.indexOf('administration-settings') === -1,
                     },
@@ -118,8 +118,8 @@ export class SideMenuComponent implements OnInit {
                     },
                     {
                         title: 'Institutions',
-                        icon: { icon: 'common-dashboard', pack: 'tesla' },
-                        link: '/system/institution',
+                        icon: { icon: 'common-course', pack: 'tesla' },
+                        link: '/system/admin-institution',
                         hidden: user.routes.indexOf('system-institutions') === -1,
                     },
                     {

@@ -12,6 +12,17 @@
         {{'SEND'}}
     </nb-card-header>
     <nb-card-body>
-        NOT IMPLEMENTED YET
- </nb-card-body>
+        <div>
+            <nb-checkbox (checkedChange)="bigFontsToggle($event)">Big fonts</nb-checkbox>
+        </div>
+        <div>
+            <nb-checkbox (checkedChange)="highContrastToggle($event)">High contrast</nb-checkbox>
+        </div>
+        <div>
+            <nb-checkbox (checkedChange)="textToSpeechToggle($event)">Text to speech</nb-checkbox>
+        </div>
+        <br>
+        <br>
+        <button nbButton type="submit">Submit</button>
+    </nb-card-body>
 </nb-card>
