@@ -1,8 +1,7 @@
-import { AuthService } from './../../../../@core/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
-// import { apiConstants } from '../../../../@core/data/api-constants';
-import { ListCellActionsComponent } from '../../../../crud/list/list-cell-actions.component';
+import { AuthService } from '../../../../@core/auth/auth.service';
 import { InstitutionUser } from '../../../../@core/models/user';
+import { ListCellActionsComponent } from '../../../../crud/list/list-cell-actions.component';
 
 @Component({
   selector: 'ngx-institution-user-list',
@@ -10,8 +9,9 @@ import { InstitutionUser } from '../../../../@core/models/user';
   styleUrls: ['./institution-user-list.component.scss'],
 })
 export class InstitutionUserListComponent implements OnInit {
-  endpoint: string;
-  institution: number;
+
+  endpoint: String;
+
   settings = {
     columns: {
       actions: {
@@ -44,6 +44,7 @@ export class InstitutionUserListComponent implements OnInit {
       display: true,
       perPage: 10,
     },
+    addNew: true,
   };
 
   constructor(private authService: AuthService) { }
@@ -53,6 +54,5 @@ export class InstitutionUserListComponent implements OnInit {
       if (user) this.endpoint = `/institution/${user.institution.id}/user`;
     });
   }
-
 
 }

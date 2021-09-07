@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { InstitutionUserComponent } from './institution-user.component';
-import { InstitutionUserShowComponent } from './institution-user-show/institution-user-show.component';
+import { InstitutionUserReadComponent } from './institution-user-read/institution-user-read.component';
 import { InstitutionUserCreateComponent } from './institution-user-create/institution-user-create.component';
 import { InstitutionUserUpdateComponent } from './institution-user-update/institution-user-update.component';
 import { InstitutionUserListComponent } from './institution-user-list/institution-user-list.component';
@@ -15,15 +15,15 @@ const routes: Routes = [{
       component: InstitutionUserListComponent,
     },
     {
-      path: 'show/:id',
-      component: InstitutionUserShowComponent,
+      path: ':id',
+      component: InstitutionUserReadComponent,
     },
     {
       path: 'create',
       component: InstitutionUserCreateComponent,
     },
     {
-      path: 'update/:id',
+      path: ':id/update',
       component: InstitutionUserUpdateComponent,
     },
   ],
