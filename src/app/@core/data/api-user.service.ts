@@ -82,12 +82,4 @@ export class ApiUserService {
     console.error('ApiUserService::handleError', error);
     return ErrorObservable.create(error);
   }
-
-  camelToSnakeCase (str) {
-    return str.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
-  }
-  snakeToCamelCase (str) {
-    return str.replace(/[-_][a-z]/ig, letter => `${letter.toUpperCase()}`).replace('_', '');
-  }
-
 }

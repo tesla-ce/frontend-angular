@@ -89,24 +89,26 @@ export class CourseReportReadComponent implements OnInit {
         this.endpoint =
          `/institution/${user.institution.id}/course/${this.courseId}/activity/${this.activityId}/report?id=${this.reportId}`;
         this.apiCourseService.getAllInstruments(user.institution.id).subscribe((instruments: any[]) => {
-          this.instruments = instruments;
-          instruments.map((instrument: any) => {
-            this.settings.columns['instrument-' + instrument.acronym] = {
-              // title: '<nb-icon icon="instrument-' + instrument.acronym + '" pack="tesla"></nb-icon> ' + instrument.acronym,
-              class: 'instrument',
-              title: instrument.name,
-              width: '1400px',
-              type: 'custom',
-              valuePrepareFunction: (value) => {
-                return instrument;
-              },
-              filter: {
+            this.instruments = instruments;
+            instruments.map((instrument: any) => {
+              this.settings.columns['instrument-' + instrument.acronym] = {
+                // title: '<nb-icon icon="instrument-' + instrument.acronym + '" pack="tesla"></nb-icon> ' + instrument.acronym,
+                class: 'instrument',
+                title: instrument.name,
+                width: '1400px',
                 type: 'custom',
-                component: ListSubHeaderComponent,
-                data: {instrument : instrument},
-              },
-              renderComponent: ListCellInstrumentComponent,
-            };
+                valuePrepareFunction: (value) => {
+                  return instrument;
+                },
+                filter: {
+                  type: 'custom',
+                  component: ListSubHeaderComponent,
+                  data: {instrument : instrument},
+                },
+                renderComponent: ListCellInstrumentComponent,
+              };
+            });
+
             this.apiReportService.getActivityReport(
               user.institution.id, this.courseId, this.activityId, this.reportId).subscribe(report => {
               this.report = report;
@@ -120,19 +122,19 @@ export class CourseReportReadComponent implements OnInit {
               });
 
               this.http.get<any>(this.report.data).subscribe(res => {
-                  const reportChartData = this.getReportChartData(res.sessions);
-                  this.reportChart = this.getReportChart(reportChartData);
+                  const sessionsData = this.getSessionsData(res.sessions);
+                  const documentsData = this.getDocumentsData(res.documents);
+                  this.reportChart = this.getReportChart(sessionsData, documentsData);
                   this.loading = false;
               });
-            });
           });
         });
       }
     });
   }
 
-  getReportChartData(sessions) {
-    const reportChartData = {
+  getSessionsData(sessions) {
+    const sessionsData = {
       sessions: [],
       series: [],
       instruments: this.instruments.map(x => x.acronym),
@@ -142,14 +144,14 @@ export class CourseReportReadComponent implements OnInit {
         if (session.data.data && session.data.data !== {} && session.data.instruments.length) {
             session.data.instruments.map(instrumentId => {
               // add serie data
-              reportChartData.series.push({
+              sessionsData.series.push({
                 instrument: this.instruments.find(x => x.id === instrumentId),
                 requests: JSON.parse(session.data.data[instrumentId].requests),
               });
             });
 
             // add session data
-            reportChartData.sessions.push(
+            sessionsData.sessions.push(
               {
                 createdAt: session.created_at,
                 closedAt: session.closed_at,
@@ -158,10 +160,31 @@ export class CourseReportReadComponent implements OnInit {
         }
       }
     });
-    return reportChartData;
+    return sessionsData;
   }
 
-  getReportChart(data) {
+  getDocumentsData(documents) {
+    const documentsData = {
+      series: [],
+      instruments: this.instruments.map(x => x.acronym),
+    };
+    documents.map(document => {
+      if (document.instruments && document.created_at) {
+          document.instruments.map(instrumentId => {
+            // add serie data
+            if (document.results && document.results[instrumentId].status === 1) {
+              documentsData.series.push({
+                instrument: this.instruments.find(x => x.id === instrumentId),
+                requests: [[document.created_at, document.results[instrumentId].result]],
+              });
+            }
+          });
+      }
+    });
+    return documentsData;
+  }
+
+  getReportChart(sessionsData, documentsData) {
     const options: any = {};
 
     options.xAxis = {
@@ -184,7 +207,7 @@ export class CourseReportReadComponent implements OnInit {
     options.series = [
     ];
 
-    data.sessions.map(session => {
+    sessionsData.sessions.map(session => {
       const sessionData = [];
       if (session.createdAt) sessionData.push({xAxis: session.createdAt});
       if (session.closedAt) sessionData.push({xAxis: session.closedAt});
@@ -205,7 +228,7 @@ export class CourseReportReadComponent implements OnInit {
       );
     });
 
-    data.series.map(serie => {
+    sessionsData.series.map(serie => {
       options.series.push(
         {
           name: serie.instrument.acronym,
@@ -216,8 +239,31 @@ export class CourseReportReadComponent implements OnInit {
       );
     });
 
+    sessionsData.series.map(serie => {
+      options.series.push(
+        {
+          name: serie.instrument.acronym,
+          data: serie.requests,
+          type: 'line',
+          smooth: true,
+        },
+      );
+    });
+
+    documentsData.series.map(serie => {
+      options.series.push(
+        {
+          name: serie.instrument.acronym,
+          data: serie.requests,
+          type: 'line',
+          symbol: 'diamond',
+          smooth: true,
+        },
+      );
+    });
+
     options.legend = {
-      data: data.instruments,
+      data: sessionsData.instruments,
     };
 
     options.toolbox = {

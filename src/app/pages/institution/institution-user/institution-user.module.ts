@@ -15,12 +15,15 @@ import { InstitutionUserRoutingModule } from './institution-user-routing.module'
 import { SideMenuModule } from '../../../side-menu/side-menu.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { ListModule } from '../../../crud/list/list.module';
 import { CreateModule } from '../../../crud/create/create.module';
 import { InstitutionUserCreateComponent } from './institution-user-create/institution-user-create.component';
 import { InstitutionUserUpdateComponent } from './institution-user-update/institution-user-update.component';
-import { InstitutionUserShowComponent } from './institution-user-show/institution-user-show.component';
+import { InstitutionUserReadComponent } from './institution-user-read/institution-user-read.component';
 import { InstitutionUserListComponent } from './institution-user-list/institution-user-list.component';
+import { ReadModule } from '../../../crud/read/read.module';
+import { UpdateModule } from '../../../crud/update/update.module';
 
 @NgModule({
   imports: [
@@ -37,12 +40,14 @@ import { InstitutionUserListComponent } from './institution-user-list/institutio
     NbIconModule,
     ListModule,
     CreateModule,
+    ReadModule,
+    UpdateModule,
   ],
   declarations: [
     InstitutionUserComponent,
     InstitutionUserCreateComponent,
     InstitutionUserUpdateComponent,
-    InstitutionUserShowComponent,
+    InstitutionUserReadComponent,
     InstitutionUserListComponent,
   ],
 })

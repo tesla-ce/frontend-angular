@@ -1,20 +1,20 @@
 // import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { InstitutionComponent } from './dashboard-default.component';
+// import { InstitutionUserUpdateComponent } from './institution-user-update.component';
 
-// describe('InstitutionComponent', () => {
-//   let component: InstitutionComponent;
-//   let fixture: ComponentFixture<InstitutionComponent>;
+// describe('InstitutionUserUpdateComponent', () => {
+//   let component: InstitutionUserUpdateComponent;
+//   let fixture: ComponentFixture<InstitutionUserUpdateComponent>;
 
 //   beforeEach(async(() => {
 //     TestBed.configureTestingModule({
-//       declarations: [ InstitutionComponent ],
+//       declarations: [ InstitutionUserUpdateComponent ]
 //     })
 //     .compileComponents();
 //   }));
 
 //   beforeEach(() => {
-//     fixture = TestBed.createComponent(InstitutionComponent);
+//     fixture = TestBed.createComponent(InstitutionUserUpdateComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });
