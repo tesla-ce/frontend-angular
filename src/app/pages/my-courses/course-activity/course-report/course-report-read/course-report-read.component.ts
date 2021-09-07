@@ -28,6 +28,7 @@ export class CourseReportReadComponent implements OnInit {
   endpoint: string;
   loading: boolean = true;
   instrumentCharts: any[] = [];
+  availableAuditInstruments: string[] = ['fr', 'plag'];
   settings = {
     addNew: false,
     search: false,
@@ -79,8 +80,8 @@ export class CourseReportReadComponent implements OnInit {
 
   back() { this.location.back(); }
 
-  audit() {
-    this.router.navigate(['audit'], { relativeTo: this.route });
+  audit(instrumentId) {
+    this.router.navigate(['audit', instrumentId], { relativeTo: this.route });
   }
 
   ngOnInit(): void {
@@ -114,6 +115,7 @@ export class CourseReportReadComponent implements OnInit {
               this.report = report;
               this.reports.push(report);
               this.report.detail.map(det => {
+                console.log(det);
                 this.instrumentCharts[det.instrument_acronym + '_activity_histogram'] = this.getInstrumentChart(det, 'activity_histogram');
                 this.instrumentCharts[det.instrument_acronym + '_learner_histogram'] = this.getInstrumentChart(det, 'learner_histogram');
                 this.instrumentCharts[det.instrument_acronym + '_positive_facts'] = det.facts.positive;

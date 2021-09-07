@@ -25,7 +25,7 @@ const routes: Routes = [{
       component: CourseReportUpdateComponent,
     },
     {
-      path: ':reportId/audit',
+      path: ':reportId/audit/:instrumentId',
       component: CourseReportAuditComponent,
     },
   ],
