@@ -34,8 +34,8 @@
                         <nb-icon style="vertical-align: middle;" [icon]="'instrument-' + det.instrument_acronym" pack="tesla"></nb-icon>
                         {{ det.instrument }}
                     </div>
-                    <div *ngIf="det.instrument_acronym == 'fr'">
-                        <button status="primary" nbButton size="tiny" (click)="audit()">
+                    <div *ngIf="availableAuditInstruments.indexOf(det.instrument_acronym) !== -1">
+                        <button status="primary" nbButton size="tiny" (click)="audit(det.instrument_id)">
                             <nb-icon icon="search-outline"></nb-icon>
                         </button>
                     </div>
