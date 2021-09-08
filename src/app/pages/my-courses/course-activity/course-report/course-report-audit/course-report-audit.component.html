@@ -12,10 +12,48 @@
         {{'AUDIT' | translate }}
     </nb-card-header>
     <nb-card-body>
-      <owl-carousel-o [options]="customOptions">
-        <ng-container *ngFor="let slide of slidesStore">
+      <h3>{{'ENROLMENT_SAMPLES' | translate }}</h3>
+      <owl-carousel-o [options]="customOptionsEnrolment">
+        <ng-container *ngFor="let slide of enrolmentSlidesStore">
           <ng-template carouselSlide [id]="slide.id">
             <img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+      <h3>{{'RESULTS' | translate }}</h3>
+      <owl-carousel-o [options]="customOptionsResults">
+        <ng-container *ngFor="let slide of resultsSlidesStore">
+          <ng-template carouselSlide [id]="slide.id">
+            <nb-card>
+              <nb-card-header class="tesla-card-header">
+                <small><strong>{{ slide.created_at }}</strong></small>
+              </nb-card-header>
+              <nb-card-body>
+                <img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
+              </nb-card-body>
+              <nb-card-footer>
+                {{ slide.result * 100 | number:'2.2-2' }} %
+                <div *ngFor="let provider of slide.providers">
+                  <owl-carousel-o [options]="customOptionsFaces">
+                    <ng-container *ngFor="let face of provider.faces">
+                      <ng-template carouselSlide>
+                        <nb-card>
+                          <nb-card-header class="tesla-card-header">
+                            <small>{{ provider.acronym }} - {{ provider.result * 100 | number:'2.2-2' }} %</small>
+                          </nb-card-header>
+                          <nb-card-body>
+                            <img class="face" [src]="face.image">
+                          </nb-card-body>
+                          <nb-card-footer>
+                            <div>{{ face.score * 100 | number:'2.2-2' }} %</div>
+                          </nb-card-footer>
+                        </nb-card>
+                      </ng-template>
+                    </ng-container>
+                  </owl-carousel-o>
+                </div>
+              </nb-card-footer>
+            </nb-card>
           </ng-template>
         </ng-container>
       </owl-carousel-o>
