@@ -73,7 +73,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   currentTheme = 'material-tesla';
 
   userMenu = [
-    { title: 'Profile' },
+    { title: 'Profile', target: 'profile' },
     { title: 'Informed Consent' , target: 'ic'},
     { title: 'Log out' }];
 
@@ -160,12 +160,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
       });
 
     this.menuService.onItemClick().subscribe((event) => {
+
       if (event.item.title === 'Log out') {
         this.authService.logOut();
         this.menuService.navigateHome();
         return false;
       } else if (event.item.target === 'ic') {
         this.router.navigate(['/learner/ic']);
+        return false;
+      } else if (event.item.target === 'profile') {
+        this.router.navigate(['/profile']);
         return false;
       }
     });

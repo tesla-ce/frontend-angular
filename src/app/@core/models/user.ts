@@ -5,6 +5,8 @@ export interface Institution {
   id: number;
   name: string;
   is_admin: boolean;
+  locale: string;
+  learner_id?: string;
 }
 
 export interface User {
@@ -30,6 +32,7 @@ export interface User {
   date_joined: Date;
   groups: string[];
   user_permissions: string[];
+  institution?: Institution;
 }
 
 export interface InstitutionUser extends User {
