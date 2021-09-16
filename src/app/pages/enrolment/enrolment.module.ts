@@ -5,8 +5,11 @@ import { EnrolmentComponent } from './enrolment.component';
 import { EnrolmentRoutingModule } from './enrolment-routing.module';
 import { SideMenuModule } from '../../side-menu/side-menu.module';
 import { EnrolmentDefaultComponent } from './enrolment-default/enrolment-default.component';
-import { NbButtonModule, NbCardModule, NbIconModule, NbActionsModule } from '@nebular/theme';
+import {NbButtonModule, NbCardModule, NbIconModule, NbActionsModule } from '@nebular/theme';
 import { SharedModule } from '../../shared/shared.module';
+import {EnrolmentStatusModule} from "../../common/enrolment-status/enrolment-status.module";
+import { SendComponent } from './enrolment-default/send/send.component';
+// import { SensorsModule } from "@tesla-ce/sensors";
 
 @NgModule({
   imports: [
@@ -20,10 +23,12 @@ import { SharedModule } from '../../shared/shared.module';
     SharedModule,
     // tesla icons
     NbIconModule,
+    EnrolmentStatusModule
   ],
   declarations: [
     EnrolmentComponent,
     EnrolmentDefaultComponent,
+    SendComponent,
   ],
 })
 export class EnrolmentModule {

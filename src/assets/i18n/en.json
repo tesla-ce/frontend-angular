@@ -85,6 +85,19 @@
             "NEGATIVE_LEARNER_RESULT_BAD_ACTIVITY": "This is a bad result if we compare with other learners in the activity.",
             "NEGATIVE_LEARNER_RESULT_NOT_FREQUENT": "This is not a normal result for this learner with this instrument.",
             "NEGATIVE_CONFIDENCE_LOW": "Confidence value is too low to take a decision."
-        }   
-    }
+        }
+    },
+    "ENROLMENT": {
+        "ENROLMENT": "Enrolment",
+        "INSTRUCTIONS": "Instructions",
+        "FR": {
+          "STAND_FRONT_SCREEN": "Stand in front of your screen with a webcam facing towards you.",
+          "IMPORTANT_NOTE": "It is important to make sure the following:",
+          "CAMERA_CENTER": "Make sure that the camera is correctly capturing the whole face without leaving any parts outside of the image boundaries.",
+          "CAMERA_CORRECTLY_FACING": "It is also important to make sure that the camera is approximately facing your face with horizontal direction, i.e. the camera is approximately at the same height as your eyes/nose.",
+          "ACTIVITY_ENVIRONMENT": "Make sure that the activity is performed in an environment with reasonable lighting conditions (neither too bright nor too dark).",
+          "FOLLOW_INSTRUCTIONS": "Follow the instructions on the video at a similar speed. The final duration of the video will be of about 10 seconds.",
+          "PUSH_START": "Please push Start button to start capturing the video. When ready, push Stop button to stop recording. Activity will close automatically."
+      }
+  }
 }

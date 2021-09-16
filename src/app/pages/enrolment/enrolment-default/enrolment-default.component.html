@@ -1,6 +1,6 @@
 <nb-card>
     <nb-card-header class="tesla-card-header">
-        <!-- <nb-actions>
+        <nb-actions>
             <nb-action>
                 <button nbButton size="tiny" (click)="back()">
                     <nb-icon icon="arrow-ios-back-outline"></nb-icon>
@@ -8,10 +8,16 @@
             </nb-action>
             <nb-action>
             </nb-action>
-        </nb-actions> -->
-        {{'ENROLMENT' | translate }}
+        </nb-actions>
+        {{ 'ENROLMENT' | translate }}
     </nb-card-header>
     <nb-card-body>
-        NOT IMPLEMENTED YET
- </nb-card-body>
+      <div *ngFor="let instrument of availableInstruments" style="width: 50%; text-align: center;">
+        <h1 style="font-size: 1rem;">{{ instrument.name }}</h1>
+        <ngx-enrolment-status style="width: 400px; height: 400px; margin-left: auto; margin-right: auto;" [enrolment]="getEnrolmentValue(instrument.id)" [analyzing]="getAnalyzingValue(instrument.id)" [instrument]="instrument.name"></ngx-enrolment-status>
+
+        <a routerLink="/enrolment/send/{{instrument.id}}" nbButton outline status="primary" *ngIf="needsGoEnrolment(instrument.id)">{{ 'Create model '+instrument.acronym | translate }}</a>
+      </div>
+
+    </nb-card-body>
 </nb-card>

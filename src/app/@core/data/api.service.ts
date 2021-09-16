@@ -20,7 +20,6 @@ export class ApiService {
     private http: HttpClient,
     private envService: EnvService,
   ) {
-    this.apiUrl = envService.apiUrl;
     this.endpointUrl = this.apiUrl + this.endpoint;
   }
 
