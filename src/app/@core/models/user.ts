@@ -8,7 +8,7 @@ export interface Institution {
 }
 
 export interface User {
-  id: string;
+  id: number;
   username: string;
   last_login: string;
   first_name: string;

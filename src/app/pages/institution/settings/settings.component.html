@@ -1,17 +1,15 @@
 <nb-card>
     <nb-card-header class="tesla-card-header">
-        <!-- <nb-actions>
-            <nb-action>
-                <button nbButton size="tiny" (click)="back()">
-                    <nb-icon icon="arrow-ios-back-outline"></nb-icon>
-                </button>
-            </nb-action>
-            <nb-action>
-            </nb-action>
-        </nb-actions> -->
         {{'SETTINGS'}}
     </nb-card-header>
     <nb-card-body>
-        NOT IMPLEMENTED YET
+        <nb-checkbox (checkedChange)="toggle($event)">Disable VLE learner creation</nb-checkbox><br>
+        <nb-checkbox (checkedChange)="toggle($event)">Disable VLE instructor creation</nb-checkbox><br>
+        <nb-checkbox (checkedChange)="toggle($event)">Disable VLE user creation</nb-checkbox><br>
+        <nb-checkbox (checkedChange)="toggle($event)">Allow learner report</nb-checkbox><br>
+        <nb-checkbox (checkedChange)="toggle($event)">Allow learner audit</nb-checkbox><br>
+        <nb-checkbox (checkedChange)="toggle($event)">Allow valid audit</nb-checkbox><br>
+        <br>
+        <button nbButton type="submit">Submit</button>
  </nb-card-body>
 </nb-card>

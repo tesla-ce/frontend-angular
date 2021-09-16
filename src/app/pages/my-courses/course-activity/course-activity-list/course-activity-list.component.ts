@@ -15,61 +15,7 @@ export class CourseActivityListComponent implements OnInit {
   courseId: number;
   endpoint: string;
   loading: boolean = true;
-  settings = {
-    addNew: false,
-    search: false,
-    columns: {
-      actions: {
-        title: 'Actions',
-        type: 'custom',
-        sort: false,
-        filter: false,
-        renderComponent: ListCellActionsComponent,
-        defaultValue: {
-          update: {
-            enabled: true,
-            path: 'activity',
-          },
-          read: {
-            enabled: true,
-            path: 'activity',
-          },
-          delete: {
-            enabled: false,
-          },
-          report: {
-            enabled: true,
-            path: 'activity',
-          },
-        },
-      },
-      name: {
-        title: 'Name',
-      },
-      vle_activity_type: {
-        title: 'Type',
-      },
-      description: {
-        title: 'Description',
-      },
-      start: {
-        title: 'Start',
-      },
-      end: {
-        title: 'End',
-      },
-    },
-    actions: {
-      edit: false,
-      add: false,
-      delete: false,
-    },
-    mode: 'external',
-    pager: {
-      display: true,
-      perPage: 10,
-    },
-  };
+  settings: any;
 
   constructor(private authService: AuthService, public translate: TranslateService,
     private location: Location, private router: Router, private route: ActivatedRoute) {
@@ -87,6 +33,61 @@ export class CourseActivityListComponent implements OnInit {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
       if (user) {
         this.endpoint = `/institution/${user.institution.id}/course/${this.courseId}/activity`;
+        this.settings = {
+          addNew: false,
+          search: false,
+          columns: {
+            actions: {
+              title: 'Actions',
+              type: 'custom',
+              sort: false,
+              filter: false,
+              renderComponent: ListCellActionsComponent,
+              defaultValue: {
+                update: {
+                  enabled: user.roles.indexOf('LEARNER') === -1,
+                  path: 'activity',
+                },
+                read: {
+                  enabled: user.roles.indexOf('LEARNER') === -1,
+                  path: 'activity',
+                },
+                delete: {
+                  enabled: false,
+                },
+                report: {
+                  enabled: true,
+                  path: 'activity',
+                },
+              },
+            },
+            name: {
+              title: 'Name',
+            },
+            vle_activity_type: {
+              title: 'Type',
+            },
+            description: {
+              title: 'Description',
+            },
+            start: {
+              title: 'Start',
+            },
+            end: {
+              title: 'End',
+            },
+          },
+          actions: {
+            edit: false,
+            add: false,
+            delete: false,
+          },
+          mode: 'external',
+          pager: {
+            display: true,
+            perPage: 10,
+          },
+        };
         this.loading = false;
       }
     });

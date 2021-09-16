@@ -15,16 +15,16 @@ const routes: Routes = [{
       component: InstitutionUserListComponent,
     },
     {
-      path: ':id',
-      component: InstitutionUserReadComponent,
-    },
-    {
       path: 'create',
       component: InstitutionUserCreateComponent,
     },
     {
       path: ':id/update',
       component: InstitutionUserUpdateComponent,
+    },
+    {
+      path: ':id',
+      component: InstitutionUserReadComponent,
     },
   ],
 }];

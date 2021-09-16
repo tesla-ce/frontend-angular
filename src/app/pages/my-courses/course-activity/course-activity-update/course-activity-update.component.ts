@@ -72,10 +72,10 @@ export class CourseActivityUpdateComponent implements OnInit {
               this.availableInstruments = this.allInstruments.filter(ins => {
                 return this.activityInstruments.map(item => item.instrument.acronym).indexOf(ins.acronym) === -1;
               });
+              this.instance = instance;
+              this.loading = false;
             });
           });
-          this.instance = instance;
-          this.loading = false;
         });
       }
     });
@@ -105,6 +105,7 @@ export class CourseActivityUpdateComponent implements OnInit {
       this.availableInstruments = [alternative.instrument, ...this.availableInstruments];
     }
     this.activityMainInstruments = this.activityMainInstruments.filter(item => item.id !== instrument.id);
+    instrument.instrument.options_schema = JSON.parse(instrument.instrument.options_schema);
     this.availableInstruments = [instrument.instrument, ...this.availableInstruments];
   }
 
