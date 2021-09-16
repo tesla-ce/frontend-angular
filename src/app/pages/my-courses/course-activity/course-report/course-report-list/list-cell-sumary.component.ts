@@ -37,7 +37,7 @@ export class ListCellSumaryComponent implements ViewCell, OnInit {
       case 4:
           return 'error';
       default:
-        break;
+        return 'disabled';
     }
   }
 }

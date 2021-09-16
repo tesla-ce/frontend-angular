@@ -29,7 +29,7 @@
 </div>
 <div class="header-container">
   <nb-select
-    *ngIf="user && user.institution"
+    *ngIf="user && user.institution && user.institutions.length > 1"
     status="primary"
     matRipple
     [selected]="user.institution.id"

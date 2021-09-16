@@ -20,17 +20,13 @@ const routes: Routes = [{
       component: InstitutionIcCreateComponent,
     },
     {
-      path: ':id',
-      component: InstitutionIcReadComponent,
-    },
-    {
       path: ':id/update',
       component: InstitutionIcUpdateComponent,
     },
-    // {
-    //   path: 'iframe/:id',
-    //   component: InstitutionIcIframeComponent,
-    // },
+    {
+      path: ':id',
+      component: InstitutionIcReadComponent,
+    },
   ],
 }];
 

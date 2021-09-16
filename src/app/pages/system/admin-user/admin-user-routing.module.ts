@@ -15,16 +15,16 @@ const routes: Routes = [{
       component: AdminUserListComponent,
     },
     {
-      path: ':id',
-      component: AdminUserReadComponent,
-    },
-    {
       path: 'create',
       component: AdminUserCreateComponent,
     },
     {
       path: ':id/update',
       component: AdminUserUpdateComponent,
+    },
+    {
+      path: ':id',
+      component: AdminUserReadComponent,
     },
   ],
 }];

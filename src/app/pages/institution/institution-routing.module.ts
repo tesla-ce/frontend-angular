@@ -2,7 +2,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { InstitutionComponent } from './institution.component';
-import { SendComponent } from './send/send.component';
 import { CourseComponent } from './course/course.component';
 import { DataManagementComponent } from './data-management/data-management.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -23,7 +22,8 @@ const routes: Routes = [{
     },
     {
       path: 'send',
-      component: SendComponent,
+      loadChildren: () => import('./institution-send/institution-send.module')
+        .then(m => m.InstitutionSendModule),
     },
     {
       path: 'course',

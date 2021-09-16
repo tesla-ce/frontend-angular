@@ -1,0 +1,6 @@
+<nb-card>
+    <nb-card-header>Create Send Category</nb-card-header>
+    <nb-card-body class="example-items-rows">
+        <ngx-create *ngIf="!loading" (save)="onSave($event)" [fields]="fields" [validator]="validator" [errors]="errors"></ngx-create>
+    </nb-card-body>
+</nb-card>
