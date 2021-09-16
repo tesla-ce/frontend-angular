@@ -17,6 +17,10 @@ export class SettingsComponent implements OnInit {
 
   }
 
+  toggle(event) {
+
+  }
+
   back() { this.location.back(); }
 }
 

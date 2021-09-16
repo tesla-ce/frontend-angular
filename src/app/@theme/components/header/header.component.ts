@@ -113,7 +113,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe((user: InstitutionUser) => {
         if (!user) return;
         this.user = user;
-
         const [institutionTheme] = this.themes.filter(theme => {
           return theme.value === 'material-' + user?.institution?.acronym.toString();
         });

@@ -1,0 +1,6 @@
+<nb-card *ngIf="instance">
+    <nb-card-header>Read Send Category {{id}}</nb-card-header>
+    <nb-card-body class="example-items-rows">
+        <ngx-read [fields]="fields" [instance]="instance" [paths]="paths"></ngx-read>
+    </nb-card-body>
+</nb-card>
