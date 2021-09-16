@@ -57,7 +57,7 @@
     "@rxweb/reactive-form-validators": "^2.1.2",
     "@swimlane/ngx-charts": "^14.0.0",
     "@tesla-ce/icons": "0.0.35",
-    "@tesla-ce/sensors": "^0.0.5",
+    "@tesla-ce/sensors": "^0.0.6",
     "@tesla-ce/web-plugin": "^0.0.14",
     "@types/ckeditor": "^4.9.10",
     "angular2-chartjs": "0.5.1",

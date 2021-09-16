@@ -59,7 +59,7 @@ export class EnrolmentDefaultComponent implements OnInit {
   getEnrolmentValue(instrumentId) {
     for(const instrument in this.instrumentEnrolmentStatus) {
       if (this.instrumentEnrolmentStatus[instrument].instrument_id === instrumentId) {
-        return this.instrumentEnrolmentStatus[instrument].percentage__min;
+        return Math.round(this.instrumentEnrolmentStatus[instrument].percentage__min);
       }
     }
     return 0;
@@ -68,7 +68,7 @@ export class EnrolmentDefaultComponent implements OnInit {
   getAnalyzingValue(instrumentId) {
     for(const instrument in this.instrumentEnrolmentStatus) {
       if (this.instrumentEnrolmentStatus[instrument].instrument_id === instrumentId) {
-        return Math.min(this.instrumentEnrolmentStatus[instrument].pending_contributions, 1);
+        return Math.round(Math.min(this.instrumentEnrolmentStatus[instrument].pending_contributions, 1));
       }
     }
     return 0;

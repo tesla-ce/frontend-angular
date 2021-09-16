@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, Inject, OnInit, ViewChildren} from '@angular/core';
 import {Location} from "@angular/common";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Sensor, SensorsService} from "@tesla-ce/sensors";
 import {
   SensorsStatus, TeSLAConfiguration, TeSLAJWTToken
@@ -9,13 +9,14 @@ import {Observable} from "rxjs/Rx";
 import {AuthService} from "../../../../@core/auth/auth.service";
 import {InstitutionUser, User} from "../../../../@core/models/user";
 import {NbAuthService} from "@nebular/auth";
-import {AlertMessage, Connection} from "./connection";
+import {AlertMessage, Connection, Buffer} from "./connection";
 import {EnvService} from "../../../../@core/env/env.service";
 import {LearnerEnrolment} from "../../../../@core/models/enrolment";
 import {ApiEnrolmentService} from "../../../../@core/data/api-enrolment.service";
 import {BehaviorSubject, timer} from "rxjs";
 import {NbAuthToken} from "@nebular/auth/services/token/token";
 import {defaultIfEmpty} from "rxjs/operators";
+import {ApiCourseService} from "../../../../@core/data/api-course.service";
 
 @Component({
   selector: 'ngx-send',
@@ -23,7 +24,7 @@ import {defaultIfEmpty} from "rxjs/operators";
   styleUrls: ['./send.component.scss']
 })
 export class SendComponent implements OnInit, AfterViewInit {
-  public buttonLabel = 'Next';
+  public buttonLabel = 'Start';
   public buttonSecondaryLabel = 'Stop';
 
   public instrumentId: number;
@@ -33,19 +34,30 @@ export class SendComponent implements OnInit, AfterViewInit {
   @ViewChildren('photoClick') photoClick;
   @ViewChildren('shutter') shutter;
 
-  public learner = {};
+  private learner = {
+    id: null,
+    learner_id: null,
+    first_name: null,
+    last_name: null,
+    picture: null,
+    institution_id: null
+  };
+
   private token: TeSLAJWTToken;
   private mode = 'enrolment';
   private apiUrl: string;
   public instrumentEnrolmentStatus: LearnerEnrolment;
   // 1 -> FR
   private instrumentNumSamples = {
-    1: 20
+    1: 2
   };
 
   public instrumentName = '';
   private step = 1;
   private ready = false;
+  public progressValue = 0;
+  public progressColor = 'info';
+  public totalQueued = 0;
 
   constructor(
     private location: Location,
@@ -55,7 +67,9 @@ export class SendComponent implements OnInit, AfterViewInit {
     private NbAuthService: NbAuthService,
     private connection: Connection,
     private envService: EnvService,
-    private apiEnrolmentService: ApiEnrolmentService
+    private apiEnrolmentService: ApiEnrolmentService,
+    private apiCourseService: ApiCourseService,
+    private router: Router
   ) {
     this.apiUrl = envService.apiUrl.split('api')[0];
     this.apiUrl = this.apiUrl.substr(0, this.apiUrl.length - 1);
@@ -63,14 +77,13 @@ export class SendComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.ready = true;
+    console.log('ngAfterViewInit');
   }
 
   ngOnInit(): void {
     this.instrumentId = parseInt(this.route.snapshot.paramMap.get('instrument_id'), 10);
 
     this.authService.getUser().subscribe( (user) => {
-      console.log(user);
-
       if (user != null) {
         this.learner = {
           id: user.id,
@@ -80,27 +93,48 @@ export class SendComponent implements OnInit, AfterViewInit {
           picture: null,
           institution_id: user.institution.id
         }
-        this.apiEnrolmentService.getEnrolment(user.id, user.institution.id).subscribe( (data) => {
-          for(const inst in data) {
-            if (data[inst]['instrument_id'] === this.instrumentId) {
-              this.instrumentEnrolmentStatus = data[inst];
+
+        this.updateInstrumentEnrolmentStatus();
+
+        this.apiCourseService.getAllInstruments(user.institution.id).subscribe(allInstruments => {
+
+          for(const inst in allInstruments) {
+            if (allInstruments[inst]['id'] === this.instrumentId) {
+              this.instrumentName = allInstruments[inst]['name'];
             }
           }
-          this.configureSensors();
         });
       }
 
     });
 
-    // let enrolment: Observable<any> = this.apiEnrolmentService.getEnrolment(user.id, user.institution.id);
     this.NbAuthService.getToken().subscribe((token) =>{
       this.token = token.getPayload();
       this.configureSensors();
     });
 
-    this.connection.newUpdateStats.subscribe( data => {
-      console.log('update stats of buffer');
-      console.log(data);
+    this.connection.newUpdateStats.subscribe( (data: Buffer) => {
+      if (data != null) {
+        console.log('update stats of buffer');
+        console.log(data);
+
+        if ( data.correct >= this.instrumentNumSamples[this.instrumentId] ) {
+          this.progressColor = 'success';
+          this.stop();
+          this.updateInstrumentEnrolmentStatus();
+          this.btnPrimaryClick();
+          return;
+        }
+
+        if (this.instrumentNumSamples[this.instrumentId] - this.totalQueued - data.failed < 0) {
+          console.log('continue capturing');
+          this.progressColor = 'danger';
+          this.sensorsService.start();
+          this.buttonLabel = "Recording...";
+          return;
+        }
+        // this.stop();
+      }
     });
 
     this.sensorsService.newData.subscribe((data) => {
@@ -112,17 +146,27 @@ export class SendComponent implements OnInit, AfterViewInit {
         }, 300);
 
         this.photoClick.first.nativeElement.play();
-        console.log(data);
-        /*
-        if (this.instrumentNumSamples[this.instrumentId] >= data.corrects) {
+        this.connection.sendRequest('enrolment', data.b64data, data.mimeType, [1], null, data.context);
+        this.totalQueued++;
+        this.progressValue = Math.round(Math.min(this.totalQueued, this.instrumentNumSamples[this.instrumentId])/this.instrumentNumSamples[this.instrumentId]*100);
 
+        if (this.totalQueued >= this.instrumentNumSamples[this.instrumentId] ) {
+          this.buttonLabel = "Analyzing...";
+          this.stop();
         }
-         */
-        this.stop();
-        // this.connection.sendRequest('enrolment', data.b64data, data.mimeType, [1], null, data.context);
       }
     });
+  }
 
+  updateInstrumentEnrolmentStatus() {
+    this.apiEnrolmentService.getEnrolment(this.learner.id, this.learner.institution_id).subscribe( (data) => {
+      for(const inst in data) {
+        if (data[inst]['instrument_id'] === this.instrumentId) {
+
+          this.instrumentEnrolmentStatus = data[inst];
+        }
+      }
+    });
   }
 
   configureSensors() {
@@ -152,8 +196,9 @@ export class SendComponent implements OnInit, AfterViewInit {
     } as TeSLAConfiguration;
 
     this.connection.setConfig(conf);
-
+    console.log("ready", this.ready);
     if (this.ready === true) {
+      console.log('configuring this.video');
       this.sensorsService.setAudio(this.audio);
       this.sensorsService.setVideo(this.video);
       this.sensorsService.setCanvas(this.canvas);
@@ -172,10 +217,19 @@ export class SendComponent implements OnInit, AfterViewInit {
     if (this.step == 1) {
       this.step++;
       this.buttonLabel = 'Recording...';
+      this.configureSensors();
       this.sensorsService.start();
+      return;
     }
     if (this.step == 2) {
-      this.buttonLabel = 'Recording...';
+        this.step++;
+        this.buttonLabel = 'Finish';
+        return;
+    }
+
+    if (this.step == 3) {
+      this.router.navigate(['/enrolment']);
+      return;
     }
   }
 
@@ -185,9 +239,9 @@ export class SendComponent implements OnInit, AfterViewInit {
 
   showStep(instrumentId, step) {
     if (instrumentId === this.instrumentId && step === this.step) {
-      return true;
+      return 'block';
     }
-    return false;
+    return 'none';
   }
   stop() {
     this.sensorsService.stop();
@@ -197,14 +251,14 @@ export class SendComponent implements OnInit, AfterViewInit {
 
   getEnrolmentValue() {
     if (this.instrumentEnrolmentStatus != null) {
-      return this.instrumentEnrolmentStatus.percentage__min;
+      return Math.round(this.instrumentEnrolmentStatus.percentage__min);
     }
     return 0;
   }
 
   getAnalyzingValue() {
     if (this.instrumentEnrolmentStatus != null) {
-      return Math.min(this.instrumentEnrolmentStatus.pending_contributions, 1);
+      return Math.round(Math.min(this.instrumentEnrolmentStatus.pending_contributions, 1));
     }
     return 0;
   }

@@ -126,6 +126,12 @@ export class EnrolmentStatusComponent implements OnInit, AfterViewInit {
       changes_detected = true;
     }
 
+    if (changes.instrument != undefined && changes.instrument.currentValue) {
+      this.instrument = changes.instrument.currentValue;
+      this.options.tooltip = {formatter: this.instrument+'<br/>{b} : {c}%'};
+      changes_detected = true;
+    }
+
     if (changes_detected === true) {
       this.update();
     }
