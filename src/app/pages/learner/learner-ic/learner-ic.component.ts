@@ -52,7 +52,7 @@ export class LearnerIcComponent implements OnInit {
       .pipe()
       .subscribe((user: InstitutionUser) => {
         if (user) {
-          this.institutionService.getInstitutionUser(user.id)
+          this.institutionService.getInstitutionUser(user.institution.id, user.id)
             .pipe()
             .subscribe((institutionUser: InstitutionUser) => {
               this.user = institutionUser;

@@ -25,9 +25,6 @@ export class AdminUserListComponent implements OnInit {
       email: {
         title: 'Email',
       },
-      is_superuser: {
-        title: 'Super User',
-      },
     },
     actions: {
       edit: false,
