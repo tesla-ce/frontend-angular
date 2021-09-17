@@ -82,6 +82,7 @@ export interface Buffer {
   correct: number;
   failed: number;
   status: Array<string>;
+  notifications: Array<string>;
 }
 
 export interface StoredData {
@@ -115,7 +116,8 @@ export class Connection {
     sent: 0,
     correct: 0,
     failed: 0,
-    status: []
+    status: [],
+    notifications: []
   };
   private alertBuffer: Buffer = {
     seq: 0,
@@ -123,7 +125,8 @@ export class Connection {
     sent: 0,
     correct: 0,
     failed: 0,
-    status: []
+    status: [],
+    notifications: []
   };
   private dataCapture: Subscription;
   private mode: string;
@@ -466,6 +469,12 @@ export class Connection {
               this.requestBuffer.correct++;
             } else {
               this.requestBuffer.failed++;
+              console.log(stat.info.validations);
+              for (const val in stat.info.validations) {
+                this.requestBuffer.notifications.push(stat.info.validations[val].error_message);
+              }
+
+              //
             }
           } else {
             index = this.alertBuffer.status.indexOf(stat.sample);

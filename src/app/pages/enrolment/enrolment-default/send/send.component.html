@@ -17,7 +17,11 @@
                             [analyzing]="getAnalyzingValue()" [instrument]="instrumentName">
       </ngx-enrolment-status>
       <div class="enrolNotifications">
-        Notifications
+        <b>Notifications</b>
+        <p *ngIf="notifications.length == 0">{{ "Empty"|translate }}</p>
+        <ul>
+          <li *ngFor="let n of notifications">{{ n }}</li>
+        </ul>
       </div>
     </div>
     <div class="enrolSingle" *ngIf="instrumentId === 1">

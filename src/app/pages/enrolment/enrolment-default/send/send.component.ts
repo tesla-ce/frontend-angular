@@ -58,6 +58,7 @@ export class SendComponent implements OnInit, AfterViewInit {
   public progressValue = 0;
   public progressColor = 'info';
   public totalQueued = 0;
+  public notifications = [];
 
   constructor(
     private location: Location,
@@ -77,7 +78,6 @@ export class SendComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.ready = true;
-    console.log('ngAfterViewInit');
   }
 
   ngOnInit(): void {
@@ -117,6 +117,10 @@ export class SendComponent implements OnInit, AfterViewInit {
       if (data != null) {
         console.log('update stats of buffer');
         console.log(data);
+        this.notifications = data.notifications;
+        console.log(this.notifications);
+
+        this.progressValue = Math.round(Math.min(data.correct, this.instrumentNumSamples[this.instrumentId])/this.instrumentNumSamples[this.instrumentId]*100);
 
         if ( data.correct >= this.instrumentNumSamples[this.instrumentId] ) {
           this.progressColor = 'success';
@@ -128,7 +132,7 @@ export class SendComponent implements OnInit, AfterViewInit {
 
         if (this.instrumentNumSamples[this.instrumentId] - this.totalQueued - data.failed < 0) {
           console.log('continue capturing');
-          this.progressColor = 'danger';
+          // this.progressColor = 'danger';
           this.sensorsService.start();
           this.buttonLabel = "Recording...";
           return;
@@ -148,7 +152,6 @@ export class SendComponent implements OnInit, AfterViewInit {
         this.photoClick.first.nativeElement.play();
         this.connection.sendRequest('enrolment', data.b64data, data.mimeType, [1], null, data.context);
         this.totalQueued++;
-        this.progressValue = Math.round(Math.min(this.totalQueued, this.instrumentNumSamples[this.instrumentId])/this.instrumentNumSamples[this.instrumentId]*100);
 
         if (this.totalQueued >= this.instrumentNumSamples[this.instrumentId] ) {
           this.buttonLabel = "Analyzing...";
@@ -196,7 +199,7 @@ export class SendComponent implements OnInit, AfterViewInit {
     } as TeSLAConfiguration;
 
     this.connection.setConfig(conf);
-    console.log("ready", this.ready);
+
     if (this.ready === true) {
       console.log('configuring this.video');
       this.sensorsService.setAudio(this.audio);

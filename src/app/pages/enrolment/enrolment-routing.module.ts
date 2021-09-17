@@ -14,7 +14,7 @@ const routes: Routes = [{
       component: EnrolmentDefaultComponent,
     },
     {
-      path: 'send/:instrument_id',
+      path: 'capture/:instrument_id',
       component: SendComponent,
     },
   ],
