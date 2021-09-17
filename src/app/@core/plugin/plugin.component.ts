@@ -39,6 +39,7 @@ export class PluginComponent implements OnInit {
               const uri = this.envService.apiUrl + '/auth/profile';
               this.http.get(uri).subscribe((user: InstitutionUser) => {
                 if (user) {
+                  console.log(user);
                   if (user.institution) {
                     this.userAuthService.setIsAdmin(user.is_admin);
                     this.http.get(this.envService.apiUrl + '/institution/' + user.institution.id.toString() + '/learner/' + user.id)
@@ -50,7 +51,9 @@ export class PluginComponent implements OnInit {
                         'name': 'UOC',
                         'acronym': 'uoc',
                         'id': 1,
-                        is_admin: true,
+                        'is_admin': true,
+                        'locale': 'en',
+                        'learner_id': null
                     };
                   }
                   this.redirect(redirectUrl, params);

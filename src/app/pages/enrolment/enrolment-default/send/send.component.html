@@ -1,0 +1,74 @@
+<nb-card>
+  <nb-card-header class="tesla-card-header">
+    <nb-actions>
+      <nb-action>
+        <button nbButton size="tiny" (click)="back()">
+          <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+        </button>
+      </nb-action>
+      <nb-action>
+      </nb-action>
+    </nb-actions>
+    {{ 'ENROLMENT.ENROLMENT'|translate }}
+  </nb-card-header>
+  <nb-card-body>
+    <div class="enrolStatus">
+      <ngx-enrolment-status style="width: 100%;" [enrolment]="getEnrolmentValue()"
+                            [analyzing]="getAnalyzingValue()" [instrument]="instrumentName">
+      </ngx-enrolment-status>
+      <div class="enrolNotifications">
+        <b>Notifications</b>
+        <p *ngIf="notifications.length == 0">{{ "Empty"|translate }}</p>
+        <ul>
+          <li *ngFor="let n of notifications">{{ n }}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="enrolSingle" *ngIf="instrumentId === 1">
+      <div class="instrument_1 step1" [style.display]="showStep(1, 1)">
+        <div style="float:left; width: 70%;">
+          <h1 class="title contrastable">{{ 'ENROLMENT.INSTRUCTIONS'|translate }}</h1>
+          <p>{{ 'ENROLMENT.FR.STAND_FRONT_SCREEN'|translate }}</p>
+          <p>{{ 'ENROLMENT.FR.IMPORTANT_NOTE'|translate }}</p>
+          <ul>
+            <li>{{ 'ENROLMENT.FR.CAMERA_CENTER'|translate }}</li>
+            <li>{{ 'ENROLMENT.FR.CAMERA_CORRECTLY_FACING'|translate }}</li>
+            <li>{{ 'ENROLMENT.FR.ACTIVITY_ENVIRONMENT'|translate }}</li>
+            <li>{{ 'ENROLMENT.FR.FOLLOW_INSTRUCTIONS'|translate }}</li>
+            <li>{{ 'ENROLMENT.FR.PUSH_START'|translate }}</li>
+
+          </ul>
+        </div>
+        <div style="float: left; width: 30%;">
+          <video width="100%" controls>
+            <source src="assets/enrolment/fr/fr.ogg" type="video/ogg">
+            <source src="assets/enrolment/fr/fr.mp4" type="video/mp4">
+            <source src="assets/enrolment/fr/fr.webm" type="video/webm">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+      <div class="instrument_1 step2" [style.display]="showStep(1, 2)">
+        <div>
+          <canvas #webcamSensorCanvas width="640" height="480" id="webcamSensorCanvas" style="display:none;"></canvas>
+          <video #webcamVideo id="webcamVideo" muted style="max-width: 100%;"></video>
+          <audio #photoClick id="photoClick" src="http://www.soundjay.com/mechanical/camera-shutter-click-08.mp3"
+                 style="display:none"></audio>
+          <div #shutter id="shutter" class="shutter"></div>
+        </div>
+
+        <nb-progress-bar [value]="progressValue" status="{{ progressColor }}">{{progressValue}}%</nb-progress-bar>
+      </div>
+      <div class="instrument_1 step3" [style.display]="showStep(1, 3)" style="text-align: center;">
+        <nb-icon icon="checkmark-circle-2-outline" status="success" style="font-size: 300px;"></nb-icon>
+        <p>{{ "ENROLMENT.FR.REGISTERED"|translate }}</p>
+      </div>
+    </div>
+
+    <div class="enrolActions" style="text-align: center; margin-top: 20px;">
+      <a nbButton outline status="primary" (click)="btnPrimaryClick()">{{ buttonLabel | translate }}</a>
+      <a nbButton outline status="secondary"
+         (click)="btnSecondaryClick()">{{ buttonSecondaryLabel | translate }}</a>
+    </div>
+  </nb-card-body>
+</nb-card>
