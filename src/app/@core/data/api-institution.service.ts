@@ -59,7 +59,6 @@ export class ApiInstitutionService {
 
   // API: POST /institutions
   public createInstitution(fields: any) {
-    // will use this.http.post()
     return this.http.post(this.endpointUrl, fields)
     .pipe(
       map(( institution: Institution ) => {
@@ -74,7 +73,7 @@ export class ApiInstitutionService {
   // API: GET /institutions/:id
   public getInstitutionById( institutionId: number ): Observable<Institution> {
     return this.http
-      .get(this.endpointUrl + institutionId)
+      .get(this.endpointUrl + institutionId + '/')
       .pipe(
         map(( institution: Institution ) => {
           // console.log(institution);
@@ -89,7 +88,7 @@ export class ApiInstitutionService {
   // API: PUT /institutions/:id
   public updateInstitution( institutionId: number, fields ): Observable<any> {
     return this.http
-     .put(this.endpointUrl + '/' + institutionId, fields).pipe(
+     .put(this.endpointUrl + institutionId + '/', fields).pipe(
      map((data: any) => {
        if (data.status) {
          return true;
@@ -107,23 +106,34 @@ export class ApiInstitutionService {
   }
 
   // API: GET /institutions/:id
+  public getLearnerById( institutionId: number, userId: number ): Observable<any> {
+    return this.http
+      .get(this.endpointUrl + institutionId + '/learner/' + userId + '/')
+      .pipe(
+        map(( learner: any ) => {
+          if ( learner ) return learner;
+          else throw learner;
+        }),
+        catchError(this.handleError),
+    );
+}
+
+  // API: GET /institutions/:id
   public getSendCategoryById( institutionId: number, sendCategoryId: number ): Observable<any> {
       return this.http
         .get(this.endpointUrl + institutionId + '/send/' + sendCategoryId)
         .pipe(
           map(( sendCategroy: any ) => {
-            // console.log(sendCategroy);
             if ( sendCategroy ) return sendCategroy;
             else throw sendCategroy;
           }),
           catchError(this.handleError),
       );
-    }
+  }
 
   // API: POST /institution/:id/send
   public createSendCategory(institutionId: number, fields: any) {
-    // will use this.http.post()
-    return this.http.post(this.endpointUrl + institutionId + '/send' , fields)
+    return this.http.post(this.endpointUrl + institutionId + '/send/' , fields)
     .pipe(
       map(( sendCategory: any ) => {
         // console.log(sendCategory);
@@ -136,7 +146,6 @@ export class ApiInstitutionService {
 
   // API: PUT /institution/:id/send
   public updateSendCategory(institutionId: number, sendCategoryId: number, fields: any) {
-    // will use this.http.post()
     return this.http.put(this.endpointUrl + '/' + institutionId + '/send/' + sendCategoryId , fields)
     .pipe(
       map((data: any) => {
@@ -150,13 +159,25 @@ export class ApiInstitutionService {
     );
   }
 
+  // API: GET /institutions/:id
+  public getSendUserCategories(institutionId: number, learnerId: number ): Observable<any> {
+    return this.http
+      .get<any>(this.endpointUrl + institutionId + '/learner/' + learnerId + '/send/')
+      .pipe(
+        map(response => response.results),
+        map(( sendCategories: any ) => {
+          if ( sendCategories ) return sendCategories;
+          else throw sendCategories;
+        }),
+        catchError(this.handleError),
+    );
+  }
+
    // API: POST /institution/:id/send
-   public createSendUser(institutionId: number, learnerId: number, fields: any) {
-    // will use this.http.post()
-    return this.http.post(this.endpointUrl + institutionId + '/learner/' + learnerId + '/send' , fields)
+   public createSendUserCategory(institutionId: number, learnerId: number, fields: any) {
+    return this.http.post(this.endpointUrl + institutionId + '/learner/' + learnerId + '/send/' , fields)
     .pipe(
       map(( sendUser: any ) => {
-        // console.log(sendUser);
         if ( sendUser ) return sendUser;
         else throw sendUser;
       }),
@@ -165,9 +186,8 @@ export class ApiInstitutionService {
   }
 
   // API: PUT /institution/:id/send
-  public updateSendUser(institutionId: number, learnerId: number, fields: any) {
-    // will use this.http.post()
-    return this.http.put(this.endpointUrl + institutionId + '/learner/' + learnerId + '/send' , fields)
+  public updateSendUserCategory(institutionId: number, learnerId: number, fields: any) {
+    return this.http.put(this.endpointUrl + institutionId + '/learner/' + learnerId + '/send/' , fields)
     .pipe(
       map((data: any) => {
         if (data.status) {

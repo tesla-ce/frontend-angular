@@ -7,6 +7,12 @@ export interface Institution {
   is_admin: boolean;
   locale: string;
   learner_id?: string;
+  disable_vle_learner_creation?: boolean;
+  disable_vle_instructor_creation?: boolean;
+  disable_vle_user_creation?: boolean;
+  allow_learner_report?: boolean;
+  allow_learner_audit?: boolean;
+  allow_valid_audit?: boolean;
 }
 
 export interface User {

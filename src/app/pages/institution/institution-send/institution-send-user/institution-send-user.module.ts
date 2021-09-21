@@ -26,6 +26,7 @@ import { InstitutionSendUserListComponent } from './institution-send-user-list/i
 import { ReadModule } from '../../../../crud/read/read.module';
 import { UpdateModule } from '../../../../crud/update/update.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { InstitutionSendUserCategoryAddComponent } from './institution-send-user-update/institution-send-user-category-add.component';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NbButtonModule,
     NbInputModule,
     NbSelectModule,
+    NbIconModule,
     NbFormFieldModule,
     NbDatepickerModule,
     NbIconModule,
@@ -53,6 +55,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     InstitutionSendUserUpdateComponent,
     InstitutionSendUserReadComponent,
     InstitutionSendUserListComponent,
+    InstitutionSendUserCategoryAddComponent,
   ],
 })
 export class InstitutionSendUserModule {
