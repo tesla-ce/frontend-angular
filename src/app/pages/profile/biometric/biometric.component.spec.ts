@@ -8,7 +8,7 @@ describe('BiometricComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BiometricComponent ]
+      declarations: [ BiometricComponent ],
     })
     .compileComponents();
   }));
