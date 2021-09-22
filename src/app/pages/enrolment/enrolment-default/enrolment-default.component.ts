@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import {ApiCourseService} from "../../../@core/data/api-course.service";
-import {ApiEnrolmentService} from "../../../@core/data/api-enrolment.service";
-import {AuthService} from "../../../@core/auth/auth.service";
-import {InstitutionUser} from "../../../@core/models/user";
-import {LearnerEnrolment} from "../../../@core/models/enrolment";
+import {ApiCourseService} from '../../../@core/data/api-course.service';
+import {ApiEnrolmentService} from '../../../@core/data/api-enrolment.service';
+import {AuthService} from '../../../@core/auth/auth.service';
+import {InstitutionUser} from '../../../@core/models/user';
+import {LearnerEnrolment} from '../../../@core/models/enrolment';
 
 @Component({
   selector: 'ngx-enrolment-default',
@@ -21,7 +21,7 @@ export class EnrolmentDefaultComponent implements OnInit {
     private location: Location,
     private apiCourseService: ApiCourseService,
     private apiEnrolmentService: ApiEnrolmentService,
-    private authService: AuthService
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -37,7 +37,7 @@ export class EnrolmentDefaultComponent implements OnInit {
           this.apiCourseService.getAllInstruments(this.institutionId).subscribe(allInstruments => {
             this.availableInstruments = [];
 
-            for(const inst in allInstruments) {
+            for (const inst in allInstruments) {
               if (allInstruments[inst]['requires_enrolment'] === true) {
                 this.availableInstruments.push(allInstruments[inst]);
               }
@@ -48,7 +48,7 @@ export class EnrolmentDefaultComponent implements OnInit {
   }
 
   needsGoEnrolment(instrumentId): Boolean {
-    for(const instrument in this.instrumentEnrolmentStatus) {
+    for (const instrument in this.instrumentEnrolmentStatus) {
       if (this.instrumentEnrolmentStatus[instrument].instrument_id === instrumentId) {
         return this.instrumentEnrolmentStatus[instrument].can_analyze__min === false;
       }
@@ -57,7 +57,7 @@ export class EnrolmentDefaultComponent implements OnInit {
   }
 
   getEnrolmentValue(instrumentId) {
-    for(const instrument in this.instrumentEnrolmentStatus) {
+    for (const instrument in this.instrumentEnrolmentStatus) {
       if (this.instrumentEnrolmentStatus[instrument].instrument_id === instrumentId) {
         return Math.round(this.instrumentEnrolmentStatus[instrument].percentage__min);
       }
@@ -66,7 +66,7 @@ export class EnrolmentDefaultComponent implements OnInit {
   }
 
   getAnalyzingValue(instrumentId) {
-    for(const instrument in this.instrumentEnrolmentStatus) {
+    for (const instrument in this.instrumentEnrolmentStatus) {
       if (this.instrumentEnrolmentStatus[instrument].instrument_id === instrumentId) {
         return Math.round(Math.min(this.instrumentEnrolmentStatus[instrument].pending_contributions, 1));
       }

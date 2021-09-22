@@ -50,7 +50,7 @@ export class LauncherComponent implements OnInit {
                       'id': 1,
                       'is_admin': true,
                       'locale': 'en',
-                      'learner_id': null
+                      'learner_id': null,
                   };
                 }
                 this.router.navigateByUrl('/dashboard');

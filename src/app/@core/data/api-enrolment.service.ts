@@ -9,7 +9,7 @@ import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { EnvService } from '../env/env.service';
 import { AuthService } from '../auth/auth.service';
 import { InstitutionUser } from '../models/user';
-import { LearnerEnrolment } from "../models/enrolment";
+import { LearnerEnrolment } from '../models/enrolment';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +30,7 @@ export class ApiEnrolmentService {
 
   }
 
-  public getEnrolment(userId: number, institutionId) : Observable<LearnerEnrolment[]> {
+  public getEnrolment(userId: number, institutionId): Observable<LearnerEnrolment[]> {
     // https://demo.tesla-project.eu/api/v2/institution/{parent_lookup_institution_id}/learner/{id}/enrolment/
     return this.http
       .get(`${this.endpointUrl}${institutionId}/learner/${userId}/enrolment/`)
