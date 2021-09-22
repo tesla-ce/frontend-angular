@@ -67,7 +67,11 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
         this.apiInstitutionService.getLearnerById(user.institution.id, this.id).subscribe((learner: any) => {
           this.learner = learner;
           this.apiInstitutionService.getSendUserCategories(user.institution.id, this.id).subscribe((userSendCategories: any[]) => {
-            this.userSendCategories = userSendCategories;
+            this.userSendCategories = userSendCategories.map(userSendCategory => {
+              userSendCategory.description = userSendCategory.info.description;
+              userSendCategory.data = userSendCategory.info.data;
+              return userSendCategory;
+            });
             this.apiCourseService.getAllInstruments(this.user.institution.id).subscribe((instruments: any) => {
               this.instruments = instruments;
               instruments.map((instrument) => {
@@ -105,23 +109,23 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
                   category: {
                     title: 'Category Id',
                   },
-                  'info.description': {
+                  description: {
                     title: 'Description',
                   },
-                  'info.enabled_options': {
+                  enabled_options: {
                     title: 'Enabled options',
                     type: 'custom',
                     sort: false,
                     filter: false,
                     renderComponent: ListCellEnabledOptionsComponent,
                   },
-                  'info.disabled_instruments': {
+                  disabled_instruments: {
                     title: 'Disabled Instruments',
                     type: 'custom',
                     sort: false,
                     filter: false,
                     defaultValue: {
-                      instruments: instruments,
+                      instruments: this.instruments,
                     },
                     renderComponent: ListCellDisabledInstrumentsComponent,
                   },
