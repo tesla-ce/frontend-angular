@@ -8,7 +8,7 @@ import {
   queueScheduler,
   scheduled, Subscription,
   throwError,
-  timer
+  timer,
 } from 'rxjs';
 import {catchError, concatMap, retry} from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
@@ -16,7 +16,7 @@ import { TeSLAJWTToken, TeSLAConfiguration} from '@tesla-ce/web-plugin';
 // import { WebPluginTokenService } from '@tesla-ce/web-plugin';
 import { Notification, ConsentStatus, NetworkStatus, SensorsStatus } from '@tesla-ce/web-plugin';
 import { StorageMap } from '@ngx-pwa/local-storage';
-import {SensorsService} from "@tesla-ce/sensors";
+import {SensorsService} from '@tesla-ce/sensors';
 
 export interface DataMetadata {
   filename?: string;
@@ -93,7 +93,7 @@ export interface StoredData {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class Connection {
 
@@ -117,7 +117,7 @@ export class Connection {
     correct: 0,
     failed: 0,
     status: [],
-    notifications: []
+    notifications: [],
   };
   private alertBuffer: Buffer = {
     seq: 0,
@@ -126,7 +126,7 @@ export class Connection {
     correct: 0,
     failed: 0,
     status: [],
-    notifications: []
+    notifications: [],
   };
   private dataCapture: Subscription;
   private mode: string;
@@ -139,14 +139,14 @@ export class Connection {
     // @Inject(WebPluginTokenService) private tokenService,
     private http: HttpClient,
     private storage: StorageMap,
-    private sensorsService: SensorsService
+    private sensorsService: SensorsService,
 
   ) {
     this.storedData = {
       sensors: null,
       network: null,
       consent: null,
-      notifications: []
+      notifications: [],
     };
     // this.apiUrl = config.getApiURL();
     /*
@@ -218,7 +218,7 @@ export class Connection {
           // this.statusService.setNetworkStatus(4);
         }
        */
-      }
+      },
     );
     /*
     this.dataCapture = this.sensorsService.newData.subscribe(data => {
@@ -274,12 +274,12 @@ export class Connection {
       responseType: 'json' as const,
       headers: new HttpHeaders({
         Authorization: 'JWT ' + this.token.access_token,
-        'Content-type': 'application/json; charset=utf-8'
-      })
+        'Content-type': 'application/json; charset=utf-8',
+      }),
     };
     return this.http.post<LAPISampleResponse>(refreshURL, sample.body, options).pipe(
       retry(2),
-      catchError(this.handleError)
+      catchError(this.handleError),
     );
   }
 
@@ -290,12 +290,12 @@ export class Connection {
       responseType: 'json' as const,
       headers: new HttpHeaders({
         Authorization: 'JWT ' + this.token.access_token,
-        'Content-type': 'application/json; charset=utf-8'
-      })
+        'Content-type': 'application/json; charset=utf-8',
+      }),
     };
     return this.http.post<LAPISampleResponse>(refreshURL, sample.body, options).pipe(
       retry(2),
-      catchError(this.handleError)
+      catchError(this.handleError),
     );
   }
 
@@ -351,13 +351,13 @@ export class Connection {
       session_id: this.config.session_id,
       data,
       instruments,
-      raised_at: new Date().toISOString()
+      raised_at: new Date().toISOString(),
     };
 
     const alertMessage: AlertMessage = {
       institutionId: this.config.learner['institution_id'],
       learnerId: this.config.learner['learner_id'],
-      body: alertData
+      body: alertData,
     };
 
     this.addAlert(alertMessage);
@@ -380,12 +380,12 @@ export class Connection {
     scheduled(from(this.requestBuffer.pending.slice(start, 10)), queueScheduler)
       .pipe(
         concatMap(seq => this.getStoredRequest(seq)),
-        concatMap(request => forkJoin([of<any>([request, ]), this.sendData(request).pipe(catchError( error => of(null)))]))
+        concatMap(request => forkJoin([of<any>([request]), this.sendData(request).pipe(catchError( error => of(null)))])),
       )
       .subscribe(result => {
         const seq = result[0][0].seq;
         if (result[1]) {
-          console.log('Request seq=' + seq + ' sent');
+          // console.log('Request seq=' + seq + ' sent');
           this.requestBuffer.pending = this.requestBuffer.pending.filter(
             (value, index, arr) => value !== seq);
           this.requestBuffer.status.push(result[1].body.path);
@@ -394,14 +394,14 @@ export class Connection {
           this.deleteStoredRequest(seq);
           // this.statusService.setNetworkStatus(1);
         } else {
-          console.log('Request seq=' + seq + ' FAILED');
+          // console.log('Request seq=' + seq + ' FAILED');
           // this.statusService.setNetworkStatus(4);
         }
       }, _ => {
         // this.statusService.setNetworkStatus(4);
       }, () => {
         this.sendingRequests = false;
-        console.log('all pending requests sent');
+        // console.log('all pending requests sent');
       });
   }
 
@@ -414,12 +414,12 @@ export class Connection {
     scheduled(from(this.alertBuffer.pending.slice(start, 10)), queueScheduler)
       .pipe(
         concatMap(seq => this.getStoredAlert(seq)),
-        concatMap(alert => forkJoin([of<any>([alert, ]), this.sendAlert(alert).pipe(catchError( error => of(null)))]))
+        concatMap(alert => forkJoin([of<any>([alert]), this.sendAlert(alert).pipe(catchError( error => of(null)))])),
       )
       .subscribe(result => {
         const seq = result[0][0].seq;
         if (result[1]) {
-          console.log('Alert seq=' + seq + ' sent');
+          // console.log('Alert seq=' + seq + ' sent');
           this.alertBuffer.pending = this.alertBuffer.pending.filter(
             (value, index, arr) => value !== seq);
           this.alertBuffer.status.push(result[1].body.path);
@@ -428,14 +428,14 @@ export class Connection {
           this.deleteStoredAlert(seq);
           // this.statusService.setNetworkStatus(2);
         } else {
-          console.log('Alert seq=' + seq + ' FAILED');
+          // console.log('Alert seq=' + seq + ' FAILED');
           // this.statusService.setNetworkStatus(4);
         }
       }, _ => {
         // this.statusService.setNetworkStatus(4);
       }, () => {
         this.sendingAlerts = false;
-        console.log('all pending alerts sent');
+        // console.log('all pending alerts sent');
       });
   }
 
@@ -447,18 +447,18 @@ export class Connection {
       responseType: 'json' as const,
       headers: new HttpHeaders({
         Authorization: 'JWT ' + this.token.access_token,
-        'Content-type': 'application/json; charset=utf-8'
-      })
+        'Content-type': 'application/json; charset=utf-8',
+      }),
     };
     const body = {
       learner_id: this.config.learner['learner_id'],
-      samples: this.requestBuffer.status.concat(this.alertBuffer.status)
+      samples: this.requestBuffer.status.concat(this.alertBuffer.status),
     };
     if (body.samples.length === 0) {
       return;
     }
     this.http.post<any>(statusURL, body, options).pipe(
-      catchError(this.handleError)
+      catchError(this.handleError),
     ).subscribe(resp => {
       for (const stat of resp) {
         if (stat.status !== 'PENDING') {
@@ -469,9 +469,11 @@ export class Connection {
               this.requestBuffer.correct++;
             } else {
               this.requestBuffer.failed++;
-              console.log(stat.info.validations);
+              // console.log(stat.info.validations);
               for (const val in stat.info.validations) {
-                this.requestBuffer.notifications.push(stat.info.validations[val].error_message);
+                if (stat.info.validations.hasOwnProperty(val)) {
+                  this.requestBuffer.notifications.push(stat.info.validations[val].error_message);
+                }
               }
 
               //
@@ -492,7 +494,7 @@ export class Connection {
       this.setStoredData('requests', Object.assign({}, this.requestBuffer));
       this.setStoredData('alerts', Object.assign({}, this.alertBuffer));
 
-      this.updateStats.next(Object.assign({},this.requestBuffer));
+      this.updateStats.next(Object.assign({}, this.requestBuffer));
     });
   }
 

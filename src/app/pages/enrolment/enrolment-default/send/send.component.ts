@@ -1,27 +1,27 @@
 import {AfterViewInit, Component, Inject, OnInit, ViewChildren} from '@angular/core';
-import {Location} from "@angular/common";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Sensor, SensorsService} from "@tesla-ce/sensors";
+import {Location} from '@angular/common';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Sensor, SensorsService} from '@tesla-ce/sensors';
 import {
-  SensorsStatus, TeSLAConfiguration, TeSLAJWTToken
-} from "@tesla-ce/web-plugin";
-import {Observable} from "rxjs/Rx";
-import {AuthService} from "../../../../@core/auth/auth.service";
-import {InstitutionUser, User} from "../../../../@core/models/user";
-import {NbAuthService} from "@nebular/auth";
-import {AlertMessage, Connection, Buffer} from "./connection";
-import {EnvService} from "../../../../@core/env/env.service";
-import {LearnerEnrolment} from "../../../../@core/models/enrolment";
-import {ApiEnrolmentService} from "../../../../@core/data/api-enrolment.service";
-import {BehaviorSubject, timer} from "rxjs";
-import {NbAuthToken} from "@nebular/auth/services/token/token";
-import {defaultIfEmpty} from "rxjs/operators";
-import {ApiCourseService} from "../../../../@core/data/api-course.service";
+  SensorsStatus, TeSLAConfiguration, TeSLAJWTToken,
+} from '@tesla-ce/web-plugin';
+import {Observable} from 'rxjs/Rx';
+import {AuthService} from '../../../../@core/auth/auth.service';
+import {InstitutionUser, User} from '../../../../@core/models/user';
+import {NbAuthService} from '@nebular/auth';
+import {AlertMessage, Connection, Buffer} from './connection';
+import {EnvService} from '../../../../@core/env/env.service';
+import {LearnerEnrolment} from '../../../../@core/models/enrolment';
+import {ApiEnrolmentService} from '../../../../@core/data/api-enrolment.service';
+import {BehaviorSubject, timer} from 'rxjs';
+import {NbAuthToken} from '@nebular/auth/services/token/token';
+import {defaultIfEmpty} from 'rxjs/operators';
+import {ApiCourseService} from '../../../../@core/data/api-course.service';
 
 @Component({
   selector: 'ngx-send',
   templateUrl: './send.component.html',
-  styleUrls: ['./send.component.scss']
+  styleUrls: ['./send.component.scss'],
 })
 export class SendComponent implements OnInit, AfterViewInit {
   public buttonLabel = 'Start';
@@ -40,7 +40,7 @@ export class SendComponent implements OnInit, AfterViewInit {
     first_name: null,
     last_name: null,
     picture: null,
-    institution_id: null
+    institution_id: null,
   };
 
   private token: TeSLAJWTToken;
@@ -49,7 +49,7 @@ export class SendComponent implements OnInit, AfterViewInit {
   public instrumentEnrolmentStatus: LearnerEnrolment;
   // 1 -> FR
   private instrumentNumSamples = {
-    1: 2
+    1: 20,
   };
 
   public instrumentName = '';
@@ -65,12 +65,12 @@ export class SendComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private sensorsService: SensorsService,
     private authService: AuthService,
-    private NbAuthService: NbAuthService,
+    private nbAuthService: NbAuthService,
     private connection: Connection,
     private envService: EnvService,
     private apiEnrolmentService: ApiEnrolmentService,
     private apiCourseService: ApiCourseService,
-    private router: Router
+    private router: Router,
   ) {
     this.apiUrl = envService.apiUrl.split('api')[0];
     this.apiUrl = this.apiUrl.substr(0, this.apiUrl.length - 1);
@@ -91,14 +91,14 @@ export class SendComponent implements OnInit, AfterViewInit {
           first_name: user.first_name,
           last_name: user.last_name,
           picture: null,
-          institution_id: user.institution.id
-        }
+          institution_id: user.institution.id,
+        };
 
         this.updateInstrumentEnrolmentStatus();
 
         this.apiCourseService.getAllInstruments(user.institution.id).subscribe(allInstruments => {
 
-          for(const inst in allInstruments) {
+          for (const inst in allInstruments) {
             if (allInstruments[inst]['id'] === this.instrumentId) {
               this.instrumentName = allInstruments[inst]['name'];
             }
@@ -108,19 +108,20 @@ export class SendComponent implements OnInit, AfterViewInit {
 
     });
 
-    this.NbAuthService.getToken().subscribe((token) =>{
+    this.nbAuthService.getToken().subscribe((token) => {
       this.token = token.getPayload();
       this.configureSensors();
     });
 
     this.connection.newUpdateStats.subscribe( (data: Buffer) => {
       if (data != null) {
-        console.log('update stats of buffer');
-        console.log(data);
+        // console.log('update stats of buffer');
+        // console.log(data);
         this.notifications = data.notifications;
-        console.log(this.notifications);
+        // console.log(this.notifications);
 
-        this.progressValue = Math.round(Math.min(data.correct, this.instrumentNumSamples[this.instrumentId])/this.instrumentNumSamples[this.instrumentId]*100);
+        this.progressValue = Math.round(Math.min(data.correct, this.instrumentNumSamples[this.instrumentId]) /
+          this.instrumentNumSamples[this.instrumentId] * 100);
 
         if ( data.correct >= this.instrumentNumSamples[this.instrumentId] ) {
           this.progressColor = 'success';
@@ -131,10 +132,10 @@ export class SendComponent implements OnInit, AfterViewInit {
         }
 
         if (this.instrumentNumSamples[this.instrumentId] - this.totalQueued - data.failed < 0) {
-          console.log('continue capturing');
+          // console.log('continue capturing');
           // this.progressColor = 'danger';
           this.sensorsService.start();
-          this.buttonLabel = "Recording...";
+          this.buttonLabel = 'Recording...';
           return;
         }
         // this.stop();
@@ -145,7 +146,7 @@ export class SendComponent implements OnInit, AfterViewInit {
       if (data && data.sensor) {
         // send data
         this.shutter.first.nativeElement.classList.add('on');
-        setTimeout(function(shutter){
+        setTimeout(function(shutter) {
           this.shutter.classList.remove('on');
         }, 300);
 
@@ -154,7 +155,7 @@ export class SendComponent implements OnInit, AfterViewInit {
         this.totalQueued++;
 
         if (this.totalQueued >= this.instrumentNumSamples[this.instrumentId] ) {
-          this.buttonLabel = "Analyzing...";
+          this.buttonLabel = 'Analyzing...';
           this.stop();
         }
       }
@@ -163,7 +164,7 @@ export class SendComponent implements OnInit, AfterViewInit {
 
   updateInstrumentEnrolmentStatus() {
     this.apiEnrolmentService.getEnrolment(this.learner.id, this.learner.institution_id).subscribe( (data) => {
-      for(const inst in data) {
+      for (const inst in data) {
         if (data[inst]['instrument_id'] === this.instrumentId) {
 
           this.instrumentEnrolmentStatus = data[inst];
@@ -185,7 +186,7 @@ export class SendComponent implements OnInit, AfterViewInit {
       accessibility: {
         high_contrast: false,
         big_fonts: false,
-        text_to_speech: false
+        text_to_speech: false,
       },
       instruments: [1],
       token: this.token,
@@ -194,43 +195,43 @@ export class SendComponent implements OnInit, AfterViewInit {
       base_url: this.apiUrl,
       locale: 'en',
       sensors: {
-        camera: [1]
-      }
+        camera: [1],
+      },
     } as TeSLAConfiguration;
 
     this.connection.setConfig(conf);
 
     if (this.ready === true) {
-      console.log('configuring this.video');
+      // console.log('configuring this.video');
       this.sensorsService.setAudio(this.audio);
       this.sensorsService.setVideo(this.video);
       this.sensorsService.setCanvas(this.canvas);
       this.sensorsService.enableSensors(['camera']);
     }
 
-    let config = [];
+    const config = [];
     config.push({
-      key: "timeBetweenPictures",
-      value: 500
+      key: 'timeBetweenPictures',
+      value: 500,
     });
     this.sensorsService.setConfiguration(config);
   }
 
   btnPrimaryClick(): void {
-    if (this.step == 1) {
+    if (this.step === 1) {
       this.step++;
       this.buttonLabel = 'Recording...';
       this.configureSensors();
       this.sensorsService.start();
       return;
     }
-    if (this.step == 2) {
+    if (this.step === 2) {
         this.step++;
         this.buttonLabel = 'Finish';
         return;
     }
 
-    if (this.step == 3) {
+    if (this.step === 3) {
       this.router.navigate(['/enrolment']);
       return;
     }

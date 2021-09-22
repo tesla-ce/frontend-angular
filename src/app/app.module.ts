@@ -31,7 +31,7 @@ import { NbTeslaIconsModule } from '@tesla-ce/icons';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +65,7 @@ import { NbTeslaIconsModule } from '@tesla-ce/icons';
 
     SideMenuModule,
     NbIconModule,
-    NbTeslaIconsModule
+    NbTeslaIconsModule,
   ],
   bootstrap: [AppComponent],
 })
