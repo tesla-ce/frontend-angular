@@ -1,0 +1,38 @@
+.enrolStatus {
+  width: 30%;
+  position: relative;
+  float: left;
+}
+
+.enrolSingle{
+  width: 70%;
+  position: relative;
+  float: left;
+}
+.enrolGauche,
+.enrolNotifications,
+.enrolActions{
+  float: left;
+  width: 100%;
+}
+
+.shutter {
+  opacity: 0;
+  transition: all 30ms ease-in;/* Shutter speed */
+  position: absolute;
+  height: 0%;
+  width: 0%;
+  pointer-events: none;
+
+  background-color: white;/* Shutter Color */
+
+  left:50%;
+  top:50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%)
+}
+.shutter.on {
+  opacity: 1;/* Shutter Transparency */
+  height: 100%;
+  width: 100%;
+}

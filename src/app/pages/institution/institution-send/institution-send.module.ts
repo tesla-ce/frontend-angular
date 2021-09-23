@@ -1,23 +1,23 @@
 import { NgModule } from '@angular/core';
-
 import { ThemeModule } from '../../../@theme/theme.module';
-import {
-
-} from '@nebular/theme';
+import { NbIconModule } from '@nebular/theme';
 
 import { InstitutionSendRoutingModule } from './institution-send-routing.module';
-import { InstitutionSendCategoryComponent } from './institution-send-category/institution-send-category.component';
-import { InstitutionSendUserComponent } from './institution-send-user/institution-send-user.component';
-import { InstitutionSendComponent } from './institution-send.component';
+import { ListCellDisabledInstrumentsComponent } from './institution-send-category/institution-send-category-list/list-cell-disabled-instruments.component';
+import { ListCellEnabledOptionsComponent } from './institution-send-category/institution-send-category-list/list-cell-enabled-options.component';
+import { CommonModule } from '@angular/common';
 
 
 
 @NgModule({
   imports: [
     InstitutionSendRoutingModule,
+    CommonModule,
+    NbIconModule,
   ],
   declarations: [
-
+    ListCellDisabledInstrumentsComponent,
+    ListCellEnabledOptionsComponent,
   ],
 })
 export class InstitutionSendModule {

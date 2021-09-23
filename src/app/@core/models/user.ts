@@ -5,6 +5,14 @@ export interface Institution {
   id: number;
   name: string;
   is_admin: boolean;
+  locale: string;
+  learner_id?: string;
+  disable_vle_learner_creation?: boolean;
+  disable_vle_instructor_creation?: boolean;
+  disable_vle_user_creation?: boolean;
+  allow_learner_report?: boolean;
+  allow_learner_audit?: boolean;
+  allow_valid_audit?: boolean;
 }
 
 export interface User {
@@ -30,6 +38,7 @@ export interface User {
   date_joined: Date;
   groups: string[];
   user_permissions: string[];
+  institution?: Institution;
 }
 
 export interface InstitutionUser extends User {

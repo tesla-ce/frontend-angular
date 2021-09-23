@@ -29,7 +29,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SharedModule } from './shared/shared.module';
 import { NbTeslaIconsModule } from '@tesla-ce/icons';
 
-
 @NgModule({
   declarations: [
     AppComponent,

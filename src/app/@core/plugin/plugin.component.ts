@@ -50,7 +50,9 @@ export class PluginComponent implements OnInit {
                         'name': 'UOC',
                         'acronym': 'uoc',
                         'id': 1,
-                        is_admin: true,
+                        'is_admin': true,
+                        'locale': 'en',
+                        'learner_id': null,
                     };
                   }
                   this.redirect(redirectUrl, params);

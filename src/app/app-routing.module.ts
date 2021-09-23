@@ -95,6 +95,12 @@ export const routes: Routes = [
     canActivate: [AuthGuardAuthenticated],
   },
   {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module')
+      .then(m => m.ProfileModule),
+    canActivate: [AuthGuardAuthenticated],
+  },
+  {
     path: 'auth',
     component: NbAuthComponent,
     children: [

@@ -59,7 +59,7 @@ export class InstitutionSendUserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
-      if (user) this.endpoint = `/institution/${user.institution.id}/user`;
+      if (user) this.endpoint = `/institution/${user.institution.id}/learner`;
     });
   }
 
