@@ -1,0 +1,28 @@
+[
+
+  {
+    "id": "4",
+    "name": "Sample Dashboard 4",
+    "widgets": [
+      {
+        "id": "1",
+        "name": "Timeline",
+        "component": "courses",
+        "cols": 3,
+        "rows": 3,
+        "y": 0,
+        "x": 0
+      },
+      {
+        "id": "2",
+        "name": "Other",
+        "component": "timeline",
+        "cols": 4,
+        "rows": 2,
+        "y": 0,
+        "x": 3
+      }
+    ]
+  }
+
+]

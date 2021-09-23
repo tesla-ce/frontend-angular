@@ -1,0 +1,10 @@
+<gridster [options]="options">
+    <ng-container *ngFor="let item of items">
+        <gridster-item [item]="item">
+            <!-- Your content goes here -->
+           <ngx-dashboard-widget [item]="item">
+           </ngx-dashboard-widget>
+        </gridster-item>
+    </ng-container>
+</gridster>
+
