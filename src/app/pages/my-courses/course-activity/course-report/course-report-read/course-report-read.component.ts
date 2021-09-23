@@ -338,7 +338,7 @@ export class CourseReportReadComponent implements OnInit {
             emphasis: {
                 focus: 'series',
             },
-            data: this.getPolarityData(detail[type], detail.instrument_polarity),
+            data: this.getPolarityData(detail[type], detail.instrument_polarity, detail.result_bean),
           },
       ],
     };
@@ -354,14 +354,12 @@ export class CourseReportReadComponent implements OnInit {
     return gaussian;
   }
 
-  getPolarityData(hist, polarity) {
+  getPolarityData(hist, polarity, bean) {
     // Compute polarity chart
-    let polarityData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    if (polarity === 1) {
-        polarityData = [0, 0, 0, 0, 0, 0, 0, 0, 0, hist[9]];
-    } else {
-        polarityData = [hist[0], 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    }
+    const polarityData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    polarityData.map((item, index) => {
+      if ((index > bean && polarity === 1) || (index < bean && polarity === -1)) polarityData[index] = hist[index];
+    });
     return polarityData;
   }
 
