@@ -351,7 +351,6 @@ export class CourseReportReadComponent implements OnInit {
     gaussian[bean] = hist[bean];
     if (bean > 0) gaussian[bean - 1] = hist[bean - 1] / 2.0;
     if (bean < 9) gaussian[bean + 1] = hist[bean + 1] / 2.0;
-    console.log(bean, hist, gaussian);
     return gaussian;
   }
 
