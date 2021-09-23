@@ -281,8 +281,7 @@ export class CourseReportReadComponent implements OnInit {
   }
 
   getInstrumentChart(detail, type) {
-
-    return {
+    const chart =  {
       tooltip: {
           trigger: 'axis',
           axisPointer: {
@@ -301,7 +300,7 @@ export class CourseReportReadComponent implements OnInit {
       xAxis: [
           {
               type: 'category',
-              data: [], // xAxis items
+              data: [],
           },
       ],
       yAxis: [
@@ -312,9 +311,19 @@ export class CourseReportReadComponent implements OnInit {
       ],
       series: [
           {
-              name: 'gaussian',
+              name: type,
               type: 'bar',
-              stack: 'stack',
+              barGap: '-100%',
+              color: MATERIAL_TESLA_THEME.variables.histogram,
+              emphasis: {
+                  focus: 'series',
+              },
+              data: detail[type],
+          },
+          {
+              name: type + '_gaussian',
+              type: 'bar',
+              barGap: '-100%',
               color: MATERIAL_TESLA_THEME.variables.gaussian,
               emphasis: {
                   focus: 'series',
@@ -322,27 +331,18 @@ export class CourseReportReadComponent implements OnInit {
               data: this.getGaussianData(detail[type], detail.result_bean),
           },
           {
-              name: 'activity histogram',
-              type: 'bar',
-              stack: 'stack',
-              color: MATERIAL_TESLA_THEME.variables.histogram,
-              emphasis: {
-                  focus: 'series',
-              },
-              data: detail.activity_histogram,
-          },
-          {
-            name: 'activity histogram',
+            name: type + '_polarity',
             type: 'bar',
-            stack: 'stack',
+            barGap: '-100%',
             color: MATERIAL_TESLA_THEME.variables.polarity,
             emphasis: {
                 focus: 'series',
             },
             data: this.getPolarityData(detail[type], detail.instrument_polarity),
-        },
+          },
       ],
     };
+    return chart;
   }
 
   getGaussianData(hist, bean) {
@@ -351,6 +351,7 @@ export class CourseReportReadComponent implements OnInit {
     gaussian[bean] = hist[bean];
     if (bean > 0) gaussian[bean - 1] = hist[bean - 1] / 2.0;
     if (bean < 9) gaussian[bean + 1] = hist[bean + 1] / 2.0;
+    console.log(bean, hist, gaussian);
     return gaussian;
   }
 
