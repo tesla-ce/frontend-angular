@@ -1,0 +1,16 @@
+<div class="calendars">
+  <div class="calendar-container">
+    <nb-calendar [(date)]="date" [dayCellComponent]="dayCellComponent" [boundingMonth]="true"></nb-calendar>
+    <span class="subtitle">
+      {{ date | date }}
+    </span>
+    <div class="day-instruments">
+      <div *ngIf="instruments.length == 0">
+        {{'DASHBOARD.NO_INSTRUMENTS_TODAY' | translate }}
+      </div>
+      <div *ngFor="let instrument of instruments">
+        <nb-icon icon="instrument-{{instrument}}" pack="tesla"></nb-icon>
+      </div>
+    </div>
+  </div>
+</div>

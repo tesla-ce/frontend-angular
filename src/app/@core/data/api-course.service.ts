@@ -28,6 +28,19 @@ export class ApiCourseService {
     this.endpointUrl = this.apiUrl;
   }
 
+  // API: GET /course/
+  public getCourses(institutionId: number): Observable<Course[]> {
+    return this.http
+      .get(`${this.endpointUrl}/institution/${institutionId}/course/`)
+      .pipe(
+        map((response: any) => {
+          if (response?.results) return response.results;
+          else return [];
+        }),
+        catchError(this.handleError),
+      );
+  }
+
   // API: GET /course/:id
   public getCourseById(institutionId: number, courseId: number): Observable<Course> {
     return this.http

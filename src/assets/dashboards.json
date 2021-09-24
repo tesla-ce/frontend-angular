@@ -1,0 +1,28 @@
+[
+
+  {
+    "id": "4",
+    "name": "Base Dashboard",
+    "widgets": [
+      {
+        "id": "1",
+        "name": "Active Courses",
+        "component": "courses",
+        "cols": 3,
+        "rows": 3,
+        "y": 0,
+        "x": 0
+      },
+      {
+        "id": "2",
+        "name": "Calendar",
+        "component": "calendar",
+        "cols": 3,
+        "rows": 5,
+        "y": 0,
+        "x": 3
+      }
+    ]
+  }
+
+]
