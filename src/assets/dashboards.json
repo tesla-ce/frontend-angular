@@ -2,11 +2,11 @@
 
   {
     "id": "4",
-    "name": "Sample Dashboard 4",
+    "name": "Base Dashboard",
     "widgets": [
       {
         "id": "1",
-        "name": "Timeline",
+        "name": "Active Courses",
         "component": "courses",
         "cols": 3,
         "rows": 3,
@@ -15,10 +15,10 @@
       },
       {
         "id": "2",
-        "name": "Other",
-        "component": "timeline",
-        "cols": 4,
-        "rows": 2,
+        "name": "Calendar",
+        "component": "calendar",
+        "cols": 3,
+        "rows": 5,
         "y": 0,
         "x": 3
       }
