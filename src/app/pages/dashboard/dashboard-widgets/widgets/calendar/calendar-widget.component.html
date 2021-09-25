@@ -1,6 +1,7 @@
 <div class="calendars">
   <div class="calendar-container">
-    <nb-calendar [(date)]="date" [dayCellComponent]="dayCellComponent" [boundingMonth]="true"></nb-calendar>
+    <!--<nb-calendar [(date)]="date" [dayCellComponent]="dayCellComponent" [boundingMonth]="true"  (mousedown)="$event.stopPropagation()" (touchstart)="$event.stopPropagation()"></nb-calendar>-->
+    <nb-calendar [(date)]="date" [dayCellComponent]="dayCellComponent" [boundingMonth]="true" class="gridster-item-content">  </nb-calendar>
     <span class="subtitle">
       {{ date | date }}
     </span>
