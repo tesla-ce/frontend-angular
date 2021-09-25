@@ -19,6 +19,14 @@ export class DashboardWidgetsComponent implements OnInit {
     public translate: TranslateService,
   ) { }
 
+  static itemChange(item, itemComponent) {
+     console.info('itemChanged', item, itemComponent);
+  }
+
+  static itemResize(item, itemComponent) {
+     console.info('itemResized', item, itemComponent);
+  }
+
   ngOnInit() {
     this.options = {
       disablePushOnDrag: true,
@@ -27,11 +35,26 @@ export class DashboardWidgetsComponent implements OnInit {
       resizable: { enabled: true },
       minCols: 10,
       minRows: 10,
+      itemChangeCallback: DashboardWidgetsComponent.itemChange,
+      itemResizeCallback: DashboardWidgetsComponent.itemResize,
     };
     this.dashService.getUserDashboard().subscribe(data => {
       this.items = data.widgets;
     });
   }
+
+  changedOptions(): void {
+    if (this.options.api && this.options.api.optionsChanged) {
+      this.options.api.optionsChanged();
+    }
+  }
+
+  removeItem($event: MouseEvent | TouchEvent, item): void {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this.items.splice(this.items.indexOf(item), 1);
+  }
+
 }
 
 
