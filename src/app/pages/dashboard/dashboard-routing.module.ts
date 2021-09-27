@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { DashboardComponent } from './dashboard.component';
 import { DashboardDefaultComponent } from './dashboard-default/dashboard-default.component';
+import { DashboardWidgetsComponent } from './dashboard-widgets/dashboard-widgets.component';
 
 const routes: Routes = [{
   path: '',
@@ -10,7 +11,7 @@ const routes: Routes = [{
   children: [
     {
       path: '',
-      component: DashboardDefaultComponent,
+      component: DashboardWidgetsComponent,
     },
   ],
 }];

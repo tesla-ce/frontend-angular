@@ -60,6 +60,7 @@
     "@tesla-ce/sensors": "^0.0.6",
     "@tesla-ce/web-plugin": "^0.0.14",
     "@types/ckeditor": "^4.9.10",
+    "angular-gridster2": "^9.3.4",
     "angular2-chartjs": "0.5.1",
     "bootstrap": "^4.5.0",
     "chart.js": "^2.9.3",
