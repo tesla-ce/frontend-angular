@@ -123,27 +123,27 @@ export class CourseReportListComponent implements OnInit {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
       if (user) {
         this.endpoint = `/institution/${user.institution.id}/course/${this.courseId}/activity/${this.activityId}/report`;
-        this.apiCourseService.getAllInstruments(user.institution.id).subscribe((instruments: any[]) => {
-          instruments.map((instrument: any) => {
-            this.settings.columns['instrument-' + instrument.acronym] = {
-              // title: '<nb-icon icon="instrument-' + instrument.acronym + '" pack="tesla"></nb-icon> ' + instrument.acronym,
-              class: 'instrument',
-              title: instrument.name,
-              width: '1400px',
-              type: 'custom',
-              valuePrepareFunction: (value) => {
-                return instrument;
-              },
-              filter: {
+        this.apiCourseService.getAllActivityInstruments(user.institution.id, this.courseId, this.activityId)
+          .subscribe((instruments: any[]) => {
+            instruments.map((instrument: any) => {
+              this.settings.columns['instrument-' + instrument.instrument.acronym] = {
+                class: 'instrument',
+                title: instrument.instrument.name,
+                width: '1400px',
                 type: 'custom',
-                component: ListSubHeaderComponent,
-                data: {instrument : instrument},
-              },
-              renderComponent: ListCellInstrumentComponent,
-            };
-            this.loading = false;
+                valuePrepareFunction: (value) => {
+                  return instrument.instrument;
+                },
+                filter: {
+                  type: 'custom',
+                  component: ListSubHeaderComponent,
+                  data: {instrument : instrument.instrument},
+                },
+                renderComponent: ListCellInstrumentComponent,
+              };
+              this.loading = false;
+            });
           });
-        });
       }
     });
   }

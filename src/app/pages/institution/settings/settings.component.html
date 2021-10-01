@@ -2,14 +2,14 @@
     <nb-card-header class="tesla-card-header">
         {{'SETTINGS'}}
     </nb-card-header>
-    <nb-card-body>
-        <nb-checkbox (checkedChange)="toggle($event)">Disable VLE learner creation</nb-checkbox><br>
-        <nb-checkbox (checkedChange)="toggle($event)">Disable VLE instructor creation</nb-checkbox><br>
-        <nb-checkbox (checkedChange)="toggle($event)">Disable VLE user creation</nb-checkbox><br>
-        <nb-checkbox (checkedChange)="toggle($event)">Allow learner report</nb-checkbox><br>
-        <nb-checkbox (checkedChange)="toggle($event)">Allow learner audit</nb-checkbox><br>
-        <nb-checkbox (checkedChange)="toggle($event)">Allow valid audit</nb-checkbox><br>
+    <nb-card-body *ngIf="institution">
+        <nb-checkbox [checked]="institution.disable_vle_learner_creation" (checkedChange)="toggleDisableVLElearnerCreation($event)">Disable VLE learner creation</nb-checkbox><br>
+        <nb-checkbox [checked]="institution.disable_vle_instructor_creation" (checkedChange)="toggleDisableVLEinstructorCreation($event)">Disable VLE instructor creation</nb-checkbox><br>
+        <nb-checkbox [checked]="institution.disable_vle_user_creation" (checkedChange)="toggleDisableVLEuserCreation($event)">Disable VLE user creation</nb-checkbox><br>
+        <nb-checkbox [checked]="institution.allow_learner_report" (checkedChange)="toggleAllowlearnerReport($event)">Allow learner report</nb-checkbox><br>
+        <nb-checkbox [checked]="institution.allow_learner_audit" (checkedChange)="toggleAllowlearnerAudit($event)">Allow learner audit</nb-checkbox><br>
+        <nb-checkbox [checked]="institution.allow_valid_audit" (checkedChange)="toggleAllowvalidAudit($event)">Allow valid audit</nb-checkbox><br>
         <br>
-        <button nbButton type="submit">Submit</button>
+        <button (click)="onSave()" nbButton type="submit">Submit</button>
  </nb-card-body>
 </nb-card>

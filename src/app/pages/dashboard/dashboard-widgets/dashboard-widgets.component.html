@@ -1,0 +1,15 @@
+<gridster [options]="options">
+    <ng-container *ngFor="let item of items">
+        <gridster-item [item]="item">
+           <div *ngIf="item.removable" class="button-holder">
+              <button mat-icon-button (mousedown)="removeItem($event, item)"
+                      (touchstart)="removeItem($event, item)">
+                  <nb-icon icon="trash-2-outline"></nb-icon>
+              </button>
+            </div>
+           <ngx-dashboard-widget [item]="item">
+           </ngx-dashboard-widget>
+        </gridster-item>
+    </ng-container>
+</gridster>
+

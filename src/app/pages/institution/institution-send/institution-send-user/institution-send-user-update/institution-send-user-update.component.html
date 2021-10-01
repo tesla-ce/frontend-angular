@@ -1,32 +1,20 @@
 <nb-card>
     <nb-card-header>Update Send User {{id}}</nb-card-header>
-    <nb-card-body *ngIf="endpoint" class="example-items-rows">
-        <!-- <ngx-update (save)="onSave($event)" [fields]="fields" [errors]="errors"  [paths]="paths" [instance]="instance"></ngx-update> -->
-        <div>
-            <label class="label">Expires At</label>
-            <input nbInput 
-            fullWidth
-            [placeholder]="'Pick a date'"
-            [nbDatepicker]="dateTimePicker"
-            id="expires_at"
-            name="expires_at"
-            [required]="true"
-            [status]="'basic'">
-            <nb-datepicker #dateTimePicker></nb-datepicker>
+    <nb-card-body *ngIf="settings" >
+        <label class="label">Enabled Options</label><br>
+        <nb-icon style="margin:5px" *ngFor="let enabled_option of learner.send.send.enabled_options" status='primary' [icon]="icons[enabled_option]" pack="fa"></nb-icon>
+        <br>
+        <br>
+        <label class="label">Disabled Instruments</label><br>
+        <nb-icon status='error' data-fill="full" *ngFor="let disabled_instrument of learner.send.send.disabled_instruments" [icon]="'instrument-' + instrumentsAcronyms[disabled_instrument]" pack="tesla"></nb-icon>
+        <br>
+        <br>
+        <div style="display:flex; margin-bottom: 15px;">
+            <label class="label" style="margin-bottom: 16px; flex:1">User SEND Categories</label>
+            <button class="create-button" nbButton status='info' size="small" (click)="create($event)">
+                <nb-icon icon="plus-circle-outline"></nb-icon>ADD NEW
+            </button>
         </div>
-        <br>
-        <div style="display: flex;">
-            <div style="flex:1; padding:15px">
-                <label class="label">Available Categories</label>
-                <ngx-list (externalUserRowSelect)="addCategory($event)"  [settings]="settings" [endpoint]="endpoint"></ngx-list>
-            </div>
-            <div style="flex:1; padding:15px">
-                <label class="label" style="margin-bottom: 16px;">Selected Categories</label>
-                <ng2-smart-table (userRowSelect)="removeCategory($event)" class="list" [settings]="settings" [source]="selectedCategories"></ng2-smart-table>
-            </div>
-        </div>
-        <br>
-        <br>
-        <button nbButton type="submit">Submit</button>
+        <ng2-smart-table (userRowSelect)="remove($event)" class="list" [settings]="settings" [source]="userSendCategories"></ng2-smart-table>
     </nb-card-body>
 </nb-card>

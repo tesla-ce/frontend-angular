@@ -1,0 +1,25 @@
+@import '../../../../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  text-align: center;
+  flex-direction: column;
+
+  &.today {
+    background-color: nb-theme(color-primary-100) !important;
+  }
+
+  .caption {
+    display: block;
+    font-size: x-small !important;
+  }
+
+  &.selected .caption,
+  &:hover .caption {
+    color: nb-theme(text-control-color);
+  }
+
+  &.bounding-month .caption {
+    color: inherit;
+  }
+}
+

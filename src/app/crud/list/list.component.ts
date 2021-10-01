@@ -92,6 +92,10 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   perPageOnChange(perPage): void {
     this.source.setPaging(1, +perPage, true);
   }
+
+  refresh() {
+    this.source.refresh();
+  }
 }
 
 export class CustomDataSource extends ServerDataSource {
