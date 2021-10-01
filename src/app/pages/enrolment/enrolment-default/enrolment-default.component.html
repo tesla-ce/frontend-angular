@@ -16,7 +16,7 @@
         <h1 style="font-size: 1rem;">{{ instrument.name }}</h1>
         <ngx-enrolment-status style="width: 400px; height: 400px; margin-left: auto; margin-right: auto;" [enrolment]="getEnrolmentValue(instrument.id)" [analyzing]="getAnalyzingValue(instrument.id)" [instrument]="instrument.name"></ngx-enrolment-status>
 
-        <a routerLink="/enrolment/send/{{instrument.id}}" nbButton outline status="primary" *ngIf="needsGoEnrolment(instrument.id)">{{ 'Create model '+instrument.acronym | translate }}</a>
+        <a routerLink="/enrolment/capture/{{instrument.id}}" nbButton outline status="primary" *ngIf="needsGoEnrolment(instrument.id)">{{ 'Create model '+instrument.acronym | translate }}</a>
       </div>
 
     </nb-card-body>

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../../../../@core/auth/auth.service';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
+import { ApiInstitutionService } from '../../../../../@core/data/api-institution.service';
 import { InstitutionUser } from '../../../../../@core/models/user';
 // import { InstitutionSendCategory } from '../../../../@core/models/send-category';
 import { ListCellActionsComponent } from '../../../../../crud/list/list-cell-actions.component';
+import { ListComponent } from '../../../../../crud/list/list.component';
 import { ListCellDisabledInstrumentsComponent } from './list-cell-disabled-instruments.component';
 import { ListCellEnabledOptionsComponent } from './list-cell-enabled-options.component';
 
@@ -19,9 +21,12 @@ export class InstitutionSendCategoryListComponent implements OnInit {
 
   settings: any;
 
+  @ViewChild('list') list: ListComponent;
+
   constructor(
     private authService: AuthService,
     private apiCourseService: ApiCourseService,
+    private apiInstitutionService: ApiInstitutionService,
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +41,22 @@ export class InstitutionSendCategoryListComponent implements OnInit {
                 sort: false,
                 filter: false,
                 renderComponent: ListCellActionsComponent,
+                onComponentInitFunction: (instance) => {
+                  instance.remove.subscribe(data => {
+                      this.remove(data);
+                  });
+                },
+                defaultValue: {
+                  read: {
+                    enabled: false,
+                  },
+                  update: {
+                    enabled: false,
+                  },
+                  report: {
+                    enabled: false,
+                  },
+                },
               },
               id: {
                 title: 'ID',
@@ -77,6 +98,12 @@ export class InstitutionSendCategoryListComponent implements OnInit {
           this.endpoint = `/institution/${user.institution.id}/send`;
         });
       }
+    });
+  }
+
+  remove(event) {
+    this.apiInstitutionService.deleteSendCategoryById(this.user.institution.id, event.id).subscribe(response => {
+      this.list.refresh();
     });
   }
 

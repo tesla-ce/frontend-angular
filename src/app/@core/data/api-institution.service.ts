@@ -159,6 +159,18 @@ export class ApiInstitutionService {
     );
   }
 
+  // API: DELETE /course/:id/activity/:id/instrument/:id
+  public deleteSendCategoryById(institutionId: number, categoryId: number): Observable<any> {
+    return this.http
+      .delete(`${this.endpointUrl}/${institutionId}/send/${categoryId}/`)
+      .pipe(
+        map((data: any) => {
+          return true;
+        }),
+        catchError(this.handleError),
+      );
+  }
+
   // API: GET /institutions/:id
   public getSendUserCategories(institutionId: number, learnerId: number ): Observable<any> {
     return this.http
@@ -200,6 +212,17 @@ export class ApiInstitutionService {
     );
   }
 
+  // API: DELETE /course/:id/activity/:id/instrument/:id
+  public deleteSendUserCategoryById(institutionId: number, learnerId: number, sendUserCategoryId: number): Observable<any> {
+    return this.http
+      .delete(`${this.endpointUrl}/${institutionId}/learner/${learnerId}/send/${sendUserCategoryId}/`)
+      .pipe(
+        map((data: any) => {
+          return true;
+        }),
+        catchError(this.handleError),
+      );
+  }
 
   private handleError(error: Response | any) {
     console.error('ApiInstitutionService::handleError', error);

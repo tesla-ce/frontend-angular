@@ -132,6 +132,19 @@ export class ApiCourseService {
       );
   }
 
+    // API: GET /instrument/
+    public getAllActivityInstruments(institutionId: number, courseId: number, activityId: number): Observable<any> {
+      return this.http
+        .get(`${this.endpointUrl}/institution/${institutionId}/course/${courseId}/activity/${activityId}/instrument/`)
+        .pipe(
+          map((response: any) => {
+            if (response?.results) return response.results.filter(instrument => instrument.alternative_to == null);
+            else return [];
+          }),
+          catchError(this.handleError),
+        );
+    }
+
 
   // API: PUT /activity/:id/
   public putActivityActive(institutionId: number, courseId: number, activityId: number, fields: any): Observable<any> {
