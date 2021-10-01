@@ -7,10 +7,11 @@ import { ListCellInstrumentComponent } from '../course-report-list/list-cell-ins
 import { ListSubHeaderComponent } from '../course-report-list/list-sub-header-instrument.component';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
 import { ListCellSumaryComponent } from '../course-report-list/list-cell-sumary.component';
-import { InstitutionUser } from '../../../../../@core/models/user';
+import { Institution, InstitutionUser } from '../../../../../@core/models/user';
 import { ApiReportService } from '../../../../../@core/data/api-report.service';
 import { HttpClient } from '@angular/common/http';
 import { MATERIAL_TESLA_THEME } from '../../../../../@theme/styles/material/theme.material-tesla';
+import { ApiInstitutionService } from '../../../../../@core/data/api-institution.service';
 
 @Component({
   selector: 'ngx-course-report-read',
@@ -66,6 +67,7 @@ export class CourseReportReadComponent implements OnInit {
     private authService: AuthService,
     private apiCourseService: ApiCourseService,
     private apiReportService: ApiReportService,
+    private apiInstitutionService: ApiInstitutionService,
     public translate: TranslateService,
     private http: HttpClient,
     private location: Location,
@@ -87,47 +89,50 @@ export class CourseReportReadComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
       if (user) {
-        this.endpoint =
-         `/institution/${user.institution.id}/course/${this.courseId}/activity/${this.activityId}/report?id=${this.reportId}`;
-        this.apiCourseService.getAllInstruments(user.institution.id).subscribe((instruments: any[]) => {
-            this.instruments = instruments;
-            instruments.map((instrument: any) => {
-              this.settings.columns['instrument-' + instrument.acronym] = {
-                // title: '<nb-icon icon="instrument-' + instrument.acronym + '" pack="tesla"></nb-icon> ' + instrument.acronym,
-                class: 'instrument',
-                title: instrument.name,
-                width: '1400px',
-                type: 'custom',
-                valuePrepareFunction: (value) => {
-                  return instrument;
-                },
-                filter: {
+        this.apiInstitutionService.getInstitutionById(user.institution.id).subscribe((institution: Institution) => {
+          if (!institution.allow_learner_audit) this.availableAuditInstruments = [];
+          this.endpoint =
+          `/institution/${user.institution.id}/course/${this.courseId}/activity/${this.activityId}/report?id=${this.reportId}`;
+          this.apiCourseService.getAllInstruments(user.institution.id).subscribe((instruments: any[]) => {
+              this.instruments = instruments;
+              instruments.map((instrument: any) => {
+                this.settings.columns['instrument-' + instrument.acronym] = {
+                  class: 'instrument',
+                  title: instrument.name,
+                  width: '1400px',
                   type: 'custom',
-                  component: ListSubHeaderComponent,
-                  data: {instrument : instrument},
-                },
-                renderComponent: ListCellInstrumentComponent,
-              };
+                  valuePrepareFunction: (value) => {
+                    return instrument;
+                  },
+                  filter: {
+                    type: 'custom',
+                    component: ListSubHeaderComponent,
+                    data: {instrument : instrument},
+                  },
+                  renderComponent: ListCellInstrumentComponent,
+                };
+              });
+
+              this.apiReportService.getActivityReport(
+                user.institution.id, this.courseId, this.activityId, this.reportId).subscribe(report => {
+                this.report = report;
+                this.reports.push(report);
+                this.report.detail.map(det => {
+                  this.instrumentCharts[det.instrument_acronym + '_activity_histogram'] =
+                    this.getInstrumentChart(det, 'activity_histogram');
+                  this.instrumentCharts[det.instrument_acronym + '_learner_histogram'] = this.getInstrumentChart(det, 'learner_histogram');
+                  this.instrumentCharts[det.instrument_acronym + '_positive_facts'] = det.facts.positive;
+                  this.instrumentCharts[det.instrument_acronym + '_neutral_facts'] = det.facts.neutral;
+                  this.instrumentCharts[det.instrument_acronym + '_negative_facts'] = det.facts.negative;
+                });
+
+                this.http.get<any>(this.report.data).subscribe(res => {
+                    const sessionsData = this.getSessionsData(res.sessions);
+                    const documentsData = this.getDocumentsData(res.documents);
+                    this.reportChart = this.getReportChart(sessionsData, documentsData);
+                    this.loading = false;
+                });
             });
-
-            this.apiReportService.getActivityReport(
-              user.institution.id, this.courseId, this.activityId, this.reportId).subscribe(report => {
-              this.report = report;
-              this.reports.push(report);
-              this.report.detail.map(det => {
-                this.instrumentCharts[det.instrument_acronym + '_activity_histogram'] = this.getInstrumentChart(det, 'activity_histogram');
-                this.instrumentCharts[det.instrument_acronym + '_learner_histogram'] = this.getInstrumentChart(det, 'learner_histogram');
-                this.instrumentCharts[det.instrument_acronym + '_positive_facts'] = det.facts.positive;
-                this.instrumentCharts[det.instrument_acronym + '_neutral_facts'] = det.facts.neutral;
-                this.instrumentCharts[det.instrument_acronym + '_negative_facts'] = det.facts.negative;
-              });
-
-              this.http.get<any>(this.report.data).subscribe(res => {
-                  const sessionsData = this.getSessionsData(res.sessions);
-                  const documentsData = this.getDocumentsData(res.documents);
-                  this.reportChart = this.getReportChart(sessionsData, documentsData);
-                  this.loading = false;
-              });
           });
         });
       }

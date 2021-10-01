@@ -90,6 +90,11 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
                     sort: false,
                     filter: false,
                     renderComponent: ListCellActionsComponent,
+                    onComponentInitFunction: (instance) => {
+                      instance.remove.subscribe(data => {
+                          this.remove(data);
+                      });
+                    },
                     defaultValue: {
                       update: {
                         enabled: false,
@@ -99,6 +104,7 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
                       },
                       delete: {
                         enabled: true,
+                        accessor: 'category',
                       },
                       report: {
                         enabled: false,
@@ -153,12 +159,14 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
         institutionId: this.user.institution.id,
         userId: this.id,
       }})
-    .onClose.subscribe(sendCategory => {
-      if (sendCategory) this.userSendCategories = [sendCategory, ...this.userSendCategories];
+    .onClose.subscribe(userSendCategory => {
+      if (userSendCategory) this.userSendCategories = [userSendCategory, ...this.userSendCategories];
     });
   }
 
-  removeCategory(event) {
-    this.userSendCategories = this.userSendCategories.filter( category => category !== event.data );
+  remove(event) {
+    this.apiInstitutionService.deleteSendUserCategoryById(this.user.institution.id, this.id, event.id).subscribe(response => {
+      this.userSendCategories = this.userSendCategories.filter( userSendCategory => userSendCategory.id !== event.id );
+    });
   }
 }

@@ -17,7 +17,7 @@ export class ListCellActionsComponent implements ViewCell, OnInit {
   @Input() value;
   @Input() rowData: any;
 
-  @Output() save: EventEmitter<any> = new EventEmitter();
+  @Output() remove: EventEmitter<any> = new EventEmitter<number>();
 
   ngOnInit() {
   }
@@ -47,7 +47,9 @@ export class ListCellActionsComponent implements ViewCell, OnInit {
   delete(event) {
     this.dialog.open(DeleteDialogComponent)
       .onClose.subscribe(data => {
-        // console.log(data)
+        if (data === 'delete') {
+          this.remove.emit(this.rowData);
+        }
       });
   }
 

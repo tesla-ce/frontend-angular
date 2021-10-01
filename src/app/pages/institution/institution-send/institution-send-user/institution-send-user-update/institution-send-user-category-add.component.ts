@@ -77,10 +77,16 @@ export class InstitutionSendUserCategoryAddComponent implements OnInit {
   }
 
   onSave() {
-    const data = {
-      expires_at: this.selectedDate.toISOString(),
+    const data: any = {
       category: this.selectedCategory.id,
+      description: this.selectedCategory.description,
+      data: {
+        enabled_options: this.selectedCategory.data.enabled_options,
+        disabled_instruments: this.selectedCategory.data.disabled_instruments,
+      },
     };
+
+    if (this.selectedDate) data.expires_at = this.selectedDate.toISOString();
 
     this.apiInstitutionService.createSendUserCategory(this.institutionId, this.userId, data).subscribe((response) => {
       this.ref.close(data);
