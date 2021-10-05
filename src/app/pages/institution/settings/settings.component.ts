@@ -32,28 +32,32 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  toggleDisableVLElearnerCreation(event) {
+  toggleDisableVLELearnerCreation(event) {
     this.institution.disable_vle_learner_creation = event;
   }
 
-  toggleDisableVLEinstructorCreation(event) {
+  toggleDisableVLEInstructorCreation(event) {
     this.institution.disable_vle_instructor_creation = event;
   }
 
-  toggleDisableVLEuserCreation(event) {
+  toggleDisableVLEUserCreation(event) {
     this.institution.disable_vle_user_creation = event;
   }
 
-  toggleAllowlearnerReport(event) {
+  toggleAllowLearnerReport(event) {
     this.institution.allow_learner_report = event;
   }
 
-  toggleAllowlearnerAudit(event) {
+  toggleAllowLearnerAudit(event) {
     this.institution.allow_learner_audit = event;
   }
 
-  toggleAllowvalidAudit(event) {
+  toggleAllowValidAudit(event) {
     this.institution.allow_valid_audit = event;
+  }
+
+  toggleExternalIC(event) {
+    this.institution.external_ic = event;
   }
 
   onSave() {

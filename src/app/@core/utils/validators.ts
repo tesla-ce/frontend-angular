@@ -3,7 +3,7 @@ import { Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@ang
 export function doublePasswordCheck(): ValidatorFn {
   return (group: AbstractControl): ValidationErrors => {
       const pass = group.get('password');
-      const confirmPass = group.get('confirm_password');
+      const confirmPass = group.get('password2');
 
       if (pass?.value !== confirmPass?.value) {
       confirmPass?.setErrors({notEquivalent: 'password does not match'});
