@@ -64,19 +64,19 @@ export class SideMenuComponent implements OnInit {
                         title: 'SEND',
                         icon: { icon: 'role-send', pack: 'tesla' },
                         link: '/institution/send',
-                        hidden: false, // user.routes.indexOf('administration-send') === -1,
+                        hidden: user.routes.indexOf('administration-send') === -1,
                         children: [
                             {
                                 title: 'Categories',
                                 icon: { icon: 'role-send', pack: 'tesla' },
                                 link: '/institution/send/category',
-                                hidden: false, // user.routes.indexOf('administration-send-categories') === -1,
+                                hidden: user.routes.indexOf('administration-send-categories') === -1,
                             },
                             {
                                 title: 'Users',
                                 icon: { icon: 'role-send', pack: 'tesla' },
                                 link: '/institution/send/user',
-                                hidden: false, // user.routes.indexOf('administration-send-users') === -1,
+                                hidden: user.routes.indexOf('administration-send-users') === -1,
                             },
                         ],
                     },

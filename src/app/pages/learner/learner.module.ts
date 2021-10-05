@@ -9,6 +9,7 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { LearnerComponent } from './learner.component';
 import { NbTabsetModule, NbIconModule, NbFormFieldModule, NbSelectModule, NbInputModule, NbButtonModule, NbCardModule } from '@nebular/theme';
 import { SharedModule } from '../../shared/shared.module';
+import { BackToLMSModule } from '../../common/lms/back-to-lms.module';
 
 @NgModule({
     imports: [
@@ -25,6 +26,7 @@ import { SharedModule } from '../../shared/shared.module';
         NbTabsetModule,
         PdfViewerModule,
         SharedModule,
+        BackToLMSModule,
     ],
     declarations: [
         LearnerIcComponent,

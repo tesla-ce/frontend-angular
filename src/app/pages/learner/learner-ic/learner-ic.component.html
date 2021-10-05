@@ -1,7 +1,8 @@
-<nb-card>
-    <!-- <nb-card-header>Read Informed Consent</nb-card-header> -->
-    <nb-card-body class="example-items-rows" *ngIf="!loading">
-        <div class="first-line-form">
+<ngx-back-to-lms></ngx-back-to-lms>
+<nb-card *ngIf="!loading">
+    <nb-card-body class="example-items-rows">
+        <!-- Available Languages -->
+        <div class="first-line-form" *ngIf="languagesSelections">
             <nb-select id="languageSelect" placeholder="Pick language" (selectedChange)="pickedLanguage($event)"
                 [(selected)]="selectedLanguage">
                 <nb-option *ngFor="let option of languagesSelections; let i = index" value="{{option}}">
@@ -9,35 +10,29 @@
                 </nb-option>
             </nb-select>
         </div>
-
-        <div class="col-sm-12 ic">
-            <!-- <div>
-                <label class="label">Informed Consent</label>
-            </div> -->
-            <!-- <label *ngIf="languages[selectedLanguage].pdf" class="label">PDF</label>
-            <div class="pdf-Download" *ngIf="languages[selectedLanguage].pdf && languages[selectedLanguage].html">
-                <p>{{languages[selectedLanguage].title}}</p>
-                <a [href]="languages[selectedLanguage].pdf" nbButton
-                    download="language[selectedLanguage].title">Download</a>
-            </div> -->
-
-            <div class="pdf-Download" *ngIf="languages[selectedLanguage].pdf && !languages[selectedLanguage].html">
-                <pdf-viewer [src]="languages[selectedLanguage].pdf" [render-text]="true" style="display: block;">
+        <!-- Documents -->
+        <div class="col-sm-12 ic" *ngIf="documents">
+            <!-- PDF -->
+            <div class="pdf-Download" *ngIf="documents[selectedLanguage].pdf && !documents[selectedLanguage].html">
+                <pdf-viewer [src]="documents[selectedLanguage].pdf" [render-text]="true" style="display: block;">
                 </pdf-viewer>
+                <a *ngIf="documents[selectedLanguage].pdf" class="download" [href]="documents[selectedLanguage].pdf"
+                    nbButton download="language.title">{{"IC.PDF_DOWNLOAD" | translate}}</a>
             </div>
-
-            <div *ngIf="languages[selectedLanguage].html">
-                <!-- <label class="label">HTML</label> -->
-                <div class="innerHTML" [innerHTML]="languages[selectedLanguage].html"></div>
+            <!-- HTML -->
+            <div *ngIf="documents[selectedLanguage].html">
+                <div class="innerHTML" [innerHTML]="documents[selectedLanguage].html"></div>
             </div>
-        </div>
-        <div style="display: flex; flex-direction: column;">
+            <!-- IC acceptance -->
             <div style="display: flex; align-self: center;">
-                <button *ngIf="!loading && !approved" nbButton type="button"
+                <button *ngIf="!loading && !valid" nbButton type="button"
                     (click)="accept()">{{"ACTIONS.ACCEPT_CONSENT" | translate }}</button>
-                <button *ngIf="!loading && approved" nbButton type="button"
+                <button *ngIf="!loading && valid" nbButton type="button"
                     (click)="reject()">{{"ACTIONS.DECLINE_CONSENT" | translate }}</button>
             </div>
+        </div>
+        <!-- IC Version -->
+        <div style="display: flex; flex-direction: column;">
             <div style="display: flex; justify-content: space-between;">
                 <div style="display: flex; flex-direction: column; margin-top: 16px;">
                     <div class="footer" >
@@ -49,10 +44,7 @@
                         <p>{{instance.valid_from | date}}</p>
                     </div>
                 </div>
-                <a *ngIf="languages[selectedLanguage].pdf" class="download" [href]="languages[selectedLanguage].pdf"
-                    nbButton download="language.title">{{"IC.PDF_DOWNLOAD" | translate}}</a>
             </div>
         </div>
-        <!-- <button *ngIf="!loading" disabled="checkDisabled(instance.valid_from)" nbButton type="button" (click)="goToEdit()">EDIT</button> -->
     </nb-card-body>
 </nb-card>
