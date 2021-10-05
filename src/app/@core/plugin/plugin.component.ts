@@ -80,7 +80,7 @@ export class PluginComponent implements OnInit {
             this.router.navigateByUrl(`/course/${params.course_id}/activity/${params.activity_id}/report`);
             break;
         case '/plugin/course/report':
-          this.router.navigateByUrl(`/course/${params.course_id}/report`);
+          this.router.navigateByUrl(`/course/${params.course_id}/report/${params.id}`);
           break;
         case '/plugin/activity/configuration':
           this.router.navigateByUrl(`/course/${params.course_id}/activity/${params.activity_id}/update`);

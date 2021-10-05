@@ -64,13 +64,6 @@ export class TestDefaultComponent implements OnInit {
       .subscribe((user: User) => {
         if (user) this.user = user;
       });
-    this.route.queryParams.subscribe(params => {
-      this.redirectUri = params['redirect_uri'];
-    });
-  }
-
-  backToLMS() {
-    window.location.href = this.redirectUri;
   }
 }
 

@@ -48,7 +48,7 @@ export class InstitutionIcCreateComponent implements OnInit {
               icon: 'save-outline',
               duration: 2000,
             });
-          this.router.navigate(['/institution/institution-ic']);
+          this.router.navigate(['/institution/ic']);
         }, error => {
           this.errors.next(error.error);
           this.toastrService.show(

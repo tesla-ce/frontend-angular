@@ -30,14 +30,13 @@ export class ApiInstitutionService {
     this.endpointUrl = this.apiUrl + this.endpoint;
   }
 
-  public getInstitutionUser(institutionId: number, userId: number): Observable<InstitutionUser> {
+  public getLearner(institutionId: number, userId: number): Observable<InstitutionUser> {
     return this.http
       .get(`${this.endpointUrl}${institutionId}/learner/${userId}/`)
       .pipe(
         map((user: InstitutionUser) => {
-          // console.log(ic);
           if (user) return user;
-          else throw user;
+          else return null;
         }),
         catchError(this.handleError),
       );
@@ -88,7 +87,7 @@ export class ApiInstitutionService {
   // API: PUT /institutions/:id
   public updateInstitution( institutionId: number, fields ): Observable<any> {
     return this.http
-     .put(this.endpointUrl + institutionId + '/', fields).pipe(
+     .put(this.apiUrl + '/admin/institution/' + institutionId + '/', fields).pipe(
      map((data: any) => {
        if (data.status) {
          return true;
