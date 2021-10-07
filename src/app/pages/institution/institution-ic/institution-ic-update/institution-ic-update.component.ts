@@ -78,6 +78,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
       if (user) {
+        this.user = user;
         this.apiIcService.getIcDocument(user.institution.id, this.id).subscribe(list => {
           this.languages = list;
           const initialOptions = ['en', 'es', 'ru', 'fr', 'ca', 'jp', 'pt'];

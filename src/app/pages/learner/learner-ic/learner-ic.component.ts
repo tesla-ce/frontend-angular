@@ -18,17 +18,18 @@ import { TranslateService } from '@ngx-translate/core';
 export class LearnerIcComponent implements OnInit {
   private destroy$: Subject<void> = new Subject<void>();
 
-  user: InstitutionUser;
+  learner: InstitutionUser;
   id: number;
-  languages: any = {};
-  approved: boolean;
-  languagesSelections: string[] = [];
+  documents: any = null;
+  valid: boolean;
+  availableLanguages: string[] = [];
   selectedLanguage: 'es';
   loading: boolean = true;
   public instance: Ic;
   public fields = InstitutionIcConfig.fields;
   regexPDF: RegExp = /[0-9A-Za-z]+[.][Pp][Dd][Ff]/;
   redirectUri: string = null;
+  external: Boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,15 +37,7 @@ export class LearnerIcComponent implements OnInit {
     private authService: AuthService,
     public translate: TranslateService,
     private institutionService: ApiInstitutionService,
-    private router: Router) {
-    // this.route.params.subscribe(params => {
-    //   if (params['id'] != null) {
-    //     this.id = params['id'];
-    //   } else {
-    //     router.navigate(['../'], { relativeTo: this.route });
-    //   }
-    // });
-  }
+    private router: Router) {}
 
   ngOnInit(): void {
 
@@ -52,54 +45,50 @@ export class LearnerIcComponent implements OnInit {
       .pipe()
       .subscribe((user: InstitutionUser) => {
         if (user) {
-          this.institutionService.getInstitutionUser(user.institution.id, user.id)
+          this.institutionService.getLearner(user.institution.id, user.id)
             .pipe()
-            .subscribe((institutionUser: InstitutionUser) => {
-              this.user = institutionUser;
-              this.approved = institutionUser.ic_status.startsWith('NOT_VALID') ? false : true;
-            });
-          this.apiIcService.getCurrentIc(user.institution.id).subscribe(instance => {
-            this.instance = instance;
-            this.apiIcService.getIcDocument(user.institution.id, this.instance.id).subscribe(list => {
-              const objectification = {};
-              list.map((item, index) => {
-                objectification[item.language] = {};
-                objectification[item.language].html = item.html;
-                if (item.pdf) {
-                  objectification[item.language].pdf = item.pdf;
-                  objectification[item.language].title = this.regexPDF.exec(item.pdf)[0];
-                }
-                this.languagesSelections.push(item.language);
-                if (!index) this.selectedLanguage = item.language;
-              });
-              this.languages = objectification;
-              this.route.queryParams.subscribe(params => {
-                if (params['redirect_uri']) {
-                  const allowedDomains = ['https://example.com/'];
-                  const domain =  (new URL(params['redirect_uri'])).hostname.replace('www.', '');
-                  if (allowedDomains.indexOf(domain) !== -1 ) this.redirectUri = params['redirect_uri'];
-                }
-                this.loading = false;
+            .subscribe((learner: InstitutionUser) => {
+              this.learner = learner;
+              this.valid = learner.ic_status.startsWith('NOT_VALID') ? false : true;
+              this.apiIcService.getCurrentIc(user.institution.id).subscribe(instance => {
+                this.instance = instance;
+                this.external = instance.institution.external_ic;
+                this.apiIcService.getIcDocument(user.institution.id, this.instance.id).subscribe(documentsList => {
+                  if (documentsList.length) {
+                    const documentObject = {};
+                    documentsList.map((item, index) => {
+                      documentObject[item.language] = {};
+                      documentObject[item.language].html = item.html;
+                      if (item.pdf) {
+                        documentObject[item.language].pdf = item.pdf;
+                        documentObject[item.language].title = this.regexPDF.exec(item.pdf)[0];
+                      }
+                      this.availableLanguages.push(item.language);
+                      if (!index) this.selectedLanguage = item.language;
+                    });
+                    this.documents = documentObject;
+                  }
+                  this.loading = false;
+                });
               });
             });
-          });
         }
     });
   }
 
   accept() {
-    this.apiIcService.approveIc(this.user, this.instance.version).subscribe(response => {
+    this.apiIcService.approveIc(this.learner, this.instance.version).subscribe(response => {
       if (response) {
-        this.user = response;
-        this.approved = true;
+        this.learner = response;
+        this.valid = true;
       }
     });
   }
   reject() {
-    this.apiIcService.rejectIc(this.user).subscribe(response => {
+    this.apiIcService.rejectIc(this.learner).subscribe(response => {
       if (response) {
-        this.user = response;
-        this.approved = false;
+        this.learner = response;
+        this.valid = false;
       }
     });
   }
@@ -107,9 +96,4 @@ export class LearnerIcComponent implements OnInit {
   pickedLanguage(event): void {
     this.selectedLanguage = event;
   }
-
-  backToLMS() {
-    window.location.href = this.redirectUri;
-  }
-
 }

@@ -30,14 +30,13 @@ export class ApiInstitutionService {
     this.endpointUrl = this.apiUrl + this.endpoint;
   }
 
-  public getInstitutionUser(institutionId: number, userId: number): Observable<InstitutionUser> {
+  public getLearner(institutionId: number, userId: number): Observable<InstitutionUser> {
     return this.http
       .get(`${this.endpointUrl}${institutionId}/learner/${userId}/`)
       .pipe(
         map((user: InstitutionUser) => {
-          // console.log(ic);
           if (user) return user;
-          else throw user;
+          else return null;
         }),
         catchError(this.handleError),
       );
@@ -59,7 +58,7 @@ export class ApiInstitutionService {
 
   // API: POST /institutions
   public createInstitution(fields: any) {
-    return this.http.post(this.endpointUrl, fields)
+    return this.http.post(`${this.apiUrl}/admin/institution/`, fields)
     .pipe(
       map(( institution: Institution ) => {
         // console.log(institution);
@@ -88,7 +87,7 @@ export class ApiInstitutionService {
   // API: PUT /institutions/:id
   public updateInstitution( institutionId: number, fields ): Observable<any> {
     return this.http
-     .put(this.endpointUrl + institutionId + '/', fields).pipe(
+     .put(`${this.apiUrl}/admin/institution/${institutionId}/`, fields).pipe(
      map((data: any) => {
        if (data.status) {
          return true;
@@ -99,10 +98,30 @@ export class ApiInstitutionService {
      catchError(this.handleError));
   }
 
+  // API: PUT /institutions/:id
+  public updateInstitutionAsInstitutionAdmin( institutionId: number, fields ): Observable<any> {
+    return this.http
+     .put(`${this.endpointUrl}/${institutionId}/`, fields).pipe(
+     map((data: any) => {
+       if (data.status) {
+         return true;
+       } else {
+         return false;
+       }
+     }),
+     catchError(this.handleError));
+  }
 
-  // DELETE /institutions/:id
-  public deleteInstitutionById(institutionId: number) {
-    // will use this.http.delete()
+  // API: DELETE /course/:id/activity/:id/instrument/:id
+  public deleteInstitutionById(institutionId: number): Observable<any> {
+    return this.http
+      .delete(`${this.apiUrl}/admin/institution/${institutionId}/`)
+      .pipe(
+        map((data: any) => {
+          return true;
+        }),
+        catchError(this.handleError),
+      );
   }
 
   // API: GET /institutions/:id

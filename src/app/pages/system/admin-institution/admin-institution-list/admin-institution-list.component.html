@@ -1,6 +1,6 @@
 <nb-card>
     <nb-card-header>Institutions</nb-card-header>
-    <nb-card-body class="example-items-rows">
-        <ngx-list [settings]="settings" [endpoint]="endpoint"></ngx-list>    
+    <nb-card-body class="example-items-rows" *ngIf="settings">
+        <ngx-list #list [settings]="settings" [endpoint]="endpoint"></ngx-list>    
     </nb-card-body>
 </nb-card>

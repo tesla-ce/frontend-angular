@@ -9,6 +9,7 @@ import { NbButtonModule, NbCardModule, NbListModule, NbIconModule } from '@nebul
 import { SharedModule } from '../../shared/shared.module';
 import { JsonFormsModule } from '@jsonforms/angular';
 import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
+import { BackToLMSModule } from '../../common/lms/back-to-lms.module';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
     // json forms
     JsonFormsModule,
     JsonFormsAngularMaterialModule,
+    BackToLMSModule,
   ],
   declarations: [
     TestComponent,

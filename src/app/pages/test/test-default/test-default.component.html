@@ -1,13 +1,4 @@
-<nb-card *ngIf="redirectUri">
-    <nb-card-header>
-        LMS
-    </nb-card-header>
-    <nb-card-body>
-        <button nbButton
-        status="primary"
-        (click)="backToLMS()">{{"BACK TO LMS" | translate }}</button>
-    </nb-card-body>
-</nb-card>
+<ngx-back-to-lms></ngx-back-to-lms>
 <nb-card>
     <nb-card-header>Test Page</nb-card-header>
     <nb-card-body>

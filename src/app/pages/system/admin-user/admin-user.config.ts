@@ -37,7 +37,7 @@ export const AdminUserConfig = {
     password: {
       creable: true,
       showable: false,
-      editable: false,
+      editable: true,
       key: 'password',
       dataType: 'string',
       label: 'Password',
@@ -47,11 +47,11 @@ export const AdminUserConfig = {
       placeholder: 'password',
       required: true,
     },
-    confirm_password: {
+    password2: {
       creable: true,
       showable: false,
-      editable: false,
-      key: 'confirm_password',
+      editable: true,
+      key: 'password2',
       dataType: 'string',
       label: 'Confirm Password',
       inputType: 'password',
@@ -88,7 +88,7 @@ export const AdminUserConfig = {
     institution: {
       creable: true,
       showable: true,
-      editable: false,
+      editable: true,
       key: 'institution',
       dataType: 'object',
       label: 'Institution',
@@ -105,7 +105,7 @@ export const AdminUserConfig = {
     locale: {
       creable: true,
       showable: true,
-      editable: false,
+      editable: true,
       key: 'locale',
       dataType: 'string',
       label: 'Language',
@@ -144,7 +144,7 @@ export const AdminUserConfig = {
     roles: {
       creable: true,
       showable: true,
-      editable: false,
+      editable: true,
       key: 'roles',
       dataType: 'string',
       label: 'Roles',

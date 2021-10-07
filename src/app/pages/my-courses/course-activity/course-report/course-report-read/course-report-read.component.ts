@@ -90,7 +90,7 @@ export class CourseReportReadComponent implements OnInit {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
       if (user) {
         this.apiInstitutionService.getInstitutionById(user.institution.id).subscribe((institution: Institution) => {
-          if (!institution.allow_learner_audit) this.availableAuditInstruments = [];
+          if (!institution.allow_learner_audit && user.roles.indexOf('LEARNER') !== -1) this.availableAuditInstruments = [];
           this.endpoint =
           `/institution/${user.institution.id}/course/${this.courseId}/activity/${this.activityId}/report?id=${this.reportId}`;
           this.apiCourseService.getAllInstruments(user.institution.id).subscribe((instruments: any[]) => {
