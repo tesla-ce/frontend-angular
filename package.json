@@ -55,6 +55,8 @@
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^6.0.0",
     "@rxweb/reactive-form-validators": "^2.1.2",
+    "@sentry/angular": "^6.13.3",
+    "@sentry/tracing": "^6.13.3",
     "@swimlane/ngx-charts": "^14.0.0",
     "@tesla-ce/icons": "0.0.35",
     "@tesla-ce/sensors": "^0.0.6",
