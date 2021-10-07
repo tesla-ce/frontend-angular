@@ -59,6 +59,7 @@ export class SendComponent implements OnInit, AfterViewInit {
   public progressColor = 'info';
   public totalQueued = 0;
   public notifications = [];
+  public enrolComplete = false;
 
   constructor(
     private location: Location,
@@ -127,6 +128,7 @@ export class SendComponent implements OnInit, AfterViewInit {
           this.progressColor = 'success';
           this.stop();
           this.updateInstrumentEnrolmentStatus();
+          this.enrolComplete = true;
           this.btnPrimaryClick();
           return;
         }
@@ -225,6 +227,11 @@ export class SendComponent implements OnInit, AfterViewInit {
       this.sensorsService.start();
       return;
     }
+
+    if (this.enrolComplete === false) {
+      return;
+    }
+
     if (this.step === 2) {
         this.step++;
         this.buttonLabel = 'Finish';
