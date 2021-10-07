@@ -15,6 +15,7 @@ import {BaseWidgetComponent} from './dashboard-widgets/widgets/base-widget.compo
 import {CoursesWidgetComponent} from './dashboard-widgets/widgets/courses/courses-widget.component';
 import {CalendarWidgetComponent} from './dashboard-widgets/widgets/calendar/calendar-widget.component';
 import {DayCellComponent} from './dashboard-widgets/widgets/calendar/day-cell/day-cell.component';
+import { BackToLMSModule } from '../../common/lms/back-to-lms.module';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import {DayCellComponent} from './dashboard-widgets/widgets/calendar/day-cell/da
     // Gridster 2 module
     GridsterModule,
     NbCalendarModule,
+    BackToLMSModule,
   ],
   declarations: [
     DashboardComponent,

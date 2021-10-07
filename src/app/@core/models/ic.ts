@@ -1,4 +1,4 @@
-import { Institution } from './users';
+import { Institution } from './user';
 
 export interface Ic {
   id: number;

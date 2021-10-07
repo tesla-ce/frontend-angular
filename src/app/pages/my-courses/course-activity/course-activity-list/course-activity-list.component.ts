@@ -55,7 +55,7 @@ export class CourseActivityListComponent implements OnInit {
                 renderComponent: ListCellActionsComponent,
                 defaultValue: {
                   update: {
-                    enabled: this.course.user_roles.indexOf('LEARNER') === -1,
+                    enabled: (this.course.user_roles.indexOf('LEARNER') === -1 && user.roles.indexOf('GLOBAL_ADMIN') === -1 ),
                     path: 'activity',
                   },
                   read: {

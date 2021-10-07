@@ -71,25 +71,40 @@ export class PluginComponent implements OnInit {
   redirect(url, params) {
       switch (url) {
         case '/plugin/ic':
-              // this.router.navigateByUrl('/learner/ic?' + params['redirect_uri']);
-              this.router.navigate(['/learner/ic'], { queryParams: {
+              this.router.navigate(['/learner/ic'],
+              { queryParams: {
                 redirect_uri: params['redirect_uri'],
               }});
           break;
-        case '/plugin/activity/report':
-            this.router.navigateByUrl(`/course/${params.course_id}/activity/${params.activity_id}/report`);
+        case '/plugin/activity/reports':
+            this.router.navigateByUrl(`/course/${params.course_id}/activity/${params.activity_id}/report`,
+            { queryParams: {
+              redirect_uri: params['redirect_uri'],
+            }});
             break;
-        case '/plugin/course/report':
-          this.router.navigateByUrl(`/course/${params.course_id}/report/${params.id}`);
+        case '/plugin/activity/report':
+          this.router.navigateByUrl(`/course/${params.course_id}/activity/${params.activity_id}/report/${params.report_id}`,
+          { queryParams: {
+            redirect_uri: params['redirect_uri'],
+          }});
           break;
         case '/plugin/activity/configuration':
-          this.router.navigateByUrl(`/course/${params.course_id}/activity/${params.activity_id}/update`);
+          this.router.navigateByUrl(`/course/${params.course_id}/activity/${params.activity_id}/update`,
+          { queryParams: {
+            redirect_uri: params['redirect_uri'],
+          }});
           break;
         case '/plugin/enrolment':
-          this.router.navigateByUrl('/enrolment');
+          this.router.navigateByUrl('/enrolment',
+          { queryParams: {
+            redirect_uri: params['redirect_uri'],
+          }});
           break;
         default:
-            this.router.navigateByUrl('/dashboard');
+            this.router.navigateByUrl('/dashboard',
+            { queryParams: {
+              redirect_uri: params['redirect_uri'],
+            }});
             break;
       }
   }
