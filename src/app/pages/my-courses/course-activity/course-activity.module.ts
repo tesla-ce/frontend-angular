@@ -40,6 +40,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { JsonParsePipe } from '../../../@core/pipes/json-parse.pipe';
 import { CourseActivityInstrumentSettingsComponent } from './course-activity-instrument/course-activity-instrument-settings.component';
 import { CourseActivityInstrumentAddComponent } from './course-activity-instrument/course-activity-instrument-add.component';
+import { BackToLMSModule } from '../../../common/lms/back-to-lms.module';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { CourseActivityInstrumentAddComponent } from './course-activity-instrume
     MatAutocompleteModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
+    BackToLMSModule,
   ],
   declarations: [
     // DataDisplayComponent,

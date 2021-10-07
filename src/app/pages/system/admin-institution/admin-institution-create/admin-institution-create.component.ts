@@ -33,7 +33,7 @@ export class AdminInstitutionCreateComponent implements OnInit {
           icon: 'save-outline',
           duration: 2000,
         });
-      this.router.navigate(['/admin/admin-institution/']);
+      this.router.navigate(['/system/admin-institution/']);
     }, error => {
       this.errors.next(error.error);
       this.toastrService.show(

@@ -17,7 +17,9 @@ export class BackToLMSComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params['redirect_uri']) {
         const domain = (new URL(params['redirect_uri'])).hostname;
-        if (this.allowedDomains.indexOf(domain) !== -1 ) this.redirectUri = params['redirect_uri'];
+        // TO DO: Allowed domains control
+        // if (this.allowedDomains.indexOf(domain) !== -1 ) this.redirectUri = params['redirect_uri'];
+        this.redirectUri = params['redirect_uri'];
       }
     });
   }

@@ -24,7 +24,7 @@
                 <div class="innerHTML" [innerHTML]="documents[selectedLanguage].html"></div>
             </div>
             <!-- IC acceptance -->
-            <div style="display: flex; align-self: center;">
+            <div *ngIf="!external" style="display: flex; align-self: center;">
                 <button *ngIf="!loading && !valid" nbButton type="button"
                     (click)="accept()">{{"ACTIONS.ACCEPT_CONSENT" | translate }}</button>
                 <button *ngIf="!loading && valid" nbButton type="button"

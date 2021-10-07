@@ -61,7 +61,7 @@ export class SettingsComponent implements OnInit {
   }
 
   onSave() {
-    this.apiInstitutionService.updateInstitution(this.institution.id, this.institution).subscribe((response: any) => {
+    this.apiInstitutionService.updateInstitutionAsInstitutionAdmin(this.institution.id, this.institution).subscribe((response: any) => {
       this.toastrService.show(
           'Institution Updated',
           this.institution.name,

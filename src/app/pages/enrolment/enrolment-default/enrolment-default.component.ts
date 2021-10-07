@@ -50,7 +50,7 @@ export class EnrolmentDefaultComponent implements OnInit {
   needsGoEnrolment(instrumentId): Boolean {
     for (const instrument in this.instrumentEnrolmentStatus) {
       if (this.instrumentEnrolmentStatus[instrument].instrument_id === instrumentId) {
-        return this.instrumentEnrolmentStatus[instrument].can_analyze__min === false;
+        return this.instrumentEnrolmentStatus[instrument].percentage__min < 1;
       }
     }
     return true;
