@@ -5,7 +5,7 @@
  */
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import {NgModule, ErrorHandler, APP_INITIALIZER} from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
@@ -28,6 +28,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SharedModule } from './shared/shared.module';
 import { NbTeslaIconsModule } from '@tesla-ce/icons';
+import * as Sentry from '@sentry/angular';
+import {Router} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -68,6 +70,24 @@ import { NbTeslaIconsModule } from '@tesla-ce/icons';
     NbTeslaIconsModule,
   ],
   bootstrap: [AppComponent],
+  providers: [
+    {
+      provide: ErrorHandler,
+      useValue: Sentry.createErrorHandler({
+        showDialog: false,
+      }),
+    },
+    {
+      provide: Sentry.TraceService,
+      deps: [Router],
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: () => () => {},
+      deps: [Sentry.TraceService],
+      multi: true,
+    },
+  ],
 })
 export class AppModule {
 }
