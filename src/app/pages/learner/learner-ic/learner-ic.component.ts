@@ -29,6 +29,7 @@ export class LearnerIcComponent implements OnInit {
   public fields = InstitutionIcConfig.fields;
   regexPDF: RegExp = /[0-9A-Za-z]+[.][Pp][Dd][Ff]/;
   redirectUri: string = null;
+  external: Boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -51,6 +52,7 @@ export class LearnerIcComponent implements OnInit {
               this.valid = learner.ic_status.startsWith('NOT_VALID') ? false : true;
               this.apiIcService.getCurrentIc(user.institution.id).subscribe(instance => {
                 this.instance = instance;
+                this.external = instance.institution.external_ic;
                 this.apiIcService.getIcDocument(user.institution.id, this.instance.id).subscribe(documentsList => {
                   if (documentsList.length) {
                     const documentObject = {};

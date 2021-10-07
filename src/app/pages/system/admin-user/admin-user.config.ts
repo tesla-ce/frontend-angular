@@ -37,7 +37,7 @@ export const AdminUserConfig = {
     password: {
       creable: true,
       showable: false,
-      editable: false,
+      editable: true,
       key: 'password',
       dataType: 'string',
       label: 'Password',
@@ -50,7 +50,7 @@ export const AdminUserConfig = {
     password2: {
       creable: true,
       showable: false,
-      editable: false,
+      editable: true,
       key: 'password2',
       dataType: 'string',
       label: 'Confirm Password',
