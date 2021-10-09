@@ -26,9 +26,9 @@ export class CalendarWidgetComponent extends BaseWidgetComponent implements OnIn
   }
   ngOnInit() {
     super.ngOnInit();
-    this.dashService.getUserActiveCourses().subscribe(courses => {
+    /*this.dashService.getUserActiveCourses().subscribe(courses => {
 
-    });
+    });*/
   }
 
   get instruments(): Array<string> {
