@@ -1,3 +1,35 @@
-<h3>Courses - {{ data.component }}</h3>
-<p>Active Courses: {{ courses.length }}</p>
+<h3>{{"ACTIVE_COURSES" | translate}}</h3>
+<div class="gridster-item-content" >
+  <input nbInput [nbFilterInput]="dataSource" id="search" class="search-input">
 
+  <table [nbTreeGrid]="dataSource" [nbSort]="dataSource" (sort)="updateSort($event)">
+
+    <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
+    <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+
+    <ng-container [nbTreeGridColumnDef]="customColumn">
+      <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(customColumn)" *nbTreeGridHeaderCellDef>
+        {{customColumn}}
+      </th>
+      <td nbTreeGridCell *nbTreeGridCellDef="let row">
+        <ngx-activity-icon [type]="row.data.type" [roles]="row.data.roles" [expanded]="row.expanded"></ngx-activity-icon>
+        {{row.data[customColumn]}}
+      </td>
+    </ng-container>
+
+    <ng-container *ngFor="let column of defaultColumns; let index = index"
+                      [nbTreeGridColumnDef]="column"
+                      [showOn]="getShowOn(index)">
+      <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(column)" *nbTreeGridHeaderCellDef>
+        {{column}}
+      </th>
+      <td nbTreeGridCell *nbTreeGridCellDef="let row">
+        <ngx-instruments-cell [row]="row" *ngIf="column==='instruments'; else rawData" class="activity-instruments"></ngx-instruments-cell>
+        <ng-template #rawData>
+          {{row.data[column] || '-'}}
+        </ng-template>
+      </td>
+    </ng-container>
+
+  </table>
+</div>

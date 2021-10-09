@@ -61,8 +61,12 @@ export class ApiCourseService {
       .get(`${this.endpointUrl}/institution/${institutionId}/course/${courseId}/activity/`)
       .pipe(
         map((response: any) => {
-          if (response?.results) return response.results;
-          else return [];
+          if (response?.results) {
+            return response.results.map(function (activity) {
+              activity.course_id = courseId;
+              return activity;
+            });
+          } else return [];
         }),
         catchError(this.handleError),
       );
