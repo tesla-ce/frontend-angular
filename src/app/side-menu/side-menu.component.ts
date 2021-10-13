@@ -139,8 +139,8 @@ export class SideMenuComponent implements OnInit {
                     {
                         title: 'Instruments',
                         icon: { icon: 'common-dashboard', pack: 'tesla' },
-                        link: '/system/instrument',
-                        hidden: user.routes.indexOf('system-instruments') === -1,
+                        link: '/system/admin-instrument',
+                        hidden: false, // user.routes.indexOf('system-instruments') === -1,
                     },
                     {
                         title: 'Services',

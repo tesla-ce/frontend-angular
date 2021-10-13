@@ -58,10 +58,10 @@ export class ApiUserService {
   }
 
 
-  // API: PUT /users/:id
+  // API: PATCH /users/:id
   public updateUser( idUser, fields ): Observable<any> {
     return this.http
-     .put(this.endpointUrl + '/' + idUser, fields).pipe(
+     .patch(this.endpointUrl + '/' + idUser, fields).pipe(
      map((data: any) => {
        if (data.status) {
          return true;

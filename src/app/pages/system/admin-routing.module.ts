@@ -2,8 +2,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { AdminComponent } from './admin.component';
-import { AdminInstitutionComponent } from './admin-institution/admin-institution.component';
-import { InstrumentComponent } from './instrument/instrument.component';
 import { ServiceComponent } from './service/service.component';
 import { StatusComponent } from './status/status.component';
 
@@ -22,8 +20,9 @@ const routes: Routes = [{
       .then(m => m.AdminInstitutionModule),
     },
     {
-      path: 'instrument',
-      component: InstrumentComponent,
+      path: 'admin-instrument',
+      loadChildren: () => import('./admin-instrument/admin-instrument.module')
+      .then(m => m.AdminInstrumentModule),
     },
     {
       path: 'service',
