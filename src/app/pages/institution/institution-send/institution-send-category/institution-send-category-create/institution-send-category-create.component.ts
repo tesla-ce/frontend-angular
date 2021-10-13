@@ -54,8 +54,8 @@ export class InstitutionSendCategoryCreateComponent implements OnInit {
       description: null,
     };
     data.description = event.description;
-    data.data.enabled_options = event.enabled_options;
-    data.data.disabled_instruments = event.disabled_instruments; // .map(dis => parseInt(dis, 10));
+    data.data.enabled_options = event.enabled_options || [];
+    data.data.disabled_instruments = event.disabled_instruments || []; // .map(dis => parseInt(dis, 10));
     this.apiInstitutionService.createSendCategory(this.user.institution.id,
       data).subscribe((sendCategory: any) => {
       this.toastService.show(

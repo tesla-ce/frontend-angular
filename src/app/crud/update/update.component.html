@@ -4,6 +4,10 @@
             <div class="form-group" [ngSwitch]="field.value.inputType" style="margin-bottom: 0.75rem;">
 
                 <label [for]="field.value.inputName" class="label">{{field.value.label || field.key}}</label>
+
+                <!-- case check box -->
+                <br><nb-checkbox *ngSwitchCase="'check-box'" [formControl]="formControls[field.key]" [formControlName]="field.key"></nb-checkbox>
+
                 <!-- case select -->
                 <nb-select fullWidth *ngSwitchCase="'select'" [(selected)]="instance[key]" placeholder="Select..."
                     [formControl]="formControls[field.key]">
