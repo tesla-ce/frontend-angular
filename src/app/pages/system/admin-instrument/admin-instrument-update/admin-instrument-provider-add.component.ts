@@ -40,8 +40,8 @@ export class AdminInstrumentProviderAddComponent implements OnInit {
 
   onSave(event) {
     if (event.service_port) event.service_port = parseInt(event.service_port, 10);
-    if (event.options_schema) event.options_schema = JSON.stringify(JSON.parse(event.options_schema));
-    if (event.options) event.options = JSON.stringify(JSON.parse(event.options));
+    if (event.options_schema) event.options_schema = JSON.parse(event.options_schema);
+    if (event.options) event.options = JSON.parse(event.options);
     this.apiInstrumentService.createProvider(this.instrumentId, event).subscribe(result => {
       this.ref.close(result);
     });

@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { of as observableOf, Observable, Subject } from 'rxjs';
+import { AuthService } from '../../../../@core/auth/auth.service';
 import { ApiUserService } from '../../../../@core/data/api-user.service';
-import { User } from '../../../../@core/models/user';
+import { InstitutionUser, User } from '../../../../@core/models/user';
 import { InstitutionUserConfig } from '../institution-user.config';
 
 @Component({
@@ -16,14 +17,22 @@ export class InstitutionUserCreateComponent implements OnInit {
   fields = InstitutionUserConfig.fields;
   validator = InstitutionUserConfig.validator;
   public errors = new Subject();
+  user: InstitutionUser;
 
-  constructor(private apiUserService: ApiUserService, private toastrService: NbToastrService, private router: Router) { }
+  constructor(
+    private apiUserService: ApiUserService,
+    private authService: AuthService,
+    private toastrService: NbToastrService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    this.authService.getUser().subscribe((user: InstitutionUser) => {
+      this.user = user;
+    });
   }
 
   onSave(event): void {
-    this.apiUserService.createUser(event).subscribe((user: User) => {
+    this.apiUserService.createInstitutionUser(this.user.institution.id, event).subscribe((user: User) => {
       this.toastrService.show(
         'User Created',
         user.username,

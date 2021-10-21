@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
+import { AuthService } from '../../../../@core/auth/auth.service';
 import { ApiUserService } from '../../../../@core/data/api-user.service';
-import { User } from '../../../../@core/models/user';
+import { InstitutionUser, User } from '../../../../@core/models/user';
 import { InstitutionUserConfig } from '../institution-user.config';
 import { InstitutionUserChangePasswordComponent } from './institution-user-change-password.component';
 
@@ -19,19 +20,17 @@ export class InstitutionUserUpdateComponent implements OnInit {
   public fields = InstitutionUserConfig.fields;
   public errors = new Subject();
   public paths = InstitutionUserConfig.paths;
-
+  user: InstitutionUser;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private dialog: NbDialogService,
+    private authService: AuthService,
     private apiUserService: ApiUserService,
     private toastrService: NbToastrService) {
     this.route.params.subscribe(params => {
       if (params['id'] != null) {
         this.id = params['id'];
-        apiUserService.getUserById(this.id).subscribe(instance => {
-          this.instance = instance;
-        });
       } else {
         router.navigate(['../'], { relativeTo: this.route });
       }
@@ -39,10 +38,18 @@ export class InstitutionUserUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authService.getUser().subscribe((user: InstitutionUser) => {
+      if (user) {
+        this.user = user;
+        this.apiUserService.getInstitutionUserById(user.institution.id, this.id).subscribe(instance => {
+          this.instance = instance;
+        });
+      }
+    });
   }
 
   onSave(event): void {
-    this.apiUserService.updateUser(this.id, event).subscribe((user: User) => {
+    this.apiUserService.updateInstitutionUser(this.user.institution.id, this.id, event).subscribe((user: User) => {
       this.toastrService.show(
         'User Updated',
         user.username,

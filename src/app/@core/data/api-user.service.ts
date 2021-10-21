@@ -59,9 +59,9 @@ export class ApiUserService {
 
 
   // API: PATCH /users/:id
-  public updateUser( idUser, fields ): Observable<any> {
+  public updateUser( userId: number, fields ): Observable<any> {
     return this.http
-     .patch(this.endpointUrl + '/' + idUser, fields).pipe(
+     .patch(this.endpointUrl + '/' + userId, fields).pipe(
      map((data: any) => {
        if (data.status) {
          return true;
@@ -72,10 +72,51 @@ export class ApiUserService {
      catchError(this.handleError));
   }
 
-
   // DELETE /users/:id
   public deleteUserById(userId: number) {
     // will use this.http.delete()
+  }
+
+  // API: POST /users
+  public createInstitutionUser(institutionId: number, fields: any) {
+    // will use this.http.post()
+    return this.http.post(`${this.apiUrl}/institution/${institutionId}/user/`, fields)
+    .pipe(
+      map(( user: User ) => {
+        // console.log(user);
+        if ( user ) return user;
+        else throw user;
+      }),
+      catchError(this.handleError),
+    );
+  }
+
+  // API: PATCH /users/:id
+  public updateInstitutionUser( institutionId: number, userId: number, fields ): Observable<any> {
+    return this.http
+     .patch(`${this.apiUrl}/institution/${institutionId}/user/${userId}/`, fields).pipe(
+     map((data: any) => {
+       if (data.status) {
+         return true;
+       } else {
+         return false;
+       }
+     }),
+     catchError(this.handleError));
+  }
+
+   // API: GET /users/:id
+   public getInstitutionUserById( institutionId: number, userId: number ): Observable<User> {
+    return this.http
+      .get(`${this.apiUrl}/institution/${institutionId}/user/${userId}/`)
+      .pipe(
+        map(( user: User ) => {
+          // console.log(user);
+          if ( user ) return user;
+          else throw user;
+        }),
+        catchError(this.handleError),
+    );
   }
 
   private handleError (error: Response | any) {
