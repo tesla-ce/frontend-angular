@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 
 export interface LearnerEnrolment {
-  can_analyze__max: boolean;
-  can_analyze__min: boolean;
+  can_analyse__max: boolean;
+  can_analyse__min: boolean;
   instrument_id: number;
   not_validated: any[];
   not_validated_count: number;

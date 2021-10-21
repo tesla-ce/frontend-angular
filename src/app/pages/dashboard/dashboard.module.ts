@@ -5,17 +5,22 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { SideMenuModule } from '../../side-menu/side-menu.module';
 import { DashboardDefaultComponent } from './dashboard-default/dashboard-default.component';
-import {NbButtonModule, NbCardModule, NbListModule, NbIconModule, NbCalendarModule} from '@nebular/theme';
+import {NbButtonModule, NbCardModule, NbListModule, NbIconModule, NbCalendarModule, NbTreeGridModule, NbInputModule} from '@nebular/theme';
 import { SharedModule } from '../../shared/shared.module';
 import { JsonFormsModule } from '@jsonforms/angular';
 import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
 import { GridsterModule } from 'angular-gridster2';
 import {DashboardWidgetsComponent} from './dashboard-widgets/dashboard-widgets.component';
 import {BaseWidgetComponent} from './dashboard-widgets/widgets/base-widget.component';
-import {CoursesWidgetComponent} from './dashboard-widgets/widgets/courses/courses-widget.component';
+import {
+  CoursesWidgetComponent,
+  ActivityIconComponent,
+  InstrumentIconsComponent,
+} from './dashboard-widgets/widgets/courses/courses-widget.component';
 import {CalendarWidgetComponent} from './dashboard-widgets/widgets/calendar/calendar-widget.component';
 import {DayCellComponent} from './dashboard-widgets/widgets/calendar/day-cell/day-cell.component';
 import { BackToLMSModule } from '../../common/lms/back-to-lms.module';
+
 
 @NgModule({
   imports: [
@@ -25,6 +30,8 @@ import { BackToLMSModule } from '../../common/lms/back-to-lms.module';
     NbButtonModule,
     NbCardModule,
     NbListModule,
+    NbTreeGridModule,
+    NbInputModule,
     // i18n
     SharedModule,
     // tesla icons
@@ -43,6 +50,8 @@ import { BackToLMSModule } from '../../common/lms/back-to-lms.module';
     DashboardWidgetsComponent,
     BaseWidgetComponent,
     CoursesWidgetComponent,
+    ActivityIconComponent,
+    InstrumentIconsComponent,
     CalendarWidgetComponent,
     DayCellComponent,
   ],
