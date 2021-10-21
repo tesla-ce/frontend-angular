@@ -24,6 +24,7 @@ import { AdminUserReadComponent } from './admin-user-read/admin-user-read.compon
 import { AdminUserListComponent } from './admin-user-list/admin-user-list.component';
 import { ReadModule } from '../../../crud/read/read.module';
 import { UpdateModule } from '../../../crud/update/update.module';
+import { AdminUserChangePasswordComponent } from './admin-user-update/admin-user-change-password.component';
 
 @NgModule({
   imports: [
@@ -49,6 +50,7 @@ import { UpdateModule } from '../../../crud/update/update.module';
     AdminUserUpdateComponent,
     AdminUserReadComponent,
     AdminUserListComponent,
+    AdminUserChangePasswordComponent,
   ],
 })
 export class AdminUserModule {

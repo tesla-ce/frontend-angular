@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
-import { of as observableOf, Observable, Subject } from 'rxjs';
-import { ApiUserService } from '../../../../@core/data/api-user.service';
-import { User } from '../../../../@core/models/user';
+import { Subject } from 'rxjs';
+import { ApiInstrumentService } from '../../../../@core/data/api-instrument.service';
 import { AdminInstrumentConfig } from '../admin-instrument.config';
 
 @Component({
@@ -17,16 +16,17 @@ export class AdminInstrumentCreateComponent implements OnInit {
   validator = AdminInstrumentConfig.validator;
   public errors = new Subject();
 
-  constructor(private apiUserService: ApiUserService, private toastrService: NbToastrService, private router: Router) { }
+  constructor(private apiInstrumentService: ApiInstrumentService, private toastrService: NbToastrService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   onSave(event): void {
-    this.apiUserService.createUser(event).subscribe((user: User) => {
+    event.options_schema = JSON.stringify(JSON.parse(event.options_schema));
+    this.apiInstrumentService.createInstrument(event).subscribe((instrument: any) => {
       this.toastrService.show(
         'User Created',
-        user.username,
+        instrument.name,
         {
           position: NbGlobalPhysicalPosition.TOP_RIGHT,
           status: 'success',

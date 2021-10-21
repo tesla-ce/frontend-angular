@@ -1,0 +1,49 @@
+import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
+import { NbDialogRef, NbWindowService } from '@nebular/theme';
+import { Subject } from 'rxjs';
+import { ApiInstrumentService } from '../../../../@core/data/api-instrument.service';
+import { AdminInstrumentProviderConfig } from './admin-instrument-provider.config';
+
+@Component({
+  selector: 'ngx-admin-instrument-provider-add',
+  templateUrl: './admin-instrument-provider-add.component.html',
+  styleUrls: ['./admin-instrument-provider-add.component.scss'],
+})
+export class AdminInstrumentProviderAddComponent implements OnInit {
+
+  @Input() instrumentId: number;
+  @Input() userId: number;
+  endpoint: string;
+  selectedCategory: any;
+  selectedDate: Date;
+  settings: any;
+  fields = AdminInstrumentProviderConfig.fields;
+  public errors = new Subject();
+
+  constructor(
+    protected ref: NbDialogRef<AdminInstrumentProviderAddComponent>,
+    private apiInstrumentService: ApiInstrumentService,
+  ) {
+  }
+
+  ngOnInit() {
+  }
+
+  dismiss() {
+    this.ref.close();
+  }
+
+
+  back() {
+
+  }
+
+  onSave(event) {
+    if (event.service_port) event.service_port = parseInt(event.service_port, 10);
+    if (event.options_schema) event.options_schema = JSON.stringify(JSON.parse(event.options_schema));
+    if (event.options) event.options = JSON.stringify(JSON.parse(event.options));
+    this.apiInstrumentService.createProvider(this.instrumentId, event).subscribe(result => {
+      this.ref.close(result);
+    });
+  }
+}

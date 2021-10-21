@@ -8,6 +8,7 @@ import {
   NbSelectModule,
   NbIconModule,
   NbFormFieldModule,
+  NbCheckboxModule,
 } from '@nebular/theme';
 
 import { AdminInstrumentComponent } from './admin-instrument.component';
@@ -24,6 +25,7 @@ import { AdminInstrumentReadComponent } from './admin-instrument-read/admin-inst
 import { AdminInstrumentListComponent } from './admin-instrument-list/admin-instrument-list.component';
 import { ReadModule } from '../../../crud/read/read.module';
 import { UpdateModule } from '../../../crud/update/update.module';
+import { AdminInstrumentProviderAddComponent } from './admin-instrument-update/admin-instrument-provider-add.component';
 
 @NgModule({
   imports: [
@@ -37,6 +39,7 @@ import { UpdateModule } from '../../../crud/update/update.module';
     NbInputModule,
     NbSelectModule,
     NbFormFieldModule,
+    NbCheckboxModule,
     NbIconModule,
     ListModule,
     CreateModule,
@@ -49,6 +52,7 @@ import { UpdateModule } from '../../../crud/update/update.module';
     AdminInstrumentUpdateComponent,
     AdminInstrumentReadComponent,
     AdminInstrumentListComponent,
+    AdminInstrumentProviderAddComponent,
   ],
 })
 export class AdminInstrumentModule {

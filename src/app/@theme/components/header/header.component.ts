@@ -8,6 +8,7 @@ import { RippleService } from '../../../@core/utils/ripple.service';
 import { AuthService } from '../../../@core/auth/auth.service';
 import { InstitutionUser} from '../../../@core/models/user';
 import { Router } from '@angular/router';
+
 // import { apiConstants } from '../../../@core/data/api-constants';
 
 
@@ -22,6 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public readonly materialTheme$: Observable<boolean>;
   userPictureOnly: boolean = false;
   user: InstitutionUser;
+  defaultPicture = '../../../../assets/images/avatar-placeholder.png';
 
   themes = [
     // {

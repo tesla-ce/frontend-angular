@@ -15,6 +15,11 @@ export class AdminInstrumentListComponent implements OnInit {
         sort: false,
         filter: false,
         renderComponent: ListCellActionsComponent,
+        defaultValue: {
+          read: {
+            enabled: false,
+          },
+        },
       },
       id: {
         title: 'ID',

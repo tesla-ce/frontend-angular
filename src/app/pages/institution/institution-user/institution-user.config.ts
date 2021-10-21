@@ -88,7 +88,7 @@ export const InstitutionUserConfig = {
     institution_id: {
       creable: true,
       showable: true,
-      editable: true,
+      editable: false,
       key: 'institution_id',
       dataType: 'object',
       label: 'Institution',

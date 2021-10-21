@@ -38,6 +38,23 @@
                     [parentForm]="updateForm">
                 </ngx-select-remote>
 
+                <!-- case date -->
+                <div  *ngSwitchCase="'dateTime'">
+                    <input nbInput  
+                    fullWidth
+                    [formControlName]="field.key" 
+                    [placeholder]="field.value.placeholder || 'Pick a date'"
+                    [nbDatepicker]="dateTimePicker"
+                    [id]="field.value.inputName || field.key"
+                    [name]="field.value.inputName || field.key"
+                    [required]="field.value.required || false"
+                    [status]="formErrors[field.key]?'danger':'basic'">
+                    <nb-datepicker #dateTimePicker></nb-datepicker>
+                </div>
+                
+                <!-- textarea input -->
+                <textarea *ngSwitchCase="'textarea'" nbInput fullWidth [placeholder]="field.value.placeholder || null" [formControl]="formControls[field.key]"></textarea>
+
                 <!-- default input -->
                 <input *ngSwitchDefault nbInput fullWidth [type]="field.value.inputType || text"
                     [id]="field.value.inputName || field.key" [name]="field.value.inputName || field.key"
@@ -66,9 +83,9 @@
             </div>
         </div>
     </div>
-    <div class="buttons">
-    <button *ngIf="!loading" nbButton type="submit" [disabled]="!updateForm.valid">Submit</button>
-</div>
+        <div class="buttons">
+        <button *ngIf="!loading" nbButton type="submit" [disabled]="!updateForm.valid">Submit</button>
+    </div>
     <p>
         <!-- {{ updateForm.status }} -->
     </p>

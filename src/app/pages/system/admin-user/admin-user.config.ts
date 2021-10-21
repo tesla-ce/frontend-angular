@@ -88,7 +88,7 @@ export const AdminUserConfig = {
     institution_id: {
       creable: true,
       showable: true,
-      editable: true,
+      editable: false,
       key: 'institution_id',
       dataType: 'object',
       label: 'Institution',
@@ -108,7 +108,7 @@ export const AdminUserConfig = {
       editable: true,
       key: 'uid',
       dataType: 'string',
-      label: 'Last name',
+      label: 'UID',
       inputType: 'text',
       inputName: 'uid-input-name',
       formControlName: 'uid-form-control-name',
