@@ -100,6 +100,12 @@ export class PluginComponent implements OnInit {
             redirect_uri: params['redirect_uri'],
           }});
           break;
+        case '/plugin/test-page':
+            this.router.navigateByUrl('/test',
+            { queryParams: {
+              redirect_uri: params['redirect_uri'],
+            }});
+            break;
         default:
             this.router.navigateByUrl('/dashboard',
             { queryParams: {

@@ -40,6 +40,7 @@ export interface User {
   groups: string[];
   user_permissions: string[];
   institution?: Institution;
+  institution_id?: number;
 }
 
 export interface InstitutionUser extends User {

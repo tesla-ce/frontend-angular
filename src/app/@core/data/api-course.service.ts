@@ -174,6 +174,19 @@ export class ApiCourseService {
         catchError(this.handleError));
   }
 
+
+  // API: GET /course/:id/activity
+  public getActivityReports(institutionId: number, courseId: number, activityId: number): Observable<any> {
+    return this.http
+      .get(`${this.endpointUrl}/institution/${institutionId}/course/${courseId}/activity/${activityId}/report/`)
+      .pipe(
+        map((data: any) => {
+          return data.results;
+        }),
+        catchError(this.handleError),
+      );
+  }
+
   // API: GET /course/:id/activity
   public getActivityReport(institutionId: number, courseId: number, activityId: number, reportId: number): Observable<any> {
     return this.http

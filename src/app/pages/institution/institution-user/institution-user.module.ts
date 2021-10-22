@@ -24,6 +24,7 @@ import { InstitutionUserReadComponent } from './institution-user-read/institutio
 import { InstitutionUserListComponent } from './institution-user-list/institution-user-list.component';
 import { ReadModule } from '../../../crud/read/read.module';
 import { UpdateModule } from '../../../crud/update/update.module';
+import { InstitutionUserChangePasswordComponent } from './institution-user-update/institution-user-change-password.component';
 
 @NgModule({
   imports: [
@@ -49,6 +50,7 @@ import { UpdateModule } from '../../../crud/update/update.module';
     InstitutionUserUpdateComponent,
     InstitutionUserReadComponent,
     InstitutionUserListComponent,
+    InstitutionUserChangePasswordComponent,
   ],
 })
 export class InstitutionUserModule {

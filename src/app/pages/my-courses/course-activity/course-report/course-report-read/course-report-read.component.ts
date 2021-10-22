@@ -26,7 +26,6 @@ export class CourseReportReadComponent implements OnInit {
   reports: any[] = [];
   reportChart: any;
   instruments: any;
-  endpoint: string;
   loading: boolean = true;
   instrumentCharts: any[] = [];
   availableAuditInstruments: string[] = ['fr'];
@@ -91,48 +90,51 @@ export class CourseReportReadComponent implements OnInit {
       if (user) {
         this.apiInstitutionService.getInstitutionById(user.institution.id).subscribe((institution: Institution) => {
           if (!institution.allow_learner_audit && user.roles.indexOf('LEARNER') !== -1) this.availableAuditInstruments = [];
-          this.endpoint =
-          `/institution/${user.institution.id}/course/${this.courseId}/activity/${this.activityId}/report?id=${this.reportId}`;
-          this.apiCourseService.getAllInstruments(user.institution.id).subscribe((instruments: any[]) => {
-              this.instruments = instruments;
-              instruments.map((instrument: any) => {
-                this.settings.columns['instrument-' + instrument.acronym] = {
-                  class: 'instrument',
-                  title: instrument.name,
-                  width: '1400px',
-                  type: 'custom',
-                  valuePrepareFunction: (value) => {
-                    return instrument;
-                  },
-                  filter: {
-                    type: 'custom',
-                    component: ListSubHeaderComponent,
-                    data: {instrument : instrument},
-                  },
-                  renderComponent: ListCellInstrumentComponent,
-                };
-              });
-
-              this.apiReportService.getActivityReport(
-                user.institution.id, this.courseId, this.activityId, this.reportId).subscribe(report => {
+            this.apiReportService.getActivityReport(
+              user.institution.id, this.courseId, this.activityId, this.reportId).subscribe(report => {
                 this.report = report;
                 this.reports.push(report);
-                this.report.detail.map(det => {
-                  this.instrumentCharts[det.instrument_acronym + '_activity_histogram'] =
-                    this.getInstrumentChart(det, 'activity_histogram');
-                  this.instrumentCharts[det.instrument_acronym + '_learner_histogram'] = this.getInstrumentChart(det, 'learner_histogram');
-                  this.instrumentCharts[det.instrument_acronym + '_positive_facts'] = det.facts.positive;
-                  this.instrumentCharts[det.instrument_acronym + '_neutral_facts'] = det.facts.neutral;
-                  this.instrumentCharts[det.instrument_acronym + '_negative_facts'] = det.facts.negative;
+
+                this.instruments = report.detail.map(dett => {
+                  return {
+                    id: dett.instrument_id,
+                    name: dett.instrument,
+                    acronym: dett.instrument_acronym,
+                  };
+                });
+                this.instruments.map((instrument: any) => {
+                  this.settings.columns['instrument-' + instrument.acronym] = {
+                    class: 'instrument',
+                    title: instrument.name,
+                    width: '1400px',
+                    type: 'custom',
+                    valuePrepareFunction: (value) => {
+                      return instrument;
+                    },
+                    filter: {
+                      type: 'custom',
+                      component: ListSubHeaderComponent,
+                      data: {instrument : instrument},
+                    },
+                    renderComponent: ListCellInstrumentComponent,
+                  };
                 });
 
-                this.http.get<any>(this.report.data).subscribe(res => {
-                    const sessionsData = this.getSessionsData(res.sessions);
-                    const documentsData = this.getDocumentsData(res.documents);
-                    this.reportChart = this.getReportChart(sessionsData, documentsData);
-                    this.loading = false;
-                });
-            });
+                this.report.detail.map(det => {
+                this.instrumentCharts[det.instrument_acronym + '_activity_histogram'] =
+                  this.getInstrumentChart(det, 'activity_histogram');
+                this.instrumentCharts[det.instrument_acronym + '_learner_histogram'] = this.getInstrumentChart(det, 'learner_histogram');
+                this.instrumentCharts[det.instrument_acronym + '_positive_facts'] = det.facts.positive;
+                this.instrumentCharts[det.instrument_acronym + '_neutral_facts'] = det.facts.neutral;
+                this.instrumentCharts[det.instrument_acronym + '_negative_facts'] = det.facts.negative;
+              });
+
+              this.http.get<any>(this.report.data).subscribe(res => {
+                  const sessionsData = this.getSessionsData(res.sessions);
+                  const documentsData = this.getDocumentsData(res.documents);
+                  this.reportChart = this.getReportChart(sessionsData, documentsData);
+                  this.loading = false;
+              });
           });
         });
       }

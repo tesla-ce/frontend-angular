@@ -42,10 +42,6 @@ export class CourseReportListComponent implements OnInit {
           },
         },
       },
-      // id: {
-      //   title: 'id',
-      //   filter: false,
-      // },
       learner: {
         width: '400px',
         title: 'Learner',
@@ -54,36 +50,6 @@ export class CourseReportListComponent implements OnInit {
         },
         filter: false,
       },
-      // detail: {
-      //   class: 'instrument',
-      //   title: 'Detail',
-      //   type: 'custom',
-      //   filter: {
-      //     type: 'custom',
-      //     component: ListSubHeaderComponent,
-      //   },
-      //   renderComponent: ListCellInstrumentComponent,
-      // },
-      // start: {
-      //   title: 'Start',
-      //   filter: false,
-      // },
-      // end: {
-      //   title: 'End',
-      //   filter: false,
-      // },
-      // identity_level: {
-      //   title: 'Identity',
-      //   filter: false,
-      // },
-      // content_level: {
-      //   title: 'Content',
-      //   filter: false,
-      // },
-      // integrity_level: {
-      //   title: 'Integrity',
-      //   filter: false,
-      // },
       summary: {
         title: 'Summary',
         filter: false,
@@ -122,28 +88,38 @@ export class CourseReportListComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
       if (user) {
-        this.endpoint = `/institution/${user.institution.id}/course/${this.courseId}/activity/${this.activityId}/report`;
-        this.apiCourseService.getAllActivityInstruments(user.institution.id, this.courseId, this.activityId)
-          .subscribe((instruments: any[]) => {
-            instruments.map((instrument: any) => {
-              this.settings.columns['instrument-' + instrument.instrument.acronym] = {
-                class: 'instrument',
-                title: instrument.instrument.name,
-                width: '1400px',
-                type: 'custom',
-                valuePrepareFunction: (value) => {
-                  return instrument.instrument;
-                },
-                filter: {
-                  type: 'custom',
-                  component: ListSubHeaderComponent,
-                  data: {instrument : instrument.instrument},
-                },
-                renderComponent: ListCellInstrumentComponent,
-              };
-              this.loading = false;
+        this.apiCourseService.getCourseById(user.institution.id, this.courseId).subscribe((course: any) => {
+          if (course.user_roles.indexOf('LEARNER') !== -1) {
+            this.apiCourseService.getActivityReports(user.institution.id, this.courseId, this.activityId).subscribe(reports => {
+              if (reports.length) {
+                this.router.navigate([reports[0].id], { relativeTo: this.route });
+              }
             });
-          });
+          } else {
+            this.endpoint = `/institution/${user.institution.id}/course/${this.courseId}/activity/${this.activityId}/report`;
+            this.apiCourseService.getAllActivityInstruments(user.institution.id, this.courseId, this.activityId)
+              .subscribe((instruments: any[]) => {
+                instruments.map((instrument: any) => {
+                  this.settings.columns['instrument-' + instrument.instrument.acronym] = {
+                    class: 'instrument',
+                    title: instrument.instrument.name,
+                    width: '1400px',
+                    type: 'custom',
+                    valuePrepareFunction: (value) => {
+                      return instrument.instrument;
+                    },
+                    filter: {
+                      type: 'custom',
+                      component: ListSubHeaderComponent,
+                      data: {instrument : instrument.instrument},
+                    },
+                    renderComponent: ListCellInstrumentComponent,
+                  };
+                  this.loading = false;
+              });
+            });
+          }
+        });
       }
     });
   }
