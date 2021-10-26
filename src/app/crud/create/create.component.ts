@@ -36,11 +36,8 @@ export class CreateComponent implements OnInit {
       if (this.fields[key].creable) {
         this.usableFields[key] = this.fields[key];
         this.formControls[key] = new FormControl(
-          this.fields[key].defaultValue ||
-          null, this.fields[key]?.validator ?
-          this.fields[key].validator() :
-          null);
-
+          this.fields[key].defaultValue !== undefined ? this.fields[key].defaultValue : null,
+          this.fields[key]?.validator ? this.fields[key].validator() : null );
         this.fields[key].disabled = false;
       } else {
         this.fields[key].disabled = true;

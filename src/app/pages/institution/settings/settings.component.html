@@ -3,13 +3,20 @@
         {{'SETTINGS'}}
     </nb-card-header>
     <nb-card-body *ngIf="institution">
-        <nb-checkbox [checked]="institution.disable_vle_learner_creation" (checkedChange)="toggleDisableVLELearnerCreation($event)">Disable VLE learner creation</nb-checkbox><br>
-        <nb-checkbox [checked]="institution.disable_vle_instructor_creation" (checkedChange)="toggleDisableVLEInstructorCreation($event)">Disable VLE instructor creation</nb-checkbox><br>
-        <nb-checkbox [checked]="institution.disable_vle_user_creation" (checkedChange)="toggleDisableVLEUserCreation($event)">Disable VLE user creation</nb-checkbox><br>
-        <nb-checkbox [checked]="institution.allow_learner_report" (checkedChange)="toggleAllowLearnerReport($event)">Allow learner report</nb-checkbox><br>
-        <nb-checkbox [checked]="institution.allow_learner_audit" (checkedChange)="toggleAllowLearnerAudit($event)">Allow learner audit</nb-checkbox><br>
-        <nb-checkbox [checked]="institution.allow_valid_audit" (checkedChange)="toggleAllowValidAudit($event)">Allow valid audit</nb-checkbox><br>
-        <nb-checkbox [checked]="institution.external_ic" (checkedChange)="toggleExternalIC($event)">External IC</nb-checkbox><br>
+        <nb-checkbox [disabled]="disabled" [checked]="institution.disable_vle_learner_creation" (checkedChange)="toggleDisableVLELearnerCreation($event)">Disable VLE learner creation</nb-checkbox><br>
+        <nb-checkbox [disabled]="disabled" [checked]="institution.disable_vle_instructor_creation" (checkedChange)="toggleDisableVLEInstructorCreation($event)">Disable VLE instructor creation</nb-checkbox><br>
+        <nb-checkbox [disabled]="disabled" [checked]="institution.disable_vle_user_creation" (checkedChange)="toggleDisableVLEUserCreation($event)">Disable VLE user creation</nb-checkbox><br>
+        <nb-checkbox [disabled]="disabled" [checked]="institution.allow_learner_report" (checkedChange)="toggleAllowLearnerReport($event)">Allow learner report</nb-checkbox><br>
+        <nb-checkbox [disabled]="disabled" [checked]="institution.allow_learner_audit" (checkedChange)="toggleAllowLearnerAudit($event)">Allow learner audit</nb-checkbox><br>
+        <nb-checkbox [disabled]="disabled" [checked]="institution.allow_valid_audit" (checkedChange)="toggleAllowValidAudit($event)">Allow valid audit</nb-checkbox><br>
+        <nb-checkbox [disabled]="disabled" [checked]="institution.external_ic" (checkedChange)="toggleExternalIC($event)">External IC</nb-checkbox><br>
+        <label>Allowed domains</label>
+        <input nbInput fullWidth [type]="text"
+            [id]="allowed_domains" [name]="allowed_domains"
+            placeholder="*.tesla-ce.eu"
+            [attr.disabled]="disabled"
+            [required]="false"
+            status="basic">
         <br>
         <button (click)="onSave()" nbButton type="submit">Submit</button>
  </nb-card-body>
