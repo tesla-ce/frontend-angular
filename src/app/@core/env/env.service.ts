@@ -11,6 +11,9 @@ export class EnvService {
   // Whether or not to enable debug mode
   public enableDebug = !environment.production;
 
+  // tesla-ce/frontend-angular version
+  public version = !environment.version;
+
   constructor() {
   }
 }

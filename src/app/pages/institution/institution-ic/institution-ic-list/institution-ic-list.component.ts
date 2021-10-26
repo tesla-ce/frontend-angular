@@ -15,43 +15,7 @@ import { InstitutionUser } from '../../../../@core/models/user';
 export class InstitutionIcListComponent implements OnInit {
   loading: boolean = true;
   endpoint: string;
-  settings = {
-    columns: {
-      actions: {
-        title: 'Actions',
-        type: 'custom',
-        sort: false,
-        filter: false,
-        renderComponent: ListCellActionsComponent,
-      },
-      id: {
-        title: 'ID',
-      },
-      'institution.name': {
-        title: 'Institution',
-      },
-      version: {
-        title: 'Version',
-      },
-      valid_from: {
-        title: 'Valid from',
-        valuePrepareFunction: value => {
-          return this.datePipe.transform(value);
-        },
-      },
-    },
-    actions: {
-      edit: false,
-      add: false,
-      delete: false,
-    },
-    mode: 'external',
-    pager: {
-      display: true,
-      perPage: 10,
-    },
-    addNew: true,
-  };
+  settings: any;
 
 
   constructor(private authService: AuthService, private datePipe: DatePipe, private router: Router, public translate: TranslateService,
@@ -60,6 +24,58 @@ export class InstitutionIcListComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
       if (user) {
+        this.settings = {
+          columns: {
+            actions: {
+              title: 'Actions',
+              type: 'custom',
+              sort: false,
+              filter: false,
+              renderComponent: ListCellActionsComponent,
+              defaultValue: {
+                read: {
+                  enabled: true,
+                },
+                delete: {
+                  enabled: user.roles.indexOf('ADMIN') !== -1,
+                },
+                update: {
+                  enabled: user.roles.indexOf('ADMIN') !== -1,
+                },
+                report: {
+                  enabled: false,
+                },
+              },
+            },
+            id: {
+              title: 'ID',
+            },
+            'institution.name': {
+              title: 'Institution',
+            },
+            version: {
+              title: 'Version',
+            },
+            valid_from: {
+              title: 'Valid from',
+              valuePrepareFunction: value => {
+                return this.datePipe.transform(value);
+              },
+            },
+          },
+          actions: {
+            edit: false,
+            add: false,
+            delete: false,
+          },
+          mode: 'external',
+          pager: {
+            display: true,
+            perPage: 10,
+          },
+          addNew: user.roles.indexOf('ADMIN') !== -1,
+        };
+
         this.endpoint = `/institution/${user.institution.id}/ic`;
         this.loading = false;
       }
