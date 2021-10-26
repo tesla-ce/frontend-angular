@@ -33,5 +33,18 @@ export const AdminInstitutionConfig = {
       placeholder: 'instititution acronym',
       required: true,
     },
+    allowed_domains: {
+      creable: true,
+      showable: true,
+      editable: true,
+      key: 'allowed_domains',
+      dataType: 'string',
+      label: 'Allowed domains',
+      inputType: 'text',
+      inputName: 'allowed_domains-input-name',
+      formControlName: 'allowed_domains-form-control-name',
+      placeholder: 'instititution allowed_domains',
+      required: false,
+    },
   },
 };

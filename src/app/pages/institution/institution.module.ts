@@ -4,7 +4,7 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { InstitutionComponent } from './institution.component';
 import { InstitutionRoutingModule } from './institution-routing.module';
 import { SideMenuModule } from '../../side-menu/side-menu.module';
-import { NbActionsModule, NbButtonModule, NbCardModule, NbCheckboxModule } from '@nebular/theme';
+import { NbActionsModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbInputModule } from '@nebular/theme';
 import { DataManagementComponent } from './data-management/data-management.component';
 import { SettingsComponent } from './settings/settings.component';
 import { CourseComponent } from './course/course.component';
@@ -17,6 +17,7 @@ import { InstitutionSendComponent } from './institution-send/institution-send.co
     ThemeModule,
     SideMenuModule,
     NbButtonModule,
+    NbInputModule,
     NbCardModule,
     NbActionsModule,
     NbCheckboxModule,

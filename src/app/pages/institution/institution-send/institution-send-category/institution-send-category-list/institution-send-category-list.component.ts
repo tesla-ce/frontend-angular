@@ -48,13 +48,16 @@ export class InstitutionSendCategoryListComponent implements OnInit {
                 },
                 defaultValue: {
                   read: {
-                    enabled: false,
+                    enabled: true,
                   },
                   update: {
                     enabled: false,
                   },
                   report: {
                     enabled: false,
+                  },
+                  delete: {
+                    enabled: user.roles.indexOf('ADMIN') !== -1,
                   },
                 },
               },
@@ -92,7 +95,7 @@ export class InstitutionSendCategoryListComponent implements OnInit {
               display: true,
               perPage: 10,
             },
-            addNew: true,
+            addNew: user.roles.indexOf('ADMIN') !== -1,
           };
           this.user = user;
           this.endpoint = `/institution/${user.institution.id}/send`;

@@ -135,7 +135,7 @@ export class ApiInstitutionService {
         }),
         catchError(this.handleError),
     );
-}
+  }
 
   // API: GET /institutions/:id
   public getSendCategoryById( institutionId: number, sendCategoryId: number ): Observable<any> {

@@ -61,7 +61,7 @@ export class ApiUserService {
   // API: PATCH /users/:id
   public updateUser( userId: number, fields ): Observable<any> {
     return this.http
-     .patch(this.endpointUrl + '/' + userId, fields).pipe(
+     .patch(this.endpointUrl + userId + '/', fields).pipe(
      map((data: any) => {
        if (data.status) {
          return true;
