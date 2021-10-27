@@ -10,14 +10,14 @@
         <nb-checkbox [disabled]="disabled" [checked]="institution.allow_learner_audit" (checkedChange)="toggleAllowLearnerAudit($event)">Allow learner audit</nb-checkbox><br>
         <nb-checkbox [disabled]="disabled" [checked]="institution.allow_valid_audit" (checkedChange)="toggleAllowValidAudit($event)">Allow valid audit</nb-checkbox><br>
         <nb-checkbox [disabled]="disabled" [checked]="institution.external_ic" (checkedChange)="toggleExternalIC($event)">External IC</nb-checkbox><br>
-        <label>Allowed domains</label>
+        <!-- <label>Allowed domains</label>
         <input nbInput fullWidth [type]="text"
             [id]="allowed_domains" [name]="allowed_domains"
             placeholder="*.tesla-ce.eu"
             [attr.disabled]="disabled"
             [required]="false"
             status="basic">
-        <br>
+        <br> -->
         <button (click)="onSave()" nbButton type="submit">Submit</button>
  </nb-card-body>
 </nb-card>
