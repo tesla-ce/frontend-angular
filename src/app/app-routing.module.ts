@@ -17,15 +17,11 @@ export const routes: Routes = [
     component: LauncherComponent,
   },
   {
-    path: 'plugin/youp',
+    path: 'plugin/ic',
     component: PluginComponent,
   },
   {
-      path: 'plugin/ic',
-      component: PluginComponent,
-  },
-  {
-      path: 'plugin/enrolment',
+      path: 'plugin/activity/reports',
       component: PluginComponent,
   },
   {
@@ -33,11 +29,19 @@ export const routes: Routes = [
       component: PluginComponent,
   },
   {
-      path: 'plugin/course/report',
+      path: 'plugin/activity/configuration',
       component: PluginComponent,
   },
   {
-      path: 'plugin/activity/configuration',
+      path: 'plugin/enrolment',
+      component: PluginComponent,
+  },
+  {
+      path: 'plugin/test-page',
+      component: PluginComponent,
+  },
+  {
+      path: 'plugin/dashboard',
       component: PluginComponent,
   },
   {
