@@ -28,6 +28,7 @@ import { CourseListComponent } from './course-list/course-list.component';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { SharedModule } from '../../shared/shared.module';
+import { BackToLMSModule } from '../../common/lms/back-to-lms.module';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { SharedModule } from '../../shared/shared.module';
     NbTabsetModule,
     PdfViewerModule,
     SharedModule,
+    BackToLMSModule,
   ],
   declarations: [
     CourseComponent,
