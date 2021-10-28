@@ -53,11 +53,7 @@ export class UpdateComponent implements OnInit {
       else {
         this.data[key] = this.fields[key];
         this.formControls[key] = new FormControl(
-            // this.fields[key].defaultValue ||
-            // (this.instance[key] && (Array.isArray(this.instance[key]) ||
-            //   typeof this.instance[key] !== 'object')) ? this.instance[key] :
-            // null
-            this.instance[key],
+            this.fields[key].dataType === 'json' ? JSON.stringify(this.instance[key]) : this.instance[key],
             this.fields[key]?.validator ? this.fields[key].validator() : null);
       }
     });
