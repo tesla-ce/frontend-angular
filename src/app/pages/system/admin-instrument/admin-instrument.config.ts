@@ -64,7 +64,7 @@ export const AdminInstrumentConfig = {
         showable: true,
         editable: true,
         key: 'options_schema',
-        dataType: 'string',
+        dataType: 'json',
         label: 'Options Schema',
         inputType: 'textarea',
         inputName: 'options_schema-input-name',
