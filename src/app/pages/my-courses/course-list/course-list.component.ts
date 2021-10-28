@@ -35,9 +35,6 @@ export class CourseListComponent implements OnInit {
       code: {
         title: 'Code',
       },
-      description: {
-        title: 'Description',
-      },
       start: {
         title: 'Start',
       },

@@ -107,7 +107,8 @@ export class AuthService extends AuthUserData {
                   if (user.roles.includes('LEARNER')) {
                     http.get(envService.apiUrl + '/institution/' + user.institution.id.toString() + '/learner/' + user.id)
                       .subscribe((learner: any) => {
-                        if (learner.ic_status.startsWith('NOT_VALID')) this.router.navigate(['/learner/ic'],{
+                        if (learner.ic_status.startsWith('NOT_VALID')) this.router.navigate(['/learner/ic'],
+                        {
                           queryParams: {
                             redirect_uri: params['redirect_uri'],
                           },
