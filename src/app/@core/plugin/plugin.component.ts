@@ -94,6 +94,12 @@ export class PluginComponent implements OnInit {
             redirect_uri: params['redirect_uri'],
           }});
           break;
+        case '/plugin/course':
+            this.router.navigate([`/course/${params.course_id}`],
+            { queryParams: {
+              redirect_uri: params['redirect_uri'],
+            }});
+            break;
         case '/plugin/enrolment':
           this.router.navigate(['/enrolment'],
           { queryParams: {

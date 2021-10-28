@@ -78,9 +78,6 @@ export class CourseActivityListComponent implements OnInit {
               vle_activity_type: {
                 title: 'Type',
               },
-              description: {
-                title: 'Description',
-              },
               start: {
                 title: 'Start',
               },
