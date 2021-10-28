@@ -4,6 +4,8 @@ set -e
 
 ME=$(basename $0)
 
+export VERSION=$(cat /usr/share/nginx/html/ui/frontend_version)
+
 auto_envsubst() {
   local defined_envs
   defined_envs=$(printf '${%s} ' $(env | cut -d= -f1))
