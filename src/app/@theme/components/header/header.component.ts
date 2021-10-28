@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public readonly materialTheme$: Observable<boolean>;
   userPictureOnly: boolean = false;
   user: InstitutionUser;
-  defaultPicture = '../../../../assets/images/avatar-placeholder.png';
+  defaultPicture = '/ui/assets/images/avatar-placeholder.png';
 
   themes = [
     // {
