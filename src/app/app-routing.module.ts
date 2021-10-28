@@ -21,28 +21,32 @@ export const routes: Routes = [
     component: PluginComponent,
   },
   {
-      path: 'plugin/activity/reports',
-      component: PluginComponent,
+    path: 'plugin/activity/reports',
+    component: PluginComponent,
   },
   {
-      path: 'plugin/activity/report',
-      component: PluginComponent,
+    path: 'plugin/activity/report',
+    component: PluginComponent,
   },
   {
-      path: 'plugin/activity/configuration',
-      component: PluginComponent,
+    path: 'plugin/activity/configuration',
+    component: PluginComponent,
   },
   {
-      path: 'plugin/enrolment',
-      component: PluginComponent,
+    path: 'plugin/course',
+    component: PluginComponent,
   },
   {
-      path: 'plugin/test-page',
-      component: PluginComponent,
+    path: 'plugin/enrolment',
+    component: PluginComponent,
   },
   {
-      path: 'plugin/dashboard',
-      component: PluginComponent,
+    path: 'plugin/test-page',
+    component: PluginComponent,
+  },
+  {
+    path: 'plugin/dashboard',
+    component: PluginComponent,
   },
   {
     path: 'dashboard',
