@@ -14,6 +14,7 @@ export interface Institution {
   allow_learner_audit?: boolean;
   allow_valid_audit?: boolean;
   external_ic?: boolean;
+  allowed_domains?: boolean;
 }
 
 export interface User {
@@ -40,6 +41,7 @@ export interface User {
   groups: string[];
   user_permissions: string[];
   institution?: Institution;
+  institution_id?: number;
 }
 
 export interface InstitutionUser extends User {

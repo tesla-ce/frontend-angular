@@ -1,4 +1,5 @@
-// import { Institution } from './users';
+import {Activity} from './activity';
+import { VLE } from './vle';
 
 export interface Course {
     id: number;
@@ -6,9 +7,9 @@ export interface Course {
     description: string;
     start: Date;
     end: Date;
-    //   institution: Institution;
-    //   created_at: Date;
-    //   updated_at: Date;
-    // roles: string;
-    // date_joined: Date;
+    vle?: VLE;
+    vle_course_id: string;
+    enabled: boolean;
+    user_roles?: Array<'LEARNER' | 'INSTRUCTOR'>;
+    activities?: Array<Activity>;
 }

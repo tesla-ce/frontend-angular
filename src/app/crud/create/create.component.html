@@ -4,6 +4,10 @@
             <div class="form-group" [ngSwitch]="field.value.inputType" style="margin-bottom: 0.75rem;">
 
                 <label [for]="field.value.inputName" class="label">{{field.value.label || field.key}}</label>
+                
+                <!-- case check box -->
+                <br><nb-checkbox *ngSwitchCase="'check-box'" [formControl]="formControls[field.key]" [formControlName]="field.key"></nb-checkbox>
+                
                 <!-- case select -->
                 <nb-select fullWidth *ngSwitchCase="'select'"
                 [required]="field.value.required || false"
@@ -57,6 +61,9 @@
                     <nb-datepicker #dateTimePicker></nb-datepicker>
                 </div>
                 
+                <!-- textarea input -->
+                <textarea *ngSwitchCase="'textarea'" nbInput fullWidth [placeholder]="field.value.placeholder || null" [formControl]="formControls[field.key]"></textarea>
+
                 <!-- default input -->
                 <input *ngSwitchDefault nbInput fullWidth [type]="field.value.inputType || text"
                     [id]="field.value.inputName || field.key" [name]="field.value.inputName || field.key"
@@ -84,7 +91,7 @@
         </div>
     </div>
     <button *ngIf="!loading" nbButton type="submit" [disabled]="!formGroup.valid">Submit</button>
-    <p>
-        <!-- {{ formGroup.status }} -->
-    </p>
+    <!-- <p>
+        {{ formGroup.status }}
+    </p> -->
 </form>

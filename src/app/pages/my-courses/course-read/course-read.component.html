@@ -19,7 +19,7 @@
                     <div class="form-group-control-column">
                         <label [for]="fields['description'].inputName" class="label">
                             {{fields['description'].label}}</label>
-                        <p>{{instance.description || ""}}</p>
+                        <p [innerHtml]="instance.description"></p>
                     </div>
                 </div>
                 <div class="form-group-row">

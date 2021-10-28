@@ -47,7 +47,7 @@ export class ReadComponent implements OnInit {
 
         } else if (typeof this.instance[key] === 'object') {
           if (this.fields[key].optionLabelAccessor && this.instance[key]) {
-            editedValue = this.instance?.[key]?.[this.fields[key].optionLabelAccessor] || 'Lost Label';
+            editedValue = this.instance?.[key]?.[this.fields[key].optionLabelAccessor];
           }
         } else if (this.fields[key].defaultValue) {
           editedValue = this.fields[key].defaultValue;

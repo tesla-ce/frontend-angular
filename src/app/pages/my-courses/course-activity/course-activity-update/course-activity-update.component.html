@@ -30,7 +30,7 @@
                 <label [for]="fields['description'].inputName" class="label"  [class.text-disabled]="instance.enabled!==true">
                     {{ fields['description'].label }}
                 </label>
-                <p  [class.text-disabled]="instance.enabled!==true">{{ instance.description }}</p>
+                <p  [class.text-disabled]="instance.enabled!==true" [innerHtml]="instance.description"></p>
                 <label [for]="fields['start'].inputName" class="label" [class.text-disabled]="instance.enabled!==true">
                     {{ fields['start'].label }}
                 </label>

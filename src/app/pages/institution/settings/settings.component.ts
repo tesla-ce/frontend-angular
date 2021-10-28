@@ -14,6 +14,7 @@ import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 export class SettingsComponent implements OnInit {
 
   institution: Institution;
+  disabled: Boolean = true;
 
   constructor(
     private location: Location,
@@ -25,6 +26,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
       if (user) {
+        if (user.roles.indexOf('ADMIN') !== -1) this.disabled = false;
         this.apiInstitutionService.getInstitutionById(user.institution.id).subscribe((institution: Institution) => {
           this.institution = institution;
         });

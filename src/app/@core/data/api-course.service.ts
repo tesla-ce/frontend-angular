@@ -61,8 +61,12 @@ export class ApiCourseService {
       .get(`${this.endpointUrl}/institution/${institutionId}/course/${courseId}/activity/`)
       .pipe(
         map((response: any) => {
-          if (response?.results) return response.results;
-          else return [];
+          if (response?.results) {
+            return response.results.map(function (activity) {
+              activity.course_id = courseId;
+              return activity;
+            });
+          } else return [];
         }),
         catchError(this.handleError),
       );
@@ -168,6 +172,19 @@ export class ApiCourseService {
           return data;
         }),
         catchError(this.handleError));
+  }
+
+
+  // API: GET /course/:id/activity
+  public getActivityReports(institutionId: number, courseId: number, activityId: number): Observable<any> {
+    return this.http
+      .get(`${this.endpointUrl}/institution/${institutionId}/course/${courseId}/activity/${activityId}/report/`)
+      .pipe(
+        map((data: any) => {
+          return data.results;
+        }),
+        catchError(this.handleError),
+      );
   }
 
   // API: GET /course/:id/activity
