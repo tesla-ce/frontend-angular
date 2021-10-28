@@ -2,7 +2,7 @@ import { of as observableOf, Observable, BehaviorSubject, PartialObserver, Subje
 import { Injectable } from '@angular/core';
 import { NbAuthService, NbAuthOAuth2JWTToken } from '@nebular/auth';
 import { NbRoleProvider } from '@nebular/security';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { User, Institution, InstitutionUser } from '../models/user';
 import { EnvService } from '../env/env.service';
@@ -87,85 +87,52 @@ export class AuthService extends AuthUserData {
     });
   }
 
-  constructor(private authService: NbAuthService, protected http: HttpClient, protected router: Router,
+  constructor(
+    private authService: NbAuthService,
+    protected http: HttpClient,
+    protected router: Router,
+    protected route: ActivatedRoute,
     private envService: EnvService) {
     super();
     this.authService.onTokenChange()
       .subscribe((token: NbAuthOAuth2JWTToken) => {
-        if (token.isValid()) {
-          const url = envService.apiUrl + '/auth/profile';
-          this.http.get(url).subscribe((user: InstitutionUser) => {
-            if (user) {
-              this._isAdmin = user.is_admin;
-              if (user.institution) {
-                // CHECK IC ONLY FOR LEARNERS
-                if (user.roles.includes('LEARNER')) {
-                  http.get(envService.apiUrl + '/institution/' + user.institution.id.toString() + '/learner/' + user.id)
-                    .subscribe((learner: any) => {
-                      if (learner.ic_status.startsWith('NOT_VALID')) this.router.navigateByUrl('/learner/ic');
-                    });
-                }
-              } else {
-                // When user has no assigned institution, take first available institution
-                if (user.institutions.length > 0) {
-                  user.institution = user.institutions[0];
-                  const userSelectedInstitution = localStorage.getItem('institution');
-                  if (userSelectedInstitution) {
-                    user.institution = user.institutions.filter(institution => institution.id.toString() === userSelectedInstitution)[0];
+        this.route.queryParams.subscribe(params => {
+          if (token.isValid()) {
+            const url = envService.apiUrl + '/auth/profile';
+            this.http.get(url).subscribe((user: InstitutionUser) => {
+              if (user) {
+                this._isAdmin = user.is_admin;
+                if (user.institution) {
+                  // CHECK IC ONLY FOR LEARNERS
+                  if (user.roles.includes('LEARNER')) {
+                    http.get(envService.apiUrl + '/institution/' + user.institution.id.toString() + '/learner/' + user.id)
+                      .subscribe((learner: any) => {
+                        if (learner.ic_status.startsWith('NOT_VALID')) this.router.navigate(['/learner/ic'],{
+                          queryParams: {
+                            redirect_uri: params['redirect_uri'],
+                          },
+                        });
+                      });
                   }
-                  user.institution.is_admin = true;
+                } else {
+                  // When user has no assigned institution, take first available institution
+                  if (user.institutions.length > 0) {
+                    user.institution = user.institutions[0];
+                    const userSelectedInstitution = localStorage.getItem('institution');
+                    if (userSelectedInstitution) {
+                      user.institution = user.institutions.filter(institution => institution.id.toString() === userSelectedInstitution)[0];
+                    }
+                    user.institution.is_admin = true;
+                  }
                 }
-              }
-              this._current_user = user;
-              this._user.next(user);
-            } else throw user;
-          });
-          // this.http.get(url).pipe(
-          //   map(( user: User ) => {
-          //     console.log("before call next!", user);
-          //     if ( user ) this._user.next(user);
-          //     else throw user;
-          //   }),
-          //   catchError(this.handleError),
-          // );
-          // let institution: Institution;
-          // let user: User | InstitutionUser = null;
-          // if (data['institution']) {
-          //   institution = Object.assign({}, {
-          //     acronym: data['institution']['acronym'],
-          //     id: data['institution']['id'],
-          //     name: data['institution']['name'],
-          //     isAdmin: false,
-          //   });
-          //   user = {
-          //     firstName: data['first_name'],
-          //     lastName: data['last_name'],
-          //     email: data['email'],
-          //     isAdmin: data['is_admin'],
-          //     fullName: data['full_name'],
-          //     locale: data['locale'],
-          //     uid: data['uid'],
-          //     username: data['username'],
-          //     roles: data['roles'],
-          //     institution,
-          //   };
-          // } else {
-          //   user = {
-          //     firstName: data['first_name'],
-          //     lastName: data['last_name'],
-          //     email: data['email'],
-          //     isAdmin: data['is_admin'],
-          //     fullName: data['full_name'],
-          //     locale: data['locale'],
-          //     username: data['username'],
-          //     roles: data['roles'],
-          //   };
-          // }
-          // this._user.next(Object.assign({}, user));
-          // });
-        } else {
-          this._user.next(null);
-        }
+                this._current_user = user;
+                this._user.next(user);
+              } else throw user;
+            });
+          } else {
+            this._user.next(null);
+          }
+        });
       });
   }
   private handleError(error: Response | any) {
