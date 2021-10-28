@@ -5,7 +5,7 @@ COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
 RUN sed -nE 's/^\s*"version": "(.*?)",$/\1/p' /usr/src/app/package.json > /usr/src/app/frontend_version
-RUN npm run build:prod
+RUN npm run build:docker
 
 ### STAGE 2: Run ###
 FROM nginx:alpine
