@@ -9,7 +9,7 @@
 @import './material/material-tesla';
 
 $nb-themes: nb-register-theme((
-  logo: url(/ui/assets/images/logo.png),
+  logo: url(/assets/images/logo.png),
   layout-padding-top: 2.25rem,
 
   menu-item-icon-margin: 0 0.5rem 0 0,
@@ -31,7 +31,7 @@ $nb-themes: nb-register-theme((
 ), default, default);
 
 $nb-themes: nb-register-theme((
-  logo: url(/ui/assets/images/logo.png),
+  logo: url(/assets/images/logo.png),
   layout-padding-top: 2.25rem,
 
   menu-item-icon-margin: 0 0.5rem 0 0,
@@ -53,7 +53,7 @@ $nb-themes: nb-register-theme((
 ), cosmic, cosmic);
 
 $nb-themes: nb-register-theme((
-  logo: url(/ui/assets/images/logo.png),
+  logo: url(/assets/images/logo.png),
   layout-padding-top: 2.25rem,
 
   menu-item-icon-margin: 0 0.5rem 0 0,
@@ -75,7 +75,7 @@ $nb-themes: nb-register-theme((
 ), corporate, corporate);
 
 $nb-themes: nb-register-theme((
-  logo: url(/ui/assets/images/logo.png),
+  logo: url(/assets/images/logo.png),
   layout-padding-top: 2.25rem,
 
   menu-item-icon-margin: 0 0.5rem 0 0,
@@ -97,7 +97,7 @@ $nb-themes: nb-register-theme((
 ), dark, dark);
 
 $nb-themes: nb-register-theme((
-  logo: url(/ui/assets/images/logo.png),
+  logo: url(/assets/images/logo.png),
   layout-padding-top: 2.25rem,
 
   menu-item-icon-margin: 0 0.5rem 0 0,
@@ -121,7 +121,7 @@ $nb-themes: nb-register-theme((
 
 $nb-themes: nb-register-theme((
 
-  logo: url(/ui/assets/images/logo-tesla-ce/logo-tesla-ce-white.png),
+  logo: url(/assets/images/logo-tesla-ce/logo-tesla-ce-white.png),
   layout-padding-top: 2.25rem,
 
   menu-item-icon-margin: 0 0.5rem 0 0,
@@ -144,7 +144,7 @@ $nb-themes: nb-register-theme((
 ), material-tesla, material-light);
 
 $nb-themes: nb-register-theme((
-  logo: url(/ui/assets/images/logo.png),
+  logo: url(/assets/images/logo.png),
   layout-padding-top: 2.25rem,
 
   menu-item-icon-margin: 0 0.5rem 0 0,
@@ -225,7 +225,7 @@ $nb-themes: nb-register-theme((
 ), material-uoc, material-tesla);
 
 $nb-themes: nb-register-theme((
-  logo: url(/ui/assets/images/logo.png),
+  logo: url(/assets/images/logo.png),
   layout-padding-top: 2.25rem,
 
   menu-item-icon-margin: 0 0.5rem 0 0,
@@ -250,7 +250,7 @@ $nb-themes: nb-register-theme((
 $nb-themes: nb-register-theme((
 
   //Place here your theme variables
-  logo: url(/ui/assets/images/logo.png),
+  logo: url(/assets/images/logo.png),
   // color-primary-100: red,
   // color-primary-200: blue,
   // color-primary-300: magenta,
@@ -282,7 +282,7 @@ material-light);
 $nb-themes: nb-register-theme((
 
   //Place here your theme variables
-  logo: url(/ui/assets/images/logo.png),
+  logo: url(/assets/images/logo.png),
   color-primary-100: red,
   color-primary-200: #000078,
   color-primary-300: #000078,
@@ -370,7 +370,7 @@ $nb-themes: nb-register-theme((
   // color-primary-700: white,
   // color-primary-800: black,
   // color-primary-900: yellow
-  logo: url(/ui/assets/images/logo-tesla-ce/logo-tesla-ce-white.png),
+  logo: url(/assets/images/logo-tesla-ce/logo-tesla-ce-white.png),
 ),
 /*
 custom theme
