@@ -25,7 +25,7 @@ export class AdminInstrumentCreateComponent implements OnInit {
     event.options_schema = JSON.stringify(JSON.parse(event.options_schema));
     this.apiInstrumentService.createInstrument(event).subscribe((instrument: any) => {
       this.toastrService.show(
-        'User Created',
+        'Instrument Created',
         instrument.name,
         {
           position: NbGlobalPhysicalPosition.TOP_RIGHT,

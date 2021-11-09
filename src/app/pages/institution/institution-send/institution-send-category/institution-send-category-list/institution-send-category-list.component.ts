@@ -51,7 +51,7 @@ export class InstitutionSendCategoryListComponent implements OnInit {
                     enabled: true,
                   },
                   update: {
-                    enabled: false,
+                    enabled: user.roles.indexOf('ADMIN') !== -1,
                   },
                   report: {
                     enabled: false,

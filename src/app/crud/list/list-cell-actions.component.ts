@@ -17,6 +17,7 @@ export class ListCellActionsComponent implements ViewCell, OnInit {
   @Input() value;
   @Input() rowData: any;
 
+  @Output() edit: EventEmitter<any> = new EventEmitter<number>();
   @Output() remove: EventEmitter<any> = new EventEmitter<number>();
 
   ngOnInit() {
@@ -38,10 +39,14 @@ export class ListCellActionsComponent implements ViewCell, OnInit {
 
   update() {
     const path = [];
-    if (this.value && this.value.update && this.value.update.path) path.push(this.value.update.path);
-    path.push(this.rowData.id);
-    path.push('update');
-    this.router.navigate(path, { relativeTo: this.route });
+    if (this.edit.observers.length) {
+      this.edit.emit(this.rowData);
+    } else {
+      if (this.value && this.value.update && this.value.update.path) path.push(this.value.update.path);
+      path.push(this.rowData.id);
+      path.push('update');
+      this.router.navigate(path, { relativeTo: this.route });
+    }
   }
 
   delete(event) {

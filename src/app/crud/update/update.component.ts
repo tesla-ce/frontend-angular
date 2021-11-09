@@ -17,6 +17,7 @@ export class UpdateComponent implements OnInit {
   @Input() paths: any;
   @Input() errors: Observable<any>;
   @Output() save: EventEmitter<any> = new EventEmitter();
+  @Output() valueChanges: EventEmitter<any> = new EventEmitter();
 
   formControls: any;
   updateForm: FormGroup;
@@ -65,6 +66,9 @@ export class UpdateComponent implements OnInit {
     this.updateForm = new FormGroup(this.formControls);
     if (this.validator) this.updateForm.setValidators(this.validator());
     if (this.instance) this.markFormGroupTouched(this.updateForm);
+    this.updateForm.valueChanges.subscribe(value => {
+      if (this.valueChanges) this.valueChanges.emit(value);
+    });
   }
 
   onSubmit() {

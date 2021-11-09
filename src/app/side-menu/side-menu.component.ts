@@ -102,7 +102,7 @@ export class SideMenuComponent implements OnInit {
                         title: 'Settings',
                         icon: { icon: 'common-system', pack: 'tesla' },
                         link: '/institution/settings',
-                        hidden: false, // user.routes.indexOf('administration-settings') === -1,
+                        hidden: user.routes.indexOf('administration-settings') === -1,
                     },
                 ],
             },
@@ -140,7 +140,7 @@ export class SideMenuComponent implements OnInit {
                         title: 'Instruments',
                         icon: { icon: 'common-dashboard', pack: 'tesla' },
                         link: '/system/admin-instrument',
-                        hidden: false, // user.routes.indexOf('system-instruments') === -1,
+                        hidden: user.routes.indexOf('system-instruments') === -1,
                     },
                     {
                         title: 'Services',
