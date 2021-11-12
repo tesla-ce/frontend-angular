@@ -21,6 +21,7 @@ export class InstitutionUserUpdateComponent implements OnInit {
   public errors = new Subject();
   public paths = InstitutionUserConfig.paths;
   user: InstitutionUser;
+  changePasswordDisabled: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -43,6 +44,15 @@ export class InstitutionUserUpdateComponent implements OnInit {
         this.user = user;
         this.apiUserService.getInstitutionUserById(user.institution.id, this.id).subscribe(instance => {
           this.instance = instance;
+          this.changePasswordDisabled = !instance.login_allowed;
+          if (instance.institution) {
+            this.instance.locale = instance.institution.locale;
+            this.instance.uid = instance.institution.uid;
+            this.instance.inst_admin = instance.institution.roles.indexOf('ADMIN') !== -1;
+            this.instance.send_admin = instance.institution.roles.indexOf('SEND') !== -1;
+            this.instance.legal_admin = instance.institution.roles.indexOf('LEGAL') !== -1;
+            this.instance.data_admin = instance.institution.roles.indexOf('DATA') !== -1;
+          }
         });
       }
     });
@@ -106,4 +116,7 @@ export class InstitutionUserUpdateComponent implements OnInit {
       });
   }
 
+  valueChanges(value) {
+    this.changePasswordDisabled = !value.login_allowed;
+  }
 }

@@ -49,6 +49,8 @@ export class InstitutionSendCategoryUpdateComponent implements OnInit {
             this.id = params['id'];
             this.apiInstitutionService.getSendCategoryById(user.institution.id, this.id).subscribe(instance => {
               this.instance = instance;
+              this.instance.disabled_instruments = instance.data.disabled_instruments?.map(item => item + '');
+              this.instance.enabled_options = instance.data.enabled_options;
               this.loading = false;
             });
           } else {
@@ -60,28 +62,35 @@ export class InstitutionSendCategoryUpdateComponent implements OnInit {
   }
 
   onSave(event): void {
-    // this.apiInstitutionService.updateSendCategory(this.id, event).subscribe((sendCategory: any ) => {
-    //   this.toastrService.show(
-    //     'SendCategory Updated',
-    //     sendCategory.name,
-    //     {
-    //       position: NbGlobalPhysicalPosition.TOP_RIGHT,
-    //       status: 'success',
-    //       icon: 'save-outline',
-    //       duration: 2000,
-    //     });
-    // }, error => {
-    //   this.errors.next(error.error);
-    //   this.toastrService.show(
-    //     'Error saving',
-    //     'send-category',
-    //     {
-    //       position: NbGlobalPhysicalPosition.TOP_RIGHT,
-    //       status: 'danger',
-    //       icon: 'save-outline',
-    //       duration: 2000,
-    //     });
-    // });
+    const data = {
+      description: event.description,
+      data: {
+        enabled_options: event.enabled_options,
+        disabled_instruments: event.disabled_instruments,
+      },
+    };
+    this.apiInstitutionService.updateSendCategory(this.user.institution.id, this.id, data).subscribe((sendCategory: any ) => {
+      this.toastrService.show(
+        'SendCategory Updated',
+        sendCategory.name,
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'success',
+          icon: 'save-outline',
+          duration: 2000,
+        });
+    }, error => {
+      this.errors.next(error.error);
+      this.toastrService.show(
+        'Error saving',
+        'send-category',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'danger',
+          icon: 'save-outline',
+          duration: 2000,
+        });
+    });
   }
 
 }

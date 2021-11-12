@@ -217,8 +217,8 @@ export class ApiInstitutionService {
   }
 
   // API: PUT /institution/:id/send
-  public updateSendUserCategory(institutionId: number, learnerId: number, fields: any) {
-    return this.http.put(this.endpointUrl + institutionId + '/learner/' + learnerId + '/send/' , fields)
+  public updateSendUserCategory(institutionId: number, learnerId: number, sendUserCategoryId: number, fields: any) {
+    return this.http.patch(this.endpointUrl + institutionId + '/learner/' + learnerId + '/send/' + sendUserCategoryId , fields)
     .pipe(
       map((data: any) => {
         if (data.status) {

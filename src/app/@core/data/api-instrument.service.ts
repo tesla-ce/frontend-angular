@@ -86,6 +86,20 @@ export class ApiInstrumentService {
         catchError(this.handleError));
   }
 
+  // API: GET /course/:id
+  public getProviderById(instrumentId: number, providerId: number): Observable<any> {
+    return this.http
+      .get(`${this.endpointUrl}instrument/${instrumentId}/provider/${providerId}`)
+      .pipe(
+        map((course: any) => {
+          // console.log(course);
+          if (course) return course;
+          else throw course;
+        }),
+        catchError(this.handleError),
+      );
+  }
+
   // API: PUT /provider/:id/
   public updateProvider(instrumentId: number, providerId: number, fields: any): Observable<any> {
     return this.http

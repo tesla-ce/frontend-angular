@@ -138,7 +138,7 @@ export const AdminInstrumentProviderConfig = {
         key: 'credentials',
         dataType: 'string',
         label: 'Credentials',
-        inputType: 'text',
+        inputType: 'textarea',
         inputName: 'credentials-input-name',
         formControlName: 'credentials-form-control-name',
         placeholder: 'credentials',

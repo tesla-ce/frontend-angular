@@ -7,6 +7,7 @@ import {
   NbSelectModule,
   NbFormFieldModule,
   NbAutocompleteModule,
+  NbCheckboxModule,
 } from '@nebular/theme';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +23,7 @@ import { SelectRemoteModule } from '../inputs/select-remote/select-remote.module
     NbButtonModule,
     NbInputModule,
     NbAutocompleteModule,
+    NbCheckboxModule,
     NbSelectModule,
     NbFormFieldModule,
     SelectRemoteModule,

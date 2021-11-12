@@ -1,0 +1,38 @@
+<nb-card *ngIf="!selectedCategory && endpoint">
+    <nb-card-body>
+        <div>
+            <div style="flex:1; padding:15px">
+                <label class="label">Select a Send Category</label>
+                <ngx-list (externalUserRowSelect)="selectCategory($event)"  [settings]="settings" [endpoint]="endpoint"></ngx-list>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+<nb-card *ngIf="selectedCategory" style="min-width: 512px; min-height: 324px;">
+    <nb-card-body>
+        <div>
+            <div>
+                <label class="label">Selected Category</label><br>
+                {{ selectedCategory?selectedCategory.description:"" }}
+            </div>
+            <div>
+                <label class="label">Expires At</label>
+                <input nbInput 
+                fullWidth
+                [(ngModel)]="selectedDate"
+                [placeholder]="'Pick a date'"
+                [nbDatepicker]="dateTimePicker"
+                id="expires_at"
+                name="expires_at"
+                [required]="true"
+                [status]="'basic'">
+                <nb-datepicker #dateTimePicker></nb-datepicker>
+            </div>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <div style="flex:1; justify-content: flex-end; align-content: flex-end;">
+            <button (click)="onSave()" nbButton type="submit">Submit</button>
+        </div>
+    </nb-card-footer>
+</nb-card>
