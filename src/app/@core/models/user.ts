@@ -15,6 +15,8 @@ export interface Institution {
   allow_valid_audit?: boolean;
   external_ic?: boolean;
   allowed_domains?: boolean;
+  uid?: string;
+  roles?: string[];
 }
 
 export interface User {
@@ -37,11 +39,17 @@ export interface User {
   is_staff: boolean;
   is_active: boolean;
   is_admin: boolean;
+  inst_admin: boolean;
+  send_admin: boolean;
+  data_admin: boolean;
+  legal_admin: boolean;
+  login_allowed: boolean;
   date_joined: Date;
   groups: string[];
   user_permissions: string[];
   institution?: Institution;
   institution_id?: number;
+  uid?: string;
 }
 
 export interface InstitutionUser extends User {

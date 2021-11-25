@@ -11,6 +11,7 @@ import { ListCellDisabledInstrumentsComponent } from '../../institution-send-cat
 import { ListCellEnabledOptionsComponent } from '../../institution-send-category/institution-send-category-list/list-cell-enabled-options.component';
 import { InstitutionSendUserConfig } from '../institution-send-user.config';
 import { InstitutionSendUserCategoryAddComponent } from './institution-send-user-category-add.component';
+import { InstitutionSendUserCategoryEditComponent } from './institution-send-user-category-edit.component';
 
 @Component({
   selector: 'ngx-institution-send-user-update',
@@ -94,10 +95,13 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
                       instance.remove.subscribe(data => {
                           this.remove(data);
                       });
+                      instance.edit.subscribe(data => {
+                        this.edit(data);
+                    });
                     },
                     defaultValue: {
                       update: {
-                        enabled: false,
+                        enabled: true,
                       },
                       read: {
                         enabled: false,
@@ -160,13 +164,28 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
         userId: this.id,
       }})
     .onClose.subscribe(userSendCategory => {
-      if (userSendCategory) this.userSendCategories = [userSendCategory, ...this.userSendCategories];
+      // if (userSendCategory) this.userSendCategories = [userSendCategory, ...this.userSendCategories];
+      this.ngOnInit();
+    });
+  }
+
+  edit(event) {
+    this.dialog.open(
+      InstitutionSendUserCategoryEditComponent, { context: {
+        institutionId: this.user.institution.id,
+        userId: this.id,
+        sendUserCategoryId: event.id,
+      }})
+    .onClose.subscribe(userSendCategory => {
+      // if (userSendCategory) this.userSendCategories = [userSendCategory, ...this.userSendCategories];
+      this.ngOnInit();
     });
   }
 
   remove(event) {
     this.apiInstitutionService.deleteSendUserCategoryById(this.user.institution.id, this.id, event.id).subscribe(response => {
-      this.userSendCategories = this.userSendCategories.filter( userSendCategory => userSendCategory.id !== event.id );
+      // this.userSendCategories = this.userSendCategories.filter( userSendCategory => userSendCategory.id !== event.id );
+      this.ngOnInit();
     });
   }
 }

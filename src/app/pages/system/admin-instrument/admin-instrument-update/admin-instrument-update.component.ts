@@ -3,12 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { ApiInstrumentService } from '../../../../@core/data/api-instrument.service';
-import { ApiUserService } from '../../../../@core/data/api-user.service';
 import { User } from '../../../../@core/models/user';
 import { ListCellActionsComponent } from '../../../../crud/list/list-cell-actions.component';
 import { ListComponent } from '../../../../crud/list/list.component';
 import { AdminInstrumentConfig } from '../admin-instrument.config';
 import { AdminInstrumentProviderAddComponent } from './admin-instrument-provider-add.component';
+import { AdminInstrumentProviderEditComponent } from './admin-instrument-provider-edit.component';
 
 @Component({
   selector: 'ngx-admin-instrument-update',
@@ -63,6 +63,9 @@ export class AdminInstrumentUpdateComponent implements OnInit {
             instance.remove.subscribe(data => {
                 this.remove(data);
             });
+            instance.edit.subscribe(data => {
+              this.edit(data);
+          });
           },
           defaultValue: {
             read: {
@@ -98,7 +101,7 @@ export class AdminInstrumentUpdateComponent implements OnInit {
   onSave(event): void {
     this.apiInstrumentService.updateInstrument(this.id, event).subscribe((instrument: any) => {
       this.toastrService.show(
-        'User Updated',
+        'Instrument Updated',
         instrument.name,
         {
           position: NbGlobalPhysicalPosition.TOP_RIGHT,
@@ -125,6 +128,19 @@ export class AdminInstrumentUpdateComponent implements OnInit {
       AdminInstrumentProviderAddComponent, {
         context: {
           instrumentId: this.id,
+        },
+      })
+      .onClose.subscribe(data => {
+        this.list.refresh();
+      });
+  }
+
+  edit(event) {
+    this.dialog.open(
+      AdminInstrumentProviderEditComponent, {
+        context: {
+          instrumentId: this.id,
+          providerId: event.id,
         },
       })
       .onClose.subscribe(data => {

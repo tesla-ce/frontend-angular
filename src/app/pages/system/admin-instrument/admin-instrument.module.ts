@@ -26,6 +26,7 @@ import { AdminInstrumentListComponent } from './admin-instrument-list/admin-inst
 import { ReadModule } from '../../../crud/read/read.module';
 import { UpdateModule } from '../../../crud/update/update.module';
 import { AdminInstrumentProviderAddComponent } from './admin-instrument-update/admin-instrument-provider-add.component';
+import { AdminInstrumentProviderEditComponent } from './admin-instrument-update/admin-instrument-provider-edit.component';
 
 @NgModule({
   imports: [
@@ -53,6 +54,7 @@ import { AdminInstrumentProviderAddComponent } from './admin-instrument-update/a
     AdminInstrumentReadComponent,
     AdminInstrumentListComponent,
     AdminInstrumentProviderAddComponent,
+    AdminInstrumentProviderEditComponent,
   ],
 })
 export class AdminInstrumentModule {

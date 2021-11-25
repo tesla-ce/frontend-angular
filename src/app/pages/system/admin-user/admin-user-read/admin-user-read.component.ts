@@ -24,6 +24,14 @@ export class AdminUserReadComponent implements OnInit {
         this.id = params['id'];
         apiUserService.getUserById(this.id).subscribe(instance => {
           this.instance = instance;
+          if (instance.institution) {
+            this.instance.locale = instance.institution.locale;
+            this.instance.uid = instance.institution.uid;
+            this.instance.inst_admin = instance.institution.roles.indexOf('ADMIN') !== -1;
+            this.instance.send_admin = instance.institution.roles.indexOf('SEND') !== -1;
+            this.instance.legal_admin = instance.institution.roles.indexOf('LEGAL') !== -1;
+            this.instance.data_admin = instance.institution.roles.indexOf('DATA') !== -1;
+          }
         });
       } else {
         router.navigate(['../'], { relativeTo: this.route });
