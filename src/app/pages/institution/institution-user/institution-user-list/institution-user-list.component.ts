@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { AuthService } from '../../../../@core/auth/auth.service';
+import { ApiUserService } from '../../../../@core/data/api-user.service';
 import { InstitutionUser } from '../../../../@core/models/user';
 import { ListCellActionsComponent } from '../../../../crud/list/list-cell-actions.component';
+import { ListComponent } from '../../../../crud/list/list.component';
 
 @Component({
   selector: 'ngx-institution-user-list',
@@ -10,14 +13,20 @@ import { ListCellActionsComponent } from '../../../../crud/list/list-cell-action
 })
 export class InstitutionUserListComponent implements OnInit {
 
+  @ViewChild('list') list: ListComponent;
   endpoint: String;
-
+  user: InstitutionUser;
   settings: any;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private apiUserService: ApiUserService,
+    private toastrService: NbToastrService,
+  ) { }
 
   ngOnInit(): void {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
+      this.user = user;
       if (user) {
         this.settings = {
           columns: {
@@ -27,6 +36,11 @@ export class InstitutionUserListComponent implements OnInit {
               sort: false,
               filter: false,
               renderComponent: ListCellActionsComponent,
+              onComponentInitFunction: (instance) => {
+                instance.remove.subscribe(data => {
+                    this.remove(data);
+                });
+              },
               defaultValue: {
                 read: {
                   enabled: true,
@@ -66,6 +80,31 @@ export class InstitutionUserListComponent implements OnInit {
         };
         this.endpoint = `/institution/${user.institution.id}/user`;
       }
+    });
+  }
+
+  remove(data): void {
+    this.apiUserService.deleteInstitutionUserById(data.id, this.user.institution.id).subscribe((user: any) => {
+      this.toastrService.show(
+        'User deleted',
+        '',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'success',
+          icon: 'save-outline',
+          duration: 2000,
+        });
+      this.list.refresh();
+    }, error => {
+      this.toastrService.show(
+        'Error',
+        '',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'danger',
+          icon: 'save-outline',
+          duration: 2000,
+        });
     });
   }
 

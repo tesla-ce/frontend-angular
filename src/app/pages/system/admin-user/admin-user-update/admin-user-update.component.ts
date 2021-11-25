@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
@@ -25,6 +26,7 @@ export class AdminUserUpdateComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private dialog: NbDialogService,
+    private location: Location,
     private apiUserService: ApiUserService,
     private toastrService: NbToastrService) {
     this.route.params.subscribe(params => {
@@ -50,6 +52,8 @@ export class AdminUserUpdateComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  back() { this.location.back(); }
 
   onSave(event): void {
     this.apiUserService.updateUser(this.id, event).subscribe((user: User) => {

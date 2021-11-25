@@ -1,5 +1,5 @@
 import { parseParams } from './../utils/utils';
-import { Institution } from './../models/institution';
+import { Institution } from './../models/user';
 import { Injectable } from '@angular/core';
 import { } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -7,7 +7,6 @@ import { Observable } from 'rxjs/Observable';
 import { catchError, map } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { EnvService } from '../env/env.service';
-import { AuthService } from '../auth/auth.service';
 import { InstitutionUser } from '../models/user';
 
 @Injectable({
@@ -23,7 +22,6 @@ export class ApiInstitutionService {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService,
     private envService: EnvService) {
     this.apiUrl = envService.apiUrl;
     // this.authService.getInstitution().subscribe((institution: Institution) => this.institution = institution);
@@ -112,7 +110,7 @@ export class ApiInstitutionService {
      catchError(this.handleError));
   }
 
-  // API: DELETE /course/:id/activity/:id/instrument/:id
+  // API: DELETE /institutions/:id
   public deleteInstitutionById(institutionId: number): Observable<any> {
     return this.http
       .delete(`${this.apiUrl}/admin/institution/${institutionId}/`)

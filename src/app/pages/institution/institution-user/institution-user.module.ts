@@ -8,6 +8,7 @@ import {
   NbSelectModule,
   NbIconModule,
   NbFormFieldModule,
+  NbActionsModule,
 } from '@nebular/theme';
 
 import { InstitutionUserComponent } from './institution-user.component';
@@ -38,6 +39,7 @@ import { InstitutionUserChangePasswordComponent } from './institution-user-updat
     NbInputModule,
     NbSelectModule,
     NbFormFieldModule,
+    NbActionsModule,
     NbIconModule,
     ListModule,
     CreateModule,

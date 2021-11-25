@@ -1,5 +1,16 @@
 <nb-card *ngIf="instance">
-    <nb-card-header>Update User {{id}}</nb-card-header>
+    <nb-card-header class="tesla-card-header">
+        <nb-actions>
+          <nb-action>
+            <button nbButton size="tiny" (click)="back()">
+              <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+            </button>
+          </nb-action>
+          <nb-action>
+          </nb-action>
+        </nb-actions>
+        Update User {{id}}
+    </nb-card-header>
     <nb-card-body class="example-items-rows">
         <ngx-update (valueChanges)="valueChanges($event)" (save)="onSave($event)" [fields]="fields" [errors]="errors"  [paths]="paths" [instance]="instance"></ngx-update>
     </nb-card-body>

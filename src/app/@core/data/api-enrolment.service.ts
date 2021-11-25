@@ -1,5 +1,5 @@
 import { parseParams } from './../utils/utils';
-import { Institution } from './../models/institution';
+import { Institution } from './../models/user';
 import { Injectable } from '@angular/core';
 import { } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';

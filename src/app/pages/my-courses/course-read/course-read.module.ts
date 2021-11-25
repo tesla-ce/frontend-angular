@@ -30,7 +30,6 @@ import { CourseActivityListComponent } from '../course-activity/course-activity-
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { SharedModule } from '../../../shared/shared.module';
-import { BackToLMSModule } from '../../../common/lms/back-to-lms.module';
 
 
 @NgModule({
@@ -57,7 +56,6 @@ import { BackToLMSModule } from '../../../common/lms/back-to-lms.module';
     NbTabsetModule,
     CourseActivityModule,
     SharedModule,
-    BackToLMSModule,
   ],
   declarations: [
     // DataDisplayComponent,

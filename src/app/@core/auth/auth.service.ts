@@ -8,6 +8,7 @@ import { User, Institution, InstitutionUser } from '../models/user';
 import { EnvService } from '../env/env.service';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { catchError, map } from 'rxjs/operators';
+import { ApiInstitutionService } from '../data/api-institution.service';
 // import { apiConstants } from '../data/api-constants';
 
 
@@ -92,6 +93,7 @@ export class AuthService extends AuthUserData {
     protected http: HttpClient,
     protected router: Router,
     protected route: ActivatedRoute,
+    private apiInstitutionService: ApiInstitutionService,
     private envService: EnvService) {
     super();
     this.authService.onTokenChange()
@@ -107,12 +109,22 @@ export class AuthService extends AuthUserData {
                   if (user.roles.includes('LEARNER')) {
                     http.get(envService.apiUrl + '/institution/' + user.institution.id.toString() + '/learner/' + user.id)
                       .subscribe((learner: any) => {
-                        if (learner.ic_status.startsWith('NOT_VALID')) this.router.navigate(['/learner/ic'],
-                        {
-                          queryParams: {
-                            redirect_uri: params['redirect_uri'],
-                          },
-                        });
+                        if (learner.ic_status.startsWith('NOT_VALID')) {
+                          this.apiInstitutionService.getInstitutionById(user.institution ? user.institution.id : user.institutions[0].id)
+                            .subscribe((institution: Institution) => {
+                              const allowedDomains = institution.allowed_domains.split(',');
+                              let isAllowed = false;
+                              const redirectUri = params['redirect_uri'].replace(/(^\w+:|^)\/\//, '');
+                              allowedDomains.map(allowedDomain => {
+                                if (this.test(redirectUri, allowedDomain)) isAllowed = true;
+                              });
+                              if (isAllowed) {
+                                localStorage.setItem('lms_redirect_uri', params['redirect_uri']);
+                                localStorage.setItem('lms_redirect_uri_ts', new Date().toISOString());
+                              }
+                              this.router.navigate(['/learner/ic']);
+                            });
+                        }
                       });
                   }
                 } else {
@@ -136,6 +148,15 @@ export class AuthService extends AuthUserData {
         });
       });
   }
+
+  test(domain, pattern) {
+    if (pattern.startsWith('*.')) {
+      if (pattern.slice(2) === domain) return true;
+    }
+    const regexp = new RegExp(`^${pattern.replace(/\./g, '\\.').replace(/\*/g, '.*?')}\$`);
+    return regexp.test(domain);
+  }
+
   private handleError(error: Response | any) {
     console.error('ApiService::handleError', error);
     return ErrorObservable.create(error);

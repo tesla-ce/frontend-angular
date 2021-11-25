@@ -161,7 +161,7 @@ export const InstitutionUserConfig = {
     //   dataType: 'string',
     //   label: 'GLOBAL_ADMIN',
     //   inputType: 'check-box',
-    defaultValue: false,
+    //   defaultValue: false,
     //   inputName: 'is_staff-input-name',
     //   formControlName: 'is_staff-form-control-name',
     //   required: false,

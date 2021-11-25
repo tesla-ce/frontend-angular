@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
@@ -5,7 +6,7 @@ import { of as observableOf, Observable, Subject } from 'rxjs';
 import { AuthService } from '../../../../../@core/auth/auth.service';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
 import { ApiInstitutionService } from '../../../../../@core/data/api-institution.service';
-import { InstitutionUser, User } from '../../../../../@core/models/user';
+import { InstitutionUser } from '../../../../../@core/models/user';
 import { InstitutionSendCategoryConfig } from '../institution-send-category.config';
 
 @Component({
@@ -28,6 +29,7 @@ export class InstitutionSendCategoryCreateComponent implements OnInit {
     private apiInstitutionService: ApiInstitutionService,
     private toastService: NbToastrService,
     private router: Router,
+    private location: Location,
     ) {
   }
 
@@ -47,6 +49,8 @@ export class InstitutionSendCategoryCreateComponent implements OnInit {
       }
     });
   }
+
+  back() { this.location.back(); }
 
   onSave(event): void {
     const data: any = {

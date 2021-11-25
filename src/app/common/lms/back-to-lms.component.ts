@@ -12,16 +12,9 @@ export class BackToLMSComponent implements OnInit {
   redirectUri: string;
   allowedDomains: String[] = ['www.example.com'];
 
-  constructor(private route: ActivatedRoute) {
-
-    this.route.queryParams.subscribe(params => {
-      if (params['redirect_uri']) {
-        const domain = (new URL(params['redirect_uri'])).hostname;
-        // TO DO: Allowed domains control
-        // if (this.allowedDomains.indexOf(domain) !== -1 ) this.redirectUri = params['redirect_uri'];
-        this.redirectUri = params['redirect_uri'];
-      }
-    });
+  constructor() {
+    const ttl = new Date(new Date(localStorage.getItem('lms_redirect_uri_ts')).getTime() + 5 * 60000);
+    if (new Date() < ttl) this.redirectUri = localStorage.getItem('lms_redirect_uri');
   }
 
   ngOnInit() {

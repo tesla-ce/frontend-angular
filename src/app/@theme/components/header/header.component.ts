@@ -76,6 +76,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   userMenu = [
     { title: 'Profile', target: 'profile' },
+    { title: 'Biometric', target: 'biometric' },
     { title: 'Informed Consent' , target: 'ic'},
     { title: 'Log out' }];
 
@@ -171,6 +172,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         return false;
       } else if (event.item.target === 'profile') {
         this.router.navigate(['/profile']);
+        return false;
+      } else if (event.item.target === 'biometric') {
+        this.router.navigate(['/profile/biometric']);
         return false;
       }
     });

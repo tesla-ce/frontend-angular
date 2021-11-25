@@ -70,6 +70,33 @@ export class CourseReportListComponent implements OnInit {
     },
   };
 
+  availableLevels = [
+    // {
+    //   value: 0,
+    //   key: 'Pending',
+    // },
+    // {
+    //   value: 1,
+    //   key: 'No information',
+    // },
+    {
+      value: 2,
+      key: 'OK',
+    },
+    {
+      value: 3,
+      key: 'Warning',
+    },
+    {
+      value: 4,
+      key: 'Alert',
+    },
+  ];
+
+  selectedIdentity: number;
+  selectedContent: number;
+  selectedIntegrity: number;
+
   constructor(
     private authService: AuthService,
     private apiCourseService: ApiCourseService,
@@ -122,5 +149,23 @@ export class CourseReportListComponent implements OnInit {
         });
       }
     });
+  }
+
+  selectedChangeIdentity(event) {
+    // console.log(event);
+  }
+
+  selectedChangeContent(event) {
+    // console.log(event);
+  }
+
+  selectedChangeIntegrity(event) {
+    // console.log(event);
+  }
+
+  resetFilters() {
+    this.selectedIdentity = -1;
+    this.selectedContent = -1;
+    this.selectedIntegrity = -1;
   }
 }

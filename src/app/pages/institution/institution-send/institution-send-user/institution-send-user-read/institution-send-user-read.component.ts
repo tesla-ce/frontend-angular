@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiUserService } from '../../../../../@core/data/api-user.service';
@@ -18,6 +19,7 @@ export class InstitutionSendUserReadComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private location: Location,
     private apiUserService: ApiUserService) {
     this.route.params.subscribe(params => {
       if (params['id'] != null) {
@@ -33,5 +35,7 @@ export class InstitutionSendUserReadComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  back() { this.location.back(); }
 
 }

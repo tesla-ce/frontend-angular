@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
@@ -23,6 +24,7 @@ export class InstitutionUserCreateComponent implements OnInit {
     private apiUserService: ApiUserService,
     private authService: AuthService,
     private toastrService: NbToastrService,
+    private location: Location,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -42,7 +44,7 @@ export class InstitutionUserCreateComponent implements OnInit {
           icon: 'save-outline',
           duration: 2000,
         });
-      this.router.navigate(['/institution/institution-user/']);
+      this.router.navigate(['/institution/user/']);
     }, error => {
       this.errors.next(error.error);
       this.toastrService.show(
@@ -56,4 +58,6 @@ export class InstitutionUserCreateComponent implements OnInit {
         });
     });
   }
+
+  back() { this.location.back(); }
 }

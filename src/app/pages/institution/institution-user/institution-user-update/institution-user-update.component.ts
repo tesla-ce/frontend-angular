@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
@@ -27,6 +28,7 @@ export class InstitutionUserUpdateComponent implements OnInit {
     private router: Router,
     private dialog: NbDialogService,
     private authService: AuthService,
+    private location: Location,
     private apiUserService: ApiUserService,
     private toastrService: NbToastrService) {
     this.route.params.subscribe(params => {
@@ -57,6 +59,8 @@ export class InstitutionUserUpdateComponent implements OnInit {
       }
     });
   }
+
+  back() { this.location.back(); }
 
   onSave(event): void {
     this.apiUserService.updateInstitutionUser(this.user.institution.id, this.id, event).subscribe((user: User) => {

@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
@@ -49,6 +50,7 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
     private apiInstitutionService: ApiInstitutionService,
     private apiCourseService: ApiCourseService,
     private authService: AuthService,
+    private location: Location,
     private dialog: NbDialogService,
     private toastrService: NbToastrService) {
     this.route.params.subscribe(params => {
@@ -182,10 +184,31 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
     });
   }
 
-  remove(event) {
-    this.apiInstitutionService.deleteSendUserCategoryById(this.user.institution.id, this.id, event.id).subscribe(response => {
-      // this.userSendCategories = this.userSendCategories.filter( userSendCategory => userSendCategory.id !== event.id );
-      this.ngOnInit();
+  remove(data): void {
+    this.apiInstitutionService.deleteSendUserCategoryById(this.user.institution.id, this.id, data.id).subscribe(response => {
+      this.toastrService.show(
+        'User Send Category deleted',
+        '',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'success',
+          icon: 'save-outline',
+          duration: 2000,
+        });
+        this.ngOnInit();
+    },
+    error => {
+      this.toastrService.show(
+        'Error',
+        '',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'danger',
+          icon: 'save-outline',
+          duration: 2000,
+        });
     });
   }
+
+  back() { this.location.back(); }
 }
