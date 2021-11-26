@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { ApiUserService } from '../../../../@core/data/api-user.service';
+import { EnvService } from '../../../../@core/env/env.service';
 import { InstitutionUser, User } from '../../../../@core/models/user';
 import { InstitutionUserConfig } from '../institution-user.config';
 
@@ -20,6 +21,7 @@ export class InstitutionUserReadComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private envService: EnvService,
     private location: Location,
     private authService: AuthService,
     private apiUserService: ApiUserService) {
@@ -46,6 +48,7 @@ export class InstitutionUserReadComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fields.locale.options = this.envService.availableLocales.map(item => ({ key: item, value: item }));
   }
 
   back() { this.location.back(); }

@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiUserService } from '../../../../@core/data/api-user.service';
+import { EnvService } from '../../../../@core/env/env.service';
 import { User } from '../../../../@core/models/user';
 import { AdminUserConfig } from '../admin-user.config';
 
@@ -20,6 +21,7 @@ export class AdminUserReadComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
+    // private envService: EnvService,
     private apiUserService: ApiUserService) {
     this.route.params.subscribe(params => {
       if (params['id'] != null) {
@@ -42,6 +44,7 @@ export class AdminUserReadComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.fields.locale.options = this.envService.availableLocales.map(item => ({ key: item, value: item }));
   }
 
   back() { this.location.back(); }

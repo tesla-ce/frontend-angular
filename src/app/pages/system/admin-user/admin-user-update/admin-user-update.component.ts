@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { ApiUserService } from '../../../../@core/data/api-user.service';
+import { EnvService } from '../../../../@core/env/env.service';
 import { InstitutionUser, User } from '../../../../@core/models/user';
 import { AdminUserConfig } from '../admin-user.config';
 import { AdminUserChangePasswordComponent } from './admin-user-change-password.component';
@@ -28,6 +29,7 @@ export class AdminUserUpdateComponent implements OnInit {
     private dialog: NbDialogService,
     private location: Location,
     private apiUserService: ApiUserService,
+    // private envService: EnvService,
     private toastrService: NbToastrService) {
     this.route.params.subscribe(params => {
       if (params['id'] != null) {
@@ -51,6 +53,7 @@ export class AdminUserUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.fields.locale.options = this.envService.availableLocales.map(item => ({ key: item, value: item }));
   }
 
   back() { this.location.back(); }

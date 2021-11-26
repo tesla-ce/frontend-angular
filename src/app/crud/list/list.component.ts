@@ -93,8 +93,12 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     this.source.setPaging(1, +perPage, true);
   }
 
-  refresh() {
+  refresh(): void {
     this.source.refresh();
+  }
+
+  setFilter(filters: any, andOperator: boolean): void {
+    this.source.setFilter(filters, andOperator);
   }
 }
 

@@ -3,6 +3,7 @@ import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { AuthService } from '../../../@core/auth/auth.service';
 import { ApiUserService } from '../../../@core/data/api-user.service';
+import { EnvService } from '../../../@core/env/env.service';
 import { InstitutionUser } from '../../../@core/models/user';
 import { doublePasswordCheck } from '../../../@core/utils/validators';
 
@@ -18,32 +19,8 @@ export class BasicComponent implements OnInit {
   big_fonts: boolean = false;
   text_to_speech: boolean = false;
   loading: boolean = true;
-  availableLanguages = [
-    {
-      value: 'en',
-      key: 'en',
-    },
-    {
-      value: 'es',
-      key: 'es',
-    },
-    {
-      value: 'ca',
-      key: 'ca',
-    },
-    {
-      value: 'bg',
-      key: 'bg',
-    },
-    {
-      value: 'fi',
-      key: 'fi',
-    },
-    {
-      value: 'tr',
-      key: 'tr',
-    },
-  ];
+  availableLanguages: { key: string; value: string; }[] = [];
+  selectedLanguage: string;
 
   public errors = new Subject();
   validator = doublePasswordCheck;
@@ -74,13 +51,16 @@ export class BasicComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private apiUserService: ApiUserService,
+    private envService: EnvService,
     private toastrService: NbToastrService,
   ) { }
 
   ngOnInit(): void {
+    this.availableLanguages = this.envService.availableLocales.map(item => ({ key: item, value: item }));
     this.authService.getUser().subscribe((user: InstitutionUser) => {
       if (user) {
         this.user = user;
+        this.selectedLanguage = this.user.locale;
         this.loading = false;
       }
     });
@@ -100,7 +80,7 @@ export class BasicComponent implements OnInit {
   }
 
   changePassword(data) {
-    this.apiUserService.updateUser(this.user.id, data).subscribe((user: InstitutionUser) => {
+    this.apiUserService.updateInstitutionUser(this.user.institution.id, this.user.id, data).subscribe((user: InstitutionUser) => {
       this.toastrService.show(
         'User Updated',
         user.username,
@@ -110,6 +90,33 @@ export class BasicComponent implements OnInit {
           icon: 'save-outline',
           duration: 2000,
         });
+    }, error => {
+      this.errors.next(error.error);
+      this.toastrService.show(
+        'Error saving',
+        'user',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'danger',
+          icon: 'save-outline',
+          duration: 2000,
+        });
+    });
+  }
+
+  changeLanguage(): void {
+    this.apiUserService.updateInstitutionUser(this.user.institution.id, this.user.id,
+      {locale: this.selectedLanguage}).subscribe((user: InstitutionUser) => {
+      this.toastrService.show(
+        'User Updated',
+        user.username,
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'success',
+          icon: 'save-outline',
+          duration: 2000,
+        });
+        this.ngOnInit();
     }, error => {
       this.errors.next(error.error);
       this.toastrService.show(

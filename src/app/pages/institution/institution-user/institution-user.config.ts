@@ -122,32 +122,7 @@ export const InstitutionUserConfig = {
       dataType: 'string',
       label: 'Language',
       inputType: 'select',
-      options: [
-        {
-          value: 'en',
-          key: 'en',
-        },
-        {
-          value: 'es',
-          key: 'es',
-        },
-        {
-          value: 'ca',
-          key: 'ca',
-        },
-        {
-          value: 'bg',
-          key: 'bg',
-        },
-        {
-          value: 'fi',
-          key: 'fi',
-        },
-        {
-          value: 'tr',
-          key: 'tr',
-        },
-      ],
+      options: [],
       inputName: 'locale-input-name',
       formControlName: 'locale-form-control-name',
       placeholder: 'en',

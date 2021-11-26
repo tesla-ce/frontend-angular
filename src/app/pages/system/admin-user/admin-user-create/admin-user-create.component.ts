@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { of as observableOf, Observable, Subject } from 'rxjs';
 import { ApiUserService } from '../../../../@core/data/api-user.service';
+import { EnvService } from '../../../../@core/env/env.service';
 import { User } from '../../../../@core/models/user';
 import { AdminUserConfig } from '../admin-user.config';
 
@@ -22,9 +23,11 @@ export class AdminUserCreateComponent implements OnInit {
     private apiUserService: ApiUserService,
     private location: Location,
     private toastrService: NbToastrService,
+    // private envService: EnvService,
     private router: Router) { }
 
   ngOnInit(): void {
+    // this.fields.locale.options = this.envService.availableLocales.map(item => ({ key: item, value: item }));
   }
 
   onSave(event): void {

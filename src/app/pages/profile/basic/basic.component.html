@@ -6,12 +6,13 @@
         <!-- case select -->
         <label class="label">Locale</label>
         <nb-select fullWidth
+            [(selected)] = "selectedLanguage"
             placeholder="Select Language...">
-            <nb-option *ngFor="let language of availableLanguages;" value="language.value">
+            <nb-option *ngFor="let language of availableLanguages;" [value]="language.value">
                 {{ language.key }}
             </nb-option>
         </nb-select><br><br>
-        <button nbButton>Change Language</button>
+        <button nbButton (click)="changeLanguage()">Change Language</button>
     </nb-card-body>
     <nb-card-footer>
         <nb-checkbox [checked]="high_contrast" (checkedChange)="toggleHighContrast($event)">Enable high contrast</nb-checkbox><br>

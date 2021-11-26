@@ -54,6 +54,6 @@
         </nb-select>
         <button nbButton (click)="resetFilters()">Reset filters</button>
         <br><br>
-        <ngx-list [settings]="settings" [endpoint]="endpoint"></ngx-list>
+        <ngx-list #list [settings]="settings" [endpoint]="endpoint"></ngx-list>
     </nb-card-body>
 </nb-card>
