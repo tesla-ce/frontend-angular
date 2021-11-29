@@ -48,8 +48,10 @@ export class SendComponent implements OnInit, AfterViewInit {
   private apiUrl: string;
   public instrumentEnrolmentStatus: LearnerEnrolment;
   // 1 -> FR
+  // 2 -> KS
   private instrumentNumSamples = {
     1: 20,
+    2: 15
   };
 
   public instrumentName = '';
@@ -147,13 +149,16 @@ export class SendComponent implements OnInit, AfterViewInit {
     this.sensorsService.newData.subscribe((data) => {
       if (data && data.sensor) {
         // send data
-        this.shutter.first.nativeElement.classList.add('on');
-        setTimeout(function(shutter) {
-          this.shutter.classList.remove('on');
-        }, 300);
+        if (this.instrumentId === 1) {
+          this.shutter.first.nativeElement.classList.add('on');
+          setTimeout(function (shutter) {
+            this.shutter.classList.remove('on');
+          }, 300);
 
-        this.photoClick.first.nativeElement.play();
-        this.connection.sendRequest('enrolment', data.b64data, data.mimeType, [1], null, data.context);
+
+          this.photoClick.first.nativeElement.play();
+        }
+        this.connection.sendRequest('enrolment', data.b64data, data.mimeType, [this.instrumentId], null, data.context);
         this.totalQueued++;
 
         if (this.totalQueued >= this.instrumentNumSamples[this.instrumentId] ) {
@@ -190,7 +195,7 @@ export class SendComponent implements OnInit, AfterViewInit {
         big_fonts: false,
         text_to_speech: false,
       },
-      instruments: [1],
+      instruments: [this.instrumentId],
       token: this.token,
       enrolment: null,
       launcher: null,
@@ -198,6 +203,7 @@ export class SendComponent implements OnInit, AfterViewInit {
       locale: 'en',
       sensors: {
         camera: [1],
+        keyboard: [2]
       },
     } as TeSLAConfiguration;
 
@@ -205,10 +211,17 @@ export class SendComponent implements OnInit, AfterViewInit {
 
     if (this.ready === true) {
       // console.log('configuring this.video');
-      this.sensorsService.setAudio(this.audio);
-      this.sensorsService.setVideo(this.video);
-      this.sensorsService.setCanvas(this.canvas);
-      this.sensorsService.enableSensors(['camera']);
+      switch(this.instrumentId) {
+        case 1:
+          this.sensorsService.setAudio(this.audio);
+          this.sensorsService.setVideo(this.video);
+          this.sensorsService.setCanvas(this.canvas);
+          this.sensorsService.enableSensors(['camera']);
+          break;
+        case 2:
+          this.sensorsService.enableSensors(['keyboard']);
+          break;
+      }
     }
 
     const config = [];

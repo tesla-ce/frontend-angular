@@ -74,7 +74,7 @@ import {Router} from '@angular/router';
     {
       provide: ErrorHandler,
       useValue: Sentry.createErrorHandler({
-        showDialog: false,
+          showDialog: false,
       }),
     },
     {
