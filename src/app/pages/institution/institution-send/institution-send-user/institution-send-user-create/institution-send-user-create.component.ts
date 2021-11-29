@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
@@ -17,7 +18,12 @@ export class InstitutionSendUserCreateComponent implements OnInit {
   validator = InstitutionSendUserConfig.validator;
   public errors = new Subject();
 
-  constructor(private apiUserService: ApiUserService, private toastrService: NbToastrService, private router: Router) { }
+  constructor(
+    private apiUserService: ApiUserService,
+    private toastrService: NbToastrService,
+    private router: Router,
+    private location: Location,
+    ) { }
 
   ngOnInit(): void {
   }
@@ -47,4 +53,6 @@ export class InstitutionSendUserCreateComponent implements OnInit {
         });
     });
   }
+
+  back() { this.location.back(); }
 }

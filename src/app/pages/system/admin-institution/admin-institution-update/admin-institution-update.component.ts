@@ -1,9 +1,10 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { ApiInstitutionService } from '../../../../@core/data/api-institution.service';
-import { Institution } from '../../../../@core/models/institution';
+import { Institution } from '../../../../@core/models/user';
 import { AdminInstitutionConfig } from '../admin-institution.config';
 
 @Component({
@@ -22,6 +23,7 @@ export class AdminInstitutionUpdateComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private location: Location,
     private apiInstitutionService: ApiInstitutionService,
     private toastrService: NbToastrService) {
     this.route.params.subscribe(params => {
@@ -63,5 +65,7 @@ export class AdminInstitutionUpdateComponent implements OnInit {
         });
     });
   }
+
+  back() { this.location.back(); }
 
 }

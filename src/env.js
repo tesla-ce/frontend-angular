@@ -7,4 +7,5 @@
   window.__env.sentryServerName = 'dev.tesla-ce.eu';
   window.__env.sentryEnabled = '1';
   window.__env.version = '0.0.1';
+  window.__env.availableLocales = ['en', 'fr'];
 }(this));

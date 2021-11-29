@@ -1,4 +1,3 @@
-<ngx-back-to-lms></ngx-back-to-lms>
 <nb-card *ngIf='!loading'>
     <nb-card-header class="tesla-card-header">
         <nb-actions>
@@ -20,6 +19,41 @@
         </nb-actions>
     </nb-card-header>
     <nb-card-body>
-        <ngx-list [settings]="settings" [endpoint]="endpoint"></ngx-list>
+        <label class="label">Identity level</label>
+        <nb-select
+            (selectedChange)="selectedChangeIdentity($event)"
+            [(selected)]="selectedIdentity"
+            placeholder="Select..."
+            style="min-width:160px;">
+            <nb-option [value]="-1">Select...</nb-option>
+            <nb-option *ngFor="let level of availableLevels;" [value]="level.value">
+                {{ level.key }}
+            </nb-option>
+        </nb-select>
+        <label class="label">Content level</label>
+        <nb-select
+            (selectedChange)="selectedChangeContent($event)"
+            [(selected)]="selectedContent"
+            placeholder="Select..."
+            style="min-width:160px;">
+            <nb-option [value]="-1">Select...</nb-option>
+            <nb-option *ngFor="let level of availableLevels;" [value]="level.value">
+                {{ level.key }}
+            </nb-option>
+        </nb-select>
+        <label class="label">Integrity level</label>
+        <nb-select
+            (selectedChange)="selectedChangeIntegrity($event)"
+            [(selected)]="selectedIntegrity"
+            placeholder="Select..."
+            style="min-width:160px; margin-right: 15px;">
+            <nb-option [value]="-1">Select...</nb-option>
+            <nb-option *ngFor="let level of availableLevels;" [value]="level.value">
+                {{ level.key }}
+            </nb-option>
+        </nb-select>
+        <button nbButton (click)="resetFilters()">Reset filters</button>
+        <br><br>
+        <ngx-list #list [settings]="settings" [endpoint]="endpoint"></ngx-list>
     </nb-card-body>
 </nb-card>

@@ -1,9 +1,11 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { of as observableOf, Observable, Subject } from 'rxjs';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { ApiUserService } from '../../../../@core/data/api-user.service';
+import { EnvService } from '../../../../@core/env/env.service';
 import { InstitutionUser, User } from '../../../../@core/models/user';
 import { InstitutionUserConfig } from '../institution-user.config';
 
@@ -23,9 +25,12 @@ export class InstitutionUserCreateComponent implements OnInit {
     private apiUserService: ApiUserService,
     private authService: AuthService,
     private toastrService: NbToastrService,
+    private envService: EnvService,
+    private location: Location,
     private router: Router) { }
 
   ngOnInit(): void {
+    this.fields.locale.options = this.envService.availableLocales.map(item => ({ key: item, value: item }));
     this.authService.getUser().subscribe((user: InstitutionUser) => {
       this.user = user;
     });
@@ -42,7 +47,7 @@ export class InstitutionUserCreateComponent implements OnInit {
           icon: 'save-outline',
           duration: 2000,
         });
-      this.router.navigate(['/institution/institution-user/']);
+      this.router.navigate(['/institution/user/']);
     }, error => {
       this.errors.next(error.error);
       this.toastrService.show(
@@ -56,4 +61,6 @@ export class InstitutionUserCreateComponent implements OnInit {
         });
     });
   }
+
+  back() { this.location.back(); }
 }

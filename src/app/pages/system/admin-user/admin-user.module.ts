@@ -8,6 +8,7 @@ import {
   NbSelectModule,
   NbIconModule,
   NbFormFieldModule,
+  NbActionsModule,
 } from '@nebular/theme';
 
 import { AdminUserComponent } from './admin-user.component';
@@ -39,6 +40,7 @@ import { AdminUserChangePasswordComponent } from './admin-user-update/admin-user
     NbSelectModule,
     NbFormFieldModule,
     NbIconModule,
+    NbActionsModule,
     ListModule,
     CreateModule,
     ReadModule,

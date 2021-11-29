@@ -12,11 +12,11 @@ const routes: Routes = [{
   component: ProfileComponent,
   children: [
     {
-      path: '',
+      path: 'biometric',
       component: BiometricComponent,
     },
     {
-      path: 'basic',
+      path: '',
       component: BasicComponent,
     },
   ],

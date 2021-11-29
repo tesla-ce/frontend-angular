@@ -1,9 +1,10 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { of as observableOf, Observable, Subject } from 'rxjs';
 import { ApiInstitutionService } from '../../../../@core/data/api-institution.service';
-import { Institution } from '../../../../@core/models/institution';
+import { Institution } from '../../../../@core/models/user';
 import { AdminInstitutionConfig } from '../admin-institution.config';
 
 @Component({
@@ -17,7 +18,11 @@ export class AdminInstitutionCreateComponent implements OnInit {
   validator = AdminInstitutionConfig.validator;
   public errors = new Subject();
 
-  constructor(private apiInstitutionService: ApiInstitutionService, private toastrService: NbToastrService, private router: Router) { }
+  constructor(
+    private apiInstitutionService: ApiInstitutionService,
+    private toastrService: NbToastrService,
+    private location: Location,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -47,4 +52,6 @@ export class AdminInstitutionCreateComponent implements OnInit {
         });
     });
   }
+
+  back() { this.location.back(); }
 }

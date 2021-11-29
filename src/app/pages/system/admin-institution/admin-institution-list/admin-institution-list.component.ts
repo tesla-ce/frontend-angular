@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { ApiInstitutionService } from '../../../../@core/data/api-institution.service';
 import { ListCellActionsComponent } from '../../../../crud/list/list-cell-actions.component';
 import { ListComponent } from '../../../../crud/list/list.component';
@@ -13,7 +14,10 @@ export class AdminInstitutionListComponent implements OnInit {
   settings: any;
   @ViewChild('list') list: ListComponent;
 
-  constructor(private apiInstitutionService: ApiInstitutionService) { }
+  constructor(
+    private apiInstitutionService: ApiInstitutionService,
+    private toastrService: NbToastrService,
+  ) { }
 
   ngOnInit(): void {
     this.settings = {
@@ -54,9 +58,28 @@ export class AdminInstitutionListComponent implements OnInit {
     };
   }
 
-  remove(event) {
-    this.apiInstitutionService.deleteInstitutionById(event.id).subscribe(response => {
+  remove(data): void {
+    this.apiInstitutionService.deleteInstitutionById(data.id).subscribe((user: any) => {
+      this.toastrService.show(
+        'Institution deleted',
+        '',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'success',
+          icon: 'save-outline',
+          duration: 2000,
+        });
       this.list.refresh();
+    }, error => {
+      this.toastrService.show(
+        'Error',
+        '',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'danger',
+          icon: 'save-outline',
+          duration: 2000,
+        });
     });
   }
 }

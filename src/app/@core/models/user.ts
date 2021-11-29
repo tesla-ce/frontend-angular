@@ -14,7 +14,7 @@ export interface Institution {
   allow_learner_audit?: boolean;
   allow_valid_audit?: boolean;
   external_ic?: boolean;
-  allowed_domains?: boolean;
+  allowed_domains?: string;
   uid?: string;
   roles?: string[];
 }

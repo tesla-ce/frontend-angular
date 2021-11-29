@@ -1,7 +1,8 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiInstitutionService } from '../../../../@core/data/api-institution.service';
-import { Institution } from '../../../../@core/models/institution';
+import { Institution } from '../../../../@core/models/user';
 import { AdminInstitutionConfig } from '../admin-institution.config';
 
 @Component({
@@ -18,6 +19,7 @@ export class AdminInstitutionReadComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private location: Location,
     private apiInstitutionService: ApiInstitutionService) {
     this.route.params.subscribe(params => {
       if (params['id'] != null) {
@@ -33,5 +35,7 @@ export class AdminInstitutionReadComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  back() { this.location.back(); }
 
 }

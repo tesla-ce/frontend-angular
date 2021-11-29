@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListCellActionsComponent } from '../../../../../crud/list/list-cell-actions.component';
 import { AuthService } from '../../../../../@core/auth/auth.service';
@@ -9,6 +9,7 @@ import { ListSubHeaderComponent } from './list-sub-header-instrument.component';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
 import { ListCellSumaryComponent } from './list-cell-sumary.component';
 import { InstitutionUser } from '../../../../../@core/models/user';
+import { ListComponent } from '../../../../../crud/list/list.component';
 
 @Component({
   selector: 'ngx-course-report-list',
@@ -16,6 +17,9 @@ import { InstitutionUser } from '../../../../../@core/models/user';
   styleUrls: ['./course-report-list.component.scss'],
 })
 export class CourseReportListComponent implements OnInit {
+
+  @ViewChild('list') list: ListComponent;
+  filter: any[] = [];
   courseId: number;
   activityId: number;
   endpoint: string;
@@ -70,6 +74,33 @@ export class CourseReportListComponent implements OnInit {
     },
   };
 
+  availableLevels = [
+    // {
+    //   value: 0,
+    //   key: 'Pending',
+    // },
+    // {
+    //   value: 1,
+    //   key: 'No information',
+    // },
+    {
+      value: 2,
+      key: 'OK',
+    },
+    {
+      value: 3,
+      key: 'Warning',
+    },
+    {
+      value: 4,
+      key: 'Alert',
+    },
+  ];
+
+  selectedIdentity: number;
+  selectedContent: number;
+  selectedIntegrity: number;
+
   constructor(
     private authService: AuthService,
     private apiCourseService: ApiCourseService,
@@ -122,5 +153,28 @@ export class CourseReportListComponent implements OnInit {
         });
       }
     });
+  }
+
+  selectedChangeIdentity(event) {
+    this.filter.push({ field: 'identity_level', search: event });
+    this.list.setFilter(this.filter, true);
+  }
+
+  selectedChangeContent(event) {
+    this.filter.push({ field: 'content_level', search: event });
+    this.list.setFilter(this.filter, true);
+  }
+
+  selectedChangeIntegrity(event) {
+    this.filter.push({ field: 'integrity_level', search: event });
+    this.list.setFilter(this.filter, true);
+  }
+
+  resetFilters() {
+    this.selectedIdentity = -1;
+    this.selectedContent = -1;
+    this.selectedIntegrity = -1;
+    this.filter = [];
+    this.list.setFilter(this.filter, true);
   }
 }

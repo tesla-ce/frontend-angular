@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
@@ -30,6 +31,7 @@ export class InstitutionSendCategoryUpdateComponent implements OnInit {
     private apiInstitutionService: ApiInstitutionService,
     private apiCourseService: ApiCourseService,
     private authService: AuthService,
+    private location: Location,
     private toastrService: NbToastrService) {}
 
   ngOnInit(): void {
@@ -60,6 +62,8 @@ export class InstitutionSendCategoryUpdateComponent implements OnInit {
       });
     });
   }
+
+  back() { this.location.back(); }
 
   onSave(event): void {
     const data = {

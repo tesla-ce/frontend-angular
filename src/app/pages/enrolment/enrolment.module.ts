@@ -16,7 +16,6 @@ import {
 import { SharedModule } from '../../shared/shared.module';
 import {EnrolmentStatusModule} from '../../common/enrolment-status/enrolment-status.module';
 import { SendComponent } from './enrolment-default/send/send.component';
-import { BackToLMSModule } from '../../common/lms/back-to-lms.module';
 // import { SensorsModule } from "@tesla-ce/sensors";
 
 @NgModule({
@@ -34,7 +33,6 @@ import { BackToLMSModule } from '../../common/lms/back-to-lms.module';
         EnrolmentStatusModule,
         NbLayoutModule,
         NbProgressBarModule,
-        BackToLMSModule,
     ],
   declarations: [
     EnrolmentComponent,

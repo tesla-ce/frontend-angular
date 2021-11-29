@@ -1,18 +1,32 @@
 import { AuthService } from './../auth/auth.service';
 import { InstitutionUser } from './../models/user';
+import { Institution } from './../models/user';
 import { Component, OnInit } from '@angular/core';
 import { nbAuthCreateToken, NbAuthOAuth2JWTToken, NbAuthService, NbAuthToken, NbTokenService } from '@nebular/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EnvService } from '../env/env.service';
+import { ApiInstitutionService } from '../data/api-institution.service';
+import * as Sentry from '@sentry/angular';
 
 @Component({
   selector: 'ngx-tesla-plugin',
   template: ``,
 })
 export class PluginComponent implements OnInit {
-  constructor(protected tokenService: NbTokenService, protected router: Router, private route: ActivatedRoute,
-    private http: HttpClient, private userAuthService: AuthService, private authService: NbAuthService, private envService: EnvService) {
+
+  allowedDomains: string[];
+
+  constructor(
+      protected tokenService: NbTokenService,
+      protected router: Router,
+      private route: ActivatedRoute,
+      private http: HttpClient,
+      private userAuthService: AuthService,
+      private authService: NbAuthService,
+      private envService: EnvService,
+      private apiInstitutionService: ApiInstitutionService,
+    ) {
 
   }
 
@@ -40,10 +54,14 @@ export class PluginComponent implements OnInit {
               this.http.get(uri).subscribe((user: InstitutionUser) => {
                 if (user) {
                   if (user.institution) {
-                    this.userAuthService.setIsAdmin(user.is_admin);
-                    this.http.get(this.envService.apiUrl + '/institution/' + user.institution.id.toString() + '/learner/' + user.id)
-                    .subscribe((learner: any) => {
-                      if (learner.ic_status.startsWith('NOT_VALID')) this.router.navigateByUrl('/learner/ic');
+                    this.apiInstitutionService.getInstitutionById(user.institution ? user.institution.id : user.institutions[0].id)
+                    .subscribe((institution: Institution) => {
+                      this.allowedDomains = institution.allowed_domains.split(',');
+                      this.userAuthService.setIsAdmin(user.is_admin);
+                      this.http.get(this.envService.apiUrl + '/institution/' + user.institution.id.toString() + '/learner/' + user.id)
+                      .subscribe((learner: any) => {
+                        if (learner.ic_status.startsWith('NOT_VALID')) this.router.navigateByUrl('/learner/ic');
+                      });
                     });
                   } else {
                     user.institution = {
@@ -63,61 +81,65 @@ export class PluginComponent implements OnInit {
           );
         });
       } else {
-        this.redirect(redirectUrl, params);
+        const uri = this.envService.apiUrl + '/auth/profile';
+        this.http.get(uri).subscribe((user: InstitutionUser) => {
+          this.apiInstitutionService.getInstitutionById(user.institution ? user.institution.id : user.institutions[0].id)
+          .subscribe((institution: Institution) => {
+            this.allowedDomains = institution.allowed_domains.split(',');
+            this.redirect(redirectUrl, params);
+          });
+        });
       }
     });
   }
 
   redirect(url, params) {
+      let isAllowed = false;
+      const redirectUri = params['redirect_uri'].replace(/(^\w+:|^)\/\//, '');
+      this.allowedDomains.map(allowedDomain => {
+        if (this.test(redirectUri, allowedDomain)) isAllowed = true;
+      });
+
+      if (isAllowed) {
+        localStorage.setItem('lms_redirect_uri', params['redirect_uri']);
+        localStorage.setItem('lms_redirect_uri_ts', new Date().toISOString());
+      } else {
+        Sentry.captureMessage(redirectUri + ' is not in the allowed domains ' + this.allowedDomains);
+      }
+
       switch (url) {
         case '/plugin/ic':
-              this.router.navigate(['/learner/ic'],
-              { queryParams: {
-                redirect_uri: params['redirect_uri'],
-              }});
+              this.router.navigate(['/learner/ic']);
           break;
         case '/plugin/activity/reports':
-            this.router.navigate([`/course/${params.course_id}/activity/${params.activity_id}/report`],
-            { queryParams: {
-              redirect_uri: params['redirect_uri'],
-            }});
+            this.router.navigate([`/course/${params.course_id}/activity/${params.activity_id}/report`]);
             break;
         case '/plugin/activity/report':
-          this.router.navigate([`/course/${params.course_id}/activity/${params.activity_id}/report/${params.report_id}`],
-          { queryParams: {
-            redirect_uri: params['redirect_uri'],
-          }});
+          this.router.navigate([`/course/${params.course_id}/activity/${params.activity_id}/report/${params.report_id}`]);
           break;
         case '/plugin/activity/configuration':
-          this.router.navigate([`/course/${params.course_id}/activity/${params.activity_id}/update`],
-          { queryParams: {
-            redirect_uri: params['redirect_uri'],
-          }});
+          this.router.navigate([`/course/${params.course_id}/activity/${params.activity_id}/update`]);
           break;
         case '/plugin/course':
-            this.router.navigate([`/course/${params.course_id}`],
-            { queryParams: {
-              redirect_uri: params['redirect_uri'],
-            }});
+            this.router.navigate([`/course/${params.course_id}`]);
             break;
         case '/plugin/enrolment':
-          this.router.navigate(['/enrolment'],
-          { queryParams: {
-            redirect_uri: params['redirect_uri'],
-          }});
+          this.router.navigate(['/enrolment']);
           break;
         case '/plugin/test-page':
-            this.router.navigate(['/test'],
-            { queryParams: {
-              redirect_uri: params['redirect_uri'],
-            }});
+            this.router.navigate(['/test']);
             break;
         default:
-            this.router.navigate(['/dashboard'],
-            { queryParams: {
-              redirect_uri: params['redirect_uri'],
-            }});
+            this.router.navigate(['/dashboard']);
             break;
       }
+  }
+
+  test(domain, pattern) {
+    if (pattern.startsWith('*.')) {
+      if (pattern.slice(2) === domain) return true;
+    }
+    const regexp = new RegExp(`^${pattern.replace(/\./g, '\\.').replace(/\*/g, '.*?')}\$`);
+    return regexp.test(domain);
   }
 }

@@ -1,11 +1,15 @@
 import { AuthService } from './../../../../@core/auth/auth.service';
-import { Component, OnInit } from '@angular/core';
-// import { apiConstants } from '../../../../@core/data/api-constants';
+import { Component,
+  OnInit,
+  ViewChild } from '@angular/core';
 import { ListCellActionsComponent } from '../../../../crud/list/list-cell-actions.component';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { InstitutionUser } from '../../../../@core/models/user';
+import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { ListComponent } from '../../../../crud/list/list.component';
+import { ApiIcService } from '../../../../@core/data/api-ic.service';
 
 @Component({
   selector: 'ngx-institution-ic-list',
@@ -13,16 +17,24 @@ import { InstitutionUser } from '../../../../@core/models/user';
   styleUrls: ['./institution-ic-list.component.scss'],
 })
 export class InstitutionIcListComponent implements OnInit {
+
+  @ViewChild('list') list: ListComponent;
   loading: boolean = true;
   endpoint: string;
+  user: InstitutionUser;
   settings: any;
 
-
-  constructor(private authService: AuthService, private datePipe: DatePipe, private router: Router, public translate: TranslateService,
+  constructor(private authService: AuthService,
+    private datePipe: DatePipe,
+    private router: Router,
+    public translate: TranslateService,
+    private apiIcService: ApiIcService,
+    private toastrService: NbToastrService,
   ) { }
 
   ngOnInit(): void {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
+      this.user = user;
       if (user) {
         this.settings = {
           columns: {
@@ -32,6 +44,11 @@ export class InstitutionIcListComponent implements OnInit {
               sort: false,
               filter: false,
               renderComponent: ListCellActionsComponent,
+              onComponentInitFunction: (instance) => {
+                instance.remove.subscribe(data => {
+                    this.remove(data);
+                });
+              },
               defaultValue: {
                 read: {
                   enabled: true,
@@ -84,6 +101,32 @@ export class InstitutionIcListComponent implements OnInit {
 
   goNew = () => {
     this.router.navigate(['/institution/institution-ic/create']);
+  }
+
+  remove(data): void {
+    this.apiIcService.deleteIcById(this.user.institution.id, data.id).subscribe((user: any) => {
+      this.toastrService.show(
+        'IC deleted',
+        '',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'success',
+          icon: 'save-outline',
+          duration: 2000,
+        });
+      this.list.refresh();
+    },
+    error => {
+      this.toastrService.show(
+        'Error',
+        '',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'danger',
+          icon: 'save-outline',
+          duration: 2000,
+        });
+    });
   }
 
 }
