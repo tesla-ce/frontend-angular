@@ -5,4 +5,5 @@
   window.__env.sentryServerName = '${SENTRY_SERVER_NAME}';
   window.__env.sentryEnabled = '${SENTRY_ENABLED}';
   window.__env.version = '${VERSION}';
+  window.__env.availableLocales = ['en', 'fr'];
 }(this));
