@@ -36,3 +36,41 @@
   height: 100%;
   width: 100%;
 }
+
+
+.enrol_fr_instrument_video{
+  width: 30%;
+  padding: 10px;
+}
+
+@media (max-width: 768px) {
+  .enrolStatus,
+  .enrolSingle,
+  .enrol_fr_instrument_instructions,
+  .enrol_fr_instrument_video{
+    width: 100%;
+  }
+}
+
+
+@media (min-width: 769px) and (max-width: 1420px) {
+  .enrolStatus {
+    width: 50%;
+  }
+  .enrolSingle {
+    width: 50%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  .enrol_fr_instrument_video{
+    width: 100%;
+  }
+}
+
+
+@media (min-width: 1200px) and (max-width: 1400px) {
+  .enrol_fr_instrument_video{
+    width: 50%;
+  }
+}
