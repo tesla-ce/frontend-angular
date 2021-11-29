@@ -8,6 +8,8 @@ import {SideMenuModule} from '../../side-menu/side-menu.module';
 import { ThemeModule } from '../../@theme/theme.module';
 import { BasicComponent } from './basic/basic.component';
 import { EnrolmentStatusModule } from '../../common/enrolment-status/enrolment-status.module';
+import { NbButtonModule, NbCardModule, NbCheckboxModule, NbSelectModule } from '@nebular/theme';
+import { CreateModule } from '../../crud/create/create.module';
 
 @NgModule({
   declarations: [ProfileComponent, BiometricComponent, BasicComponent],
@@ -17,6 +19,11 @@ import { EnrolmentStatusModule } from '../../common/enrolment-status/enrolment-s
     SharedModule,
     SideMenuModule,
     EnrolmentStatusModule,
+    NbCheckboxModule,
+    NbSelectModule,
+    NbCardModule,
+    NbButtonModule,
+    CreateModule,
   ],
 })
 export class ProfileModule { }

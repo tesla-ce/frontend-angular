@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../../@core/auth/auth.service';
@@ -25,6 +26,7 @@ export class InstitutionSendCategoryReadComponent implements OnInit {
     private router: Router,
     private apiInstitutionService: ApiInstitutionService,
     private apiCourseService: ApiCourseService,
+    private location: Location,
     private authService: AuthService) {}
 
   ngOnInit(): void {
@@ -54,4 +56,5 @@ export class InstitutionSendCategoryReadComponent implements OnInit {
     });
   }
 
+  back() { this.location.back(); }
 }

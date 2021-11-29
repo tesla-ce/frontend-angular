@@ -14,7 +14,7 @@ import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 export class SettingsComponent implements OnInit {
 
   institution: Institution;
-  disabled: Boolean = true;
+  disabled: boolean = true;
 
   constructor(
     private location: Location,

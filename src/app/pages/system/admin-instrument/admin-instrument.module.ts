@@ -9,6 +9,7 @@ import {
   NbIconModule,
   NbFormFieldModule,
   NbCheckboxModule,
+  NbActionsModule,
 } from '@nebular/theme';
 
 import { AdminInstrumentComponent } from './admin-instrument.component';
@@ -42,6 +43,7 @@ import { AdminInstrumentProviderEditComponent } from './admin-instrument-update/
     NbFormFieldModule,
     NbCheckboxModule,
     NbIconModule,
+    NbActionsModule,
     ListModule,
     CreateModule,
     ReadModule,

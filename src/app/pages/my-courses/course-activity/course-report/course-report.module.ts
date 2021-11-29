@@ -34,7 +34,6 @@ import { ListCellSumaryComponent } from './course-report-list/list-cell-sumary.c
 import { NgxEchartsModule } from 'ngx-echarts';
 import { CourseReportAuditComponent } from './course-report-audit/course-report-audit.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { BackToLMSModule } from '../../../../common/lms/back-to-lms.module';
 
 
 @NgModule({
@@ -63,7 +62,6 @@ import { BackToLMSModule } from '../../../../common/lms/back-to-lms.module';
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),
-    BackToLMSModule,
   ],
   declarations: [
     // DataDisplayComponent,

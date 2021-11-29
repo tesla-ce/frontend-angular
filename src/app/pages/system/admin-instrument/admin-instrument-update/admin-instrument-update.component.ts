@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
@@ -30,6 +31,7 @@ export class AdminInstrumentUpdateComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private dialog: NbDialogService,
+    private location: Location,
     private apiInstrumentService: ApiInstrumentService,
     private toastrService: NbToastrService) {
     this.route.params.subscribe(params => {
@@ -65,7 +67,7 @@ export class AdminInstrumentUpdateComponent implements OnInit {
             });
             instance.edit.subscribe(data => {
               this.edit(data);
-          });
+            });
           },
           defaultValue: {
             read: {
@@ -144,11 +146,57 @@ export class AdminInstrumentUpdateComponent implements OnInit {
         },
       })
       .onClose.subscribe(data => {
-        this.list.refresh();
+        if (data) {
+          if (data.acronym) {
+            this.list.refresh();
+            this.toastrService.show(
+              'Provider Updated',
+              data.name,
+              {
+                position: NbGlobalPhysicalPosition.TOP_RIGHT,
+                status: 'success',
+                icon: 'save-outline',
+                duration: 2000,
+              });
+          } else {
+            this.toastrService.show(
+            'Error saving',
+            'provider',
+            {
+              position: NbGlobalPhysicalPosition.TOP_RIGHT,
+              status: 'danger',
+              icon: 'save-outline',
+              duration: 2000,
+            });
+          }
+        }
       });
   }
 
-  remove(event): void {
-    this.list.refresh();
+  remove(data): void {
+    this.apiInstrumentService.deleteInstrumentProviderById(this.instance.id, data.id).subscribe((user: any) => {
+      this.toastrService.show(
+        'Institution deleted',
+        '',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'success',
+          icon: 'save-outline',
+          duration: 2000,
+        });
+      this.list.refresh();
+    }, error => {
+      this.toastrService.show(
+        'Error',
+        '',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'danger',
+          icon: 'save-outline',
+          duration: 2000,
+        });
+    });
   }
+
+  back() { this.location.back(); }
 }

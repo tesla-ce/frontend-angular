@@ -10,7 +10,6 @@ import { ThemeModule } from '../../@theme/theme.module';
     BackToLMSComponent,
   ],
   imports: [
-    ThemeModule,
     CommonModule,
     SharedModule,
     NbButtonModule,

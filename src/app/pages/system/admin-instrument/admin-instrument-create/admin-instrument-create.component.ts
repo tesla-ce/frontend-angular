@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
@@ -16,7 +17,11 @@ export class AdminInstrumentCreateComponent implements OnInit {
   validator = AdminInstrumentConfig.validator;
   public errors = new Subject();
 
-  constructor(private apiInstrumentService: ApiInstrumentService, private toastrService: NbToastrService, private router: Router) { }
+  constructor(
+    private apiInstrumentService: ApiInstrumentService,
+    private location: Location,
+    private toastrService: NbToastrService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -33,7 +38,7 @@ export class AdminInstrumentCreateComponent implements OnInit {
           icon: 'save-outline',
           duration: 2000,
         });
-      this.router.navigate(['/admin/admin-instrument/']);
+      this.router.navigate(['/system/admin-instrument/']);
     }, error => {
       this.errors.next(error.error);
       this.toastrService.show(
@@ -47,4 +52,6 @@ export class AdminInstrumentCreateComponent implements OnInit {
         });
     });
   }
+
+  back() { this.location.back(); }
 }

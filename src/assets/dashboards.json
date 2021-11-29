@@ -9,7 +9,7 @@
         "name": "Active Courses",
         "component": "courses",
         "cols": 10,
-        "rows": 4,
+        "rows": 6,
         "y": 0,
         "x": 0,
         "removable": false,

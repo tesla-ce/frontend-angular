@@ -72,10 +72,30 @@ export class ApiUserService {
      catchError(this.handleError));
   }
 
-  // DELETE /users/:id
-  public deleteUserById(userId: number) {
-    // will use this.http.delete()
+  // API: DELETE /users/:id
+  public deleteUserById(userId: number): Observable<any> {
+    return this.http
+      .delete(`${this.apiUrl}/admin/user/${userId}/`)
+      .pipe(
+        map((data: any) => {
+          return true;
+        }),
+        catchError(this.handleError),
+      );
   }
+
+  // API: DELETE /users/:id
+  public deleteInstitutionUserById(userId: number, institutionId: number): Observable<any> {
+    return this.http
+      .delete(`${this.apiUrl}/institution/${institutionId}/user/${userId}/`)
+      .pipe(
+        map((data: any) => {
+          return true;
+        }),
+        catchError(this.handleError),
+      );
+  }
+
 
   // API: POST /users
   public createInstitutionUser(institutionId: number, fields: any) {

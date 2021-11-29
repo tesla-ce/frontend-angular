@@ -62,6 +62,18 @@ export class ApiInstrumentService {
         catchError(this.handleError));
   }
 
+    // API: DELETE /instument/:id
+    public deleteInstrumentById(instrumentId: number): Observable<any> {
+      return this.http
+        .delete(`${this.endpointUrl}instrument/${instrumentId}/`)
+        .pipe(
+          map((data: any) => {
+            return true;
+          }),
+          catchError(this.handleError),
+        );
+    }
+
   // API: GET /provider/
   public getProviders(instrumentId: number): Observable<any[]> {
     return this.http
@@ -89,7 +101,7 @@ export class ApiInstrumentService {
   // API: GET /course/:id
   public getProviderById(instrumentId: number, providerId: number): Observable<any> {
     return this.http
-      .get(`${this.endpointUrl}instrument/${instrumentId}/provider/${providerId}`)
+      .get(`${this.endpointUrl}instrument/${instrumentId}/provider/${providerId}/`)
       .pipe(
         map((course: any) => {
           // console.log(course);
@@ -100,10 +112,23 @@ export class ApiInstrumentService {
       );
   }
 
+  // API: DELETE /instument/:id/provider/:id
+  public deleteInstrumentProviderById(instrumentId: number, providerId: number): Observable<any> {
+    return this.http
+      .delete(`${this.endpointUrl}instrument/${instrumentId}/provider/${providerId}/`)
+      .pipe(
+        map((data: any) => {
+          return true;
+        }),
+        catchError(this.handleError),
+      );
+  }
+
+
   // API: PUT /provider/:id/
   public updateProvider(instrumentId: number, providerId: number, fields: any): Observable<any> {
     return this.http
-    .post(`${this.endpointUrl}instrument/${instrumentId}/provider/${providerId}/`, fields)
+    .put(`${this.endpointUrl}instrument/${instrumentId}/provider/${providerId}/`, fields)
       .pipe(
         map((data: any) => {
           return data;

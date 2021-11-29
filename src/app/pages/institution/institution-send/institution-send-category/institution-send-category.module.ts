@@ -8,6 +8,7 @@ import {
   NbSelectModule,
   NbIconModule,
   NbFormFieldModule,
+  NbActionsModule,
 } from '@nebular/theme';
 
 import { InstitutionSendCategoryComponent } from './institution-send-category.component';
@@ -36,6 +37,7 @@ import { UpdateModule } from '../../../../crud/update/update.module';
     NbButtonModule,
     NbInputModule,
     NbSelectModule,
+    NbActionsModule,
     NbFormFieldModule,
     NbIconModule,
     ListModule,

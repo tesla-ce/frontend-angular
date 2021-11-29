@@ -9,6 +9,7 @@ import {
   NbDatepickerModule,
   NbIconModule,
   NbFormFieldModule,
+  NbActionsModule,
 } from '@nebular/theme';
 
 import { InstitutionSendUserComponent } from './institution-send-user.component';
@@ -41,6 +42,7 @@ import { InstitutionSendUserCategoryEditComponent } from './institution-send-use
     NbInputModule,
     NbSelectModule,
     NbIconModule,
+    NbActionsModule,
     NbFormFieldModule,
     NbDatepickerModule,
     NbIconModule,

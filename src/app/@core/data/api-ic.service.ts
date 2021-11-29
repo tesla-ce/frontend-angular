@@ -128,7 +128,7 @@ export class ApiIcService {
   // API: PUT /ics/:id
   public updateIc(institutionId: number, icId: number, fields: any): Observable<any> {
     return this.http
-      .put(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}`, fields)
+      .put(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}/`, fields)
       .pipe(
         map((data: any) => {
           if (data.status) {
@@ -141,8 +141,15 @@ export class ApiIcService {
   }
 
   // DELETE /ic/:id
-  public deleteIcById(institutionId: number) {
-    // Not implemented yet, delete ic this.http.delete()
+  public deleteIcById(institutionId: number, icId: number): Observable<any> {
+    return this.http
+      .delete(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}/`)
+      .pipe(
+        map((data: any) => {
+          return true;
+        }),
+        catchError(this.handleError),
+      );
   }
 
   // DELETE Langueg /ics/:id
