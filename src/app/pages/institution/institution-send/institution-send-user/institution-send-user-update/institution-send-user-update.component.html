@@ -1,5 +1,16 @@
 <nb-card>
-    <nb-card-header>Update Send User {{id}}</nb-card-header>
+    <nb-card-header class="tesla-card-header">
+        <nb-actions>
+          <nb-action>
+            <button nbButton size="tiny" (click)="back()">
+              <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+            </button>
+          </nb-action>
+          <nb-action>
+          </nb-action>
+        </nb-actions>
+        Update Send User {{id}}
+    </nb-card-header>
     <nb-card-body *ngIf="settings" >
         <label class="label">Enabled Options</label><br>
         <nb-icon style="margin:5px" *ngFor="let enabled_option of learner.send.send.enabled_options" status='primary' [icon]="icons[enabled_option]" pack="fa"></nb-icon>

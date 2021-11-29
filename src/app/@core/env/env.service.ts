@@ -14,6 +14,8 @@ export class EnvService {
   // tesla-ce/frontend-angular version
   public version = !environment.version;
 
+  public availableLocales = environment.availableLocales;
+
   constructor() {
   }
 }

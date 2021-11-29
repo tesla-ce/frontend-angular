@@ -44,11 +44,15 @@ export class AdminInstrumentProviderEditComponent implements OnInit {
   }
 
   onSave(event) {
-    if (event.service_port) event.service_port = parseInt(event.service_port, 10);
-    if (event.options_schema) event.options_schema = JSON.parse(event.options_schema);
-    if (event.options) event.options = JSON.parse(event.options);
-    this.apiInstrumentService.updateProvider(this.providerId, this.instrumentId, event).subscribe(result => {
-      this.ref.close(result);
-    });
+    try {
+      if (event.service_port) event.service_port = parseInt(event.service_port, 10);
+      if (event.options_schema) event.options_schema = JSON.parse(event.options_schema);
+      if (event.options) event.options = JSON.parse(event.options);
+      this.apiInstrumentService.updateProvider(this.instrumentId, this.providerId, event).subscribe(result => {
+        this.ref.close(result);
+      });
+    } catch (error) {
+      this.ref.close(error);
+    }
   }
 }

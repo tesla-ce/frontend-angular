@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { AnalyticsService } from './@core/utils/analytics.service';
 import {TranslateService} from '@ngx-translate/core';
 import { NbIconLibraries } from '@nebular/theme';
+import { EnvService } from './@core/env/env.service';
 
 @Component({
   selector: 'ngx-app',
@@ -18,14 +19,14 @@ export class AppComponent implements OnInit {
     private analytics: AnalyticsService,
     public translate: TranslateService,
     private iconLibraries: NbIconLibraries,
+    private envService: EnvService,
   ) {
 
     // CK EDITOR
     window['CKEDITOR_BASEPATH'] = '//cdn.ckeditor.com/4.6.2/full-all/';
 
-
     // i18n
-    translate.addLangs(['en', 'fr']);
+    translate.addLangs(this.envService.availableLocales);
      // this language will be used as a fallback when a translation isn't found in the current language
     translate.setDefaultLang('en');
      // get the borwser lang

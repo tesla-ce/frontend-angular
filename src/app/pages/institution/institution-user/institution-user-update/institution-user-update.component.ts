@@ -1,9 +1,11 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { ApiUserService } from '../../../../@core/data/api-user.service';
+import { EnvService } from '../../../../@core/env/env.service';
 import { InstitutionUser, User } from '../../../../@core/models/user';
 import { InstitutionUserConfig } from '../institution-user.config';
 import { InstitutionUserChangePasswordComponent } from './institution-user-change-password.component';
@@ -27,6 +29,8 @@ export class InstitutionUserUpdateComponent implements OnInit {
     private router: Router,
     private dialog: NbDialogService,
     private authService: AuthService,
+    private location: Location,
+    private envService: EnvService,
     private apiUserService: ApiUserService,
     private toastrService: NbToastrService) {
     this.route.params.subscribe(params => {
@@ -39,6 +43,7 @@ export class InstitutionUserUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fields.locale.options = this.envService.availableLocales.map(item => ({ key: item, value: item }));
     this.authService.getUser().subscribe((user: InstitutionUser) => {
       if (user) {
         this.user = user;
@@ -57,6 +62,8 @@ export class InstitutionUserUpdateComponent implements OnInit {
       }
     });
   }
+
+  back() { this.location.back(); }
 
   onSave(event): void {
     this.apiUserService.updateInstitutionUser(this.user.institution.id, this.id, event).subscribe((user: User) => {

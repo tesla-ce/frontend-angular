@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { ApiInstrumentService } from '../../../../@core/data/api-instrument.service';
 import { ListCellActionsComponent } from '../../../../crud/list/list-cell-actions.component';
+import { ListComponent } from '../../../../crud/list/list.component';
 
 @Component({
   selector: 'ngx-admin-instrument-list',
@@ -7,6 +10,9 @@ import { ListCellActionsComponent } from '../../../../crud/list/list-cell-action
   styleUrls: ['./admin-instrument-list.component.scss'],
 })
 export class AdminInstrumentListComponent implements OnInit {
+
+  @ViewChild('list') list: ListComponent;
+
   settings = {
     columns: {
       actions: {
@@ -15,6 +21,11 @@ export class AdminInstrumentListComponent implements OnInit {
         sort: false,
         filter: false,
         renderComponent: ListCellActionsComponent,
+        onComponentInitFunction: (instance) => {
+          instance.remove.subscribe(data => {
+              this.remove(data);
+          });
+        },
         defaultValue: {
           read: {
             enabled: false,
@@ -46,9 +57,37 @@ export class AdminInstrumentListComponent implements OnInit {
 
   endpoint = '/admin/instrument';
 
-  constructor() { }
+  constructor(
+    private apiInstrumentService: ApiInstrumentService,
+    private toastrService: NbToastrService,
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  remove(data): void {
+    this.apiInstrumentService.deleteInstrumentById(data.id).subscribe((user: any) => {
+      this.toastrService.show(
+        'Instrument deleted',
+        '',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'success',
+          icon: 'save-outline',
+          duration: 2000,
+        });
+      this.list.refresh();
+    }, error => {
+      this.toastrService.show(
+        'Error',
+        '',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'danger',
+          icon: 'save-outline',
+          duration: 2000,
+        });
+    });
   }
 
 }

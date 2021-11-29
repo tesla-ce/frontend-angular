@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { AuthService } from '../../../../../@core/auth/auth.service';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
 import { ApiInstitutionService } from '../../../../../@core/data/api-institution.service';
@@ -27,6 +28,7 @@ export class InstitutionSendCategoryListComponent implements OnInit {
     private authService: AuthService,
     private apiCourseService: ApiCourseService,
     private apiInstitutionService: ApiInstitutionService,
+    private toastrService: NbToastrService,
   ) { }
 
   ngOnInit(): void {
@@ -104,9 +106,29 @@ export class InstitutionSendCategoryListComponent implements OnInit {
     });
   }
 
-  remove(event) {
-    this.apiInstitutionService.deleteSendCategoryById(this.user.institution.id, event.id).subscribe(response => {
+  remove(data): void {
+    this.apiInstitutionService.deleteSendCategoryById(this.user.institution.id, data.id).subscribe(response => {
+      this.toastrService.show(
+        'Send Category deleted',
+        '',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'success',
+          icon: 'save-outline',
+          duration: 2000,
+        });
       this.list.refresh();
+    },
+    error => {
+      this.toastrService.show(
+        'Error',
+        '',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'danger',
+          icon: 'save-outline',
+          duration: 2000,
+        });
     });
   }
 

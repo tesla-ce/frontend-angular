@@ -8,6 +8,7 @@ import {
   NbSelectModule,
   NbIconModule,
   NbFormFieldModule,
+  NbActionsModule,
 } from '@nebular/theme';
 
 import { AdminInstitutionComponent } from './admin-institution.component';
@@ -38,6 +39,7 @@ import { UpdateModule } from '../../../crud/update/update.module';
     NbSelectModule,
     NbFormFieldModule,
     NbIconModule,
+    NbActionsModule,
     ListModule,
     CreateModule,
     ReadModule,
