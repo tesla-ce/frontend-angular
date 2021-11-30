@@ -1,9 +1,8 @@
-<nb-card>
+<nb-card *ngIf="!loading">
     <nb-card-header class="tesla-card-header">
         {{'PROFILE'}}
     </nb-card-header>
-    <nb-card-body *ngIf="!loading">
-        <!-- case select -->
+    <nb-card-body *ngIf="!globalAdmin">
         <label class="label">Locale</label>
         <nb-select fullWidth
             [(selected)] = "selectedLanguage"

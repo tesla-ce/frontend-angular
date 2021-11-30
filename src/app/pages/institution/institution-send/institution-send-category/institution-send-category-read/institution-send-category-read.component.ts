@@ -46,6 +46,8 @@ export class InstitutionSendCategoryReadComponent implements OnInit {
             this.id = params['id'];
             this.apiInstitutionService.getSendCategoryById(user.institution.id, this.id).subscribe(instance => {
               this.instance = instance;
+              this.instance.disabled_instruments = instance.data.disabled_instruments?.map(item => item + '');
+              this.instance.enabled_options = instance.data.enabled_options;
               this.loading = false;
             });
           } else {
