@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
@@ -51,6 +51,7 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
     private apiCourseService: ApiCourseService,
     private authService: AuthService,
     private location: Location,
+    private datePipe: DatePipe,
     private dialog: NbDialogService,
     private toastrService: NbToastrService) {
     this.route.params.subscribe(params => {
@@ -143,6 +144,9 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
                   },
                   expires_at: {
                     title: 'Expiration date',
+                    valuePrepareFunction: value => {
+                      return this.datePipe.transform(value, 'dd-mm-yy hh:mm');
+                    },
                   },
                 },
                 mode: 'external',

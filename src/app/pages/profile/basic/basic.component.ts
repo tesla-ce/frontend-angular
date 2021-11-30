@@ -19,6 +19,7 @@ export class BasicComponent implements OnInit {
   big_fonts: boolean = false;
   text_to_speech: boolean = false;
   loading: boolean = true;
+  globalAdmin: boolean = false;
   availableLanguages: { key: string; value: string; }[] = [];
   selectedLanguage: string;
 
@@ -60,6 +61,7 @@ export class BasicComponent implements OnInit {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
       if (user) {
         this.user = user;
+        if (this.user.roles.indexOf('GLOBAL_ADMIN') !== -1) this.globalAdmin = true;
         this.selectedLanguage = this.user.locale;
         this.loading = false;
       }
@@ -71,37 +73,65 @@ export class BasicComponent implements OnInit {
 
   toggleHighContrast(event): void {
     localStorage.setItem('high_contrast', event + '');
+    window.location.reload();
   }
   toggleBigFonts(event): void {
     localStorage.setItem('big_fonts', event + '');
+    window.location.reload();
   }
   toggleTextToSpeech(event): void {
     localStorage.setItem('text_to_speech', event + '');
+    window.location.reload();
   }
 
   changePassword(data) {
-    this.apiUserService.updateInstitutionUser(this.user.institution.id, this.user.id, data).subscribe((user: InstitutionUser) => {
-      this.toastrService.show(
-        'User Updated',
-        user.username,
-        {
-          position: NbGlobalPhysicalPosition.TOP_RIGHT,
-          status: 'success',
-          icon: 'save-outline',
-          duration: 2000,
-        });
-    }, error => {
-      this.errors.next(error.error);
-      this.toastrService.show(
-        'Error saving',
-        'user',
-        {
-          position: NbGlobalPhysicalPosition.TOP_RIGHT,
-          status: 'danger',
-          icon: 'save-outline',
-          duration: 2000,
-        });
-    });
+    if (this.globalAdmin) {
+      this.apiUserService.updateUser(this.user.id, data).subscribe((user: InstitutionUser) => {
+        this.toastrService.show(
+          'User Updated',
+          user.username,
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'success',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+      }, error => {
+        this.errors.next(error.error);
+        this.toastrService.show(
+          'Error saving',
+          'user',
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'danger',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+      });
+    } else {
+      this.apiUserService.updateInstitutionUser(this.user.institution.id, this.user.id, data).subscribe((user: InstitutionUser) => {
+        this.toastrService.show(
+          'User Updated',
+          user.username,
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'success',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+      }, error => {
+        this.errors.next(error.error);
+        this.toastrService.show(
+          'Error saving',
+          'user',
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'danger',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+      });
+    }
   }
 
   changeLanguage(): void {
@@ -116,7 +146,9 @@ export class BasicComponent implements OnInit {
           icon: 'save-outline',
           duration: 2000,
         });
-        this.ngOnInit();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1600);
     }, error => {
       this.errors.next(error.error);
       this.toastrService.show(

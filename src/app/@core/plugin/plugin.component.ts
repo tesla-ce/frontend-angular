@@ -98,6 +98,11 @@ export class PluginComponent implements OnInit {
 
   redirect(url, params, user) {
       let isAllowed = false;
+      if (params['redirect_uri'] === null || params['redirect_uri'] === undefined || params['redirect_uri'] === ['']
+        || params['redirect_uri'] === '' ) {
+        return;
+      }
+
       const redirectUri = params['redirect_uri'].replace(/(^\w+:|^)\/\//, '');
 
       this.apiInstitutionService.getInstitutionById(user.institution ? user.institution.id : user.institutions[0].id)

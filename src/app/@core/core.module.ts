@@ -61,6 +61,8 @@ export const NB_CORE_PROVIDERS = [
         baseEndpoint: environment.apiUrl,
         login: {
           endpoint: '/auth/login',
+          defaultErrors: ['Login/Email combination is not correct, please try again.'],
+          defaultMessages: ['You have been successfully logged in.'],
         },
         refreshToken: {
           endpoint: '/auth/token/refresh',
@@ -77,7 +79,7 @@ export const NB_CORE_PROVIDERS = [
         socialLinks: socialLinks,
         showMessages: {
           success: false,
-          error: false,
+          error: true,
         },
       },
       register: {

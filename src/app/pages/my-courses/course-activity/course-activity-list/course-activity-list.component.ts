@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ListCellActionsComponent } from '../../../../crud/list/list-cell-actions.component';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
-import { Location } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
 import { Institution, InstitutionUser } from '../../../../@core/models/user';
 import { ApiInstitutionService } from '../../../../@core/data/api-institution.service';
 
@@ -26,6 +26,7 @@ export class CourseActivityListComponent implements OnInit {
     private apiInstitutionService: ApiInstitutionService,
     private location: Location,
     private router: Router,
+    private datePipe: DatePipe,
     private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
       if (params['courseId'] != null) {
@@ -80,9 +81,15 @@ export class CourseActivityListComponent implements OnInit {
               },
               start: {
                 title: 'Start',
+                valuePrepareFunction: value => {
+                  return this.datePipe.transform(value, 'dd-mm-yy hh:mm');
+                },
               },
               end: {
                 title: 'End',
+                valuePrepareFunction: value => {
+                  return this.datePipe.transform(value, 'dd-mm-yy hh:mm');
+                },
               },
             },
             actions: {
