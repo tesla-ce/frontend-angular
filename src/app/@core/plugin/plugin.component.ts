@@ -73,7 +73,7 @@ export class PluginComponent implements OnInit {
                         'learner_id': null,
                     };
                   }
-                  this.redirect(redirectUrl, params);
+                  this.redirect(redirectUrl, params, user);
                 } else throw user;
               });
             });
@@ -83,56 +83,69 @@ export class PluginComponent implements OnInit {
       } else {
         const uri = this.envService.apiUrl + '/auth/profile';
         this.http.get(uri).subscribe((user: InstitutionUser) => {
+          this.redirect(redirectUrl, params, user);
+          /*
           this.apiInstitutionService.getInstitutionById(user.institution ? user.institution.id : user.institutions[0].id)
           .subscribe((institution: Institution) => {
             this.allowedDomains = institution.allowed_domains.split(',');
-            this.redirect(redirectUrl, params);
+
           });
+          */
         });
       }
     });
   }
 
-  redirect(url, params) {
+  redirect(url, params, user) {
       let isAllowed = false;
       const redirectUri = params['redirect_uri'].replace(/(^\w+:|^)\/\//, '');
-      this.allowedDomains.map(allowedDomain => {
-        if (this.test(redirectUri, allowedDomain)) isAllowed = true;
+
+      this.apiInstitutionService.getInstitutionById(user.institution ? user.institution.id : user.institutions[0].id)
+        .subscribe((institution: Institution) => {
+          this.allowedDomains = institution.allowed_domains.split(',');
+
+          if (this.allowedDomains === null || this.allowedDomains === undefined || this.allowedDomains === ['']) {
+            // accept all if allowedDomains is empty
+            isAllowed = true;
+          } else {
+            this.allowedDomains.map(allowedDomain => {
+              if (this.test(redirectUri, allowedDomain)) isAllowed = true;
+            });
+
+            if (isAllowed) {
+              localStorage.setItem('lms_redirect_uri', params['redirect_uri']);
+              localStorage.setItem('lms_redirect_uri_ts', new Date().toISOString());
+            } else {
+              Sentry.captureMessage(redirectUri + ' is not in the allowed domains ' + this.allowedDomains);
+            }
+          }
+          switch (url) {
+            case '/plugin/ic':
+                  this.router.navigate(['/learner/ic']);
+              break;
+            case '/plugin/activity/reports':
+                this.router.navigate([`/course/${params.course_id}/activity/${params.activity_id}/report`]);
+                break;
+            case '/plugin/activity/report':
+              this.router.navigate([`/course/${params.course_id}/activity/${params.activity_id}/report/${params.report_id}`]);
+              break;
+            case '/plugin/activity/configuration':
+              this.router.navigate([`/course/${params.course_id}/activity/${params.activity_id}/update`]);
+              break;
+            case '/plugin/course':
+                this.router.navigate([`/course/${params.course_id}`]);
+                break;
+            case '/plugin/enrolment':
+              this.router.navigate(['/enrolment']);
+              break;
+            case '/plugin/test-page':
+                this.router.navigate(['/test']);
+                break;
+            default:
+                this.router.navigate(['/dashboard']);
+                break;
+          }
       });
-
-      if (isAllowed) {
-        localStorage.setItem('lms_redirect_uri', params['redirect_uri']);
-        localStorage.setItem('lms_redirect_uri_ts', new Date().toISOString());
-      } else {
-        Sentry.captureMessage(redirectUri + ' is not in the allowed domains ' + this.allowedDomains);
-      }
-
-      switch (url) {
-        case '/plugin/ic':
-              this.router.navigate(['/learner/ic']);
-          break;
-        case '/plugin/activity/reports':
-            this.router.navigate([`/course/${params.course_id}/activity/${params.activity_id}/report`]);
-            break;
-        case '/plugin/activity/report':
-          this.router.navigate([`/course/${params.course_id}/activity/${params.activity_id}/report/${params.report_id}`]);
-          break;
-        case '/plugin/activity/configuration':
-          this.router.navigate([`/course/${params.course_id}/activity/${params.activity_id}/update`]);
-          break;
-        case '/plugin/course':
-            this.router.navigate([`/course/${params.course_id}`]);
-            break;
-        case '/plugin/enrolment':
-          this.router.navigate(['/enrolment']);
-          break;
-        case '/plugin/test-page':
-            this.router.navigate(['/test']);
-            break;
-        default:
-            this.router.navigate(['/dashboard']);
-            break;
-      }
   }
 
   test(domain, pattern) {
