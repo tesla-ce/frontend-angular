@@ -11,6 +11,7 @@ import { AuthService } from '../../../@core/auth/auth.service';
 import { Location } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { InstitutionUser } from '../../../@core/models/user';
+import { dateFormat } from '../../../@core/utils/utils';
 
 @Component({
   selector: 'ngx-course-read',
@@ -20,7 +21,7 @@ import { InstitutionUser } from '../../../@core/models/user';
 export class CourseReadComponent implements OnInit {
   id: number;
   loading: boolean = true;
-
+  dateFormat = dateFormat;
   public instance: Course;
   public fields = CourseConfig.fields;
 

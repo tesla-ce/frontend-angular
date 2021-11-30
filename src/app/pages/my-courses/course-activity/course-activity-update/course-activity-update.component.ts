@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import { CourseActivityInstrumentAddComponent } from '../course-activity-instrument/course-activity-instrument-add.component';
 import { InstitutionUser } from '../../../../@core/models/user';
+import { dateFormat } from '../../../../@core/utils/utils';
 
 @Component({
   selector: 'ngx-course-activity-update',
@@ -27,6 +28,7 @@ export class CourseActivityUpdateComponent implements OnInit {
   activityAltInstruments: any[];
   addComponent: any = {};
   data: any = {};
+  dateFormat = dateFormat;
 
   public instance: any;
   public fields = CourseActivityConfig.fields;
