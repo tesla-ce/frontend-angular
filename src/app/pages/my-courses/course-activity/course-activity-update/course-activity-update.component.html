@@ -33,11 +33,11 @@
                 <label [for]="fields['start'].inputName" class="label" [class.text-disabled]="instance.enabled!==true">
                     {{ fields['start'].label }}
                 </label>
-                <p [class.text-disabled]="instance.enabled!==true">{{ instance.start }}</p>
+                <p [class.text-disabled]="instance.enabled!==true">{{ instance.start | date: dateFormat }}</p>
                 <label [for]="fields['end'].inputName" class="label" [class.text-disabled]="instance.enabled!==true">
                     {{ fields['end'].label }}
                 </label>
-                <p [class.text-disabled]="instance.enabled!==true">{{ instance.end }}</p>
+                <p [class.text-disabled]="instance.enabled!==true">{{ instance.end | date: dateFormat }}</p>
                 <!-- <p> {{'COURSE.STARTS' | translate }}: {{instance.start || "start date"}}</p>
                 <p> {{'COURSE.ENDS' | translate }}: {{instance.end || "end date"}}</p> -->
             </div>

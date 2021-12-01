@@ -1,17 +1,28 @@
-<nb-card *ngIf="instance">
-    <nb-card-header class="tesla-card-header">
-        <nb-actions>
-          <nb-action>
-            <button nbButton size="tiny" (click)="back()">
-              <nb-icon icon="arrow-ios-back-outline"></nb-icon>
-            </button>
-          </nb-action>
-          <nb-action>
-          </nb-action>
-        </nb-actions>
-        Read Send User {{id}}
-    </nb-card-header>
-    <nb-card-body class="example-items-rows">
-        <ngx-read [fields]="fields" [instance]="instance" [paths]="paths"></ngx-read>
-    </nb-card-body>
+<nb-card>
+  <nb-card-header class="tesla-card-header">
+      <nb-actions>
+        <nb-action>
+          <button nbButton size="tiny" (click)="back()">
+            <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+          </button>
+        </nb-action>
+        <nb-action>
+        </nb-action>
+      </nb-actions>
+      Update Send User {{id}}
+  </nb-card-header>
+  <nb-card-body *ngIf="settings" >
+      <label class="label">Enabled Options</label><br>
+      <nb-icon style="margin:5px" *ngFor="let enabled_option of learner.send.send.enabled_options" status='primary' [icon]="icons[enabled_option]" pack="fa"></nb-icon>
+      <br>
+      <br>
+      <label class="label">Disabled Instruments</label><br>
+      <nb-icon status='error' data-fill="full" *ngFor="let disabled_instrument of learner.send.send.disabled_instruments" [icon]="'instrument-' + instrumentsAcronyms[disabled_instrument]" pack="tesla"></nb-icon>
+      <br>
+      <br>
+      <div style="display:flex; margin-bottom: 15px;">
+          <label class="label" style="margin-bottom: 16px; flex:1">User SEND Categories</label>
+      </div>
+      <ng2-smart-table class="list" [settings]="settings" [source]="userSendCategories"></ng2-smart-table>
+  </nb-card-body>
 </nb-card>

@@ -51,7 +51,7 @@ export class SendComponent implements OnInit, AfterViewInit {
   // 2 -> KS
   private instrumentNumSamples = {
     1: 20,
-    2: 15
+    2: 15,
   };
 
   public instrumentName = '';
@@ -203,7 +203,7 @@ export class SendComponent implements OnInit, AfterViewInit {
       locale: 'en',
       sensors: {
         camera: [1],
-        keyboard: [2]
+        keyboard: [2],
       },
     } as TeSLAConfiguration;
 
@@ -211,7 +211,7 @@ export class SendComponent implements OnInit, AfterViewInit {
 
     if (this.ready === true) {
       // console.log('configuring this.video');
-      switch(this.instrumentId) {
+      switch ( this.instrumentId ) {
         case 1:
           this.sensorsService.setAudio(this.audio);
           this.sensorsService.setVideo(this.video);

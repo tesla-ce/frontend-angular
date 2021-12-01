@@ -193,6 +193,7 @@ export class CourseReportReadComponent implements OnInit {
   }
 
   getReportChart(sessionsData, documentsData) {
+
     const options: any = {};
 
     options.xAxis = {
@@ -237,25 +238,29 @@ export class CourseReportReadComponent implements OnInit {
     });
 
     sessionsData.series.map(serie => {
-      options.series.push(
-        {
-          name: serie.instrument.acronym,
-          data: serie.requests,
-          type: 'line',
-          smooth: true,
-        },
-      );
+      if (serie.instrument) {
+        options.series.push(
+          {
+            name: serie.instrument.acronym,
+            data: serie.requests,
+            type: 'line',
+            smooth: true,
+          },
+        );
+      }
     });
 
     sessionsData.series.map(serie => {
-      options.series.push(
-        {
-          name: serie.instrument.acronym,
-          data: serie.requests,
-          type: 'line',
-          smooth: true,
-        },
-      );
+      if (serie.instrument) {
+        options.series.push(
+          {
+            name: serie.instrument.acronym,
+            data: serie.requests,
+            type: 'line',
+            smooth: true,
+          },
+        );
+      }
     });
 
     documentsData.series.map(serie => {

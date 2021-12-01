@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
@@ -7,6 +7,7 @@ import { AuthService } from '../../../../../@core/auth/auth.service';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
 import { ApiInstitutionService } from '../../../../../@core/data/api-institution.service';
 import { InstitutionUser, User } from '../../../../../@core/models/user';
+import { dateFormat } from '../../../../../@core/utils/utils';
 import { ListCellActionsComponent } from '../../../../../crud/list/list-cell-actions.component';
 import { ListCellDisabledInstrumentsComponent } from '../../institution-send-category/institution-send-category-list/list-cell-disabled-instruments.component';
 import { ListCellEnabledOptionsComponent } from '../../institution-send-category/institution-send-category-list/list-cell-enabled-options.component';
@@ -51,6 +52,7 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
     private apiCourseService: ApiCourseService,
     private authService: AuthService,
     private location: Location,
+    private datePipe: DatePipe,
     private dialog: NbDialogService,
     private toastrService: NbToastrService) {
     this.route.params.subscribe(params => {
@@ -143,6 +145,9 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
                   },
                   expires_at: {
                     title: 'Expiration date',
+                    valuePrepareFunction: value => {
+                      return this.datePipe.transform(value, dateFormat);
+                    },
                   },
                 },
                 mode: 'external',
