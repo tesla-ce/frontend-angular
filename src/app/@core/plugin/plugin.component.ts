@@ -100,6 +100,7 @@ export class PluginComponent implements OnInit {
       let isAllowed = false;
       if (params['redirect_uri'] === null || params['redirect_uri'] === undefined || params['redirect_uri'] === ['']
         || params['redirect_uri'] === '' ) {
+        this.router.navigate(['/dashboard']);
         return;
       }
 
