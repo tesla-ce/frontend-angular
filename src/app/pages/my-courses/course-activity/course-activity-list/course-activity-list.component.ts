@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DatePipe, Location } from '@angular/common';
 import { Institution, InstitutionUser } from '../../../../@core/models/user';
 import { ApiInstitutionService } from '../../../../@core/data/api-institution.service';
+import { dateFormat } from '../../../../@core/utils/utils';
 
 @Component({
   selector: 'ngx-course-activity-list',
@@ -82,13 +83,13 @@ export class CourseActivityListComponent implements OnInit {
               start: {
                 title: 'Start',
                 valuePrepareFunction: value => {
-                  return this.datePipe.transform(value, 'dd-mm-yy hh:mm');
+                  return this.datePipe.transform(value, dateFormat);
                 },
               },
               end: {
                 title: 'End',
                 valuePrepareFunction: value => {
-                  return this.datePipe.transform(value, 'dd-mm-yy hh:mm');
+                  return this.datePipe.transform(value, dateFormat);
                 },
               },
             },

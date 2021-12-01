@@ -20,6 +20,7 @@ export class BasicComponent implements OnInit {
   text_to_speech: boolean = false;
   loading: boolean = true;
   globalAdmin: boolean = false;
+  loginAllowed: boolean = true;
   availableLanguages: { key: string; value: string; }[] = [];
   selectedLanguage: string;
 
@@ -62,6 +63,7 @@ export class BasicComponent implements OnInit {
       if (user) {
         this.user = user;
         if (this.user.roles.indexOf('GLOBAL_ADMIN') !== -1) this.globalAdmin = true;
+        if (this.user.login_allowed === false) this.loginAllowed = false;
         this.selectedLanguage = this.user.locale;
         this.loading = false;
       }

@@ -11,6 +11,7 @@ import { ListCellActionsComponent } from '../../../../../crud/list/list-cell-act
 import { ListCellDisabledInstrumentsComponent } from '../../institution-send-category/institution-send-category-list/list-cell-disabled-instruments.component';
 import { ListCellEnabledOptionsComponent } from '../../institution-send-category/institution-send-category-list/list-cell-enabled-options.component';
 import { InstitutionSendUserConfig } from '../institution-send-user.config';
+import { dateFormat } from '../../../../../@core/utils/utils';
 
 @Component({
   selector: 'ngx-institution-send-user-read',
@@ -112,7 +113,7 @@ export class InstitutionSendUserReadComponent implements OnInit {
                   expires_at: {
                     title: 'Expiration date',
                     valuePrepareFunction: value => {
-                      return this.datePipe.transform(value, 'dd-mm-yy hh:mm');
+                      return this.datePipe.transform(value, dateFormat);
                     },
                   },
                 },

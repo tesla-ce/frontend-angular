@@ -121,6 +121,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
 
   changePDF(language: string): void {
     this.hasDocument[language].has = false;
+    this.apiIcService.patchDocument(this.user.institution.id, this.id, language, {pdf: null}).subscribe(response => {});
   }
 
   newLenguage(): void {

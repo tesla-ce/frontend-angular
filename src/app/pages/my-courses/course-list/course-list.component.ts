@@ -5,6 +5,7 @@ import { ListCellActionsComponent } from '../../../crud/list/list-cell-actions.c
 import { TranslateService } from '@ngx-translate/core';
 import { InstitutionUser } from '../../../@core/models/user';
 import { DatePipe } from '@angular/common';
+import { dateFormat } from '../../../@core/utils/utils';
 
 @Component({
   selector: 'ngx-course-list',
@@ -39,13 +40,13 @@ export class CourseListComponent implements OnInit {
       start: {
         title: 'Start',
         valuePrepareFunction: value => {
-          return this.datePipe.transform(value, 'dd-mm-yy hh:mm');
+          return this.datePipe.transform(value, dateFormat);
         },
       },
       end: {
         title: 'End',
         valuePrepareFunction: value => {
-          return this.datePipe.transform(value, 'dd-mm-yy hh:mm');
+          return this.datePipe.transform(value, dateFormat);
         },
       },
     },

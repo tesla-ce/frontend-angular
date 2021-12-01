@@ -26,14 +26,14 @@
                         <label [for]="fields['start'].inputName" class="label">
                             {{fields['start'].label}}
                         </label>
-                        <p>{{instance.start | date: 'dd-mm-yy hh:mm'}}</p>
+                        <p>{{instance.start | date: dateFormat}}</p>
                     </div>
                 <div class="form-group-row">
                     <div class="form-group-control-row">
                         <label [for]="fields['end'].inputName" class="label">
                             {{fields['end'].label}}
                         </label>
-                        <p>{{instance.end | date: 'dd-mm-yy hh:mm'}}</p>
+                        <p>{{instance.end | date: dateFormat}}</p>
                     </div>
                 </div>
             </div>

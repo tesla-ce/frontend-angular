@@ -125,6 +125,22 @@ export class ApiIcService {
       catchError(this.handleError));
   }
 
+  // API: PUT /ics/document/
+  public patchDocument(institutionId: number, icId: number, language: string,  fields: any): Observable<any> {
+
+    return this.http
+      .patch(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}/document/${language}/`, fields)
+      .pipe(
+      map((data: any) => {
+        if (data.status) {
+          return true;
+        } else {
+          return false;
+        }
+      }),
+      catchError(this.handleError));
+  }
+
   // API: PUT /ics/:id
   public updateIc(institutionId: number, icId: number, fields: any): Observable<any> {
     return this.http
