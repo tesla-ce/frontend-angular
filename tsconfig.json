@@ -22,6 +22,14 @@
     ],
     // "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@angular/*": [
+        "./node_modules/@angular/*"
+      ],
+      "@nebular/*": [
+        "../node_modules/@nebular/*"
+      ]
+    },
   },
   // "paths": {
   //   "json-schema-ref-parser": ["node_modules/json-schema-ref-parser/dist/ref-parser.js"],

@@ -10,9 +10,7 @@ import {NgxEchartsModule} from 'ngx-echarts';
   ],
   imports: [
     CommonModule,
-    NgxEchartsModule.forRoot({
-      echarts: () => import('echarts'),
-    }),
+    NgxEchartsModule,
   ],
   exports: [
     EnrolmentStatusComponent,
