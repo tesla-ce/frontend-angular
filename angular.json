@@ -100,8 +100,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "tesla-ce:build",
-            "baseHref": "/ui/"
+            "browserTarget": "tesla-ce:build"
           },
           "configurations": {
             "production": {
