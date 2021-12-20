@@ -22,7 +22,7 @@
                         [name]="fields['version'].inputName || 'version'" [formControlName]="'version'"
                         [placeholder]="fields['version'].placeholder || null"
                         [attr.disabled]="fields['version'].disabled || null"
-                        [attr.email]="fields['version'].validator == 'email' || null"
+                        [attr.email]="fields['version'].validator === 'email' || null"
                         [required]="fields['version'].required || false"
                         [status]="formErrors['version']?'danger':'basic'">
                     <errors class="text-danger">{{formErrors['version']?formErrors['version']:''}}</errors>

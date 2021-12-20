@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Inject, OnInit, ViewChildren} from '@angular/core';
+/*import {AfterViewInit, Component, Inject, OnInit, ViewChildren} from '@angular/core';
 import {Location} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Sensor, SensorsService} from '@tesla-ce/sensors';
@@ -287,3 +287,4 @@ export class SendComponent implements OnInit, AfterViewInit {
     return 0;
   }
 }
+*/

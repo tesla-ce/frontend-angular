@@ -21,20 +21,20 @@
                     <nb-actions>
                         <nb-action>
                             <button nbButton
-                                *ngIf="type != 'show' && !instrument.alternative_to && !instrument.hasAlternative  || instruments && type != 'show' && !instrument.alternative_to && !instrument.hasAlternative && checkInstruments()"
+                                *ngIf="type !== 'show' && !instrument.alternative_to && !instrument.hasAlternative  || instruments && type !== 'show' && !instrument.alternative_to && !instrument.hasAlternative && checkInstruments()"
                                 (click)="addInstrument(instrument.id)">
                                 <nb-icon icon="plus-square-outline"></nb-icon>
                             </button>
                             <button
                                 class="margin--left-8" 
-                                *ngIf="type != 'show'  &&  instrument.alternative_to"
+                                *ngIf="type !== 'show'  &&  instrument.alternative_to"
                                 nbButton
                                 (click)="handleDeleteInstrument(instrument.id)">
                                 <nb-icon icon="trash-2-outline"></nb-icon>
                             </button>
                             <button nbButton
                                 class="margin--left-8"
-                                *ngIf="type != 'show'  &&  !instrument.alternative_to"
+                                *ngIf="type !== 'show'  &&  !instrument.alternative_to"
                                 (click)="handleDeleteInstrument(instrument.id, instrument.hasAlternative)">
                                 <nb-icon icon="trash-2-outline"></nb-icon>
                             </button>
@@ -42,7 +42,7 @@
                         <nb-action>
                             <nb-toggle 
                                 class="toggle"
-                                *ngIf="type != 'show'"
+                                *ngIf="type !== 'show'"
                                 (click)="enableDisableInstrument(instrument)"
                                 [(ngModel)]="instrument.active"
                                 labelPosition="left"

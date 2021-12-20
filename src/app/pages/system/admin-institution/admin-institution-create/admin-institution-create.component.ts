@@ -1,8 +1,8 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
-import { of as observableOf, Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { ApiInstitutionService } from '../../../../@core/data/api-institution.service';
 import { Institution } from '../../../../@core/models/user';
 import { AdminInstitutionConfig } from '../admin-institution.config';
@@ -12,7 +12,7 @@ import { AdminInstitutionConfig } from '../admin-institution.config';
   templateUrl: './admin-institution-create.component.html',
   styleUrls: ['./admin-institution-create.component.scss'],
 })
-export class AdminInstitutionCreateComponent implements OnInit {
+export class AdminInstitutionCreateComponent {
 
   fields = AdminInstitutionConfig.fields;
   validator = AdminInstitutionConfig.validator;
@@ -23,9 +23,6 @@ export class AdminInstitutionCreateComponent implements OnInit {
     private toastrService: NbToastrService,
     private location: Location,
     private router: Router) { }
-
-  ngOnInit(): void {
-  }
 
   onSave(event): void {
     this.apiInstitutionService.createInstitution(event).subscribe((institution: Institution) => {

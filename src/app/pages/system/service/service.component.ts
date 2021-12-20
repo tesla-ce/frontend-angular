@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
@@ -7,15 +7,11 @@ import { Location } from '@angular/common';
   templateUrl: './service.component.html',
 })
 
-export class ServiceComponent implements OnInit {
+export class ServiceComponent {
 
   constructor(
     private location: Location,
   ) { }
-
-  ngOnInit() {
-
-  }
 
   back() { this.location.back(); }
 }

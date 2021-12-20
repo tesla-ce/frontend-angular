@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/*import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import {ApiCourseService} from '../../../@core/data/api-course.service';
 import {ApiEnrolmentService} from '../../../@core/data/api-enrolment.service';
@@ -78,3 +78,4 @@ export class EnrolmentDefaultComponent implements OnInit {
 }
 
 
+*/

@@ -1,11 +1,10 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { ApiUserService } from '../../../../@core/data/api-user.service';
-import { EnvService } from '../../../../@core/env/env.service';
-import { InstitutionUser, User } from '../../../../@core/models/user';
+import { User } from '../../../../@core/models/user';
 import { AdminUserConfig } from '../admin-user.config';
 import { AdminUserChangePasswordComponent } from './admin-user-change-password.component';
 
@@ -14,7 +13,7 @@ import { AdminUserChangePasswordComponent } from './admin-user-change-password.c
   templateUrl: './admin-user-update.component.html',
   styleUrls: ['./admin-user-update.component.scss'],
 })
-export class AdminUserUpdateComponent implements OnInit {
+export class AdminUserUpdateComponent {
 
   public id: number;
   public instance: User;
@@ -50,10 +49,6 @@ export class AdminUserUpdateComponent implements OnInit {
         router.navigate(['../'], { relativeTo: this.route });
       }
     });
-  }
-
-  ngOnInit(): void {
-    // this.fields.locale.options = this.envService.availableLocales.map(item => ({ key: item, value: item }));
   }
 
   back() { this.location.back(); }

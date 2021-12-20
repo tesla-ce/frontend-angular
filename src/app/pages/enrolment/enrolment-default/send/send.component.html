@@ -18,7 +18,7 @@
       </ngx-enrolment-status>
       <div class="enrolNotifications">
         <b>Notifications</b>
-        <p *ngIf="notifications.length == 0">{{ "Empty"|translate }}</p>
+        <p *ngIf="notifications.length === 0">{{ "Empty"|translate }}</p>
         <ul>
           <li *ngFor="let n of notifications">{{ n }}</li>
         </ul>
