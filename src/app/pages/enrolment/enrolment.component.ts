@@ -1,4 +1,4 @@
-/*import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'ngx-enrolment',
@@ -7,4 +7,3 @@
 })
 export class EnrolmentComponent {
 }
-*/

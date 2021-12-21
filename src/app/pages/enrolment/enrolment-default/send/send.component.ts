@@ -1,9 +1,9 @@
-/*import {AfterViewInit, Component, Inject, OnInit, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnInit, ViewChildren} from '@angular/core';
 import {Location} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Sensor, SensorsService} from '@tesla-ce/sensors';
 import {
-  SensorsStatus, TeSLAConfiguration, TeSLAJWTToken,
+  SensorsStatus, TeSLAConfiguration, TeSLAConfigurationOptions, TeSLAJWTToken, TeSLALearner,
 } from '@tesla-ce/web-plugin';
 import {Observable} from 'rxjs/Rx';
 import {AuthService} from '../../../../@core/auth/auth.service';
@@ -41,7 +41,8 @@ export class SendComponent implements OnInit, AfterViewInit {
     last_name: null,
     picture: null,
     institution_id: null,
-  };
+    locale: null
+  } as TeSLALearner;
 
   private token: TeSLAJWTToken;
   private mode = 'enrolment';
@@ -95,7 +96,8 @@ export class SendComponent implements OnInit, AfterViewInit {
           last_name: user.last_name,
           picture: null,
           institution_id: user.institution.id,
-        };
+          locale: null
+        } as TeSLALearner;
 
         this.updateInstrumentEnrolmentStatus();
 
@@ -205,6 +207,9 @@ export class SendComponent implements OnInit, AfterViewInit {
         camera: [1],
         keyboard: [2],
       },
+      options: {
+        floating_menu_initial_pos: 'top-right'
+      } as TeSLAConfigurationOptions
     } as TeSLAConfiguration;
 
     this.connection.setConfig(conf);
@@ -287,4 +292,3 @@ export class SendComponent implements OnInit, AfterViewInit {
     return 0;
   }
 }
-*/

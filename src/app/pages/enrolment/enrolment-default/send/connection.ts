@@ -1,4 +1,4 @@
-/*import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import {
   BehaviorSubject,
   forkJoin,
@@ -207,7 +207,7 @@ export class Connection {
         this.initAlertSent();
         this.getStatus();
       }
-      
+
         // if (!this.tokenService.isExpired()) {
         //   this.initRequestSent();
         //   this.initAlertSent();
@@ -215,10 +215,10 @@ export class Connection {
         // } else {
         //   // this.statusService.setNetworkStatus(4);
         // }
-       
+
       },
     );
-    
+
     // this.dataCapture = this.sensorsService.newData.subscribe(data => {
     //   console.log('hey data capture');
 
@@ -231,7 +231,7 @@ export class Connection {
     //   }
 
     // });
-     
+
 
 
   }
@@ -530,5 +530,3 @@ export class Connection {
   }
 
 }
-
-*/
