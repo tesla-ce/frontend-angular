@@ -1,4 +1,3 @@
-/*
 import { NgModule } from '@angular/core';
 
 import { ThemeModule } from '../../@theme/theme.module';
@@ -43,4 +42,3 @@ import { SendComponent } from './enrolment-default/send/send.component';
 })
 export class EnrolmentModule {
 }
-*/
