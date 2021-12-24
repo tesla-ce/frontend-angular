@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiUserService } from '../../../../@core/data/api-user.service';
 import { User } from '../../../../@core/models/user';
@@ -10,7 +10,7 @@ import { AdminInstrumentConfig } from '../admin-instrument.config';
   templateUrl: './admin-instrument-read.component.html',
   styleUrls: ['./admin-instrument-read.component.scss'],
 })
-export class AdminInstrumentReadComponent implements OnInit {
+export class AdminInstrumentReadComponent {
   id: number;
   fields = AdminInstrumentConfig.fields;
   paths = AdminInstrumentConfig.paths;
@@ -31,9 +31,6 @@ export class AdminInstrumentReadComponent implements OnInit {
         router.navigate(['../'], { relativeTo: this.route });
       }
     });
-  }
-
-  ngOnInit(): void {
   }
 
   back() { this.location.back(); }

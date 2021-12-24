@@ -11,8 +11,8 @@
     <a class="ng2-smart-action tesla-cell-instrument-text">{{ cellData?.confidence?cellData.confidence  + '%':'-'}}</a>
     <a class="ng2-smart-action tesla-cell-instrument-text">{{ cellData?.result?cellData.result + '%':'-'}}</a>
     <a class="ng2-smart-action tesla-cell-instrument-text">
-        <nb-icon *ngIf="sumary?.identity_level!='disabled'" icon="common-identity" [attr.status]='sumary?.identity_level' pack="tesla" ></nb-icon>
-        <nb-icon *ngIf="sumary?.content_level!='disabled'" icon="common-authorship" [attr.status]='sumary?.content_level'  pack="tesla"></nb-icon>
-        <nb-icon *ngIf="sumary?.integrity_level!='disabled'" icon="common-integrity" [attr.status]='sumary?.integrity_level' pack="tesla"></nb-icon>
+        <nb-icon *ngIf="sumary?.identity_level !== 'disabled'" icon="common-identity" [attr.status]='sumary?.identity_level' pack="tesla" ></nb-icon>
+        <nb-icon *ngIf="sumary?.content_level !== 'disabled'" icon="common-authorship" [attr.status]='sumary?.content_level'  pack="tesla"></nb-icon>
+        <nb-icon *ngIf="sumary?.integrity_level !== 'disabled'" icon="common-integrity" [attr.status]='sumary?.integrity_level' pack="tesla"></nb-icon>
     </a>
 </div>

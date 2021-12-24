@@ -11,7 +11,8 @@
 
 // framework component themes (styles tied to theme variables)
 @import '~@nebular/theme/styles/globals';
-@import '~@nebular/auth/styles/all';
+// @import '~@nebular/auth/styles/all';
+@import '~@nebular/auth/styles/globals';
 
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
@@ -50,3 +51,6 @@
   @include nb-overrides();
   @include material-overrides();
 };
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

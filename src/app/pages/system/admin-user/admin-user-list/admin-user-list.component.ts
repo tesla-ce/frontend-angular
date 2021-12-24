@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { ApiUserService } from '../../../../@core/data/api-user.service';
 import { ListCellActionsComponent } from '../../../../crud/list/list-cell-actions.component';
@@ -9,7 +9,7 @@ import { ListComponent } from '../../../../crud/list/list.component';
   templateUrl: './admin-user-list.component.html',
   styleUrls: ['./admin-user-list.component.scss'],
 })
-export class AdminUserListComponent implements OnInit {
+export class AdminUserListComponent {
   @ViewChild('list') list: ListComponent;
 
   settings = {
@@ -55,9 +55,6 @@ export class AdminUserListComponent implements OnInit {
     private apiUserService: ApiUserService,
     private toastrService: NbToastrService,
   ) { }
-
-  ngOnInit(): void {
-  }
 
   remove(data): void {
     this.apiUserService.deleteUserById(data.id).subscribe((user: any) => {

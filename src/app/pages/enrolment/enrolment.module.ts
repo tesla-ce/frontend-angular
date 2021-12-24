@@ -14,7 +14,7 @@ import {
   NbProgressBarModule,
 } from '@nebular/theme';
 import { SharedModule } from '../../shared/shared.module';
-import {EnrolmentStatusModule} from '../../common/enrolment-status/enrolment-status.module';
+import { EnrolmentStatusModule } from '../../common/enrolment-status/enrolment-status.module';
 import { SendComponent } from './enrolment-default/send/send.component';
 // import { SensorsModule } from "@tesla-ce/sensors";
 

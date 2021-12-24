@@ -7,15 +7,11 @@ import { Location } from '@angular/common';
   templateUrl: './course.component.html',
 })
 
-export class CourseComponent implements OnInit {
+export class CourseComponent {
 
   constructor(
     private location: Location,
   ) { }
-
-  ngOnInit() {
-
-  }
 
   back() { this.location.back(); }
 }

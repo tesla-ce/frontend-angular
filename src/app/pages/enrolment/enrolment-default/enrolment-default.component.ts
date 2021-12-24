@@ -76,5 +76,3 @@ export class EnrolmentDefaultComponent implements OnInit {
 
   back() { this.location.back(); }
 }
-
-

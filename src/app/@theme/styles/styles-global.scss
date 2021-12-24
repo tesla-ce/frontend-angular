@@ -1,4 +1,8 @@
 /* place here your global styles */
+@use '@angular/material' as mat;
+
+mat.$theme-ignore-duplication-warnings: true;
+
 @import '../../../../node_modules/@tesla-ce/icons/src/lib/tesla.icons.component';
 
 .tesla-card-header {
