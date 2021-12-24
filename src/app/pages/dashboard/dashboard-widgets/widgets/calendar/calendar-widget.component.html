@@ -6,7 +6,7 @@
       {{ date | date }}
     </span>
     <div class="day-instruments">
-      <div *ngIf="instruments.length == 0">
+      <div *ngIf="instruments.length === 0">
         {{'DASHBOARD.NO_INSTRUMENTS_TODAY' | translate }}
       </div>
       <div *ngFor="let instrument of instruments">

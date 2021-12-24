@@ -7,15 +7,11 @@ import { Location } from '@angular/common';
   templateUrl: './monitoring-default.component.html',
 })
 
-export class MonitoringDefaultComponent implements OnInit {
+export class MonitoringDefaultComponent {
 
   constructor(
     private location: Location,
   ) { }
-
-  ngOnInit() {
-
-  }
 
   back() { this.location.back(); }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,7 +10,7 @@ import { DeleteDialogComponent } from './delete-dialog.component';
   templateUrl: './list-cell-actions.component.html',
   styleUrls: ['./list-cell-actions.component.scss'],
 })
-export class ListCellActionsComponent implements ViewCell, OnInit {
+export class ListCellActionsComponent implements ViewCell {
 
   id: string;
 
@@ -19,9 +19,6 @@ export class ListCellActionsComponent implements ViewCell, OnInit {
 
   @Output() edit: EventEmitter<any> = new EventEmitter<number>();
   @Output() remove: EventEmitter<any> = new EventEmitter<number>();
-
-  ngOnInit() {
-  }
 
   constructor(
     public translate: TranslateService,

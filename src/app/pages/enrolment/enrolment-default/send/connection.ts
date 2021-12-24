@@ -149,11 +149,9 @@ export class Connection {
       notifications: [],
     };
     // this.apiUrl = config.getApiURL();
-    /*
-    tokenService.tokenChange.subscribe(token => {
-      this.token = token;
-    });
-     */
+    // tokenService.tokenChange.subscribe(token => {
+    //  this.token = token;
+    // });
 
     if (this.getStoredData('requests')) {
       Object.assign(this.requestBuffer, this.getStoredData('requests'));
@@ -209,31 +207,31 @@ export class Connection {
         this.initAlertSent();
         this.getStatus();
       }
-      /*
-        if (!this.tokenService.isExpired()) {
-          this.initRequestSent();
-          this.initAlertSent();
-          this.getStatus();
-        } else {
-          // this.statusService.setNetworkStatus(4);
-        }
-       */
+
+        // if (!this.tokenService.isExpired()) {
+        //   this.initRequestSent();
+        //   this.initAlertSent();
+        //   this.getStatus();
+        // } else {
+        //   // this.statusService.setNetworkStatus(4);
+        // }
+
       },
     );
-    /*
-    this.dataCapture = this.sensorsService.newData.subscribe(data => {
-      console.log('hey data capture');
 
-      return;
-      if (this.config.isCapturing()) {
-        if (data && data.sensor) {
-          this.sendRequest(this.config.getMode(), data.b64data, data.mimeType,
-            this.config.getSensorInstruments(data.sensor), null, data.context);
-        }
-      }
+    // this.dataCapture = this.sensorsService.newData.subscribe(data => {
+    //   console.log('hey data capture');
 
-    });
-     */
+    //   return;
+    //   if (this.config.isCapturing()) {
+    //     if (data && data.sensor) {
+    //       this.sendRequest(this.config.getMode(), data.b64data, data.mimeType,
+    //         this.config.getSensorInstruments(data.sensor), null, data.context);
+    //     }
+    //   }
+
+    // });
+
 
 
   }
@@ -532,4 +530,3 @@ export class Connection {
   }
 
 }
-

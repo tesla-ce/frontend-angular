@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
@@ -11,7 +11,7 @@ import { AdminInstrumentConfig } from '../admin-instrument.config';
   templateUrl: './admin-instrument-create.component.html',
   styleUrls: ['./admin-instrument-create.component.scss'],
 })
-export class AdminInstrumentCreateComponent implements OnInit {
+export class AdminInstrumentCreateComponent {
 
   fields = AdminInstrumentConfig.fields;
   validator = AdminInstrumentConfig.validator;
@@ -22,9 +22,6 @@ export class AdminInstrumentCreateComponent implements OnInit {
     private location: Location,
     private toastrService: NbToastrService,
     private router: Router) { }
-
-  ngOnInit(): void {
-  }
 
   onSave(event): void {
     event.options_schema = JSON.stringify(JSON.parse(event.options_schema));

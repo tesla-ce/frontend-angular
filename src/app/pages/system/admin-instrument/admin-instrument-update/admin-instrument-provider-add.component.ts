@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
-import { NbDialogRef, NbWindowService } from '@nebular/theme';
+import { Component, Input } from '@angular/core';
+import { NbDialogRef } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { ApiInstrumentService } from '../../../../@core/data/api-instrument.service';
 import { AdminInstrumentProviderConfig } from './admin-instrument-provider.config';
@@ -9,7 +9,7 @@ import { AdminInstrumentProviderConfig } from './admin-instrument-provider.confi
   templateUrl: './admin-instrument-provider-add.component.html',
   styleUrls: ['./admin-instrument-provider-add.component.scss'],
 })
-export class AdminInstrumentProviderAddComponent implements OnInit {
+export class AdminInstrumentProviderAddComponent {
 
   @Input() instrumentId: number;
   @Input() userId: number;
@@ -24,9 +24,6 @@ export class AdminInstrumentProviderAddComponent implements OnInit {
     protected ref: NbDialogRef<AdminInstrumentProviderAddComponent>,
     private apiInstrumentService: ApiInstrumentService,
   ) {
-  }
-
-  ngOnInit() {
   }
 
   dismiss() {

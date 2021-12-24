@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { of as observableOf, Observable, Subject } from 'rxjs';
@@ -12,7 +12,7 @@ import { InstitutionSendUserConfig } from '../institution-send-user.config';
   templateUrl: './institution-send-user-create.component.html',
   styleUrls: ['./institution-send-user-create.component.scss'],
 })
-export class InstitutionSendUserCreateComponent implements OnInit {
+export class InstitutionSendUserCreateComponent {
 
   fields = InstitutionSendUserConfig.fields;
   validator = InstitutionSendUserConfig.validator;
@@ -24,9 +24,6 @@ export class InstitutionSendUserCreateComponent implements OnInit {
     private router: Router,
     private location: Location,
     ) { }
-
-  ngOnInit(): void {
-  }
 
   onSave(event): void {
     this.apiUserService.createUser(event).subscribe((user: User) => {

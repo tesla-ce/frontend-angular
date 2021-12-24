@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { Location } from '@angular/common';
 
@@ -7,20 +7,13 @@ import { Location } from '@angular/common';
   templateUrl: './course-report.component.html',
   styleUrls: ['./course-report.component.scss'],
 })
-export class CourseReportComponent implements OnInit {
+export class CourseReportComponent {
 
 
   constructor(
     private location: Location,
-    ) {
-
-  }
+  ) {}
 
   back() { this.location.back(); }
-
-
-  ngOnInit(): void {
-
-  }
 
 }

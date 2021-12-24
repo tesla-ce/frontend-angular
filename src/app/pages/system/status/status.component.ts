@@ -7,15 +7,11 @@ import { Location } from '@angular/common';
   templateUrl: './status.component.html',
 })
 
-export class StatusComponent implements OnInit {
+export class StatusComponent {
 
   constructor(
     private location: Location,
   ) { }
-
-  ngOnInit() {
-
-  }
 
   back() { this.location.back(); }
 }
