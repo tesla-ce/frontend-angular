@@ -14,7 +14,7 @@ import { InstitutionUser } from '../../../../@core/models/user';
 })
 export class CourseActivityInstrumentComponent implements OnInit {
 
-  loading: boolean = true;
+  loading = true;
   idAi: string;
   instruments: any;
   addComponent: any;
@@ -24,8 +24,8 @@ export class CourseActivityInstrumentComponent implements OnInit {
   @Input() instance: any;
   @Input() activityInstruments: any[];
   @Input() allInstruments: any[];
-  @Input() type: string = 'show';
-  @Input() reload: Function;
+  @Input() type = 'show';
+  @Input() reload: any;
 
   institutionId: number;
   courseId: number;

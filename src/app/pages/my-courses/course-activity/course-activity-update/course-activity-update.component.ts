@@ -1,8 +1,8 @@
 // import { DataDisplayComponent } from '../control';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCourseService } from '../../../../@core/data/api-course.service';
-import { NbDialogService, NbThemeService, NbWindowService } from '@nebular/theme';
+import { NbDialogService } from '@nebular/theme';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { CourseActivityConfig } from '../course-activity.config';
 import { TranslateService } from '@ngx-translate/core';
@@ -20,7 +20,7 @@ export class CourseActivityUpdateComponent implements OnInit {
   institutionId: number;
   courseId: number;
   activityId: number;
-  loading: boolean = true;
+  loading = true;
   allInstruments: any[];
   availableInstruments: any[];
   activityInstruments: any[];

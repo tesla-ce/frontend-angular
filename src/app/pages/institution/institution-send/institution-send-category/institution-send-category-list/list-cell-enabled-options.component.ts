@@ -22,7 +22,4 @@ export class ListCellEnabledOptionsComponent implements ViewCell, OnInit {
   ngOnInit() {
     if (!this.rowData.data) this.rowData.data = {enabled_options: []};
   }
-
-  constructor(
-  ) { }
 }

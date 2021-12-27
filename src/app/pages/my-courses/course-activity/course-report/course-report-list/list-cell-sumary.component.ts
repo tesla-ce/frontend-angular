@@ -20,10 +20,6 @@ export class ListCellSumaryComponent implements ViewCell, OnInit {
     };
   }
 
-  constructor(
-
-  ) { }
-
   getIconStatus(level) {
     switch (level) {
       case 0:

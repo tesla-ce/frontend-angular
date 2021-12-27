@@ -59,7 +59,7 @@ export class AdminInstitutionListComponent implements OnInit {
   }
 
   remove(data): void {
-    this.apiInstitutionService.deleteInstitutionById(data.id).subscribe((user: any) => {
+    this.apiInstitutionService.deleteInstitutionById(data.id).subscribe(() => {
       this.toastrService.show(
         'Institution deleted',
         '',
@@ -70,7 +70,7 @@ export class AdminInstitutionListComponent implements OnInit {
           duration: 2000,
         });
       this.list.refresh();
-    }, error => {
+    }, () => {
       this.toastrService.show(
         'Error',
         '',

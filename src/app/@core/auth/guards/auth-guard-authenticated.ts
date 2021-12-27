@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {CanActivate, Router} from '@angular/router';
 import { NbAuthService } from '@nebular/auth';
-import { iif, of } from 'rxjs';
+import { iif, Observable, of } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import {tap} from 'rxjs/operators';
 
@@ -11,7 +11,7 @@ export class AuthGuardAuthenticated implements CanActivate {
   constructor(private authService: NbAuthService, private router: Router) {
   }
 
-  canActivate() {
+  canActivate(): Observable<boolean> {
     return this.authService.isAuthenticatedOrRefresh()
     .pipe(
       mergeMap(isAuth => iif(() => isAuth, this.authService.getToken(), of(null))),

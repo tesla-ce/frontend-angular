@@ -1,5 +1,3 @@
-import { Validators } from '@angular/forms';
-
 export const InstitutionCourseConfig = {
   validator: null,
   fields: {

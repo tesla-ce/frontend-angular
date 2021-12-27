@@ -1,4 +1,3 @@
-import { startWith } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCourseService } from '../../../../@core/data/api-course.service';
@@ -32,7 +31,7 @@ export class InstitutionCourseReadComponent implements OnInit {
     'name': 'Forensic Analysis',
     'acronym': 'fa', 'description': 'Verify learner identity by means of writing style patterns.',
   }];
-  loading: boolean = true;
+  loading = true;
   public instance: Course;
   public fields = InstitutionCourseConfig.fields;
 
@@ -51,12 +50,12 @@ export class InstitutionCourseReadComponent implements OnInit {
   }
 
   enableDisableActivity(activitiId, value): void {
-    this.apiCourseService.putActivityActive(this.institutionId, this.id, activitiId, { enabled: value }).subscribe(response => { return; });
+    this.apiCourseService.putActivityActive(this.institutionId, this.id, activitiId, { enabled: value }).subscribe();
   }
 
-  addInstrument(activitiId, isAlternative): void {
-    return;
-  }
+  // addInstrument(activitiId, isAlternative): void {
+  //   return;
+  // }
 
   handleDeleteInstrument(activitiId, instrument, hasAlternative) {
     if (hasAlternative) {

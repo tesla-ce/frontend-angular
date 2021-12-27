@@ -1,7 +1,7 @@
 import { AuthService } from './../auth/auth.service';
 import { Injectable } from '@angular/core';
 import { } from '../../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Ic } from '../models/ic';
 import { Observable } from 'rxjs/Observable';
 import { catchError, map } from 'rxjs/operators';
@@ -161,9 +161,7 @@ export class ApiIcService {
     return this.http
       .delete(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}/`)
       .pipe(
-        map((data: any) => {
-          return true;
-        }),
+        map(() => true),
         catchError(this.handleError),
       );
   }
@@ -173,9 +171,7 @@ export class ApiIcService {
     return this.http
       .delete(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}/document/${language}/`)
       .pipe(
-        map((data: any) => {
-          return true;
-        }),
+        map(() => true),
         catchError(this.handleError),
       );
     // will use this.http.delete()

@@ -19,7 +19,7 @@ import { ApiIcService } from '../../../../@core/data/api-ic.service';
 export class InstitutionIcListComponent implements OnInit {
 
   @ViewChild('list') list: ListComponent;
-  loading: boolean = true;
+  loading = true;
   endpoint: string;
   user: InstitutionUser;
   settings: any;
@@ -104,7 +104,7 @@ export class InstitutionIcListComponent implements OnInit {
   }
 
   remove(data): void {
-    this.apiIcService.deleteIcById(this.user.institution.id, data.id).subscribe((user: any) => {
+    this.apiIcService.deleteIcById(this.user.institution.id, data.id).subscribe(() => {
       this.toastrService.show(
         'IC deleted',
         '',
@@ -116,7 +116,7 @@ export class InstitutionIcListComponent implements OnInit {
         });
       this.list.refresh();
     },
-    error => {
+    () => {
       this.toastrService.show(
         'Error',
         '',

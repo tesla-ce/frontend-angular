@@ -5,8 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './admin-instrument.component.html',
   styleUrls: ['./admin-instrument.component.scss'],
 })
-export class AdminInstrumentComponent {
-
-  constructor() { }
-
-}
+export class AdminInstrumentComponent {}

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, AfterViewInit, ViewChild, Input, SimpleChanges, OnChanges, Output } from '@angular/core';
+import { Component, OnInit, ElementRef, AfterViewInit, ViewChild, Input, OnChanges, Output } from '@angular/core';
 import { LocalDataSource, ServerDataSource } from 'ng2-smart-table';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ServerSourceConf } from 'ng2-smart-table/lib/lib/data-source/server/server-source.conf';
@@ -18,7 +18,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() settings: any;
   @Input() endpoint: any;
   @Input() localSource: [];
-  @Input() showFooter: boolean = true;
+  @Input() showFooter = true;
 
   @Output() externalUserRowSelect: EventEmitter<any> = new EventEmitter();
 
@@ -62,7 +62,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     this.initTable();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges() {
     this.initTable();
   }
 
@@ -73,7 +73,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
         filter(Boolean),
         debounceTime(150),
         distinctUntilChanged(),
-        tap((text) => {
+        tap(() => {
           this.source.setFilter([{ field: 'search', search: this.searchInput.nativeElement.value }]);
         }),
       )
@@ -85,7 +85,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     if (this.externalUserRowSelect) this.externalUserRowSelect.emit(event);
   }
 
-  create(event) {
+  create() {
     this.router.navigate(['create'], { relativeTo: this.route });
   }
 

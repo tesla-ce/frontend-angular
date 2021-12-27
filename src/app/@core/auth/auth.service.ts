@@ -1,4 +1,4 @@
-import { of as observableOf, Observable, BehaviorSubject, PartialObserver, Subject } from 'rxjs';
+import { of as observableOf, Observable, BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { NbAuthService, NbAuthOAuth2JWTToken } from '@nebular/auth';
 import { NbRoleProvider } from '@nebular/security';
@@ -7,9 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { User, Institution, InstitutionUser } from '../models/user';
 import { EnvService } from '../env/env.service';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
-import { catchError, map } from 'rxjs/operators';
 import { ApiInstitutionService } from '../data/api-institution.service';
-// import { apiConstants } from '../data/api-constants';
 
 
 export abstract class AuthUserData extends NbRoleProvider {
@@ -17,14 +15,14 @@ export abstract class AuthUserData extends NbRoleProvider {
   abstract logOut(): void;
   abstract getRole(): Observable<string>;
   abstract getRoles(): Observable<Array<string>>;
-  abstract hasRole(role: string): Observable<boolean>;
+  // abstract hasRole(role: string): Observable<boolean>;
 }
 
 @Injectable()
 export class AuthService extends AuthUserData {
   private time: Date = new Date;
   private _user = new BehaviorSubject<User>(null);
-  private _isAdmin: boolean = false;
+  private _isAdmin = false;
   private _institution: number;
   private _userInstitutions: any[];
   private _current_user: InstitutionUser = null;
@@ -34,9 +32,9 @@ export class AuthService extends AuthUserData {
     return observableOf('user');
   }
 
-  hasRole(role: string): Observable<boolean> {
-    return observableOf(true);
-  }
+  // hasRole(role: string): Observable<boolean> {
+  //   return observableOf(true);
+  // }
 
   getRoles(): Observable<Array<string>> {
     return observableOf(['user']);
@@ -83,7 +81,7 @@ export class AuthService extends AuthUserData {
   }
 
   logOut(): void {
-    this.authService.logout('email').subscribe(result => {
+    this.authService.logout('email').subscribe(() => {
       this.router.navigateByUrl('/auth/login');
     });
   }
@@ -149,11 +147,11 @@ export class AuthService extends AuthUserData {
       });
   }
 
-  test(domain, pattern) {
+  test(domain: string, pattern: string): boolean {
     if (pattern.startsWith('*.')) {
       if (pattern.slice(2) === domain) return true;
     }
-    const regexp = new RegExp(`^${pattern.replace(/\./g, '\\.').replace(/\*/g, '.*?')}\$`);
+    const regexp = new RegExp(`^${pattern.replace(/\./g, '\\.').replace(/\*/g, '.*?')}$`);
     return regexp.test(domain);
   }
 

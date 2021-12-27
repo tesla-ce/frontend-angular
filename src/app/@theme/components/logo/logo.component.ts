@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'ngx-logo',
@@ -6,11 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./logo.component.scss'],
 })
 export class LogoComponent {
-
-  @Input() type: string = 'image+text'; // ["image", "text", "image+text"]
-  @Input() title: string = 'TeSLA-CE';
-  @Input() logo: string = '/assets/logo.png';
-
-  constructor() { }
-
+  @Input() type = 'image+text'; // ["image", "text", "image+text"]
+  @Input() title = 'TeSLA-CE';
+  @Input() logo = '/assets/logo.png';
 }

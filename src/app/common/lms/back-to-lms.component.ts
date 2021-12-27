@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'ngx-back-to-lms',
@@ -8,7 +8,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
 export class BackToLMSComponent {
 
   redirectUri: string;
-  allowedDomains: String[] = ['www.example.com'];
+  allowedDomains: string[] = ['www.example.com'];
 
   constructor() {
     const ttl = new Date(new Date(localStorage.getItem('lms_redirect_uri_ts')).getTime() + 5 * 60000);

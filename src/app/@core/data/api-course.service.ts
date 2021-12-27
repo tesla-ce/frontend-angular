@@ -2,13 +2,12 @@ import { AuthService } from './../auth/auth.service';
 // import { apiConstants } from './api-constants';
 import { Injectable } from '@angular/core';
 import { } from '../../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Course } from '../models/course';
 import { Observable } from 'rxjs/Observable';
 import { catchError, map } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { EnvService } from '../env/env.service';
-import { InstitutionUser } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -116,9 +115,7 @@ export class ApiCourseService {
     return this.http
       .delete(`${this.endpointUrl}/institution/${institutionId}/course/${courseId}/activity/${activityId}/instrument/${instrumentId}/`)
       .pipe(
-        map((data: any) => {
-          return true;
-        }),
+        map(() => true),
         catchError(this.handleError),
       );
   }

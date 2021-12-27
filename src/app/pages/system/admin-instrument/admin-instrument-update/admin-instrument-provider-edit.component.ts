@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
-import { NbDialogRef, NbWindowService } from '@nebular/theme';
+import { Component, OnInit, Input } from '@angular/core';
+import { NbDialogRef } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { ApiInstrumentService } from '../../../../@core/data/api-instrument.service';
 import { AdminInstrumentProviderConfig } from './admin-instrument-provider.config';
@@ -36,11 +36,6 @@ export class AdminInstrumentProviderEditComponent implements OnInit {
 
   dismiss() {
     this.ref.close();
-  }
-
-
-  back() {
-
   }
 
   onSave(event) {

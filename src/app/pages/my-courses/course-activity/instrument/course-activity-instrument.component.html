@@ -21,7 +21,7 @@
                     <nb-actions>
                         <nb-action>
                             <button nbButton
-                                *ngIf="type !== 'show' && !instrument.alternative_to && !instrument.hasAlternative  || instruments && type !== 'show' && !instrument.alternative_to && !instrument.hasAlternative && checkInstruments()"
+                                *ngIf="type !== 'show' && !instrument.alternative_to && !instrument.hasAlternative  || instruments && type !== 'show' && !instrument.alternative_to && !instrument.hasAlternative && checkInstruments()"
                                 (click)="addInstrument(instrument.id)">
                                 <nb-icon icon="plus-square-outline"></nb-icon>
                             </button>

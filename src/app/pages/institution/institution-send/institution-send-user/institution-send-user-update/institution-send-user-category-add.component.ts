@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
-import { NbDialogRef, NbWindowService } from '@nebular/theme';
+import { Component, OnInit, Input } from '@angular/core';
+import { NbDialogRef } from '@nebular/theme';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
 import { ApiInstitutionService } from '../../../../../@core/data/api-institution.service';
 import { ListCellDisabledInstrumentsComponent } from '../../institution-send-category/institution-send-category-list/list-cell-disabled-instruments.component';
@@ -71,11 +71,6 @@ export class InstitutionSendUserCategoryAddComponent implements OnInit {
     this.selectedCategory = event.data;
   }
 
-
-  back() {
-
-  }
-
   onSave() {
     const data: any = {
       category: this.selectedCategory.id,
@@ -88,7 +83,7 @@ export class InstitutionSendUserCategoryAddComponent implements OnInit {
 
     if (this.selectedDate) data.expires_at = this.selectedDate.toISOString();
 
-    this.apiInstitutionService.createSendUserCategory(this.institutionId, this.userId, data).subscribe((response) => {
+    this.apiInstitutionService.createSendUserCategory(this.institutionId, this.userId, data).subscribe(() => {
       this.ref.close(data);
     });
   }

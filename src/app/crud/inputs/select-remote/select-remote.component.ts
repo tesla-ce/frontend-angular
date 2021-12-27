@@ -18,7 +18,7 @@ export class SelectRemoteComponent implements OnInit {
   apiService: ApiInstitutionService;
   options: any[];
   value: string;
-  firstRender: boolean = true;
+  firstRender = true;
 
   constructor(apiService: ApiInstitutionService) {
     this.apiService = apiService;
@@ -36,12 +36,12 @@ export class SelectRemoteComponent implements OnInit {
       this.parentForm.controls[this.field.key].setValue(this.initialValue[this.field.optionValueAccessor]);
     }
 
-    this.apiService.getAll({[this.field.search || 'search'] : this.value }).subscribe( options => {
+    this.apiService.getAll({[this.field.search || 'search'] : this.value }).subscribe( options => {
       this.options = options;
     });
   }
 
-  private filter(value: string = '', options: object[]): object[] {
+  private filter(value = '', options: any[]): any[] {
     const filterValue = value?.toLowerCase();
     return options.filter((option) => option[this.field.optionLabelAccessor]?.toLowerCase()?.includes(filterValue));
   }
@@ -55,7 +55,7 @@ export class SelectRemoteComponent implements OnInit {
       if (!this.internForm.controls.intern.pristine)this.parentForm.controls[this.field.key].markAsTouched();
     }
 
-    this.apiService.getAll({[this.field.search || 'search'] : value }).subscribe( options => {
+    this.apiService.getAll({[ this.field.search || 'search'] : value }).subscribe( options => {
       this.options = this.filter(value, options);
 
     });

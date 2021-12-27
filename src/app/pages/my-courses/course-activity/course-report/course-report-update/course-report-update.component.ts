@@ -1,8 +1,7 @@
 // import { DataDisplayComponent } from '../control';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
-import { NbWindowService } from '@nebular/theme';
 import { AuthService } from '../../../../../@core/auth/auth.service';
 import { CourseReportConfig } from '../course-report.config';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,7 +17,7 @@ export class CourseReportUpdateComponent implements OnInit {
   course: any;
   activity: any;
   id: number;
-  loading: boolean = true;
+  loading = true;
   instruments: any[];
   addComponent: any = {};
 
@@ -40,7 +39,7 @@ export class CourseReportUpdateComponent implements OnInit {
   }
   back() { this.location.back(); }
 
-  enableDisableReport(value): void {
+  enableDisableReport(): void {
     // this.apiCourseService.putReportActivity(this.course, this.id, { enabled: value }).subscribe();
   }
 

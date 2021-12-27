@@ -15,10 +15,10 @@ import { InstitutionIcConfig } from '../institution-ic.config';
 export class InstitutionIcReadComponent implements OnInit {
   id: number;
   languages: any[] = [];
-  loading: boolean = true;
+  loading = true;
   public instance: Ic;
   public fields = InstitutionIcConfig.fields;
-  regexPDF: RegExp = /[0-9A-Za-z]+[.][Pp][Dd][Ff]/;
+  regexPDF = /[0-9A-Za-z]+[.][Pp][Dd][Ff]/;
 
   constructor(
     private route: ActivatedRoute,

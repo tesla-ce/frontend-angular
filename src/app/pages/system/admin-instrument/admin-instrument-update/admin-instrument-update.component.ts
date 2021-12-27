@@ -125,14 +125,14 @@ export class AdminInstrumentUpdateComponent implements OnInit {
     });
   }
 
-  addNew(event) {
+  addNew() {
     this.dialog.open(
       AdminInstrumentProviderAddComponent, {
         context: {
           instrumentId: this.id,
         },
       })
-      .onClose.subscribe(data => {
+      .onClose.subscribe(() => {
         this.list.refresh();
       });
   }
@@ -174,7 +174,7 @@ export class AdminInstrumentUpdateComponent implements OnInit {
   }
 
   remove(data): void {
-    this.apiInstrumentService.deleteInstrumentProviderById(this.instance.id, data.id).subscribe((user: any) => {
+    this.apiInstrumentService.deleteInstrumentProviderById(this.instance.id, data.id).subscribe(() => {
       this.toastrService.show(
         'Institution deleted',
         '',
@@ -185,7 +185,7 @@ export class AdminInstrumentUpdateComponent implements OnInit {
           duration: 2000,
         });
       this.list.refresh();
-    }, error => {
+    }, () => {
       this.toastrService.show(
         'Error',
         '',

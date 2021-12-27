@@ -2,13 +2,11 @@ import { AuthService } from './../auth/auth.service';
 // import { apiConstants } from './api-constants';
 import { Injectable } from '@angular/core';
 import { } from '../../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Report } from '../models/report';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import {catchError, map, tap, switchMap} from 'rxjs/operators';
+import {catchError, map, switchMap} from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { EnvService } from '../env/env.service';
-import { InstitutionUser } from '../models/user';
 import { ReportAudit } from '../models/report';
 import {iif, of} from 'rxjs';
 

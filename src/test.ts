@@ -23,6 +23,7 @@ declare const __karma__: any;
 declare const require: any;
 
 // Prevent Karma from running prematurely.
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 __karma__.loaded = function () {};
 
 // First, initialize the Angular testing environment.

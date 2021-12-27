@@ -1,13 +1,12 @@
 // import { DataDisplayComponent } from '../control';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCourseService } from '../../../../@core/data/api-course.service';
-import { NbDialogService, NbThemeService, NbWindowService } from '@nebular/theme';
+import { NbDialogService } from '@nebular/theme';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { CourseActivityConfig } from '../course-activity.config';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
-import { CourseActivityInstrumentAddComponent } from '../course-activity-instrument/course-activity-instrument-add.component';
 import { InstitutionUser } from '../../../../@core/models/user';
 import { dateFormat } from '../../../../@core/utils/utils';
 
@@ -20,7 +19,7 @@ export class CourseActivityReadComponent implements OnInit {
   institutionId: number;
   courseId: number;
   activityId: number;
-  loading: boolean = true;
+  loading = true;
   activityInstruments: any[];
   activityMainInstruments: any[];
   activityAltInstruments: any[];

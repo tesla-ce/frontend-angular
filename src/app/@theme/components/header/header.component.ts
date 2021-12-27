@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
   public readonly materialTheme$: Observable<boolean>;
-  userPictureOnly: boolean = false;
+  userPictureOnly = false;
   user: InstitutionUser;
   defaultPicture = '/ui/assets/images/avatar-placeholder.png';
 
@@ -116,9 +116,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe((user: InstitutionUser) => {
         if (!user) return;
         this.user = user;
-        const [institutionTheme] = this.themes.filter(theme => {
-          return theme.value === 'material-' + user?.institution?.acronym.toString();
-        });
+        // const [institutionTheme] = this.themes.filter(theme => {
+        //   return theme.value === 'material-' + user?.institution?.acronym.toString();
+        // });
 
         // if (institutionTheme) this.themeService.changeTheme(institutionTheme.name);
         // apiConstants.institution = this.institutions[0].id;

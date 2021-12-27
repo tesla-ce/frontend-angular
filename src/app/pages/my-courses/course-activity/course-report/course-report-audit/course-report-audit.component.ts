@@ -8,7 +8,6 @@ import { InstitutionUser } from '../../../../../@core/models/user';
 import { ReportAudit } from '../../../../../@core/models/report';
 import { ApiReportService } from '../../../../../@core/data/api-report.service';
 import { HttpClient } from '@angular/common/http';
-import { MATERIAL_TESLA_THEME } from '../../../../../@theme/styles/material/theme.material-tesla';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
 
@@ -96,7 +95,7 @@ export class CourseReportAuditComponent implements OnInit {
   reportId: number;
   instrumentId: number;
   endpoint: string;
-  loading: boolean = true;
+  loading = true;
   audit: any = null;
   enrolmentSlidesStore: any[];
   resultsSlidesStore: any[];
@@ -137,7 +136,7 @@ export class CourseReportAuditComponent implements OnInit {
 
   load_enrolment(data: ReportAudit): void {
     this.enrolmentSlidesStore = [];
-    if (data !== null && data.audit !== null && data.audit.hasOwnProperty('enrolment_samples')) {
+    if (data !== null && data.audit !== null && Object.prototype.hasOwnProperty.call(data.audit, 'enrolment_samples')) {
       const sample_ids = Object.keys(data.audit.enrolment_samples);
       for (const sid of sample_ids) {
         const sample = data.audit.enrolment_samples[sid];

@@ -22,11 +22,12 @@ export class UpdateComponent implements OnInit {
   formControls: any;
   updateForm: FormGroup;
   formErrors: any = {};
-  loading: Boolean = true;
+  loading = true;
   data: any;
 
   constructor(private router: Router) { }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
     return 0;
   }

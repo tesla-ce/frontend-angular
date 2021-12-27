@@ -1,51 +1,35 @@
 {
-  "root": true,
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
-  "overrides": [
-    {
-      "files": [
-        "*.ts"
-      ],
-      "parserOptions": {
-        "project": [
-          "tsconfig.json",
-          "e2e/tsconfig.json"
-        ],
-        "createDefaultProgram": true
-      },
-      "extends": [
-        "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
-      ],
-      "rules": {
-        // "@angular-eslint/component-selector": [
-        //   "warn",
-        //   {
-        //     "prefix": "app",
-        //     "style": "kebab-case",
-        //     "type": "element"
-        //   }
-        // ],
-        // "@angular-eslint/directive-selector": [
-        //   "warn",
-        //   {
-        //     "prefix": "app",
-        //     "style": "camelCase",
-        //     "type": "attribute"
-        //   }
-        // ]
-      }
+    "env": {
+        "browser": true,
+        "es2021": true
     },
-    {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
-      "rules": {}
-    }
-  ]
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off"
+    },
+    "overrides": [{
+        "files": ["*.component.html", "index.html"],
+        "parser": "@angular-eslint/template-parser",
+        "rules": {
+          "@typescript-eslint/dot-notation": "off",
+          "@typescript-eslint/no-implied-eval": "off",
+          "@typescript-eslint/no-throw-literal": "off",
+          "strict": "off",
+          "import/first": "off",
+          "lines-around-directive": "off"
+        },
+        "plugins": ["@angular-eslint/template"]
+    }]
 }
