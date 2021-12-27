@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EnrolmentStatusComponent } from './enrolment-status.component';
-import {NgxEchartsModule} from 'ngx-echarts';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 
 @NgModule({
@@ -10,7 +10,9 @@ import {NgxEchartsModule} from 'ngx-echarts';
   ],
   imports: [
     CommonModule,
-    NgxEchartsModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
   ],
   exports: [
     EnrolmentStatusComponent,

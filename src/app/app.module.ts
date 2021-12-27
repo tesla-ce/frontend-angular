@@ -67,7 +67,7 @@ import {Router} from '@angular/router';
 
     SideMenuModule,
     NbIconModule,
-    NbTeslaIconsModule,
+    NbTeslaIconsModule
   ],
   bootstrap: [AppComponent],
   providers: [
