@@ -96,12 +96,12 @@ export const routes: Routes = [
       .then(m => m.LearnerModule),
     canActivate: [AuthGuardAuthenticated],
   },
-  // {
-  //   path: 'enrolment',
-  //   loadChildren: () => import('./pages/enrolment/enrolment.module')
-  //     .then(m => m.EnrolmentModule),
-  //   canActivate: [AuthGuardAuthenticated],
-  // },
+  {
+     path: 'enrolment',
+     loadChildren: () => import('./pages/enrolment/enrolment.module')
+       .then(m => m.EnrolmentModule),
+     canActivate: [AuthGuardAuthenticated],
+  },
   {
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module')

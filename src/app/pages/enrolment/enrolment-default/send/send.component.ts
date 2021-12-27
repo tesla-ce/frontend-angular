@@ -218,9 +218,9 @@ export class SendComponent implements OnInit, AfterViewInit {
       // console.log('configuring this.video');
       switch ( this.instrumentId ) {
         case 1:
-          this.sensorsService.setAudio(this.audio);
-          this.sensorsService.setVideo(this.video);
-          this.sensorsService.setCanvas(this.canvas);
+          // this.sensorsService.setAudio(this.audio);
+          this.sensorsService.setVideo(this.video.first);
+          this.sensorsService.setCanvas(this.canvas.first);
           this.sensorsService.enableSensors(['camera']);
           break;
         case 2:

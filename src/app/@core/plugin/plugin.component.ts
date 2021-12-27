@@ -117,7 +117,8 @@ export class PluginComponent implements OnInit {
             this.allowedDomains.map(allowedDomain => {
               if (this.test(redirectUri, allowedDomain)) isAllowed = true;
             });
-
+            console.log(redirectUri);
+            console.log(isAllowed );
             if (isAllowed) {
               localStorage.setItem('lms_redirect_uri', params['redirect_uri']);
               localStorage.setItem('lms_redirect_uri_ts', new Date().toISOString());
@@ -158,7 +159,8 @@ export class PluginComponent implements OnInit {
     if (pattern.startsWith('*.')) {
       if (pattern.slice(2) === domain) return true;
     }
-    const regexp = new RegExp(`^${pattern.replace(/\./g, '\\.').replace(/\*/g, '.*?')}\$`);
+    const regexp = new RegExp(`^${pattern.replace(/\./g, '\\.').replace(/\*/g, '.*?')}`);
+
     return regexp.test(domain);
   }
 }
