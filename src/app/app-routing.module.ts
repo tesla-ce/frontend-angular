@@ -97,10 +97,10 @@ export const routes: Routes = [
     canActivate: [AuthGuardAuthenticated],
   },
   {
-    path: 'enrolment',
-    loadChildren: () => import('./pages/enrolment/enrolment.module')
-      .then(m => m.EnrolmentModule),
-    canActivate: [AuthGuardAuthenticated],
+     path: 'enrolment',
+     loadChildren: () => import('./pages/enrolment/enrolment.module')
+       .then(m => m.EnrolmentModule),
+     canActivate: [AuthGuardAuthenticated],
   },
   {
     path: 'profile',

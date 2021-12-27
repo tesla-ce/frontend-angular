@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
@@ -12,7 +12,7 @@ import { AdminInstitutionConfig } from '../admin-institution.config';
   templateUrl: './admin-institution-update.component.html',
   styleUrls: ['./admin-institution-update.component.scss'],
 })
-export class AdminInstitutionUpdateComponent implements OnInit {
+export class AdminInstitutionUpdateComponent {
 
   public id: number;
   public instance: Institution;
@@ -36,9 +36,6 @@ export class AdminInstitutionUpdateComponent implements OnInit {
         router.navigate(['../'], { relativeTo: this.route });
       }
     });
-  }
-
-  ngOnInit(): void {
   }
 
   onSave(event): void {

@@ -2,9 +2,8 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
-import { of as observableOf, Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { ApiUserService } from '../../../../@core/data/api-user.service';
-import { EnvService } from '../../../../@core/env/env.service';
 import { User } from '../../../../@core/models/user';
 import { AdminUserConfig } from '../admin-user.config';
 
@@ -13,7 +12,7 @@ import { AdminUserConfig } from '../admin-user.config';
   templateUrl: './admin-user-create.component.html',
   styleUrls: ['./admin-user-create.component.scss'],
 })
-export class AdminUserCreateComponent implements OnInit {
+export class AdminUserCreateComponent {
 
   fields = AdminUserConfig.fields;
   validator = AdminUserConfig.validator;
@@ -23,12 +22,7 @@ export class AdminUserCreateComponent implements OnInit {
     private apiUserService: ApiUserService,
     private location: Location,
     private toastrService: NbToastrService,
-    // private envService: EnvService,
     private router: Router) { }
-
-  ngOnInit(): void {
-    // this.fields.locale.options = this.envService.availableLocales.map(item => ({ key: item, value: item }));
-  }
 
   onSave(event): void {
     this.apiUserService.createUser(event).subscribe((user: User) => {

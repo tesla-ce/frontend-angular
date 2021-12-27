@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
@@ -7,15 +7,11 @@ import { Location } from '@angular/common';
   templateUrl: './data-management.component.html',
 })
 
-export class DataManagementComponent implements OnInit {
+export class DataManagementComponent {
 
   constructor(
     private location: Location,
   ) { }
-
-  ngOnInit() {
-
-  }
 
   back() { this.location.back(); }
 }

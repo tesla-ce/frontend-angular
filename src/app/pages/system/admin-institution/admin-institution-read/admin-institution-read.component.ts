@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiInstitutionService } from '../../../../@core/data/api-institution.service';
 import { Institution } from '../../../../@core/models/user';
@@ -10,7 +10,7 @@ import { AdminInstitutionConfig } from '../admin-institution.config';
   templateUrl: './admin-institution-read.component.html',
   styleUrls: ['./admin-institution-read.component.scss'],
 })
-export class AdminInstitutionReadComponent implements OnInit {
+export class AdminInstitutionReadComponent {
   id: number;
   fields = AdminInstitutionConfig.fields;
   paths = AdminInstitutionConfig.paths;
@@ -31,9 +31,6 @@ export class AdminInstitutionReadComponent implements OnInit {
         router.navigate(['../'], { relativeTo: this.route });
       }
     });
-  }
-
-  ngOnInit(): void {
   }
 
   back() { this.location.back(); }

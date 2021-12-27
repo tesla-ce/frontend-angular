@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
-import { NbDialogRef, NbWindowService } from '@nebular/theme';
+import { Component } from '@angular/core';
+import { NbDialogRef } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { doublePasswordCheck } from '../../../../@core/utils/validators';
 
@@ -8,7 +8,7 @@ import { doublePasswordCheck } from '../../../../@core/utils/validators';
   templateUrl: './admin-user-change-password.component.html',
   styleUrls: ['./admin-user-change-password.component.scss'],
 })
-export class AdminUserChangePasswordComponent implements OnInit {
+export class AdminUserChangePasswordComponent {
 
   public errors = new Subject();
   validator = doublePasswordCheck;
@@ -41,10 +41,7 @@ export class AdminUserChangePasswordComponent implements OnInit {
     protected ref: NbDialogRef<AdminUserChangePasswordComponent>,
   ) {
   }
-
-  ngOnInit() {
-  }
-
+  
   dismiss() {
     this.ref.close();
   }

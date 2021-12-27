@@ -1,7 +1,7 @@
 import { InstitutionIcConfig } from '../institution-ic.config';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
-import { of as observableOf, Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { ApiIcService } from '../../../../@core/data/api-ic.service';
 import { Ic } from '../../../../@core/models/ic';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ import { InstitutionUser } from '../../../../@core/models/user';
   templateUrl: './institution-ic-create.component.html',
   styleUrls: ['./institution-ic-create.component.scss'],
 })
-export class InstitutionIcCreateComponent implements OnInit {
+export class InstitutionIcCreateComponent {
 
   fields = InstitutionIcConfig.fields;
   public errors = new Subject();
@@ -29,11 +29,7 @@ export class InstitutionIcCreateComponent implements OnInit {
     private toastrService: NbToastrService,
     private router: Router) { }
 
-  ngOnInit(): void {
-  }
-
   back() { this.location.back(); }
-
 
   onSave(event): void {
     this.authService.getUser().subscribe((user: InstitutionUser) => {

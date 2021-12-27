@@ -1,8 +1,7 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiUserService } from '../../../../@core/data/api-user.service';
-import { EnvService } from '../../../../@core/env/env.service';
 import { User } from '../../../../@core/models/user';
 import { AdminUserConfig } from '../admin-user.config';
 
@@ -11,7 +10,7 @@ import { AdminUserConfig } from '../admin-user.config';
   templateUrl: './admin-user-read.component.html',
   styleUrls: ['./admin-user-read.component.scss'],
 })
-export class AdminUserReadComponent implements OnInit {
+export class AdminUserReadComponent {
   id: number;
   fields = AdminUserConfig.fields;
   paths = AdminUserConfig.paths;
@@ -41,10 +40,6 @@ export class AdminUserReadComponent implements OnInit {
         router.navigate(['../'], { relativeTo: this.route });
       }
     });
-  }
-
-  ngOnInit(): void {
-    // this.fields.locale.options = this.envService.availableLocales.map(item => ({ key: item, value: item }));
   }
 
   back() { this.location.back(); }
