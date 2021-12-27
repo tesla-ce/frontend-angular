@@ -5,7 +5,6 @@
  */
 
 /* SystemJS module definition */
-import {ECharts} from "echarts";
 
 declare var module: NodeModule;
 interface NodeModule {
@@ -13,5 +12,3 @@ interface NodeModule {
 }
 
 declare var tinymce: any;
-
-declare var echarts: ECharts;
