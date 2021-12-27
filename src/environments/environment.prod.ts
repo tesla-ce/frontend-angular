@@ -8,5 +8,5 @@ export const environment = {
   apiUrl: 'https://demo.tesla-project.eu/api/',
   apiVersion: 'v2',
   version: '0.0.0',
-  availableLocales: ['en', 'fr'],
+  availableLocales: ['bg', 'ca', 'en', 'es', 'fi', 'tr', 'pt'],
 };
