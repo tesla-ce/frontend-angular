@@ -5,7 +5,10 @@
  */
 
 /* SystemJS module definition */
-// declare var module: NodeModule;
+
+// eslint-disable-next-line no-var
+declare var module: NodeModule;
+
 interface NodeModule {
   id: string;
 }

@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, Input, OnChanges, SimpleChanges, ViewChildren} from '@angular/core';
 import { EChartsOption } from 'echarts';
+// import {echarts} from "../../../typings";
 
 @Component({
   selector: 'ngx-enrolment-status',
@@ -98,10 +99,12 @@ export class EnrolmentStatusComponent implements AfterViewInit, OnChanges {
 
   ngAfterViewInit() {
     this.ready = true;
-    this.echartsInstance = echarts.init(this.gEcharts.first.nativeElement);
+    // this.echartsInstance = echarts.init(this.gEcharts.first.nativeElement);
+  }
+  onChartInit(ec) {
+    this.echartsInstance = ec;
     this.update();
   }
-
   update() {
     if (this.ready === true) {
       this.echartsInstance.setOption(this.options);

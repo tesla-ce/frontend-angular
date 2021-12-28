@@ -151,7 +151,7 @@ export class AuthService extends AuthUserData {
     if (pattern.startsWith('*.')) {
       if (pattern.slice(2) === domain) return true;
     }
-    const regexp = new RegExp(`^${pattern.replace(/\./g, '\\.').replace(/\*/g, '.*?')}$`);
+    const regexp = new RegExp(`^${pattern.replace(/\./g, '\\.').replace(/\*/g, '.*?')}`);
     return regexp.test(domain);
   }
 

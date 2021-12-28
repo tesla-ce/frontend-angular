@@ -9,20 +9,22 @@ import { BasicComponent } from './basic/basic.component';
 import { EnrolmentStatusModule } from '../../common/enrolment-status/enrolment-status.module';
 import { NbButtonModule, NbCardModule, NbCheckboxModule, NbSelectModule } from '@nebular/theme';
 import { CreateModule } from '../../crud/create/create.module';
+import {EnrolmentModule} from "../enrolment/enrolment.module";
 
 @NgModule({
   declarations: [ProfileComponent, BiometricComponent, BasicComponent],
-  imports: [
-    ThemeModule,
-    ProfileRoutingModule,
-    SharedModule,
-    SideMenuModule,
-    EnrolmentStatusModule,
-    NbCheckboxModule,
-    NbSelectModule,
-    NbCardModule,
-    NbButtonModule,
-    CreateModule,
-  ],
+    imports: [
+        ThemeModule,
+        ProfileRoutingModule,
+        SharedModule,
+        SideMenuModule,
+        EnrolmentStatusModule,
+        NbCheckboxModule,
+        NbSelectModule,
+        NbCardModule,
+        NbButtonModule,
+        CreateModule,
+        EnrolmentModule,
+    ],
 })
 export class ProfileModule { }
