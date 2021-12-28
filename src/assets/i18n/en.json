@@ -34,10 +34,15 @@
         "HEADER": "Notifications",
         "SESSION_EXPIRED": "Session has expired. Please log in again."
     },
-    "ADMIN": {
-        "DASHBOARD": {
-            "WELCOME" : "Welcome"
-        }
+    "DASHBOARD": {
+        "WELCOME" : "Welcome",
+        "ACTIVE_COURSES": "Active courses"
+    },
+    "CRUD": {
+        "CREATE": "Create",
+        "READ": "Read",
+        "UPDATE": "Update",
+        "DELETE": "Delete"
     },
     "IC": {
         "IC" : "Informed Consent",
@@ -54,8 +59,8 @@
         "READ_TITLE": "Read Informed Consent"
     },
     "COURSE":{
-        "SINGULAR": "Course",
-        "PLURAL": "Courses",
+        "COURSE": "Course",
+        "COURSES": "Courses",
         "UPDATE_TITLE": "Update Informed Consent",
         "NEW_TITLE": "Create new Informed Consent",
         "CODE": "Code",
