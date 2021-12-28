@@ -4,7 +4,6 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { SideMenuModule } from '../../side-menu/side-menu.module';
-import { InstrumentComponent } from './instrument/instrument.component';
 import { ServiceComponent } from './service/service.component';
 import { StatusComponent } from './status/status.component';
 import { NbActionsModule, NbButtonModule, NbCardModule } from '@nebular/theme';
@@ -21,7 +20,6 @@ import { NbActionsModule, NbButtonModule, NbCardModule } from '@nebular/theme';
   ],
   declarations: [
     AdminComponent,
-    InstrumentComponent,
     ServiceComponent,
     StatusComponent,
   ],

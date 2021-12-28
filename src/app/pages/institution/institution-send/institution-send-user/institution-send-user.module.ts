@@ -29,6 +29,7 @@ import { UpdateModule } from '../../../../crud/update/update.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { InstitutionSendUserCategoryAddComponent } from './institution-send-user-update/institution-send-user-category-add.component';
 import { InstitutionSendUserCategoryEditComponent } from './institution-send-user-update/institution-send-user-category-edit.component';
+import { SharedModule } from '../../../../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -51,6 +52,7 @@ import { InstitutionSendUserCategoryEditComponent } from './institution-send-use
     ReadModule,
     UpdateModule,
     Ng2SmartTableModule,
+    SharedModule,
   ],
   declarations: [
     InstitutionSendUserComponent,

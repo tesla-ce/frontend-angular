@@ -52,6 +52,7 @@ import { SideMenuModule } from '../side-menu/side-menu.module';
 import { MATERIAL_UOC_THEME } from './styles/material/theme.material-uoc';
 import { MATERIAL_TESLA_THEME } from './styles/material/theme.material-tesla';
 import { BackToLMSModule } from '../common/lms/back-to-lms.module';
+import { SharedModule } from '../shared/shared.module';
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -68,6 +69,7 @@ const NB_MODULES = [
   NbEvaIconsModule,
   SideMenuModule,
   BackToLMSModule,
+  SharedModule,
 ];
 const COMPONENTS = [
   SwitcherComponent,

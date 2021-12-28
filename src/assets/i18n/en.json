@@ -74,7 +74,9 @@
         "SINGULAR": "Instrument",
         "PLURAL": "Instruments",
         "ADD": "Add Instrument",
-        "ADD_ALTERNATIVE": "Add Alternative"
+        "ADD_ALTERNATIVE": "Add Alternative",
+        "ADD_PROVIDER" : "Add provider",
+        "UPDATE_PROVIDER" : "Update provider"
     },
     "REPORT": {
         "REPORT": "Report",
@@ -118,5 +120,53 @@
         "KS": {
           "INSTRUCTIONS": "In order to enroll keystroke dynamics, talk about yourself. Type text into the text area"
         }
-  }
+    },
+    "SEND": {
+        "DISABLED_INSTRUMENTS" : "Disabled instruments",
+        "ENABLED_OPTIONS": "Enabled options",
+        "USER_SEND_CATEGORIES" : "User SEND categories"
+    },
+    "INSTITUTION_SETTINGS": {
+        "DISABLE_VLE_LEARNER_CREATION" : "Disable VLE learner creation",
+        "DISABLE_VLE_INSTRUCTOR_CREATION" : "Disable VLE instructor creation",
+        "DISABLE_VLE_USER_CREATION" : "Disable VLE user creation",
+        "ALLOW_LEARNER_REPORT" : "Allow learner report",
+        "ALLOW_LEARNER_AUDIT" : "Allow learner audit",
+        "ALLOW_VALID_AUDIT" : "Allow valid audit",
+        "EXTERNAL_IC" : "External IC",
+        "ALLOWED_DOMAINS" : "Allowed domains"
+    },
+    "PROFILE": {
+        "PROFILE" : "Profile",
+        "PROFILE.ENABLE_HIGH_CONTRAST": "Enable high contrast",
+        "PROFILE.ENABLE_BIG_FONTS": "Enable big fonts",
+        "PROFILE.ENABLE_TEXT_TO_SPEECH": "Enable text to speech"
+    },
+    "TOP_MENU": {
+        "PROFILE" : "Profile",
+        "BIOMETRIC" : "Biometric",
+        "INFORMED_CONSENT" : "Informed consent",
+        "LOG_OUT" : "Log out"
+    },
+    "SIDE_MENU": {
+        "DASHBOARD":"Dashboard",
+        "MY_COURSES":"My Courses",
+        "TEST_PAGE":"Test page",
+        "ADMINISTRATION":"Administration",
+        "USERS":"Users",
+        "INFORMED_CONSENT":"Informed Consent",
+        "SEND":"SEND",
+        "CATEGORIES":"Categories",
+        "COURSES":"Courses",
+        "DATA_MANAGEMENT":"Data Management",
+        "INSTITUTION":"Institution",
+        "SETTINGS":"Settings",
+        "STATISTICS":"Statistics",
+        "MONITORING":"Monitoring",
+        "SYSTEM":"System",
+        "INSTITUTIONS":"Institutions",
+        "INSTRUMENTS":"Instruments",
+        "SERVICES":"Services",
+        "STATUS":"Status"
+    }
 }

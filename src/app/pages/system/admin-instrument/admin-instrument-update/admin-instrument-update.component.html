@@ -9,7 +9,7 @@
           <nb-action>
           </nb-action>
         </nb-actions>
-        Update Instrument {{id}}
+        {{ 'CRUD.UPDATE' | translate }} Instrument {{id}}
     </nb-card-header>
     <nb-card-body class="example-items-rows">
         <ngx-update (save)="onSave($event)" [fields]="fields" [errors]="errors"  [paths]="paths" [instance]="instance"></ngx-update>
@@ -18,7 +18,7 @@
         <div style="display:flex; margin-bottom: 15px;">
             <label class="label" style="margin-bottom: 16px; flex:1">Providers</label>
             <button class="create-button" nbButton status='info' size="small" (click)="addNew($event)">
-                <nb-icon icon="plus-circle-outline"></nb-icon>ADD NEW
+                <nb-icon icon="plus-circle-outline"></nb-icon>{{ 'CRUD.ADD_NEW' | translate }}
             </button>
         </div>
         <!-- <ng2-smart-table (userRowSelect)="remove($event)" class="list" [settings]="settings" [source]="userSendCategories"></ng2-smart-table> -->

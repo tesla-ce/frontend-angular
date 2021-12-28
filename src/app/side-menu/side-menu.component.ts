@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService } from '../@core/auth/auth.service';
 import { User } from '../@core/models/user';
 import { NbMenuItem } from '@nebular/theme';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-side-menu',
@@ -15,6 +16,7 @@ export class SideMenuComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private translate: TranslateService,
   ) { }
 
   ngOnInit(): void {
@@ -25,55 +27,55 @@ export class SideMenuComponent implements OnInit {
             this.user = user;
             this.menu = [
             {
-                title: 'Dashboard',
+                title: this.translate.instant('SIDE_MENU.DASHBOARD'),
                 icon: { icon: 'common-dashboard', pack: 'tesla'},
                 link: '/dashboard',
                 hidden: user.routes.indexOf('dashboard') === -1,
             },
             {
-                title: 'My Courses',
+                title: this.translate.instant('SIDE_MENU.MY_COURSES'),
                 icon: { icon: 'common-course', pack: 'tesla' },
                 link: '/course',
                 hidden: user.routes.indexOf('course') === -1,
             },
             {
-                title: 'Test page',
+                title: this.translate.instant('SIDE_MENU.TEST_PAGE'),
                 icon: { icon: 'common-menu_logo', pack: 'tesla' },
                 link: '/test',
                 hidden: user.routes.indexOf('test-page') === -1,
             },
             {
-                title: 'Administration',
+                title: this.translate.instant('SIDE_MENU.ADMINISTRATION'),
                 icon: { icon: 'common-monitoring', pack: 'tesla' },
                 link: '/institution',
                 hidden: user.routes.indexOf('administration') === -1,
                 children: [
                     {
-                        title: 'Users',
+                        title: this.translate.instant('SIDE_MENU.USERS'),
                         icon: { icon: 'common-user', pack: 'tesla' },
                         link: '/institution/user',
                         hidden: user.routes.indexOf('administration-users') === -1,
                     },
                     {
-                        title: 'Informed Consent',
+                        title: this.translate.instant('SIDE_MENU.INFORMED_CONSENT'),
                         icon: { icon: 'common-informed-consent', pack: 'tesla' },
                         link: '/institution/ic',
                         hidden: user.routes.indexOf('administration-ic') === -1,
                     },
                     {
-                        title: 'SEND',
+                        title: this.translate.instant('SIDE_MENU.SEND'),
                         icon: { icon: 'role-send', pack: 'tesla' },
                         link: '/institution/send',
                         hidden: user.routes.indexOf('administration-send') === -1,
                         children: [
                             {
-                                title: 'Categories',
+                                title: this.translate.instant('SIDE_MENU.CATEGORIES'),
                                 icon: { icon: 'role-send', pack: 'tesla' },
                                 link: '/institution/send/category',
                                 hidden: user.routes.indexOf('administration-send-categories') === -1,
                             },
                             {
-                                title: 'Users',
+                                title: this.translate.instant('SIDE_MENU.USERS'),
                                 icon: { icon: 'role-send', pack: 'tesla' },
                                 link: '/institution/send/user',
                                 hidden: user.routes.indexOf('administration-send-users') === -1,
@@ -81,25 +83,19 @@ export class SideMenuComponent implements OnInit {
                         ],
                     },
                     {
-                        title: 'Courses',
+                        title: this.translate.instant('SIDE_MENU.COURSES'),
                         icon: { icon: 'instrument-plagiarism', pack: 'tesla' },
                         link: '/institution/course',
                         hidden: user.routes.indexOf('administration-courses') === -1,
                     },
                     {
-                        title: 'Data Management',
-                        icon: { icon: 'instrument-vr', pack: 'tesla' },
-                        link: '/institution/data-management',
-                        hidden: user.routes.indexOf('administration-data-management') === -1,
-                    },
-                    {
-                        title: 'Institution',
+                        title: this.translate.instant('SIDE_MENU.INSTITUTION'),
                         icon: { icon: 'instrument-vr', pack: 'tesla' },
                         link: '/institution/data-management',
                         hidden: user.routes.indexOf('administration-institution') === -1,
                     },
                     {
-                        title: 'Settings',
+                        title: this.translate.instant('SIDE_MENU.SETTINGS'),
                         icon: { icon: 'common-system', pack: 'tesla' },
                         link: '/institution/settings',
                         hidden: user.routes.indexOf('administration-settings') === -1,
@@ -107,49 +103,49 @@ export class SideMenuComponent implements OnInit {
                 ],
             },
             {
-                title: 'Statistics',
+                title: this.translate.instant('SIDE_MENU.STATISTICS'),
                 icon: { icon: 'sensor-camera', pack: 'tesla' },
                 link: '/statistics',
                 hidden: user.routes.indexOf('statistics') === -1,
             },
             {
-                title: 'Monitoring',
+                title: this.translate.instant('SIDE_MENU.MONITORING'),
                 icon: { icon: 'sensor-keyboard', pack: 'tesla' },
                 link: '/monitoring',
                 hidden: user.routes.indexOf('monitoring') === -1,
             },
             {
-                title: 'System',
+                title: this.translate.instant('SIDE_MENU.SYSTEM'),
                 icon: { icon: 'common-system', pack: 'tesla' },
                 link: '/system',
                 hidden: user.routes.indexOf('system') === -1,
                 children: [
                     {
-                        title: 'Users',
+                        title: this.translate.instant('SIDE_MENU.USERS'),
                         icon: { icon: 'common-user', pack: 'tesla' },
                         link: '/system/admin-user',
                         hidden: user.routes.indexOf('system-user') === -1,
                     },
                     {
-                        title: 'Institutions',
+                        title: this.translate.instant('SIDE_MENU.INSTITUTIONS'),
                         icon: { icon: 'common-course', pack: 'tesla' },
                         link: '/system/admin-institution',
                         hidden: user.routes.indexOf('system-institutions') === -1,
                     },
                     {
-                        title: 'Instruments',
+                        title: this.translate.instant('SIDE_MENU.INSTRUMENTS'),
                         icon: { icon: 'common-dashboard', pack: 'tesla' },
                         link: '/system/admin-instrument',
                         hidden: user.routes.indexOf('system-instruments') === -1,
                     },
                     {
-                        title: 'Services',
+                        title: this.translate.instant('SIDE_MENU.SERVICES'),
                         icon: { icon: 'common-dashboard', pack: 'tesla' },
                         link: '/system/service',
                         hidden: user.routes.indexOf('system-services') === -1,
                     },
                     {
-                        title: 'Status',
+                        title: this.translate.instant('SIDE_MENU.STATUS'),
                         icon: { icon: 'common-dashboard', pack: 'tesla' },
                         link: '/system/status',
                         hidden: user.routes.indexOf('system-status') === -1,
@@ -159,29 +155,4 @@ export class SideMenuComponent implements OnInit {
         }
     });
   }
-
-  getMockedRoutes(): string[] {
-    return [
-        'dashboard',
-        'my-courses',
-        // 'test-page',
-        'administration',
-        // 'administration-users',
-        'administration-ic',
-        // 'administration-send',
-        // 'administration-courses',
-        // 'administration-data-management',
-        // 'administration-settings',
-        // 'settings',
-        // 'statistics',
-        // 'monitoring',
-        'system',
-        'system-users',
-        // 'system-institutions',
-        // 'system-instruments',
-        // 'system-services',
-        // 'system-status',
-      ];
-    }
-
 }

@@ -1,5 +1,3 @@
-// import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
-// import { JsonFormsModule } from '@jsonforms/angular';
 import { NgModule } from '@angular/core';
 
 import { ThemeModule } from '../../../@theme/theme.module';
@@ -15,16 +13,14 @@ import {
   NbActionsModule,
 } from '@nebular/theme';
 
-// import { CourseReadRoutingModule } from './course-read-routing.module';
 import { SideMenuModule } from '../../../side-menu/side-menu.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators'; // <-- #2 import module
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 
 import { ListModule } from '../../../crud/list/list.module';
 import { CreateModule } from '../../../crud/create/create.module';
 import { CourseReadComponent } from './course-read.component';
-// import { DataDisplayComponent } from '../course-read/control';
 import { CourseActivityModule } from '../course-activity/course-activity.module';
 import { CourseActivityListComponent } from '../course-activity/course-activity-list/course-activity-list.component';
 import { CommonModule } from '@angular/common';
@@ -34,7 +30,6 @@ import { SharedModule } from '../../../shared/shared.module';
 @NgModule({
   imports: [
     CommonModule,
-    // CourseReadRoutingModule,
     ThemeModule,
     FormsModule,
     ReactiveFormsModule,
@@ -43,8 +38,6 @@ import { SharedModule } from '../../../shared/shared.module';
     NbButtonModule,
     NbInputModule,
     NbSelectModule,
-    // JsonFormsModule,
-    // JsonFormsAngularMaterialModule,
     NbToggleModule,
     NbFormFieldModule,
     RxReactiveFormsModule,
@@ -57,14 +50,9 @@ import { SharedModule } from '../../../shared/shared.module';
     SharedModule,
   ],
   declarations: [
-    // DataDisplayComponent,
     CourseReadComponent,
-    // CourseReadActivityListComponent,
-    // CourseReadActivityReadComponent,
-    // CourseReadActivityUpdateComponent,
   ],
   entryComponents: [
-    // DataDisplayComponent,
     CourseActivityListComponent,
   ],
 
