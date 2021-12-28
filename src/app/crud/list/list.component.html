@@ -1,6 +1,6 @@
 <div class="list-header">
     <button *ngIf="settings.addNew" class="create-button" nbButton status='info' size="small" (click)="create($event)">
-        <nb-icon icon="plus-circle-outline"></nb-icon>ADD NEW
+        <nb-icon icon="plus-circle-outline"></nb-icon>{{ 'CRUD.ADD_NEW' | translate }}
     </button>
     <nb-form-field *ngIf="settings.search">
         <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
@@ -10,7 +10,7 @@
 <ng2-smart-table *ngIf="source" (userRowSelect)="userRowSelect($event)" class="list" [settings]="settings" [source]="source"></ng2-smart-table>
 <ng2-smart-table *ngIf="localDataSource" (userRowSelect)="userRowSelect($event)" class="list" [settings]="settings" [source]="localDataSource"></ng2-smart-table>
 <div *ngIf='settings.showFooter===false?false:true' class="list-footer">
-    <nb-select placeholder="Items per page" [(selected)]="perPage" (selectedChange)="perPageOnChange($event)">
+    <nb-select placeholder="{{ 'CRUD.ITEMS_PER_PAGE' | translate }}" [(selected)]="perPage" (selectedChange)="perPageOnChange($event)">
         <nb-option value="5">5</nb-option>
         <nb-option value="10">10</nb-option>
         <nb-option value="50">50</nb-option>

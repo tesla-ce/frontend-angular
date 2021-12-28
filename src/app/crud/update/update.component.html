@@ -84,7 +84,7 @@
         </div>
     </div>
         <div class="buttons">
-        <button *ngIf="!loading" nbButton type="submit" [disabled]="!updateForm.valid">Submit</button>
+        <button *ngIf="!loading" nbButton type="submit" [disabled]="!updateForm.valid">{{ 'ACTIONS.SUBMIT' | translate }}</button>
     </div>
     <p>
         <!-- {{ updateForm.status }} -->

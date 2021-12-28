@@ -10,7 +10,7 @@
             </nb-action>
         </nb-actions>
         <div style="flex:1">
-            {{'REPORT.PLURAL' | translate }}
+            {{'REPORT.REPORTS' | translate }}
         </div>
         <nb-actions>
             <nb-action>
@@ -19,7 +19,7 @@
         </nb-actions>
     </nb-card-header>
     <nb-card-body>
-        <label class="label">Identity level</label>
+        <label class="label">{{'REPORT.IDENTITY_LEVEL' | translate }}</label>
         <nb-select
             (selectedChange)="selectedChangeIdentity($event)"
             [(selected)]="selectedIdentity"
@@ -30,7 +30,7 @@
                 {{ level.key }}
             </nb-option>
         </nb-select>
-        <label class="label">Content level</label>
+        <label class="label">{{'REPORT.CONTENT_LEVEL' | translate }}</label>
         <nb-select
             (selectedChange)="selectedChangeContent($event)"
             [(selected)]="selectedContent"
@@ -41,7 +41,7 @@
                 {{ level.key }}
             </nb-option>
         </nb-select>
-        <label class="label">Integrity level</label>
+        <label class="label">{{'REPORT.INTEGRITY_LEVEL' | translate }}</label>
         <nb-select
             (selectedChange)="selectedChangeIntegrity($event)"
             [(selected)]="selectedIntegrity"
@@ -52,7 +52,7 @@
                 {{ level.key }}
             </nb-option>
         </nb-select>
-        <button nbButton (click)="resetFilters()">Reset filters</button>
+        <button nbButton (click)="resetFilters()">{{'REPORT.RESET_FILTERS' | translate }}</button>
         <br><br>
         <ngx-list #list [settings]="settings" [endpoint]="endpoint"></ngx-list>
     </nb-card-body>

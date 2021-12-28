@@ -13,7 +13,8 @@
         "SAVE": "Save",
         "DOWNLOAD": "Download",
         "ADD": "Add",
-        "NEW": "New"
+        "NEW": "New",
+        "CHANGE_PASSWORD": "Change password"
     },
     "ETHICAL_WARNING": {
         "ACTIVE_INSTRUMENTS": "The following instruments are enabled",
@@ -42,7 +43,10 @@
         "CREATE": "Create",
         "READ": "Read",
         "UPDATE": "Update",
-        "DELETE": "Delete"
+        "DELETE": "Delete",
+        "REPORT": "Report",
+        "ITEMS_PER_PAGE": "Items per page",
+        "ADD_NEW" : "Add new"
     },
     "IC": {
         "IC" : "Informed Consent",
@@ -76,8 +80,17 @@
         "ADD_ALTERNATIVE": "Add Alternative"
     },
     "REPORT": {
-        "SINGULAR": "Report",
-        "PLURAL": "Reports",
+        "REPORT": "Report",
+        "REPORTS": "Reports",
+        "IDENTITY_LEVEL": "Identity level",
+        "CONTENT_LEVEL": "Content level",
+        "INTEGRITY_LEVEL": "Integrity level",
+        "RESET_FILTERS" : "Reset filters",
+        "REPORT_CHART" : "Report chart",
+        "REPORT.ACTIVITY_HISTOGRAM": "Activity histogram",
+        "REPORT.LEARNER_HISTOGRAM": "Learner histogram",
+        "REPORT.POSITIVE_FACTS": "Positive facts",
+        "REPORT.NEGATIVE_FACTS": "Negative facts",
         "FACTS": {
             "POSITIVE_LEARNER_RESULT_ABOVE_THRESHOLD": "The result obtained by this learner is above the defined threshold.",
             "POSITIVE_LEARNER_RESULT_GOOD_INSTRUMENT": "Looking at results obtained for this learner in this instrument, this is a good result.",
