@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { InstitutionUser } from '../../../../@core/models/user';
+import { EnvService } from '../../../../@core/env/env.service';
 
 @Component({
   selector: 'ngx-institution-ic-update',
@@ -25,7 +26,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
   private user: InstitutionUser;
   public instance: Ic;
   public fields = InstitutionIcConfig.fields;
-  ckEditorConfig = { extraPlugins: 'divarea', height: '320' };
+  ckEditorConfig = { extraPlugins: 'divarea', height: '320', removePlugins: 'tableselection,scayt' };
   public errors = new Subject();
   formControls: any;
   formErrors: any = {};
@@ -60,6 +61,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
     private apiIcService: ApiIcService,
     private authService: AuthService,
     public translate: TranslateService,
+    private envService: EnvService,
     private location: Location,
     private windowService: NbWindowService,
     private toastrService: NbToastrService) {
@@ -81,7 +83,7 @@ export class InstitutionIcUpdateComponent implements OnInit {
         this.user = user;
         this.apiIcService.getIcDocument(user.institution.id, this.id).subscribe(list => {
           this.languages = list;
-          const initialOptions = ['en', 'es', 'ru', 'fr', 'ca', 'jp', 'pt'];
+          const initialOptions = this.envService.availableLocales;
           for (let i = 0; i < list.length; i++) {
             this.toUpdate[list[i].language] = { html: list[i].html || '', file: list[i].file || null, language: list[i].language };
             const index = initialOptions.indexOf(list[i].language);

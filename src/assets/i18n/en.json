@@ -9,7 +9,7 @@
         "DELETE": "Delete",
         "DELETE_CONFIRMATION": "Are you sure you want to remove this item?",
         "EDIT": "Edit",
-        "SUBMIT": "Submit",
+        "SUBMIT": "Save",
         "SAVE": "Save",
         "DOWNLOAD": "Download",
         "ADD": "Add",
@@ -57,10 +57,7 @@
         "PDF_DOWNLOAD": "Download PDF",
         "DELETE_ALERT_1": "This action CAN NOT be reverted. Before deleting a language please save all the other changes. Are you sure you want to delete te whole ",
         "DELETE_ALERT_2": " document?",
-        "PDF_FILE": "PDF file",
-        "UPDATE_TITLE": "Update Informed Consent",
-        "NEW_TITLE": "Create new Informed Consent",
-        "READ_TITLE": "Read Informed Consent"
+        "PDF_FILE": "PDF file"
     },
     "COURSE":{
         "COURSE": "Course",

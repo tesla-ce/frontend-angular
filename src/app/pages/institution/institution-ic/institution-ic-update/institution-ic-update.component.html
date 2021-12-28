@@ -9,7 +9,7 @@
             <nb-action>
             </nb-action>
         </nb-actions>
-        {{'IC.UPDATE_TITLE' | translate }}
+        {{'CRUD.UPDATE' | translate }} {{'IC.IC' | translate }} {{ id }}
     </nb-card-header>
     <nb-card-body class="example-items-rows" *ngIf="!loading">
         <form [formGroup]="formGrupIC" fullWidth (ngSubmit)="onSave()">
@@ -52,7 +52,7 @@
                         {{option}}
                     </nb-option>
                 </nb-select>
-                <button nbButton [disabled]="!picked" (click)="newLenguage()"> {{'ACTIONS.ADD' | translate}}</button>
+                <button style="margin-right: 15px;" nbButton [disabled]="!picked" (click)="newLenguage()"> {{'ACTIONS.ADD' | translate}}</button>
             </div>
             <nb-tabset *ngIf="languages?.length > 0" fullWidth>
                 <nb-tab *ngFor="let language of languages; let f = index" tabTitle={{language.language}}
