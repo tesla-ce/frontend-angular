@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DefaultFilter } from 'ng2-smart-table';
 
 @Component({
@@ -6,18 +6,19 @@ import { DefaultFilter } from 'ng2-smart-table';
   templateUrl: './list-sub-header-instrument.component.html',
   styleUrls: ['./list-sub-header-instrument.component.scss'],
 })
-export class ListSubHeaderComponent extends DefaultFilter {
+export class ListSubHeaderComponent extends DefaultFilter implements OnInit, OnChanges {
 
   constructor() {
     super();
   }
 
-  // ngOnInit() {
-  //   const config = {...this.column.filter};
-  // }
+  ngOnInit() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const config = {...this.column.filter};
+  }
 
-  // ngOnChanges(changes: SimpleChanges) {
-  //   if (changes.query) {
-  //   }
-  // }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  ngOnChanges(changes: SimpleChanges) 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function  
+  {}
 }

@@ -15,4 +15,4 @@ interface NodeModule {
 
 declare let tinymce: any;
 
-declare let echarts: any;
+// declare let echarts: any;

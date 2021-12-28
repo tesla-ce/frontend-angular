@@ -59,7 +59,9 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     NbIconModule,
     CarouselModule,
     // CHARTS
-    NgxEchartsModule
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ],
   declarations: [
     // DataDisplayComponent,
