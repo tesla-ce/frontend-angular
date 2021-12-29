@@ -15,7 +15,7 @@ import { InstitutionSendCategoryConfig } from '../institution-send-category.conf
 })
 export class InstitutionSendCategoryReadComponent implements OnInit {
   id: number;
-  loading: boolean = false;
+  loading = false;
   fields = InstitutionSendCategoryConfig.fields;
   paths = InstitutionSendCategoryConfig.paths;
   instance: any;

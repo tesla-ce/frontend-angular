@@ -9,7 +9,7 @@
           <nb-action>
           </nb-action>
         </nb-actions>
-        Update Institution {{id}}
+        {{ 'CRUD.UPDATE' | translate }} Institution {{id}}
     </nb-card-header>
     <nb-card-body class="example-items-rows">
         <ngx-update (save)="onSave($event)" [fields]="fields" [errors]="errors"  [paths]="paths" [instance]="instance"></ngx-update>

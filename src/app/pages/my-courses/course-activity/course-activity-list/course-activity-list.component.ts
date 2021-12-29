@@ -16,7 +16,7 @@ import { dateFormat } from '../../../../@core/utils/utils';
 export class CourseActivityListComponent implements OnInit {
   courseId: number;
   endpoint: string;
-  loading: boolean = true;
+  loading = true;
   settings: any;
   institution: Institution;
   @Input() course: any;
@@ -69,7 +69,7 @@ export class CourseActivityListComponent implements OnInit {
                   },
                   report: {
                     enabled: this.course.user_roles.indexOf('LEARNER') === -1 ||
-                     (this.course.user_roles.indexOf('LEARNER') !== -1 && this.institution.allow_learner_report),
+                    (this.course.user_roles.indexOf('LEARNER') !== -1 && this.institution.allow_learner_report),
                     path: 'activity',
                   },
                 },

@@ -15,14 +15,13 @@ export class CreateComponent implements OnInit {
   @Input() errors: Observable<any>;
   @Output() save: EventEmitter<any> = new EventEmitter();
 
-  usableFields: {};
+  usableFields: any;
   formControls: any;
   formGroup: FormGroup;
   formErrors: any = {};
-  loading: Boolean = true;
+  loading = true;
 
-  constructor() { }
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
     return 0;
   }

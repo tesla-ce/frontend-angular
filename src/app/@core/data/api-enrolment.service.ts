@@ -1,4 +1,3 @@
-import { parseParams } from './../utils/utils';
 import { Institution } from './../models/user';
 import { Injectable } from '@angular/core';
 import { } from '../../../environments/environment';
@@ -8,7 +7,6 @@ import { catchError, map } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { EnvService } from '../env/env.service';
 import { AuthService } from '../auth/auth.service';
-import { InstitutionUser } from '../models/user';
 import { LearnerEnrolment } from '../models/enrolment';
 
 @Injectable({
@@ -17,7 +15,7 @@ import { LearnerEnrolment } from '../models/enrolment';
 export class ApiEnrolmentService {
 
   apiUrl: string;
-  endpoint: string = '/institution/';
+  endpoint = '/institution/';
   endpointUrl: string;
   institution: Institution;
 

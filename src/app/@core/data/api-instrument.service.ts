@@ -1,5 +1,4 @@
 import { AuthService } from './../auth/auth.service';
-// import { apiConstants } from './api-constants';
 import { Injectable } from '@angular/core';
 import { } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -32,7 +31,6 @@ export class ApiInstrumentService {
       .get(`${this.endpointUrl}instrument/${instrumentId}/`)
       .pipe(
         map((course: any) => {
-          // console.log(course);
           if (course) return course;
           else throw course;
         }),
@@ -67,9 +65,7 @@ export class ApiInstrumentService {
       return this.http
         .delete(`${this.endpointUrl}instrument/${instrumentId}/`)
         .pipe(
-          map((data: any) => {
-            return true;
-          }),
+          map(() => true),
           catchError(this.handleError),
         );
     }
@@ -117,9 +113,7 @@ export class ApiInstrumentService {
     return this.http
       .delete(`${this.endpointUrl}instrument/${instrumentId}/provider/${providerId}/`)
       .pipe(
-        map((data: any) => {
-          return true;
-        }),
+        map(() => true),
         catchError(this.handleError),
       );
   }

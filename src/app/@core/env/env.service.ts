@@ -16,6 +16,4 @@ export class EnvService {
 
   public availableLocales = environment.availableLocales;
 
-  constructor() {
-  }
 }

@@ -25,6 +25,7 @@ import { AdminInstitutionReadComponent } from './admin-institution-read/admin-in
 import { AdminInstitutionListComponent } from './admin-institution-list/admin-institution-list.component';
 import { ReadModule } from '../../../crud/read/read.module';
 import { UpdateModule } from '../../../crud/update/update.module';
+import { SharedModule } from '../../../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -44,6 +45,7 @@ import { UpdateModule } from '../../../crud/update/update.module';
     CreateModule,
     ReadModule,
     UpdateModule,
+    SharedModule,
   ],
   declarations: [
     AdminInstitutionComponent,

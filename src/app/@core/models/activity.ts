@@ -11,12 +11,12 @@ interface Instrument {
   originality: boolean;
   authorship: boolean;
   integrity: boolean;
-  options_schema: object;
+  options_schema: any;
 }
 
 interface InstrumentConfiguration {
   id: number;
-  options: object;
+  options: any;
   active: boolean;
   alternative_to: number;
   instrument: Instrument;
@@ -36,7 +36,7 @@ export interface Activity {
     instruments?: Array<InstrumentConfiguration>;
     user_instruments?: Array<InstrumentConfiguration>;
     enabled: boolean;
-    conf: object;
+    conf: any;
     //   institution: Institution;
     //   created_at: Date;
     //   updated_at: Date;

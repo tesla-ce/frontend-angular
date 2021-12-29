@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, ViewChild, TemplateRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { angularMaterialRenderers } from '@jsonforms/angular-material';
-import { NbDialogService, NbThemeService, NbWindowService } from '@nebular/theme';
+import { NbDialogService, NbWindowService } from '@nebular/theme';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { ApiCourseService } from '../../../../@core/data/api-course.service';
@@ -15,7 +15,7 @@ import { CourseActivityInstrumentSettingsComponent } from './course-activity-ins
 })
 export class CourseActivityInstrumentComponent implements OnInit {
 
-  loading: boolean = true;
+  loading = true;
   @Input() instrument: any;
   @Input() isAlternative: boolean;
   @Input() hasAlternative: boolean;
@@ -85,7 +85,6 @@ export class CourseActivityInstrumentComponent implements OnInit {
         courseId: this.courseId,
         activityId: this.activityId,
       } })
-    .onClose.subscribe(data => {
-    });
+    .onClose.subscribe();
   }
 }

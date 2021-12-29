@@ -13,12 +13,12 @@ export class ListSubHeaderComponent extends DefaultFilter implements OnInit, OnC
   }
 
   ngOnInit() {
-    let config: any;
-    config = {...this.column.filter};
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const config = {...this.column.filter};
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.query) {
-    }
-  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  ngOnChanges(changes: SimpleChanges) 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function  
+  {}
 }

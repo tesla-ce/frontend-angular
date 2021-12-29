@@ -1,4 +1,4 @@
-import { doublePasswordCheck, checkEmail } from '../../../@core/utils/validators';
+import { doublePasswordCheck } from '../../../@core/utils/validators';
 
 export const AdminInstrumentConfig = {
   validator: doublePasswordCheck,

@@ -63,7 +63,7 @@ export class AdminInstrumentListComponent {
   ) { }
 
   remove(data): void {
-    this.apiInstrumentService.deleteInstrumentById(data.id).subscribe((user: any) => {
+    this.apiInstrumentService.deleteInstrumentById(data.id).subscribe(() => {
       this.toastrService.show(
         'Instrument deleted',
         '',
@@ -74,7 +74,7 @@ export class AdminInstrumentListComponent {
           duration: 2000,
         });
       this.list.refresh();
-    }, error => {
+    }, () => {
       this.toastrService.show(
         'Error',
         '',

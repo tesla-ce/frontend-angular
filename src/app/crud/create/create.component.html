@@ -90,7 +90,7 @@
             </div>
         </div>
     </div>
-    <button *ngIf="!loading" nbButton type="submit" [disabled]="!formGroup.valid">Submit</button>
+    <button *ngIf="!loading" nbButton type="submit" [disabled]="!formGroup.valid">{{ 'ACTIONS.SUBMIT' | translate }}</button>
     <!-- <p>
         {{ formGroup.status }}
     </p> -->

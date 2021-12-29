@@ -21,7 +21,4 @@ export class ListCellDisabledInstrumentsComponent implements ViewCell, OnInit {
     });
   }
 
-  constructor(
-  ) { }
-
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ViewCell } from 'ng2-smart-table';
 
 @Component({
@@ -21,10 +21,6 @@ export class ListCellInstrumentComponent implements ViewCell, OnInit {
       identity_level: this.getIconStatus(this.cellData?.identity_level || 0),
     };
   }
-
-  constructor(
-
-  ) { }
 
   getIconStatus(level) {
     switch (level) {

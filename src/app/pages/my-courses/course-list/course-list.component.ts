@@ -63,7 +63,10 @@ export class CourseListComponent implements OnInit {
     addNew: false,
   };
 
-  constructor(private authService: AuthService, public translate: TranslateService, private datePipe: DatePipe,
+  constructor(
+    private authService: AuthService,
+    public translate: TranslateService,
+    private datePipe: DatePipe,
   ) { }
 
   ngOnInit(): void {

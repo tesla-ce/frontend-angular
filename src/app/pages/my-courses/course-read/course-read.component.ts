@@ -20,7 +20,7 @@ import { dateFormat } from '../../../@core/utils/utils';
 })
 export class CourseReadComponent implements OnInit {
   id: number;
-  loading: boolean = true;
+  loading = true;
   dateFormat = dateFormat;
   public instance: Course;
   public fields = CourseConfig.fields;

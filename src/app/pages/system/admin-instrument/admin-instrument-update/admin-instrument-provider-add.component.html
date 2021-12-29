@@ -1,6 +1,6 @@
 <nb-card style="height: 600px; width: 800px;">
     <nb-card-header>
-        Add provider
+        {{ 'INSTRUMENT.ADD_PROVIDER' | translate }}
     </nb-card-header>
     <nb-card-body>
         <ngx-create (save)="onSave($event)" [fields]="fields" [errors]="errors"></ngx-create>

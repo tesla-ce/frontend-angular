@@ -10,7 +10,7 @@ import { ListCellActionsComponent } from '../../../../../crud/list/list-cell-act
 })
 export class InstitutionSendUserListComponent implements OnInit {
 
-  endpoint: String;
+  endpoint: string;
   settings: any;
   constructor(private authService: AuthService) { }
 

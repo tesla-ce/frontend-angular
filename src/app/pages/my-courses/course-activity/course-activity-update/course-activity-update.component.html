@@ -38,26 +38,8 @@
                     {{ fields['end'].label }}
                 </label>
                 <p [class.text-disabled]="instance.enabled!==true">{{ instance.end | date: dateFormat }}</p>
-                <!-- <p> {{'COURSE.STARTS' | translate }}: {{instance.start || "start date"}}</p>
-                <p> {{'COURSE.ENDS' | translate }}: {{instance.end || "end date"}}</p> -->
             </div>
         </div>
-        <!-- <p>AQUI ACTIVITY CONFIGURACIÓ</p> -->
-        <!-- <div class="instruments">
-                <label class="label">Instruments</label>
-            </div> -->
-        <!-- <div *ngIf="instance.instruments">
-            <ngx-course-activity-instrument class="width--max" 
-            [type]="update"
-            [instance]="instance"
-            [course]="course"
-            [activityInstruments]="activityInstruments"
-            [allInstruments]="allInstruments"
-            [id]="id"
-            [reload]="ngOnInit"
-            >
-            </ngx-course-activity-instrument>
-        </div> -->
         <nb-card *ngIf="!loading">
             <nb-card-header class='tesla-card-header'>
                 <div style="flex:1" [class.text-disabled]="instance.enabled!==true">

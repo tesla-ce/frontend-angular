@@ -28,6 +28,7 @@ import { ReadModule } from '../../../crud/read/read.module';
 import { UpdateModule } from '../../../crud/update/update.module';
 import { AdminInstrumentProviderAddComponent } from './admin-instrument-update/admin-instrument-provider-add.component';
 import { AdminInstrumentProviderEditComponent } from './admin-instrument-update/admin-instrument-provider-edit.component';
+import { SharedModule } from '../../../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -48,6 +49,7 @@ import { AdminInstrumentProviderEditComponent } from './admin-instrument-update/
     CreateModule,
     ReadModule,
     UpdateModule,
+    SharedModule,
   ],
   declarations: [
     AdminInstrumentComponent,

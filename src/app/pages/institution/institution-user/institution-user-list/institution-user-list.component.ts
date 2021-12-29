@@ -14,7 +14,7 @@ import { ListComponent } from '../../../../crud/list/list.component';
 export class InstitutionUserListComponent implements OnInit {
 
   @ViewChild('list') list: ListComponent;
-  endpoint: String;
+  endpoint: string;
   user: InstitutionUser;
   settings: any;
 
@@ -84,7 +84,7 @@ export class InstitutionUserListComponent implements OnInit {
   }
 
   remove(data): void {
-    this.apiUserService.deleteInstitutionUserById(data.id, this.user.institution.id).subscribe((user: any) => {
+    this.apiUserService.deleteInstitutionUserById(data.id, this.user.institution.id).subscribe(() => {
       this.toastrService.show(
         'User deleted',
         '',
@@ -95,7 +95,7 @@ export class InstitutionUserListComponent implements OnInit {
           duration: 2000,
         });
       this.list.refresh();
-    }, error => {
+    }, () => {
       this.toastrService.show(
         'Error',
         '',

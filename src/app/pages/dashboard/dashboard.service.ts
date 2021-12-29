@@ -75,6 +75,7 @@ export class PaginationDataSource<T> implements DataSource<T> {
     return this.page$.pipe(map(page => page.content));
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   disconnect(): void {}
 
   static getQueryString(request: PageRequest<any>): string {
@@ -106,6 +107,7 @@ export class CourseService {
     });
 
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   page(request: PageRequest<Course>, query: QueryString): Observable<Page<Course>> {
     const qs = PaginationDataSource.getQueryString(request);
     if (this.currentUser)
@@ -113,6 +115,7 @@ export class CourseService {
     return EMPTY;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public fetchAllActiveUserActivities(searchTerm?: string): Observable<Activity[]> {
     return this.http.get<ApiDataResponse<Activity>>(`${this.apiUrl}`).pipe(
       // we recursively call the GET requests until there is no 'next' url

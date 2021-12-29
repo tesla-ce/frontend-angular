@@ -1,6 +1,6 @@
 <nb-card *ngIf="!loading">
     <nb-card-header class="tesla-card-header">
-        {{'PROFILE'}}
+        {{ 'PROFILE.PROFILE' | translate }}
     </nb-card-header>
     <nb-card-body *ngIf="!globalAdmin">
         <label class="label">Locale</label>
@@ -14,9 +14,9 @@
         <button nbButton (click)="changeLanguage()">Change Language</button>
     </nb-card-body>
     <nb-card-footer>
-        <nb-checkbox [checked]="high_contrast" (checkedChange)="toggleHighContrast($event)">Enable high contrast</nb-checkbox><br>
-        <nb-checkbox [checked]="big_fonts" (checkedChange)="toggleBigFonts($event)">Enable big fonts</nb-checkbox><br>
-        <nb-checkbox [checked]="text_to_speech" (checkedChange)="toggleTextToSpeech($event)">Enable text to speech</nb-checkbox><br>
+        <nb-checkbox [checked]="high_contrast" (checkedChange)="toggleHighContrast($event)">{{ 'PROFILE.ENABLE_HIGH_CONTRAST' | translate }}</nb-checkbox><br>
+        <nb-checkbox [checked]="big_fonts" (checkedChange)="toggleBigFonts($event)">{{ 'PROFILE.ENABLE_BIG_FONTS' | translate }}</nb-checkbox><br>
+        <nb-checkbox [checked]="text_to_speech" (checkedChange)="toggleTextToSpeech($event)">{{ 'PROFILE.ENABLE_TEXT_TO_SPEECH' | translate }}</nb-checkbox><br>
     </nb-card-footer>
     <nb-card-footer *ngIf="loginAllowed">
         <ngx-create (save)="changePassword($event)" [validator]="validator" [fields]="fields" [errors]="errors"></ngx-create>

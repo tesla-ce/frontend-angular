@@ -4,7 +4,6 @@ import { AuthService } from '../../../../../@core/auth/auth.service';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
 import { ApiInstitutionService } from '../../../../../@core/data/api-institution.service';
 import { InstitutionUser } from '../../../../../@core/models/user';
-// import { InstitutionSendCategory } from '../../../../@core/models/send-category';
 import { ListCellActionsComponent } from '../../../../../crud/list/list-cell-actions.component';
 import { ListComponent } from '../../../../../crud/list/list.component';
 import { ListCellDisabledInstrumentsComponent } from './list-cell-disabled-instruments.component';
@@ -17,7 +16,7 @@ import { ListCellEnabledOptionsComponent } from './list-cell-enabled-options.com
 })
 export class InstitutionSendCategoryListComponent implements OnInit {
 
-  endpoint: String;
+  endpoint: string;
   user: InstitutionUser;
 
   settings: any;
@@ -107,7 +106,7 @@ export class InstitutionSendCategoryListComponent implements OnInit {
   }
 
   remove(data): void {
-    this.apiInstitutionService.deleteSendCategoryById(this.user.institution.id, data.id).subscribe(response => {
+    this.apiInstitutionService.deleteSendCategoryById(this.user.institution.id, data.id).subscribe(() => {
       this.toastrService.show(
         'Send Category deleted',
         '',
@@ -119,7 +118,7 @@ export class InstitutionSendCategoryListComponent implements OnInit {
         });
       this.list.refresh();
     },
-    error => {
+    () => {
       this.toastrService.show(
         'Error',
         '',

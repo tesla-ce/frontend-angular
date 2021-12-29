@@ -23,7 +23,7 @@ export class CourseReportListComponent implements OnInit {
   courseId: number;
   activityId: number;
   endpoint: string;
-  loading: boolean = true;
+  loading = true;
   settings = {
     addNew: false,
     search: false,
@@ -136,7 +136,7 @@ export class CourseReportListComponent implements OnInit {
                     title: instrument.instrument.name,
                     width: '1400px',
                     type: 'custom',
-                    valuePrepareFunction: (value) => {
+                    valuePrepareFunction: () => {
                       return instrument.instrument;
                     },
                     filter: {

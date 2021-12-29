@@ -1,14 +1,14 @@
 <div class="row">
-    <button *ngIf='value?value.read?value.read.enabled:true:true' nbButton status='info' size="small" (click)="read()">
+    <button attr.aria-label="{{ 'CRUD.READ' | translate }}" *ngIf='value?value.read?value.read.enabled:true:true' nbButton status='info' size="small" (click)="read()">
         <nb-icon icon="eye-outline"></nb-icon>
     </button>
-    <button *ngIf='value?value.update?value.update.enabled:true:true'  nbButton status='warning' size="small" (click)="update()">
+    <button attr.aria-label="{{ 'CRUD.UPDATE' | translate }}" *ngIf='value?value.update?value.update.enabled:true:true'  nbButton status='warning' size="small" (click)="update()">
         <nb-icon icon="edit-outline"></nb-icon>
     </button>
-    <button  *ngIf='value?value.delete?value.delete.enabled:true:true'  nbButton status='danger' size="small" (click)="delete($event.stopPropagation())">
+    <button attr.aria-label="{{ 'CRUD.DELETE' | translate }}"  *ngIf='value?value.delete?value.delete.enabled:true:true'  nbButton status='danger' size="small" (click)="delete($event.stopPropagation())">
         <nb-icon icon="trash-2-outline"></nb-icon>
     </button>
-    <button  *ngIf='value?value.report?value.report.enabled:false:false'  nbButton status='default' size="small" (click)="report($event)">
+    <button attr.aria-label="{{ 'CRUD.REPORT' | translate }}"  *ngIf='value?value.report?value.report.enabled:false:false'  nbButton status='default' size="small" (click)="report($event)">
         <nb-icon icon="file-text-outline"></nb-icon>
     </button>
 </div>

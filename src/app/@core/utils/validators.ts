@@ -1,4 +1,4 @@
-import { Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 
 export function doublePasswordCheck(): ValidatorFn {
   return (group: AbstractControl): ValidationErrors => {
@@ -14,17 +14,10 @@ export function doublePasswordCheck(): ValidatorFn {
   };
 }
 
-  export function checkEmail(): ValidatorFn {
-    return (control: AbstractControl): {[key: string]: any} | null => {
-        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (!re.test(String(control.value).toLowerCase())) return  { wrongFormat: 'Wrong email format' };
-        else return null;
-    };
-  }
-
-//   export function minLenght(lenght: Number): ValidatorFn {
-//     return (control: AbstractControl): {[key: string]: any} | null => {
-//         if (control.value.length() > lenght) return  {wrongFormat: "Wrong email format"}
-//         else return null
-//     };
-//   }
+export function checkEmail(): ValidatorFn {
+  return (control: AbstractControl): {[key: string]: any} | null => {
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (!re.test(String(control.value).toLowerCase())) return  { wrongFormat: 'Wrong email format' };
+      else return null;
+  };
+}

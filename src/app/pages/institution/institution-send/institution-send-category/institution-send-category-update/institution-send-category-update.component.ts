@@ -17,7 +17,7 @@ import { InstitutionSendCategoryConfig } from '../institution-send-category.conf
 })
 export class InstitutionSendCategoryUpdateComponent implements OnInit {
 
-  public loading: boolean = false;
+  public loading = false;
   public user: InstitutionUser;
   public id: number;
   public instance: any; // SendCategory;

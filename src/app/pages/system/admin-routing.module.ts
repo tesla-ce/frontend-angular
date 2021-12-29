@@ -2,8 +2,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { AdminComponent } from './admin.component';
-import { ServiceComponent } from './service/service.component';
-import { StatusComponent } from './status/status.component';
 
 const routes: Routes = [{
   path: '',
@@ -23,14 +21,6 @@ const routes: Routes = [{
       path: 'admin-instrument',
       loadChildren: () => import('./admin-instrument/admin-instrument.module')
       .then(m => m.AdminInstrumentModule),
-    },
-    {
-      path: 'service',
-      component: ServiceComponent,
-    },
-    {
-      path: 'status',
-      component: StatusComponent,
     },
   ],
 }];

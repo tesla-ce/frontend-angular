@@ -27,14 +27,14 @@ export class ListCellActionsComponent implements ViewCell {
     private dialog: NbDialogService,
   ) { }
 
-  read() {
+  read(): void {
     const path = [];
     if (this.value && this.value.read && this.value.read.path) path.push(this.value.read.path);
     path.push(this.rowData.id);
     this.router.navigate(path, { relativeTo: this.route });
   }
 
-  update() {
+  update() : void {
     const path = [];
     if (this.edit.observers.length) {
       this.edit.emit(this.rowData);
@@ -46,7 +46,7 @@ export class ListCellActionsComponent implements ViewCell {
     }
   }
 
-  delete(event) {
+  delete(): void {
     this.dialog.open(DeleteDialogComponent)
       .onClose.subscribe(data => {
         if (data === 'delete') {
@@ -55,7 +55,7 @@ export class ListCellActionsComponent implements ViewCell {
       });
   }
 
-  report() {
+  report(): void {
     const path = [];
     if (this.value && this.value.report && this.value.report.path) path.push(this.value.report.path);
     path.push(this.rowData.id);

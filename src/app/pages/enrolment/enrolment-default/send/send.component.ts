@@ -1,21 +1,16 @@
-import {AfterViewInit, Component, Inject, OnInit, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChildren} from '@angular/core';
 import {Location} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Sensor, SensorsService} from '@tesla-ce/sensors';
+import {SensorsService} from '@tesla-ce/sensors';
 import {
-  SensorsStatus, TeSLAConfiguration, TeSLAConfigurationOptions, TeSLAJWTToken, TeSLALearner,
+  TeSLAConfiguration, TeSLAConfigurationOptions, TeSLAJWTToken, TeSLALearner,
 } from '@tesla-ce/web-plugin';
-import {Observable} from 'rxjs/Rx';
 import {AuthService} from '../../../../@core/auth/auth.service';
-import {InstitutionUser, User} from '../../../../@core/models/user';
 import {NbAuthService} from '@nebular/auth';
-import {AlertMessage, Connection, Buffer} from './connection';
+import {Connection, Buffer} from './connection';
 import {EnvService} from '../../../../@core/env/env.service';
 import {LearnerEnrolment} from '../../../../@core/models/enrolment';
 import {ApiEnrolmentService} from '../../../../@core/data/api-enrolment.service';
-import {BehaviorSubject, timer} from 'rxjs';
-import {NbAuthToken} from '@nebular/auth/services/token/token';
-import {defaultIfEmpty} from 'rxjs/operators';
 import {ApiCourseService} from '../../../../@core/data/api-course.service';
 
 @Component({
@@ -153,7 +148,7 @@ export class SendComponent implements OnInit, AfterViewInit {
         // send data
         if (this.instrumentId === 1) {
           this.shutter.first.nativeElement.classList.add('on');
-          setTimeout(function (shutter) {
+          setTimeout(function () {
             this.shutter.classList.remove('on');
           }, 300);
 
@@ -183,8 +178,7 @@ export class SendComponent implements OnInit, AfterViewInit {
   }
 
   configureSensors() {
-    let conf: TeSLAConfiguration;
-    conf = {
+    const conf: TeSLAConfiguration = {
       api_url: this.apiUrl,
       dashboard_url: null,
       logo_url: null,

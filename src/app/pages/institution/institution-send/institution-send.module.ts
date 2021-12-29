@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { ThemeModule } from '../../../@theme/theme.module';
 import { NbIconModule } from '@nebular/theme';
 
 import { InstitutionSendRoutingModule } from './institution-send-routing.module';

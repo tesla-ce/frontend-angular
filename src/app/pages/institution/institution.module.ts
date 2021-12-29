@@ -5,10 +5,9 @@ import { InstitutionComponent } from './institution.component';
 import { InstitutionRoutingModule } from './institution-routing.module';
 import { SideMenuModule } from '../../side-menu/side-menu.module';
 import { NbActionsModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbInputModule } from '@nebular/theme';
-import { DataManagementComponent } from './data-management/data-management.component';
 import { SettingsComponent } from './settings/settings.component';
-import { CourseComponent } from './course/course.component';
 import { InstitutionSendComponent } from './institution-send/institution-send.component';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -21,13 +20,12 @@ import { InstitutionSendComponent } from './institution-send/institution-send.co
     NbCardModule,
     NbActionsModule,
     NbCheckboxModule,
+    SharedModule,
   ],
   declarations: [
     InstitutionComponent,
     InstitutionSendComponent,
-    DataManagementComponent,
     SettingsComponent,
-    CourseComponent,
   ],
 })
 export class InstitutionModule {

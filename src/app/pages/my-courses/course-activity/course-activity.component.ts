@@ -17,7 +17,7 @@ export class CourseActivityComponent implements OnInit {
 
   institutionId: number;
   courseId: number;
-  loading: boolean = true;
+  loading = true;
 
   public instance: Course;
   public fields = CourseConfig.fields;
