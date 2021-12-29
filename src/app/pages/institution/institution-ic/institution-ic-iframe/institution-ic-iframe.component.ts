@@ -18,10 +18,10 @@ export class InstitutionIcIframeComponent implements OnInit {
   languages: any = {};
   languagesSelections: string[] = [];
   selectedLanguage: 'es';
-  loading: boolean = true;
+  loading = true;
   public instance: Ic;
   public fields = InstitutionIcConfig.fields;
-  regexPDF: RegExp = /[0-9A-Za-z]+[.][Pp][Dd][Ff]/;
+  regexPDF = /[0-9A-Za-z]+[.][Pp][Dd][Ff]/;
 
   constructor(
     private route: ActivatedRoute,

@@ -26,7 +26,7 @@ export class CourseReportReadComponent implements OnInit {
   reports: any[] = [];
   reportChart: any;
   instruments: any;
-  loading: boolean = true;
+  loading = true;
   instrumentCharts: any[] = [];
   availableAuditInstruments: string[] = ['fr'];
   settings = {
@@ -108,7 +108,7 @@ export class CourseReportReadComponent implements OnInit {
                     title: instrument.name,
                     width: '1400px',
                     type: 'custom',
-                    valuePrepareFunction: (value) => {
+                    valuePrepareFunction: () => {
                       return instrument;
                     },
                     filter: {

@@ -1,11 +1,11 @@
-import {of as observableOf, Observable, BehaviorSubject} from 'rxjs';
+/* import {of as observableOf, Observable, BehaviorSubject} from 'rxjs';
 import { Injectable } from '@angular/core';
 import {NbAuthService, NbAuthOAuth2JWTToken} from '@nebular/auth';
 import {NbRoleProvider} from '@nebular/security';
 import {Router} from '@angular/router';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-import { User, Institution } from './user';
+import { User } from './user';
 import {EnvService} from '../env/env.service';
 import { catchError, map } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
@@ -81,3 +81,4 @@ export class ApiService extends NbRoleProvider {
     return ErrorObservable.create(error);
   }
 }
+ */

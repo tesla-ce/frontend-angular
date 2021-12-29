@@ -33,7 +33,7 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
   public selectedCategory: any = null;
   public selectedDate: Date = null;
 
-  endpoint: String;
+  endpoint: string;
   instruments: any;
   instrumentsAcronyms = {};
   icons = {
@@ -164,13 +164,13 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
     });
   }
 
-  create(event) {
+  create() {
     this.dialog.open(
       InstitutionSendUserCategoryAddComponent, { context: {
         institutionId: this.user.institution.id,
         userId: this.id,
       }})
-    .onClose.subscribe(userSendCategory => {
+    .onClose.subscribe(() => {
       // if (userSendCategory) this.userSendCategories = [userSendCategory, ...this.userSendCategories];
       this.ngOnInit();
     });
@@ -183,14 +183,14 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
         userId: this.id,
         sendUserCategoryId: event.id,
       }})
-    .onClose.subscribe(userSendCategory => {
+    .onClose.subscribe(() => {
       // if (userSendCategory) this.userSendCategories = [userSendCategory, ...this.userSendCategories];
       this.ngOnInit();
     });
   }
 
   remove(data): void {
-    this.apiInstitutionService.deleteSendUserCategoryById(this.user.institution.id, this.id, data.id).subscribe(response => {
+    this.apiInstitutionService.deleteSendUserCategoryById(this.user.institution.id, this.id, data.id).subscribe(() => {
       this.toastrService.show(
         'User Send Category deleted',
         '',
@@ -202,7 +202,7 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
         });
         this.ngOnInit();
     },
-    error => {
+    () => {
       this.toastrService.show(
         'Error',
         '',

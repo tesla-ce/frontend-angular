@@ -23,7 +23,7 @@ export class InstitutionUserUpdateComponent implements OnInit {
   public errors = new Subject();
   public paths = InstitutionUserConfig.paths;
   user: InstitutionUser;
-  changePasswordDisabled: boolean = false;
+  changePasswordDisabled = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,

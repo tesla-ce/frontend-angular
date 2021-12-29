@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   BehaviorSubject,
   forkJoin,
@@ -21,7 +21,7 @@ import {SensorsService} from '@tesla-ce/sensors';
 export interface DataMetadata {
   filename?: string;
   mimetype: string;
-  context?: object;
+  context?: any;
   created_at: Date;
 }
 
@@ -72,7 +72,7 @@ export interface AlertMessage {
 export interface LAPISampleResponse {
   status: 'OK' | 'ERROR';
   path?: string;
-  errors?: object;
+  errors?: any;
 }
 
 export interface Buffer {
@@ -201,7 +201,7 @@ export class Connection {
     this.sendingAlerts = false;
     this.sendingRequests = false;
 
-    this.senderTimer.subscribe( _ => {
+    this.senderTimer.subscribe( () => {
       if (this.configured === true) {
         this.initRequestSent();
         this.initAlertSent();
@@ -298,7 +298,7 @@ export class Connection {
   }
 
   public sendRequest(type: 'enrolment' | 'verification', data: string, mimetype: string, instruments: Array<number>,
-                     filename?: string, context?: object): void {
+                     filename?: string, context?: any): void {
 
     const metadata: DataMetadata = {
       mimetype,
@@ -378,14 +378,14 @@ export class Connection {
     scheduled(from(this.requestBuffer.pending.slice(start, 10)), queueScheduler)
       .pipe(
         concatMap(seq => this.getStoredRequest(seq)),
-        concatMap(request => forkJoin([of<any>([request]), this.sendData(request).pipe(catchError( error => of(null)))])),
+        concatMap(request => forkJoin([of<any>([request]), this.sendData(request).pipe(catchError( () => of(null)))])),
       )
       .subscribe(result => {
         const seq = result[0][0].seq;
         if (result[1]) {
           // console.log('Request seq=' + seq + ' sent');
           this.requestBuffer.pending = this.requestBuffer.pending.filter(
-            (value, index, arr) => value !== seq);
+            (value) => value !== seq);
           this.requestBuffer.status.push(result[1].body.path);
           this.requestBuffer.sent++;
           this.setStoredData('requests', Object.assign({}, this.requestBuffer));
@@ -395,7 +395,7 @@ export class Connection {
           // console.log('Request seq=' + seq + ' FAILED');
           // this.statusService.setNetworkStatus(4);
         }
-      }, _ => {
+      }, () => {
         // this.statusService.setNetworkStatus(4);
       }, () => {
         this.sendingRequests = false;
@@ -412,14 +412,14 @@ export class Connection {
     scheduled(from(this.alertBuffer.pending.slice(start, 10)), queueScheduler)
       .pipe(
         concatMap(seq => this.getStoredAlert(seq)),
-        concatMap(alert => forkJoin([of<any>([alert]), this.sendAlert(alert).pipe(catchError( error => of(null)))])),
+        concatMap(alert => forkJoin([of<any>([alert]), this.sendAlert(alert).pipe(catchError( () => of(null)))])),
       )
       .subscribe(result => {
         const seq = result[0][0].seq;
         if (result[1]) {
           // console.log('Alert seq=' + seq + ' sent');
           this.alertBuffer.pending = this.alertBuffer.pending.filter(
-            (value, index, arr) => value !== seq);
+            (value) => value !== seq);
           this.alertBuffer.status.push(result[1].body.path);
           this.alertBuffer.sent++;
           this.setStoredData('alerts', Object.assign({}, this.alertBuffer));
@@ -429,7 +429,7 @@ export class Connection {
           // console.log('Alert seq=' + seq + ' FAILED');
           // this.statusService.setNetworkStatus(4);
         }
-      }, _ => {
+      }, () => {
         // this.statusService.setNetworkStatus(4);
       }, () => {
         this.sendingAlerts = false;
@@ -469,7 +469,7 @@ export class Connection {
               this.requestBuffer.failed++;
               // console.log(stat.info.validations);
               for (const val in stat.info.validations) {
-                if (stat.info.validations.hasOwnProperty(val)) {
+                if (Object.prototype.hasOwnProperty.call(stat.info.validations, val)) {
                   this.requestBuffer.notifications.push(stat.info.validations[val].error_message);
                 }
               }

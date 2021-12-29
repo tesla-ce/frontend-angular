@@ -26,6 +26,7 @@ import { AdminUserListComponent } from './admin-user-list/admin-user-list.compon
 import { ReadModule } from '../../../crud/read/read.module';
 import { UpdateModule } from '../../../crud/update/update.module';
 import { AdminUserChangePasswordComponent } from './admin-user-update/admin-user-change-password.component';
+import { SharedModule } from '../../../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { AdminUserChangePasswordComponent } from './admin-user-update/admin-user
     CreateModule,
     ReadModule,
     UpdateModule,
+    SharedModule,
   ],
   declarations: [
     AdminUserComponent,

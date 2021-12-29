@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
 import { angularMaterialRenderers } from '@jsonforms/angular-material';
 import { createAjv } from '@jsonforms/core';
-import { NbDialogRef, NbWindowService } from '@nebular/theme';
+import { NbDialogRef } from '@nebular/theme';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { ApiCourseService } from '../../../../@core/data/api-course.service';
@@ -16,7 +15,7 @@ import { InstitutionUser } from '../../../../@core/models/user';
 export class CourseActivityInstrumentAddComponent implements OnInit {
 
   institutionId: number;
-  loading: boolean = true;
+  loading = true;
   @Input() availableInstruments: any[];
   selectedInstrument: any = null;
   @Input() courseId: any;
@@ -31,7 +30,6 @@ export class CourseActivityInstrumentAddComponent implements OnInit {
     public translate: TranslateService,
     private apiCourseService: ApiCourseService,
     private authService: AuthService,
-    private route: ActivatedRoute,
     protected ref: NbDialogRef<CourseActivityInstrumentAddComponent>,
   ) {
   }

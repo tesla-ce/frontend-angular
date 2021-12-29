@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import {BaseWidgetComponent} from '../base-widget.component';
-import {Course} from '../../../../../@core/models/course';
 import {DashboardService} from '../../../dashboard.service';
 import {NbDateService} from '@nebular/theme';
 import {DayCellComponent} from './day-cell/day-cell.component';

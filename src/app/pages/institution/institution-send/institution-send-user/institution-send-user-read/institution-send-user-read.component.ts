@@ -1,13 +1,12 @@
 import { DatePipe, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NbDialogService, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { AuthService } from '../../../../../@core/auth/auth.service';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
 import { ApiInstitutionService } from '../../../../../@core/data/api-institution.service';
 import { InstitutionUser, User } from '../../../../../@core/models/user';
-import { ListCellActionsComponent } from '../../../../../crud/list/list-cell-actions.component';
 import { ListCellDisabledInstrumentsComponent } from '../../institution-send-category/institution-send-category-list/list-cell-disabled-instruments.component';
 import { ListCellEnabledOptionsComponent } from '../../institution-send-category/institution-send-category-list/list-cell-enabled-options.component';
 import { InstitutionSendUserConfig } from '../institution-send-user.config';
@@ -31,7 +30,7 @@ export class InstitutionSendUserReadComponent implements OnInit {
   public selectedCategory: any = null;
   public selectedDate: Date = null;
 
-  endpoint: String;
+  endpoint: string;
   instruments: any;
   instrumentsAcronyms = {};
   icons = {

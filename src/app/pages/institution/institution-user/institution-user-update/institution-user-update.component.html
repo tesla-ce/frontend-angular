@@ -9,12 +9,12 @@
           <nb-action>
           </nb-action>
         </nb-actions>
-        Update User {{id}}
+        {{ 'CRUD.UPDATE' | translate }} user {{id}}
     </nb-card-header>
     <nb-card-body class="example-items-rows">
         <ngx-update (valueChanges)="valueChanges($event)" (save)="onSave($event)" [fields]="fields" [errors]="errors"  [paths]="paths" [instance]="instance"></ngx-update>
     </nb-card-body>
     <nb-card-footer>
-        <button [disabled]="changePasswordDisabled" nbButton (click)="changePassword()">Change Password</button>
+        <button [disabled]="changePasswordDisabled" nbButton (click)="changePassword()">{{ 'ACTIONS.CHANGE_PASSWORD' | translate }}</button>
     </nb-card-footer>
 </nb-card>

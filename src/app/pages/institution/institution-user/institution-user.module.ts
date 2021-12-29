@@ -26,6 +26,7 @@ import { InstitutionUserListComponent } from './institution-user-list/institutio
 import { ReadModule } from '../../../crud/read/read.module';
 import { UpdateModule } from '../../../crud/update/update.module';
 import { InstitutionUserChangePasswordComponent } from './institution-user-update/institution-user-change-password.component';
+import { SharedModule } from '../../../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { InstitutionUserChangePasswordComponent } from './institution-user-updat
     CreateModule,
     ReadModule,
     UpdateModule,
+    SharedModule,
   ],
   declarations: [
     InstitutionUserComponent,

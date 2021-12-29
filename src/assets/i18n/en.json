@@ -9,11 +9,12 @@
         "DELETE": "Delete",
         "DELETE_CONFIRMATION": "Are you sure you want to remove this item?",
         "EDIT": "Edit",
-        "SUBMIT": "Submit",
+        "SUBMIT": "Save",
         "SAVE": "Save",
         "DOWNLOAD": "Download",
         "ADD": "Add",
-        "NEW": "New"
+        "NEW": "New",
+        "CHANGE_PASSWORD": "Change password"
     },
     "ETHICAL_WARNING": {
         "ACTIVE_INSTRUMENTS": "The following instruments are enabled",
@@ -34,10 +35,18 @@
         "HEADER": "Notifications",
         "SESSION_EXPIRED": "Session has expired. Please log in again."
     },
-    "ADMIN": {
-        "DASHBOARD": {
-            "WELCOME" : "Welcome"
-        }
+    "DASHBOARD": {
+        "WELCOME" : "Welcome",
+        "ACTIVE_COURSES": "Active courses"
+    },
+    "CRUD": {
+        "CREATE": "Create",
+        "READ": "Read",
+        "UPDATE": "Update",
+        "DELETE": "Delete",
+        "REPORT": "Report",
+        "ITEMS_PER_PAGE": "Items per page",
+        "ADD_NEW" : "Add new"
     },
     "IC": {
         "IC" : "Informed Consent",
@@ -48,14 +57,11 @@
         "PDF_DOWNLOAD": "Download PDF",
         "DELETE_ALERT_1": "This action CAN NOT be reverted. Before deleting a language please save all the other changes. Are you sure you want to delete te whole ",
         "DELETE_ALERT_2": " document?",
-        "PDF_FILE": "PDF file",
-        "UPDATE_TITLE": "Update Informed Consent",
-        "NEW_TITLE": "Create new Informed Consent",
-        "READ_TITLE": "Read Informed Consent"
+        "PDF_FILE": "PDF file"
     },
     "COURSE":{
-        "SINGULAR": "Course",
-        "PLURAL": "Courses",
+        "COURSE": "Course",
+        "COURSES": "Courses",
         "UPDATE_TITLE": "Update Informed Consent",
         "NEW_TITLE": "Create new Informed Consent",
         "CODE": "Code",
@@ -68,11 +74,22 @@
         "SINGULAR": "Instrument",
         "PLURAL": "Instruments",
         "ADD": "Add Instrument",
-        "ADD_ALTERNATIVE": "Add Alternative"
+        "ADD_ALTERNATIVE": "Add Alternative",
+        "ADD_PROVIDER" : "Add provider",
+        "UPDATE_PROVIDER" : "Update provider"
     },
     "REPORT": {
-        "SINGULAR": "Report",
-        "PLURAL": "Reports",
+        "REPORT": "Report",
+        "REPORTS": "Reports",
+        "IDENTITY_LEVEL": "Identity level",
+        "CONTENT_LEVEL": "Content level",
+        "INTEGRITY_LEVEL": "Integrity level",
+        "RESET_FILTERS" : "Reset filters",
+        "REPORT_CHART" : "Report chart",
+        "REPORT.ACTIVITY_HISTOGRAM": "Activity histogram",
+        "REPORT.LEARNER_HISTOGRAM": "Learner histogram",
+        "REPORT.POSITIVE_FACTS": "Positive facts",
+        "REPORT.NEGATIVE_FACTS": "Negative facts",
         "FACTS": {
             "POSITIVE_LEARNER_RESULT_ABOVE_THRESHOLD": "The result obtained by this learner is above the defined threshold.",
             "POSITIVE_LEARNER_RESULT_GOOD_INSTRUMENT": "Looking at results obtained for this learner in this instrument, this is a good result.",
@@ -103,5 +120,53 @@
         "KS": {
           "INSTRUCTIONS": "In order to enroll keystroke dynamics, talk about yourself. Type text into the text area"
         }
-  }
+    },
+    "SEND": {
+        "DISABLED_INSTRUMENTS" : "Disabled instruments",
+        "ENABLED_OPTIONS": "Enabled options",
+        "USER_SEND_CATEGORIES" : "User SEND categories"
+    },
+    "INSTITUTION_SETTINGS": {
+        "DISABLE_VLE_LEARNER_CREATION" : "Disable VLE learner creation",
+        "DISABLE_VLE_INSTRUCTOR_CREATION" : "Disable VLE instructor creation",
+        "DISABLE_VLE_USER_CREATION" : "Disable VLE user creation",
+        "ALLOW_LEARNER_REPORT" : "Allow learner report",
+        "ALLOW_LEARNER_AUDIT" : "Allow learner audit",
+        "ALLOW_VALID_AUDIT" : "Allow valid audit",
+        "EXTERNAL_IC" : "External IC",
+        "ALLOWED_DOMAINS" : "Allowed domains"
+    },
+    "PROFILE": {
+        "PROFILE" : "Profile",
+        "PROFILE.ENABLE_HIGH_CONTRAST": "Enable high contrast",
+        "PROFILE.ENABLE_BIG_FONTS": "Enable big fonts",
+        "PROFILE.ENABLE_TEXT_TO_SPEECH": "Enable text to speech"
+    },
+    "TOP_MENU": {
+        "PROFILE" : "Profile",
+        "BIOMETRIC" : "Biometric",
+        "INFORMED_CONSENT" : "Informed consent",
+        "LOG_OUT" : "Log out"
+    },
+    "SIDE_MENU": {
+        "DASHBOARD":"Dashboard",
+        "MY_COURSES":"My Courses",
+        "TEST_PAGE":"Test page",
+        "ADMINISTRATION":"Administration",
+        "USERS":"Users",
+        "INFORMED_CONSENT":"Informed Consent",
+        "SEND":"SEND",
+        "CATEGORIES":"Categories",
+        "COURSES":"Courses",
+        "DATA_MANAGEMENT":"Data Management",
+        "INSTITUTION":"Institution",
+        "SETTINGS":"Settings",
+        "STATISTICS":"Statistics",
+        "MONITORING":"Monitoring",
+        "SYSTEM":"System",
+        "INSTITUTIONS":"Institutions",
+        "INSTRUMENTS":"Instruments",
+        "SERVICES":"Services",
+        "STATUS":"Status"
+    }
 }

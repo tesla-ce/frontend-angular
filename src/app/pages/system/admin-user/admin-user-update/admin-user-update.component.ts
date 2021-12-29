@@ -20,7 +20,7 @@ export class AdminUserUpdateComponent {
   public fields = AdminUserConfig.fields;
   public errors = new Subject();
   public paths = AdminUserConfig.paths;
-  changePasswordDisabled: boolean = false;
+  changePasswordDisabled = false;
 
   constructor(
     private route: ActivatedRoute,

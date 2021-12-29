@@ -15,12 +15,12 @@ import { doublePasswordCheck } from '../../../@core/utils/validators';
 export class BasicComponent implements OnInit {
 
   user: InstitutionUser;
-  high_contrast: boolean = false;
-  big_fonts: boolean = false;
-  text_to_speech: boolean = false;
-  loading: boolean = true;
-  globalAdmin: boolean = false;
-  loginAllowed: boolean = true;
+  high_contrast = false;
+  big_fonts = false;
+  text_to_speech = false;
+  loading = true;
+  globalAdmin = false;
+  loginAllowed = true;
   availableLanguages: { key: string; value: string; }[] = [];
   selectedLanguage: string;
 

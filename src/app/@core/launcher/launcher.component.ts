@@ -32,8 +32,8 @@ export class LauncherComponent implements OnInit {
       }, options).subscribe(result => {
         const token: NbAuthToken = nbAuthCreateToken(NbAuthOAuth2JWTToken,
           result, 'email');
-        this.tokenService.set(token).subscribe(_ => {
-          this.authService.isAuthenticatedOrRefresh().subscribe(authenticated => {
+        this.tokenService.set(token).subscribe( () => {
+          this.authService.isAuthenticatedOrRefresh().subscribe(() => {
             const uri = this.envService.apiUrl + '/auth/profile';
             this.http.get(uri).subscribe((user: InstitutionUser) => {
               if (user) {

@@ -57,7 +57,7 @@ export class AdminUserListComponent {
   ) { }
 
   remove(data): void {
-    this.apiUserService.deleteUserById(data.id).subscribe((user: any) => {
+    this.apiUserService.deleteUserById(data.id).subscribe(() => {
       this.toastrService.show(
         'User deleted',
         '',
@@ -68,7 +68,7 @@ export class AdminUserListComponent {
           duration: 2000,
         });
       this.list.refresh();
-    }, error => {
+    }, () => {
       this.toastrService.show(
         'Error',
         '',

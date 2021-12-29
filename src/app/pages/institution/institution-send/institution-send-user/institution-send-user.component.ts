@@ -5,8 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './institution-send-user.component.html',
   styleUrls: ['./institution-send-user.component.scss'],
 })
-export class InstitutionSendUserComponent {
-
-  constructor() { }
-
-}
+export class InstitutionSendUserComponent {}

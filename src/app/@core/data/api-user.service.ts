@@ -13,7 +13,7 @@ import { EnvService } from '../env/env.service';
 export class ApiUserService {
 
   apiUrl: string;
-  endpoint: string = '/admin/user/';
+  endpoint = '/admin/user/';
   endpointUrl: string;
 
   constructor(
@@ -77,9 +77,7 @@ export class ApiUserService {
     return this.http
       .delete(`${this.apiUrl}/admin/user/${userId}/`)
       .pipe(
-        map((data: any) => {
-          return true;
-        }),
+        map(() => true),
         catchError(this.handleError),
       );
   }
@@ -89,9 +87,7 @@ export class ApiUserService {
     return this.http
       .delete(`${this.apiUrl}/institution/${institutionId}/user/${userId}/`)
       .pipe(
-        map((data: any) => {
-          return true;
-        }),
+        map(() => true),
         catchError(this.handleError),
       );
   }

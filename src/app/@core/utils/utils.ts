@@ -1,9 +1,8 @@
-
-export const parseParams = (params: Object): String => {
+export const parseParams = (params: any): string => {
   let i = 0, url = '';
   if (params) {
   for (const key in params) {
-    if (params.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(params, key)) {
       if (i === 0) {
         url += `?${key}=${params[key]}`;
         } else {

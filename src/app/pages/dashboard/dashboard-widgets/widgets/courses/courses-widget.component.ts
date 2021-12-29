@@ -4,7 +4,6 @@ import {BaseWidgetComponent} from '../base-widget.component';
 import {Activity} from '../../../../../@core/models/activity';
 import {Course} from '../../../../../@core/models/course';
 import {
-  NbDateService,
   NbSortDirection,
   NbSortRequest,
   NbTreeGridDataSource,
@@ -34,7 +33,7 @@ interface CourseActivityEntry {
   type: 'course' | 'activity';
   roles?: Array<'LEARNER' | 'INSTRUCTOR'>;
   description: string;
-  enrolment: object;
+  enrolment: any;
   instruments?: Array<InstrumentAcronym>;
 }
 
@@ -51,7 +50,7 @@ export interface WidgetData {
 export class CoursesWidgetComponent extends BaseWidgetComponent implements OnInit {
   courses: Array<Course> = [];
   private course_data: TreeNode<CourseActivityEntry>[] = [];
-  private enrolment_data: object = {};
+  private enrolment_data: any = {};
 
   customColumn = 'name';
   defaultColumns = [ 'start', 'end', 'instruments' ];
@@ -144,7 +143,7 @@ export class CoursesWidgetComponent extends BaseWidgetComponent implements OnIni
       };
     }
     for (const activity of activities) {
-      if (!course_dict.hasOwnProperty(activity.course_id)) {
+      if (!Object.prototype.hasOwnProperty.call(course_dict, activity.course_id)) {
         // Add a new course
         course_dict[activity.course_id] = {
           data: {
@@ -231,7 +230,7 @@ export class ActivityIconComponent {
 export class InstrumentIconsComponent implements OnInit {
   @Input() row: TreeNode<CourseActivityEntry>;
   instruments: Array<InstrumentAcronym>;
-  enrolment: object;
+  enrolment: any;
 
   ngOnInit() {
     this.enrolment = this.row.data['enrolment'];

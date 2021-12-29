@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, Input, OnChanges, SimpleChanges, ViewChildren} from '@angular/core';
 import { EChartsOption } from 'echarts';
 // import {echarts} from "../../../typings";
 

@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
-import { of as observableOf, Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { ApiUserService } from '../../../../../@core/data/api-user.service';
 import { User } from '../../../../../@core/models/user';
 import { InstitutionSendUserConfig } from '../institution-send-user.config';

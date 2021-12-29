@@ -8,6 +8,7 @@ import { RippleService } from '../../../@core/utils/ripple.service';
 import { AuthService } from '../../../@core/auth/auth.service';
 import { InstitutionUser} from '../../../@core/models/user';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 // import { apiConstants } from '../../../@core/data/api-constants';
 
@@ -21,7 +22,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
   public readonly materialTheme$: Observable<boolean>;
-  userPictureOnly: boolean = false;
+  userPictureOnly = false;
   user: InstitutionUser;
   defaultPicture = '/ui/assets/images/avatar-placeholder.png';
 
@@ -74,11 +75,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'material-tesla';
 
-  userMenu = [
-    { title: 'Profile', target: 'profile' },
-    { title: 'Biometric', target: 'biometric' },
-    { title: 'Informed Consent' , target: 'ic'},
-    { title: 'Log out' }];
+  userMenu = [];
 
   // currentInstitution = this.authService.getInstitution().subscribe(id => id)
   // institutions = this.authService.getUserInstitutions().subscribe(list => list)
@@ -90,6 +87,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private layoutService: LayoutService,
     private breakpointService: NbMediaBreakpointsService,
     private rippleService: RippleService,
+    private translateService: TranslateService,
     private authService: AuthService,
     private router: Router,
   ) {
@@ -110,15 +108,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.userMenu.push({ title: this.translateService.instant("TOP_MENU.PROFILE"), target: 'profile' });
+    this.userMenu.push({ title: this.translateService.instant("TOP_MENU.BIOMETRIC"), target: 'biometric' });
+    this.userMenu.push({ title: this.translateService.instant("TOP_MENU.INFORMED_CONSENT"), target: 'ic' });
+    this.userMenu.push({ title: this.translateService.instant("TOP_MENU.LOG_OUT"), target: 'logout' });
+
     this.currentTheme = this.themeService.currentTheme;
     this.authService.getUser()
       // .pipe(takeUntil(this.destroy$))
       .subscribe((user: InstitutionUser) => {
         if (!user) return;
         this.user = user;
-        const [institutionTheme] = this.themes.filter(theme => {
-          return theme.value === 'material-' + user?.institution?.acronym.toString();
-        });
+        // const [institutionTheme] = this.themes.filter(theme => {
+        //   return theme.value === 'material-' + user?.institution?.acronym.toString();
+        // });
 
         // if (institutionTheme) this.themeService.changeTheme(institutionTheme.name);
         // apiConstants.institution = this.institutions[0].id;
@@ -163,7 +166,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.menuService.onItemClick().subscribe((event) => {
 
-      if (event.item.title === 'Log out') {
+      if (event.item.target === 'logout') {
         this.authService.logOut();
         this.menuService.navigateHome();
         return false;

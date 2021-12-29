@@ -15,7 +15,7 @@ import { InstitutionUser } from '../models/user';
 export class ApiInstitutionService {
 
   apiUrl: string;
-  endpoint: string = '/institution/';
+  endpoint = '/institution/';
   endpointUrl: string;
   institution: Institution;
   user: InstitutionUser;
@@ -115,9 +115,7 @@ export class ApiInstitutionService {
     return this.http
       .delete(`${this.apiUrl}/admin/institution/${institutionId}/`)
       .pipe(
-        map((data: any) => {
-          return true;
-        }),
+        map(() => true),
         catchError(this.handleError),
       );
   }
@@ -181,9 +179,7 @@ export class ApiInstitutionService {
     return this.http
       .delete(`${this.endpointUrl}/${institutionId}/send/${categoryId}/`)
       .pipe(
-        map((data: any) => {
-          return true;
-        }),
+        map(() => true),
         catchError(this.handleError),
       );
   }
@@ -234,9 +230,7 @@ export class ApiInstitutionService {
     return this.http
       .delete(`${this.endpointUrl}/${institutionId}/learner/${learnerId}/send/${sendUserCategoryId}/`)
       .pipe(
-        map((data: any) => {
-          return true;
-        }),
+        map(() => true),
         catchError(this.handleError),
       );
   }

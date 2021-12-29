@@ -1,6 +1,6 @@
 <nb-card style="height: 600px; width: 800px;">
     <nb-card-header>
-        Edit provider
+        {{ 'INSTRUMENT.UPDATE_PROVIDER' | translate }}
     </nb-card-header>
     <nb-card-body *ngIf="instance">
         <ngx-update [instance]="instance" (save)="onSave($event)" [fields]="fields" [errors]="errors"></ngx-update>

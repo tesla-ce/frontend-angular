@@ -48,8 +48,8 @@ export class PluginComponent implements OnInit {
         }, options).subscribe(result => {
           const token: NbAuthToken = nbAuthCreateToken(NbAuthOAuth2JWTToken,
             result, 'email');
-          this.tokenService.set(token).subscribe(_ => {
-            this.authService.isAuthenticatedOrRefresh().subscribe(authenticated => {
+          this.tokenService.set(token).subscribe(() => {
+            this.authService.isAuthenticatedOrRefresh().subscribe(() => {
               const uri = this.envService.apiUrl + '/auth/profile';
               this.http.get(uri).subscribe((user: InstitutionUser) => {
                 if (user) {
@@ -155,12 +155,11 @@ export class PluginComponent implements OnInit {
       });
   }
 
-  test(domain, pattern) {
+  test(domain: string, pattern: string) : boolean {
     if (pattern.startsWith('*.')) {
       if (pattern.slice(2) === domain) return true;
     }
     const regexp = new RegExp(`^${pattern.replace(/\./g, '\\.').replace(/\*/g, '.*?')}`);
-
     return regexp.test(domain);
   }
 }

@@ -29,12 +29,7 @@ export class AdminInstrumentProviderAddComponent {
   dismiss() {
     this.ref.close();
   }
-
-
-  back() {
-
-  }
-
+  
   onSave(event) {
     if (event.service_port) event.service_port = parseInt(event.service_port, 10);
     if (event.options_schema) event.options_schema = JSON.parse(event.options_schema);

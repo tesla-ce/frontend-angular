@@ -1,11 +1,10 @@
 import { ApiIcService } from '../../../@core/data/api-ic.service';
 import { InstitutionIcConfig } from '../../institution/institution-ic/institution-ic.config';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ic } from '../../../@core/models/ic';
 import { AuthService } from '../../../@core/auth/auth.service';
-import { takeUntil } from 'rxjs/operators';
-import { InstitutionUser, User } from '../../../@core/models/user';
+import { InstitutionUser } from '../../../@core/models/user';
 import { Subject } from 'rxjs';
 import { ApiInstitutionService } from '../../../@core/data/api-institution.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -24,12 +23,12 @@ export class LearnerIcComponent implements OnInit {
   valid: boolean;
   availableLanguages: string[] = [];
   selectedLanguage: 'es';
-  loading: boolean = true;
+  loading = true;
   public instance: Ic;
   public fields = InstitutionIcConfig.fields;
-  regexPDF: RegExp = /[0-9A-Za-z]+[.][Pp][Dd][Ff]/;
+  regexPDF = /[0-9A-Za-z]+[.][Pp][Dd][Ff]/;
   redirectUri: string = null;
-  external: Boolean = false;
+  external = false;
 
   constructor(
     private route: ActivatedRoute,

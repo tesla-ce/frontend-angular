@@ -10,7 +10,7 @@
             </nb-action>
         </nb-actions>
         <div style="flex:1">
-            {{'REPORT.SINGULAR' | translate }}
+            {{'REPORT.REPORT' | translate }}
         </div>
         <nb-actions>
             <nb-action>
@@ -21,7 +21,7 @@
     <nb-card-body>
         <ngx-list [settings]="settings" [localSource]="reports"></ngx-list>
         <br>
-        <strong>REPORT CHART</strong>
+        <strong>{{'REPORT.REPORT_CHART' | translate }}</strong>
         <br>
         <div>
             <div style="height:400px" echarts [options]="reportChart"></div>
@@ -41,16 +41,16 @@
                     </div>
                 </nb-card-header>
                 <nb-card-body>
-                    <b>Activity Histogram</b>
+                    <b>{{'REPORT.ACTIVITY_HISTOGRAM' | translate }}</b>
                     <div style="height:200px" echarts [options]="instrumentCharts[det.instrument_acronym + '_activity_histogram']"></div>
                     <br>
                     <br>
-                    <b>Learner Histogram</b>
+                    <b>{{'REPORT.LEARNER_HISTOGRAM' | translate }}</b>
                     <div style="height:200px" echarts [options]="instrumentCharts[det.instrument_acronym + '_learner_histogram']"></div>
                 </nb-card-body>
                 <nb-card-footer *ngIf="instrumentCharts[det.instrument_acronym + '_positive_facts'] && instrumentCharts[det.instrument_acronym + '_positive_facts'].length">
                     <nb-icon style="margin-right: 5px;" status='success' icon="thumbs-up" pack="fa"></nb-icon>
-                    <b>Positive Facts</b>
+                    <b>{{'REPORT.POSITIVE_FACTS' | translate }}</b>
                     <br><br>
                     <div *ngFor="let positiveFact of instrumentCharts[det.instrument_acronym + '_positive_facts']">
                         {{ "REPORT.FACTS." + positiveFact | translate }}<br><br>
@@ -63,7 +63,8 @@
                     </div>
                 </nb-card-footer>
                 <nb-card-footer *ngIf="instrumentCharts[det.instrument_acronym + '_negative_facts'] && instrumentCharts[det.instrument_acronym + '_negative_facts'].length">
-                    <nb-icon style="margin-right: 5px;" status='danger' icon="thumbs-down" pack="fa"></nb-icon><b>Negative Facts</b>
+                    <nb-icon style="margin-right: 5px;" status='danger' icon="thumbs-down" pack="fa"></nb-icon>
+                    <b>{{'REPORT.NEGATIVE_FACTS' | translate }}</b>
                     <div *ngFor="let negativeFact of instrumentCharts[det.instrument_acronym + '_negative_facts']">
                         {{ "REPORT.FACTS." + negativeFact | translate }}<br><br>
                     </div>

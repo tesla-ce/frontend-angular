@@ -1,4 +1,4 @@
-import { NbJSThemeOptions, DEFAULT_THEME as baseTheme } from '@nebular/theme';
+import { NbJSThemeOptions } from '@nebular/theme';
 import { MATERIAL_LIGHT_THEME } from './material/theme.material-light';
 
 const baseThemeVariables = MATERIAL_LIGHT_THEME.variables;

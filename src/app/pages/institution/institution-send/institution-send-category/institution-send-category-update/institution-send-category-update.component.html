@@ -9,7 +9,7 @@
           <nb-action>
           </nb-action>
         </nb-actions>
-        Update Send Category {{id}}
+        {{ "CRUD.UPDATE" | translate }} Send Category {{id}}
     </nb-card-header>
     <nb-card-body *ngIf="!loading" class="example-items-rows">
         <ngx-update (save)="onSave($event)" [fields]="fields" [errors]="errors"  [paths]="paths" [instance]="instance"></ngx-update>

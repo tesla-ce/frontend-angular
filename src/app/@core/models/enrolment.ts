@@ -1,5 +1,3 @@
-import { Observable } from 'rxjs';
-
 export interface LearnerEnrolment {
   can_analyse__max: boolean;
   can_analyse__min: boolean;

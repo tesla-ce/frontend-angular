@@ -14,7 +14,7 @@ import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 export class SettingsComponent implements OnInit {
 
   institution: Institution;
-  disabled: boolean = true;
+  disabled = true;
 
   constructor(
     private location: Location,
@@ -63,7 +63,7 @@ export class SettingsComponent implements OnInit {
   }
 
   onSave() {
-    this.apiInstitutionService.updateInstitutionAsInstitutionAdmin(this.institution.id, this.institution).subscribe((response: any) => {
+    this.apiInstitutionService.updateInstitutionAsInstitutionAdmin(this.institution.id, this.institution).subscribe(() => {
       this.toastrService.show(
           'Institution Updated',
           this.institution.name,
@@ -73,7 +73,7 @@ export class SettingsComponent implements OnInit {
             icon: 'save-outline',
             duration: 2000,
           });
-      }, error => {
+      }, () => {
         this.toastrService.show(
           'Error saving',
           'user',

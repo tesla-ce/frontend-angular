@@ -5,14 +5,14 @@
     <nb-card-body *ngIf="institution">
         <form formGroup="readForm">
             <div class="form-group">
-                <nb-checkbox [disabled]="disabled" [checked]="institution.disable_vle_learner_creation" (checkedChange)="toggleDisableVLELearnerCreation($event)">Disable VLE learner creation</nb-checkbox><br>
-                <nb-checkbox [disabled]="disabled" [checked]="institution.disable_vle_instructor_creation" (checkedChange)="toggleDisableVLEInstructorCreation($event)">Disable VLE instructor creation</nb-checkbox><br>
-                <nb-checkbox [disabled]="disabled" [checked]="institution.disable_vle_user_creation" (checkedChange)="toggleDisableVLEUserCreation($event)">Disable VLE user creation</nb-checkbox><br>
-                <nb-checkbox [disabled]="disabled" [checked]="institution.allow_learner_report" (checkedChange)="toggleAllowLearnerReport($event)">Allow learner report</nb-checkbox><br>
-                <nb-checkbox [disabled]="disabled" [checked]="institution.allow_learner_audit" (checkedChange)="toggleAllowLearnerAudit($event)">Allow learner audit</nb-checkbox><br>
-                <nb-checkbox [disabled]="disabled" [checked]="institution.allow_valid_audit" (checkedChange)="toggleAllowValidAudit($event)">Allow valid audit</nb-checkbox><br>
-                <nb-checkbox [disabled]="disabled" [checked]="institution.external_ic" (checkedChange)="toggleExternalIC($event)">External IC</nb-checkbox><br>
-                <label class="label">Allowed domains</label>
+                <nb-checkbox [disabled]="disabled" [checked]="institution.disable_vle_learner_creation" (checkedChange)="toggleDisableVLELearnerCreation($event)">{{ 'INSTITUTION_SETTINGS.DISABLE_VLE_LEARNER_CREATION' | translate }}</nb-checkbox><br>
+                <nb-checkbox [disabled]="disabled" [checked]="institution.disable_vle_instructor_creation" (checkedChange)="toggleDisableVLEInstructorCreation($event)">{{ 'INSTITUTION_SETTINGS.DISABLE_VLE_INSTRUCTOR_CREATION' | translate }}</nb-checkbox><br>
+                <nb-checkbox [disabled]="disabled" [checked]="institution.disable_vle_user_creation" (checkedChange)="toggleDisableVLEUserCreation($event)">{{ 'INSTITUTION_SETTINGS.DISABLE_VLE_USER_CREATION' | translate }}</nb-checkbox><br>
+                <nb-checkbox [disabled]="disabled" [checked]="institution.allow_learner_report" (checkedChange)="toggleAllowLearnerReport($event)">{{ 'INSTITUTION_SETTINGS.ALLOW_LEARNER_REPORT' | translate }}</nb-checkbox><br>
+                <nb-checkbox [disabled]="disabled" [checked]="institution.allow_learner_audit" (checkedChange)="toggleAllowLearnerAudit($event)">{{ 'INSTITUTION_SETTINGS.ALLOW_LEARNER_AUDIT' | translate }}</nb-checkbox><br>
+                <nb-checkbox [disabled]="disabled" [checked]="institution.allow_valid_audit" (checkedChange)="toggleAllowValidAudit($event)">{{ 'INSTITUTION_SETTINGS.ALLOW_VALID_AUDIT' | translate }}</nb-checkbox><br>
+                <nb-checkbox [disabled]="disabled" [checked]="institution.external_ic" (checkedChange)="toggleExternalIC($event)">{{ 'INSTITUTION_SETTINGS.EXTERNAL_IC' | translate }}</nb-checkbox><br>
+                <label class="label">{{ 'INSTITUTION_SETTINGS.ALLOWED_DOMAINS' | translate }}</label>
                 <input nbInput fullWidth 
                     [type]="text"
                     [id]="allowed_domains" 
@@ -24,7 +24,7 @@
                     status="basic">
                 <br>
                 <br>
-                <button (click)="onSave()" nbButton type="submit">Submit</button>
+                <button (click)="onSave()" nbButton type="submit">{{ 'ACTIONS.SUBMIT' | translate }}</button>
             </div>
         </form>
  </nb-card-body>

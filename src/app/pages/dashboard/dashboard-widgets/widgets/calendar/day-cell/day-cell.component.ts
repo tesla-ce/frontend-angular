@@ -10,7 +10,8 @@ import { NbCalendarDayCellComponent } from '@nebular/theme';
 export class DayCellComponent extends NbCalendarDayCellComponent<Date> {
   
   @HostBinding('class.day-cell')
-  @HostListener('click') onClick() {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  @HostListener('click') onClick() {}
   instruments = [
   ];
 }

@@ -5,7 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './institution-ic.component.html',
   styleUrls: ['./institution-ic.component.scss'],
 })
-export class InstitutionIcComponent {
-
-  constructor() { }
-}
+export class InstitutionIcComponent {}

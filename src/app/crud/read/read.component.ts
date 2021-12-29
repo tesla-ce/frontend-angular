@@ -1,7 +1,6 @@
 import { KeyValue } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, Pipe, PipeTransform } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,11 +20,12 @@ export class ReadComponent implements OnInit {
   formControls: any;
   readForm: FormGroup;
   formErrors: any = {};
-  loading: Boolean = true;
+  loading = true;
   data: any;
 
   constructor(private router: Router) { }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
     return 0;
   }
