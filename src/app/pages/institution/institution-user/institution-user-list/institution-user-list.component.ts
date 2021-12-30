@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { ApiUserService } from '../../../../@core/data/api-user.service';
 import { InstitutionUser } from '../../../../@core/models/user';
@@ -21,6 +22,7 @@ export class InstitutionUserListComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private apiUserService: ApiUserService,
+    private translate: TranslateService,
     private toastrService: NbToastrService,
   ) { }
 
@@ -31,7 +33,7 @@ export class InstitutionUserListComponent implements OnInit {
         this.settings = {
           columns: {
             actions: {
-              title: 'Actions',
+              title: this.translate.instant('ACTIONS.ACTIONS'),
               type: 'custom',
               sort: false,
               filter: false,
@@ -57,13 +59,13 @@ export class InstitutionUserListComponent implements OnInit {
               },
             },
             id: {
-              title: 'ID',
+              title: this.translate.instant('ENTITIES.USER.ID'),
             },
             username: {
-              title: 'Username',
+              title: this.translate.instant('ENTITIES.USER.USERNAME'),
             },
             email: {
-              title: 'Email',
+              title: this.translate.instant('ENTITIES.USER.EMAIL'),
             },
           },
           actions: {

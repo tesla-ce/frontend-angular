@@ -9,19 +9,19 @@
         <nb-action>
         </nb-action>
       </nb-actions>
-      {{ "CRUD.READ" | translate }} Send User {{id}}
+      {{ "CRUD.READ" | translate }} SEND {{ "ENTITIES.NAMES.USER" | translate }} {{id}}
   </nb-card-header>
   <nb-card-body *ngIf="settings" >
-      <label class="label">Enabled Options</label><br>
+      <label class="label">{{ "ENTITIES.SEND_CATEGORY.ENABLED_OPTIONS" | translate }}</label><br>
       <nb-icon style="margin:5px" *ngFor="let enabled_option of learner.send.send.enabled_options" status='primary' [icon]="icons[enabled_option]" pack="fa"></nb-icon>
       <br>
       <br>
-      <label class="label">Disabled Instruments</label><br>
+      <label class="label">{{ "ENTITIES.SEND_CATEGORY.DISABLED_INSTRUMENTS" | translate }}</label><br>
       <nb-icon status='error' data-fill="full" *ngFor="let disabled_instrument of learner.send.send.disabled_instruments" [icon]="'instrument-' + instrumentsAcronyms[disabled_instrument]" pack="tesla"></nb-icon>
       <br>
       <br>
       <div style="display:flex; margin-bottom: 15px;">
-          <label class="label" style="margin-bottom: 16px; flex:1">User SEND Categories</label>
+          <label class="label" style="margin-bottom: 16px; flex:1">{{ "ENTITIES.NAMES.USER" | translate }} {{ "ENTITIES.NAMES.SEND_CATEGORIES" | translate }}</label>
       </div>
       <ng2-smart-table class="list" [settings]="settings" [source]="userSendCategories"></ng2-smart-table>
   </nb-card-body>

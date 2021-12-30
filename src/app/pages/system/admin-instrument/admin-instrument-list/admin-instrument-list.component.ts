@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { TranslateService } from '@ngx-translate/core';
 import { ApiInstrumentService } from '../../../../@core/data/api-instrument.service';
 import { ListCellActionsComponent } from '../../../../crud/list/list-cell-actions.component';
 import { ListComponent } from '../../../../crud/list/list.component';
@@ -16,7 +17,7 @@ export class AdminInstrumentListComponent {
   settings = {
     columns: {
       actions: {
-        title: 'Actions',
+        title: this.translate.instant('ACTIONS.ACTIONS'),
         type: 'custom',
         sort: false,
         filter: false,
@@ -33,13 +34,13 @@ export class AdminInstrumentListComponent {
         },
       },
       id: {
-        title: 'ID',
+        title: this.translate.instant('ENTITIES.INSTRUMENT.ID'),
       },
       name: {
-        title: 'Name',
+        title: this.translate.instant('ENTITIES.INSTRUMENT.NAME'),
       },
       acronym: {
-        title: 'Acronym',
+        title: this.translate.instant('ENTITIES.INSTRUMENT.ACRONYM'),
       },
     },
     actions: {
@@ -60,6 +61,7 @@ export class AdminInstrumentListComponent {
   constructor(
     private apiInstrumentService: ApiInstrumentService,
     private toastrService: NbToastrService,
+    private translate: TranslateService,
   ) { }
 
   remove(data): void {

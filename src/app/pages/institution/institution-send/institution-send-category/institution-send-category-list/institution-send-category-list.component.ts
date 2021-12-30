@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../../../@core/auth/auth.service';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
 import { ApiInstitutionService } from '../../../../../@core/data/api-institution.service';
@@ -28,6 +29,7 @@ export class InstitutionSendCategoryListComponent implements OnInit {
     private apiCourseService: ApiCourseService,
     private apiInstitutionService: ApiInstitutionService,
     private toastrService: NbToastrService,
+    private translate: TranslateService,
   ) { }
 
   ngOnInit(): void {

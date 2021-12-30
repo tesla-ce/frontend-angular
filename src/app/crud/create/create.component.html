@@ -3,7 +3,7 @@
         <div *ngFor="let field of usableFields | keyvalue: originalOrder" class="col-sm-6">
             <div class="form-group" [ngSwitch]="field.value.inputType" style="margin-bottom: 0.75rem;">
 
-                <label [for]="field.value.inputName" class="label">{{field.value.label || field.key}}</label>
+                <label [for]="field.value.inputName" class="label">{{field.value.label | translate}}</label>
                 
                 <!-- case check box -->
                 <br><nb-checkbox *ngSwitchCase="'check-box'" [formControl]="formControls[field.key]" [formControlName]="field.key"></nb-checkbox>

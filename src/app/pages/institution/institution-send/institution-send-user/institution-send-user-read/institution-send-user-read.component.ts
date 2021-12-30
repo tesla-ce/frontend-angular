@@ -9,8 +9,8 @@ import { ApiInstitutionService } from '../../../../../@core/data/api-institution
 import { InstitutionUser, User } from '../../../../../@core/models/user';
 import { ListCellDisabledInstrumentsComponent } from '../../institution-send-category/institution-send-category-list/list-cell-disabled-instruments.component';
 import { ListCellEnabledOptionsComponent } from '../../institution-send-category/institution-send-category-list/list-cell-enabled-options.component';
-import { InstitutionSendUserConfig } from '../institution-send-user.config';
 import { dateFormat } from '../../../../../@core/utils/utils';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-institution-send-user-read',
@@ -24,7 +24,6 @@ export class InstitutionSendUserReadComponent implements OnInit {
   public learner: any;
   public fields = null;
   public errors = new Subject();
-  public paths = InstitutionSendUserConfig.paths;
   public user: InstitutionUser;
   public userSendCategories: any[];
   public selectedCategory: any = null;
@@ -50,6 +49,7 @@ export class InstitutionSendUserReadComponent implements OnInit {
     private authService: AuthService,
     private location: Location,
     private datePipe: DatePipe,
+    private translate: TranslateService,
     private dialog: NbDialogService,
     private toastrService: NbToastrService) {
     this.route.params.subscribe(params => {
@@ -87,20 +87,20 @@ export class InstitutionSendUserReadComponent implements OnInit {
                 },
                 columns: {
                   category: {
-                    title: 'Category Id',
+                    title: this.translate.instant('ENTITIES.NAMES.SEND_CATEGORY') + ' ' + this.translate.instant('ENTITIES.SEND_CATEGORY.ID'),
                   },
                   description: {
-                    title: 'Description',
+                    title: this.translate.instant('ENTITIES.SEND_CATEGORY.DESCRIPTION'),
                   },
                   enabled_options: {
-                    title: 'Enabled options',
+                    title: this.translate.instant('ENTITIES.SEND_CATEGORY.ENABLED_OPTIONS'),
                     type: 'custom',
                     sort: false,
                     filter: false,
                     renderComponent: ListCellEnabledOptionsComponent,
                   },
                   disabled_instruments: {
-                    title: 'Disabled Instruments',
+                    title: this.translate.instant('ENTITIES.SEND_CATEGORY.DISABLED_INSTRUMENTS'),
                     type: 'custom',
                     sort: false,
                     filter: false,
@@ -110,7 +110,7 @@ export class InstitutionSendUserReadComponent implements OnInit {
                     renderComponent: ListCellDisabledInstrumentsComponent,
                   },
                   expires_at: {
-                    title: 'Expiration date',
+                    title: this.translate.instant('ENTITIES.SEND_CATEGORY.EXPIRATION_DATE'),
                     valuePrepareFunction: value => {
                       return this.datePipe.transform(value, dateFormat);
                     },

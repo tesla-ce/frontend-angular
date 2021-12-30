@@ -17,7 +17,7 @@ export class CourseListComponent implements OnInit {
   settings = {
     columns: {
       actions: {
-        title: 'Actions',
+        title: this.translate.instant('ACTIONS.ACTIONS'),
         type: 'custom',
         sort: false,
         filter: false,
@@ -32,19 +32,19 @@ export class CourseListComponent implements OnInit {
         },
       },
       id: {
-        title: 'ID',
+        title: this.translate.instant('ENTITIES.COURSE.ID'),
       },
       code: {
-        title: 'Code',
+        title: this.translate.instant('ENTITIES.COURSE.CODE'),
       },
       start: {
-        title: 'Start',
+        title: this.translate.instant('ENTITIES.COURSE.START'),
         valuePrepareFunction: value => {
           return this.datePipe.transform(value, dateFormat);
         },
       },
       end: {
-        title: 'End',
+        title: this.translate.instant('ENTITIES.COURSE.END'),
         valuePrepareFunction: value => {
           return this.datePipe.transform(value, dateFormat);
         },

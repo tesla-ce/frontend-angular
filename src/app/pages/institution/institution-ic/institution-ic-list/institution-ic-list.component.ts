@@ -39,7 +39,7 @@ export class InstitutionIcListComponent implements OnInit {
         this.settings = {
           columns: {
             actions: {
-              title: 'Actions',
+              title: this.translate.instant('ACTIONS.ACTIONS'),
               type: 'custom',
               sort: false,
               filter: false,
@@ -65,16 +65,16 @@ export class InstitutionIcListComponent implements OnInit {
               },
             },
             id: {
-              title: 'ID',
+              title: this.translate.instant('ENTITIES.IC.ID'),
             },
-            'institution.name': {
-              title: 'Institution',
-            },
+            // 'institution.name': {
+            //   title: this.translate.instant('ENTITIES.IC.INSTITUTION'),
+            // },
             version: {
-              title: 'Version',
+              title: this.translate.instant('ENTITIES.IC.VERSION'),
             },
             valid_from: {
-              title: 'Valid from',
+              title: this.translate.instant('ENTITIES.IC.VALID_FROM'),
               valuePrepareFunction: value => {
                 return this.datePipe.transform(value);
               },

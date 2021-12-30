@@ -29,7 +29,7 @@ export class CourseReportListComponent implements OnInit {
     search: false,
     columns: {
       actions: {
-        title: 'Actions',
+        title: this.translate.instant('ACTIONS.ACTIONS'),
         type: 'custom',
         sort: false,
         filter: false,
@@ -48,14 +48,14 @@ export class CourseReportListComponent implements OnInit {
       },
       learner: {
         width: '400px',
-        title: 'Learner',
+        title: this.translate.instant('ENTITIES.REPORT.LEARNER'),
         valuePrepareFunction: (value) => {
           return value.last_name + ', ' + value.first_name;
         },
         filter: false,
       },
       summary: {
-        title: 'Summary',
+        title: this.translate.instant('ENTITIES.REPORT.SUMMARY'),
         filter: false,
         type: 'custom',
         renderComponent: ListCellSumaryComponent,

@@ -1,5 +1,6 @@
 {
     "ACTIONS": {
+        "ACTIONS": "Actions",
         "ACCEPT_CONSENT": "Accept",
         "CLEAR": "Clear",
         "CLOSE": "Close",
@@ -36,7 +37,7 @@
         "SESSION_EXPIRED": "Session has expired. Please log in again."
     },
     "DASHBOARD": {
-        "WELCOME" : "Welcome",
+        "WELCOME": "Welcome",
         "ACTIVE_COURSES": "Active courses"
     },
     "CRUD": {
@@ -46,12 +47,12 @@
         "DELETE": "Delete",
         "REPORT": "Report",
         "ITEMS_PER_PAGE": "Items per page",
-        "ADD_NEW" : "Add new"
+        "ADD_NEW": "Add new"
     },
     "IC": {
-        "IC" : "Informed Consent",
-        "LANGUAGE" : "Language",
-        "VERSION" : "Version",
+        "IC": "Informed Consent",
+        "LANGUAGE": "Language",
+        "VERSION": "Version",
         "VALID_FROM": "Valid From",
         "PDF_UPLOAD": "Upload PDF file",
         "PDF_DOWNLOAD": "Download PDF",
@@ -71,12 +72,12 @@
         "ACTIVITIES": "Activities"
     },
     "INSTRUMENT": {
-        "SINGULAR": "Instrument",
-        "PLURAL": "Instruments",
+        "INSTRUMENT": "Instrument",
+        "INSTRUMENTS": "Instruments",
         "ADD": "Add Instrument",
         "ADD_ALTERNATIVE": "Add Alternative",
-        "ADD_PROVIDER" : "Add provider",
-        "UPDATE_PROVIDER" : "Update provider"
+        "ADD_PROVIDER": "Add provider",
+        "UPDATE_PROVIDER": "Update provider"
     },
     "REPORT": {
         "REPORT": "Report",
@@ -84,12 +85,12 @@
         "IDENTITY_LEVEL": "Identity level",
         "CONTENT_LEVEL": "Content level",
         "INTEGRITY_LEVEL": "Integrity level",
-        "RESET_FILTERS" : "Reset filters",
-        "REPORT_CHART" : "Report chart",
-        "REPORT.ACTIVITY_HISTOGRAM": "Activity histogram",
-        "REPORT.LEARNER_HISTOGRAM": "Learner histogram",
-        "REPORT.POSITIVE_FACTS": "Positive facts",
-        "REPORT.NEGATIVE_FACTS": "Negative facts",
+        "RESET_FILTERS": "Reset filters",
+        "REPORT_CHART": "Report chart",
+        "ACTIVITY_HISTOGRAM": "Activity histogram",
+        "LEARNER_HISTOGRAM": "Learner histogram",
+        "POSITIVE_FACTS": "Positive facts",
+        "NEGATIVE_FACTS": "Negative facts",
         "FACTS": {
             "POSITIVE_LEARNER_RESULT_ABOVE_THRESHOLD": "The result obtained by this learner is above the defined threshold.",
             "POSITIVE_LEARNER_RESULT_GOOD_INSTRUMENT": "Looking at results obtained for this learner in this instrument, this is a good result.",
@@ -122,51 +123,134 @@
         }
     },
     "SEND": {
-        "DISABLED_INSTRUMENTS" : "Disabled instruments",
+        "DISABLED_INSTRUMENTS": "Disabled instruments",
         "ENABLED_OPTIONS": "Enabled options",
-        "USER_SEND_CATEGORIES" : "User SEND categories"
+        "USER_SEND_CATEGORIES": "User SEND categories"
     },
     "INSTITUTION_SETTINGS": {
-        "DISABLE_VLE_LEARNER_CREATION" : "Disable VLE learner creation",
-        "DISABLE_VLE_INSTRUCTOR_CREATION" : "Disable VLE instructor creation",
-        "DISABLE_VLE_USER_CREATION" : "Disable VLE user creation",
-        "ALLOW_LEARNER_REPORT" : "Allow learner report",
-        "ALLOW_LEARNER_AUDIT" : "Allow learner audit",
-        "ALLOW_VALID_AUDIT" : "Allow valid audit",
-        "EXTERNAL_IC" : "External IC",
-        "ALLOWED_DOMAINS" : "Allowed domains"
+        "SETTINGS": "Settings",
+        "DISABLE_VLE_LEARNER_CREATION": "Disable VLE learner creation",
+        "DISABLE_VLE_INSTRUCTOR_CREATION": "Disable VLE instructor creation",
+        "DISABLE_VLE_USER_CREATION": "Disable VLE user creation",
+        "ALLOW_LEARNER_REPORT": "Allow learner report",
+        "ALLOW_LEARNER_AUDIT": "Allow learner audit",
+        "ALLOW_VALID_AUDIT": "Allow valid audit",
+        "EXTERNAL_IC": "External IC",
+        "ALLOWED_DOMAINS": "Allowed domains"
     },
     "PROFILE": {
-        "PROFILE" : "Profile",
+        "PROFILE": "Profile",
         "PROFILE.ENABLE_HIGH_CONTRAST": "Enable high contrast",
         "PROFILE.ENABLE_BIG_FONTS": "Enable big fonts",
         "PROFILE.ENABLE_TEXT_TO_SPEECH": "Enable text to speech"
     },
     "TOP_MENU": {
-        "PROFILE" : "Profile",
-        "BIOMETRIC" : "Biometric",
-        "INFORMED_CONSENT" : "Informed consent",
-        "LOG_OUT" : "Log out"
+        "PROFILE": "Profile",
+        "BIOMETRIC": "Biometric",
+        "INFORMED_CONSENT": "Informed consent",
+        "LOG_OUT": "Log out"
     },
     "SIDE_MENU": {
-        "DASHBOARD":"Dashboard",
-        "MY_COURSES":"My Courses",
-        "TEST_PAGE":"Test page",
-        "ADMINISTRATION":"Administration",
-        "USERS":"Users",
-        "INFORMED_CONSENT":"Informed Consent",
-        "SEND":"SEND",
-        "CATEGORIES":"Categories",
-        "COURSES":"Courses",
-        "DATA_MANAGEMENT":"Data Management",
-        "INSTITUTION":"Institution",
-        "SETTINGS":"Settings",
-        "STATISTICS":"Statistics",
-        "MONITORING":"Monitoring",
-        "SYSTEM":"System",
-        "INSTITUTIONS":"Institutions",
-        "INSTRUMENTS":"Instruments",
-        "SERVICES":"Services",
-        "STATUS":"Status"
+        "DASHBOARD": "Dashboard",
+        "MY_COURSES": "My Courses",
+        "TEST_PAGE": "Test page",
+        "ADMINISTRATION": "Administration",
+        "USERS": "Users",
+        "INFORMED_CONSENT": "Informed Consent",
+        "SEND": "SEND",
+        "CATEGORIES": "Categories",
+        "COURSES": "Courses",
+        "DATA_MANAGEMENT": "Data Management",
+        "INSTITUTION": "Institution",
+        "SETTINGS": "Settings",
+        "STATISTICS": "Statistics",
+        "MONITORING": "Monitoring",
+        "SYSTEM": "System",
+        "INSTITUTIONS": "Institutions",
+        "INSTRUMENTS": "Instruments",
+        "SERVICES": "Services",
+        "STATUS": "Status"
+    },
+    "ENTITIES": {
+        "NAMES": {
+            "USER": "User",
+            "USERS": "Users",
+            "IC": "Informed consent",
+            "ICS" : "Informed consents",
+            "SEND_CATEGORY": "SEND category",
+            "SEND_CATEGORIES": "SEND categories"
+        },
+        "USER": {
+            "ID": "Id", 
+            "USERNAME": "Username",
+            "EMAIL": "Email",
+            "PASSWORD": "Password",
+            "CONFIRM_PASSWORD": "Confirm password",
+            "FIRST_NAME": "First name",
+            "LAST_NAME": "Last name",
+            "INSTITUTION": "Institution",
+            "UID": "Uid",
+            "LANGUAGE": "Language",
+            "GLOBAL_ADMIN": "Global admin",
+            "ADMIN": "Admin",
+            "SEND": "SEND",
+            "LEGAL": "Legal",
+            "DATA": "Data",
+            "LOGIN_ALLOWED": "Login allowed"
+        },
+        "INSTITUTION": {
+            "ID": "Id",
+            "NAME": "Name",
+            "ACRONYM": "Acronym",
+            "ALLOWED DOMAINS": "Allowed domains"
+        },
+        "IC": {
+            "ID": "Id",
+            "INSTITUTION": "Institution",
+            "VERSION": "Version",
+            "VALID_FROM": "Valid from",
+            "UPLOAD PDF FILE": "Upload PDF file",
+            "HTML": "Html"
+        },
+        "SEND_CATEGORY": {
+            "ID": "Id", 
+            "DESCRIPTION": "Description",
+            "ENABLED_OPTIONS": "Enabled options",
+            "DISABLED_INSTRUMENTS": "Disabled instruments",
+            "EXPIRATION_DATE": "Expiration date" 
+        },
+        "COURSE": {
+            "ID": "Id",
+            "DESCRIPTION": "Description",
+            "CODE": "Code",
+            "START": "Start",
+            "END": "End"
+        },
+        "ACTIVITY": {
+            "ID": "Id",
+            "NAME": "Name",
+            "DESCRIPTION": "Description",
+            "TYPE": "Type",
+            "START": "Start",
+            "END": "End"
+        },
+        "REPORT": {
+            "LEARNER": "Learner",
+            "SUMMARY": "Summary"
+        },
+        "INSTRUMENT": {
+            "ID": "Id",
+            "NAME":"Name",
+            "ACRONYM":"Acronym",
+            "DESCRIPTION":"Description",
+            "QUEUE":"Queue",
+            "OPTIONS_SCHEMA":"Options Schema",
+            "ENABLED":"Enabled",
+            "REQUIRES_ENROLMENT":"Requires Enrolment",
+            "IDENTITY":"Identity",
+            "ORIGINALITY":"Originality",
+            "AUTHORSHIP":"Authorship",
+            "INTEGRITY":"Integrity"
+        }
     }
 }
