@@ -15,7 +15,10 @@
         "DOWNLOAD": "Download",
         "ADD": "Add",
         "NEW": "New",
-        "CHANGE_PASSWORD": "Change password"
+        "CHANGE_PASSWORD": "Change password",
+        "SIDE_MENU": "Side menu",
+        "TOP_MENU": "Top menu",
+        "LOGO_BUTTON": "Logo button"
     },
     "ETHICAL_WARNING": {
         "ACTIVE_INSTRUMENTS": "The following instruments are enabled",

@@ -7,10 +7,11 @@
       [matRippleUnbounded]="true"
       [matRippleCentered]="true"
       (click)="toggleSidebar()"
+      attr.aria-label="{{ 'ACTIONS.SIDE_MENU' | translate }}"
     >
       <nb-icon [icon]="(materialTheme$ | async) ? 'menu-outline' : 'menu-2-outline'"></nb-icon>
     </a>
-    <a class="logo" href="#" (click)="navigateHome()">
+    <a attr.aria-label="{{ 'ACTIONS.LOGO_BUTTON' | translate }}" class="logo" href="#" (click)="navigateHome()">
       <ngx-logo></ngx-logo>
     </a>
   </div>
@@ -44,6 +45,7 @@
   </nb-select>
   <nb-actions size="small">
     <nb-action
+      attr.aria-label="{{ 'ACTIONS.TOP_MENU' | translate }}"
       class="user-action"
       *nbIsGranted="['view', 'user']"
       matRipple
