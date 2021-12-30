@@ -156,17 +156,17 @@ export class CourseReportListComponent implements OnInit {
   }
 
   selectedChangeIdentity(event) {
-    this.filter.push({ field: 'identity_level', search: event });
+    this.filter.push({ field: 'identity_level__gte', search: event });
     this.list.setFilter(this.filter, true);
   }
 
   selectedChangeContent(event) {
-    this.filter.push({ field: 'content_level', search: event });
+    this.filter.push({ field: 'content_level__gte', search: event });
     this.list.setFilter(this.filter, true);
   }
 
   selectedChangeIntegrity(event) {
-    this.filter.push({ field: 'integrity_level', search: event });
+    this.filter.push({ field: 'integrity_level__gte', search: event });
     this.list.setFilter(this.filter, true);
   }
 

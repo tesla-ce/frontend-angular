@@ -6,7 +6,7 @@ import { map, takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { RippleService } from '../../../@core/utils/ripple.service';
 import { AuthService } from '../../../@core/auth/auth.service';
-import { InstitutionUser} from '../../../@core/models/user';
+import { Institution, InstitutionUser} from '../../../@core/models/user';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -96,15 +96,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         const themeName: string = theme?.name || '';
         return themeName.startsWith('material');
       }));
-
-    // this.authService.getUserInstitutions().subscribe(list => {
-    //   this.institutions = list
-    // })
-
-    // this.authService.getInstitution().subscribe(id => {
-    //   console.log(id)
-    //   this.currentInstitution = id
-    // })
   }
 
   ngOnInit() {
@@ -119,33 +110,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe((user: InstitutionUser) => {
         if (!user) return;
         this.user = user;
-        // const [institutionTheme] = this.themes.filter(theme => {
-        //   return theme.value === 'material-' + user?.institution?.acronym.toString();
-        // });
-
-        // if (institutionTheme) this.themeService.changeTheme(institutionTheme.name);
-        // apiConstants.institution = this.institutions[0].id;
-        // this.currentInstitution = this.institutions[0].id;
-        // if (!user?.is_admin) {
-        //   // mock institutions
-        //   this.institutions = [
-        //     {
-        //       'acronym': 'uoc',
-        //       'id': 1,
-        //       'isAdmin': false,
-        //     },
-        //     {
-        //       'acronym': 'test',
-        //       'id': 2,
-        //       'isAdmin': false,
-        //     }];
-        // Load institution from user
-        // TO DO: this will be an array, delete mocked array, add user.institutions to array or load it from template user?.institutions
-        // this.institutions.push(user.institution)
-        // this.currentInstitution = user.institution.acronym;
-
-        // }
-      });
+        this.changeInstitutionTheme(user?.institution?.acronym);
+    });
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
       .pipe(
@@ -192,9 +158,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.themeService.changeTheme(themeName);
   }
 
-  changeInstitution(id: string) {
-    this.authService.setInstitution(id);
-    // this.themeService.changeTheme(acronym);
+  changeInstitution(institution: Institution) {
+    this.authService.setInstitution(institution.id.toString());
+    this.changeInstitutionTheme(institution.acronym);
   }
 
   toggleSidebar(): boolean {
@@ -207,5 +173,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   navigateHome() {
     this.menuService.navigateHome();
     return false;
+  }
+
+  changeInstitutionTheme(institutionAcronym){
+    const availableThemes = this.themes.map(item => item.value);
+    const institutionThemeName = 'material-' + institutionAcronym;
+    if (availableThemes.indexOf(institutionThemeName) !== -1) this.themeService.changeTheme(institutionThemeName);
+    const high_contrast = localStorage.getItem('high_contrast') === 'true';
+    const big_fonts = localStorage.getItem('big_fonts') === 'true';
+    const text_to_speech = localStorage.getItem('text_to_speech') === 'true';
+    console.log(high_contrast, big_fonts, text_to_speech);
   }
 }

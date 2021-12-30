@@ -14,7 +14,7 @@
       <ngx-logo></ngx-logo>
     </a>
   </div>
-  <nb-select
+  <!-- <nb-select
     status="primary"
     matRipple
     [selected]="currentTheme"
@@ -25,7 +25,7 @@
       [value]="theme.value"
       matRipple
     >{{ theme.name }}</nb-option>
-  </nb-select>
+  </nb-select> -->
   <ngx-back-to-lms></ngx-back-to-lms>
 </div>
 <div class="header-container">
@@ -33,12 +33,12 @@
     *ngIf="user && user.institution && user.institutions.length > 1"
     status="primary"
     matRipple
-    [selected]="user.institution.id"
+    [selected]="user.institution"
     (selectedChange)="changeInstitution($event)"
   >
     <nb-option
       *ngFor="let institution of user.institutions"
-      [value]="institution.id"
+      [value]="institution"
       matRipple
     >{{ institution.acronym }}</nb-option>
   </nb-select>
