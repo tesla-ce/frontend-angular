@@ -143,9 +143,9 @@
     },
     "PROFILE": {
         "PROFILE": "Profile",
-        "PROFILE.ENABLE_HIGH_CONTRAST": "Enable high contrast",
-        "PROFILE.ENABLE_BIG_FONTS": "Enable big fonts",
-        "PROFILE.ENABLE_TEXT_TO_SPEECH": "Enable text to speech"
+        "ENABLE_HIGH_CONTRAST": "Enable high contrast",
+        "ENABLE_BIG_FONTS": "Enable big fonts",
+        "ENABLE_TEXT_TO_SPEECH": "Enable text to speech"
     },
     "TOP_MENU": {
         "PROFILE": "Profile",
