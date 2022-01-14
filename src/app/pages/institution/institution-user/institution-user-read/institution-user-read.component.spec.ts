@@ -1,25 +1,32 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NbAuthModule } from '@nebular/auth';
+import { AuthService } from '../../../../@core/auth/auth.service';
+import { EnvService } from '../../../../@core/env/env.service';
 
-// import { InstitutionUserReadComponent } from './institution-user-read.component';
+import { InstitutionUserReadComponent } from './institution-user-read.component';
 
-// describe('InstitutionUserReadComponent', () => {
-//   let component: InstitutionUserReadComponent;
-//   let fixture: ComponentFixture<InstitutionUserReadComponent>;
+describe('InstitutionUserReadComponent', () => {
+  let component: InstitutionUserReadComponent;
+  let fixture: ComponentFixture<InstitutionUserReadComponent>;
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ InstitutionUserReadComponent ]
-//     })
-//     .compileComponents();
-//   }));
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ InstitutionUserReadComponent ],
+      imports: [ RouterTestingModule, NbAuthModule.forRoot(), HttpClientTestingModule ],
+      providers: [ EnvService, AuthService ],
+    })
+    .compileComponents();
+  }));
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(InstitutionUserReadComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(InstitutionUserReadComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

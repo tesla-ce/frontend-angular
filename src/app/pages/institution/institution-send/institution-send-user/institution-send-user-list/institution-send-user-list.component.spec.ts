@@ -1,25 +1,33 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NbAuthModule } from '@nebular/auth';
+import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from '../../../../../@core/auth/auth.service';
+import { EnvService } from '../../../../../@core/env/env.service';
 
-// import { InstitutionSendUserListComponent } from './institution-user-list.component';
+import { InstitutionSendUserListComponent } from './institution-send-user-list.component';
 
-// describe('InstitutionSendUserListComponent', () => {
-//   let component: InstitutionSendUserListComponent;
-//   let fixture: ComponentFixture<InstitutionSendUserListComponent>;
+describe('InstitutionSendUserListComponent', () => {
+  let component: InstitutionSendUserListComponent;
+  let fixture: ComponentFixture<InstitutionSendUserListComponent>;
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ InstitutionSendUserListComponent ],
-//     })
-//     .compileComponents();
-//   }));
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ InstitutionSendUserListComponent ],
+      imports: [ NbAuthModule.forRoot(), HttpClientTestingModule, RouterTestingModule, TranslateModule.forRoot() ],
+      providers: [ AuthService, EnvService ],
+    })
+    .compileComponents();
+  }));
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(InstitutionSendUserListComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(InstitutionSendUserListComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

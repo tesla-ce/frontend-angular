@@ -1,24 +1,24 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-// import { ListComponent } from './list.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { InstitutionUserComponent } from './institution-user.component';
 
-// describe('ListComponent', () => {
-//   let component: ListComponent;
-//   let fixture: ComponentFixture<ListComponent>;
+describe('InstitutionUserComponent', () => {
+  let component: InstitutionUserComponent;
+  let fixture: ComponentFixture<InstitutionUserComponent>;
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ ListComponent ],
-//     })
-//     .compileComponents();
-//   }));
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ InstitutionUserComponent ],
+    })
+    .compileComponents();
+  }));
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(ListComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(InstitutionUserComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

@@ -32,7 +32,7 @@ export class InstitutionIcIframeComponent implements OnInit {
       if (params['id'] != null) {
         this.id = params['id'];
       } else {
-        router.navigate(['../'], { relativeTo: this.route });
+        this.router.navigate(['../'], { relativeTo: this.route });
       }
     });
   }
