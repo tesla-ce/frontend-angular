@@ -23,15 +23,9 @@ export class ReadComponent implements OnInit {
   loading = true;
   data: any;
 
-  constructor(private router: Router) { }
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
     return 0;
-  }
-
-  goToRead(): void {
-    this.router.navigate([this.paths.readRedirect + this.instance.id]);
   }
 
   private markFormGroupTouched(formGroup: FormGroup) {
