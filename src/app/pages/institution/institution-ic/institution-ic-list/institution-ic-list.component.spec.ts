@@ -3,21 +3,17 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NbAuthModule } from '@nebular/auth';
-import { NbLayoutScrollService, NbOverlayModule, NbToastrModule, NbToastrService } from '@nebular/theme';
+import { NbLayoutScrollService, NbToastrModule } from '@nebular/theme';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { EnvService } from '../../../../@core/env/env.service';
+import { ThemeModule } from '../../../../@theme/theme.module';
 
 import { InstitutionIcListComponent } from './institution-ic-list.component';
 
 describe('InstitutionIcListComponent', () => {
   let component: InstitutionIcListComponent;
   let fixture: ComponentFixture<InstitutionIcListComponent>;
-  const toastrService = {
-    success: null,
-    error: null,
-  };
-
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -27,10 +23,9 @@ describe('InstitutionIcListComponent', () => {
         RouterTestingModule,
         TranslateModule.forRoot(),
         NbToastrModule.forRoot(),
-        NbOverlayModule.forRoot(),
      ],
       providers: [ AuthService,
-        { provide: NbToastrService, useValue: toastrService },
+        ThemeModule.forRoot().providers,
         EnvService,
         NbLayoutScrollService,
         DatePipe ],
