@@ -1,25 +1,29 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
-// import { InstitutionIcShowComponent } from './institution-ic-show.component';
+import { CourseReportComponent } from './course-report.component';
 
-// describe('InstitutionIcShowComponent', () => {
-//   let component: InstitutionIcShowComponent;
-//   let fixture: ComponentFixture<InstitutionIcShowComponent>;
+describe('CourseReportComponent', () => {
+  let component: CourseReportComponent;
+  let fixture: ComponentFixture<CourseReportComponent>;
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ InstitutionIcShowComponent ]
-//     })
-//     .compileComponents();
-//   }));
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ CourseReportComponent ],
+      imports: [
+        RouterTestingModule,
+      ]
+    })
+    .compileComponents();
+  }));
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(InstitutionIcShowComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(CourseReportComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

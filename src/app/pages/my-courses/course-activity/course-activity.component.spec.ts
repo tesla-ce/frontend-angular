@@ -15,8 +15,16 @@ describe('CourseActivityComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ CourseActivityComponent ],
-      imports: [ RouterTestingModule, TranslateModule.forRoot(), NbAuthModule.forRoot(), HttpClientTestingModule ],
-      providers: [ AuthService, EnvService ],
+      imports: [ 
+          RouterTestingModule,
+          TranslateModule.forRoot(),
+          NbAuthModule.forRoot(),
+          HttpClientTestingModule,
+      ],
+      providers: [ 
+          AuthService,
+          EnvService
+      ],
     })
     .compileComponents();
   }));

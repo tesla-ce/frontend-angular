@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NbCardModule } from '@nebular/theme';
 import { TranslateModule } from '@ngx-translate/core';
-
+import { ThemeModule } from '../../../@theme/theme.module';
 import { TestDefaultComponent } from './test-default.component';
 
 describe('TestDefaultComponent', () => {
@@ -10,7 +11,11 @@ describe('TestDefaultComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ TestDefaultComponent ],
-      imports: [ TranslateModule.forRoot() ]
+      imports: [ TranslateModule.forRoot(),
+        ThemeModule,
+        NbCardModule,
+      ],
+      providers: [ ThemeModule.forRoot().providers ]
     })
     .compileComponents();
   }));

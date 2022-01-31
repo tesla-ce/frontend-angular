@@ -2,7 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NbAuthModule } from '@nebular/auth';
-import { NbToastrModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbCheckboxModule, NbInputModule, NbToastrModule } from '@nebular/theme';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../../@core/auth/auth.service';
 import { EnvService } from '../../../@core/env/env.service';
@@ -17,8 +17,21 @@ describe('SettingsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SettingsComponent ],
-      imports: [ NbAuthModule.forRoot(), HttpClientTestingModule, RouterTestingModule, NbToastrModule.forRoot(), TranslateModule.forRoot() ],
-      providers: [ AuthService, EnvService, ThemeModule.forRoot().providers ],
+      imports: [ NbAuthModule.forRoot(),
+        HttpClientTestingModule,
+        RouterTestingModule,
+        NbToastrModule.forRoot(),
+        TranslateModule.forRoot(),
+        ThemeModule,
+        NbButtonModule,
+        NbInputModule,
+        NbCardModule,
+        NbCheckboxModule,
+      ],
+      providers: [ 
+        AuthService,
+        EnvService,
+        ThemeModule.forRoot().providers ],
     })
     .compileComponents();
   }));

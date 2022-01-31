@@ -10,38 +10,37 @@ import { EnvService } from '../../@core/env/env.service';
 import { ThemeModule } from '../../@theme/theme.module';
 import { SideMenuModule } from '../../side-menu/side-menu.module';
 
-import { CourseComponent } from './course.component';
+import { InstitutionComponent } from './institution.component';
 
-describe('CourseComponent', () => {
-  let component: CourseComponent;
-  let fixture: ComponentFixture<CourseComponent>;
+describe('InstitutionComponent', () => {
+  let component: InstitutionComponent;
+  let fixture: ComponentFixture<InstitutionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseComponent],
+      declarations: [InstitutionComponent],
       imports: [
         RouterTestingModule,
         SideMenuModule,
+        NbSidebarModule.forRoot(),
         NbAuthModule.forRoot(),
         HttpClientTestingModule,
         TranslateModule.forRoot(),
-        NbSidebarModule.forRoot(),
         CoreModule.forRoot(),
         NbMenuModule.forRoot(),
       ],
       providers: [
-        AuthService,
-        EnvService,
         ThemeModule.forRoot().providers,
         CoreModule.forRoot().providers,
+        AuthService,
+        EnvService,
       ]
-
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CourseComponent);
+    fixture = TestBed.createComponent(InstitutionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

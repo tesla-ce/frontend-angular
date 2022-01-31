@@ -1,5 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NbAutocompleteModule, NbButtonModule, NbCheckboxModule, NbFormFieldModule, NbInputModule, NbSelectModule } from '@nebular/theme';
 import { TranslateModule } from '@ngx-translate/core';
+import { ThemeModule } from '../../@theme/theme.module';
+import { SelectRemoteModule } from '../inputs/select-remote/select-remote.module';
 import { ReadComponent } from './read.component';
 
 describe('ReadComponent', () => {
@@ -9,7 +13,19 @@ describe('ReadComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ReadComponent ],
-      imports: [ TranslateModule.forRoot() ]
+      imports: [ TranslateModule.forRoot(),
+        ThemeModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NbButtonModule,
+        NbInputModule,
+        NbAutocompleteModule,
+        NbCheckboxModule,
+        NbSelectModule,
+        NbFormFieldModule,
+        SelectRemoteModule,
+      ],
+      providers: [ ThemeModule.forRoot().providers ]
     })
     .compileComponents();
   }));

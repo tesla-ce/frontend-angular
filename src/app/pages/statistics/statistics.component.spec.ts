@@ -2,27 +2,32 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NbAuthModule } from '@nebular/auth';
+import { NbMenuModule, NbSidebarModule } from '@nebular/theme';
 import { TranslateModule } from '@ngx-translate/core';
-import { AuthService } from '../../../@core/auth/auth.service';
-import { EnvService } from '../../../@core/env/env.service';
-import { ThemeModule } from '../../../@theme/theme.module';
-import { EnrolmentModule } from '../../enrolment/enrolment.module';
+import { AuthService } from '../../@core/auth/auth.service';
+import { CoreModule } from '../../@core/core.module';
+import { EnvService } from '../../@core/env/env.service';
+import { ThemeModule } from '../../@theme/theme.module';
+import { SideMenuModule } from '../../side-menu/side-menu.module';
 
-import { BiometricComponent } from './biometric.component';
+import { StatisticsComponent } from './statistics.component';
 
-describe('BiometricComponent', () => {
-  let component: BiometricComponent;
-  let fixture: ComponentFixture<BiometricComponent>;
+describe('StatisticsComponent', () => {
+  let component: StatisticsComponent;
+  let fixture: ComponentFixture<StatisticsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BiometricComponent ],
+      declarations: [ StatisticsComponent ],
       imports: [
-        EnrolmentModule,
+        RouterTestingModule,
+        SideMenuModule,
+        NbSidebarModule.forRoot(),
         NbAuthModule.forRoot(),
         HttpClientTestingModule,
-        RouterTestingModule,
         TranslateModule.forRoot(),
+        CoreModule.forRoot(),
+        NbMenuModule.forRoot(),
       ],
       providers: [
         ThemeModule.forRoot().providers,
@@ -34,7 +39,7 @@ describe('BiometricComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BiometricComponent);
+    fixture = TestBed.createComponent(StatisticsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

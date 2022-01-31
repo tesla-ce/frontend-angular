@@ -7,6 +7,10 @@ import { EnvService } from '../../../../@core/env/env.service';
 import 'rxjs/add/observable/of';
 
 import { InstitutionIcIframeComponent } from './institution-ic-iframe.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NbCardModule, NbButtonModule, NbSelectModule, NbActionsModule, NbIconModule } from '@nebular/theme';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { ThemeModule } from '../../../../@theme/theme.module';
 
 describe('InstitutionIcIframeComponent', () => {
   let component: InstitutionIcIframeComponent;
@@ -15,8 +19,21 @@ describe('InstitutionIcIframeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ InstitutionIcIframeComponent ],
-      imports: [ NbAuthModule.forRoot(), HttpClientTestingModule, RouterTestingModule ],
+      imports: [ NbAuthModule.forRoot(),
+        HttpClientTestingModule,
+        RouterTestingModule,
+        ThemeModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NbCardModule,
+        NbButtonModule,
+        NbSelectModule,
+        NbActionsModule,
+        NbIconModule,
+        PdfViewerModule,
+      ],
       providers: [ 
+          ThemeModule.forRoot().providers,
           AuthService,
           EnvService,
      ],

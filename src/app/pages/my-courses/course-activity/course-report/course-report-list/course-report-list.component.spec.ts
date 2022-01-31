@@ -2,46 +2,47 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NbAuthModule } from '@nebular/auth';
-import { NbCardModule, NbButtonModule, NbIconModule, NbActionsModule, NbTabsetModule } from '@nebular/theme';
+import { NbCardModule, NbButtonModule, NbIconModule, NbActionsModule } from '@nebular/theme';
 import { TranslateModule } from '@ngx-translate/core';
-import { CarouselModule } from 'ngx-owl-carousel-o';
 import { AuthService } from '../../../../../@core/auth/auth.service';
 import { EnvService } from '../../../../../@core/env/env.service';
 import { ThemeModule } from '../../../../../@theme/theme.module';
+import { ListModule } from '../../../../../crud/list/list.module';
+import { SideMenuModule } from '../../../../../side-menu/side-menu.module';
 
-import { CourseReportAuditComponent } from './course-report-audit.component';
+import { CourseReportListComponent } from './course-report-list.component';
 
-describe('CourseReportAuditComponent', () => {
-  let component: CourseReportAuditComponent;
-  let fixture: ComponentFixture<CourseReportAuditComponent>;
+describe('CourseReportListComponent', () => {
+  let component: CourseReportListComponent;
+  let fixture: ComponentFixture<CourseReportListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CourseReportAuditComponent ],
+      declarations: [ CourseReportListComponent ],
       imports: [
         NbAuthModule.forRoot(),
         HttpClientTestingModule,
         RouterTestingModule,
         TranslateModule.forRoot(),
         ThemeModule,
+        SideMenuModule,
         NbCardModule,
         NbButtonModule,
         NbIconModule,
+        ListModule,
         NbActionsModule,
-        NbTabsetModule,
-        CarouselModule,
+        NbIconModule,
       ],
       providers: [
-          ThemeModule.forRoot().providers,
-          AuthService,
-          EnvService,
+        AuthService,
+        EnvService,
       ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CourseReportAuditComponent);
+    fixture = TestBed.createComponent(CourseReportListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

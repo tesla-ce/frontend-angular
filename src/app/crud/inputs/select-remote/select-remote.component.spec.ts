@@ -2,6 +2,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { SelectRemoteComponent } from './select-remote.component';
 import { EnvService } from '../../../@core/env/env.service';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NbAutocompleteModule, NbInputModule } from '@nebular/theme';
+import { ThemeModule } from '../../../@theme/theme.module';
 
 describe('SelectRemoteComponent', () => {
   let component: SelectRemoteComponent;
@@ -10,8 +14,14 @@ describe('SelectRemoteComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SelectRemoteComponent ],
-      imports: [ HttpClientTestingModule ] ,
-      providers: [ EnvService ]
+      imports: [ 
+        HttpClientTestingModule,
+        CommonModule,
+        NbAutocompleteModule,
+        NbInputModule,
+        ReactiveFormsModule,
+      ] ,
+      providers: [ EnvService, ThemeModule.forRoot().providers ]
     })
     .compileComponents();
   }));

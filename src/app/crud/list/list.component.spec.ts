@@ -1,24 +1,39 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NbButtonModule, NbCardModule, NbDialogModule, NbFormFieldModule, NbIconModule, NbInputModule, NbSelectModule } from '@nebular/theme';
 import { TranslateModule } from '@ngx-translate/core';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { EnvService } from '../../@core/env/env.service';
+import { ThemeModule } from '../../@theme/theme.module';
 
 import { ListComponent } from './list.component';
 
 describe('ListComponent', () => {
   let component: ListComponent;
   let fixture: ComponentFixture<ListComponent>;
-  const fakeActivatedRoute = {
-    snapshot: { data: {  } }
-  } as ActivatedRoute;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ListComponent ],
-      imports: [ HttpClientTestingModule, RouterTestingModule, TranslateModule.forRoot() ],
-      providers: [ EnvService, {provide: ActivatedRoute, useValue: fakeActivatedRoute} ],
+      imports: [ 
+        HttpClientTestingModule,
+        RouterTestingModule,
+        TranslateModule.forRoot(),
+        Ng2SmartTableModule,
+        ThemeModule,
+        NbIconModule,
+        NbSelectModule,
+        NbFormFieldModule,
+        NbInputModule,
+        NbButtonModule,
+        NbCardModule,
+        NbDialogModule,
+      ],
+      providers: [ 
+        EnvService, 
+        ThemeModule.forRoot().providers,
+      ],
     })
     .compileComponents();
   }));

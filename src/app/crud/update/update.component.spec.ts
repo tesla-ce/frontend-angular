@@ -2,6 +2,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { UpdateComponent } from './update.component';
+import { ThemeModule } from '../../@theme/theme.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NbAutocompleteModule, NbButtonModule, NbCheckboxModule, NbFormFieldModule, NbInputModule, NbSelectModule } from '@nebular/theme';
+import { SelectRemoteModule } from '../inputs/select-remote/select-remote.module';
 
 describe('UpdateComponent', () => {
   let component: UpdateComponent;
@@ -10,7 +14,19 @@ describe('UpdateComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ UpdateComponent ],
-      imports: [ TranslateModule.forRoot() ]
+      imports: [ TranslateModule.forRoot(),
+        ThemeModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NbButtonModule,
+        NbInputModule,
+        NbAutocompleteModule,
+        NbSelectModule,
+        NbFormFieldModule,
+        NbCheckboxModule,
+        SelectRemoteModule,
+      ],
+      providers: [ ThemeModule.forRoot().providers ]
     })
     .compileComponents();
   }));

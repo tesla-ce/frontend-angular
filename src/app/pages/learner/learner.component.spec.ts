@@ -9,39 +9,37 @@ import { CoreModule } from '../../@core/core.module';
 import { EnvService } from '../../@core/env/env.service';
 import { ThemeModule } from '../../@theme/theme.module';
 import { SideMenuModule } from '../../side-menu/side-menu.module';
+import { LearnerComponent } from './learner.component';
 
-import { CourseComponent } from './course.component';
-
-describe('CourseComponent', () => {
-  let component: CourseComponent;
-  let fixture: ComponentFixture<CourseComponent>;
+describe('LearnerComponent', () => {
+  let component: LearnerComponent;
+  let fixture: ComponentFixture<LearnerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseComponent],
+      declarations: [ LearnerComponent ],
       imports: [
         RouterTestingModule,
         SideMenuModule,
+        NbSidebarModule.forRoot(),
         NbAuthModule.forRoot(),
         HttpClientTestingModule,
         TranslateModule.forRoot(),
-        NbSidebarModule.forRoot(),
         CoreModule.forRoot(),
         NbMenuModule.forRoot(),
       ],
       providers: [
-        AuthService,
-        EnvService,
         ThemeModule.forRoot().providers,
         CoreModule.forRoot().providers,
+        AuthService,
+        EnvService,
       ]
-
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CourseComponent);
+    fixture = TestBed.createComponent(LearnerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

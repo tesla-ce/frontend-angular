@@ -9,39 +9,37 @@ import { CoreModule } from '../../@core/core.module';
 import { EnvService } from '../../@core/env/env.service';
 import { ThemeModule } from '../../@theme/theme.module';
 import { SideMenuModule } from '../../side-menu/side-menu.module';
+import { TestComponent } from './test.component';
 
-import { CourseComponent } from './course.component';
-
-describe('CourseComponent', () => {
-  let component: CourseComponent;
-  let fixture: ComponentFixture<CourseComponent>;
+describe('TestComponent', () => {
+  let component: TestComponent;
+  let fixture: ComponentFixture<TestComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseComponent],
+      declarations: [ TestComponent ],
       imports: [
-        RouterTestingModule,
-        SideMenuModule,
-        NbAuthModule.forRoot(),
-        HttpClientTestingModule,
-        TranslateModule.forRoot(),
-        NbSidebarModule.forRoot(),
-        CoreModule.forRoot(),
-        NbMenuModule.forRoot(),
-      ],
-      providers: [
-        AuthService,
-        EnvService,
-        ThemeModule.forRoot().providers,
-        CoreModule.forRoot().providers,
-      ]
-
+          RouterTestingModule,
+          SideMenuModule,
+          NbSidebarModule.forRoot(),
+          NbAuthModule.forRoot(),
+          HttpClientTestingModule,
+          TranslateModule.forRoot(),
+          CoreModule.forRoot(),
+          NbMenuModule.forRoot(),
+        ],
+        providers: [
+          ThemeModule.forRoot().providers,
+          CoreModule.forRoot().providers,
+          AuthService,
+          EnvService,
+        ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CourseComponent);
+    fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
