@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NbAuthModule } from '@nebular/auth';
 import { NbCardModule, NbButtonModule, NbInputModule, NbSelectModule, NbActionsModule, NbFormFieldModule, NbIconModule } from '@nebular/theme';
+import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../../../../@core/auth/auth.service';
 import { EnvService } from '../../../../../@core/env/env.service';
 import { ThemeModule } from '../../../../../@theme/theme.module';
@@ -41,6 +42,7 @@ describe('InstitutionSendCategoryReadComponent', () => {
         CreateModule,
         ReadModule,
         UpdateModule,
+        TranslateModule.forRoot(),
       ],
       providers: [ EnvService, AuthService ],
     })

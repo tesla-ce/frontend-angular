@@ -63,7 +63,7 @@
                     [required]="field.value.required ? !field.value.disabled :  false" [status]="formErrors[field.key]?'danger':'basic'">
 
                 <!-- errors -->
-                <errors class="text-danger">{{formErrors[field.key]?formErrors[field.key]:''}}</errors>
+                <div class="text-danger">{{formErrors[field.key]?formErrors[field.key]:''}}</div>
                 <div *ngIf="updateForm.controls[field.key].invalid && 
                 updateForm.controls[field.key].errors && 
                 (updateForm.controls[field.key].dirty || updateForm.controls[field.key].touched)">

@@ -3,7 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { SelectRemoteComponent } from './select-remote.component';
 import { EnvService } from '../../../@core/env/env.service';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NbAutocompleteModule, NbInputModule } from '@nebular/theme';
 import { ThemeModule } from '../../../@theme/theme.module';
 
@@ -20,6 +20,7 @@ describe('SelectRemoteComponent', () => {
         NbAutocompleteModule,
         NbInputModule,
         ReactiveFormsModule,
+        FormsModule,
       ] ,
       providers: [ EnvService, ThemeModule.forRoot().providers ]
     })

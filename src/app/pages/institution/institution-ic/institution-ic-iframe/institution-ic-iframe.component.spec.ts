@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NbCardModule, NbButtonModule, NbSelectModule, NbActionsModule, NbIconModule } from '@nebular/theme';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ThemeModule } from '../../../../@theme/theme.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('InstitutionIcIframeComponent', () => {
   let component: InstitutionIcIframeComponent;
@@ -31,6 +32,7 @@ describe('InstitutionIcIframeComponent', () => {
         NbActionsModule,
         NbIconModule,
         PdfViewerModule,
+        TranslateModule.forRoot(),
       ],
       providers: [ 
           ThemeModule.forRoot().providers,

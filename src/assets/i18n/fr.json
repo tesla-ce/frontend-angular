@@ -1,0 +1,259 @@
+{
+    "ACTIONS": {
+        "ACTIONS": "Actions",
+        "ACCEPT_CONSENT": "Accept",
+        "CLEAR": "Clear",
+        "CLOSE": "Close",
+        "CANCEL": "Cancel",
+        "DECLINE_CONSENT": "Reject",
+        "GO_BACK": "Go to previous page",
+        "DELETE": "Delete",
+        "DELETE_CONFIRMATION": "Are you sure you want to remove this item?",
+        "EDIT": "Edit",
+        "SUBMIT": "Save",
+        "SAVE": "Save",
+        "DOWNLOAD": "Download",
+        "ADD": "Add",
+        "NEW": "New",
+        "CHANGE_PASSWORD": "Change password",
+        "SIDE_MENU": "Side menu",
+        "TOP_MENU": "Top menu",
+        "LOGO_BUTTON": "Logo button"
+    },
+    "ETHICAL_WARNING": {
+        "ACTIVE_INSTRUMENTS": "The following instruments are enabled",
+        "HEADER": "Warning",
+        "MESSAGE": "This activity is managed by the TeSLA system. Below are the instruments that will be used during and/or after the activity. Please note that your webcam and microphone may be activated at the time you accept."
+    },
+    "INSTRUMENTS": {
+        "FA": "Forensic Analysis",
+        "FR": "Face recognition",
+        "KS": "Keystroke dynamics recognition",
+        "PLAGIARISM": "Plagiarism detection",
+        "VR": "Voice recognition"
+    },
+    "NOTIFICATION": {
+        "CONSENT": {
+            "ACCEPTED": "Ethical warning accepted"
+        },
+        "HEADER": "Notifications",
+        "SESSION_EXPIRED": "Session has expired. Please log in again."
+    },
+    "DASHBOARD": {
+        "WELCOME": "Welcome",
+        "ACTIVE_COURSES": "Active courses - fr"
+    },
+    "CRUD": {
+        "CREATE": "Create",
+        "READ": "Read",
+        "UPDATE": "Update",
+        "DELETE": "Delete",
+        "REPORT": "Report",
+        "ITEMS_PER_PAGE": "Items per page",
+        "ADD_NEW": "Add new"
+    },
+    "IC": {
+        "IC": "Informed Consent",
+        "LANGUAGE": "Language",
+        "VERSION": "Version",
+        "VALID_FROM": "Valid From",
+        "PDF_UPLOAD": "Upload PDF file",
+        "PDF_DOWNLOAD": "Download PDF",
+        "DELETE_ALERT_1": "This action CAN NOT be reverted. Before deleting a language please save all the other changes. Are you sure you want to delete te whole ",
+        "DELETE_ALERT_2": " document?",
+        "PDF_FILE": "PDF file"
+    },
+    "COURSE":{
+        "COURSE": "Course",
+        "COURSES": "Courses",
+        "UPDATE_TITLE": "Update Informed Consent",
+        "NEW_TITLE": "Create new Informed Consent",
+        "CODE": "Code",
+        "DESCRIPTION": "Description",
+        "STARTS": "Starts",
+        "ENDS": "Ends",
+        "ACTIVITIES": "Activities"
+    },
+    "INSTRUMENT": {
+        "INSTRUMENT": "Instrument",
+        "INSTRUMENTS": "Instruments",
+        "ADD": "Add Instrument",
+        "ADD_ALTERNATIVE": "Add Alternative",
+        "ADD_PROVIDER": "Add provider",
+        "UPDATE_PROVIDER": "Update provider"
+    },
+    "REPORT": {
+        "REPORT": "Report",
+        "REPORTS": "Reports",
+        "IDENTITY_LEVEL": "Identity level",
+        "CONTENT_LEVEL": "Content level",
+        "INTEGRITY_LEVEL": "Integrity level",
+        "RESET_FILTERS": "Reset filters",
+        "REPORT_CHART": "Report chart",
+        "ACTIVITY_HISTOGRAM": "Activity histogram",
+        "LEARNER_HISTOGRAM": "Learner histogram",
+        "POSITIVE_FACTS": "Positive facts",
+        "NEGATIVE_FACTS": "Negative facts",
+        "FACTS": {
+            "POSITIVE_LEARNER_RESULT_ABOVE_THRESHOLD": "The result obtained by this learner is above the defined threshold.",
+            "POSITIVE_LEARNER_RESULT_GOOD_INSTRUMENT": "Looking at results obtained for this learner in this instrument, this is a good result.",
+            "POSITIVE_LEARNER_RESULT_GOOD_ACTIVITY": "This is a good result if we compare with other learners in the activity.",
+            "POSITIVE_LEARNER_RESULT_FREQUENT": "This is a normal result for this learner with this instrument.",
+            "POSITIVE_CONFIDENCE_HIGH": "Confidence value is high, results are representative.",
+            "NEUTRAL_MISSING_INFORMATION": "Available information is not enough to decide.",
+            "NEGATIVE_LEARNER_RESULT_BELOW_THRESHOLD": "The result obtained by this learner is below the defined threshold.",
+            "NEGATIVE_LEARNER_RESULT_BAD_INSTRUMENT": "Looking at results obtained for this learner in this instrument, this is a bad result.",
+            "NEGATIVE_LEARNER_RESULT_BAD_ACTIVITY": "This is a bad result if we compare with other learners in the activity.",
+            "NEGATIVE_LEARNER_RESULT_NOT_FREQUENT": "This is not a normal result for this learner with this instrument.",
+            "NEGATIVE_CONFIDENCE_LOW": "Confidence value is too low to take a decision."
+        }
+    },
+    "ENROLMENT": {
+        "ENROLMENT": "Enrolment",
+        "INSTRUCTIONS": "Instructions",
+        "REGISTERED": "Your enrolment is registered.",
+        "FR": {
+          "STAND_FRONT_SCREEN": "Stand in front of your screen with a webcam facing towards you.",
+          "IMPORTANT_NOTE": "It is important to make sure the following:",
+          "CAMERA_CENTER": "Make sure that the camera is correctly capturing the whole face without leaving any parts outside of the image boundaries.",
+          "CAMERA_CORRECTLY_FACING": "It is also important to make sure that the camera is approximately facing your face with horizontal direction, i.e. the camera is approximately at the same height as your eyes/nose.",
+          "ACTIVITY_ENVIRONMENT": "Make sure that the activity is performed in an environment with reasonable lighting conditions (neither too bright nor too dark).",
+          "FOLLOW_INSTRUCTIONS": "Follow the instructions on the video at a similar speed. The final duration of the video will be of about 10 seconds.",
+          "PUSH_START": "Please push Start button to start capturing the video. When ready, push Stop button to stop recording. Activity will close automatically."
+        },
+        "KS": {
+          "INSTRUCTIONS": "In order to enroll keystroke dynamics, talk about yourself. Type text into the text area"
+        }
+    },
+    "SEND": {
+        "DISABLED_INSTRUMENTS": "Disabled instruments",
+        "ENABLED_OPTIONS": "Enabled options",
+        "USER_SEND_CATEGORIES": "User SEND categories"
+    },
+    "INSTITUTION_SETTINGS": {
+        "SETTINGS": "Settings",
+        "DISABLE_VLE_LEARNER_CREATION": "Disable VLE learner creation",
+        "DISABLE_VLE_INSTRUCTOR_CREATION": "Disable VLE instructor creation",
+        "DISABLE_VLE_USER_CREATION": "Disable VLE user creation",
+        "ALLOW_LEARNER_REPORT": "Allow learner report",
+        "ALLOW_LEARNER_AUDIT": "Allow learner audit",
+        "ALLOW_VALID_AUDIT": "Allow valid audit",
+        "EXTERNAL_IC": "External IC",
+        "ALLOWED_DOMAINS": "Allowed domains"
+    },
+    "PROFILE": {
+        "PROFILE": "Profile",
+        "ENABLE_HIGH_CONTRAST": "Enable high contrast",
+        "ENABLE_BIG_FONTS": "Enable big fonts",
+        "ENABLE_TEXT_TO_SPEECH": "Enable text to speech"
+    },
+    "TOP_MENU": {
+        "PROFILE": "Profile",
+        "BIOMETRIC": "Biometric",
+        "INFORMED_CONSENT": "Informed consent",
+        "LOG_OUT": "Log out"
+    },
+    "SIDE_MENU": {
+        "DASHBOARD": "Dashboard",
+        "MY_COURSES": "My Courses",
+        "TEST_PAGE": "Test page",
+        "ADMINISTRATION": "Administration",
+        "USERS": "Users",
+        "INFORMED_CONSENT": "Informed Consent",
+        "SEND": "SEND",
+        "CATEGORIES": "Categories",
+        "COURSES": "Courses",
+        "DATA_MANAGEMENT": "Data Management",
+        "INSTITUTION": "Institution",
+        "SETTINGS": "Settings",
+        "STATISTICS": "Statistics",
+        "MONITORING": "Monitoring",
+        "SYSTEM": "System",
+        "INSTITUTIONS": "Institutions",
+        "INSTRUMENTS": "Instruments",
+        "SERVICES": "Services",
+        "STATUS": "Status"
+    },
+    "ENTITIES": {
+        "NAMES": {
+            "USER": "User",
+            "USERS": "Users",
+            "IC": "Informed consent",
+            "ICS" : "Informed consents",
+            "SEND_CATEGORY": "SEND category",
+            "SEND_CATEGORIES": "SEND categories"
+        },
+        "USER": {
+            "ID": "Id", 
+            "USERNAME": "Username",
+            "EMAIL": "Email",
+            "PASSWORD": "Password",
+            "CONFIRM_PASSWORD": "Confirm password",
+            "FIRST_NAME": "First name",
+            "LAST_NAME": "Last name",
+            "INSTITUTION": "Institution",
+            "UID": "Uid",
+            "LANGUAGE": "Language",
+            "GLOBAL_ADMIN": "Global admin",
+            "ADMIN": "Admin",
+            "SEND": "SEND",
+            "LEGAL": "Legal",
+            "DATA": "Data",
+            "LOGIN_ALLOWED": "Login allowed"
+        },
+        "INSTITUTION": {
+            "ID": "Id",
+            "NAME": "Name",
+            "ACRONYM": "Acronym",
+            "ALLOWED DOMAINS": "Allowed domains"
+        },
+        "IC": {
+            "ID": "Id",
+            "INSTITUTION": "Institution",
+            "VERSION": "Version",
+            "VALID_FROM": "Valid from",
+            "UPLOAD PDF FILE": "Upload PDF file",
+            "HTML": "Html"
+        },
+        "SEND_CATEGORY": {
+            "ID": "Id", 
+            "DESCRIPTION": "Description",
+            "ENABLED_OPTIONS": "Enabled options",
+            "DISABLED_INSTRUMENTS": "Disabled instruments",
+            "EXPIRATION_DATE": "Expiration date" 
+        },
+        "COURSE": {
+            "ID": "Id",
+            "DESCRIPTION": "Description",
+            "CODE": "Code",
+            "START": "Start",
+            "END": "End"
+        },
+        "ACTIVITY": {
+            "ID": "Id",
+            "NAME": "Name",
+            "DESCRIPTION": "Description",
+            "TYPE": "Type",
+            "START": "Start",
+            "END": "End"
+        },
+        "REPORT": {
+            "LEARNER": "Learner",
+            "SUMMARY": "Summary"
+        },
+        "INSTRUMENT": {
+            "ID": "Id",
+            "NAME":"Name",
+            "ACRONYM":"Acronym",
+            "DESCRIPTION":"Description",
+            "QUEUE":"Queue",
+            "OPTIONS_SCHEMA":"Options Schema",
+            "ENABLED":"Enabled",
+            "REQUIRES_ENROLMENT":"Requires Enrolment",
+            "IDENTITY":"Identity",
+            "ORIGINALITY":"Originality",
+            "AUTHORSHIP":"Authorship",
+            "INTEGRITY":"Integrity"
+        }
+    }
+}

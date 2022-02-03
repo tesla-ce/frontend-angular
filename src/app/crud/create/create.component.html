@@ -73,7 +73,7 @@
                     [status]="formErrors[field.key]?'danger':'basic'">
 
                 <!-- errors -->    
-                <errors class="text-danger">{{formErrors[field.key]?formErrors[field.key]:''}}</errors>
+                <div class="text-danger">{{formErrors[field.key]?formErrors[field.key]:''}}</div>
                 <div *ngIf="formGroup.controls[field.key].invalid && 
                 formGroup.controls[field.key].errors && 
                 (formGroup.controls[field.key].dirty || formGroup.controls[field.key].touched)">

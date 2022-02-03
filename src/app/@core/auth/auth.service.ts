@@ -8,7 +8,7 @@ import { User, Institution, InstitutionUser } from '../models/user';
 import { EnvService } from '../env/env.service';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { ApiInstitutionService } from '../data/api-institution.service';
-
+import { TranslateService } from '@ngx-translate/core';
 
 export abstract class AuthUserData extends NbRoleProvider {
   abstract getUser(): Observable<User>;
@@ -92,6 +92,7 @@ export class AuthService extends AuthUserData {
     protected router: Router,
     protected route: ActivatedRoute,
     private apiInstitutionService: ApiInstitutionService,
+    private translate: TranslateService,
     private envService: EnvService) {
     super();
     this.authService.onTokenChange()
@@ -102,6 +103,7 @@ export class AuthService extends AuthUserData {
             this.http.get(url).subscribe((user: InstitutionUser) => {
               if (user) {
                 this._isAdmin = user.is_admin;
+                if (user.locale) translate.use(user.locale);
                 if (user.institution) {
                   // CHECK IC ONLY FOR LEARNERS
                   if (user.roles.includes('LEARNER')) {
