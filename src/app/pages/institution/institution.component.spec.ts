@@ -26,8 +26,8 @@ describe('InstitutionComponent', () => {
         NbAuthModule.forRoot(),
         HttpClientTestingModule,
         TranslateModule.forRoot(),
-        CoreModule.forRoot(),
         NbMenuModule.forRoot(),
+        ThemeModule,
       ],
       providers: [
         ThemeModule.forRoot().providers,

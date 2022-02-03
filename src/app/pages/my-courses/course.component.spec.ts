@@ -28,6 +28,7 @@ describe('CourseComponent', () => {
         NbSidebarModule.forRoot(),
         CoreModule.forRoot(),
         NbMenuModule.forRoot(),
+        ThemeModule,
       ],
       providers: [
         AuthService,

@@ -28,6 +28,7 @@ describe('StatisticsComponent', () => {
         TranslateModule.forRoot(),
         CoreModule.forRoot(),
         NbMenuModule.forRoot(),
+        ThemeModule,
       ],
       providers: [
         ThemeModule.forRoot().providers,
