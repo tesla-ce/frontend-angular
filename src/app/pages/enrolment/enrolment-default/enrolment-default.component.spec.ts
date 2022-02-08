@@ -5,6 +5,7 @@ import { NbAuthModule } from '@nebular/auth';
 import { NbButtonModule, NbCardModule, NbActionsModule, NbIconModule, NbLayoutModule, NbProgressBarModule } from '@nebular/theme';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../../@core/auth/auth.service';
+import { AuthServiceTesting } from '../../../@core/auth/auth.service.mock';
 import { EnvService } from '../../../@core/env/env.service';
 import { ThemeModule } from '../../../@theme/theme.module';
 import { EnrolmentStatusModule } from '../../../common/enrolment-status/enrolment-status.module';
@@ -38,7 +39,7 @@ describe('EnrolmentDefaultComponent', () => {
       ],
       providers: [ 
         ThemeModule.forRoot().providers,
-        AuthService,
+        { provide: AuthService, useClass: AuthServiceTesting },
         EnvService 
       ]
     })

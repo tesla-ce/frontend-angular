@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { NbAuthModule } from '@nebular/auth';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../../@core/auth/auth.service';
+import { AuthServiceTesting } from '../../../@core/auth/auth.service.mock';
 import { EnvService } from '../../../@core/env/env.service';
 import { ThemeModule } from '../../../@theme/theme.module';
 import { EnrolmentModule } from '../../enrolment/enrolment.module';
@@ -26,7 +27,7 @@ describe('BiometricComponent', () => {
       ],
       providers: [
         ThemeModule.forRoot().providers,
-        AuthService,
+        { provide: AuthService, useClass: AuthServiceTesting },
         EnvService,
       ]
     })

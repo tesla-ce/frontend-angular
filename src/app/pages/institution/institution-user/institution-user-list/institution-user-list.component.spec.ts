@@ -5,6 +5,7 @@ import { NbAuthModule } from '@nebular/auth';
 import { NbButtonModule, NbCardModule, NbIconModule, NbToastrModule } from '@nebular/theme';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../../../@core/auth/auth.service';
+import { AuthServiceTesting } from '../../../../@core/auth/auth.service.mock';
 import { EnvService } from '../../../../@core/env/env.service';
 import { ThemeModule } from '../../../../@theme/theme.module';
 import { ListModule } from '../../../../crud/list/list.module';
@@ -29,7 +30,7 @@ describe('InstitutionUserListComponent', () => {
         NbIconModule,
         ListModule,
       ],
-      providers: [ AuthService,
+      providers: [ { provide: AuthService, useClass: AuthServiceTesting },
         EnvService,
         ThemeModule.forRoot().providers ],
     })

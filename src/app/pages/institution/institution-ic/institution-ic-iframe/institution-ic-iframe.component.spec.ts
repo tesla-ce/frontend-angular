@@ -12,6 +12,7 @@ import { NbCardModule, NbButtonModule, NbSelectModule, NbActionsModule, NbIconMo
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ThemeModule } from '../../../../@theme/theme.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthServiceTesting } from '../../../../@core/auth/auth.service.mock';
 
 describe('InstitutionIcIframeComponent', () => {
   let component: InstitutionIcIframeComponent;
@@ -36,7 +37,7 @@ describe('InstitutionIcIframeComponent', () => {
       ],
       providers: [ 
           ThemeModule.forRoot().providers,
-          AuthService,
+          { provide: AuthService, useClass: AuthServiceTesting },
           EnvService,
      ],
     })

@@ -6,6 +6,7 @@ import { NbCardModule, NbButtonModule, NbIconModule, NbActionsModule, NbTabsetMo
 import { TranslateModule } from '@ngx-translate/core';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { AuthService } from '../../../../../@core/auth/auth.service';
+import { AuthServiceTesting } from '../../../../../@core/auth/auth.service.mock';
 import { EnvService } from '../../../../../@core/env/env.service';
 import { ThemeModule } from '../../../../../@theme/theme.module';
 
@@ -33,7 +34,7 @@ describe('CourseReportAuditComponent', () => {
       ],
       providers: [
           ThemeModule.forRoot().providers,
-          AuthService,
+          { provide: AuthService, useClass: AuthServiceTesting },
           EnvService,
       ]
     })

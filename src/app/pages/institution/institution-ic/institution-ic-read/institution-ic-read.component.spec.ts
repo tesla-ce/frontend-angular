@@ -6,6 +6,7 @@ import { NbCardModule, NbButtonModule, NbActionsModule, NbIconModule, NbDatepick
 import { TranslateModule } from '@ngx-translate/core';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { AuthService } from '../../../../@core/auth/auth.service';
+import { AuthServiceTesting } from '../../../../@core/auth/auth.service.mock';
 import { EnvService } from '../../../../@core/env/env.service';
 import { ThemeModule } from '../../../../@theme/theme.module';
 import { CreateModule } from '../../../../crud/create/create.module';
@@ -36,7 +37,7 @@ describe('InstitutionIcReadComponent', () => {
       ],
       providers: [ 
         ThemeModule.forRoot().providers,
-        AuthService,
+        { provide: AuthService, useClass: AuthServiceTesting },
         EnvService ]
     })
     .compileComponents();

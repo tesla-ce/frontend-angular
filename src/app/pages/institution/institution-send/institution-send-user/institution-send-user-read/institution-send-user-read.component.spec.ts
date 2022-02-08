@@ -8,6 +8,7 @@ import { NbActionsModule, NbButtonModule, NbCardModule, NbDatepickerModule, NbDi
 import { TranslateModule } from '@ngx-translate/core';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { AuthService } from '../../../../../@core/auth/auth.service';
+import { AuthServiceTesting } from '../../../../../@core/auth/auth.service.mock';
 import { EnvService } from '../../../../../@core/env/env.service';
 import { ThemeModule } from '../../../../../@theme/theme.module';
 import { ListModule } from '../../../../../crud/list/list.module';
@@ -48,7 +49,7 @@ describe('InstitutionSendUserReadComponent', () => {
     ],
       providers: [ ThemeModule.forRoot().providers,
         EnvService,
-        AuthService,
+        { provide: AuthService, useClass: AuthServiceTesting },
         DatePipe ],
     })
     .compileComponents();

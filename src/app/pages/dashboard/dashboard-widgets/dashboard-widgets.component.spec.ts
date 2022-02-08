@@ -8,6 +8,7 @@ import { NbButtonModule, NbCardModule, NbListModule, NbTreeGridModule, NbInputMo
 import { TranslateModule } from '@ngx-translate/core';
 import { GridsterModule } from 'angular-gridster2';
 import { AuthService } from '../../../@core/auth/auth.service';
+import { AuthServiceTesting } from '../../../@core/auth/auth.service.mock';
 import { EnvService } from '../../../@core/env/env.service';
 import { ThemeModule } from '../../../@theme/theme.module';
 
@@ -37,7 +38,7 @@ describe('DashboardWidgetsComponent', () => {
         GridsterModule,
         NbCalendarModule,
       ],
-      providers: [ AuthService,
+      providers: [ { provide: AuthService, useClass: AuthServiceTesting },
         EnvService ]
     })
     .compileComponents();

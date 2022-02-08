@@ -14,6 +14,7 @@ import { NbActionsModule, NbButtonModule, NbCardModule, NbDialogModule, NbFormFi
 import { TranslateModule } from '@ngx-translate/core';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { AuthService } from '../../../../@core/auth/auth.service';
+import { AuthServiceTesting } from '../../../../@core/auth/auth.service.mock';
 import { EnvService } from '../../../../@core/env/env.service';
 import { ThemeModule } from '../../../../@theme/theme.module';
 import { SideMenuModule } from '../../../../side-menu/side-menu.module';
@@ -56,7 +57,7 @@ describe('CourseActivityUpdateComponent', () => {
         MatProgressSpinnerModule,
        ],
       providers: [ 
-        AuthService,
+        { provide: AuthService, useClass: AuthServiceTesting },
         EnvService,
         ThemeModule.forRoot().providers,
       ],

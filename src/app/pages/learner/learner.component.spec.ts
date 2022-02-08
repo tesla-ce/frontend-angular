@@ -1,9 +1,11 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NbAuthModule } from '@nebular/auth';
-import { NbMenuModule, NbSidebarModule } from '@nebular/theme';
+import { NbIconModule, NbMenuModule, NbSidebarModule } from '@nebular/theme';
 import { TranslateModule } from '@ngx-translate/core';
+import { NbTeslaIconsModule, TeslaIconsModule } from '@tesla-ce/icons';
 import { AuthService } from '../../@core/auth/auth.service';
 import { CoreModule } from '../../@core/core.module';
 import { EnvService } from '../../@core/env/env.service';
@@ -27,6 +29,10 @@ describe('LearnerComponent', () => {
         TranslateModule.forRoot(),
         NbMenuModule.forRoot(),
         ThemeModule,
+        BrowserAnimationsModule,
+        NbIconModule,
+        TeslaIconsModule,
+        NbTeslaIconsModule,
       ],
       providers: [
         ThemeModule.forRoot().providers,

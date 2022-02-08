@@ -21,7 +21,7 @@
 //         TranslateModule.forRoot(),
 //       ],
 //       providers: [
-//           AuthService,
+//           { provide: AuthService, useClass: AuthServiceTesting },
 //           EnvService,
 //       ]
 //     })

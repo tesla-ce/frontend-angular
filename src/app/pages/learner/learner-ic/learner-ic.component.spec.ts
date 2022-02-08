@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { AuthService } from '../../../@core/auth/auth.service';
+import { AuthServiceTesting } from '../../../@core/auth/auth.service.mock';
 import { EnvService } from '../../../@core/env/env.service';
 import { ThemeModule } from '../../../@theme/theme.module';
 import { SideMenuModule } from '../../../side-menu/side-menu.module';
@@ -37,7 +38,7 @@ describe('LearnerIcComponent', () => {
         NbTabsetModule,
         PdfViewerModule,
       ],
-      providers: [ AuthService, EnvService ],
+      providers: [ { provide: AuthService, useClass: AuthServiceTesting }, EnvService ],
     })
     .compileComponents();
   }));

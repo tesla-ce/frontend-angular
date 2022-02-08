@@ -6,6 +6,7 @@ import { NbAuthModule } from '@nebular/auth';
 import { NbCardModule, NbButtonModule, NbInputModule, NbSelectModule, NbActionsModule, NbFormFieldModule, NbIconModule } from '@nebular/theme';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../../../../@core/auth/auth.service';
+import { AuthServiceTesting } from '../../../../../@core/auth/auth.service.mock';
 import { EnvService } from '../../../../../@core/env/env.service';
 import { ThemeModule } from '../../../../../@theme/theme.module';
 import { CreateModule } from '../../../../../crud/create/create.module';
@@ -44,7 +45,7 @@ describe('InstitutionSendCategoryReadComponent', () => {
         UpdateModule,
         TranslateModule.forRoot(),
       ],
-      providers: [ EnvService, AuthService ],
+      providers: [ EnvService, { provide: AuthService, useClass: AuthServiceTesting } ],
     })
     .compileComponents();
   }));

@@ -5,6 +5,7 @@ import { NbAuthModule } from '@nebular/auth';
 import { NbCardModule, NbButtonModule, NbActionsModule, NbIconModule } from '@nebular/theme';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../../../@core/auth/auth.service';
+import { AuthServiceTesting } from '../../../../@core/auth/auth.service.mock';
 import { EnvService } from '../../../../@core/env/env.service';
 import { ThemeModule } from '../../../../@theme/theme.module';
 import { ReadModule } from '../../../../crud/read/read.module';
@@ -30,7 +31,7 @@ describe('InstitutionUserReadComponent', () => {
         TranslateModule.forRoot(),
       ],
       providers: [ EnvService,
-        AuthService ],
+        { provide: AuthService, useClass: AuthServiceTesting } ],
     })
     .compileComponents();
   }));

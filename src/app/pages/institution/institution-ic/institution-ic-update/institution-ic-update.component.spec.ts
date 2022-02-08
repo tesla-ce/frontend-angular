@@ -9,6 +9,7 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { AuthService } from '../../../../@core/auth/auth.service';
+import { AuthServiceTesting } from '../../../../@core/auth/auth.service.mock';
 import { EnvService } from '../../../../@core/env/env.service';
 import { ThemeModule } from '../../../../@theme/theme.module';
 import { CreateModule } from '../../../../crud/create/create.module';
@@ -45,7 +46,7 @@ describe('InstitutionIcUpdateComponent', () => {
         PdfViewerModule,
         NbDatepickerModule,
        ],
-      providers: [ AuthService,
+      providers: [ { provide: AuthService, useClass: AuthServiceTesting },
         NbThemeModule.forRoot().providers,
         EnvService ],
     })

@@ -14,6 +14,7 @@ import { NbActionsModule, NbButtonModule, NbCardModule, NbDialogModule, NbFormFi
 import { TranslateModule } from '@ngx-translate/core';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { AuthService } from '../../../../@core/auth/auth.service';
+import { AuthServiceTesting } from '../../../../@core/auth/auth.service.mock';
 import { EnvService } from '../../../../@core/env/env.service';
 import { ThemeModule } from '../../../../@theme/theme.module';
 import { CreateModule } from '../../../../crud/create/create.module';
@@ -62,7 +63,7 @@ describe('CourseActivityInstrumentComponent', () => {
     ],
       providers: [
         ThemeModule.forRoot().providers,
-        AuthService,
+        { provide: AuthService, useClass: AuthServiceTesting },
         EnvService,
     ]
     })
