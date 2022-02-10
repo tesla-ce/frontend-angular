@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../../../@core/auth/auth.service';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
 import { ApiInstitutionService } from '../../../../../@core/data/api-institution.service';
@@ -28,6 +29,7 @@ export class InstitutionSendCategoryListComponent implements OnInit {
     private apiCourseService: ApiCourseService,
     private apiInstitutionService: ApiInstitutionService,
     private toastrService: NbToastrService,
+    private translate: TranslateService,
   ) { }
 
   ngOnInit(): void {
@@ -37,7 +39,7 @@ export class InstitutionSendCategoryListComponent implements OnInit {
           this.settings = {
             columns: {
               actions: {
-                title: 'Actions',
+                title: this.translate.instant('ACTIONS.ACTIONS'),
                 type: 'custom',
                 sort: false,
                 filter: false,
@@ -63,20 +65,20 @@ export class InstitutionSendCategoryListComponent implements OnInit {
                 },
               },
               id: {
-                title: 'ID',
+                title: this.translate.instant('ENTITIES.SEND_CATEGORY.ID'),
               },
               description: {
-                title: 'Description',
+                title: this.translate.instant('ENTITIES.SEND_CATEGORY.DESCRIPTION'),
               },
               enabled_options: {
-                title: 'Enabled options',
+                title: this.translate.instant('ENTITIES.SEND_CATEGORY.ENABLED_OPTIONS'),
                 type: 'custom',
                 sort: false,
                 filter: false,
                 renderComponent: ListCellEnabledOptionsComponent,
               },
               disabled_instruments: {
-                title: 'Disabled Instruments',
+                title: this.translate.instant('ENTITIES.SEND_CATEGORY.DISABLED_INSTRUMENTS'),
                 type: 'custom',
                 sort: false,
                 filter: false,

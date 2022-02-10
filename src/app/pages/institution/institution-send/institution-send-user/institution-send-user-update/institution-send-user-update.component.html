@@ -9,19 +9,19 @@
           <nb-action>
           </nb-action>
         </nb-actions>
-        {{ "CRUD.UPDATE" | translate }} Send User {{id}}
+        {{ "CRUD.UPDATE" | translate }} SEND {{ "ENTITIES.NAMES.USER" | translate }} {{id}}
     </nb-card-header>
     <nb-card-body *ngIf="settings" >
-        <label class="label"> {{ "SEND.ENABLED_OPTIONS" | translate }}</label><br>
+        <label class="label"> {{ "ENTITIES.SEND_CATEGORY.ENABLED_OPTIONS" | translate }}</label><br>
         <nb-icon style="margin:5px" *ngFor="let enabled_option of learner.send.send.enabled_options" status='primary' [icon]="icons[enabled_option]" pack="fa"></nb-icon>
         <br>
         <br>
-        <label class="label">{{ "SEND.DISABLED_INSTRUMENTS" | translate }}</label><br>
+        <label class="label">{{ "ENTITIES.SEND_CATEGORY.DISABLED_INSTRUMENTS" | translate }}</label><br>
         <nb-icon status='error' data-fill="full" *ngFor="let disabled_instrument of learner.send.send.disabled_instruments" [icon]="'instrument-' + instrumentsAcronyms[disabled_instrument]" pack="tesla"></nb-icon>
         <br>
         <br>
         <div style="display:flex; margin-bottom: 15px;">
-            <label class="label" style="margin-bottom: 16px; flex:1">{{ "SEND.USER_SEND_CATEGORIES" | translate }}</label>
+          <label class="label" style="margin-bottom: 16px; flex:1">{{ "ENTITIES.NAMES.USER" | translate }} {{ "ENTITIES.NAMES.SEND_CATEGORIES" | translate }}</label>
             <button class="create-button" nbButton status='info' size="small" (click)="create($event)">
                 <nb-icon icon="plus-circle-outline"></nb-icon>{{ "CRUD.ADD_NEW" | translate }}
             </button>

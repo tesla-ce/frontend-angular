@@ -1,7 +1,5 @@
-import { doublePasswordCheck } from '../../../@core/utils/validators';
-
 export const AdminInstitutionConfig = {
-  validator: doublePasswordCheck,
+  validator: null,
   paths: {
     editRedirect: '/system/admin-institution/update/',
     readRedirect: '/system/admin-institution/read/',
@@ -13,7 +11,7 @@ export const AdminInstitutionConfig = {
       editable: true,
       key: 'name',
       dataType: 'string',
-      label: 'Name',
+      label: 'ENTITIES.INSTITUTION.NAME',
       inputType: 'text',
       inputName: 'name-input-name',
       formControlName: 'name-form-control-name',
@@ -26,7 +24,7 @@ export const AdminInstitutionConfig = {
       editable: true,
       key: 'acronym',
       dataType: 'string',
-      label: 'Acronym',
+      label: 'ENTITIES.INSTITUTION.ACRONYM',
       inputType: 'text',
       inputName: 'acronym-input-name',
       formControlName: 'acronym-form-control-name',
@@ -39,7 +37,7 @@ export const AdminInstitutionConfig = {
       editable: true,
       key: 'allowed_domains',
       dataType: 'string',
-      label: 'Allowed domains',
+      label: 'ENTITIES.INSTITUTION.ALLOWED DOMAINS',
       inputType: 'text',
       inputName: 'allowed_domains-input-name',
       formControlName: 'allowed_domains-form-control-name',

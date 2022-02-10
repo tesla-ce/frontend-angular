@@ -144,6 +144,138 @@ $nb-themes: nb-register-theme((
 ), material-tesla, material-light);
 
 $nb-themes: nb-register-theme((
+
+  logo: url(/ui/assets/images/logo-tesla-ce/logo-tesla-ce-white.png),
+  layout-padding-top: 2.25rem,
+
+  menu-item-icon-margin: 0 0.5rem 0 0,
+
+  card-height-tiny: 13.5rem,
+  card-height-small: 21.1875rem,
+  card-height-medium: 28.875rem,
+  card-height-large: 36.5625rem,
+  card-height-giant: 44.25rem,
+  card-margin-bottom: 1.875rem,
+  card-header-with-select-padding-top: 0.5rem,
+  card-header-with-select-padding-bottom: 0.5rem,
+
+  select-min-width: 6rem,
+  option-list-border-radius: 0,
+
+  slide-out-background: linear-gradient(270deg, #e0e0e0 0%, #ebebeb 100%),
+  slide-out-shadow-color: 0 4px 14px 0 #ebebeb,
+  slide-out-shadow-color-rtl: 0 4px 14px 0 #ebebeb,
+
+  color-primary-100: black,
+  color-primary-200: black,
+  color-primary-300: black,
+  color-primary-400: black,
+  color-primary-500: black,
+  color-primary-600: black,
+  color-primary-700: black,
+  color-primary-800: black,
+  color-primary-900: black,
+), material-tesla-high_contrast, material-light);
+
+$nb-themes: nb-register-theme((
+
+  logo: url(/ui/assets/images/logo-tesla-ce/logo-tesla-ce-white.png),
+  layout-padding-top: 2.25rem,
+
+  menu-item-icon-margin: 0 0.5rem 0 0,
+
+  card-height-tiny: 13.5rem,
+  card-height-small: 21.1875rem,
+  card-height-medium: 28.875rem,
+  card-height-large: 36.5625rem,
+  card-height-giant: 44.25rem,
+  card-margin-bottom: 1.875rem,
+  card-header-with-select-padding-top: 0.5rem,
+  card-header-with-select-padding-bottom: 0.5rem,
+
+  select-min-width: 6rem,
+  option-list-border-radius: 0,
+
+  slide-out-background: linear-gradient(270deg, #e0e0e0 0%, #ebebeb 100%),
+  slide-out-shadow-color: 0 4px 14px 0 #ebebeb,
+  slide-out-shadow-color-rtl: 0 4px 14px 0 #ebebeb,
+
+  text-heading-1-font-size: 4.50rem,
+  text-heading-2-font-size: 4rem,
+  text-heading-3-font-size: 3.75rem,
+  text-heading-4-font-size: 3.250rem,
+  text-heading-5-font-size: 2.750rem,
+  text-heading-6-font-size: 2.250rem,
+  text-subtitle-font-size: 1.875rem,
+  text-subtitle-2-font-size: 1.6125rem,
+  text-paragraph-font-size: 1.875rem,
+  text-paragraph-2-font-size: 1.625rem,
+  text-label-font-size: 1.5rem,
+  text-caption-font-size: 1.5rem,
+  text-caption-2-font-size: 1.5rem,
+  text-button-tiny-font-size: 1.250rem,
+  text-button-small-font-size: 1.5rem,
+  text-button-medium-font-size: 1.750rem,
+  text-button-large-font-size: 2rem,
+  text-button-giant-font-size: 2.250rem,
+
+), material-tesla-big_fonts, material-light);
+
+$nb-themes: nb-register-theme((
+
+  logo: url(/ui/assets/images/logo-tesla-ce/logo-tesla-ce-white.png),
+  layout-padding-top: 2.25rem,
+
+  menu-item-icon-margin: 0 0.5rem 0 0,
+
+  card-height-tiny: 13.5rem,
+  card-height-small: 21.1875rem,
+  card-height-medium: 28.875rem,
+  card-height-large: 36.5625rem,
+  card-height-giant: 44.25rem,
+  card-margin-bottom: 1.875rem,
+  card-header-with-select-padding-top: 0.5rem,
+  card-header-with-select-padding-bottom: 0.5rem,
+
+  select-min-width: 6rem,
+  option-list-border-radius: 0,
+
+  slide-out-background: linear-gradient(270deg, #e0e0e0 0%, #ebebeb 100%),
+  slide-out-shadow-color: 0 4px 14px 0 #ebebeb,
+  slide-out-shadow-color-rtl: 0 4px 14px 0 #ebebeb,
+
+  color-primary-100: black,
+  color-primary-200: black,
+  color-primary-300: black,
+  color-primary-400: black,
+  color-primary-500: black,
+  color-primary-600: black,
+  color-primary-700: black,
+  color-primary-800: black,
+  color-primary-900: black,
+
+  text-heading-1-font-size: 4.50rem,
+  text-heading-2-font-size: 4rem,
+  text-heading-3-font-size: 3.75rem,
+  text-heading-4-font-size: 3.250rem,
+  text-heading-5-font-size: 2.750rem,
+  text-heading-6-font-size: 2.250rem,
+  text-subtitle-font-size: 1.875rem,
+  text-subtitle-2-font-size: 1.6125rem,
+  text-paragraph-font-size: 1.875rem,
+  text-paragraph-2-font-size: 1.625rem,
+  text-label-font-size: 1.5rem,
+  text-caption-font-size: 1.5rem,
+  text-caption-2-font-size: 1.5rem,
+  text-button-tiny-font-size: 1.250rem,
+  text-button-small-font-size: 1.5rem,
+  text-button-medium-font-size: 1.750rem,
+  text-button-large-font-size: 2rem,
+  text-button-giant-font-size: 2.250rem,
+
+), material-tesla-high_contrast-big_fonts, material-light);
+
+$nb-themes: nb-register-theme((
   logo: url(/ui/assets/images/logo.png),
   layout-padding-top: 2.25rem,
 

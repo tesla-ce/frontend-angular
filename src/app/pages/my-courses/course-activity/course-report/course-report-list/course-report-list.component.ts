@@ -29,7 +29,7 @@ export class CourseReportListComponent implements OnInit {
     search: false,
     columns: {
       actions: {
-        title: 'Actions',
+        title: this.translate.instant('ACTIONS.ACTIONS'),
         type: 'custom',
         sort: false,
         filter: false,
@@ -48,14 +48,14 @@ export class CourseReportListComponent implements OnInit {
       },
       learner: {
         width: '400px',
-        title: 'Learner',
+        title: this.translate.instant('ENTITIES.REPORT.LEARNER'),
         valuePrepareFunction: (value) => {
           return value.last_name + ', ' + value.first_name;
         },
         filter: false,
       },
       summary: {
-        title: 'Summary',
+        title: this.translate.instant('ENTITIES.REPORT.SUMMARY'),
         filter: false,
         type: 'custom',
         renderComponent: ListCellSumaryComponent,
@@ -156,17 +156,17 @@ export class CourseReportListComponent implements OnInit {
   }
 
   selectedChangeIdentity(event) {
-    this.filter.push({ field: 'identity_level', search: event });
+    this.filter.push({ field: 'identity_level__gte', search: event });
     this.list.setFilter(this.filter, true);
   }
 
   selectedChangeContent(event) {
-    this.filter.push({ field: 'content_level', search: event });
+    this.filter.push({ field: 'content_level__gte', search: event });
     this.list.setFilter(this.filter, true);
   }
 
   selectedChangeIntegrity(event) {
-    this.filter.push({ field: 'integrity_level', search: event });
+    this.filter.push({ field: 'integrity_level__gte', search: event });
     this.list.setFilter(this.filter, true);
   }
 

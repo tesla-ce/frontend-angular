@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../../../@core/auth/auth.service';
 import { InstitutionUser } from '../../../../../@core/models/user';
 import { ListCellActionsComponent } from '../../../../../crud/list/list-cell-actions.component';
@@ -12,7 +13,9 @@ export class InstitutionSendUserListComponent implements OnInit {
 
   endpoint: string;
   settings: any;
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private translate: TranslateService) { }
 
   ngOnInit(): void {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
@@ -41,13 +44,13 @@ export class InstitutionSendUserListComponent implements OnInit {
               },
             },
             id: {
-              title: 'ID',
+              title: this.translate.instant('ENTITIES.USER.ID'),
             },
             username: {
-              title: 'Username',
+              title: this.translate.instant('ENTITIES.USER.USERNAME'),
             },
             email: {
-              title: 'Email',
+              title: this.translate.instant('ENTITIES.USER.EMAIL'),
             },
           },
           actions: {
