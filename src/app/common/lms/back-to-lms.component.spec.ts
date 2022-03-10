@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NbButtonModule } from '@nebular/theme';
+import { NbButtonModule, NbStatusService } from '@nebular/theme';
 import { TranslateModule } from '@ngx-translate/core';
 import { BackToLMSComponent } from './back-to-lms.component';
 
@@ -18,6 +18,9 @@ describe('BackToLMSComponent', () => {
         TranslateModule.forRoot(),
       ],
       declarations: [ BackToLMSComponent ],
+      providers: [
+        NbStatusService
+      ]
     })
     .compileComponents();
   }));
@@ -30,5 +33,11 @@ describe('BackToLMSComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should press back button', () => {
+    const currentLocation = window.location.href;
+    component.backToLMS();
+    expect(window.location.href).toEqual(currentLocation)
   });
 });

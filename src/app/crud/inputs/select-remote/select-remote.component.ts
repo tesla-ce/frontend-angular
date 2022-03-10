@@ -41,14 +41,14 @@ export class SelectRemoteComponent implements OnInit {
     });
   }
 
-  private filter(value = '', options: any[]): any[] {
+  filter(value = '', options: any[]): any[] {
     const filterValue = value?.toLowerCase();
     return options.filter((option) => option[this.field.optionLabelAccessor]?.toLowerCase()?.includes(filterValue));
   }
 
   async onModelChange(value: string) {
     if (this.firstRender) return this.firstRender = false;
-    const picked = this.options?.filter((option) => option[this.field.optionLabelAccessor] === value);
+    const picked = this.options?.filter((option) => option[this.field.optionLabelAccessor].indexOf(value)!==-1);
     if (picked?.length > 0) this.parentForm.controls[this.field.key].setValue(picked[0][this.field.optionValueAccessor]);
     else {
       this.parentForm.controls[this.field.key].setValue(null);

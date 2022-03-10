@@ -99,7 +99,7 @@ export class ApiInstitutionService {
   // API: PUT /institutions/:id
   public updateInstitutionAsInstitutionAdmin( institutionId: number, fields ): Observable<any> {
     return this.http
-     .put(`${this.endpointUrl}/${institutionId}/`, fields).pipe(
+     .put(`${this.endpointUrl}${institutionId}/`, fields).pipe(
      map((data: any) => {
        if (data.status) {
          return true;

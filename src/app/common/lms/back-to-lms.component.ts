@@ -8,7 +8,6 @@ import {Component} from '@angular/core';
 export class BackToLMSComponent {
 
   redirectUri: string;
-  allowedDomains: string[] = ['www.example.com'];
 
   constructor() {
     const ttl = new Date(new Date(localStorage.getItem('lms_redirect_uri_ts')).getTime() + 5 * 60000);
@@ -16,6 +15,6 @@ export class BackToLMSComponent {
   }
 
   backToLMS() {
-    window.location.href = this.redirectUri;
+    if (this.redirectUri) window.location.href = this.redirectUri;
   }
 }
