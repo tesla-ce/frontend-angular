@@ -22,7 +22,8 @@ describe('InstitutionUserCreateComponent', () => {
   const apiServiceTesting =  new ApiServiceTesting(new EnvService());
   const locationStub = {
     back: jasmine.createSpy('back')
-  }
+  };
+  
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ InstitutionUserCreateComponent ],
@@ -42,7 +43,7 @@ describe('InstitutionUserCreateComponent', () => {
         EnvService,
         { provide: AuthService, useClass: AuthServiceTesting },
         { provide: NbToastrService, useClass: ToastrServiceTesting },
-        {provide: Location, useValue: locationStub}
+        { provide: Location, useValue: locationStub },
        ],
     })
     .compileComponents();

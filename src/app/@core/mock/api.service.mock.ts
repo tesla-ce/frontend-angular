@@ -740,6 +740,162 @@ export class ApiServiceTesting  {
                 "groups": [],
                 "user_permissions": []
               }
+            case '/institution/1/ic/':
+              return {
+                "id": 1,
+                "institution": {
+                  "id": 1,
+                  "acronym": "default",
+                  "uid": "inst_admin@dev.tesla-ce.eu",
+                  "roles": [
+                    "ADMIN",
+                    "SEND",
+                    "LEGAL",
+                    "DATA"
+                  ],
+                  "locale": "en"
+                },
+                "version": "1.0.1",
+                "valid_from":  "2021-10-07T10:24:48.717256Z",
+                "created_at":  "2021-10-07T10:24:48.717256Z",
+                "updated_at":  "2021-10-07T10:24:48.717256Z",
+              }
+              case '/institution/1/ic/1/':
+                return {
+                  "id": 1,
+                  "institution": {
+                    "id": 1,
+                    "acronym": "default",
+                    "uid": "inst_admin@dev.tesla-ce.eu",
+                    "roles": [
+                      "ADMIN",
+                      "SEND",
+                      "LEGAL",
+                      "DATA"
+                    ],
+                    "locale": "en"
+                  },
+                  "version": "1.0.1",
+                  "valid_from":  "2021-10-07T10:24:48.717256Z",
+                  "created_at":  "2021-10-07T10:24:48.717256Z",
+                  "updated_at":  "2021-10-07T10:24:48.717256Z",
+                }
+                case '/institution/1/ic/1/document/':
+                  return {
+                    "count": 1,
+                    "next": null,
+                    "previous": null,
+                    "results": [
+                        {
+                            "id": 1,
+                            "consent": {
+                                "id": 1,
+                                "institution": {
+                                    "id": 1,
+                                    "acronym": "default",
+                                    "name": "Default Institution",
+                                    "external_ic": false,
+                                    "mail_domain": null,
+                                    "disable_vle_learner_creation": false,
+                                    "disable_vle_instructor_creation": false,
+                                    "disable_vle_user_creation": false,
+                                    "allow_learner_report": false,
+                                    "allow_learner_audit": false,
+                                    "allow_valid_audit": false,
+                                    "allowed_domains": "moodle.dev.tesla-ce.eu",
+                                    "created_at": "2021-10-07T10:14:53.717742Z",
+                                    "updated_at": "2021-12-30T09:42:24.102241Z"
+                                },
+                                "version": "1.0.0",
+                                "valid_from": "2021-09-30T22:00:00Z",
+                                "created_at": "2021-10-14T09:14:54.587534Z",
+                                "updated_at": "2021-10-14T09:14:54.587553Z"
+                            },
+                            "language": "en",
+                            "html": null,
+                            "pdf": "test.pdf",
+                            "created_at": "2021-10-14T09:15:01.209517Z",
+                            "updated_at": "2021-10-14T09:15:01.209565Z"
+                        },
+                        {
+                          "id": 2,
+                          "consent": {
+                              "id": 1,
+                              "institution": {
+                                  "id": 1,
+                                  "acronym": "default",
+                                  "name": "Default Institution",
+                                  "external_ic": false,
+                                  "mail_domain": null,
+                                  "disable_vle_learner_creation": false,
+                                  "disable_vle_instructor_creation": false,
+                                  "disable_vle_user_creation": false,
+                                  "allow_learner_report": false,
+                                  "allow_learner_audit": false,
+                                  "allow_valid_audit": false,
+                                  "allowed_domains": "moodle.dev.tesla-ce.eu",
+                                  "created_at": "2021-10-07T10:14:53.717742Z",
+                                  "updated_at": "2021-12-30T09:42:24.102241Z"
+                              },
+                              "version": "1.0.0",
+                              "valid_from": "2021-09-30T22:00:00Z",
+                              "created_at": "2021-10-14T09:14:54.587534Z",
+                              "updated_at": "2021-10-14T09:14:54.587553Z"
+                          },
+                          "language": "en",
+                          "html":null,
+                          "pdf": "/test/test.pdf",
+                          "created_at": "2021-10-14T09:15:01.209517Z",
+                          "updated_at": "2021-10-14T09:15:01.209565Z"
+                      }
+                    ]
+                };
+              case '/institution/1/ic?offset=0&limit=10':
+                return {
+                    "count": 2,
+                    "next": null,
+                    "previous": null,
+                    "results": [
+                      {
+                        "id": 1,
+                        "institution": {
+                          "id": 1,
+                          "acronym": "default",
+                          "uid": "inst_admin@dev.tesla-ce.eu",
+                          "roles": [
+                            "ADMIN",
+                            "SEND",
+                            "LEGAL",
+                            "DATA"
+                          ],
+                          "locale": "en"
+                        },
+                        "version": "1.0.1",
+                        "valid_from":  "2021-10-07T10:24:48.717256Z",
+                        "created_at":  "2021-10-07T10:24:48.717256Z",
+                        "updated_at":  "2021-10-07T10:24:48.717256Z",
+                      },
+                      {
+                        "id": 2,
+                        "institution": {
+                          "id": 1,
+                          "acronym": "default",
+                          "uid": "inst_admin@dev.tesla-ce.eu",
+                          "roles": [
+                            "ADMIN",
+                            "SEND",
+                            "LEGAL",
+                            "DATA"
+                          ],
+                          "locale": "en"
+                        },
+                        "version": "1.0.1",
+                        "valid_from":  "2021-10-07T10:24:48.717256Z",
+                        "created_at":  "2021-10-07T10:24:48.717256Z",
+                        "updated_at":  "2021-10-07T10:24:48.717256Z",
+                      }
+                    ],
+                  }
             default:
                 return {};
         }

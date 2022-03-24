@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NbAuthModule } from '@nebular/auth';
@@ -13,10 +13,15 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ThemeModule } from '../../../../@theme/theme.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthServiceTesting } from '../../../../@core/auth/auth.service.mock';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
+import { ApiServiceTesting } from '../../../../@core/mock/api.service.mock';
 
 describe('InstitutionIcIframeComponent', () => {
   let component: InstitutionIcIframeComponent;
   let fixture: ComponentFixture<InstitutionIcIframeComponent>;
+  let httpMock: HttpTestingController;
+  const apiServiceTesting =  new ApiServiceTesting(new EnvService());
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -38,10 +43,19 @@ describe('InstitutionIcIframeComponent', () => {
       providers: [ 
           ThemeModule.forRoot().providers,
           { provide: AuthService, useClass: AuthServiceTesting },
+          {
+            provide: ActivatedRoute,
+            useValue: {
+              params: of({
+                id: 1,
+              }),
+            },
+          },
           EnvService,
      ],
     })
     .compileComponents();
+    httpMock = TestBed.get(HttpTestingController);
   }));
 
   beforeEach(() => {
@@ -51,6 +65,20 @@ describe('InstitutionIcIframeComponent', () => {
   });
 
   it('should create', () => {
+    const documentResponse: any = apiServiceTesting.getData('/institution/1/ic/1/document/');
+    const getDocumentRequest = httpMock.expectOne(apiServiceTesting.getUrl('/institution/1/ic/1/document/'));
+    getDocumentRequest.flush(documentResponse);
+    const icResponse: any = apiServiceTesting.getData('/institution/1/ic/1/');
+    const getIcRequest = httpMock.expectOne(apiServiceTesting.getUrl('/institution/1/ic/1/'));
+    getIcRequest.flush(icResponse);
+    expect(component).toBeTruthy();
+  });
+
+  it('it sould select a language', () => {
+    const documentResponse: any = apiServiceTesting.getData('/institution/1/ic/1/document/');
+    const getDocumentRequest = httpMock.expectOne(apiServiceTesting.getUrl('/institution/1/ic/1/document/'));
+    getDocumentRequest.flush(documentResponse);
+    component.pickedLanguage('fr');
     expect(component).toBeTruthy();
   });
 });

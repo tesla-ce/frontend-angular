@@ -46,7 +46,7 @@ export class ApiIcService {
   // API: GET /ics/:id
   public getIcById(institutionId: number, icId: number): Observable<Ic> {
     return this.http
-      .get(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}`)
+      .get(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}/`)
       .pipe(
         map((ic: Ic) => {
           // console.log(ic);
@@ -75,7 +75,7 @@ export class ApiIcService {
       .get(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}/document/`)
       .pipe(
         map((response: any) => {
-          if (response?.results) return response.results;
+          return response.results;
         }),
         catchError(this.handleError),
       );

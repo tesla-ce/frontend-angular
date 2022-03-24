@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { ApiIcService } from '../../../../@core/data/api-ic.service';
 import { Ic } from '../../../../@core/models/ic';
@@ -27,12 +27,10 @@ export class InstitutionIcIframeComponent implements OnInit {
     private route: ActivatedRoute,
     private apiIcService: ApiIcService,
     private authService: AuthService,
-    private router: Router) {
+    ) {
     this.route.params.subscribe(params => {
       if (params['id'] != null) {
         this.id = params['id'];
-      } else {
-        this.router.navigate(['../'], { relativeTo: this.route });
       }
     });
   }
