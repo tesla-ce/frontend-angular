@@ -136,7 +136,7 @@ export class ApiInstitutionService {
   // API: GET /institutions/:id
   public getSendCategoryById( institutionId: number, sendCategoryId: number ): Observable<any> {
       return this.http
-        .get(this.endpointUrl + institutionId + '/send/' + sendCategoryId)
+        .get(this.endpointUrl + institutionId + '/send/' + sendCategoryId + '/')
         .pipe(
           map(( sendCategroy: any ) => {
             if ( sendCategroy ) return sendCategroy;
@@ -161,7 +161,7 @@ export class ApiInstitutionService {
 
   // API: PUT /institution/:id/send
   public updateSendCategory(institutionId: number, sendCategoryId: number, fields: any) {
-    return this.http.put(this.endpointUrl + '/' + institutionId + '/send/' + sendCategoryId , fields)
+    return this.http.put(this.endpointUrl + institutionId + '/send/' + sendCategoryId + '/' , fields)
     .pipe(
       map((data: any) => {
         if (data.status) {
@@ -177,7 +177,7 @@ export class ApiInstitutionService {
   // API: DELETE /course/:id/activity/:id/instrument/:id
   public deleteSendCategoryById(institutionId: number, categoryId: number): Observable<any> {
     return this.http
-      .delete(`${this.endpointUrl}/${institutionId}/send/${categoryId}/`)
+      .delete(`${this.endpointUrl}${institutionId}/send/${categoryId}/`)
       .pipe(
         map(() => true),
         catchError(this.handleError),
@@ -212,7 +212,7 @@ export class ApiInstitutionService {
 
   // API: PUT /institution/:id/send
   public updateSendUserCategory(institutionId: number, learnerId: number, sendUserCategoryId: number, fields: any) {
-    return this.http.patch(this.endpointUrl + institutionId + '/learner/' + learnerId + '/send/' + sendUserCategoryId , fields)
+    return this.http.patch(this.endpointUrl + institutionId + '/learner/' + learnerId + '/send/' + sendUserCategoryId + '/' , fields)
     .pipe(
       map((data: any) => {
         if (data.status) {
@@ -228,7 +228,7 @@ export class ApiInstitutionService {
   // API: DELETE /course/:id/activity/:id/instrument/:id
   public deleteSendUserCategoryById(institutionId: number, learnerId: number, sendUserCategoryId: number): Observable<any> {
     return this.http
-      .delete(`${this.endpointUrl}/${institutionId}/learner/${learnerId}/send/${sendUserCategoryId}/`)
+      .delete(`${this.endpointUrl}${institutionId}/learner/${learnerId}/send/${sendUserCategoryId}/`)
       .pipe(
         map(() => true),
         catchError(this.handleError),
