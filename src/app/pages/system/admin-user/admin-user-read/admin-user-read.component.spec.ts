@@ -24,7 +24,8 @@ describe('AdminUserReadComponent', () => {
   const apiServiceTesting =  new ApiServiceTesting(new EnvService());
   const locationStub = {
     back: jasmine.createSpy('back')
-  }
+  };
+  
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AdminUserReadComponent ],

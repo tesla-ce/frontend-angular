@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Optional } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { ApiInstrumentService } from '../../../../@core/data/api-instrument.service';
@@ -21,7 +21,7 @@ export class AdminInstrumentProviderAddComponent {
   public errors = new Subject();
 
   constructor(
-    protected ref: NbDialogRef<AdminInstrumentProviderAddComponent>,
+    @Optional() protected ref: NbDialogRef<AdminInstrumentProviderAddComponent>,
     private apiInstrumentService: ApiInstrumentService,
   ) {
   }

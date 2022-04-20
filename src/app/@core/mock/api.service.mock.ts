@@ -1066,7 +1066,35 @@ export class ApiServiceTesting  {
                         }
                     }
                 ]
-            };    
+            };
+            case '/admin/instrument?offset=0&limit=10':
+                return {
+                    "count": 9,
+                    "next": null,
+                    "previous": null,
+                    "results": []
+                };
+            case '/admin/instrument/':
+                  return {
+                    "count": 2,
+                    "next": null,
+                    "previous": null,
+                    "results": [
+                      {
+                        "id": 1,
+                        "name": "test-instrument-1"
+                      },
+                      {
+                        "id": 1,
+                        "name": "test-instrument-2"
+                      },
+                    ],
+                  };
+            case '/admin/instrument/1/':
+                return {
+                      "id": 1,
+                      "name": "test-instrument-1"
+                    };
             default:
                 return {};
         }

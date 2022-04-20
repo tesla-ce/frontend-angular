@@ -72,6 +72,20 @@ export class ApiUserService {
      catchError(this.handleError));
   }
 
+  // API: PATCH /users/:id
+  public updateUserProfile( fields ): Observable<any> {
+    return this.http
+     .post(`${this.apiUrl}/auth/profile/`, fields).pipe(
+     map((data: any) => {
+       if (data.status) {
+         return true;
+       } else {
+         return false;
+       }
+     }),
+     catchError(this.handleError));
+  }
+
   // API: DELETE /users/:id
   public deleteUserById(userId: number): Observable<any> {
     return this.http
