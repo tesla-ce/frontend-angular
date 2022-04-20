@@ -1095,6 +1095,18 @@ export class ApiServiceTesting  {
                       "id": 1,
                       "name": "test-instrument-1"
                     };
+            case '/admin/instrument/1/provider/':
+                return {
+                      "service_port": "1",
+                      "options_schema": "{}",
+                      "options": "{}",
+                    };
+            case '/admin/instrument/1/provider/1/':
+              return {
+                    "service_port": "1",
+                    "options_schema": "{}",
+                    "options": "{}",
+                  };
             default:
                 return {};
         }
