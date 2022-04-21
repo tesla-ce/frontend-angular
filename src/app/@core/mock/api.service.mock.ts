@@ -670,8 +670,8 @@ export class ApiServiceTesting  {
             case '/institution/1/' :
                   return {
                     "id": 1,
-                    "acronym": "default",
-                    "uid": "inst_admin@dev.tesla-ce.eu",
+                    "acronym": "test",
+                    "uid": "test@dev.tesla-ce.eu",
                     "roles": [
                         "ADMIN",
                         "SEND",
@@ -1107,6 +1107,37 @@ export class ApiServiceTesting  {
                     "options_schema": "{}",
                     "options": "{}",
                   };
+            case '/admin/institution?offset=0&limit=10':
+              return {
+                "count": 1,
+                "next": null,
+                "previous": null,
+                "results": [{
+                  "id": 1,
+                  "acronym": "test",
+                  "uid": "test@dev.tesla-ce.eu",
+                  "roles": [
+                    "ADMIN",
+                    "SEND",
+                    "LEGAL",
+                    "DATA"
+                  ],
+                  "locale": "en"
+                }]
+            };
+            case '/admin/institution/1/':
+              return {
+                  "id": 1,
+                  "acronym": "test",
+                  "uid": "test@dev.tesla-ce.eu",
+                  "roles": [
+                    "ADMIN",
+                    "SEND",
+                    "LEGAL",
+                    "DATA"
+                  ],
+                  "locale": "en"
+            };
             default:
                 return {};
         }

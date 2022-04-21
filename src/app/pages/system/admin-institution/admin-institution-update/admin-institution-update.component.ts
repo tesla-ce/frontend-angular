@@ -22,7 +22,6 @@ export class AdminInstitutionUpdateComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private location: Location,
     private apiInstitutionService: ApiInstitutionService,
     private toastrService: NbToastrService) {
@@ -32,8 +31,6 @@ export class AdminInstitutionUpdateComponent {
         apiInstitutionService.getInstitutionById(this.id).subscribe(instance => {
           this.instance = instance;
         });
-      } else {
-        router.navigate(['../'], { relativeTo: this.route });
       }
     });
   }

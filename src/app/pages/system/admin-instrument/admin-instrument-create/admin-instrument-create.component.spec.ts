@@ -54,7 +54,6 @@ describe('AdminInstrumentCreateComponent', () => {
           ThemeModule.forRoot().providers,
           { provide: AuthService, useClass: AuthServiceTesting },
           EnvService,
-          { provide: AuthService, useClass: AuthServiceTesting },
           { provide: NbToastrService, useClass: ToastrServiceTesting },
           { provide: Location, useValue: locationStub}
       ]
