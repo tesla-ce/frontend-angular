@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { InstitutionSendComponent } from './institution-send.component';
 
@@ -9,6 +10,9 @@ describe('InstitutionSendComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [InstitutionSendComponent],
+      imports: [
+        RouterTestingModule,
+      ]
     })
       .compileComponents();
   }));

@@ -3,7 +3,7 @@
         <div *ngFor="let field of data | keyvalue: originalOrder" class="col-sm-6">
             <div class="form-group" [ngSwitch]="field.value.inputType" style="margin-bottom: 0.75rem;">
 
-                <label [for]="field.value.inputName" class="label">{{field.value.label || field.key}}</label>
+                <label [for]="field.value.inputName" class="label">{{field.value.label | translate}}</label>
 
                 <!-- case check box -->
                 <br><nb-checkbox *ngSwitchCase="'check-box'" [formControl]="formControls[field.key]" [formControlName]="field.key"></nb-checkbox>
@@ -63,7 +63,7 @@
                     [required]="field.value.required ? !field.value.disabled :  false" [status]="formErrors[field.key]?'danger':'basic'">
 
                 <!-- errors -->
-                <errors class="text-danger">{{formErrors[field.key]?formErrors[field.key]:''}}</errors>
+                <div class="text-danger">{{formErrors[field.key]?formErrors[field.key]:''}}</div>
                 <div *ngIf="updateForm.controls[field.key].invalid && 
                 updateForm.controls[field.key].errors && 
                 (updateForm.controls[field.key].dirty || updateForm.controls[field.key].touched)">
@@ -86,7 +86,4 @@
         <div class="buttons">
         <button *ngIf="!loading" nbButton type="submit" [disabled]="!updateForm.valid">{{ 'ACTIONS.SUBMIT' | translate }}</button>
     </div>
-    <p>
-        <!-- {{ updateForm.status }} -->
-    </p>
 </form>

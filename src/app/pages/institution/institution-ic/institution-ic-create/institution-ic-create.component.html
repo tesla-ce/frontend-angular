@@ -13,7 +13,6 @@
     {{'CRUD.CREATE' | translate }} {{'IC.IC' | translate }}
   </nb-card-header>
   <nb-card-body class="example-items-rows">
-      <!-- <ngx-create (save)="onSave($event)" [fields]="fields" [errors]="errors"></ngx-create>         -->
       <ngx-create (save)="onSave($event)" [fields]="fields" [validator]="validator" [errors]="errors"></ngx-create>
   </nb-card-body>
 </nb-card>

@@ -2,6 +2,7 @@ import { DatePipe, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { AuthService } from '../../../../../@core/auth/auth.service';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
@@ -11,7 +12,6 @@ import { dateFormat } from '../../../../../@core/utils/utils';
 import { ListCellActionsComponent } from '../../../../../crud/list/list-cell-actions.component';
 import { ListCellDisabledInstrumentsComponent } from '../../institution-send-category/institution-send-category-list/list-cell-disabled-instruments.component';
 import { ListCellEnabledOptionsComponent } from '../../institution-send-category/institution-send-category-list/list-cell-enabled-options.component';
-import { InstitutionSendUserConfig } from '../institution-send-user.config';
 import { InstitutionSendUserCategoryAddComponent } from './institution-send-user-category-add.component';
 import { InstitutionSendUserCategoryEditComponent } from './institution-send-user-category-edit.component';
 
@@ -27,7 +27,6 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
   public learner: any;
   public fields = null;
   public errors = new Subject();
-  public paths = InstitutionSendUserConfig.paths;
   public user: InstitutionUser;
   public userSendCategories: any[];
   public selectedCategory: any = null;
@@ -52,6 +51,7 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
     private apiCourseService: ApiCourseService,
     private authService: AuthService,
     private location: Location,
+    private translate: TranslateService,
     private datePipe: DatePipe,
     private dialog: NbDialogService,
     private toastrService: NbToastrService) {
@@ -90,7 +90,7 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
                 },
                 columns: {
                   actions: {
-                    title: 'Actions',
+                    title: this.translate.instant('ACTIONS.ACTIONS'),
                     type: 'custom',
                     sort: false,
                     filter: false,
@@ -121,20 +121,20 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
                     },
                   },
                   category: {
-                    title: 'Category Id',
+                    title: this.translate.instant('ENTITIES.NAMES.SEND_CATEGORY') + ' ' + this.translate.instant('ENTITIES.SEND_CATEGORY.ID'),
                   },
                   description: {
-                    title: 'Description',
+                    title: this.translate.instant('ENTITIES.SEND_CATEGORY.DESCRIPTION'),
                   },
                   enabled_options: {
-                    title: 'Enabled options',
+                    title: this.translate.instant('ENTITIES.SEND_CATEGORY.ENABLED_OPTIONS'),
                     type: 'custom',
                     sort: false,
                     filter: false,
                     renderComponent: ListCellEnabledOptionsComponent,
                   },
                   disabled_instruments: {
-                    title: 'Disabled Instruments',
+                    title: this.translate.instant('ENTITIES.SEND_CATEGORY.DISABLED_INSTRUMENTS'),
                     type: 'custom',
                     sort: false,
                     filter: false,
@@ -144,7 +144,7 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
                     renderComponent: ListCellDisabledInstrumentsComponent,
                   },
                   expires_at: {
-                    title: 'Expiration date',
+                    title: this.translate.instant('ENTITIES.SEND_CATEGORY.EXPIRATION_DATE'),
                     valuePrepareFunction: value => {
                       return this.datePipe.transform(value, dateFormat);
                     },

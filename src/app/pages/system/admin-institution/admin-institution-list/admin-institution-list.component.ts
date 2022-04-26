@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { TranslateService } from '@ngx-translate/core';
 import { ApiInstitutionService } from '../../../../@core/data/api-institution.service';
 import { ListCellActionsComponent } from '../../../../crud/list/list-cell-actions.component';
 import { ListComponent } from '../../../../crud/list/list.component';
@@ -17,13 +18,14 @@ export class AdminInstitutionListComponent implements OnInit {
   constructor(
     private apiInstitutionService: ApiInstitutionService,
     private toastrService: NbToastrService,
+    private translate: TranslateService,
   ) { }
 
   ngOnInit(): void {
     this.settings = {
       columns: {
         actions: {
-          title: 'Actions',
+          title: this.translate.instant('ACTIONS.ACTIONS'),
           type: 'custom',
           sort: false,
           filter: false,
@@ -35,13 +37,13 @@ export class AdminInstitutionListComponent implements OnInit {
           },
         },
         id: {
-          title: 'ID',
+          title: this.translate.instant('ENTITIES.INSTITUTION.ID'),
         },
         name: {
-          title: 'Name',
+          title: this.translate.instant('ENTITIES.INSTITUTION.NAME'),
         },
         acronym: {
-          title: 'Acronym',
+          title: this.translate.instant('ENTITIES.INSTITUTION.ACRONYM'),
         },
       },
       actions: {

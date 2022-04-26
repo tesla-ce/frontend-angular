@@ -1,25 +1,42 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NbAuthModule } from '@nebular/auth';
+import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from '../../../@core/auth/auth.service';
+import { AuthServiceTesting } from '../../../@core/auth/auth.service.mock';
+import { EnvService } from '../../../@core/env/env.service';
 
-// import { InstitutionIcShowComponent } from './institution-ic-show.component';
+import { CourseActivityComponent } from './course-activity.component';
 
-// describe('InstitutionIcShowComponent', () => {
-//   let component: InstitutionIcShowComponent;
-//   let fixture: ComponentFixture<InstitutionIcShowComponent>;
+describe('CourseActivityComponent', () => {
+  let component: CourseActivityComponent;
+  let fixture: ComponentFixture<CourseActivityComponent>;
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ InstitutionIcShowComponent ]
-//     })
-//     .compileComponents();
-//   }));
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ CourseActivityComponent ],
+      imports: [ 
+          RouterTestingModule,
+          TranslateModule.forRoot(),
+          NbAuthModule.forRoot(),
+          HttpClientTestingModule,
+      ],
+      providers: [ 
+        { provide: AuthService, useClass: AuthServiceTesting },
+          EnvService
+      ],
+    })
+    .compileComponents();
+  }));
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(InstitutionIcShowComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(CourseActivityComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

@@ -11,7 +11,7 @@ export const InstitutionSendCategoryConfig = {
       editable: true,
       key: 'description',
       dataType: 'string',
-      label: 'Description',
+      label: 'ENTITIES.SEND_CATEGORY.DESCRIPTION',
       inputType: 'text',
       inputName: 'description-input-name',
       formControlName: 'description-form-control-name',
@@ -24,7 +24,7 @@ export const InstitutionSendCategoryConfig = {
       editable: true,
       key: 'enabled_options',
       dataType: 'string',
-      label: 'Enabled Options',
+      label: 'ENTITIES.SEND_CATEGORY.ENABLED_OPTIONS',
       inputType: 'select-multiple',
       options: [
         {
@@ -51,7 +51,7 @@ export const InstitutionSendCategoryConfig = {
       editable: true,
       key: 'disabled_instruments',
       dataType: 'string',
-      label: 'Disabled instruments',
+      label: 'ENTITIES.SEND_CATEGORY.DISABLED_INSTRUMENTS',
       inputType: 'select-multiple',
       options: [],
       inputName: 'enabled-options-input-name',

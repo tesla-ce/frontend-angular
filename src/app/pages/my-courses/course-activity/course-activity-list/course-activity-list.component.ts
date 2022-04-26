@@ -50,7 +50,7 @@ export class CourseActivityListComponent implements OnInit {
             search: false,
             columns: {
               actions: {
-                title: 'Actions',
+                title: this.translate.instant('ACTIONS.ACTIONS'),
                 type: 'custom',
                 sort: false,
                 filter: false,
@@ -75,19 +75,19 @@ export class CourseActivityListComponent implements OnInit {
                 },
               },
               name: {
-                title: 'Name',
+                title: this.translate.instant('ENTITIES.ACTIVITY.NAME'),
               },
               vle_activity_type: {
-                title: 'Type',
+                title: this.translate.instant('ENTITIES.ACTIVITY.TYPE'),
               },
               start: {
-                title: 'Start',
+                title: this.translate.instant('ENTITIES.ACTIVITY.START'),
                 valuePrepareFunction: value => {
                   return this.datePipe.transform(value, dateFormat);
                 },
               },
               end: {
-                title: 'End',
+                title: this.translate.instant('ENTITIES.ACTIVITY.END'),
                 valuePrepareFunction: value => {
                   return this.datePipe.transform(value, dateFormat);
                 },

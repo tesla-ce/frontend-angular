@@ -1,7 +1,6 @@
 import { KeyValue } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output, Pipe, PipeTransform } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-read',
@@ -23,15 +22,9 @@ export class ReadComponent implements OnInit {
   loading = true;
   data: any;
 
-  constructor(private router: Router) { }
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
     return 0;
-  }
-
-  goToRead(): void {
-    this.router.navigate([this.paths.readRedirect + this.instance.id]);
   }
 
   private markFormGroupTouched(formGroup: FormGroup) {
@@ -63,17 +56,4 @@ export class ReadComponent implements OnInit {
     this.readForm.disable();
   }
 
-  onSubmit() {
-    this.save.emit(this.readForm.value);
-  }
-
-}
-
-
-@Pipe({ name: 'keys' })
-export class KeysPipe implements PipeTransform {
-  transform(value): any {
-    if (!value) return null;
-    return Object.keys(value);
-  }
 }

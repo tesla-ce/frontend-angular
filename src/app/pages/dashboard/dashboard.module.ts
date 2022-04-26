@@ -4,7 +4,6 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { SideMenuModule } from '../../side-menu/side-menu.module';
-import { DashboardDefaultComponent } from './dashboard-default/dashboard-default.component';
 import {NbButtonModule, NbCardModule, NbListModule, NbIconModule, NbCalendarModule, NbTreeGridModule, NbInputModule} from '@nebular/theme';
 import { SharedModule } from '../../shared/shared.module';
 import { JsonFormsModule } from '@jsonforms/angular';
@@ -44,7 +43,6 @@ import {DayCellComponent} from './dashboard-widgets/widgets/calendar/day-cell/da
   ],
   declarations: [
     DashboardComponent,
-    DashboardDefaultComponent,
     DashboardWidgetsComponent,
     BaseWidgetComponent,
     CoursesWidgetComponent,

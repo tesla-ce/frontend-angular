@@ -20,7 +20,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ListModule } from '../../../../crud/list/list.module';
 import { CreateModule } from '../../../../crud/create/create.module';
-import { InstitutionSendUserCreateComponent } from './institution-send-user-create/institution-send-user-create.component';
 import { InstitutionSendUserUpdateComponent } from './institution-send-user-update/institution-send-user-update.component';
 import { InstitutionSendUserReadComponent } from './institution-send-user-read/institution-send-user-read.component';
 import { InstitutionSendUserListComponent } from './institution-send-user-list/institution-send-user-list.component';
@@ -56,7 +55,6 @@ import { SharedModule } from '../../../../shared/shared.module';
   ],
   declarations: [
     InstitutionSendUserComponent,
-    InstitutionSendUserCreateComponent,
     InstitutionSendUserUpdateComponent,
     InstitutionSendUserReadComponent,
     InstitutionSendUserListComponent,

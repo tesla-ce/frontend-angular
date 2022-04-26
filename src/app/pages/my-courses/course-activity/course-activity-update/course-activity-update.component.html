@@ -27,15 +27,15 @@
         <div class="flexbox--direction-column">
             <div class="flexbox--direction-column">
                 <label [for]="fields['description'].inputName" class="label"  [class.text-disabled]="instance.enabled!==true">
-                    {{ fields['description'].label }}
+                    {{ fields['description'].label | translate}}
                 </label>
                 <p  [class.text-disabled]="instance.enabled!==true" [innerHtml]="instance.description"></p>
                 <label [for]="fields['start'].inputName" class="label" [class.text-disabled]="instance.enabled!==true">
-                    {{ fields['start'].label }}
+                    {{ fields['start'].label | translate}}
                 </label>
                 <p [class.text-disabled]="instance.enabled!==true">{{ instance.start | date: dateFormat }}</p>
                 <label [for]="fields['end'].inputName" class="label" [class.text-disabled]="instance.enabled!==true">
-                    {{ fields['end'].label }}
+                    {{ fields['end'].label | translate}}
                 </label>
                 <p [class.text-disabled]="instance.enabled!==true">{{ instance.end | date: dateFormat }}</p>
             </div>
@@ -43,7 +43,7 @@
         <nb-card *ngIf="!loading">
             <nb-card-header class='tesla-card-header'>
                 <div style="flex:1" [class.text-disabled]="instance.enabled!==true">
-                {{'INSTRUMENT.PLURAL' | translate }}
+                {{'INSTRUMENT.INSTRUMENTS' | translate }}
                 </div>
                 <nb-actions>
                     <nb-action>

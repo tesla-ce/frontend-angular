@@ -1,24 +1,28 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-// import { ListComponent } from './list.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AdminInstrumentComponent } from './admin-instrument.component';
 
-// describe('ListComponent', () => {
-//   let component: ListComponent;
-//   let fixture: ComponentFixture<ListComponent>;
+describe('AdminInstrumentComponent', () => {
+  let component: AdminInstrumentComponent;
+  let fixture: ComponentFixture<AdminInstrumentComponent>;
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ ListComponent ],
-//     })
-//     .compileComponents();
-//   }));
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ AdminInstrumentComponent ],
+      imports: [
+        RouterTestingModule,
+      ]
+    })
+    .compileComponents();
+  }));
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(ListComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AdminInstrumentComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

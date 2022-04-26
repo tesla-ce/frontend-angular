@@ -26,7 +26,6 @@ import { CreateModule } from '../../../../crud/create/create.module';
 import { CourseReportComponent } from './course-report.component';
 // import { DataDisplayComponent } from '../course-report/control';
 import { CourseReportListComponent } from './course-report-list/course-report-list.component';
-import { CourseReportUpdateComponent } from './course-report-update/course-report-update.component';
 import { CourseReportReadComponent } from './course-report-read/course-report-read.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { ListCellInstrumentComponent } from './course-report-list/list-cell-instrument.component';
@@ -67,8 +66,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     // DataDisplayComponent,
     CourseReportComponent,
     CourseReportListComponent,
-    CourseReportReadComponent,
-    CourseReportUpdateComponent,
+    CourseReportReadComponent, 
     CourseReportAuditComponent,
     ListCellInstrumentComponent,
     ListCellSumaryComponent,

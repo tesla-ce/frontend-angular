@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'ngx-statistics-default',
@@ -9,11 +8,6 @@ import { Location } from '@angular/common';
 
 export class StatisticsDefaultComponent {
 
-  constructor(
-    private location: Location,
-  ) { }
-
-  back() { this.location.back(); }
 }
 
 

@@ -46,7 +46,7 @@ export class ApiUserService {
   // API: GET /users/:id
   public getUserById( userId: number ): Observable<User> {
     return this.http
-      .get(this.endpointUrl + userId)
+      .get(this.endpointUrl + userId + '/')
       .pipe(
         map(( user: User ) => {
           // console.log(user);
