@@ -58,6 +58,7 @@ describe('CourseActivityListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CourseActivityListComponent);
     component = fixture.componentInstance;
+    component.course = {user_roles:[]};
     fixture.detectChanges();
   });
 
