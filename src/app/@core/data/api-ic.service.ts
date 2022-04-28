@@ -59,7 +59,7 @@ export class ApiIcService {
 
   public getCurrentIc(institutionId: number): Observable<Ic> {
     return this.http
-      .get(`${this.endpointUrl}/institution/${institutionId}/ic/current`)
+      .get(`${this.endpointUrl}/institution/${institutionId}/ic/current/`)
       .pipe(
         map((ic: Ic) => {
           if (ic) return ic;

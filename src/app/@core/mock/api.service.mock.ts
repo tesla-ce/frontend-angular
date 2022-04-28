@@ -1372,6 +1372,116 @@ export class ApiServiceTesting  {
                 ],
                 "documents": []
             };
+            case '/institution/1/ic/current/':
+              return {
+                "id": 1,
+                "institution": {
+                  "id": 1,
+                  "acronym": "default",
+                  "name": "Default Institution",
+                  "external_ic": false,
+                  "mail_domain": null,
+                  "disable_vle_learner_creation": false,
+                  "disable_vle_instructor_creation": false,
+                  "disable_vle_user_creation": false,
+                  "allow_learner_report": false,
+                  "allow_learner_audit": false,
+                  "allow_valid_audit": false,
+                  "allowed_domains": "moodle.dev.tesla-ce.eu",
+                  "created_at": "2021-10-07T10:14:53.717742Z",
+                  "updated_at": "2021-12-30T09:42:24.102241Z"
+                },
+                "version": "1.2.2",
+                "valid_from": "2021-12-08T23:00:00Z",
+                "created_at": "2021-12-10T09:00:42.151322Z",
+                "updated_at": "2021-12-10T09:25:56.866224Z"
+              }
+            case '/institution/1/learner/1/ic/':
+              return {
+                "id": 1,
+                "institution": {
+                    "id": 1,
+                    "acronym": "default",
+                    "name": "Default Institution",
+                    "external_ic": false,
+                    "mail_domain": null,
+                    "disable_vle_learner_creation": false,
+                    "disable_vle_instructor_creation": false,
+                    "disable_vle_user_creation": false,
+                    "allow_learner_report": false,
+                    "allow_learner_audit": false,
+                    "allow_valid_audit": false,
+                    "allowed_domains": "moodle.dev.tesla-ce.eu",
+                    "created_at": "2021-10-07T10:14:53.717742Z",
+                    "updated_at": "2021-12-30T09:42:24.102241Z"
+                },
+                "username": "student100@tesla-ce.eu",
+                "consent": {
+                    "version": "1.2.2",
+                    "status": "VALID"
+                },
+                "consent_accepted": "2022-04-28T08:12:12.988999Z",
+                "consent_rejected": null,
+                "learner_id": "test-f9e-976a-9fdfebf3719f",
+                "last_login": null,
+                "send": {
+                    "is_send": false,
+                    "send": {
+                        "enabled_options": [],
+                        "disabled_instruments": []
+                    }
+                },
+                "email": "student100@tesla-ce.eu",
+                "ic_status": "VALID",
+                "login_allowed": true,
+                "enrolment_status": [
+                    {
+                        "instrument_id": 1,
+                        "percentage__min": 1,
+                        "percentage__max": 1,
+                        "can_analyse__min": true,
+                        "can_analyse__max": true,
+                        "pending": [],
+                        "not_validated": [
+                            {
+                                "provider_id": 4,
+                                "instrument_id": 2,
+                                "count": 2
+                            }
+                        ],
+                        "pending_contributions": 0,
+                        "not_validated_count": 0
+                    },
+                    {
+                        "instrument_id": 2,
+                        "percentage__min": 1,
+                        "percentage__max": 1,
+                        "can_analyse__min": true,
+                        "can_analyse__max": true,
+                        "pending": [],
+                        "not_validated": [
+                            {
+                                "provider_id": 4,
+                                "instrument_id": 2,
+                                "count": 2
+                            }
+                        ],
+                        "pending_contributions": 0,
+                        "not_validated_count": 2
+                    }
+                ],
+                "first_name": "student",
+                "last_name": "100",
+                "locale": "fr",
+                "created_at": "2021-10-14T09:11:39.099438Z",
+                "updated_at": "2022-04-28T08:12:12.989938Z",
+                "uid": "test@tesla-ce.eu",
+                "inst_admin": false,
+                "legal_admin": false,
+                "send_admin": false,
+                "data_admin": false,
+                "joined_at": "2021-10-14T09:11:39.105001Z"
+            };
             default:
                 return {};
         }

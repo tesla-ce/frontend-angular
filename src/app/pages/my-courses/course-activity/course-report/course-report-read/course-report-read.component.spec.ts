@@ -20,7 +20,6 @@ import { ListModule } from '../../../../../crud/list/list.module';
 import { SharedModule } from '../../../../../shared/shared.module';
 import { SideMenuModule } from '../../../../../side-menu/side-menu.module';
 import { CourseReportReadComponent } from './course-report-read.component';
-import { AppModule } from '../../../../../app.module';
 
 describe('CourseReportReadComponent', () => {
   let component: CourseReportReadComponent;
@@ -79,12 +78,10 @@ describe('CourseReportReadComponent', () => {
       ]
     })
     .compileComponents();
-    
+    httpMock = TestBed.get(HttpTestingController);
   }));
 
   beforeEach(() => {
-    const iconLibraries = new NbIconLibraries();
-    iconLibraries.registerFontPack('fa', { packClass: 'fa', iconClassPrefix: 'fa' });
     httpMock = TestBed.get(HttpTestingController);
     fixture = TestBed.createComponent(CourseReportReadComponent);
     component = fixture.componentInstance;
