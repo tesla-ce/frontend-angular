@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ListCellActionsComponent } from '../../../../crud/list/list-cell-actions.component';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -26,18 +26,14 @@ export class CourseActivityListComponent implements OnInit {
     public translate: TranslateService,
     private apiInstitutionService: ApiInstitutionService,
     private location: Location,
-    private router: Router,
     private datePipe: DatePipe,
     private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
       if (params['courseId'] != null) {
         this.courseId = params['courseId'];
-      } else {
-        router.navigate(['../'], { relativeTo: this.route });
       }
     });
   }
-  back() { this.location.back(); }
 
   ngOnInit(): void {
     this.authService.getUser().subscribe((user: InstitutionUser) => {

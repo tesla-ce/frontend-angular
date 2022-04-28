@@ -163,7 +163,7 @@ export class ApiCourseService {
   public putInstrumentActive(
     institutionId: number, courseId: number, activityId: number, instrumentId: number, fields: any): Observable<any> {
     return this.http
-      .put(`${this.endpointUrl}/institution/${institutionId}/course/${courseId}/activity/${activityId}/instrument/${instrumentId}`, fields)
+      .put(`${this.endpointUrl}/institution/${institutionId}/course/${courseId}/activity/${activityId}/instrument/${instrumentId}/`, fields)
       .pipe(
         map((data: any) => {
           return data;

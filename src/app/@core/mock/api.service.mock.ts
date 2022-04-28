@@ -904,11 +904,21 @@ export class ApiServiceTesting  {
                 "results": [
                   {
                     "id": 1,
-                    "name": "test-instrument-1"
+                    "name": "test-instrument-1",
+                    "acronym": "tst-1",
+                    "options_schema": "{}",
                   },
                   {
-                    "id": 1,
-                    "name": "test-instrument-2"
+                    "id": 2,
+                    "name": "test-instrument-2",
+                    "acronym": "tst-2",
+                    "options_schema": "{}",
+                  },
+                  {
+                    "id": 3,
+                    "name": "test-instrument-3",
+                    "acronym": "tst-3",
+                    "options_schema": "{}",
                   },
                 ],
               };
@@ -1137,6 +1147,230 @@ export class ApiServiceTesting  {
                     "DATA"
                   ],
                   "locale": "en"
+            };
+            case '/institution/1/course/1/activity/1/instrument/1/':
+              return {
+                "id": 1,
+                "name": "test-instrument-1"
+            };
+            case '/institution/1/course/1/activity/1/': 
+              return {
+                name: 'test',
+            };
+            case '/institution/1/course/1/activity/1/instrument/':
+              return {
+                "count": 1,
+                "next": null,
+                "previous": null,
+                "results": [{
+                  "id": 1,
+                  "name": "test-instrument-1",
+                  "alternative_to" : null, 
+                  "acronym": "tst-1",
+                  "options_schema": "{}",
+                  "instrument": {
+                    "id": 1,
+                    "name": "test-instrument-1",
+                    "acronym": "tst-1",
+                    "options_schema": "{}",
+                  },
+                },
+                {
+                  "id": 2,
+                  "name": "test-instrument-2",
+                  "alternative_to" :1, 
+                  "acronym": "tst-2",
+                  "options_schema": "{}",
+                  "instrument": {
+                    "id": 2,
+                    "name": "test-instrument-2",
+                    "acronym": "tst-2",
+                    "options_schema": "{}",
+                  },
+                },
+                {
+                  "id": 3,
+                  "name": "test-instrument-3",
+                  "alternative_to" :1, 
+                  "acronym": "tst-3",
+                  "options_schema": "{}",
+                  "instrument": {
+                    "id": 3,
+                    "name": "test-instrument-3",
+                    "acronym": "tst-3",
+                    "options_schema": "{}",
+                  }
+                }]
+            };
+            case '/institution/1/course/1/':
+              return {
+                "id": 1,
+                "vle": {
+                    "id": 1,
+                    "type": "MOODLE",
+                    "institution": {
+                        "id": 1,
+                        "acronym": "default",
+                        "name": "Default Institution",
+                        "external_ic": false,
+                        "mail_domain": null,
+                        "disable_vle_learner_creation": false,
+                        "disable_vle_instructor_creation": false,
+                        "disable_vle_user_creation": false,
+                        "allow_learner_report": false,
+                        "allow_learner_audit": false,
+                        "allow_valid_audit": false,
+                        "allowed_domains": "moodle.dev.tesla-ce.eu",
+                        "created_at": "2021-10-07T10:14:53.717742Z",
+                        "updated_at": "2021-12-30T09:42:24.102241Z"
+                    },
+                    "name": "default_moodle",
+                    "url": "https://moodle.test.tesla-ce.eu",
+                    "client_id": null
+                },
+                "vle_course_id": "2",
+                "code": "test dev course",
+                "description": "test dev course",
+                "start": "2021-10-14T23:00:00Z",
+                "end": "2022-10-14T23:00:00Z",
+                "user_roles": [],
+                "enabled": true,
+                "created_at": "2021-10-14T09:10:35.571228Z",
+                "updated_at": "2022-01-13T16:21:03.269697Z"
+            };
+            case '/institution/1/course/1/activity/1/report/1/': 
+              return {
+                "id": 2,
+                "learner": {
+                  "id": 4,
+                  "uid": "student100@tesla-ce.eu",
+                  "first_name": "student",
+                  "last_name": "100",
+                  "email": "student100@tesla-ce.eu",
+                  "learner_id": "f8cf6b21-a5ba-4f9e-976a-9fdfebf3719f"
+                },
+                "detail": [
+                  {
+                    "instrument": "Keystroke Dynamics Recognition",
+                    "enrolment": 100,
+                    "confidence": 100,
+                    "result": 40,
+                    "identity_level": 2,
+                    "instrument_acronym": "ks",
+                    "content_level": 1,
+                    "integrity_level": 1,
+                    "learner_histogram": [
+                      2,
+                      0,
+                      2,
+                      0,
+                      2,
+                      0,
+                      0,
+                      0,
+                      0,
+                      2
+                    ],
+                    "activity_histogram": [
+                      2,
+                      0,
+                      2,
+                      0,
+                      2,
+                      0,
+                      0,
+                      0,
+                      0,
+                      2
+                    ],
+                    "instrument_id": 2,
+                    "instrument_polarity": 1,
+                    "result_bean": 4,
+                    "thresholds": {
+                      "warning_below": 0.6,
+                      "alert_below": 0.3
+                    },
+                    "prob_learner": 0.25,
+                    "prob_context": 0.25,
+                    "h_prob_learner": 0.25,
+                    "h_prob_context": 0.25,
+                    "facts": {
+                      "positive": [
+                        "POSITIVE_CONFIDENCE_HIGH",
+                        "POSITIVE_LEARNER_RESULT_ABOVE_THRESHOLD",
+                        "POSITIVE_LEARNER_RESULT_GOOD_INSTRUMENT",
+                        "POSITIVE_LEARNER_RESULT_GOOD_ACTIVITY"
+                      ],
+                      "negative": []
+                    }
+                  }
+                ],
+                "identity_level": 2,
+                "content_level": 1,
+                "integrity_level": 1,
+                "data": "https://test.mock.dev.tesla-ce.eu/report.json"
+              }
+            case 'https://test.mock.dev.tesla-ce.eu/report.json':
+              return {
+                "sessions": [
+                    {
+                        "id": 3,
+                        "pending_requests": 0,
+                        "valid_requests": 2,
+                        "processed_requests": 2,
+                        "total_requests": 2,
+                        "created_at": "2021-12-02T16:24:38.560743+00:00",
+                        "closed_at": null,
+                        "identity_level": 0,
+                        "integrity_level": 0,
+                        "content_level": 0,
+                        "data": {
+                            "instruments": [
+                                2
+                            ],
+                            "alerts": "[]",
+                            "data": {
+                                "2": {
+                                    "total": 2,
+                                    "valid": 2,
+                                    "confidence": 1,
+                                    "result": 0.6999999999999997,
+                                    "code": 2,
+                                    "requests": "[[\"2021-12-02T16:24:37.740Z\", 0.4599999999999995], [\"2021-12-02T16:25:27.365Z\", 0.94]]"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": 4,
+                        "pending_requests": 0,
+                        "valid_requests": 2,
+                        "processed_requests": 2,
+                        "total_requests": 2,
+                        "created_at": "2021-12-02T16:28:06.522209+00:00",
+                        "closed_at": null,
+                        "identity_level": 0,
+                        "integrity_level": 0,
+                        "content_level": 0,
+                        "data": {
+                            "instruments": [
+                                2
+                            ],
+                            "alerts": "[]",
+                            "data": {
+                                "2": {
+                                    "total": 2,
+                                    "valid": 2,
+                                    "confidence": 1,
+                                    "result": 0.11000000000000006,
+                                    "code": 2,
+                                    "requests": "[[\"2021-12-02T16:28:05.782Z\", 0.0], [\"2021-12-02T16:28:25.562Z\", 0.2200000000000001]]"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "documents": []
             };
             default:
                 return {};

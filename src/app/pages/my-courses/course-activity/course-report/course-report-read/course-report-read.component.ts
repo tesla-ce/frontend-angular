@@ -5,13 +5,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { formatDate, Location } from '@angular/common';
 import { ListCellInstrumentComponent } from '../course-report-list/list-cell-instrument.component';
 import { ListSubHeaderComponent } from '../course-report-list/list-sub-header-instrument.component';
-import { ApiCourseService } from '../../../../../@core/data/api-course.service';
 import { ListCellSumaryComponent } from '../course-report-list/list-cell-sumary.component';
 import { Institution, InstitutionUser } from '../../../../../@core/models/user';
 import { ApiReportService } from '../../../../../@core/data/api-report.service';
 import { HttpClient } from '@angular/common/http';
 import { MATERIAL_TESLA_THEME } from '../../../../../@theme/styles/material/theme.material-tesla';
 import { ApiInstitutionService } from '../../../../../@core/data/api-institution.service';
+import { NbIconLibraries } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-course-report-read',
@@ -64,19 +64,21 @@ export class CourseReportReadComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private apiCourseService: ApiCourseService,
     private apiReportService: ApiReportService,
     private apiInstitutionService: ApiInstitutionService,
     public translate: TranslateService,
     private http: HttpClient,
     private location: Location,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    iconLibraries: NbIconLibraries,
+  ) {
     this.route.params.subscribe(params => {
       this.courseId = params['courseId'];
       this.activityId = params['activityId'];
       this.reportId = params['reportId'];
     });
+    iconLibraries.registerFontPack('fa', { packClass: 'fa', iconClassPrefix: 'fa' });
   }
 
   back() { this.location.back(); }
