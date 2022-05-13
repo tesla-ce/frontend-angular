@@ -59,7 +59,6 @@ export class ApiInstitutionService {
     return this.http.post(`${this.apiUrl}/admin/institution/`, fields)
     .pipe(
       map(( institution: Institution ) => {
-        // console.log(institution);
         if ( institution ) return institution;
         else throw institution;
       }),
@@ -73,7 +72,6 @@ export class ApiInstitutionService {
       .get(this.endpointUrl + institutionId + '/')
       .pipe(
         map(( institution: Institution ) => {
-          // console.log(institution);
           if ( institution ) return institution;
           else throw institution;
         }),
@@ -151,7 +149,6 @@ export class ApiInstitutionService {
     return this.http.post(this.endpointUrl + institutionId + '/send/' , fields)
     .pipe(
       map(( sendCategory: any ) => {
-        // console.log(sendCategory);
         if ( sendCategory ) return sendCategory;
         else throw sendCategory;
       }),

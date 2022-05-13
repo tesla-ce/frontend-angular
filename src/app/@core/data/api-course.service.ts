@@ -46,7 +46,6 @@ export class ApiCourseService {
       .get(`${this.endpointUrl}/institution/${institutionId}/course/${courseId}/`)
       .pipe(
         map((course: Course) => {
-          // console.log(course);
           if (course) return course;
           else throw course;
         }),
@@ -104,7 +103,6 @@ export class ApiCourseService {
       .post(`${this.endpointUrl}/institution/${institutionId}/course/${courseId}/activity/${activityId}/instrument/`, fields)
       .pipe(
         map((data: any) => {
-          // console.log('Create Document Response', data);
           return data;
         }),
         catchError(this.handleError));

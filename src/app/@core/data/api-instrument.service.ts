@@ -100,7 +100,6 @@ export class ApiInstrumentService {
       .get(`${this.endpointUrl}instrument/${instrumentId}/provider/${providerId}/`)
       .pipe(
         map((course: any) => {
-          // console.log(course);
           if (course) return course;
           else throw course;
         }),

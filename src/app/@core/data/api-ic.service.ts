@@ -35,7 +35,6 @@ export class ApiIcService {
       .post(`${this.endpointUrl}/institution/${institutionId}/ic/`, fields)
       .pipe(
         map((ic: Ic) => {
-          // console.log(ic);
           if (ic) return ic;
           else throw ic;
         }),
@@ -49,7 +48,6 @@ export class ApiIcService {
       .get(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}/`)
       .pipe(
         map((ic: Ic) => {
-          // console.log(ic);
           if (ic) return ic;
           else throw ic;
         }),
@@ -93,7 +91,6 @@ export class ApiIcService {
       .post(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}/document/`, formData)
       .pipe(
         map((data: any) => {
-          // console.log('Create Document Response', data);
           if (data.status) {
             return true;
           } else {

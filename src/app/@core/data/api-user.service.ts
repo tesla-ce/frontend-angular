@@ -35,7 +35,6 @@ export class ApiUserService {
     return this.http.post(this.endpointUrl, fields)
     .pipe(
       map(( user: User ) => {
-        // console.log(user);
         if ( user ) return user;
         else throw user;
       }),
@@ -49,7 +48,6 @@ export class ApiUserService {
       .get(this.endpointUrl + userId + '/')
       .pipe(
         map(( user: User ) => {
-          // console.log(user);
           if ( user ) return user;
           else throw user;
         }),
@@ -113,7 +111,6 @@ export class ApiUserService {
     return this.http.post(`${this.apiUrl}/institution/${institutionId}/user/`, fields)
     .pipe(
       map(( user: User ) => {
-        // console.log(user);
         if ( user ) return user;
         else throw user;
       }),
@@ -141,7 +138,6 @@ export class ApiUserService {
       .get(`${this.apiUrl}/institution/${institutionId}/user/${userId}/`)
       .pipe(
         map(( user: User ) => {
-          // console.log(user);
           if ( user ) return user;
           else throw user;
         }),

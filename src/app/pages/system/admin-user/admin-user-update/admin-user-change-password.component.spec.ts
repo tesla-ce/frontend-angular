@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NbCardModule } from '@nebular/theme';
 import { TranslateModule } from '@ngx-translate/core';
+import { ThemeModule } from '../../../../@theme/theme.module';
+import { CreateModule } from '../../../../crud/create/create.module';
 import { AdminUserChangePasswordComponent } from './admin-user-change-password.component';
 
 describe('AdminUserChangePasswordComponent', () => {
@@ -12,7 +15,12 @@ describe('AdminUserChangePasswordComponent', () => {
       declarations: [ AdminUserChangePasswordComponent ],
       imports: [
           RouterTestingModule,
+          NbCardModule,
+          CreateModule,
           TranslateModule.forRoot(),
+      ],
+      providers: [
+        ThemeModule.forRoot().providers,
       ]
     })
     .compileComponents();
