@@ -85,32 +85,83 @@ export class BasicComponent implements OnInit {
   }
 
   changePassword(data) {
-    this.apiUserService.updateUserProfile(data).subscribe((user: InstitutionUser) => {
-      this.toastrService.show(
-        'User Updated',
-        user.username,
-        {
-          position: NbGlobalPhysicalPosition.TOP_RIGHT,
-          status: 'success',
-          icon: 'save-outline',
-          duration: 2000,
-        });
-    }, error => {
-      this.errors.next(error.error);
-      this.toastrService.show(
-        'Error saving',
-        'user',
-        {
-          position: NbGlobalPhysicalPosition.TOP_RIGHT,
-          status: 'danger',
-          icon: 'save-outline',
-          duration: 2000,
-        });
-    });
+    if (this.user.roles.indexOf('GLOBAL_ADMIN') !== -1) {
+      this.apiUserService.updateUser(this.user.id, data).subscribe((user: InstitutionUser) => {
+        this.toastrService.show(
+          'User Updated',
+          user.username,
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'success',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+      }, error => {
+        this.errors.next(error.error);
+        this.toastrService.show(
+          'Error saving',
+          'user',
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'danger',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+      });
+    } else {
+      this.apiUserService.updateUserProfile(this.user.id, this.user.institution.id, data).subscribe((user: InstitutionUser) => {
+        this.toastrService.show(
+          'User Updated',
+          user.username,
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'success',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+      }, error => {
+        this.errors.next(error.error);
+        this.toastrService.show(
+          'Error saving',
+          'user',
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'danger',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+      });
+    }
   }
 
   changeLanguage(): void {
-    this.apiUserService.updateUserProfile({
+    if (this.user.roles.indexOf('GLOBAL_ADMIN') !== -1) {
+      this.apiUserService.updateUser(this.user.id, {
+        locale: this.selectedLanguage
+      }).subscribe((user: InstitutionUser) => {
+        this.toastrService.show(
+          'User Updated',
+          user.username,
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'success',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+      }, error => {
+        this.errors.next(error.error);
+        this.toastrService.show(
+          'Error saving',
+          'user',
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'danger',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+      });
+    } else {
+      this.apiUserService.updateUserProfile(this.user.id, this.user.institution.id, {
         locale: this.selectedLanguage
       }).subscribe((user: InstitutionUser) => {
       this.toastrService.show(
@@ -137,5 +188,6 @@ export class BasicComponent implements OnInit {
           duration: 2000,
         });
     });
+    }
   }
 }

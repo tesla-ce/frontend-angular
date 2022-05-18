@@ -71,9 +71,9 @@ export class ApiUserService {
   }
 
   // API: PATCH /users/:id
-  public updateUserProfile( fields ): Observable<any> {
+  public updateUserProfile(userId: number, institutionId: number,  fields ): Observable<any> {
     return this.http
-     .post(`${this.apiUrl}/auth/profile/`, fields).pipe(
+     .post(`${this.apiUrl}/institution/${institutionId}/user/${userId}/profile/`, fields).pipe(
      map((data: any) => {
        if (data.status) {
          return true;
