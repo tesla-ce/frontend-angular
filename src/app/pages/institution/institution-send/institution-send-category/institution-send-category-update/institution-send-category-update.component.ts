@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { AuthService } from '../../../../../@core/auth/auth.service';
@@ -27,7 +27,6 @@ export class InstitutionSendCategoryUpdateComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private apiInstitutionService: ApiInstitutionService,
     private apiCourseService: ApiCourseService,
     private authService: AuthService,
@@ -55,8 +54,6 @@ export class InstitutionSendCategoryUpdateComponent implements OnInit {
               this.instance.enabled_options = instance.data.enabled_options;
               this.loading = false;
             });
-          } else {
-            this.router.navigate(['../'], { relativeTo: this.route });
           }
         }
       });

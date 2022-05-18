@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { ApiUserService } from '../../../../@core/data/api-user.service';
 import { EnvService } from '../../../../@core/env/env.service';
@@ -20,7 +20,6 @@ export class InstitutionUserReadComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private envService: EnvService,
     private location: Location,
     private authService: AuthService,
@@ -41,8 +40,6 @@ export class InstitutionUserReadComponent implements OnInit {
               this.instance.data_admin = instance.institution.roles.indexOf('DATA') !== -1;
             }});
           }});
-      } else {
-        router.navigate(['../'], { relativeTo: this.route });
       }
     });
   }

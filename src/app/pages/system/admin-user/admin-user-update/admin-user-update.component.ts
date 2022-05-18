@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NbDialogService, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { ApiUserService } from '../../../../@core/data/api-user.service';
@@ -24,11 +24,9 @@ export class AdminUserUpdateComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private dialog: NbDialogService,
     private location: Location,
     private apiUserService: ApiUserService,
-    // private envService: EnvService,
     private toastrService: NbToastrService) {
     this.route.params.subscribe(params => {
       if (params['id'] != null) {
@@ -45,8 +43,6 @@ export class AdminUserUpdateComponent {
             this.instance.data_admin = instance.institution.roles.indexOf('DATA') !== -1;
           }
         });
-      } else {
-        router.navigate(['../'], { relativeTo: this.route });
       }
     });
   }

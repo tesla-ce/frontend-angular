@@ -85,8 +85,6 @@ export class SettingsComponent implements OnInit {
           });
       });
   }
-
-  back() { this.location.back(); }
 }
 
 

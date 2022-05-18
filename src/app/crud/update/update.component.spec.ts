@@ -47,16 +47,36 @@ describe('UpdateComponent', () => {
           formControlName: 'username-form-control-name',
           placeholder: 'joedoe',
           required: true,
-        }
+        },
+        email: {
+          creable: true,
+          showable: true,
+          editable: true,
+          key: 'email',
+          dataType: 'string',
+          label: 'ENTITIES.USER.EMAIL',
+          inputType: 'email',
+          inputName: 'email-input-name',
+          formControlName: 'email-form-control-name',
+          placeholder: 'joedoe@example.com',
+          required: true,
+        },
     };
     component.instance = {
         username: 'Joe Doe',
+        email: 'joe@doe.com',
     }
     component.errors = new Subject();
     fixture.detectChanges();
   });
 
   it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should submit', () => {
+    fixture.detectChanges();
+    component.onSubmit();
     expect(component).toBeTruthy();
   });
 });

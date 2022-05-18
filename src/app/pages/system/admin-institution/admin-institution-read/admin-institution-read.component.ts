@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ApiInstitutionService } from '../../../../@core/data/api-institution.service';
 import { Institution } from '../../../../@core/models/user';
 import { AdminInstitutionConfig } from '../admin-institution.config';
@@ -18,7 +18,6 @@ export class AdminInstitutionReadComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private location: Location,
     private apiInstitutionService: ApiInstitutionService) {
     this.route.params.subscribe(params => {
@@ -27,8 +26,6 @@ export class AdminInstitutionReadComponent {
         apiInstitutionService.getInstitutionById(this.id).subscribe(instance => {
           this.instance = instance;
         });
-      } else {
-        router.navigate(['../'], { relativeTo: this.route });
       }
     });
   }

@@ -1,6 +1,6 @@
 import { DatePipe, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NbDialogService, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
@@ -46,7 +46,6 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private apiInstitutionService: ApiInstitutionService,
     private apiCourseService: ApiCourseService,
     private authService: AuthService,
@@ -59,8 +58,6 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
       if (params['id'] != null) {
         this.id = params['id'];
         this.instance = null;
-      } else {
-        router.navigate(['../'], { relativeTo: this.route });
       }
     });
   }
@@ -171,7 +168,6 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
         userId: this.id,
       }})
     .onClose.subscribe(() => {
-      // if (userSendCategory) this.userSendCategories = [userSendCategory, ...this.userSendCategories];
       this.ngOnInit();
     });
   }
@@ -184,7 +180,6 @@ export class InstitutionSendUserUpdateComponent implements OnInit {
         sendUserCategoryId: event.id,
       }})
     .onClose.subscribe(() => {
-      // if (userSendCategory) this.userSendCategories = [userSendCategory, ...this.userSendCategories];
       this.ngOnInit();
     });
   }

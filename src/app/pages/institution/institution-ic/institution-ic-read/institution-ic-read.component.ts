@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../../@core/auth/auth.service';
 import { ApiIcService } from '../../../../@core/data/api-ic.service';
 import { Ic } from '../../../../@core/models/ic';
@@ -25,18 +25,12 @@ export class InstitutionIcReadComponent implements OnInit {
     private apiIcService: ApiIcService,
     private authService: AuthService,
     private location: Location,
-    private router: Router) {
+  ) {
     this.route.params.subscribe(params => {
       if (params['id'] != null) {
         this.id = params['id'];
-      } else {
-        router.navigate(['../'], { relativeTo: this.route });
       }
     });
-  }
-
-  goToEdit(): void {
-    this.router.navigate(['/institution/institution-ic/' + this.instance.id + '/update']);
   }
 
   back() { this.location.back(); }

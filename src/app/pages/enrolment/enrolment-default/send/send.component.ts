@@ -115,10 +115,7 @@ export class SendComponent implements OnInit, AfterViewInit {
 
     this.connection.newUpdateStats.subscribe( (data: Buffer) => {
       if (data != null) {
-        // console.log('update stats of buffer');
-        // console.log(data);
         this.notifications = data.notifications;
-        // console.log(this.notifications);
 
         this.progressValue = Math.round(Math.min(data.correct, this.instrumentNumSamples[this.instrumentId]) /
           this.instrumentNumSamples[this.instrumentId] * 100);
@@ -133,7 +130,6 @@ export class SendComponent implements OnInit, AfterViewInit {
         }
 
         if (this.instrumentNumSamples[this.instrumentId] - this.totalQueued - data.failed < 0) {
-          // console.log('continue capturing');
           // this.progressColor = 'danger';
           this.sensorsService.start();
           this.buttonLabel = 'Recording...';
@@ -209,7 +205,6 @@ export class SendComponent implements OnInit, AfterViewInit {
     this.connection.setConfig(conf);
 
     if (this.ready === true) {
-      // console.log('configuring this.video');
       switch ( this.instrumentId ) {
         case 1:
           // this.sensorsService.setAudio(this.audio);

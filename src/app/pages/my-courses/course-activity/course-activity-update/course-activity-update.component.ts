@@ -62,6 +62,7 @@ export class CourseActivityUpdateComponent implements OnInit {
       if (user) {
         this.institutionId = user.institution.id;
         this.apiCourseService.getCourseActivity(this.institutionId, this.courseId, this.activityId).subscribe(instance => {
+          this.instance = instance;
           this.apiCourseService.getActivityInstrument(this.institutionId, this.courseId, this.activityId).subscribe(activityInstruments => {
             this.activityInstruments = activityInstruments;
             this.activityMainInstruments = activityInstruments.filter(ins => ins.alternative_to === null);
@@ -74,7 +75,6 @@ export class CourseActivityUpdateComponent implements OnInit {
               this.availableInstruments = this.allInstruments.filter(ins => {
                 return this.activityInstruments.map(item => item.instrument.acronym).indexOf(ins.acronym) === -1;
               });
-              this.instance = instance;
               this.loading = false;
             });
           });

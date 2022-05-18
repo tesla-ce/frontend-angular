@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService, NbWindowService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { ApiIcService } from '../../../../@core/data/api-ic.service';
@@ -35,10 +35,10 @@ export class InstitutionIcUpdateComponent implements OnInit {
   toUpdate: any = {};
   toCreate: any = {};
   toDelete: string;
-  options: any[];
+  availableLanguages: any[];
   languages: any[] = [];
   loading = true;
-  picked: string;
+  selectedLanguage: string;
   hasDocument: any = {};
   regexPDF = /[0-9A-Za-z]+[.][Pp][Dd][Ff]/;
 
@@ -57,7 +57,6 @@ export class InstitutionIcUpdateComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private apiIcService: ApiIcService,
     private authService: AuthService,
     public translate: TranslateService,
@@ -68,8 +67,6 @@ export class InstitutionIcUpdateComponent implements OnInit {
     this.route.params.subscribe(params => {
       if (params['id'] != null) {
         this.id = params['id'];
-      } else {
-        this.router.navigate(['../'], { relativeTo: this.route });
       }
     });
   }
@@ -83,14 +80,14 @@ export class InstitutionIcUpdateComponent implements OnInit {
         this.user = user;
         this.apiIcService.getIcDocument(user.institution.id, this.id).subscribe(list => {
           this.languages = list;
-          const initialOptions = this.envService.availableLocales;
+          const initialAvabailableLanguages = this.envService.availableLocales;
           for (let i = 0; i < list.length; i++) {
             this.toUpdate[list[i].language] = { html: list[i].html || '', file: list[i].file || null, language: list[i].language };
-            const index = initialOptions.indexOf(list[i].language);
-            initialOptions.splice(index, 1);
+            const index = initialAvabailableLanguages.indexOf(list[i].language);
+            initialAvabailableLanguages.splice(index, 1);
           }
 
-          this.options = initialOptions;
+          this.availableLanguages = initialAvabailableLanguages;
           const group = {};
 
           list.map((item) => {
@@ -126,36 +123,36 @@ export class InstitutionIcUpdateComponent implements OnInit {
     this.apiIcService.patchDocument(this.user.institution.id, this.id, language, {pdf: null}).subscribe();
   }
 
-  newLenguage(): void {
-    this.languages.push({ language: this.picked });
-    const index = this.options.indexOf(this.picked);
-    this.options.splice(index, 1);
+  addNewLanguage(): void {
+    this.languages.push({ language: this.selectedLanguage });
+    const index = this.availableLanguages.indexOf(this.selectedLanguage);
+    this.availableLanguages.splice(index, 1);
 
     const group = {};
-    group[`${this.documentFieldsModel.pdf.formControlName}${this.picked}`] = new FormControl(null);
-    group[`${this.documentFieldsModel.html.formControlName}${this.picked}`] = new FormControl(null);
+    group[`${this.documentFieldsModel.pdf.formControlName}${this.selectedLanguage}`] = new FormControl(null);
+    group[`${this.documentFieldsModel.html.formControlName}${this.selectedLanguage}`] = new FormControl(null);
     if (this.formGrupDocument) {
-      this.formGrupDocument.addControl(`${this.documentFieldsModel.pdf.formControlName}${this.picked}`, new FormControl(null));
-      this.formGrupDocument.addControl(`${this.documentFieldsModel.html.formControlName}${this.picked}`, new FormControl(null));
+      this.formGrupDocument.addControl(`${this.documentFieldsModel.pdf.formControlName}${this.selectedLanguage}`, new FormControl(null));
+      this.formGrupDocument.addControl(`${this.documentFieldsModel.html.formControlName}${this.selectedLanguage}`, new FormControl(null));
     } else this.formGrupDocument = new FormGroup(group);
 
-    this.toCreate[this.picked] = {};
-    this.hasDocument[this.picked] = { has: false };
+    this.toCreate[this.selectedLanguage] = {};
+    this.hasDocument[this.selectedLanguage] = { has: false };
 
-    this.picked = '';
+    this.selectedLanguage = '';
 
   }
 
-  pickedNewLanguage(event): void {
-    this.picked = event;
+  languageSelectedChange(event): void {
+    this.selectedLanguage = event;
   }
 
-  deleteLenguage(language: string, index: number) {
+  deleteLanguage(language: string, index: number) {
     if (Object.keys(this.toCreate).indexOf(language) > -1) {
       delete this.toCreate[language];
-      this.options.push(language);
+      this.availableLanguages.push(language);
       this.languages.splice(index, 1);
-      this.picked = null;
+      this.selectedLanguage = null;
       return;
     }
     this.toDelete = language;

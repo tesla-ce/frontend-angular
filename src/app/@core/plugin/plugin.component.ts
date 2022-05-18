@@ -117,8 +117,6 @@ export class PluginComponent implements OnInit {
             this.allowedDomains.map(allowedDomain => {
               if (this.test(redirectUri, allowedDomain)) isAllowed = true;
             });
-            console.log(redirectUri);
-            console.log(isAllowed );
             if (isAllowed) {
               localStorage.setItem('lms_redirect_uri', params['redirect_uri']);
               localStorage.setItem('lms_redirect_uri_ts', new Date().toISOString());

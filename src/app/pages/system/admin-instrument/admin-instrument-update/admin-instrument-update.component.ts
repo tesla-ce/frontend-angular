@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NbDialogService, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { ApiInstrumentService } from '../../../../@core/data/api-instrument.service';
@@ -29,7 +29,6 @@ export class AdminInstrumentUpdateComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private dialog: NbDialogService,
     private location: Location,
     private apiInstrumentService: ApiInstrumentService,
@@ -41,8 +40,6 @@ export class AdminInstrumentUpdateComponent implements OnInit {
           this.instance = instance;
           this.providersEndpoint = `/admin/instrument/${this.id}/provider/`;
         });
-      } else {
-        router.navigate(['../'], { relativeTo: this.route });
       }
     });
   }

@@ -53,4 +53,11 @@ describe('DashboardWidgetsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should call all methods', () => {
+    component.items = [{x:1,y:2,rows:1,cols:1}]
+    component.changedOptions();
+    component.removeItem(new TouchEvent('test'),{x:1,y:2,rows:1,cols:1});
+    expect(component).toBeTruthy();
+  });
 });

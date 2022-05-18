@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ApiUserService } from '../../../../@core/data/api-user.service';
 import { User } from '../../../../@core/models/user';
 import { AdminUserConfig } from '../admin-user.config';
@@ -18,14 +18,12 @@ export class AdminUserReadComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private location: Location,
-    // private envService: EnvService,
     private apiUserService: ApiUserService) {
     this.route.params.subscribe(params => {
       if (params['id'] != null) {
         this.id = params['id'];
-        apiUserService.getUserById(this.id).subscribe(instance => {
+        this.apiUserService.getUserById(this.id).subscribe(instance => {
           this.instance = instance;
           if (instance.institution) {
             this.instance.locale = instance.institution.locale;
@@ -36,8 +34,6 @@ export class AdminUserReadComponent {
             this.instance.data_admin = instance.institution.roles.indexOf('DATA') !== -1;
           }
         });
-      } else {
-        router.navigate(['../'], { relativeTo: this.route });
       }
     });
   }

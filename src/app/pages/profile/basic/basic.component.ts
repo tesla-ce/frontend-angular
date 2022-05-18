@@ -19,7 +19,6 @@ export class BasicComponent implements OnInit {
   big_fonts = false;
   text_to_speech = false;
   loading = true;
-  globalAdmin = false;
   loginAllowed = true;
   availableLanguages: { key: string; value: string; }[] = [];
   selectedLanguage: string;
@@ -62,7 +61,6 @@ export class BasicComponent implements OnInit {
     this.authService.getUser().subscribe((user: InstitutionUser) => {
       if (user) {
         this.user = user;
-        if (this.user.roles.indexOf('GLOBAL_ADMIN') !== -1) this.globalAdmin = true;
         if (this.user.login_allowed === false) this.loginAllowed = false;
         this.selectedLanguage = this.user.locale;
         this.loading = false;
@@ -87,7 +85,7 @@ export class BasicComponent implements OnInit {
   }
 
   changePassword(data) {
-    if (this.globalAdmin) {
+    if (this.user.roles.indexOf('GLOBAL_ADMIN') !== -1) {
       this.apiUserService.updateUser(this.user.id, data).subscribe((user: InstitutionUser) => {
         this.toastrService.show(
           'User Updated',
@@ -111,7 +109,7 @@ export class BasicComponent implements OnInit {
           });
       });
     } else {
-      this.apiUserService.updateInstitutionUser(this.user.institution.id, this.user.id, data).subscribe((user: InstitutionUser) => {
+      this.apiUserService.updateUserProfile(this.user.id, this.user.institution.id, data).subscribe((user: InstitutionUser) => {
         this.toastrService.show(
           'User Updated',
           user.username,
@@ -137,8 +135,35 @@ export class BasicComponent implements OnInit {
   }
 
   changeLanguage(): void {
-    this.apiUserService.updateInstitutionUser(this.user.institution.id, this.user.id,
-      {locale: this.selectedLanguage}).subscribe((user: InstitutionUser) => {
+    if (this.user.roles.indexOf('GLOBAL_ADMIN') !== -1) {
+      this.apiUserService.updateUser(this.user.id, {
+        locale: this.selectedLanguage
+      }).subscribe((user: InstitutionUser) => {
+        this.toastrService.show(
+          'User Updated',
+          user.username,
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'success',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+      }, error => {
+        this.errors.next(error.error);
+        this.toastrService.show(
+          'Error saving',
+          'user',
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'danger',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+      });
+    } else {
+      this.apiUserService.updateUserProfile(this.user.id, this.user.institution.id, {
+        locale: this.selectedLanguage
+      }).subscribe((user: InstitutionUser) => {
       this.toastrService.show(
         'User Updated',
         user.username,
@@ -163,5 +188,6 @@ export class BasicComponent implements OnInit {
           duration: 2000,
         });
     });
+    }
   }
 }

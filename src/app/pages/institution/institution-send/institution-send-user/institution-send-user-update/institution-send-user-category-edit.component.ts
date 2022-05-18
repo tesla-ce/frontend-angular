@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Optional } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
 import { ApiInstitutionService } from '../../../../../@core/data/api-institution.service';
@@ -23,7 +23,7 @@ export class InstitutionSendUserCategoryEditComponent implements OnInit {
   constructor(
     private apiInstitutionService: ApiInstitutionService,
     private apiCourseService: ApiCourseService,
-    protected ref: NbDialogRef<InstitutionSendUserCategoryEditComponent>,
+    @Optional() protected ref: NbDialogRef<InstitutionSendUserCategoryEditComponent>,
   ) {
   }
 
@@ -89,7 +89,7 @@ export class InstitutionSendUserCategoryEditComponent implements OnInit {
       this.userId,
       this.sendUserCategoryId,
       data).subscribe(() => {
-        this.ref.close(data);
+        if (this.ref) this.ref.close(data);
     });
   }
 

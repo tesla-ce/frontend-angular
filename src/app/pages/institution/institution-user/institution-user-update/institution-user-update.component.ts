@@ -34,11 +34,7 @@ export class InstitutionUserUpdateComponent implements OnInit {
     private apiUserService: ApiUserService,
     private toastrService: NbToastrService) {
     this.route.params.subscribe(params => {
-      if (params['id'] != null) {
-        this.id = params['id'];
-      } else {
-        router.navigate(['../'], { relativeTo: this.route });
-      }
+      if (params['id'] != null) this.id = params['id'];
     });
   }
 
@@ -97,7 +93,7 @@ export class InstitutionUserUpdateComponent implements OnInit {
       })
       .onClose.subscribe(data => {
         if (data) {
-          this.apiUserService.updateUser(this.id, data).subscribe((user: User) => {
+          this.apiUserService.updateInstitutionUser(this.user.institution.id, this.id, data).subscribe((user: User) => {
             this.toastrService.show(
               'User Updated',
               user.username,

@@ -220,7 +220,6 @@ export class Connection {
     );
 
     // this.dataCapture = this.sensorsService.newData.subscribe(data => {
-    //   console.log('hey data capture');
 
     //   return;
     //   if (this.config.isCapturing()) {
@@ -383,7 +382,6 @@ export class Connection {
       .subscribe(result => {
         const seq = result[0][0].seq;
         if (result[1]) {
-          // console.log('Request seq=' + seq + ' sent');
           this.requestBuffer.pending = this.requestBuffer.pending.filter(
             (value) => value !== seq);
           this.requestBuffer.status.push(result[1].body.path);
@@ -392,14 +390,12 @@ export class Connection {
           this.deleteStoredRequest(seq);
           // this.statusService.setNetworkStatus(1);
         } else {
-          // console.log('Request seq=' + seq + ' FAILED');
           // this.statusService.setNetworkStatus(4);
         }
       }, () => {
         // this.statusService.setNetworkStatus(4);
       }, () => {
         this.sendingRequests = false;
-        // console.log('all pending requests sent');
       });
   }
 
@@ -417,7 +413,6 @@ export class Connection {
       .subscribe(result => {
         const seq = result[0][0].seq;
         if (result[1]) {
-          // console.log('Alert seq=' + seq + ' sent');
           this.alertBuffer.pending = this.alertBuffer.pending.filter(
             (value) => value !== seq);
           this.alertBuffer.status.push(result[1].body.path);
@@ -426,14 +421,12 @@ export class Connection {
           this.deleteStoredAlert(seq);
           // this.statusService.setNetworkStatus(2);
         } else {
-          // console.log('Alert seq=' + seq + ' FAILED');
           // this.statusService.setNetworkStatus(4);
         }
       }, () => {
         // this.statusService.setNetworkStatus(4);
       }, () => {
         this.sendingAlerts = false;
-        // console.log('all pending alerts sent');
       });
   }
 
@@ -467,7 +460,6 @@ export class Connection {
               this.requestBuffer.correct++;
             } else {
               this.requestBuffer.failed++;
-              // console.log(stat.info.validations);
               for (const val in stat.info.validations) {
                 if (Object.prototype.hasOwnProperty.call(stat.info.validations, val)) {
                   this.requestBuffer.notifications.push(stat.info.validations[val].error_message);

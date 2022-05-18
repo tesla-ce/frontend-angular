@@ -27,7 +27,7 @@ jobs:
         with:
           fail_ci_if_error: true
           env_vars: OS
-          files: ./coverage/index.html
+          files: ./coverage/lcov.info
       - name: Fossa update license analysis
         uses: fossa-contrib/fossa-action@v1
         with:

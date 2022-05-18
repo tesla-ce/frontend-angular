@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'ngx-service',
@@ -7,13 +6,6 @@ import { Location } from '@angular/common';
   templateUrl: './service.component.html',
 })
 
-export class ServiceComponent {
-
-  constructor(
-    private location: Location,
-  ) { }
-
-  back() { this.location.back(); }
-}
+export class ServiceComponent {}
 
 

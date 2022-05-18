@@ -99,10 +99,6 @@ export class InstitutionIcListComponent implements OnInit {
     });
   }
 
-  goNew = () => {
-    this.router.navigate(['/institution/institution-ic/create']);
-  }
-
   remove(data): void {
     this.apiIcService.deleteIcById(this.user.institution.id, data.id).subscribe(() => {
       this.toastrService.show(
