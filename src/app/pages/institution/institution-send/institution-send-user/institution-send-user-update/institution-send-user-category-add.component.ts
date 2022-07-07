@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Optional } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
 import { ApiCourseService } from '../../../../../@core/data/api-course.service';
 import { ApiInstitutionService } from '../../../../../@core/data/api-institution.service';
@@ -22,7 +22,7 @@ export class InstitutionSendUserCategoryAddComponent implements OnInit {
   constructor(
     private apiInstitutionService: ApiInstitutionService,
     private apiCourseService: ApiCourseService,
-    protected ref: NbDialogRef<InstitutionSendUserCategoryAddComponent>,
+    @Optional() protected ref: NbDialogRef<InstitutionSendUserCategoryAddComponent>,
   ) {
   }
 
@@ -84,7 +84,7 @@ export class InstitutionSendUserCategoryAddComponent implements OnInit {
     if (this.selectedDate) data.expires_at = this.selectedDate.toISOString();
 
     this.apiInstitutionService.createSendUserCategory(this.institutionId, this.userId, data).subscribe(() => {
-      this.ref.close(data);
+      if (this.ref) this.ref.close(data);
     });
   }
 

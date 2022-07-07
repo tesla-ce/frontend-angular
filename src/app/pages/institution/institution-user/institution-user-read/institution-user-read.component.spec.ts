@@ -24,6 +24,7 @@ describe('InstitutionUserReadComponent', () => {
   const locationStub = {
     back: jasmine.createSpy('back')
   }
+  
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ InstitutionUserReadComponent ],

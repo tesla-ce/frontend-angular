@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NbDialogRef } from '@nebular/theme';
+import { NbCardModule, NbDialogRef } from '@nebular/theme';
 import { TranslateModule } from '@ngx-translate/core';
+import { ThemeModule } from '../../../../@theme/theme.module';
+import { CreateModule } from '../../../../crud/create/create.module';
 import { InstitutionUserChangePasswordComponent } from './institution-user-change-password.component';
 
 describe('InstitutionUserChangePasswordComponent', () => {
@@ -18,10 +20,13 @@ describe('InstitutionUserChangePasswordComponent', () => {
       declarations: [ InstitutionUserChangePasswordComponent ],
       imports: [
         RouterTestingModule,
+        NbCardModule,
+        CreateModule,
         TranslateModule.forRoot(),
       ],
       providers: [
         { provide: NbDialogRef, useClass: DialogRefMock },
+        ThemeModule.forRoot().providers,
       ]
     })
     .compileComponents();

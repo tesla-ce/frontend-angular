@@ -3,7 +3,7 @@ import { of } from "rxjs";
 export class AuthServiceTesting  {
     getUser() {
         return of({
-        "id": 2,
+        "id": 1,
         "first_name": "Institution",
         "last_name": "Admin",
         "username": "inst_admin@dev.tesla-ce.eu",

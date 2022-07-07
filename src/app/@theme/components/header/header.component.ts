@@ -178,19 +178,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
   changeInstitutionTheme(institutionAcronym){
     const availableThemes = this.themes.map(item => item.value);
     let institutionThemeName = 'material-' + institutionAcronym;
-    let fallbackThemeName = 'material-tesla'
+    let fallbackThemeName = 'material-tesla';
+
     if (localStorage.getItem('high_contrast') === 'true'){
       fallbackThemeName += '-high_contrast';
       institutionThemeName += '-high_contrast';
-    } 
+    }
+
     if (localStorage.getItem('big_fonts') === 'true'){
       fallbackThemeName += '-big_fonts';
-    } institutionThemeName += '-big_fonts';
-    console.log(institutionThemeName);
-    console.log(fallbackThemeName);
+      institutionThemeName += '-big_fonts';
+    } 
+
     if (availableThemes.indexOf(institutionThemeName) !== -1) this.themeService.changeTheme(institutionThemeName);
-    else {
-      this.themeService.changeTheme(fallbackThemeName);
-    }
+    else this.themeService.changeTheme(fallbackThemeName);
   }
 }

@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ApiUserService } from '../../../../@core/data/api-user.service';
 import { User } from '../../../../@core/models/user';
 import { AdminInstrumentConfig } from '../admin-instrument.config';
@@ -18,7 +18,6 @@ export class AdminInstrumentReadComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private location: Location,
     private apiUserService: ApiUserService) {
     this.route.params.subscribe(params => {
@@ -27,8 +26,6 @@ export class AdminInstrumentReadComponent {
         apiUserService.getUserById(this.id).subscribe(instance => {
           this.instance = instance;
         });
-      } else {
-        router.navigate(['../'], { relativeTo: this.route });
       }
     });
   }
