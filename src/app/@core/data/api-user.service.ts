@@ -35,7 +35,6 @@ export class ApiUserService {
     return this.http.post(this.endpointUrl, fields)
     .pipe(
       map(( user: User ) => {
-        // console.log(user);
         if ( user ) return user;
         else throw user;
       }),
@@ -46,10 +45,9 @@ export class ApiUserService {
   // API: GET /users/:id
   public getUserById( userId: number ): Observable<User> {
     return this.http
-      .get(this.endpointUrl + userId)
+      .get(this.endpointUrl + userId + '/')
       .pipe(
         map(( user: User ) => {
-          // console.log(user);
           if ( user ) return user;
           else throw user;
         }),
@@ -62,6 +60,20 @@ export class ApiUserService {
   public updateUser( userId: number, fields ): Observable<any> {
     return this.http
      .patch(this.endpointUrl + userId + '/', fields).pipe(
+     map((data: any) => {
+       if (data.status) {
+         return true;
+       } else {
+         return false;
+       }
+     }),
+     catchError(this.handleError));
+  }
+
+  // API: PATCH /users/:id
+  public updateUserProfile(userId: number, institutionId: number,  fields ): Observable<any> {
+    return this.http
+     .post(`${this.apiUrl}/institution/${institutionId}/user/${userId}/profile/`, fields).pipe(
      map((data: any) => {
        if (data.status) {
          return true;
@@ -99,7 +111,6 @@ export class ApiUserService {
     return this.http.post(`${this.apiUrl}/institution/${institutionId}/user/`, fields)
     .pipe(
       map(( user: User ) => {
-        // console.log(user);
         if ( user ) return user;
         else throw user;
       }),
@@ -127,7 +138,6 @@ export class ApiUserService {
       .get(`${this.apiUrl}/institution/${institutionId}/user/${userId}/`)
       .pipe(
         map(( user: User ) => {
-          // console.log(user);
           if ( user ) return user;
           else throw user;
         }),

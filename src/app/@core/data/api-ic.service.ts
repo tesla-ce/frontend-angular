@@ -35,7 +35,6 @@ export class ApiIcService {
       .post(`${this.endpointUrl}/institution/${institutionId}/ic/`, fields)
       .pipe(
         map((ic: Ic) => {
-          // console.log(ic);
           if (ic) return ic;
           else throw ic;
         }),
@@ -46,10 +45,9 @@ export class ApiIcService {
   // API: GET /ics/:id
   public getIcById(institutionId: number, icId: number): Observable<Ic> {
     return this.http
-      .get(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}`)
+      .get(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}/`)
       .pipe(
         map((ic: Ic) => {
-          // console.log(ic);
           if (ic) return ic;
           else throw ic;
         }),
@@ -59,7 +57,7 @@ export class ApiIcService {
 
   public getCurrentIc(institutionId: number): Observable<Ic> {
     return this.http
-      .get(`${this.endpointUrl}/institution/${institutionId}/ic/current`)
+      .get(`${this.endpointUrl}/institution/${institutionId}/ic/current/`)
       .pipe(
         map((ic: Ic) => {
           if (ic) return ic;
@@ -75,7 +73,7 @@ export class ApiIcService {
       .get(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}/document/`)
       .pipe(
         map((response: any) => {
-          if (response?.results) return response.results;
+          return response.results;
         }),
         catchError(this.handleError),
       );
@@ -93,7 +91,6 @@ export class ApiIcService {
       .post(`${this.endpointUrl}/institution/${institutionId}/ic/${icId}/document/`, formData)
       .pipe(
         map((data: any) => {
-          // console.log('Create Document Response', data);
           if (data.status) {
             return true;
           } else {

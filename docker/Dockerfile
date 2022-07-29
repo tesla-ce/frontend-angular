@@ -2,7 +2,7 @@
 FROM node:14.18.2-alpine3.14 AS build
 WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 COPY . .
 RUN sed -nE 's/^\s*"version": "(.*?)",$/\1/p' /usr/src/app/package.json > /usr/src/app/frontend_version
 RUN npm run build:docker

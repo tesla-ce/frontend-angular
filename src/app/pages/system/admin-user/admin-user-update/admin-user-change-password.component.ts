@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Optional } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { doublePasswordCheck } from '../../../../@core/utils/validators';
@@ -38,7 +38,7 @@ export class AdminUserChangePasswordComponent {
   };
 
   constructor(
-    protected ref: NbDialogRef<AdminUserChangePasswordComponent>,
+    @Optional() protected ref: NbDialogRef<AdminUserChangePasswordComponent>,
   ) {
   }
   

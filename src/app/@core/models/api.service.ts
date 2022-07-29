@@ -42,7 +42,6 @@ export class ApiService extends NbRoleProvider {
           this.http.get(url, options)
           .pipe(
             map(( user: User ) => {
-              // console.log(user);
               if ( user ) return user;
               else throw user;
             }),

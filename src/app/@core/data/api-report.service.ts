@@ -32,7 +32,7 @@ export class ApiReportService {
   // API: GET /report/:id/activity
   public getActivityReport(institutionId: number, courseId: number, activityId: number, reportId: number): Observable<any> {
     return this.http
-      .get(`${this.endpointUrl}/institution/${institutionId}/course/${courseId}/activity/${activityId}/report/${reportId}`)
+      .get(`${this.endpointUrl}/institution/${institutionId}/course/${courseId}/activity/${activityId}/report/${reportId}/`)
       .pipe(
         map((response: any) => {
           if (response?.id) return response;

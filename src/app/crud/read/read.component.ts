@@ -1,5 +1,5 @@
 import { KeyValue } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output, Pipe, PipeTransform } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -56,17 +56,4 @@ export class ReadComponent implements OnInit {
     this.readForm.disable();
   }
 
-  onSubmit() {
-    this.save.emit(this.readForm.value);
-  }
-
-}
-
-
-@Pipe({ name: 'keys' })
-export class KeysPipe implements PipeTransform {
-  transform(value): any {
-    if (!value) return null;
-    return Object.keys(value);
-  }
 }

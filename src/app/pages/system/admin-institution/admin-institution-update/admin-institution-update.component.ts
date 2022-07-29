@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { ApiInstitutionService } from '../../../../@core/data/api-institution.service';
@@ -22,7 +22,6 @@ export class AdminInstitutionUpdateComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private location: Location,
     private apiInstitutionService: ApiInstitutionService,
     private toastrService: NbToastrService) {
@@ -32,8 +31,6 @@ export class AdminInstitutionUpdateComponent {
         apiInstitutionService.getInstitutionById(this.id).subscribe(instance => {
           this.instance = instance;
         });
-      } else {
-        router.navigate(['../'], { relativeTo: this.route });
       }
     });
   }

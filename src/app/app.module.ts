@@ -30,6 +30,7 @@ import { SharedModule } from './shared/shared.module';
 import { NbTeslaIconsModule } from '@tesla-ce/icons';
 import * as Sentry from '@sentry/angular';
 import {Router} from '@angular/router';
+import {NgxEchartsModule} from "ngx-echarts";
 
 @NgModule({
   declarations: [
@@ -67,7 +68,15 @@ import {Router} from '@angular/router';
 
     SideMenuModule,
     NbIconModule,
-    NbTeslaIconsModule
+    NbTeslaIconsModule,
+    NgxEchartsModule.forRoot({
+      /**
+       * This will import all modules from echarts.
+       * If you only need custom modules,
+       * please refer to [Custom Build] section.
+       */
+      echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
+    }),
   ],
   bootstrap: [AppComponent],
   providers: [
