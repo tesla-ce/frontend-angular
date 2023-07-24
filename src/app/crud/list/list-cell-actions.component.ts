@@ -63,4 +63,13 @@ export class ListCellActionsComponent implements ViewCell {
     this.router.navigate(path, { relativeTo: this.route });
   }
 
+  enrolment(): void {
+    this.dialog.open(DeleteDialogComponent)
+      .onClose.subscribe(data => {
+      if (data === 'delete') {
+        this.rowData.delete_enrolment = true;
+        this.remove.emit(this.rowData);
+      }
+    });
+  }
 }

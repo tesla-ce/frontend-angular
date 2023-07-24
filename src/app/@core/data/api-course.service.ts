@@ -200,4 +200,23 @@ export class ApiCourseService {
     return ErrorObservable.create(error);
   }
 
+  // API: DELETE /course/:id/
+  public deleteCourseByCourseId(institutionId: number, courseId: number): Observable<any> {
+    return this.http
+      .delete(`${this.endpointUrl}/institution/${institutionId}/course/${courseId}/`)
+      .pipe(
+        map(() => true),
+        catchError(this.handleError),
+      );
+  }
+
+  // API: DELETE /course/:id/
+  public deleteActivityIdCourseByCourseIdActivityId(institutionId: number, courseId: number, activityId: number): Observable<any> {
+    return this.http
+      .delete(`${this.endpointUrl}/institution/${institutionId}/course/${courseId}/activity/${activityId}/`)
+      .pipe(
+        map(() => true),
+        catchError(this.handleError),
+      );
+  }
 }

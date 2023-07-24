@@ -104,6 +104,15 @@ export class ApiUserService {
       );
   }
 
+  // API: DELETE /learner/:id/enrolment/
+  public deleteEnrolmentInstitutionUserById(userId: number, institutionId: number): Observable<any> {
+    return this.http
+      .delete(`${this.apiUrl}/institution/${institutionId}/learner/${userId}/enrolment/`)
+      .pipe(
+        map(() => true),
+        catchError(this.handleError),
+      );
+  }
 
   // API: POST /users
   public createInstitutionUser(institutionId: number, fields: any) {

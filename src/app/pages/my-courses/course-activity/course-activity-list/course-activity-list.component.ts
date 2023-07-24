@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ListCellActionsComponent } from '../../../../crud/list/list-cell-actions.component';
 import { AuthService } from '../../../../@core/auth/auth.service';
@@ -7,6 +7,9 @@ import { DatePipe, Location } from '@angular/common';
 import { Institution, InstitutionUser } from '../../../../@core/models/user';
 import { ApiInstitutionService } from '../../../../@core/data/api-institution.service';
 import { dateFormat } from '../../../../@core/utils/utils';
+import {NbGlobalPhysicalPosition, NbToastrService} from '@nebular/theme';
+import {ListComponent} from '../../../../crud/list/list.component';
+import {ApiCourseService} from '../../../../@core/data/api-course.service';
 
 @Component({
   selector: 'ngx-course-activity-list',
@@ -14,6 +17,7 @@ import { dateFormat } from '../../../../@core/utils/utils';
   styleUrls: ['./course-activity-list.component.scss'],
 })
 export class CourseActivityListComponent implements OnInit {
+  @ViewChild('list') list: ListComponent;
   courseId: number;
   endpoint: string;
   loading = true;
@@ -27,7 +31,10 @@ export class CourseActivityListComponent implements OnInit {
     private apiInstitutionService: ApiInstitutionService,
     private location: Location,
     private datePipe: DatePipe,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private apiCourseService: ApiCourseService,
+    private toastrService: NbToastrService
+  ) {
     this.route.params.subscribe(params => {
       if (params['courseId'] != null) {
         this.courseId = params['courseId'];
@@ -51,6 +58,11 @@ export class CourseActivityListComponent implements OnInit {
                 sort: false,
                 filter: false,
                 renderComponent: ListCellActionsComponent,
+                onComponentInitFunction: (instance) => {
+                  instance.remove.subscribe(data => {
+                    this.remove(data);
+                  });
+                },
                 defaultValue: {
                   update: {
                     enabled: (this.course.user_roles.indexOf('LEARNER') === -1 && user.roles.indexOf('GLOBAL_ADMIN') === -1 ),
@@ -61,7 +73,7 @@ export class CourseActivityListComponent implements OnInit {
                     path: 'activity',
                   },
                   delete: {
-                    enabled: false,
+                    enabled: (user.roles.indexOf('DATA') !== -1)
                   },
                   report: {
                     enabled: this.course.user_roles.indexOf('LEARNER') === -1 ||
@@ -106,4 +118,29 @@ export class CourseActivityListComponent implements OnInit {
     });
   }
 
+  remove(data): void {
+    // check if enrolment data or user data
+    this.apiCourseService.deleteActivityIdCourseByCourseIdActivityId(this.institution.id, data.course_id, data.id).subscribe(() => {
+      this.toastrService.show(
+        'Activity deleted',
+        '',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'success',
+          icon: 'save-outline',
+          duration: 2000,
+        });
+      this.list.refresh();
+    }, () => {
+      this.toastrService.show(
+        'Error',
+        '',
+        {
+          position: NbGlobalPhysicalPosition.TOP_RIGHT,
+          status: 'danger',
+          icon: 'save-outline',
+          duration: 2000,
+        });
+    });
+  }
 }
