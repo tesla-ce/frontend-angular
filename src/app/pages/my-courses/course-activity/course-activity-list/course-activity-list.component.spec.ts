@@ -4,7 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NbAuthModule } from '@nebular/auth';
-import { NbCardModule, NbButtonModule, NbIconModule, NbActionsModule } from '@nebular/theme';
+import { NbCardModule, NbButtonModule, NbIconModule, NbActionsModule, NbToastrModule, NbToastrService } from '@nebular/theme';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 import { AuthService } from '../../../../@core/auth/auth.service';
@@ -15,6 +15,7 @@ import { ThemeModule } from '../../../../@theme/theme.module';
 import { ListModule } from '../../../../crud/list/list.module';
 
 import { CourseActivityListComponent } from './course-activity-list.component';
+import {ToastrServiceTesting} from "../../../../@core/mock/toastr.service.mock";
 
 describe('CourseActivityListComponent', () => {
   let component: CourseActivityListComponent;
@@ -25,10 +26,11 @@ describe('CourseActivityListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [CourseActivityListComponent],
-      imports: [ 
+      imports: [
         NbAuthModule.forRoot(),
         HttpClientTestingModule,
         RouterTestingModule,
+        NbToastrModule.forRoot(),
         TranslateModule.forRoot(),
         ThemeModule,
         NbCardModule,
@@ -37,7 +39,7 @@ describe('CourseActivityListComponent', () => {
         ListModule,
         NbActionsModule,
      ],
-      providers: [ 
+      providers: [
         { provide: AuthService, useClass: AuthServiceTesting },
         DatePipe,
         EnvService,
@@ -49,6 +51,7 @@ describe('CourseActivityListComponent', () => {
             }),
           },
         },
+        { provide: NbToastrService, useClass: ToastrServiceTesting },
        ],
     })
       .compileComponents();
