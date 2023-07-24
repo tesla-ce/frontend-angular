@@ -50,7 +50,8 @@
         "DELETE": "Delete",
         "REPORT": "Report",
         "ITEMS_PER_PAGE": "Items per page",
-        "ADD_NEW": "Add new"
+        "ADD_NEW": "Add new",
+        "ENROLMENT": "Enrolment"
     },
     "IC": {
         "IC": "Informed Consent",
@@ -184,7 +185,7 @@
             "SEND_CATEGORIES": "SEND categories"
         },
         "USER": {
-            "ID": "Id", 
+            "ID": "Id",
             "USERNAME": "Username",
             "EMAIL": "Email",
             "PASSWORD": "Password",
@@ -216,11 +217,11 @@
             "HTML": "Html"
         },
         "SEND_CATEGORY": {
-            "ID": "Id", 
+            "ID": "Id",
             "DESCRIPTION": "Description",
             "ENABLED_OPTIONS": "Enabled options",
             "DISABLED_INSTRUMENTS": "Disabled instruments",
-            "EXPIRATION_DATE": "Expiration date" 
+            "EXPIRATION_DATE": "Expiration date"
         },
         "COURSE": {
             "ID": "Id",

@@ -11,4 +11,7 @@
     <button attr.aria-label="{{ 'CRUD.REPORT' | translate }}"  *ngIf='value?value.report?value.report.enabled:false:false'  nbButton status='default' size="small" (click)="report($event)">
         <nb-icon icon="file-text-outline"></nb-icon>
     </button>
+    <button attr.aria-label="{{ 'CRUD.ENROLMENT' | translate }}"  *ngIf='value?value.enrolment?value.enrolment.enabled:false:false'  nbButton status='default' size="small" (click)="enrolment($event)">
+      <nb-icon icon="cube-outline"></nb-icon>
+    </button>
 </div>

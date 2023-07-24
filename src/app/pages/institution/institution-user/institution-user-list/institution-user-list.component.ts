@@ -48,13 +48,15 @@ export class InstitutionUserListComponent implements OnInit {
                   enabled: true,
                 },
                 delete: {
-                  enabled: user.roles.indexOf('ADMIN') !== -1,
+                  enabled: user.roles.indexOf('DATA') !== -1,
                 },
                 update: {
                   enabled: user.roles.indexOf('ADMIN') !== -1,
                 },
-                report: {
-                  enabled: false,
+                enrolment: {
+                  enabled: (user.roles.indexOf('DATA') !== -1),
+                  delete: true,
+                  path: 'activity',
                 },
               },
             },
@@ -86,28 +88,55 @@ export class InstitutionUserListComponent implements OnInit {
   }
 
   remove(data): void {
-    this.apiUserService.deleteInstitutionUserById(data.id, this.user.institution.id).subscribe(() => {
-      this.toastrService.show(
-        'User deleted',
-        '',
-        {
-          position: NbGlobalPhysicalPosition.TOP_RIGHT,
-          status: 'success',
-          icon: 'save-outline',
-          duration: 2000,
-        });
-      this.list.refresh();
-    }, () => {
-      this.toastrService.show(
-        'Error',
-        '',
-        {
-          position: NbGlobalPhysicalPosition.TOP_RIGHT,
-          status: 'danger',
-          icon: 'save-outline',
-          duration: 2000,
-        });
-    });
+    // check if enrolment data or user data
+    if (data.delete_enrolment !== true) {
+      this.apiUserService.deleteInstitutionUserById(data.id, this.user.institution.id).subscribe(() => {
+        this.toastrService.show(
+          'User deleted',
+          '',
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'success',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+        this.list.refresh();
+      }, () => {
+        this.toastrService.show(
+          'Error',
+          '',
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'danger',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+      });
+    } else {
+      // remove enrolment
+      this.apiUserService.deleteEnrolmentInstitutionUserById(data.id, this.user.institution.id).subscribe(() => {
+        this.toastrService.show(
+          'User enrolment deleted',
+          'Success',
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'success',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+        this.list.refresh();
+      }, () => {
+        this.toastrService.show(
+          'Are you sure that this user is learner?',
+          'Error',
+          {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status: 'danger',
+            icon: 'save-outline',
+            duration: 2000,
+          });
+      });
+    }
   }
 
 }

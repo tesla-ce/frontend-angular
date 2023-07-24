@@ -3,7 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NbAuthModule } from '@nebular/auth';
-import { NbCardModule, NbButtonModule, NbIconModule, NbActionsModule } from '@nebular/theme';
+import { NbCardModule, NbButtonModule, NbIconModule, NbActionsModule, NbToastrModule, NbToastrService } from '@nebular/theme';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../../@core/auth/auth.service';
 import { AuthServiceTesting } from '../../../@core/auth/auth.service.mock';
@@ -13,6 +13,7 @@ import { ListModule } from '../../../crud/list/list.module';
 import { SideMenuModule } from '../../../side-menu/side-menu.module';
 
 import { CourseListComponent } from './course-list.component';
+import {ToastrServiceTesting} from '../../../@core/mock/toastr.service.mock';
 
 describe('CourseListComponent', () => {
   let component: CourseListComponent;
@@ -25,6 +26,7 @@ describe('CourseListComponent', () => {
           NbAuthModule.forRoot(),
           HttpClientTestingModule,
           RouterTestingModule,
+          NbToastrModule.forRoot(),
           TranslateModule.forRoot(),
           ThemeModule,
           SideMenuModule,
@@ -39,6 +41,7 @@ describe('CourseListComponent', () => {
           { provide: AuthService, useClass: AuthServiceTesting },
           EnvService,
           DatePipe,
+          { provide: NbToastrService, useClass: ToastrServiceTesting },
       ]
     })
       .compileComponents();
