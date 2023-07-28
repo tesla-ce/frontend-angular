@@ -28,7 +28,7 @@ export class CourseReportReadComponent implements OnInit {
   instruments: any;
   loading = true;
   instrumentCharts: any[] = [];
-  availableAuditInstruments: string[] = ['fr', 'plag'];
+  availableAuditInstruments: string[] = ['fr'];
   settings = {
     addNew: false,
     search: false,
