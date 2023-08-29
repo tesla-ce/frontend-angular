@@ -106,7 +106,8 @@
             "NEGATIVE_LEARNER_RESULT_BAD_INSTRUMENT": "Looking at results obtained for this learner in this instrument, this is a bad result.",
             "NEGATIVE_LEARNER_RESULT_BAD_ACTIVITY": "This is a bad result if we compare with other learners in the activity.",
             "NEGATIVE_LEARNER_RESULT_NOT_FREQUENT": "This is not a normal result for this learner with this instrument.",
-            "NEGATIVE_CONFIDENCE_LOW": "Confidence value is too low to take a decision."
+            "NEGATIVE_CONFIDENCE_LOW": "Confidence value is too low to take a decision.",
+            "NEGATIVE_WITH_ALERTS": "Alerts arising during the evaluation activity."
         }
     },
     "ENROLMENT": {
